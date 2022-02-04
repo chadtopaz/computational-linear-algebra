@@ -1,5 +1,8 @@
 ---
-title: "Computational Linear Algebra Lecture Notes"
+title: "Computational Linear Algebra"
+subtitle: "Course Notes"
+author: "Chad M. Topaz"
+date: "Last updated: 2022-02-04"
 output:
   html_document:
     toc: true
@@ -17,6 +20,7 @@ library(knitr)
 knitr::opts_chunk$set(cache = TRUE)
 library(BatchGetSymbols, quietly = T)
 library(rvest)
+library(kableExtra)
 source("https://dl.dropbox.com/s/cr1pxjp2ysakcyw/307Functions.r?dl=0")
 ```
 
