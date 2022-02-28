@@ -1,0 +1,128 @@
+---
+title: "Activity - Solving Linear Systems"
+author: "Insert group members' full names here"
+output: html_document
+---
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\renewcommand{\mat}[1]{\mathbf{#1}}
+
+```{r}
+library(pracma)
+```
+
+### Objectives
+
+* Practice LU decomposition
+* Practice Jacobi's method
+* Implement methods computationally
+
+### Procedure
+
+* Please collaborate on this activity with one person as scribe (typist). There should only be one laptop open. We're aiming for actual collaboration here, not two or three people working in parallel.
+
+* It doesn't matter if you finish the whole activity during class.
+
+* It **does** mater if you focus on helping each other learn. Helping each other learn is the point of this activity. Completing the problems is merely a mechanism to guide you towards learning.
+
+* It **does** mater if everyone participates. The expectation is that every group member participates, where the definition of "participation" can include asking questions, answering questions, brainstorming, or any other form of meaningful engagement.
+
+* In the last three minutes of class, before you leave, please knit your .Rmd file to html, print the html to .pdf, and have the scribe submit it as a group assignment through GLOW.
+
+* Don't forget that the solutions are available on GLOW.
+
+### Problem 0
+
+Recalling that academic integrity policies apply even in an ungraded course, please disclose any irregular circumstances related to participation in your group (for instance, a group member was missing and did not contribute to this document).
+
+### Problem 0 Solution
+
+Your solution goes here.
+
+### Problem 1
+
+a. By hand (without using a computer) find the **LU** decomposition of the matrix
+
+$$
+\mat{A} = \begin{pmatrix}
+4 & 5 & 6\\
+8 & 14 & 17\\
+12 & 23 & 32
+\end{pmatrix}
+$$
+
+b. Check your answer by entering your **L** and **U** matrices into R and carrying out matrix multiplication (with `%*%`) to recover the original matrix.
+
+c. Use the built in command `lu` with option `scheme = "ijk"` to obtain the same result as you did by hand.
+
+
+### Problem 1 solution
+
+a.
+
+$$
+\mat{L} = \begin{pmatrix}
+1 & 0 & 0\\
+2 & 1 & 0\\
+3 & 2 & 1
+\end{pmatrix}, \quad
+\mat{U} = \begin{pmatrix}
+4 & 5 & 6\\
+0 & 4 & 5\\
+0 & 0 & 4
+\end{pmatrix}
+$$
+
+b.
+```{r cache = TRUE}
+L <- matrix(c(1,0,0,2,1,0,3,2,1), nrow = 3, byrow=TRUE)
+U <- matrix(c(4,5,6,0,4,5,0,0,4), nrow = 3, byrow=TRUE)
+L %*% U
+```
+
+c.
+```{r cache = TRUE}
+A <- matrix(c(4,5,6,8,14,17,12,23,32), nrow = 3, byrow = TRUE)
+lu(A, scheme = "ijk")
+```
+
+### Problem 2
+
+a. Generate a 1000 x 1000 random matrix **A** with entries drawn uniformly from the interval [0,1]. Use R's build in `solve` command to solve **Ax**=**b** for 500 randomly generated **b** vectors that are 1000 x 1 vectors with random entries drawn in the same manner as for A. Time the calculation.
+
+b. Using the same matrix **A**, compute (a single time) its **LU** decomposition and then use the `backsolve` and `forwardsolve` commands to solve **LUx**=**b** for 500 randomly generated **b** vectors. Time the calculation. When you time it, for fairness, you should include the time to calculate the single **LU** decomposition as well as the 500 solutions for different **b**.
+
+c. Compare the times.
+
+### Problem 2 Solution
+
+a. Your solution goes here.
+
+b. Your solution goes here.
+
+c. Your solution goes here.
+
+### Problem 3
+
+Consider **Ax**=**b** for 
+
+$$
+\mat{A} = \begin{pmatrix}
+4 & -1 & -1 \\
+-2 & 6 & 1\\
+-1 & 1 & 7
+\end{pmatrix}, \quad
+\vec{b} = \begin{pmatrix}
+3 \\ 9 \\ -6
+\end{pmatrix}
+$$
+
+a. Show that **A** is strictly diagonally dominant.
+
+b. Choose any initial guess for **x** that you want (really! or you can try different ones!) and use Jacobi iteration to solve until the backwards error is less than $10^{-6}$ in the infinity norm. Report your answer.
+
+### Problem 3 Solution
+
+a. Your solution goes here.
+
+b. Your solution goes here.
