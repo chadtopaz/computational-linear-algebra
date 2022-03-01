@@ -1,0 +1,96 @@
+---
+title: "Pset - Linear Systems"
+author: "Insert your full name here"
+output: html_document
+---
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\renewcommand{\mat}[1]{\mathbf{#1}}
+
+```{r,message=FALSE}
+library("Matrix")
+library("igraph")
+library("pracma")
+```
+
+### Problem 0
+
+Please disclose any issues relating to academic integrity, including (but not limited to) collaborations, unusual resources used, and so forth.
+
+### Problem 0 Solution
+
+Your solution goes here.
+
+### Problem 1
+
+The point of this problem is to use definitions of norms and condition numbers and to develop proof skills. This is a pencil-and-apper problem, but please write it up here in markdown as usual!
+
+A real $n \times n$ matrix $\mat{Q}$ is *orthonormal* if 
+
+$$ \mat{Q}^{T}\mat{Q}=\mat{Q}\mat{Q}^T=\mat{I};~i.e., \mat{Q}^{-1}=\mat{Q}^T.$$
+
+Note: sometimes you will see these matrices just called *orthogonal matrices*. 
+
+Show that $||\mat{Q}||_2=||\mat{Q}^{-1}||_2=1$, and therefore the 2-norm condition number of any orthonormal matrix $\mat{Q}$ is $\kappa_2(\mat{Q})=||\mat{Q}||_2 ||\mat{Q}^{-1}||_2=1$.
+
+### Problem 1 Solution
+
+Your solution goes here.
+
+### Problem 2
+
+Consider the $n \times n$ square matrix
+
+$$A=\begin{bmatrix} 1 & -1 & -1 & -1 & \ldots & -1 \\ 0 & 1 & -1 & -1 & \ldots & -1 \\ 0 & 0 & 1 & -1 & \ldots & -1 \\ \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\ 0 & 0 & 0 & 0 & 0 & 1 \end{bmatrix}.$$
+
+a. Write a function that takes a value of $n$ as input and outputs the matrix A above. Challenge yourself to be efficient in your coding when you create the matrix. Looking at patterns and Googling how to create them helps. I managed to create the matrix with no loops, in two lines of code.
+
+b. Use your function and the R command `kappa` to calculate the approximate condition number $\kappa(\mat{A})$ for $n=1,\ldots,30$. Plot $\log_{10}[\kappa(\mat{A})]$ as a function of $n$ and use the commands `lm` and `abline` to plot a best fit line. How would you describe the conditioning of the matrix as $n$ increases?
+
+c. Now choose $n=30$. Generate the matrix $\mat{A}$ and let $\vec{b_1}$ be an $n \times 1$ vector of random numbers chosen uniformly from 0 to 1. Solve $\mat{A} \vec{x}_1 = \vec{b}_1$ using any appropriate method that you want (including R's built-in capabilities). Now let $\vec{b}_2 = \vec{b}_1 + (0,\ldots,0,0.001)^T$, that is, you leave the first 29 elements the same as in $\vec{b}_1$ but add 0.001 to the last element. Solve $\mat{A} \vec{x}_2 = \vec{b}_2$. Use the command `Norm` to find the (approximate)2-norm of $\vec{x_1}-\vec{x_2}$ and discuss vis-a-vis your result from part b. Also, to help build your intuition, find the magnitude of the difference between the first coordinate of $\vec{x}_1$ and that of $\vec{x}_2$.
+
+### Problem 2 Solution
+
+Your solution goes here.
+
+### Problem 3
+
+Note: This problem is taken from Linear Algebra and its Applications, by Lay et al.
+
+<img src="https://github.com/chadtopaz/computationallineaaralgebra/raw/main/psets/heat.png" width="400">
+
+An important concern in the study of heat transfer is to determine the steady-state temperature distribution of a thin plate when the temperature around the boundary is known. Assume the plate shown in the figure above represents a cross section of a metal beam, with negligible heat flow in the direction perpendicular to the plate. Let the variables $x_1, x_2, \ldots, x_8$ denote the temperatures at nodes 1 through 8 in the picture. In steady state, the temperature at a node is approximately equal to the average of the four nearest nodes (to the left, above, right, below).
+
+a) The solution to the approximate steady-state heat flow problem for this plate can be written as a system of linear equations $Ax=b$, where $x=[x_1, x_2, \ldots, x_8]$ is the vector of temperatures at nodes 1 through 8. Find the $8 \times 8$ matrix $A$ and the vector $b$.
+
+b) Solve the system any way you want (using R) to find the unknown temperatures.
+
+### Problem 3 Solution
+
+Your solution goes here.
+
+### Problem 4
+
+The following command loads a matrix $\mat{M}$ describing the western power network of the United States. Each element is zero or one. A one in row $i$ and column $j$ means that component $i$ of the network is connected to component $j$. This type of matrix is called a network's *adjacency matrix*.
+```{r cache=TRUE}
+M <- as.matrix(readMM(gzcon(url("https://math.nist.gov/pub/MatrixMarket2/Harwell-Boeing/bcspwr/bcspwr10.mtx.gz")))+0)
+```
+These commands visualize the network for you using a package called `igraph`. It may take a little bit of time (several minutes) to run because the graph is really large!
+```{r cache=TRUE, out.width='70%', crop=TRUE}
+knitr::knit_hooks$set(crop = knitr::hook_pdfcrop)
+g <- graph_from_adjacency_matrix(M,mode="undirected")
+V(g)$color <- "grey"
+V(g)$size <- 2
+myLayout <- layout_nicely(g)
+plot(simplify(g),layout=myLayout,vertex.color=V(g)$color,vertex.size=V(g)$size,vertex.label="")
+```
+
+a. In the analysis of networks, one is often concerned with finding the most important (most central, in some sense) component. One measure of importance is called Katz centrality. The Katz centrality of the nodes, $\vec{x}$, satisfies
+$$(\mat{I} - \alpha \mat{M}^T)\vec{x} = \vec{1}$$
+where $\mat{I}$ is the identity matrix, $\alpha$ is a small number, and $\vec{1}$ is a vector of all ones. Take $\alpha = 0.05$ and solve for $\vec{x}$ using any method you want. Print out the largest element of $\vec{x}$ so that I can verify your answer.
+
+b. Re-plot the network using your same graph layout as before, color the most important node red and plot it with size 5. This way, the most important node (at least, according to the Katz measure) will stand out on your plot.
+
+### Problem 4 Solution
+
+Your solution goes here.

@@ -1,0 +1,246 @@
+---
+title: "Pset - Solving Linear Systems"
+author: "Insert your full name here"
+output: html_document
+---
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\renewcommand{\mat}[1]{\mathbf{#1}}
+
+```{r, message = FALSE}
+library(Matrix)
+library(knitr)
+library(tidyverse)
+library(pracma)
+library(data.table)
+library(R.utils)
+library(igraph)
+```
+
+### Problem 0
+
+Please disclose any issues relating to academic integrity, including (but not limited to) collaborations, unusual resources used, and so forth.
+
+### Problem 0 Solution
+
+Your solution goes here.
+
+### Problem 1
+
+In solving linear systems, we will see algorithms that (hopefully) produce a sequence of approximations to a true solution. We want to know if that sequence converges, and if so, how fast. 
+
+Let's review some key concepts about convergence. We say a sequence ${a_n}$ *converges* if it has a finite limit as $n \to \infty$. For instance, if $a_n = 4n^2/(2n^2+1)$ then the sequence converges to $2$. On the other hand, if $a_n = (-1)^n + 1$, the limit does not exist so the sequence diverges.
+
+In addition to asking whether or not a sequence converges, for a convergent sequence, we can ask about how fast (in some sense) it converges. As a quick example, think of the sequences ${(1/2)^n}$ and ${(1/2)^{2^n}}$. Both converge to 0 but look at how differently they do so.
+
+```{r cache = TRUE}
+n <- 0:6
+an <- (0.5)^n
+bn <- (0.5)^(2^n-1)
+kable(cbind(n,an,bn))
+```
+
+The *order of convergence* of a sequence ${a_n}$ is defined as the number $q \geq 1$ satisfying 
+$$
+\lim_{n \to \infty} \frac{|a_{n+1}-a|}{|a_n - a|^q} = C
+$$
+such that $C$ is a finite, nonzero number. Here, $a$ is the limit of the sequence, that is, the value of $a_n$ as $n \to \infty$. Sometimes you might see this expression rearranged and written more compactly as as
+$$
+e_{n+1} = Ce_n^q
+$$
+as $n \to \infty$, where $e_n \equiv |a_n - a|$.
+
+To bring it back to computational linear algebra... when solving a problem with an iterative algorithm, the relevant sequence is the sequence of errors produced. If we don't know the true solution, we can't calculate the forward error, but we can calculate the backward error. Let's call the backward error on the nth iteration $e_n$. We can estimate the convergence of the algorithm by making a log-log plot of error data. Taking the log of each side of the equation above, we have
+$$
+\log e_{n+1} = \log C + q \log e_n.
+$$
+If we plot $(\log e_n,\log e_{n+1})$ and observe linear behavior for large enough $n$, then the slope is the convergence rate $q$.
+
+a. Calculate (analytically) the order of convergence of the sequence defined by
+$$
+a_n = 3 + (1/2)^{2^n - 1}, \quad n \geq 1.
+$$
+
+b. Numerically measure the order of convergence of the sequence from (a) by making a base-10 log-log plot with ten points, fitting a line to it, and extracting the slope.
+
+c. Now let's investigate numerical convergence of Jacobi's method for solving **Ax**=**b**. Let **b** be a 1000 x 1 column vector with every entry equal to one. Let **A** be a 1000 x 1000 matrix that I have created for you below.
+
+```{r cache = TRUE}
+n <- 1000
+ThreeBanded <- function(n,offset){
+  spMatrix(n,n,i=c(1:n,1:(n-1),2:n,(offset+1):n,1:(n-offset)),j=c(1:n,2:n,1:(n-1),1:(n-offset),(offset+1):n),x=c(.5+sqrt(1:n),rep(1,(2*(2*n-1-offset)))))
+}
+A <- as.matrix(ThreeBanded(n,100))
+```
+
+Use Jacobi's method to solve the system. Run 35 iterations of Jacobi's method taking **x** as the zero vector for your initial guess and find the order of convergence of the backwards error in the 2-norm using the same idea you used in part (b).
+
+### Problem 1 Solution
+
+a. Your solution goes here.
+
+b. Your solution goes here.
+
+c. Your solution goes here.
+
+### Problem 2
+
+Read [this student project](https://home.csulb.edu/~jchang9/m247/m247_fa11_David_Diego_Alissa_Daniel.pdf) about linear algebra and ciphers, from [Prof. Jen-Mei Chang](https://home.csulb.edu/~jchang9/index.html)'s Linear Algebra course at California State University, Long Beach.
+
+For convenience, I have written a function that converts a string of text (letters a through z, ignoring case, as well as space, comma, and period) into a matrix with entries 1 - 29, where the letters are 1 - 26, the space is 27, and the comma is 28, and the period is 29. We'll work with text in groups of N characters, so the matrix produced will have N rows. There's no actual ciphering going on yet. We're just implementing a way of representing letters (and space and period) straightforwardly as numbers. 
+```{r}
+texttomatrix <- function(text,N){
+  key <- c(LETTERS," ",",",".")
+  text <- toupper(text)
+  newlength <- ceiling(nchar(text)/N)*N
+  text <- str_pad(text,newlength,"right")
+  tmp <- unlist(strsplit(text, split = ""))
+  result <- matrix(match(tmp, key), nrow = N)
+  return(result)
+}
+```
+For example, using blocks of 20 letters,
+```{r}
+M <- texttomatrix("Once upon a time there was a very cute puppy.",20)
+M
+```
+I have also written a function that takes this type of matrix and turns it back into text.
+```{r}
+matrixtotext <- function(M){
+  key <- c(LETTERS," ",",",".")
+  M <- as.numeric(M)
+  result <- trimws(paste(key[M], collapse = ""))
+  return(result)
+}
+```
+For example,
+```{r}
+matrixtotext(M)
+```
+
+a. Experiment with each line of code in the `texttomatrix` and `matrixtotext` functions I wrote for you. Explain what the built-in R functions `LETTER`, `toupper`, `ceiling`, `nchar`, `str_pad`, `strsplit`, `unlist`, `match` `as.numeric` (applied to something that is already a numerical matrix), `paste` (with `collapse = ""`), and `trimws` do in their contexts above.
+
+b. In the example usage of `texttomatrix` above, why are there repeated values of `27` at the end?
+
+c. Suppose you are receiving continuous transmissions of ciphertext (as numbers, stored in a vector) one sentence at a time, and you want to decipher them real time as they come in. I've created a 20 x 20 cipher matrix for you below.
+```{r}
+set.seed(123)
+N <- 20
+c <- sample(-300:300, N*N, replace = TRUE)
+C <- matrix(c, nrow = N)
+```
+What is a computationally efficient way to decode the incoming text? (Hint: in this context, "computationally efficient" means that you should do as few Gaussian eliminations / matrix inversions as possible.) Implement your method on the four ciphered sentences below.
+```{r}
+s1 <- c(9450, 5309, 3621, 7196, -2988, -6711, -3540, -12496, -5157, 
+3091, 11463, -6858, -5570, -12771, 1393, 2917, 11056, -20835, 
+-483, -6306, 19831, -2548, 3807, 2942, 14025, -17369, 8327, -18494, 
+1261, 587, 5851, 1989, 12463, -17387, -371, 14754, -18495, -21795, 
+4221, -7976, 22298, -1155, -889, 9549, -7929, -19996, 596, -15147, 
+-7841, 9887, 9008, -9997, 5413, -20790, 11273, 36732, -9755, 
+-25491, 3994, -3112, 28548, -4384, 15685, 11222, 602, -13878, 
+-18383, -13174, 6597, -2755, 8172, -877, 4499, -25620, -4261, 
+20467, -219, -22349, 2888, -17339, 11282, -6043, -1484, -15430, 
+-4917, -13373, -10290, -8215, -8048, 2777, 6544, -6741, 2446, 
+-22471, -1771, 7768, 7386, -15946, -3617, -9760, 20418, -3641, 
+5066, 1191, 11842, -10134, -1170, -15963, -6142, 9531, 14026, 
+-5745, 6187, -22898, 4486, 16147, -12695, -27109, -7824, -4971, 
+19333, 7537, 4819, 11934, 3938, -22670, -15963, -7744, 930, 1916, 
+15038, 3286, -1167, -33460, 13951, 16321, -554, -22727, -6380, 
+-19020)
+s2 <- c(12257, -54, 4102, 10792, 13035, -12547, 6602, -16035, 1342, 
+-2884, 10784, 8201, 12006, -19133, 8275, 16190, -3014, -16689, 
+-10090, -19441, 17112, -6130, 7855, -2562, 3886, -9700, 879, 
+-11750, -5939, -8150, 16510, 7626, 984, -26116, -1671, 23490, 
+-8749, -13703, -1382, -14416, 17760, 3999, -8006, 6444, -2585, 
+-30757, -9462, -14277, -10714, -3669, 12041, -9829, 14059, -24666, 
+10985, 15850, 1997, -31693, 6542, -16217)
+s3 <- c(26646, -3881, 12186, 5296, 5851, -15292, -5619, -16723, 4438, 
+5286, 8983, 2228, 2777, -22077, 3172, 9966, -2785, -21675, 1202, 
+-23630, 12892, 12892, 7848, 22079, 5985, -21387, -7324, -14668, 
+5065, -12738, 11710, 10289, 6385, -26435, 2671, 4816, -727, -19629, 
+94, -12211, 17866, 14765, 1712, 14937, -3829, -18954, -8066, 
+-16352, -2792, 215, 12812, -7781, -986, -20588, 4995, 2596, 14428, 
+-24824, 2490, -9633, 17008, -13546, 11303, -2742, 2928, -11146, 
+-7879, -14162, 882, -13636, 3616, 8864, 4177, -24202, -12623, 
+24262, -12028, -16351, -8235, -12171, 24614, 4388, 5792, 22644, 
+11521, -17583, -10650, -10978, 6748, -1825, 10898, 2814, 17003, 
+-28130, 12455, 22251, -8591, -18133, -5319, -13905, 23691, 6196, 
+7317, 10076, 7786, -25016, 391, -14459, 9001, -1869, 3784, 7241, 
+-1578, -22724, -582, 11371, -8364, -21870, 6535, -22048, 20794, 
+-9154, 10528, -5460, -1530, -2975, -5549, -14397, 45, 7178, 6229, 
+1101, 576, -25505, -3055, 13523, -9350, -20866, -5945, -8217, 
+14687, 1212, 12545, 1764, -2029, -10481, -6468, -13051, 17528, 
+2402, -1993, 8729, -1984, -18144, -9916, -1302, -59, -19224, 
+246, -16874, 28697, -2781, 2653, 473, 5410, -10567, -7507, -13103, 
+-9947, 377, 19249, -4524, 10831, -20558, 12970, 22566, 460, -15430, 
+406, -13638, 14711, 15673, 6062, 11700, -2128, -20559, -8194, 
+-9284, -3626, -10374, 18417, 416, -5122, -21770, -6145, 6060, 
+2635, -20511, 11185, -8686, 25228, -802, -9449, -2936, 4078, 
+-22791, -4729, -11215, -8228, 1188, 10163, -602, 7382, -35695, 
+9835, 24156, -12914, -31081, -5853, -17573)
+s4 <- c(18390, -9213, 10878, 3440, 14930, -14154, 1349, -16994, 5298, 
+-14517, 661, 19714, 12753, -25238, -8494, 13875, -24909, -17677, 
+-4572, -18219, 17829, 2751, 5151, 4769, -11285, -26131, -9831, 
+-15433, 6015, -6129, -1114, 369, 834, -22692, -9512, 13806, -3149, 
+-22684, 11418, -7372, 14425, 559, 8971, -12295, -9532, -19671, 
+-6072, -12348, -4532, 6398, 11662, 91, -8621, -20767, -579, 4304, 
+59, -13988, 7671, -7998, 24230, 2237, 9027, 14894, 773, -7496, 
+1796, -19271, 5465, 7939, 7997, 8534, 4050, -27248, 9452, 18019, 
+-9729, -25964, -5969, -13151, 22985, -3064, -3907, -7897, 302, 
+-9648, 1379, -7368, 3609, 3785, 668, -537, 2458, -24440, 4419, 
+27129, -4314, -15508, 788, -16127, 20777, -997, 9766, 6917, 1948, 
+-19196, -6312, -14687, -2036, 1444, 21437, -3017, 6301, -29331, 
+2672, 29133, -5587, -20334, 690, -6530, 38326, -1646, -3518, 
+3654, 8791, -21585, -7853, -15641, -4588, -9464, 6570, -1854, 
+15369, -26819, 6330, 25957, -6318, -22058, 3306, -21971, 20162, 
+5481, 9722, 22192, 2231, -12427, -8038, -11100, 12957, -1821, 
+9125, 96, 8344, -18131, -6407, 18117, -3965, -20393, 4167, -6620, 
+16811, -238, 92, 1658, 6248, -26653, 6911, -15480, 4910, 2062, 
+663, 4928, 11082, -24141, 2983, 20715, -15901, -18748, 6241, 
+-9508, 16391, 2099, 90, -250, -6964, -29248, -7943, -10799, 3087, 
+9031, 2863, 5140, -4085, -29106, 13656, 14449, -5643, -20804, 
+-1661, -14038)
+```
+
+### Problem 2 Solution
+
+a. Your solution goes here.
+
+b. Your solution goes here.
+
+c. Your solution goes here.
+
+
+### Problem 3
+
+Read the introduction to [this Wikipedia article about the infamous Enron scandal](https://en.wikipedia.org/wiki/Enron_scandal). The network of email exchanges is available from the [Stanford Large Network Dataset Collection](http://snap.stanford.edu/data/email-Enron.html). Make sure you read the brief descrioption of the data set.
+
+The code below creates the network's adjacency matrix for you.
+```{r cache = TRUE}
+url <- "http://snap.stanford.edu/data/email-Enron.txt.gz"
+data <- fread(url)
+data <- as.matrix(data) + 1
+G <- graph_from_edgelist(data)
+A <- as_adjacency_matrix(G)
+```
+
+One measure of the importance of a node is the Katz centrality. The vector of Katz centralities **x** satisfies
+$$
+\vec{x} = \bigl((\mat{I} - \alpha A^T)^{-1} - \mat{I} \bigr) \vec{1}.
+$$
+where $\vec{1}$ is a vector of ones. 
+
+You are going to compute the Katz centrality without inverting a matrix. Some hints:
+
+* Write the system in the form **Mx**=**b**.
+* At some point, you will need to create the identity matrix that appears in the definition of Katz centrality. Do this using the command `Diagonal` (as opposed to the usal `diag`, which is not optimal for large matrices).
+
+a. State what method you should use (remember, no matrix inversion or Gaussian elimination allowed) and justify mathematically/numerically why it should work.
+
+b. For $\alpha = 0.0005$, find the biggest Katz centrality. Solve such that the backwards error is less than $10^{-10}$ in the infinity norm. Report the largest Katz centrality, along with the index of the node that has it. By the way, though the indices of the nodes are not identified with a persons's name in the data set, you can at least go [browse the actual Enron emails](http://www.enron-mail.com/email/) if you are interested.
+
+### Problem 3 Solution
+
+a. Your solution goes here.
+
+b. Your solution goes here.
