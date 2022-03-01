@@ -1,6 +1,6 @@
 ### Problem 2
 
-Read [https://home.csulb.edu/~jchang9/m247/m247_fa11_David_Diego_Alissa_Daniel.pdf](this student project) about linear algebra and ciphers, from [https://home.csulb.edu/~jchang9/index.html](Prof. Jen-Mei Chang)'s Linear Algebra course at California State University, Long Beach. 
+Read [this student project](https://home.csulb.edu/~jchang9/m247/m247_fa11_David_Diego_Alissa_Daniel.pdf) about linear algebra and ciphers, from [Prof. Jen-Mei Chang](https://home.csulb.edu/~jchang9/index.html)'s Linear Algebra course at California State University, Long Beach.
 
 For convenience, I have written a function that converts a string of text (letters a through z, ignoring case, as well as space, comma, and period) into a matrix with entries 1 - 29, where the letters are 1 - 26, the space is 27, and the comma is 28, and the period is 29. We'll work with text in groups of N characters, so the matrix produced will have N rows. There's no actual ciphering going on yet. We're just implementing a way of representing letters (and space and period) straightforwardly as numbers. 
 ```{r}
