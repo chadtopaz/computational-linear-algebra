@@ -45,7 +45,7 @@ N <- 20
 c <- sample(-300:300, N*N, replace = TRUE)
 C <- matrix(c, nrow = N)
 ```
-What is a computationally efficient way to decode the incoming text? Implement your method on the four encoded sentences below.
+What is a computationally efficient way to decode the incoming text? (Hint: in this context, "computationally efficient" means that you should do as few matrix inversions as possible.) Implement your method on the four encoded sentences below.
 ```{r}
 s1 <- c(9450, 5309, 3621, 7196, -2988, -6711, -3540, -12496, -5157, 
 3091, 11463, -6858, -5570, -12771, 1393, 2917, 11056, -20835, 
