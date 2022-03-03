@@ -1,0 +1,27 @@
+### Problem 3
+
+Read the introduction to [this Wikipedia article about the infamous Enron scandal](https://en.wikipedia.org/wiki/Enron_scandal). The network of email exchanges is available from the [Stanford Large Network Dataset Collection](http://snap.stanford.edu/data/email-Enron.html). Make sure you read the brief descrioption of the data set.
+
+The code below creates the network's adjacency matrix for you.
+```{r cache = TRUE}
+url <- "http://snap.stanford.edu/data/email-Enron.txt.gz"
+data <- fread(url)
+data <- as.matrix(data) + 1
+G <- graph_from_edgelist(data)
+A <- as_adjacency_matrix(G)
+```
+
+One measure of the importance of a node is the Katz centrality. The vector of Katz centralities **x** satisfies
+$$
+\vec{x} = \bigl((\mat{I} - \alpha A^T)^{-1} - \mat{I} \bigr) \vec{1}.
+$$
+where $\vec{1}$ is a vector of ones. 
+
+You are going to compute the Katz centrality without inverting a matrix. Some hints:
+
+* Write the system in the form **Mx**=**b**.
+* At some point, you will need to create the identity matrix that appears in the definition of Katz centrality. Do this using the command `Diagonal` (as opposed to the usal `diag`, which is not optimal for large matrices).
+
+a. State what method you should use (remember, no matrix inversion or Gaussian elimination allowed) and justify mathematically/numerically why it should work.
+
+b. For $\alpha = 0.0005$, find the biggest Katz centrality. Solve such that the backwards error is less than $10^{-10}$ in the infinity norm. Report the largest Katz centrality, along with the index of the node that has it. By the way, though the indices of the nodes are not identified with a persons's name in the data set, you can at least go [browse the actual Enron emails](http://www.enron-mail.com/email/) if you are interested.
