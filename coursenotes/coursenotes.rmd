@@ -21,6 +21,7 @@ knitr::opts_chunk$set(cache = TRUE)
 library(BatchGetSymbols, quietly = T)
 library(rvest)
 library(kableExtra)
+library(pracma)
 source("https://dl.dropbox.com/s/cr1pxjp2ysakcyw/307Functions.r?dl=0")
 ```
 
@@ -971,7 +972,6 @@ Now we enter into the part of this course that is about data. As scientists, oft
 - Explain the advantage of using polynomials to describe data
 - Implement Vandermonde interpolation and explain its pros/cons
 - Implement Lagrange inteprolation and explain its pros/cons
-- Implement Newton divided difference interpolation and explain its pros/cons
 - Explain and implement data compression via interpolation
 
 #### Why polynomials?
@@ -1009,8 +1009,7 @@ x <- seq(from=1,to=3,length=200)
 plot(x,f(x),type="l",lwd=2)
 lines(x,tee(x),col="red",lwd=2)
 points(xdata,f(xdata),cex=2)
-py <- Interpolator(xdata,f(xdata),x)
-lines(x,py,col="green",lwd=2)
+lines(x,p(x),col="green",lwd=2)
 ```
 
 A few important points to know about the interpolating polynomial through $n$ points with distinct $x$ coordinates include:
@@ -1106,7 +1105,7 @@ $$
 p(x) = \sum_{i = 1}^n y_i \prod_{j \not = i} \frac{(x - x_j)}{(x_i - x_j)}.
 $$
 
-The advantage of this method is that it doesn't require any numerical solution -- just evaluation. Let's try a comparison: Vandermonde vs. Lagrange X-treme Smackdown.
+The advantage of this method is that it doesn't require any numerical solution... just evaluation. Let's try a comparison: Vandermonde vs. Lagrange.
 ```{r error=TRUE, cache=TRUE}
 set.seed(123)
 n <- 20
@@ -1114,14 +1113,7 @@ x <- 1:n
 y <- runif(n)
 x0 <- 1.5
 c <- solve(Vandermonde(x),y)
-lagrange <- function(x,y,x0){
-  ans <- 0
-  for (i in 1:n){
-    ans <- ans + y[i]*prod((x0-x[-i])/(x[i]-x[-i]))
-  }
-  return(ans)
-}
-lagrange(x,y,x0)
+barylag(x,y,x0)
 ```
 We can also do a speed comparison test.
 ```{r cache=TRUE}
@@ -1138,7 +1130,7 @@ t1 <- system.time(
 )[3]
 t2 <- system.time(
   for (i in 1:numTrials){
-    lagrange(x,y,x0)
+    barylag(x,y,x0)
   }
 )[3]
 t1/t2
@@ -1193,14 +1185,14 @@ t1/t2
 
 #### Data compression
 
-One of the powerful things interpolation can do is compress data. Let's do an example. Suppose that we need to know values for the function $\sin x$. A computer doesn't magically know this function, so it has to have some way to compute/evaluate it. One option would be to store a giant look-up table. There are an infinite number of numbers to store, though, even for the interval $[0,2\pi)$. Another option is to fit a polynomial based on a finite number of points, store the coefficients, and evaluate the polynomial as needed. Let's do this using 5 points to begin with. We'll write a function that takes a specified number of points, samples them from the function, constructs the interpolating polynomial, plots the function and the polynomial, and calculates the maximum error. To find the interpolated data, I'll use the `Interpolator` function that has been written for you. The inputs are your $x$ data, your $y$ data, and the $x$ values at which you'd like interpolated values.
+One of the powerful things interpolation can do is compress data. Let's do an example. Suppose that we need to know values for the function $\sin x$. A computer doesn't magically know this function, so it has to have some way to compute/evaluate it. One option would be to store a giant look-up table. There are an infinite number of numbers to store, though, even for the interval $[0,2\pi)$. Another option is to fit a polynomial based on a finite number of points, store the coefficients, and evaluate the polynomial as needed. Let's do this using 5 points to begin with. We'll write a function that takes a specified number of points, samples them from the function, constructs the interpolating polynomial, plots the function and the polynomial, and calculates the maximum error. The inputs are your $x$ data, your $y$ data, and the $x$ values at which you'd like interpolated values.
 ```{r cache=TRUE}
 interperror <- function(n,plotflag=FALSE){
   x <- seq(from=0,to=2*pi,length=n)
   y <- sin(x)
   xexact <- seq(from=0,to=2*pi,length=1000)
   yexact <- sin(xexact)
-  yinterp <- Interpolator(x,y,xexact)
+  yinterp <- barylag(x,y,xexact)
   if (plotflag==TRUE){
     plot(xexact,yexact,type="l")
     points(x,y)
@@ -1327,7 +1319,7 @@ where $c$ is a number between $x$ and $x_0$. For an interpolating polynomial con
 $$
 \left|\frac{f^{(n)}(c)}{n!}(x-x_1)(x-x_2)\cdots (x-x_n)\right|
 $$
-for some $c \in [x_1,x_n]$. If you are interested in the proof, it appears in your textbook and/or I am happy to go over it with you in office hours. Hoenstly, though, I find the proof to be totally nonintuitive and unenlightening.
+for some $c \in [x_1,x_n]$. If you are interested in the proof, it appears in your textbook and/or I am happy to go over it with you in office hours. Honestly, though, I find the proof to be totally nonintuitive and unenlightening.
 
 Let's use the error term to do an example, where we again ask the question HOW DO WE EVEN KNOW ANYTHING? For instance, suppose you want to calculate the value of an exponential function. [This turns out to be hard](https://math.stackexchange.com/questions/1239352/how-do-pocket-calculators-calculate-exponents)! Let's restrict the problem a bit. Suppose we want to calculate $\exp{x}$ on $[0,1]$ with 5 digits of accuracy. One way to do this would be to choose equally-spaced points on $[0,1]$ and make a table of $\exp{x}$ for those values using some very accurate method. Then, we let the user choose a value of $x$. We find the two values that surround it in our table, construct the linear interpolating polynomial between them, and use it to estimate our answer. For instance, if we chose $x$ values of $0.1, 0.2, \ldots, 1$ and the user input $x=0.3268$, we would construct the inteprolating polynomial through $(0.3,\exp{0.3})$ and $(0.4,\exp{0.4})$ and then plug in our $x$. Let's ask the question: to achieve 5-digit accuracy with this method, how many points must we take on $[0,1]$? (Note: crucially, this is not at all the same as creating a single interpolating polynomial that goes through all the points.) We have
 $$
@@ -1517,8 +1509,8 @@ n <- 30
 x <- sort(runif(n))
 y <- cumsum(abs(rnorm(n)))
 plot(x,y,pch=19,ylim=c(-2,35),cex=1.5)
-xx = seq(from=0,to=1,length=1000)
-yy = Interpolator(x,y,xx)
+xx = seq(from=min(x),to=max(x),length=1000)
+yy = barylag(x,y,xx)
 lines(xx,yy,col="red",lwd=3)
 cubicspline <- splinefun(x,y,method='natural')
 lines(xx,cubicspline(xx),col="blue",lwd=3)
@@ -1537,13 +1529,13 @@ day <- 1:length(price)
 # Sample every 5th day
 sampledday <- day[seq(from=1,to=length(price),by=5)]
 sampledprice <- price[seq(from=1,to=length(price),by=5)]
-# Fit inteprolating polynomial
-interpolatedprice <- Interpolator(sampledday,sampledprice,day)
-plot(day,interpolatedprice,col="red",type="l",ylim=c(250,370))
+# Fit interpolating polynomial
+interpolatedprice <- barylag(sampledday,sampledprice,day[1:max(sampledday)])
+plot(day[1:max(sampledday)],interpolatedprice,col="red",type="l",ylim=c(800,1200))
 points(day,price,col="blue")
 # Fit splines
 TSLAspline <- splinefun(sampledday,sampledprice,method='natural')
-plot(day,TSLAspline(day),col="blue",type="l",ylim=c(250,370))
+plot(day,TSLAspline(day),col="blue",type="l",ylim=c(800,1200))
 points(day,price,col="blue")
 ```
 
