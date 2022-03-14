@@ -169,8 +169,8 @@ The problem is that $f$ is repeating, but on a computer only holds 52 bits. The 
 * If the 53rd bit is a 0, drop the 53rd bit and everything after it.
 * If the 53rd bit is a 1 and there is any nonzero bit after it, add 1 to the 52nd bit (and carry as necessary).
 * If the 53rd bit is a 1 and there are only zeros after it,
-  + If the 52nd bit is 1, add 1 to it and carry as necessary
-  + If the 52nd bit is a 0, do nothing (truncate after 52nd bit)
++ If the 52nd bit is 1, add 1 to it and carry as necessary
++ If the 52nd bit is a 0, do nothing (truncate after 52nd bit)
 
 For our example above, in the mantissa $f$ we have $11011$ followed by 23 copies of the pattern $01$ followed by a $0$. This means the 53rd bit is a $1$, and there are nonzero bits after it, so we have to add $1$ to the 52nd. In base 10, we have
 $$f = 2^{-1} + 2^{-2} + 2^{-4} + 2^{-5} + 2^{-7} + 2^{-9} + + \ldots + 2^{-51} + 2^{-52} = 0.85416666666666674068.$$
@@ -394,7 +394,9 @@ Gaussian elimination refers to transforming a matrix to row echelon form by appl
 To solve a linear system $\mat{A}\vec{x}=\vec{b}$, write it as an augmented matrix, reduce it to row echelon form, and then use back substitution to solve.
 
 For example, take
-$$\mat{A} = 
+
+$$
+\mat{A} = 
 \begin{pmatrix}
 1 & 3 & 1\\
 1 & 1 & -1 \\
@@ -413,6 +415,7 @@ $$
 \end{pmatrix}.
 $$
 Apply $II \leftarrow II - I$ and $III \leftarrow  III - 3 I$.
+
 $$
 \mat{A_a} = \begin{pmatrix}
 1 & 3 & 1 & 9 \\
@@ -428,6 +431,7 @@ $$
 0 & 0 & 0 & 0
 \end{pmatrix}.
 $$
+
 The bottom row tells us nothing. The second row tells us there is a free variable, which we take to be $x_3$. So we solve this equation for $x_2$, finding $x_2 = 4 -x_3$. This is called back substitution. Then we do back substitution on the top row, from which we find $x_1 = 9 - x_3 - 3 x_2 = 9 - x_3 - 3(4 - x_3) = -3 + 2x_3$. Therefore, the solution is
 $$
 \vec{x} = \begin{pmatrix}  -3 + 2x_3 \\ 4 - x_3 \\ x_3 \end{pmatrix} = \begin{pmatrix}  -3 \\ 4\\ 0 \end{pmatrix} + x_3 \begin{pmatrix}  2 \\ -1 \\ 1 \end{pmatrix}.
@@ -1060,9 +1064,14 @@ $$
 $$
 It can be proven that if the $x_i$ are distinct, the matrix has nonzero determinant, and hence the system is solvable with a unique solution.
 
-In solving problems using the Vandermonde matrix, we are using a basis for the interpolating polynomial that is $\{1,x,x^2,\ldots\}$. This seems very natural since this is how we usually think of polynomials! The problems is that to find the coefficients in this basis, we have to solve a linear problem whose matrix is very ill-conditioned. Let's see what happens if we sample more and more points from our function and construct the interpolating polynomial. We'll look at $\kappa$ for the Vandermonde matrix using a function I wrote for you.
+In solving problems using the Vandermonde matrix, we are using a basis for the interpolating polynomial that is $\{1,x,x^2,\ldots\}$. This seems very natural since this is how we usually think of polynomials! The problems is that to find the coefficients in this basis, we have to solve a linear problem whose matrix is very ill-conditioned. Let's see what happens if we sample more and more points from our function and construct the interpolating polynomial. We'll look at $\kappa$ for the Vandermonde matrix.
 
 ```{r cache=TRUE}
+Vandermonde <- function(x){
+  n <- length(x)
+  V <- outer(x, 0:(n-1), "^")
+  return(V)
+}
 nvals <- 2^(1:8)
 kappavals <- NULL
 for (n in nvals){
@@ -1105,7 +1114,7 @@ $$
 p(x) = \sum_{i = 1}^n y_i \prod_{j \not = i} \frac{(x - x_j)}{(x_i - x_j)}.
 $$
 
-The advantage of this method is that it doesn't require any numerical solution... just evaluation. Let's try a comparison: Vandermonde vs. Lagrange.
+The advantage of this method is that it doesn't require any numerical solution... just evaluation. Let's try a comparison: Vandermonde vs. Lagrange. Here, I'll use R's `baryalg` function. This function has some strengths and some weaknesses. Llater, I will ask you to write your own function to do Lagrange interpolation.
 ```{r error=TRUE, cache=TRUE}
 set.seed(123)
 n <- 20
@@ -1186,6 +1195,7 @@ t1/t2
 #### Data compression
 
 One of the powerful things interpolation can do is compress data. Let's do an example. Suppose that we need to know values for the function $\sin x$. A computer doesn't magically know this function, so it has to have some way to compute/evaluate it. One option would be to store a giant look-up table. There are an infinite number of numbers to store, though, even for the interval $[0,2\pi)$. Another option is to fit a polynomial based on a finite number of points, store the coefficients, and evaluate the polynomial as needed. Let's do this using 5 points to begin with. We'll write a function that takes a specified number of points, samples them from the function, constructs the interpolating polynomial, plots the function and the polynomial, and calculates the maximum error. The inputs are your $x$ data, your $y$ data, and the $x$ values at which you'd like interpolated values.
+
 ```{r cache=TRUE}
 interperror <- function(n,plotflag=FALSE){
   x <- seq(from=0,to=2*pi,length=n)
@@ -1203,7 +1213,9 @@ interperror <- function(n,plotflag=FALSE){
 }
 interperror(5,plotflag=TRUE)
 ```
+
 Not bad for just 5 points. Let's examine how the error changes as a function of $n$.
+
 ```{r cache=TRUE}
 nvec <- 2:20
 errorvec <- NULL
@@ -1235,6 +1247,7 @@ the function $f(x) = \cos(x)$ around the point $x_0=0$ on $[0,2\pi]$. The $n$th 
 $$
 \sum_{i=1}^n (-1)^{i/2} \frac{x^i}{i!}.
 $$
+
 ```{r cache=TRUE}
 mytaylor1 <- function(x,n){
   ans <- 0
@@ -1447,8 +1460,6 @@ I've tried to convince you that it can be problematic to construct interpolating
 
 #### Goals
 - Explain advantages of interpolating data with cubic splines
-- State the conditions satisfied by cubic splines
-- Explain the relationship between cubic splines and linear algebra
 - Implement cubic spline interpolation
 
 #### Why cubic splines?
@@ -1496,9 +1507,11 @@ In short, thus far, the procedure for finding spline coefficients is underetermi
 
 Crucially, since we find the coefficients by solving an square linear system of dimension $4n-4$, these boundary conditions don't merely affect the first and last splines, but influence ALL of the splines.
 
+You don't need to memorize the details of these different types of splines. My main goals for you are to understand what they mean and to be able to implement them in R.
+
 #### Splines and linear algebra
 
-As we have been discussing, to find spline coefficients, we have to solve a linear system. I won't write down the whole system here because we are going to use built-in tools to solve it. However, it's good mathematical literay to know that by writing down the system of equations, you can see that it is tridiagonal and strictly diagonally dominant, which are nice numerical properties.
+As we have been discussing, to find spline coefficients, we have to solve a linear system. I won't write down the whole system here because we are going to use built-in tools to solve it. However, it's good mathematical literacy to know that by writing down the system of equations, you can see that it is tridiagonal and strictly diagonally dominant, which are nice numerical properties.
 
 #### Implementing cubic spline interpolation
 
@@ -1973,20 +1986,20 @@ $$
 \begin{pmatrix} \frac{1}{3} &  \frac{2}{3} & \frac{2}{3} \\ \frac{2}{15} & \frac{2}{3} & -\frac{11}{15} \end{pmatrix} \\
 &= \frac{1}{225}
 \begin{pmatrix}
- 29 & 70 & 28 \\
- 70 & 200 & -10 \\
- 28 & -10 & 221
+29 & 70 & 28 \\
+70 & 200 & -10 \\
+28 & -10 & 221
 \end{pmatrix}\\
 & = \underbrace{
 \begin{pmatrix}
- \frac{1}{9} & \frac{2}{9} & \frac{2}{9} \\
- \frac{2}{9} & \frac{4}{9} & \frac{4}{9} \\
- \frac{2}{9} & \frac{4}{9} & \frac{4}{9}
+\frac{1}{9} & \frac{2}{9} & \frac{2}{9} \\
+\frac{2}{9} & \frac{4}{9} & \frac{4}{9} \\
+\frac{2}{9} & \frac{4}{9} & \frac{4}{9}
 \end{pmatrix}}_{\vec{q}_1 \vec{q}_1^T}  +  \underbrace{
 \begin{pmatrix}
- \frac{4}{225} & \frac{4}{45} & -\frac{22}{225} \\
- \frac{4}{45} & \frac{4}{9} & -\frac{22}{45} \\
- -\frac{22}{225} & -\frac{22}{45} & \frac{121}{225}
+\frac{4}{225} & \frac{4}{45} & -\frac{22}{225} \\
+\frac{4}{45} & \frac{4}{9} & -\frac{22}{45} \\
+-\frac{22}{225} & -\frac{22}{45} & \frac{121}{225}
 \end{pmatrix}}_{\vec{q}_2 \vec{q}_2^T}.
 \end{align}
 $$
@@ -2054,8 +2067,8 @@ $$
 $$
 or, as matrices,
 $$
- \begin{pmatrix} | & | &   | \\ \vec{v}_1 & \vec{v}_2  & \vec{v}_3 \\| & | &   | \\ \end{pmatrix} = 
- \underbrace{ \begin{pmatrix} | & | &   | \\ \vec{q}_1 & \vec{q}_2  & \vec{q}_3 \\| & | &   | \\ \end{pmatrix}}_Q   \underbrace{\begin{pmatrix} r_{1,1} & r_{1,2} &   r_{1,3} \\ 0 &r_{2,2}  & r_{2,3} \\0 & 0 &   r_{3,3} \\ \end{pmatrix} }_R
+\begin{pmatrix} | & | &   | \\ \vec{v}_1 & \vec{v}_2  & \vec{v}_3 \\| & | &   | \\ \end{pmatrix} = 
+\underbrace{ \begin{pmatrix} | & | &   | \\ \vec{q}_1 & \vec{q}_2  & \vec{q}_3 \\| & | &   | \\ \end{pmatrix}}_Q   \underbrace{\begin{pmatrix} r_{1,1} & r_{1,2} &   r_{1,3} \\ 0 &r_{2,2}  & r_{2,3} \\0 & 0 &   r_{3,3} \\ \end{pmatrix} }_R
 $$
 with 
 $$r_{i,i} = ||\vec{y}_i||, \qquad r_{i,j} = \vec{q}_i \cdot \vec{v}_j.
@@ -2316,11 +2329,11 @@ $$
 {\begin{pmatrix} \vert & \vert & \cdots & \vert \\
 \lambda_1 \vec{v}_1 & \lambda_2 \vec{v}_2 & \cdots & \lambda_n \vec{v}_n \\
 \vert & \vert & \cdots & \vert 
-  \end{pmatrix}} \\
+\end{pmatrix}} \\
 &=\underbrace{\begin{pmatrix} \vert & \vert & \cdots & \vert \\
 \vec{v}_1 & \vec{v}_2 & \cdots & \vec{v}_n \\
 \vert & \vert & \cdots & \vert 
-  \end{pmatrix}}_\mat{S}
+\end{pmatrix}}_\mat{S}
 \underbrace{\begin{pmatrix} \lambda_1 &&& \\ & \lambda_2 & & \\ && \ddots & \\ &&& \lambda_n   \end{pmatrix}}_\mat{\Lambda}.
 \end{align}
 $$
@@ -2512,8 +2525,8 @@ v <- A%*%v
 v
 v <- v/vnorm(v)
 for (i in 1:100){
-v <- A%*%v
-v <- v/vnorm(v)
+  v <- A%*%v
+  v <- v/vnorm(v)
 }
 (A%*%v)/v
 e <- eigen(A)
