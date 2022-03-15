@@ -53,33 +53,7 @@ x <- 1:n
 y <- runif(n)
 x0 <- 1.5
 C <- solve(Vandermonde(x),y)
-lagrange <- function(x,y,x0){
-  ans <- 0
-  for (i in 1:n){
-    ans <- ans + y[i]*prod((x0-x[-i])/(x[i]-x[-i]))
-  }
-  return(ans)
-}
 lagrange(x,y,x0)
-
-# Vandermonde vs. Lagrange speed test for 10 pts
-set.seed(123)
-numTrials <- 100000
-n <- 10
-x <- 1:n
-y <- runif(n)
-t1 <- system.time(
-  for (i in 1:numTrials){
-    C <- solve(Vandermonde(x),y)
-    horner(rev(C),x0)
-  }
-)[3]
-t2 <- system.time(
-  for (i in 1:numTrials){
-    lagrange(x,y,x0)
-  }
-)[3]
-t1/t2
 
 # Interpolation error for sin(x) with 5 pts
 interperror <- function(n,plotflag=FALSE){
