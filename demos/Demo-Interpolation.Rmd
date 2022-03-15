@@ -1,3 +1,5 @@
+# NOTE: ASSUMES THAT YOU HAVE ALREADY WRITTEN A FUNCTION TO DO LAGRANGE INTERPOLATION
+
 # Load libraries
 library(knitr)
 library(pracma)
