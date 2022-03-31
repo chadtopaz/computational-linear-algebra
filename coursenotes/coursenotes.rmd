@@ -12,7 +12,7 @@ output:
 \renewcommand{\vec}[1]{\mathbf{#1}}
 \renewcommand{\mat}[1]{\mathbf{#1}}
 \newcommand{\exp}[1]{\mathrm{e}^{#1}}
-\newcommand{\argmin}[1]{\underset{#1}{\operatorname{argmin}}}
+\DeclareMathOperator*{\argmin}{arg\,min}
 
 
 ```{r,message=FALSE, warning=FALSE, include=FALSE}
@@ -1693,7 +1693,8 @@ By writing it this way, we can remember one interpretation of linear systems. In
 #### Projection onto a vector
 
 To examine the details, let's start with an even more fundamental example: a single vector in the plane. Suppose I hand you the vector $\vec{a} = (2,1)^T$ and tell you to use it to reach the target vector $\vec{b}=(6,8)^T$. Well, you can't do it exactly because there is no scalar $x$ such that $x\vec{a} = \vec{b}$. So let us do the next best thing: let's find the value of $x$ such that $x\vec{a}$ is as close as possible to $\vec{b}$. We can draw a picture to solve this problem.
-```{r cache=TRUE}
+
+```{r cache = TRUE, echo = FALSE}
 par(pty="s")
 plot(0,0,xlim=c(-0.1,10),ylim=c(-0.1,10),type="n",xlab="",ylab="",asp=1)
 arrows(0,0,2,1)
@@ -1704,7 +1705,8 @@ lines(c(0,10),c(0,5),type="l",lty=5)
 ```
 
 Where should we stop on the dotted line? When we are perpendicular to the end of $\vec{b}$. This results in the following picture.
-```{r cache=TRUE}
+
+```{r cache = TRUE, echo= FALSE}
 par(pty="s")
 plot(0,0,xlim=c(-0.1,10),ylim=c(-0.1,10),type="n",xlab="",ylab="",asp=1)
 arrows(0,0,2,1)
@@ -1915,13 +1917,13 @@ We can apply calculus to minimize this expression and the normal equations will 
 We've talked about how to fit a model to data using least squares, and we've examined the theoretical aspect of this process, but thus far we've ignored computational issues. It turns out that solving the normal equations can be difficult on a computer, and a technique called QR factorization provides a potentially better way to solve a least squares problem.
 
 #### Goals
-- Goal 1
-- Goal 2
-- Goal 3
+- Define orthonormal matrices
+- Perform Graham-Schmidt Orthogonalization
+- Solve least squares problems with **QR** decomposition
 
 #### Orthogonality is nice
 
-The eventual goal of this lecture is to show you how to solve the least squares problem
+The eventual goal of this lesson is to show you how to solve the least squares problem
 $$\vec{x}_{LS} = \argmin_x \frac{1}{2}||\mat{A}\vec{x}-\vec{b}||^2$$
 
 by writing the matrix $\mat{A}$ in a convenient way. But to build up to that, we need to introduce a number of ideas. First off: orthogonality.
@@ -1940,7 +1942,7 @@ $$
 &= \mat{I}_n.
 \end{align}
 $$
-If $\mat{A}$ is square and orthonormal, since $\mat{A}^T\mat{A} = \mat{I}$, then by definition of inverse, $\mat{A}^T = \mat{A}^{-1}$. This is a pretty great way to calculate an inverse!
+If $\mat{A}$ is square and orthonormal, since $\mat{A}^T\mat{A} = \mat{I}$, then by definition of inverse, $\mat{A}^T = \mat{A}^{-1}$. This is a pretty great way to calculate an inverse! Remember, though, that in our least squares context ,$\mat{A}$ is generally *not* a square matrix.
 
 Another helpful property of orthogonal matrices is that they preserve length, meaning that have norm of one. That is, suppose $\mat{Q}$ is orthogonal. Then
 $$
@@ -1957,7 +1959,7 @@ Since $||\mat{Q}\vec{v}||^2 = ||\vec{v}||^2$, we know $||\mat{Q}\vec{v}|| = ||\v
 
 Finally, let's consider projecting a vector into a subspace spanned by orthonormal vectors $\vec{q}_i$, $i=1,\ldots,n$. Define $\mat{A}$ as
 $$
-\mat{A} = \begin{pmatrix} | & | &  & | \\ \vec{q}_1 & \vec{q}_2 & \cdots & \  `vec{q}_n \\| & | &  & | \\ \end{pmatrix}.
+\mat{A} = \begin{pmatrix} | & | &  & | \\ \vec{q}_1 & \vec{q}_2 & \cdots & \  \vec{q}_n \\| & | &  & | \\ \end{pmatrix}.
 $$
 Let's project a vector $\vec{w}$ onto the subspace spanned by the columns of $\mat{A}$.
 By definition of the projection operator, and using the fact that $\mat{A}$ is orthogonal,
