@@ -1,0 +1,199 @@
+# Load libraries
+library(pracma)
+
+# Setting up least squares problem
+# Advertising example from lecture notes
+a <- 3:6
+s <- c(105,117,141,152)
+plot(a, s, pch = 19)
+vandermonde <- function(x) {
+  A <- outer(x, (length(x)):1 - 1, "^")
+  return(A)
+}
+A <- vandermonde(a)[,c(3,4)]
+
+# Least squares with one basis vector
+# Find best solution x (scalar) to ax = b
+a <- c(2,1)
+b <- c(6,8)
+pseudoinv <- solve(t(a) %*% a) %*% t(a)
+x <- pseudoinv %*% b
+bhat <- a %*% x
+r <- b - bhat
+print(x)
+print(bhat)
+dot <- function(v1,v2){sum(v1*v2)}
+dot(a,r)
+
+# Least squares with two basis vectors
+# Advertising example from lecture notes
+a <- 3:6
+A <- vandermonde(a)[,c(3,4)]
+b <- c(105,117,141,152)
+pseudoinv <- solve(t(A) %*% A) %*% t(A)
+x <- pseudoinv %*% b
+bhat <- A %*% x
+r <- b - bhat
+print(x)
+print(bhat)
+dot(r,A[,1])
+dot(r,A[,2])
+plot(a1,b,xlab="advertising",ylab="sales")
+xx <- seq(from=0,to=6,length=200)
+lines(xx,horner(as.numeric(x),xx)$y)
+
+# Best-fit parabola
+x <- c(0,1,2,3)
+A <- vandermonde(x)[,2:4]
+b <- c(6,5,2,2)
+pseudoinv <- solve(t(A) %*% A) %*% t(A)
+c <- pseudoinv %*% b
+bhat <- A %*% c
+r <- b - bhat
+print(c)
+plot(x,b)
+xx <- seq(from=0,to=3,length=200)
+lines(xx,horner(c,xx)$y)
+print(r)
+
+# Data compression
+x <- seq(from=0,to=1,length=100)
+y <- 3*x + 0.4*(2*runif(100))
+plot(x,y)
+A <- vandermonde(x)[,(length(x)-1):length(x)]
+c <- qr.solve(A,y)
+lines(x, horner(c,x)$y, col = "red")
+
+# Gram-Schmidt example
+# Note vectors are not linearly independent
+# since 1/3(v1+v2) = v3
+# So we should only generate two vectors
+v1 <- c(1,2,2)
+v2 <- c(2,1,-2)
+v3 <- c(1,1,0)
+y1 <- v1
+r11 <- Norm(y1)
+q1 <- y1/r11
+y2 <- v2 - (q1%*%t(q1))%*%v2
+r22 <- Norm(y2)
+q2 <- y2/r22
+q1
+q2
+Norm(q1)
+Norm(q2)
+dot(q1,q2)
+
+# QR Example
+# Define matrix
+v1 <- c(2,3,6)
+v2 <- c(10,8,9)
+v3 <- c(19,-3,-13)
+A <- cbind(v1,v2,v3)
+A
+# Step 1
+y1 <- v1
+r11 <- Norm(y1)
+q1 <- y1/r11
+# Step2
+y2 <- v2 - (q1%*%t(q1))%*%v2
+r22 <- Norm(y2)
+q2 <- y2/r22
+r12 <- dot(q1,v2)
+# Step 3
+y3 <- v3 - (q1%*%t(q1))%*%v3 - (q2%*%t(q2))%*%v3
+r33 <- Norm(y3)
+q3 <- y3/r33
+r13 <- dot(q1,v3)
+r23 <- dot(q2,v3)
+# Assemble into Qbar and Rbar
+Qbar <- cbind(q1,q2,q3)
+Rbar <- rbind(c(r11,r12,r13),c(0,r22,r23),c(0,0,r33))
+Qbar
+Rbar
+Qbar%*%Rbar - A
+QRbarcheck <- qr(A)
+Qbarcheck <- qr.Q(QRbarcheck, complete=TRUE)
+Rbarcheck <- qr.R(QRbarcheck, complete=TRUE)
+Qbar
+Qbarcheck
+S <- diag(c(-1,-1,-1))
+Qbarcheck <- Qbarcheck%*%S
+Rbarcheck <- S%*%Rbarcheck
+Qbarcheck - Qbar
+Rbarcheck - Rbar
+
+# Next QR example
+# Define matrix
+v1 <- c(1,2,2)
+v2 <- c(2,1,-2)
+v3 <- c(1,1,0)
+A <- cbind(v1,v2,v3)
+# Step 1
+y1 <- v1
+r11 <- Norm(y1)
+q1 <- y1/r11
+# Step2
+y2 <- v2 - (q1%*%t(q1))%*%v2
+r22 <- Norm(y2)
+q2 <- y2/r22
+r12 <- dot(q1,v2)
+# Step 3
+y3 <- v3 - (q1%*%t(q1))%*%v3 - (q2%*%t(q2))%*%v3
+y3
+V3 <- c(1,1,1)
+y3 <- V3 - (q1%*%t(q1))%*%V3 - (q2%*%t(q2))%*%V3
+q3 <- y3/Norm(y3) 
+r13 <- dot(q1,v3)
+r23 <- dot(q2,v3)
+r33 <- 0
+# Assemble into Qbar and Rbar
+Qbar <- cbind(q1,q2,q3)
+Rbar <- rbind(c(r11,r12,r13),c(0,r22,r23),c(0,0,r33))
+Qbar
+Rbar
+Qbar%*%Rbar - A
+Q <- Qbar[1:3,1:2]
+R <- Rbar[1:2,1:3]
+Q
+R
+Q%*%R - A
+
+# Last QR example
+v1 <- c(1,1,1,1)
+v2 <- c(0,1,1,1)
+v3 <- c(0,0,1,1)
+A <- cbind(v1,v2,v3)
+A
+# Step 1
+y1 <- v1
+r11 <- Norm(y1)
+q1 <- y1/r11
+# Step 2
+y2 <- v2 - (q1%*%t(q1))%*%v2
+r22 <- Norm(y2)
+q2 <- y2/r22
+r12 <- dot(q1,v2)
+# Step 3
+y3 <- v3 - (q1%*%t(q1))%*%v3 - (q2%*%t(q2))%*%v3
+r33 <- Norm(y3) 
+q3 <- y3/(r33)
+r13 <- dot(q1,v3)
+r23 <- dot(q2,v3)
+# Choose a vector not in the span of q1, q2, q3
+v4 <- c(1,2,3,4)
+y4 <- v4 - (q1%*%t(q1))%*%v4 - (q2%*%t(q2))%*%v4  - (q3%*%t(q3))%*%v4
+r44 <- Norm(y4) 
+q4 <- y4/(r44)
+r14 <- dot(q1,v4)
+r24 <- dot(q2,v4)
+r34 <- dot(q3,v4)
+# Assemble into Qbar and Rbar, check answer
+Qbar <- cbind(q1,q2,q3,q4)
+Rbar <- rbind(c(r11,r12,r13),c(0,r22,r23),c(0,0,r33),c(0,0,0))
+Qbar
+Rbar
+Qbar%*%Rbar - A
+# Make reduced QR and check
+Q <- Qbar[1:4,1:3]
+R <- Rbar[1:3,1:3]
+Q%*%R - A
