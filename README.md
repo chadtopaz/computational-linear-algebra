@@ -13,17 +13,17 @@
 
 ## Course Units
 
-* R Bootcamp(#r-bootcamp)
-* How Computers Store Numbers(#how-computers-store-numbers)
-* Linear Systems(#linear-systems)
-* Solving Linear Systems(#solving-linear-systems)
-* Recap Exercise I(#recap-exercise-I)
-* Interpolation(#interpolation)
-* Least Squares(#least-squares)
-* Eigenvalues(#eigenvalues)
-* Principal Component Analysis(#principal-component-analysis)
-* Topological Data Analysis(#topological-data-analysis)
-* Recap Exercise II(#recap-exercise-II)
+* [R Bootcamp(#r-bootcamp)
+* [How Computers Store Numbers](#how-computers-store-numbers)
+* [Linear Systems](#linear-systems)
+* [Solving Linear Systems](#solving-linear-systems)
+* [Recap Exercise I](#recap-exercise-I)
+* [Interpolation](#interpolation)
+* [Least Squares](#least-squares)
+* [Eigenvalues](#eigenvalues)
+* [Principal Component Analysis](#principal-component-analysis)
+* [Topological Data Analysis](#topological-data-analysis)
+* [Recap Exercise II](#recap-exercise-II)
 
 ## Introduction
 
