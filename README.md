@@ -78,7 +78,7 @@ Stack Overflow | My Favorite Choice
 
 ## Course Details
 
-Each link below leads to a course unit page. A few characteristics of my on-the-ground course include:
+A few characteristics of my on-the-ground course include:
 
 * Ungrading
 * Flipped classroom style, including pre-class quizzes
