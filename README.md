@@ -2,23 +2,23 @@
 
 ## Introduction
 
-I am Prof. Chad Topaz. Welcome to the public-facing version of  my Computational Linear Algebra course. This Canvas course is a minimalist recreation of the one I use on my own campus at Williams College. You can access all of the basic course materials here. Since this site is for public sharing, I have eliminated certain items related to surveying my students, performing course evaluation, student assessment, and so forth. I enthusiastically credit colleagues from my time at Macalester College: Tom Halverson, Danny Kaplan, David Shuman, and Lori Ziegelmeier. Their versions of a Computational Linear Algebra course have influenced my own course, and I'm grateful to them for sharing wisdom and materials.
+I am [Prof. Chad Topaz](http://www.chadtopaz.com). Welcome to the public-facing version of  my Computational Linear Algebra course. This Canvas course is a minimalist recreation of the one I use on my own campus at Williams College. You can access all of the basic course materials here. Since this site is for public sharing, I have eliminated certain items related to surveying my students, performing course evaluation, student assessment, and so forth. I enthusiastically credit colleagues from my time at Macalester College: Tom Halverson, Danny Kaplan, David Shuman, and Lori Ziegelmeier. Their versions of a Computational Linear Algebra course have influenced my own course, and I'm grateful to them for sharing wisdom and materials.
 
-## Credit/Citation
+## Citation
 
-If you use this site as a student (for your own learning ) or as an instructor (for teaching your own course) I would appreciate you letting me know so that I can track impact of the work I have done to create it. If you do adopt materials from this site, including but not limited to the linked GitHub repository, please make sure to credit me.
+If you use this site as a student (for your own learning ) or as an instructor (for teaching your own course) I would appreciate you [letting me know](mailto:chad.topaz+impact@gmail.com) so that I can track impact of the work I have done to create it. If you do adopt materials from this site, please make sure to credit me.
 
 ## In Development
 
 This course site is perpetually in development. I regularly revisit my course materials in order to improve them.
 
-##Errata
+## Errata
 
-If you find any problems with course materials (a typo, code that doesn't work, a broken link – anything at all) please let me know by contacting me here.
+If you find any problems with course materials (a typo, code that doesn't work, a broken link – anything at all) please let me know by [contacting me here](mailto:chad.topaz+errata@gmail.com).
 
 ## Consulting/Speaking
 
-I have built this public-facing site as a free, shareable public good. If you are interested in assistance with technical/mathematical aspects of this course or related consulting, please contact me here. If you would like me to speak to your department/institution/organization about curriculum and/or pedagogy (of this course, or of anything else) then please see my Speaking page and contact me here.
+I have built this public-facing site as a free, shareable public good. If you are interested in assistance with technical/mathematical aspects of this course or related consulting, please [contact me here](mailto:chad.topaz+consulting@gmail.com). If you would like me to speak to your department/institution/organization about curriculum and/or pedagogy (of this course, or of anything else) then please see my [Speaking](http://www.chadtopaz.com/speaking) page and contact me [here](mailto:chad.topaz+speaking@gmail.com).
 
 ## Course Syllabus
 
