@@ -73,9 +73,11 @@ Your solution goes here.
 
 Consider the function
 
-$$f(x)=\\frac{1-(1-x)^3}{x}$$
-for x = 10<sup>−1</sup>, 10<sup>−2</sup>, …, 10<sup>−14</sup>. Then use
-an alternative form of the expression that doesn’t suffer from
+![f(x)=\\frac{1-(1-x)^3}{x}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;f%28x%29%3D%5Cfrac%7B1-%281-x%29%5E3%7D%7Bx%7D "f(x)=\frac{1-(1-x)^3}{x}")
+
+for x =
+![10^{-1}, 10^{-2}, \\ldots, 10^{-14}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;10%5E%7B-1%7D%2C%2010%5E%7B-2%7D%2C%20%5Cldots%2C%2010%5E%7B-14%7D "10^{-1}, 10^{-2}, \ldots, 10^{-14}").
+Then use an alternative form of the expression that doesn’t suffer from
 subtracting nearly equal numbers. Consider the results from the second
 calculation to be exact, and make a log-log plot of the relative error
 in the first calculation as a function of x. What is the general trend?

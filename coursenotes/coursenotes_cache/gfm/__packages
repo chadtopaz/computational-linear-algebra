@@ -1,0 +1,6 @@
+knitr
+rvest
+dplyr
+BatchGetSymbols
+kableExtra
+pracma

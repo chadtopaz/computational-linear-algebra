@@ -4,7 +4,7 @@ subtitle: "Course Notes"
 author: "Chad M. Topaz"
 date: "Last updated: 2022-02-04"
 output:
-  html_document:
+  rmarkdown::github_document:
     toc: true
     toc_depth: 4
 ---

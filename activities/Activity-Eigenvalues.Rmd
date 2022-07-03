@@ -1,7 +1,7 @@
 ---
 title: "Activity - Eigenvalues"
 author: "Insert group members' full names here"
-output: html_document
+output: rmarkdown::github_document
 ---
 
 \renewcommand{\vec}[1]{\mathbf{#1}}
