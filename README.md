@@ -1,5 +1,31 @@
 # Computational Linear Algebra
 
+## Introductory Material Table of Contents
+
+* Introduction
+* Citation
+* In Development
+* Errata
+* Consulting/Speaking
+* Course Syllabus
+* R Resources
+* Course Details
+
+## Course Units Table of Contents
+
+* R Bootcamp
+* How Computers Store Numbers
+* Linear Systems
+* Solving Linear Systems
+* Recap Exercise I
+* Interpolation
+* Least Squares I
+* Least Squares II
+* Eigenvalues
+* Principal Component Analysis
+* Topological Data Analysis
+* Recap Exercise II
+
 ## Introduction
 
 I am [Prof. Chad Topaz](http://www.chadtopaz.com). Welcome to the public-facing version of  my Computational Linear Algebra course. This Canvas course is a minimalist recreation of the one I use on my own campus at Williams College. You can access all of the basic course materials here. Since this site is for public sharing, I have eliminated certain items related to surveying my students, performing course evaluation, student assessment, and so forth. I enthusiastically credit colleagues from my time at Macalester College: Tom Halverson, Danny Kaplan, David Shuman, and Lori Ziegelmeier. Their versions of a Computational Linear Algebra course have influenced my own course, and I'm grateful to them for sharing wisdom and materials.
@@ -39,17 +65,37 @@ Stack Overflow | My Favorite Choice
 
 ## Course Details
 
-Each link below leads to a course unit page. My course is designed around week-long units on a Tuesday/Thursday teaching schedule, and you will see that reflected. Students turn in problem sets and self-reflective writing for each unit, but I have removed the submission of those items from this public-facing course site. In my on-the-ground course on my campus, I spend the first calendar week of class (which is actually only one-half week of instructional time) on introductory activities, and I have also eliminated those from this public-facing version of the course.
+Each link below leads to a course unit page. A few characteristics of my on-the-ground course include:
 
-R Bootcamp
-How Computers Store Numbers
-Linear Systems
-Solving Linear Systems
-Recap Exercise I
-Interpolation
-Least Squares I
-Least Squares II
-Eigenvalues
-Principal Component Analysis
-Topological Data Analysis
-Recap Exercise II
+* Ungrading
+* Flipped classroom style, including pre-class quizzes
+* Organization around weekly blocks of material
+* An introductory half-week that gets students oriented to the course
+
+To enable you to make easy and flexible use of the resources here, I have eliminated these elements ffrom this public-facing version of the course.
+
+The course units are below.
+
+## R Bootcamp
+
+## How Computers Store Numbers
+
+## Linear Systems
+
+## Solving Linear Systems
+
+## Recap Exercise I
+
+## Interpolation
+
+## Least Squares I
+
+## Least Squares II
+
+## Eigenvalues
+
+## Principal Component Analysis
+
+## Topological Data Analysis
+
+## Recap Exercise II
