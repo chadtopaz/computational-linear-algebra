@@ -13,7 +13,7 @@
 
 ## Course Units
 
-* [R Bootcamp(#r-bootcamp)
+* [R Bootcamp](#r-bootcamp)
 * [How Computers Store Numbers](#how-computers-store-numbers)
 * [Linear Systems](#linear-systems)
 * [Solving Linear Systems](#solving-linear-systems)
@@ -91,6 +91,26 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 [Back to Table of Contents](#table-of-contents)
 
 ## R Bootcamp
+
+*   Videos
+    *   [Horner's Method (17:16)](https://www.youtube.com/watch?v=RGrmEWj38bs) 
+    *   [Intro to Taylor Series (12:42)](https://youtu.be/9YAaCEA08yM)
+    *   [Why Taylor Series Actually Work (9:34)](https://youtu.be/Iub16Y1ZXRw)
+*   Reading
+    *   [Course Notes](https://htmlpreview.github.io/?https://github.com/chadtopaz/computationallineaaralgebra/blob/main/coursenotes/coursenotes.html): R Bootcamp
+    *   [Machine Learning Has Been Used to Automatically Translate Long-Lost Languages](https://www.technologyreview.com/2019/07/01/65601/machine-learning-has-been-used-to-automatically-translate-long-lost-languages/)
+    *   [The Best Bits](https://www.americanscientist.org/article/the-best-bits)
+*   Coding Practice
+    *   [DataCamp](http://www.datacamp.com/) Getting Started with R Markdown (single lesson)
+    *   [DataCamp](http://www.datacamp.com/) Introduction to Linear Algebra (single lesson)
+    *   [DataCamp](http://www.datacamp.com/) Conditionals and Control Flow (single lesson)
+    *   [DataCamp](http://www.datacamp.com/) Loops (single lesson)
+    *   [DataCamp](http://www.datacamp.com/) Functions (single lesson)
+*   Class Activity
+    *   [Activity - R Bootcamp](https://rstudio.cloud/spaces/207853/project/3451797)
+*   [Pset - R Bootcamp](https://rstudio.cloud/spaces/207853/project/3472433)
+*   Looking ahead
+    *   8.2 - 7.2 - 1 = ?
 
 [Back to Course Units](#course-units)
 
