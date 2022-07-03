@@ -24,7 +24,7 @@ I have built this public-facing site as a free, shareable public good. If you ar
 
 Rather than using a traditional text-based course syllabus, I use a rather concise graphical syllabus; see below. I designed this syllabus using Piktochart. A similar tool you could consider is Canva. Some details of this syllabus are not relevant for a broad public audience, but I include the full syllabus nonetheless in order to give a flavor of the course and the philosophy I bring to it.
 
-![](/syllabus/`Computational Linear Algebra Syllabus.jpg`)
+![Computational Linear Algebra Course Syllabus]("/syllabus/`Computational Linear Algebra Syllabus.jpg")
 
 ## R Resources
 
