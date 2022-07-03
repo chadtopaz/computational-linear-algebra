@@ -2,7 +2,7 @@
 
 ## Introductory Material Table of Contents
 
-* [Introduction](https://github.com/chadtopaz/computationallineaaralgebra/blob/main/README.md#introduction)
+* [Introduction](README.md#introduction)
 * Citation
 * In Development
 * Errata
