@@ -16,11 +16,11 @@ This course site is perpetually in development. I regularly revisit my course ma
 
 If you find any problems with course materials (a typo, code that doesn't work, a broken link – anything at all) please let me know by contacting me here.
 
-##Consulting/Speaking
+## Consulting/Speaking
 
 I have built this public-facing site as a free, shareable public good. If you are interested in assistance with technical/mathematical aspects of this course or related consulting, please contact me here. If you would like me to speak to your department/institution/organization about curriculum and/or pedagogy (of this course, or of anything else) then please see my Speaking page and contact me here.
 
-##Course Syllabus
+## Course Syllabus
 
 Rather than using a traditional text-based course syllabus, I use a rather concise graphical syllabus; see below. I designed this syllabus using Piktochart. A similar tool you could consider is Canva. Some details of this syllabus are not relevant for a broad public audience, but I include the full syllabus nonetheless in order to give a flavor of the course and the philosophy I bring to it.
 
