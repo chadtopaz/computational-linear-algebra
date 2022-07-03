@@ -2,7 +2,7 @@
 
 ## Introductory Material Table of Contents
 
-* Introduction
+* [Introduction](#introduction)
 * Citation
 * In Development
 * Errata
@@ -69,10 +69,11 @@ Each link below leads to a course unit page. A few characteristics of my on-the-
 
 * Ungrading
 * Flipped classroom style, including pre-class quizzes
-* Organization around weekly blocks of material
 * An introductory half-week that gets students oriented to the course
+* Organization around weekly blocks of material
+* Substantial in-class small-group discussion
 
-To enable you to make easy and flexible use of the resources here, I have eliminated these elements ffrom this public-facing version of the course.
+To enable you to make easy and flexible use of the resources here, I have eliminated these elements from this public-facing version of the course. Essentially, what I am providing here is a core dump of materials I use.
 
 The course units are below.
 
