@@ -24,6 +24,8 @@ I have built this public-facing site as a free, shareable public good. If you ar
 
 Rather than using a traditional text-based course syllabus, I use a rather concise graphical syllabus; see below. I designed this syllabus using Piktochart. A similar tool you could consider is Canva. Some details of this syllabus are not relevant for a broad public audience, but I include the full syllabus nonetheless in order to give a flavor of the course and the philosophy I bring to it.
 
+![](/syllabus/`Computational Linear Algebra Syllabus.jpg`)
+
 ## R Resources
 
 This course uses the R programming language in the RStudio integrated development environment. RStudio Cloud is a free version of RStudio that you can run on any device that has an internet connection and a web browser.
