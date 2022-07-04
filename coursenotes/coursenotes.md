@@ -3164,7 +3164,7 @@ print(ncheb)
     ## [1] 41
 
 This is an improvement in compression by a factor of 632/41 =
-15.414634146341.
+15.4146341.
 
 ### Splines
 
