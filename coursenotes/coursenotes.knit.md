@@ -1,12 +1,5 @@
 ---
-title: "Computational Linear Algebra"
-subtitle: "Course Notes"
-author: "Chad M. Topaz"
-date: "Last updated: 2022-02-04"
-output:
-  rmarkdown::github_document:
-    toc: true
-    toc_depth: 1
+output: rmarkdown::github_document
 ---
 
 \renewcommand{\vec}[1]{\mathbf{#1}}
@@ -15,6 +8,30 @@ output:
 \DeclareMathOperator*{\argmin}{arg\,min}
 
 
+
+
+# Computational Linear Alegbra Course Notes
+
+### Chad M. Topaz
+
+### Last updated: 2022-02-04
+
+# [Table of Contents](#table-of-contents)
+
+-   [R Bootcamp](#r-bootcamp)
+-   [How computers store numbers](#how-computers-store-numbers)
+-   [Linear systems review](#linear-systems-review)
+-   [Matrix norms and conditioning](#matrix-norms-and-conditioning)
+-   [LU decomposition](#lu-decomposition)
+-   [Iterative methods for linear
+    systems](#iterative-methods-for-linear-systems)
+-   [Polynomial interpolation](#polynomial-interpolation)
+-   [Interpolation error and Chebyshev
+    interpolation](#interpolation-error-and-chebyshev-interpolation)
+-   [Splines](#splines)
+-   [Least squares](#least-squares)
+-   [QR Factorization](#qr-factorization)
+-   [Eigenvalues](#eigenvalues)
 
 
 # R Bootcamp
@@ -170,6 +187,7 @@ abs(sin(0.1)-P3(0.1))
 Many mathematics and applied mathematics problems can only be solved numerically, on computers. There is, potentially, error in the way that computers store numbers and perform arithmetic, and it is crucial to understand this important source of error.
 
 ## Goals
+
 - Convert between decimal and binary
 - Explain the form of double precision floating point numbers
 - Convert between real numbers and floating point numbers
