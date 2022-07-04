@@ -1,12 +1,5 @@
 Activity - R Bootcamp
 ================
-Solutions
-
-# Objectives
-
--   Create your first in-class R Markdown
--   Create matrices in R
--   Evaluate polynomials in R
 
 # Problem 1
 
@@ -72,61 +65,11 @@ Generate the following matrices with as little code as possible.
 
 # Problem 1 Solution
 
-1.  
+1.  Your solution goes here.
 
-``` r
-A <- matrix(1, nrow = 8, ncol = 7)
-A[6:7,4:6] <- 5
-print(A)
-```
+2.  Your solution goes here.
 
-    ##      [,1] [,2] [,3] [,4] [,5] [,6] [,7]
-    ## [1,]    1    1    1    1    1    1    1
-    ## [2,]    1    1    1    1    1    1    1
-    ## [3,]    1    1    1    1    1    1    1
-    ## [4,]    1    1    1    1    1    1    1
-    ## [5,]    1    1    1    1    1    1    1
-    ## [6,]    1    1    1    5    5    5    1
-    ## [7,]    1    1    1    5    5    5    1
-    ## [8,]    1    1    1    1    1    1    1
-
-2.  
-
-``` r
-v1 <- 1:8
-v2 <- 1:10
-B <- v1 %*% t(v2) # t() is the transpose operator
-print(B)
-```
-
-    ##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
-    ## [1,]    1    2    3    4    5    6    7    8    9    10
-    ## [2,]    2    4    6    8   10   12   14   16   18    20
-    ## [3,]    3    6    9   12   15   18   21   24   27    30
-    ## [4,]    4    8   12   16   20   24   28   32   36    40
-    ## [5,]    5   10   15   20   25   30   35   40   45    50
-    ## [6,]    6   12   18   24   30   36   42   48   54    60
-    ## [7,]    7   14   21   28   35   42   49   56   63    70
-    ## [8,]    8   16   24   32   40   48   56   64   72    80
-
-A shortcut is to use the outer product notation %o%:
-
-``` r
-B <- v1 %o% v2
-```
-
-3.  If we think about matrix multiplication as taking different linear
-    combinations of the columns, we can see that each of the columns of
-    this matrix is a linear combination (in fact, the same linear
-    combination) of a single column vector. Note also how we can take an
-    exponent of each of the elements of a vector in R and how we can
-    create a vector with the repeated entries.
-
-``` r
-w1 <- 1:11
-w2 <- rep(1,5)
-C <- w1^2 %o% w2
-```
+3.  Your solution goes here.
 
 # Problem 2
 
@@ -201,39 +144,7 @@ Hints:
 
 # Problem 2 Solution
 
-``` r
-P <- function(a,x) {
-  
-  # See how many terms there are in our polynomial
-  numterms <- length(a)
-  
-  # See how many values of x have been input for evaluation
-  numx <- length(x)
-  
-  # Since we will carry out the calculation using matrices,
-  # create matrix with one copy of the coefficients list in each
-  # row, with one (identical) row for each value of x
-  A <- matrix(rep(a,numx), nrow = numx, byrow = TRUE)
-  
-  # Create vector of powers associated to each term of polynomial
-  p <- (numterms-1):0
-  
-  # Evaluate each value of x raised to each power p
-  xp <- outer(x, p, `^`)
-
-  # Multiply xp by coefficients and then
-  # take row sums to obtain final answer
-  y <- rowSums(A*xp)
-  return(y)
-  
-}
-
-mycoeffs <- c(2, -3, 1, -10, 0, 1)
-x <- 3:7
-P(mycoeffs,x)
-```
-
-    ## [1]   181  1185  4251 11521 26265
+Your solution goes here.
 
 # Key Commands
 

@@ -1,15 +1,14 @@
 Activity - How Computers Store Numbers
 ================
-Insert group members’ full names here
 
-### Objectives
+# Objectives
 
 -   Practice with binary and machine representation of numbers
 -   Recognize situations when the limitations of floating point
     arithmetic are realized
 -   Reformulate those situations to get improved numerical accuracy
 
-### Procedure
+# Procedure
 
 -   Please collaborate on this activity with one person as scribe
     (typist). There should only be one laptop open. We’re aiming for
@@ -33,43 +32,43 @@ Insert group members’ full names here
 
 -   Don’t forget that the solutions are available on GLOW.
 
-### Problem 0
+# Problem 0
 
 Recalling that academic integrity policies apply even in an ungraded
 course, please disclose any irregular circumstances related to
 participation in your group (for instance, a group member was missing
 and did not contribute to this document).
 
-### Problem 0 Solution
+# Problem 0 Solution
 
 Your solution goes here.
 
-### Problem 1
+# Problem 1
 
 Convert the binary number 110111.001 to base 10.
 
-### Problem 1 Solution
+# Problem 1 Solution
 
 Your solution goes here.
 
-### Problem 2
+# Problem 2
 
 Convert the base 10 number 1/3 to binary.
 
-### Problem 2 Solution
+# Problem 2 Solution
 
 Your solution goes here.
 
-### Problem 3
+# Problem 3
 
 By hand, calculate the IEEE double precision representation fl(1/3) and
 find the relative error in the computer storage of this number.
 
-### Problem 3 Solution
+# Problem 3 Solution
 
 Your solution goes here.
 
-### Problem 4
+# Problem 4
 
 Consider the function
 
@@ -82,15 +81,15 @@ subtracting nearly equal numbers. Consider the results from the second
 calculation to be exact, and make a log-log plot of the relative error
 in the first calculation as a function of x. What is the general trend?
 
-### Problem 4 Solution
+# Problem 4 Solution
 
 Your solution goes here.
 
-### Problem 5
+# Problem 5
 
 Consider a right triangle whose legs are of length 3344556600 and
 1.2222222. How much longer is the hypotenuse than the longer leg?
 
-### Problem 5 Solution
+# Problem 5 Solution
 
 Your solution goes here.

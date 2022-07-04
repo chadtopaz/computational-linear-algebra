@@ -135,8 +135,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
     *   [Conditionals and Control Flow (chapter)](https://www.datacamp.com/courses/intermediate-r)
     *   [Loops (chapter)](https://www.datacamp.com/courses/intermediate-r)
     *   [Functions (chapter)](https://www.datacamp.com/courses/intermediate-r)
-*   [Activity - R Bootcamp](https://rstudio.cloud/spaces/207853/project/3451797)
-*   [Pset - R Bootcamp](https://rstudio.cloud/spaces/207853/project/3472433)
+*   Activity - R Bootcamp [viewable](activities/Activity-R-Bootcamp.md) [.Rmd](activities/Activity-R-Bootcamp.Rmd)
 *   Looking ahead
     *   8.2 - 7.2 - 1 = ?
 
@@ -146,10 +145,10 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
 *   Videos
     *   [Floating Point Numbers (17:29)](https://youtu.be/gc1Nl3mmCuY)
-    *   [Floating Point Representation and Rounding Error (16:26)](https://youtu.be/wbxSTxhTmrs) \[substantial conceptual overlap with previous video but good for reinforcement\]
+    *   [Floating Point Representation and Rounding Error (16:26)](https://youtu.be/wbxSTxhTmrs)
 *   Reading
     *   [Course Notes: How Computers Store Numbers](/coursenotes/coursenotes.md#how-computers-store-numbers)
-    *   [Bits and Bugs](https://drive.google.com/file/d/1Ez-Vjk9e97o5lMMsSkFLFZF968q7rjyC/view?usp=sharing) 2.1 or 2.2 or 2.3 or 2.4 (choose one that interests you and come ready to discuss)
+    *   [Bits and Bugs](https://drive.google.com/file/d/1Ez-Vjk9e97o5lMMsSkFLFZF968q7rjyC/view?usp=sharing) 2.1 - 2.4
 *   DataCamp Coding Practice
     *   [Quick Introduction to Base R Graphics (chapter)](https://www.datacamp.com/courses/data-visualization-in-r)
 *   [Activity - How Computers Store Numbers]() | [Solutions]()
