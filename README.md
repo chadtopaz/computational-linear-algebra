@@ -97,7 +97,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
     *   [Intro to Taylor Series (12:42)](https://youtu.be/9YAaCEA08yM)
     *   [Why Taylor Series Actually Work (9:34)](https://youtu.be/Iub16Y1ZXRw)
 *   Reading
-    *   [Course Notes](https://htmlpreview.github.io/?https://github.com/chadtopaz/computationallineaaralgebra/blob/main/coursenotes/coursenotes.html): R Bootcamp
+    *   [Course Notes: R Bootcamp](/coursenotes/coursenotes.md#r-bootcamp)
     *   [Machine Learning Has Been Used to Automatically Translate Long-Lost Languages](https://www.technologyreview.com/2019/07/01/65601/machine-learning-has-been-used-to-automatically-translate-long-lost-languages/)
     *   [The Best Bits](https://www.americanscientist.org/article/the-best-bits)
 *   Coding Practice
