@@ -8,11 +8,9 @@ Last updated: 2022-02-04
 -   [Linear systems review](#linear-systems-review)
 -   [Matrix norms and conditioning](#matrix-norms-and-conditioning)
 -   [LU decomposition](#lu-decomposition)
--   [Iterative methods for linear
-    systems](#iterative-methods-for-linear-systems)
+-   [Iterative methods for linear systems](#iterative-methods-for-linear-systems)
 -   [Polynomial interpolation](#polynomial-interpolation)
--   [Interpolation error and Chebyshev
-    interpolation](#interpolation-error-and-chebyshev-interpolation)
+-   [Interpolation error and Chebyshev interpolation](#interpolation-error-and-chebyshev-interpolation)
 -   [Splines](#splines)
 -   [Least squares](#least-squares)
 -   [QR Factorization](#qr-factorization)
