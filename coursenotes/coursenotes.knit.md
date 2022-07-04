@@ -1,0 +1,3491 @@
+---
+title: "Computational Linear Algebra"
+subtitle: "Course Notes"
+author: "Chad M. Topaz"
+date: "Last updated: 2022-02-04"
+output:
+  rmarkdown::github_document:
+    toc: true
+    toc_depth: 1
+---
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\renewcommand{\mat}[1]{\mathbf{#1}}
+\newcommand{\exp}[1]{\mathrm{e}^{#1}}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+
+
+
+# R Bootcamp
+
+## Big picture
+
+It's time to review some math and start getting experience with R programming.
+
+## Goals
+
+- Implement Horner's method
+- Explain advantage of Horner's method
+- Define different ways to multiply vectors
+- Compute Taylor polynomials and bound the error
+
+## Horner's method
+
+Evaluating a polynomial might seem boring, and admittedly, it sort of is. But even a simple task like evaluating a polynomial can involve complexities. Suppose that evaluating a polynomial on your comptuer takes 0.005 seconds. That seems fast, but what if you are solving a heavy-duty industrial problem that requires millions of evaluations?
+
+Consider some methods for evaluating the polynomial $2x^4+3x^3-3x^2+5x-1$:
+
+1. Naively, $2 \times x \times x \times x \times x + 3 \times x \times x \times x \ldots$.
++ 10 multiplications, 4 additions (includes subtractions)
+2. Store $(1/2)(1/2)$, bootstrap to $(1/2)(1/2)(1/2)$, and so forth.
++ 7 multiplications, 4 additions
+3. Horner's method, factoring out successive powers of $x$, as in $-1+x(5+x(-3+x(3+2x)))$.
++ 4 multiplications, 4 additions
+
+We can test:
+
+```r
+xvec <- runif(10^6)
+t1 <- system.time(
+  for (x in xvec){
+    2*x^4+3*x^3-3*x^2+5*x-1
+  }
+)[3]
+t2 <- system.time(
+  for (x in xvec){
+    -1+x*(5+x*(-3+x*(3+2*x)))
+  }
+)[3]
+t1/t2
+```
+
+```
+##  elapsed 
+## 1.779221
+```
+
+## Inner and outer products
+
+There are several different ways to "multiply" vectors $\vec{x}$ and $\vec{y}$:
+
+1. Element-wise. Just multiply each element of $\vec{x}$ with the element in the corresponding poisiotn in $\vec{y}$. Note that $\vec{x}$ and $\vec{y}$ must have the same number of elements, and the result is a vector with the same number of elements.
+
+2. Dot product, also known as the inner product. To compute, calculate $x \cdot y \equiv \vec{x}^T\vec{y}$ where the superscript $T$ indicates transpose. Dot product is related to the angle $\theta$ between the two vectors as $\vec{x} \cdot \vec{y} = |\vec{x}||\vec{y}| \cos \theta$. Rearranging this as $\vec{x} \cdot \vec{y}/|\vec{y}| = |\vec{x}| \cos \theta$ suggests the intuition of the dot product. It calculates a *projection* of one vector onto the other, or restated, it tells us how much of one vector is pointing in the direction of the other vector. Note that $\vec{x}$ and $\vec{y}$ must have the same number of elements, and the result is a scalar.
+
+3. Outer product. To compute, calculate $x \otimes y \equiv \vec{x}\vec{y}^T$. Note that $\vec{x}$ and $\vec{y}$ do not need to have the same number of elements, and the result is a matrix. If $\vec{x}$ is $m \times 1$ and $\vec{y}$ is $n \times 1$ then $x \otimes y$ is $m \times n$.
+
+4. Cross product. We are not going to worry about this one for now.
+
+Let's calculate some examples.
+
+
+```r
+x <- c(1,2,3)
+y <- c(4,5,6)
+z <- c(7,8,9,10)
+x*y # element-wise
+```
+
+```
+## [1]  4 10 18
+```
+
+```r
+t(x)%*%y # dot product
+```
+
+```
+##      [,1]
+## [1,]   32
+```
+
+```r
+sum(x*y) # dot product
+```
+
+```
+## [1] 32
+```
+
+```r
+x%*%t(z) # outer product
+```
+
+```
+##      [,1] [,2] [,3] [,4]
+## [1,]    7    8    9   10
+## [2,]   14   16   18   20
+## [3,]   21   24   27   30
+```
+
+```r
+x%o%z # outer product
+```
+
+```
+##      [,1] [,2] [,3] [,4]
+## [1,]    7    8    9   10
+## [2,]   14   16   18   20
+## [3,]   21   24   27   30
+```
+
+## Taylor's theorem
+
+This theorem will be especially useful for error analysis of some algorithms we use. The basic idea of Taylor's theorem is that for many functions, we can approximate the function around a point $x_0$ as a polynomial of finite degree, called the Taylor polynomial, plus an error term that accounts for all the higher degree terms we ignored.
+
+More formally, suppose $f$ is $n+1$ times continuously differentiably on the interval between $x_0$ and $x$. Then
+$$ f(x) = \left( \displaystyle \sum_{k=0}^n \frac{f^{(k)}(x_0)}{k!}(x-x_0)^k \right) + \frac{f^{(n+1)}(c)}{(n+1)!}(x-x_0)^{n+1}$$
+where $c$ is an (unknown) number between $x_0$ and $x$.
+
+For example, suppose $f(x)=\sin(x)$ and $x_0=0$. We can pre-compute some derivatives, $f(0)=\sin(0)=0$, $f^{(1)}(0)=\cos(0)=1$, $f^{(2)}(0)=-\sin(0)=0$, $f^{(3)}(0)=-\cos(0)=-1$, $f^{(4)}(0)=\sin(0)=0$, and so on. Then the Taylor polynomial to 4th order and the error term are are
+$$ 0 + x + 0x^2 - \frac{x^3}{6} + 0*x^4 + \frac{x^5}{120}\cos c.$$
+Here is a plot of the function and the subsequent Taylor approximations.
+
+```r
+P1 <- function(x) {x}
+P3 <- function(x) {x-x^3/6}
+x = seq(from=-pi/2,to=pi/2,length=200)
+plot(x,sin(x),col="black",type="l")
+lines(x,P1(x),col="green")
+lines(x,P3(x),col="red")
+```
+
+![](coursenotes_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+
+We can also calculaute a bound on the error if we use the fourth degree polynomial to approxiamte $\sin(0.1)$. Note $\sin$ is at most one in magnitude, so the error term is at most $(0.1)^5/120\approx 8.333 \times 10^{-8}$. The actual error achieved is
+
+```r
+abs(sin(0.1)-P3(0.1))
+```
+
+```
+## [1] 8.331349e-08
+```
+
+# How computers store numbers
+
+## Big picture
+
+Many mathematics and applied mathematics problems can only be solved numerically, on computers. There is, potentially, error in the way that computers store numbers and perform arithmetic, and it is crucial to understand this important source of error.
+
+## Goals
+- Convert between decimal and binary
+- Explain the form of double precision floating point numbers
+- Convert between real numbers and floating point numbers
+- Implement nearest neighbor rounding
+- Recognize loss of numerical significance
+- Implement strategies to reduce loss of significance
+- Calculate/estimate the error arising in numerical computations
+
+## Binary numbers
+
+We usually work in the base 10 system, where each place in the number represents a power of 10 with a coefficient of 0 through 9, *e.g.*,
+$$13.25 = 1 \times 10^1 + 3\times 10^0 + 2 \times 10^{-1} + 5 \times 10^{-2}.$$
+In the binary system, we instead use powers of 2 with coefficients of 0 through 1, *e.g.*,
+$$1101.01 = 1 \times 2^3 + 1\times 2^2 + 0 \times 2^1 + 1 \times 2^0 + 0 \times 2^{-1} + 1 \times 2^{-2}.$$
+
+## Machine numbers
+
+Arithmetic performed on a machine can be different from what we do in our heads. One fundamental difference is that computers can't perfectly store most numbers.
+
+Most computers use a standard representation of real numbers called a *floating point* number. Sometimes we just say *float* for short. We represent the floating point version of a number $x$ as $fl(x)$, and to reiterate the point above, it is not necessarily true that $fl(x)=x$.
+
+We focus on double precision floats. A double precision float consists of 64 bits (1's and 0's) and, expressed in base 10, is equal to
+$$(-1)^s 2^{c-1023}(1+f)$$
+The parts of this number are:
+
+Part of number  | Name          | Bits              | Notes
+-------------   | ------------- | -------------     | -------------
+s               | sign          | 1                 | Determines positive or negative
+c               | exponent      | 2 - 12 (11 bits)  | Subtract 1023 to correct exponential bias
+f               | mantissa      | 13 - 64 (52 bits) | Interpreted as a binary fraction (after radix pt)
+
+For example, suppose our 64 bits are
+$$1 | 10000000111 | 1101000000000000000000000000000000000000000000000000$$
+Then expressed in base 10, $s=1$, $c=1024+4+2+1=1031$, and $f=1/2+1/4+1/16=0.8125$. So the floating point number is $(-1)^1 \cdot 2^{1031-1023} \cdot 1.8125=-208$.
+
+Now let's go the other way, namely converting from a decimal number to a floating point number. In doing so, we'll see that there can be error in the computer storage of numbers. Let's take the number $59\ 1/3$.
+
+1. Convert to binary. The number is $111011.01010101\ldots$.
+2. Write in normalized form, similar to scientific notation for base 10. In normalized form, there is a 1 before the radix point (nothing more, nothing less). This yelds $1.11011\overline{01}\times 2^5$.
+3. Work backwords to figure out $s$, $c$, and $f$. Since the number is positive, the sign is $s=0$. Since we have $2^5$, the exponent must equal $5+1023 = 1028$ in base 10, which is $10000000100$. The mantissa $f$ is $11011\overline{01}$.
+
+The problem is that $f$ is repeating, but on a computer only holds 52 bits. The computer truncates to 52 bits by nearest neigbor rounding, which works like this:
+
+* If the 53rd bit is a 0, drop the 53rd bit and everything after it.
+* If the 53rd bit is a 1 and there is any nonzero bit after it, add 1 to the 52nd bit (and carry as necessary).
+* If the 53rd bit is a 1 and there are only zeros after it,
++ If the 52nd bit is 1, add 1 to it and carry as necessary
++ If the 52nd bit is a 0, do nothing (truncate after 52nd bit)
+
+For our example above, in the mantissa $f$ we have $11011$ followed by 23 copies of the pattern $01$ followed by a $0$. This means the 53rd bit is a $1$, and there are nonzero bits after it, so we have to add $1$ to the 52nd. In base 10, we have
+$$f = 2^{-1} + 2^{-2} + 2^{-4} + 2^{-5} + 2^{-7} + 2^{-9} + + \ldots + 2^{-51} + 2^{-52} = 0.85416666666666674068.$$
+Therefore, on the machine, our number is stored as $2^5(1.85416666666666674068)=59.333333333333335702 \neq 59\ 1/3$.
+
+The relative error in the storage of this number is
+$$\frac{|59\ 1/3 -  59.333333333333335702|}{59\ 1/3} \approx -4 \times 10^{-17}.$$
+An important number is *machine epsilon*, denoted $\epsilon_{mach}$, which is the distance from the number 1 to the next smallest number that can be represented exactly in floating point form. This distance is $\epsilon_{mach}=2^{-52}\approx 2.2 \times 10^{-16}$.
+
+## Machine addition
+
+Machine addition is defined as
+$$fl(x+y) = fl(fl(x)+fl(y)).$$
+That is, take $x$ and $y$, convert each to a machine number, add them (exactly, since more registers are available for this operation), and convert the result to a machine number. Subtraction is just addition with a negative sign.
+
+For example, let's add $1$ and $2^{-53}$. Well, $fl(1)=1$ and $fl(2^{-53})=2^{-53}$. The (exact) sum is $1+2^{-53}$ but due to the rounding rules on machines, $fl(1+2^{-53})=1$. Therefore, on a machine, the sum is $1$. Let's try:
+
+```r
+1+2^(-53)
+```
+
+```
+## [1] 1
+```
+
+## Loss of significance
+
+We've seen that computer storage of numbers can have error, and therefore arithmetic can have error. This error is sometimes called *loss of significance* and the most dangerous operation is subtraction of nearly equal numbers. Consider the expression $(1-\cos x)/\sin^2 x$, which can also be written as $1/(1+\cos x)$. We compute this both ways for $x$ decreasing from $1$.
+
+```r
+options(digits=12)
+x <- 10^(-(0:12))
+E1 <- (1-cos(x))/sin(x)^2
+E2 <- 1/(1+cos(x))
+kable(cbind(x,E1,E2))
+```
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> x </th>
+   <th style="text-align:right;"> E1 </th>
+   <th style="text-align:right;"> E2 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 1e+00 </td>
+   <td style="text-align:right;"> 0.649223205205 </td>
+   <td style="text-align:right;"> 0.649223205205 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1e-01 </td>
+   <td style="text-align:right;"> 0.501252086289 </td>
+   <td style="text-align:right;"> 0.501252086289 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1e-02 </td>
+   <td style="text-align:right;"> 0.500012500208 </td>
+   <td style="text-align:right;"> 0.500012500208 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1e-03 </td>
+   <td style="text-align:right;"> 0.500000124992 </td>
+   <td style="text-align:right;"> 0.500000125000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1e-04 </td>
+   <td style="text-align:right;"> 0.499999998628 </td>
+   <td style="text-align:right;"> 0.500000001250 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1e-05 </td>
+   <td style="text-align:right;"> 0.500000041387 </td>
+   <td style="text-align:right;"> 0.500000000012 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1e-06 </td>
+   <td style="text-align:right;"> 0.500044450291 </td>
+   <td style="text-align:right;"> 0.500000000000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1e-07 </td>
+   <td style="text-align:right;"> 0.499600361081 </td>
+   <td style="text-align:right;"> 0.500000000000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1e-08 </td>
+   <td style="text-align:right;"> 0.000000000000 </td>
+   <td style="text-align:right;"> 0.500000000000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1e-09 </td>
+   <td style="text-align:right;"> 0.000000000000 </td>
+   <td style="text-align:right;"> 0.500000000000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1e-10 </td>
+   <td style="text-align:right;"> 0.000000000000 </td>
+   <td style="text-align:right;"> 0.500000000000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1e-11 </td>
+   <td style="text-align:right;"> 0.000000000000 </td>
+   <td style="text-align:right;"> 0.500000000000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1e-12 </td>
+   <td style="text-align:right;"> 0.000000000000 </td>
+   <td style="text-align:right;"> 0.500000000000 </td>
+  </tr>
+</tbody>
+</table>
+
+The result becomes drastically wrong for small $x$ because of subtraction of nearly equal numbers. In such problems, be aware and seek alternative ways to represent the necessary computation, as we did with the second option above.
+
+<!-- ## Root finding -->
+
+<!-- ### Big picture -->
+
+<!-- Arises in applications including -->
+
+<!-- - Optimization -->
+<!-- - Signals/systems (audio filtering, flight stabilization, etc.) -->
+<!-- - Cryptography -->
+<!-- - Economics -->
+<!-- - Dynamical systems -->
+<!-- - Much more -->
+
+<!-- And yet most equations $f(x)=0$ cannot be solved exactly, so we need numerical algorithms. -->
+
+<!-- ### Goals -->
+<!-- - Explain order of convergence -->
+<!-- - Calculate order of convergence from data -->
+<!-- - Derive, explain and implement root finding algorithms -->
+<!-- - Compare advantages/disadvantages of root finding algorithms -->
+<!-- - Prove/demonstrate order of convergence analytically for bisection and Newton's method -->
+
+<!-- ### Rate of convergence -->
+
+<!-- To talk about root-finding, we need the idea of convergence, so let's remember it. We say a sequence ${a_n}$ *converges* if it has a finite limit as $n \to \infty$. For instance, if $a_n = 4n^2/(2n^2+1)$ then the sequence converges to $2$. On the other hand, if $a_n = (-1)^n + 1$, the limit does not exist so the sequence diverges. -->
+
+<!-- In root finding, we will see algorithms that (hopefully) produce a sequence of approxiations to a true root. We want to know if that sequence converges, and if so, how fast. As a quick example, think of the sequences ${(1/2)^n}$ and ${(1/2)^{2^n}}$. Both converge to 0 but look at how differently they do so. -->
+<!-- ```{r cache=TRUE} -->
+<!-- n <- 0:6 -->
+<!-- an <- (0.5)^n -->
+<!-- bn <- (0.5)^(2^n-1) -->
+<!-- kable(cbind(n,an,bn)) -->
+<!-- ``` -->
+
+<!-- We'll often talk about the rate of convergence of a sequence, and the sequence we will look at is the error sequence, namely the difference between the approximation of a root and the true value of a root, namely $e_n = |x_n - x|$ for $f(x)=0$. The rate of convergence is defined as the positive number $q$ satisfying -->
+<!-- $e_{n+1} = Ce_n^q$ as $n \to \infty$. If we have numerical data, we can estimate the convergence by making a log-log plot of error data. Note -->
+<!-- $$\log e_{n+1} = \log C + q \log e_n.$$ -->
+<!-- If we plot $(\log e_n,\log e_{n+1})$ and observe linear behavior for large enough $n$, then the slope is the convergence rate $q$.  -->
+<!-- ```{r cache=TRUE} -->
+<!-- n <- 18 -->
+<!-- e <- c(1,0.9,0.79,0.67,0.54,0.4*(0.5)^((0:12))) -->
+<!-- loge <- log(e[1:(n-1)]) -->
+<!-- logep <- log(e[2:n]) -->
+<!-- plot(loge,logep) -->
+<!-- lm(logep[6:n]~loge[6:n]) -->
+<!-- ``` -->
+
+<!-- ### Bisection method -->
+
+<!-- The *intermediate value theorem* states that if $f(x)$ is continuous on $[a,b]$ and $f(a)f(b)=0$, then there exists $r \in (a,b)$ such that $f(r)=0$. To apply the *bisection method* for root finding, start with the interval $[a,b]$, called a *bracketing interval*. Calculate $f(a)$, $f(b)$, and $f(\frac{a+b}{2})$. Then apply the intermediate value theorem to decide which half of the interval the root is in, and repeat. -->
+
+<!-- You also have to decide when to terminate the algorithm. This could be a maximum number of iterations, an upper bound on the error, or something else. To obtain an upper bound on the error, note that on the nth iteration, the maximum error is $(b-a)/2^{n+1}$. We say that the solution is *correct within $p$ decimal places$* if the error is less than $0.5 \times 10^{-p}$. For instance, for solving $\sin x - x -1/2 = 0$ beginning with $[-2,20]$ with guaranteed 6 decimal place accuracy, we need -->
+<!-- $$\frac{20-(-2)}{2^{n+1}} < 0.5 \times 10^{-6}$$ -->
+<!-- which results in $n > 24.391 = 25$ iterations. -->
+
+<!-- The bisection method is guaranteed to converge given a bracketing interval. On the downside, the error bound converges linearly, and this is considered slow. Arguably, we could expect this since the method doesn't use much information about the function -- only its sign. -->
+
+<!-- ### Newton's method -->
+
+<!-- We can get a faster root finding method by using the slope of the function instead of just its sign. Equivalently, we can say we are using the first degree Taylor expansion of the function. -->
+
+<!-- If $x_i$ is the guess for a root, we make a new guess by finding where the tangent line through the guess has a root. This line is $y - f(x_i) = f'(x_i)(x-x_i)$ which has a root at $x_i - f(x_i)/f'(x_i)$. This is our next guess $x_{i+1}$. -->
+
+<!-- A weakness of this method is that it assumes the tangent line's root is close to the function's root. Unless our guess is close to the true root, there's no reason to expect this is true. As a result, Newton's method does not have guaranteed convergence. Another weakness is that this method requires computation of the derivative which can be costly. On the upside, when the algorithm converges, it does so quadratically so long as the root is a simple root of the function. -->
+
+<!-- \begin{aligned} -->
+<!-- e_{n+1} &= x - x_{n+1}\\ -->
+<!-- & = x - \left(x_n - \frac{f(x_n)}{f'(x_n)}\right) -->
+<!-- \end{aligned} -->
+<!-- By Taylor's theorem, note -->
+<!-- $$f(x) = f(x_n) + f'(x_n)(x-x_n)+\frac{1}{2}f''(\xi)(x-x_n)^2.$$ -->
+
+<!-- However, $f(x)=0$ since $x$ is a root. Solving for $f(x_n)$ and plugging into the previous equation yields -->
+<!-- \begin{aligned} -->
+<!-- e_{n+1} &= x - x_n + \frac{ -f'(x_n)(x-x_n)-(1/2)f''(\xi)(x-x_n)^2}{f'(x_n)}\\ -->
+<!-- &= x - x_n -(x-x_n) - \frac{f''(\xi)}{2f'(x_n)}(x-x_n)^2\\ -->
+<!-- &= -\frac{f''(x)}{2f'(x)}(x-x_n)^2\text{ as }n \to \infty\\ -->
+<!-- &= c e_{n+1}^2. -->
+<!-- \end{aligned} -->
+
+<!-- Note that this calculation depends on $f'(x) \neq 0$. IN the case $f'(x)=0$, the root has multiplicity higher than one and convergence is linear (not proven here). However, there are algebraic manipulations you can perform that will turn the problem into one that converges to the root quadratically (if it converges). -->
+
+<!-- ### Root finding without derivatives -->
+
+<!-- To avoid the problems with having to calculate a derivative, a number of other algorithms are available. They include: -->
+
+<!-- - Regula falsi. Like bisection, but connect endpoints of bracketing interval with a line and use its root. -->
+<!-- - Secant method. Like Newton's method, but draw a secant line between two successive guesses instead of using tangent line. -->
+<!-- - Muller's method. Like secant method, but use three successive guesses to construct a parabola and find its root. -->
+<!-- - Inverse quadratic interpolation (IQI). Like Muller's method, but uses a sideways parabole. -->
+<!-- - Brent's method. Combines IQI, secant method, and bisection, depending on the conditions of each iteration. -->
+
+# Linear systems review
+
+## Big picture
+
+We begin considering the solution of systems of linear equations, $\mat{A}\vec{x}=\vec{b}$. Linear systems arise in analysis of different equations (modeling macromolecules, electromagnetics, heat flow, wave motion, structural engineering, a million other examples), in curve fitting, in optimization, and many other applications. To understand solution of linear systems, it's helpful to recall some fundamental ideas of linear algebra.
+
+## Goals
+- Interpret linear systems geometrically
+- Define linear algebra terms including inverse, determinant, eigenvalues, nullspace, linear independence, span, and image
+- Give intuitive explanations for the "big theorem" of linear algebra
+- Perform the steps of Gaussian elimination
+- Establish the computational complexity of Gaussian elimination
+
+## Linear systems
+
+For concreteness let's work in three dimensions and let's consider the system
+$$
+\begin{pmatrix}
+2 & 4 & -2\\
+1 & 4 & -3\\
+-2 & -6 & 7
+\end{pmatrix}
+\begin{pmatrix}
+x_1 \\ x_2 \\ x_3
+\end{pmatrix}
+=
+\begin{pmatrix}
+8 \\ 8 \\ -3
+\end{pmatrix}.
+$$
+Let's interpret this system two ways.
+
+**Intersecting hyperplanes.** Carrying out the matrix multiplication, we write the equations
+$$
+\begin{eqnarray}
+2x_1 + 4x_2 -2x_3 & = & 8\\
+x_1 + 4x_2 -3x_3 & = & 8\\
+-2x_1 -6x_2 + 7x_3 & = & -3
+\end{eqnarray}
+$$
+This form suggests thinking of the set of points that are at the intersection of these three planes, which could be the empty set, or a point, or a line, or a plane.
+
+**Vector spans.** Write the equation in terms of its columns, as
+
+$$
+x_1 \begin{pmatrix} 2 \\ 1 \\ -2 \end{pmatrix}
++ x_2 \begin{pmatrix} 4 \\ 4 \\ -6 \end{pmatrix}
++ x_3 \begin{pmatrix} -2 \\ -3 \\ 7 \end{pmatrix}
+= \begin{pmatrix} 8 \\ 8 \\ -3 \end{pmatrix}
+$$
+
+This form suggests thinking of the linear combination of three basis vectors necessary to reach a particular target vector. There could be 0, 1, or inifinity depending on the arrangement of those vectors.
+
+## Linear algebra review and the Big Theorem
+
+Let's consider an $n \times n$ matrix $\mat{A}$.
+
+1. **Invertible** means that the inverse $\mat{A}^{-1}$ exists. This matrix satisfies $\mat{A}\mat{A}^{-1} = I$, where $I$ is the $n \times n$ identity matrix.
+
+2. The notation $\det$ means **determinant**. Think of it as a scaling factor for the transformation defined by a matrix. That is, multiplication by $\mat{A}$ can cause a region to contract ($|\det \mat{A}| < 1$) or expand ($|\det \mat{A}| > 1$) and/or reflect ($\det \mat{A} < 0$). As an example, let
+$$\mat{A}=\begin{pmatrix}a & b\\c & d\end{pmatrix}.$$
+For this example,
+$$\mat{A}^{-1} = \frac{1}{ad-bc}\begin{pmatrix}d & -b\\-c & a\end{pmatrix}.$$
+So $\mat{A}$ invertible $\iff \det \mat{A} \neq 0$.
+
+3. The **eigenvalues** $\lambda_i$ of $\mat{A}$ satisfy $$\mat{A}\vec{v_i}=\lambda_i \vec{v_i},$$ where $\vec{v_i}$ are the **eigenvectors**. You can prove that
+$$\prod_i \lambda_i = \det \mat{A},$$
+so no $\lambda_i = 0 \iff \det \mat{A} \neq 0$.
+
+4. $\mat{A} \vec{z} \neq 0$ for all $\vec{z} \in \mathbb{R}^n$ except $\vec{z}=0 \iff \mat{A}$ is invertible. Why? If $\mat{A} \vec{z} = 0$ for $\vec{z} \neq 0$, then $\mat{A} \vec{z} = 0 \vec{z}$, so 0 is an eigenvalue. But for $\mat{A}$ to be invertible, we know $0$ can't be an eigenvalue. (If you are proof oriented you might notice that the implication needs to be shown both ways, but I am trying purposely not to prove here -- just to give you some intuition.)
+
+5. **Nullspace** just means the parts of $\mathbb{R}^n$ that gets mapped to $\vec{0}$ by $\mat{A}$. Another name for nullspace is **kernel**. Mathematically, the nullspace is all the vectors $\vec{v}$ for which $\mat{A} \vec{v}=0$. So for an invertible matrix $\mat{A}$, the nullspace is $\vec{0}$. This is basically  assigning a definition to the previous point (above).
+
+6. If vectors are **linearly independent**, it means that none of the vectors can be written as a linear combination of the others. If $\mat{A}$ is invertible, then its columns are linearly independent. Why? If the columns were linearly dependent, you could take a linear combination of them to reach $\vec{0}$ nontrivially, for instance,
+$$\begin{pmatrix}1 & -2\\2 & -4\end{pmatrix}\begin{pmatrix}x_1 \\ x_2 \end{pmatrix}=\begin{pmatrix}0 \\ 0\end{pmatrix}.$$ This violates our previous condition (above) about the nullspace only being $\vec{0}$.
+
+7. **Span** means the set of points reachable by taking linear combinations of a set of vectors. If you have $n$ linearly independent vectors in $\mathbb{R}^n$, they span $\mathbb{R}^n$. The **rank** of $\mathbb{A}$ is just the dimension of the space spanned by the column vectors.
+
+8. The **image** of $\mat{A}$ means all the points that $\mat{A}$ can map to. This is synonymous with the point above: it's the span of the columns of $\mat{A}$. If the rank of $\mat{A}$ is $n$, then the column vectors are linearly independent so they span $\mathbb{R}^n$, so the image of $\mat{A}$ is $\mathbb{R}^n$.
+
+9. $\mat{A}\vec{x}=\vec{b}$ has a unique solution for all $\vec{b} \iff$ $\mat{A}$ is invertible, since you can left multiply by $\mat{A}^{-1}$.
+
+## Gaussian elimination
+
+First, we define **row echelon form**. A matrix is in row echelon for if
+
+- all nonzero rows (rows with at least one nonzero element) are above any rows of all zeroes
+- the leading coefficient (the first nonzero number from the left, also called the **pivot**) of a nonzero row is always strictly to the right of the leading coefficient of the row above it
+
+Gaussian elimination refers to transforming a matrix to row echelon form by applying the following operations, which do not change the solution set:
+
+- swap two rows
+- multiply a row by a nonzero scalar
+- Add one row to a scalar multiple of another
+
+To solve a linear system $\mat{A}\vec{x}=\vec{b}$, write it as an augmented matrix, reduce it to row echelon form, and then use back substitution to solve.
+
+For example, take
+
+$$
+\mat{A} = 
+\begin{pmatrix}
+1 & 3 & 1\\
+1 & 1 & -1 \\
+3 & 11 & 5
+\end{pmatrix}, \quad
+\vec{b} = \begin{pmatrix}
+9 \\ 1 \\ 35
+\end{pmatrix}.
+$$
+Write augmented matrix
+$$
+\mat{A_a} = \begin{pmatrix}
+1 & 3 & 1 & 9 \\
+1 & 1 & -1 & 1\\
+3 & 11 & 5 & 35
+\end{pmatrix}.
+$$
+Apply $II \leftarrow II - I$ and $III \leftarrow  III - 3 I$.
+
+$$
+\mat{A_a} = \begin{pmatrix}
+1 & 3 & 1 & 9 \\
+0 & -2 & -2 & -8\\
+0 & 2 & 2 & 8
+\end{pmatrix}.
+$$
+Apply $III \leftarrow III + II$.
+$$
+\mat{A_a} = \begin{pmatrix}
+1 & 3 & 1 & 9 \\
+0 & -2 & -2 & -8\\
+0 & 0 & 0 & 0
+\end{pmatrix}.
+$$
+
+The bottom row tells us nothing. The second row tells us there is a free variable, which we take to be $x_3$. So we solve this equation for $x_2$, finding $x_2 = 4 -x_3$. This is called back substitution. Then we do back substitution on the top row, from which we find $x_1 = 9 - x_3 - 3 x_2 = 9 - x_3 - 3(4 - x_3) = -3 + 2x_3$. Therefore, the solution is
+$$
+\vec{x} = \begin{pmatrix}  -3 + 2x_3 \\ 4 - x_3 \\ x_3 \end{pmatrix} = \begin{pmatrix}  -3 \\ 4\\ 0 \end{pmatrix} + x_3 \begin{pmatrix}  2 \\ -1 \\ 1 \end{pmatrix}.
+$$
+
+By the way, we can go ahead and use a routine I've written to perform the elimination.
+
+```r
+A <- matrix(c(1,3,1,9,1,1,-1,1,3,11,5,35),nrow=3,byrow = TRUE)
+eliminate(A)
+```
+
+```
+##      [,1] [,2] [,3] [,4]
+## [1,]    1    3    1    9
+## [2,]    0   -2   -2   -8
+## [3,]    0    0    0    0
+```
+
+## Operation counts and complexity
+
+Because we are solving problems on computers, we should care about how long solution takes, which in turn depends on the number of computational operations carried out. This is called the *complexity* of the method. For solving $\mat{A}\vec{x}=b$, with $\mat{A}$ an $n \times n$ matrix, we write the complexity in terms of $n$. Then, we are usually concerned with the behavior of the operation count for $n$ large, so we might retain just the leading term in $n$ as an approximation, or even ignore the coefficient in front that leading term.
+
+For Gaussian elimination, we have to compute the complexity of the two stages.
+
+1. Reduce to echelon form. This takes
+$$\frac{2}{3}n^3 + \frac{1}{2}n^2-\frac{7}{6}n = \mathcal{O}(n^3)$$
+operations.
+
+2. Back substitute. This takes $n^2 = \mathcal{O}(n^2)$ operations.
+
+Back substitution is comptuationally cheap compared to row reduction. For large enough $n$, the back substitution step is negligible since $n^3 \gg n^2$.
+
+We can use these operation counts to make estimates of how long calculations should take.
+
+For example, suppose row reduction on a $500 \times 500$ matrix takes 1 second. How long does back substitution take? Well, we just use leading terms in the complexity. Since $n=500$, we have $(2/3)*500^3 t =1$ where $t$ is time per operation. Solving, $t = 1.2 \times 10^{-8}$. Back substitution takes $n^2=500^2$ operations, so the total time is $n^2t=500^2\times 1.2 \times 10^{-8}=0.003$ seconds.
+
+Let's test scaling of the reduction step on Chad's machine for a random matrix.
+
+```r
+set.seed(123)
+n1 <- 200
+A1 <- matrix(runif(n1^2), ncol=n1)
+t1 <- system.time(eliminate(A1))[3]
+n2 <- 2*n1
+A2 <- matrix(runif(n2^2), ncol=n2)
+t2 <- system.time(eliminate(A2))[3]
+t2/t1
+```
+
+```
+##       elapsed 
+## 5.29104477612
+```
+
+# Matrix norms and conditioning
+
+## Big picture
+
+As we consider the solution of problems on a computer, we have to think about the effect of small errors on the solution of the problem. This is called conditioning. In the linear algebra setting, conditioning is intimitely related to matrix and vector norms.
+
+## Goals
+- Define forward and backward error
+- Define vector norms
+- Define matrix norms
+- Define condition number for solution of $\mat{A}\vec{x}=\vec{b}$
+
+## Forward and backward error
+
+In the solution of a computational problem, **forward error** is the difference between the exact and computed solution, and **backwards error** is the difference between the original problem and the so-called modified problem that the approximate solution satisfies. This probably sounds abstract, so let's make it concrete in the cases of a root-finding problem and a linear algebra problem.
+
+<!-- For root-finding, suppose we want to solve $f(x)=0$. The true root is $x=r$ but our computational method finds an approximate solution $x=r_a$. The forward error is the distance between the two roots, that is, $|r-r_a|$. The backwards error is the difference between what you get when you plug in those roots, that is $|f(r)-f(r_a)|=|f(r_a)|\neq 0$. -->
+
+<!-- Here's a numerical example. -->
+<!-- ```{r cache=TRUE} -->
+<!-- P <- function(x){x^20} -->
+<!-- r <- 0 -->
+<!-- ra <- 0.2 -->
+<!-- P(r) -->
+<!-- P(ra) -->
+<!-- ``` -->
+<!-- The backwards error is minuscule but the forwards error is larger by a factor of about $2 \times 10^{13}$. -->
+
+<!-- Turning to linear algebra, s -->
+Suppose we want to solve $\mat{A}\vec{x}=b$. The true solution is $\vec{x}$ but our computational method finds an approximate solution $\vec{x}_a$. The forward error is the distance between the two solutions, that is, $||\vec{x}-\vec{x_a}||$. The backward error is the distance between what the matrix outputs when applied to those solutions, that is, $||\mat{A}\vec{x}-\mat{A}\vec{x}_a||=||\vec{b}-\mat{A}\vec{x}_a||$. Distance here is the length of the difference between two quantities.
+
+Notice that we haven't specified what distance means! This is why we need to define vector and matrix norms.
+
+## Vector norms
+
+A vector norm is a rule that assigns a real number to every vector. Intuitively, it measures length. There are a bunch of requirements that this rule must satisfy in order to be a norm, but rather than stating those requirements, I'm going to just tell you some practicalities.
+
+The vector norm we'll work with is called the **$p$-norm**. The $p$-norm for $1 \le p \le \infty$ is defined as
+$$
+|| \vec{x} ||_p = \left({|x_1|^p + |x_2|^p + \cdots + |x_n|^p} \right)^{1/p}.
+$$
+
+The three most common $p$-norms are $p = 1, 2, \infty$ since they are the easiest to compute with and in some sense are the most natural:
+
+- $p=1$ (the Manhattan or taxicab norm)
+$$
+|| \vec{x} ||_1 =|x_1| + |x_2| + \cdots + |x_n|
+$$
+- $p =2$ (the Euclidean norm)
+$$
+|| \vec{x} ||_2 = \sqrt{x_1^2 + x_2^2 + \cdots + x_n^2\ } = \sqrt{\vec{x} \cdot \vec{x}}
+$$
+- $p=\infty$
+$$
+|| \vec{x} ||_\infty = \max{\left(| x_1|, | x_2|,  \ldots, |x_n|\right)}
+$$
+
+For $p = \infty$ it takes a little analysis to show why the computational definition is what it is, but a numerical study is usually convincing. We can use a piece of code I wrote for you called `vnorm.`
+
+
+```r
+v <- c(3,-2,2,3,1,4,1,2,3)
+pvals <- c(1,1.5,2,3,4,5,6,7,20)
+res <- NULL
+for (p in pvals){
+  res <- c(res,vnorm(v,p))
+}
+res <- c(res,vnorm(v,"I"))
+kable(cbind(c(pvals,"Infinity"),res),col.names=c("p","norm"))
+```
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> p </th>
+   <th style="text-align:left;"> norm </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> 21 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1.5 </td>
+   <td style="text-align:left;"> 10.5102535215316 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2 </td>
+   <td style="text-align:left;"> 7.54983443527075 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 3 </td>
+   <td style="text-align:left;"> 5.55049910291155 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 4 </td>
+   <td style="text-align:left;"> 4.84053189512475 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 5 </td>
+   <td style="text-align:left;"> 4.50278575773901 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 6 </td>
+   <td style="text-align:left;"> 4.31746656321528 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 7 </td>
+   <td style="text-align:left;"> 4.20717405025799 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 20 </td>
+   <td style="text-align:left;"> 4.00189474866413 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Infinity </td>
+   <td style="text-align:left;"> 4 </td>
+  </tr>
+</tbody>
+</table>
+
+To further build intuition, we can plot the unit sphere in $\mathbb{R}^2$ for various values of $p$, that is, the set of points that are unit distance from the origin.
+![](UnitCircleGrid.png)
+
+## Matrix norms
+
+The matrix $p$-norm is closely related to the vector $p$-norm, and is given by
+
+$$
+||\mat{A}||_p = \max_{\vec{x} \not = \vec{ 0}} \frac{ || \mat{A} \vec{x}||_p} { ||\vec{x}||_p} = \max_{||\vec{x}||_p  = 1}  || \mat{A} \vec{x}||_p
+$$
+
+The matrix $p$-norm says: apply $A$ to the unit sphere, and $||\mat{A}||_p$ is the length of the vector that is farthest from the origin. This is not trivial to calculate! You have an infinite number of vectors to consider.
+
+Fortunately, just like for the vector case, the matrix $p$-norm has a few special values of $p$ for which it is easy to compute. We have:
+
+- $p=1$
+$$
+||\mat{A} ||_1 = \displaystyle{\max_{1 \le j \le n} \sum_{i=1}^n |a_{ij}|} = \text{maximum absolute column sum}
+$$
+
+- $p=2$
+$$
+|| \mat{A} ||_2 = \sqrt{\max\{ \text{eigenvalue}(A^TA) \} }
+$$
+
+- $p=\infty$
+$$
+|| \mat{A} ||_\infty = \displaystyle{\max_{1 \le i \le n} \sum_{j=1}^n |a_{ij}|} = \text{maximum absolute row sum}
+$$
+
+To see why these definitions are true requires some analysis. If you are interested, I am happy to point you to proofs.
+
+You can calculate the $1$, $2$, and $\infty$ matrix norms using the R command `norm`.
+
+
+```r
+A <- matrix(c(2,-1,1,1,0,1,3,-1,4),byrow = TRUE, nrow = 3)
+norm(A,"1")
+```
+
+```
+## [1] 6
+```
+
+```r
+norm(A,"2")
+```
+
+```
+## [1] 5.72292695333
+```
+
+```r
+norm(A,"I")
+```
+
+```
+## [1] 8
+```
+
+There is one really useful identity you should know about matrix norms:
+$$||\mat{A}\vec{x}||_p \leq ||\mat{A}||_p ||\vec{x}||_p.$$
+To see this, we start with the right hand side and note
+$$||\mat{A}||_p ||\vec{x}||_p = \left( \max_{\vec{y} \not = \vec{ 0}} \frac{ || \mat{A} \vec{y}||_p} { ||\vec{y}||_p} \right) ||\vec{x}||_p \geq \frac{ || \mat{A} \vec{x}||_p} { ||\vec{x}||_p} ||\vec{x}||_p = || \mat{A} \vec{x}||_p.$$
+
+## Condition number for Ax=b
+
+Let us consider solving $\mat{A}\vec{x}=\vec{b}$. Suppose we find approximate solution $\vec{x}_a$. The **relative forward error** is
+$$\frac{||\vec{x}-\vec{x}_a||}{||\vec{x}||}$$
+and the **relative backward error** is
+$$\frac{||\mat{A}\vec{x}-\mat{A}\vec{x}_a||}{||\mat{A}\vec{x}||}=\frac{||\vec{b}-\mat{A}\vec{x}_a||}{||\vec{b}||}.$$
+We define **error magnification** as the ratio
+$$\frac{\text{relative forward error}}{\text{relative backward error}}=\frac{\frac{||\vec{x}-\vec{x}_a||}{||\vec{x}||}}{\frac{||\vec{b}-\mat{A}\vec{x}_a||}{||\vec{b}||}}.$$
+
+The **condition number** $\kappa(\mat{A})$ is the largest possible error magnification (over all possible $\vec{x}$). Or restated, it's the worst possible ratio of relative forward error to relative backward error.
+
+Why do we care about this? It tells us whether we expect a small residual to imply a small error in the solution or not. Let's make this concrete with an example.
+
+Consider:
+
+- Let $\mat{A} = \begin{pmatrix}0.913 & 0.659 \\ 0.457 & 0.330 \end{pmatrix}$
+- Then $\kappa_2(A) = 1.25\times10^4$
+- Let $\vec{b} = \begin{pmatrix} 0.254 \\ 0.127 \end{pmatrix}$
+- Then $\vec{x} =(1,-1)$.
+- Consider two approximate solutions $\vec{x}_{1,2}$
+$$
+\begin{array}{lcl}
+\vec{x}_1 = (-0.0827,0.5) && \vec{x}_2 = (0.999,-1.001) \\
+\triangle \vec{x}_1 = (1.0827, -1.5) && \triangle \vec{x}_2 = (0.001,0.001) \\
+||\triangle \vec{x}_1 || = 1.85&& ||\triangle \vec{x}_2|| = .0014\\
+||\triangle \vec{x}_1 ||/||\vec{x}|| = 1.308&& ||\triangle \vec{x}_2||/||\vec{x}|| = .001\\
+\vec{b}_1 = (0.2539949, 0.1272061) &&  \vec{b}_2 = (0.252428, 0.126213) \\
+\triangle\vec{b}_1 = (0.0000051,- 0.0002061) &&  \triangle\vec{b}_2 = (0.001572, 0.000787) \\
+||\triangle \vec{b}_1 || = 0.000206&& ||\triangle \vec{b}_2|| = .00176\\
+||\triangle \vec{b}_1 ||/||\vec{b}|| = 0.000726&& ||\triangle \vec{b}_2||/||\vec{b}|| = .0062\\
+mag = 1.8 \times 10^3 && mag = 1.6 \times 10^1
+\end{array}
+$$
+
+We can go ahead and calculate the actual condition number of the matrix. R has a command called `kappa` that computes the condition number approximately by default, or exactly if specified.
+
+
+```r
+A <- matrix(c(0.913,0.659,0.457,0.330),nrow=2,byrow=TRUE)
+kappa(A)
+```
+
+```
+## [1] 14132.0316376
+```
+
+```r
+kappa(A,exact=TRUE)
+```
+
+```
+## [1] 12485.031416
+```
+
+## Calculating the condition number
+
+Remember that the condition number isn't merely an error magnification -- it's the maximum possible error magnificaton. Computing $\kappa$ exactly using this definition is impossible because there are an infinite number vectors one must consider $\mat{A}$ acting on.
+
+Fortunately, there's another way to calculate condition number:
+
+$$\kappa_p(\mat{A})=||\mat{A}||_p||\mat{A}^{-1}||_p$$
+
+The derivation of this identity is about 10 to 20 lines of linear algebra that I am happy to show you if you are interested. We can check it numerically for now.
+
+```r
+set.seed(123)
+N <- 10
+A <- matrix(runif(N^2),nrow=N)
+ans1 <- norm(A,"2")*norm(solve(A),"2")
+ans2 <- kappa(A,norm="2",exact=TRUE)
+```
+
+# LU decomposition
+
+## Big picture
+
+When solving systems of linear equations, depending on the context, solution by Gaussian elimination can be computationally costly. Sometimes it is better to decompose (factor) the matrix. There are a number of useful ways to do this but the one we will focus on is called LU decomposision.
+
+## Goals
+- Define and implement LU decomposition and state the potential advantages
+<!-- - Explain $\mat{PA}=\mat{LU}$ decomposition and state the potential advantages -->
+<!-- - Assess whether a matrix is symmetric positive definite -->
+<!-- - Explain the idea and potential advantages of Cholesky decomposition -->
+
+## LU decomposition
+
+Recall that when solving an $n \times n$ system $\mat{A}\vec{x} = \vec{b}$ with Gaussian elimination, the elimination step is $\mathcal{O}(n^3)$ and back substitution is $\mathcal{O}(n^2)$. In some applications, it is necessary to solve 
+$$
+\mat{A}\vec{x} = \vec{b}_1, \quad \mat{A}\vec{x} = \vec{b}_2, \quad \mat{A}\vec{x} = \vec{b}_3, \quad \ldots, \quad \mat{A}\vec{x} = \vec{b}_M
+$$
+where $\mat{A}$ is the same each time and $M$ is large. $\mat{A}$ itself needs the same row reductions each time. Only the augmented part $\vec{b}$ changes. It would be a waste of computation to run Gaussian elimination $M$ times.
+
+LU decomposition is a way of storing the Gaussian elimination steps in matrix form so that they can be applied to many $\vec{b}$. We take $\mat{A}$ and decompose (or factorize) it as the product
+$$
+A  = 
+\underbrace{\begin{array}{|cccccc|}
+\hline
+1 &&&&&\\
+\ast & 1 &&&&\\
+\ast & \ast  & 1 &&&\\
+\ast & \ast & \ast & 1 &&\\
+\ast & \ast & \ast & \ast & 1  &\\
+\ast & \ast & \ast & \ast & \ast & 1 \\ \hline
+\end{array}}_{\mat{L}=\text{Lower unit triangular}} \
+\underbrace{\begin{array}{|cccccc|}
+\hline
+\ast & \ast & \ast & \ast & \ast & \ast \\ 
+&\ast & \ast & \ast & \ast & \ast  \\
+&&\ast & \ast & \ast & \ast \\
+&&&\ast & \ast  & \ast \\
+&&&&\ast & \ast \\
+&&&&&\ast \\
+\hline
+\end{array}}_{\mat{U}=\text{Upper triangular}}
+$$
+
+The $\mat{L}$ matrix encodes the multipliers used to eliminate elements during Gaussian elimination and the $\mat{U}$ matrix is the result of the elimination process. Therefore, putting $\mat{A}$ into its LU factorization takes one application of Gaussian elimination, or approximately $\frac{2}{3} n^3$ operations. Solving $\mat{LU}\vec{x} = \vec{b}$ requires 2 back substitutions, namely one to solve $\mat{L}\vec{y} = \vec{b}$ for $\vec{y}$ and one to solve $\mat{U}\vec{x}=\vec{y}$ for $\vec{x}$. This takes $2n^2$ operations. So, to solve $\mat{A}\vec{x} = \vec{b}_1, \ldots, \mat{A}\vec{x} = \vec{b}_M$ takes approximately $\frac{2}{3}n^3 + 2 M n^2$ operations, in contrast to $\frac{2}{3}Mn^3 + Mn^2$ for Gaussian elimination.
+
+The LU decomposition exists if and only if the upper-left sub-blocks $\mat{A}_{1:k,1:k}$ are non-singular for all $1\leq k \leq n$ (not proven here). If the decomposition exists, it is unique.
+
+Let's do an example of how LU decomposition works. Take
+$$\mat{A} = 
+\begin{pmatrix}
+1 & 3 & 1\\
+1 & 1 & -1 \\
+3 & 11 & 5
+\end{pmatrix}.$$
+Start by defining $\mat{U} = \mat{A}$ (it's not upper triangluar yet, but I am still calling it $\mat{U}$) and
+$$\mat{L} = \mat{I}_3 = 
+\begin{pmatrix}
+1 & 0 & 0\\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{pmatrix}.$$
+Apply $II \leftarrow II - 1\cdot I$ and $III \leftarrow  III - 3\cdot I$ to $\mat{U}$
+$$
+\mat{U} = \begin{pmatrix}
+1 & 3 & 1  \\
+0 & -2 & -2\\
+0 & 2 & 2
+\end{pmatrix}.
+$$
+Also, store the multupliers $1$ and $3$ in their corresponding rows in the first column of $\mat{L}$, so that
+$$\mat{L} =
+\begin{pmatrix}
+1 & 0 & 0\\
+1 & 1 & 0 \\
+3 & 0 & 1
+\end{pmatrix}.$$
+Now apply $III \leftarrow III + II$, which yields
+$$
+\mat{U} = \begin{pmatrix}
+1 & 3 & 1  \\
+0 & -2 & -2\\
+0 & 0 & 0
+\end{pmatrix}
+$$
+and
+$$\mat{L} =
+\begin{pmatrix}
+1 & 0 & 0\\
+1 & 1 & 0 \\
+3 & -1 & 1
+\end{pmatrix}.$$
+Since $\mat{U}$ is in echelon form, we are done! We can check that our decomposition worked.
+
+```r
+A <- matrix(c(1,3,1,1,1,-1,3,11,5),nrow=3,byrow=TRUE)
+L <- matrix(c(1,0,0,1,1,0,3,-1,1),nrow=3,byrow=TRUE)
+U <- matrix(c(1,3,1,0,-2,-2,0,0,0),nrow=3,byrow=TRUE)
+A - L%*%U
+```
+
+```
+##      [,1] [,2] [,3]
+## [1,]    0    0    0
+## [2,]    0    0    0
+## [3,]    0    0    0
+```
+We can also use the `myLU` routine loaded automatically for you.
+
+```r
+sol <- myLU(A)
+L <- sol$L
+U <- sol$U
+A - L%*%U
+```
+
+```
+##      [,1] [,2] [,3]
+## [1,]    0    0    0
+## [2,]    0    0    0
+## [3,]    0    0    0
+```
+
+Let's use Gaussian elimination and LU decomposition to compare the time for solving a $100 \times 100$ system for $100$ different right hand sides.
+
+
+```r
+n <- 100
+A <- matrix(runif(n^2),nrow=n)
+set.seed(123)
+t1 <- system.time(
+  for (i in 1:n){
+    b <- runif(n)
+    MySolve(A,b)
+  }
+)[3]
+t2 <- system.time(sol <- myLU(A))[3]
+set.seed(123)
+t3 <- system.time(
+  for (i in 1:n){
+    b <- runif(n)
+    myLUSolve(sol$L,sol$U,b)
+  }
+)[3]
+t1/(t2+t3)
+```
+
+```
+##  elapsed 
+## 40.78125
+```
+
+<!-- ### $\mat{PA}=\mat{LU}$ decomposition -->
+
+<!-- LU decomposition can have problems. -->
+
+<!-- First, try applying it to the matrix -->
+<!-- $$\mat{A}=\begin{pmatrix} 0 & 1\\ 1 & 0\end{pmatrix}.$$ -->
+<!-- It fails immediately because no multiple of the first row can be used to eliminate the first entry of the second row. In general, if any of the pivots turns out to be zero, LU decomposition will fail. -->
+
+<!-- Second, if a pivot is very small, numerical error can dominate. Consider the example -->
+<!-- $$A = \begin{pmatrix} \epsilon & 1 \\ 1 & 1 \end{pmatrix} = \mat{LU} = \begin{pmatrix} 1 & 0 \\ 1/\epsilon & 1 \end{pmatrix} \begin{pmatrix} \epsilon & 1 \\ 0 & 1 - 1/\epsilon \end{pmatrix} -->
+<!-- $$ -->
+<!-- where $\epsilon$ is very small. On a computer, this may be carried out as -->
+<!-- $$ -->
+<!-- \mat{LU} = \begin{pmatrix} 1 & 0 \\ 1/\epsilon & 1 \end{pmatrix} \begin{pmatrix} \epsilon & 1 \\ 0 & - 1/\epsilon \end{pmatrix} = \begin{pmatrix} \epsilon & 1 \\ 1 & 0 \end{pmatrix} \neq \mat{A}. -->
+<!-- $$ -->
+<!-- We can demonstrate this on the computer. -->
+<!-- ```{r cache=TRUE} -->
+<!-- epsilon <- 1e-16 -->
+<!-- A <- matrix(c(epsilon,1,1,1),nrow=2,byrow=TRUE) -->
+<!-- A -->
+<!-- sol <- myLU(A,tol=1e-17) -->
+<!-- sol$L %*% sol$U -->
+<!-- ``` -->
+
+<!-- A solution is to allow row swapping. If we swapped the rows of $\mat{A}$, everything would work. When working on a column, we simply swap rows so that the pivot with the largest magnitude in the column is in the uppermost position. Then everything works. This is called **partial pivoting**. Let's demonstrate. -->
+<!-- ```{r cache=TRUE} -->
+<!-- B <- A[2:1,] -->
+<!-- B -->
+<!-- sol <- myLU(B,tol=1e-17) -->
+<!-- sol$L %*% sol$U -->
+<!-- ``` -->
+
+<!-- We can encode partial pivoting in matrix form by means of a **permutation matrix** $\mat{P}$ that has a single 1 in each row and column. For instance, the matrix -->
+<!-- $$ -->
+<!-- P = \begin{pmatrix} 0 & 1 \\ 1 & 0\end{pmatrix} $$ -->
+<!-- exchanges the rows of A. -->
+
+<!-- To solve $\mat{PA}\vec{x}=\mat{LU}\vec{x}=\vec{b}$, first we must perform the decomposition, which is $\mathcal{O}(n^3)$. Next we solve $\mat{L}\vec{y}=\mat{P}\vec{b}$ for $\vec{y}$ which is $\mathcal{O}(n^2)$. Then we solve $\mat{U}\vec{x}=\vec{y}$ for $\vec{x}$ which is also $\mathcal{O}(n^2)$. -->
+
+<!-- ### Symmetric positive-definite matrices -->
+
+<!-- A special type of matrix is a **symmetric positive-definite matrix**. These show up in a range of applications. Let's define these properties. -->
+
+<!-- 1. An $n \times n$ matrix $\mat{A}$ is **symmetric** if $\mat{A}^T = \mat{A}$. -->
+<!-- 2. $\mat{A}$ is **positive-definite** if $\vec{x}^T \mat{A} \vec{x} > 0$ for all $\vec{x} \neq 0$.  If we allow greater than or equal to zero, the matrix is called **positive semi-definite**. For example, take -->
+<!-- $$ -->
+<!-- \mat{A} = \begin{pmatrix} 3 & 2 \\ 2 & 6 \end{pmatrix}. -->
+<!-- $$ -->
+<!-- Then -->
+<!-- $$ -->
+<!-- \begin{pmatrix} x_1 & x_2 \end{pmatrix} \begin{pmatrix} 3 & 2 \\ 2 & 6 \end{pmatrix} \begin{pmatrix} x_1 \\ x_2 \end{pmatrix} -->
+<!-- = 3 x_1^2 + 4 x_1 x_2 + 6x_2^2 = x_1^2  + 2 (x_1 + x_2)^2 + 4 x_2^2 > 0 -->
+<!-- $$ -->
+<!-- so $\mat{A}$ is positive definite. -->
+
+<!-- There are two useful properties to know about these special matrices. -->
+
+<!-- 1. If $\mat{A}$ is symmetric, then it is positive-definite if and only if all of its eigenvalues are positive. We won't prove this here but the proof is in Section 2.6.1 of your book. For example, consider -->
+<!-- $$ -->
+<!-- \mat{A} = \begin{pmatrix} 8 & 4 & 2 \\ 4 & 6 & 0 \\ 2 & 0 & 3\end{pmatrix}. -->
+<!-- $$ -->
+
+<!-- ```{r cache=TRUE} -->
+<!-- A <- matrix(c(8,4,2,4,6,0,2,0,3),nrow=3,byrow=TRUE) -->
+<!-- isSymmetric(A) -->
+<!-- lambda <- eigen(A)$values -->
+<!-- lambda -->
+<!-- ``` -->
+<!-- So the matrix is symmetric positive definite. -->
+
+<!-- 2. Any principal supmatrix of $\mat{A}$ is symmetric positive-definite. A principal supmatrix is just any square supmatrix whose diagonal entries are entries of $\mat{A}$. For the same matrix $\mat{A}$ in one above, some principal submatrices are -->
+<!-- $$ -->
+<!-- \begin{pmatrix} 8 & 4\\4 & 6\end{pmatrix}, \qquad \begin{pmatrix} 6 & 0\\0 & 3\end{pmatrix}, \qquad \begin{pmatrix} 8\end{pmatrix} -->
+<!-- $$ -->
+<!-- and so forth. Each of these is symmetric positive-definite. -->
+
+<!-- ### Cholesky decomposition -->
+
+<!-- If $\mat{A}$ is symmetric positive-definite, then it has a special decomposition where it can be written as the product of an upper triangular matrix $\mat{R}$ and its transpose, that is, $\mat{A} = \mat{R}^T \mat{R}$. Solve $\mat{A}\vec{x}=\vec{b}$ with Cholesky decomposition is totally identical to LU in the back substitution step, but the decomposition itself is faster because if you know $\mat{R}$ then you immediately know $\mat{R}^T$. Let's demonstrate. -->
+<!-- ```{r cache=TRUE} -->
+<!-- n <- 100 -->
+<!-- reps <- 100 -->
+<!-- set.seed(123) -->
+<!-- a <- matrix(runif(n^2),nrow=n) -->
+<!-- A <- 0.5*(a+t(a))+n*diag(n) -->
+<!-- t1 <- system.time( -->
+<!--   for (i in 1:reps){ -->
+<!--     solve(A) # I'm even using R's fancy LU decomposition -->
+<!--   })[3] -->
+<!-- t2 <- system.time( -->
+<!--   for (i in 1:reps){ -->
+<!--     chol(A) -->
+<!--   })[3] -->
+<!-- t1/t2 -->
+<!-- ``` -->
+
+# Iterative methods for linear systems
+
+## Big picture
+
+So far, all of the methods you have seen for solving linear systems provide exact solutions (excluding numerical error). They are called direct methods. However, they all involve at least one step that is $\mathcal{O}(n^3)$. If this computational cost is prohibitive, consider a potentially faster iterative method at the expense of giving up having an exact solution.
+
+## Goals
+- Explain how fixed point iteration relates to solution of an equation
+- Derive and implement Jacobi's method, and explain advantages and limitations
+- Use convergence criteria for Jacobi's method
+- State other iterative solution methods
+
+## Fixed point iteration
+
+Sometimes you can solve a problem by a method called **fixed point iteration** whereby you just keep plugging into an expression until the output equals the input. For example, suppose you want to solve $(x-3)(x+1)=x^2-2x-3=0$. Pretend you don't know where the roots are but you think there is one near x = -2, so you start out with that guess. You also notice you can write $x^2 - 2x - 3 =0$ as $x = 3/(x-2)$. So you define an iteration
+$x_{i+1} = 3/(x_i-2)$.
+
+```r
+x <- -2
+for (i in 1:10){
+  x <-  3/(x-2)
+}
+```
+The iteration seems to be converging to a root. What if we try a guess near the other root?
+
+```r
+x <- 3.00001
+for (i in 1:20){
+  x <-  3/(x-2)
+}
+```
+The iteration does not have to converge to the solution we want, and in fact, it doesn't have to converge at all.
+
+But if it converges, it's pretty nifty. It's computationally cheap -- all we have to do is evaluate the right hand side of our iteration repeatedly.
+
+## Jacobi iteration
+
+Let's take this idea and apply it to solving $\mat{A}\vec{x}=\vec{b}$. Let $\mat{A} = \mat{D} + \mat{R}$ where $\mat{D}$ contains the diagonal elements of $\mat{A}$ and $\mat{R}$ contains everything else. Then we can write
+$$
+\begin{align}
+\mat{A}\vec{x} &= \vec{b} \\
+(\mat{D}+\mat{R})\vec{x} &= \vec{b} \\
+\mat{D}\vec{x} + \mat{R} \vec{x} &= \vec{b}\\
+\mat{D} \vec{x} &= \vec{b} - \mat{R} \vec{x}\\
+\vec{x} &= \mat{D}^{-1} (\vec{b}-\mat{R}\vec{x})
+\end{align}
+$$
+We can consider this a fixed point iteration,
+$$
+\vec{x}_{i+1} = \mat{D}^{-1} (\vec{b}-\mat{R}\vec{x}_i).
+$$
+Here are some computational advantages of this method.
+
+1. The matrix $\mat{D}$ is very cheap to invert, because it is a diagonal matrix. The inverse is simply the diagonal matrix with the reciprocals of the original elements.
+2. Each iteration is only $\mathcal{O}(n^2)$, and if the matrix is sparse, it is even cheaper.
+
+The usual way we stop iterating is that we choose in advance a threshold for the relative backwards error and stop when we fall below it.
+
+Here's an example.
+
+```r
+set.seed(123)
+n <- 1000
+A <- matrix(runif(n^2),nrow=n)
+diag(A) <- n + 1 + diag(A)
+b <- runif(n)
+t1 <- system.time(xexact <- MySolve(A,b))[3]
+xapprox <- rep(0,n)
+d <- diag(A)
+R <- A - diag(d)
+err <-  Inf
+tol <- 1e-10
+t2 <- system.time(
+  while (err > tol){
+    xapprox <- (b - R%*%xapprox)/d
+    err <- vnorm(b-A%*%xapprox,"I")/vnorm(b,"I")
+  }
+)[3]
+vnorm(xapprox-xexact,"I")
+```
+
+```
+## [1] 3.64226335724e-14
+```
+
+```r
+t1/t2
+```
+
+```
+##       elapsed 
+## 250.788732394
+```
+
+## Convergence of Jacobi's method
+
+There's no reason at all to expect that Jacobi's method converges. There's a really useful theorem that says it it will converge if and only if the eigenvalues of $-\mat{D}^{-1}\mat{R}$ are all less than one in magnitude. If this criterion is met, then the closer to one the eigenvalues are in magnitude, the slower convergence will be. This takes about half a page to prove and is a worthwhile exercise to understand, so feel free to ask me for the proof.
+
+However, calculating the eigenvalues of that matrix could be really hard and costly! There's a sufficient condition for convergence that is much easier to check computationally, namely that $\mat{A}$ is **strictly diagonally dominant**. This means
+$$
+|a_{ii}| > \sum_{j \not=i} |a_{ij}| \quad\text{in each row $i$.}
+$$
+
+## Other iterative methods
+
+There are other iterative solution methods for linear systems that all are inspired by Jacobi's method. Some of these include Gauss-Seidel iteration and Successive Over-Relaxation. Details of these appear in book and you are welcome to discuss them with me.
+
+# Polynomial interpolation
+
+## Big picture
+
+Now we enter into the part of this course that is about data. As scientists, often we will have access only to noisy or partial data such as a sound signal, a visual image, geograhpic data, network data, and so forth. We may wish to fill in the missing data, make predictions, smooth the data, compress it, differentiate or integrate it, visualize it, and more. These are data processing tasks. The first approach we present is polynomial interpolation and approximation. Interpolation refers to constructing new data points within the range of a discrete set of known points. Approximation refers to finding an approximation to given function by choosing a function from a predetermined class, which in this case, is polynomials.
+
+## Goals
+- Explain the advantage of using polynomials to describe data
+- Implement Vandermonde interpolation and explain its pros/cons
+- Implement Lagrange inteprolation and explain its pros/cons
+- Explain and implement data compression via interpolation
+
+## Why polynomials?
+
+
+
+Suppose we have incomplete data and we'd like to estimate a piece of information that we don't have.
+
+```r
+# I created some mystery data and hid it from you
+plot(x,y)
+```
+
+![](coursenotes_files/figure-gfm/unnamed-chunk-21-1.png)<!-- -->
+
+We might try to use polynomials to describe the data, and then glean information from the polynomial. Polynomials are convenient for several reasons.
+
+First, for any function that is defined and continuous on a closed, bounded interval, there exists a polynomial that is as "close" to the given function as desired. Stated more precisely, this is the **Weierstrass Approximation Theorem**. Suppose $f$ is defined and continuous on $[a,b]$. For each $\epsilon > 0$, there exists a polynomial $P(x)$ with the property that $|f(x)-P(x)| < \epsilon$ for all $x \in [a,b]$.
+
+Second, polynomials are easy to handle computationally. It is fast to evaluate them using Horner's method and it is straightforward to integrate and differentiate them.
+
+Though polynomials are convenient, we won't use Taylor polynomials. Taylor polynomials can do a great job accurately describing a function near a single point, but we are now instead interested in getting a good approximation over an interval.
+
+In contrast, a polynomial that passes through every data point is called the interpolating polynomial.
+
+Even though I haven't yet told you how to find an interpolating polynomial, let's compare the Taylor and interpolating approaches. Consider $f(x) = 1/x$ on the interval $[1,3]$. The second degree Taylor polynomal through $x=1$ (as an example) is $T(x)=3-3x+x^2$. The interpolating polynomial using three points from sampled equally across the interval, namely $(1,1),(2,1/2),(3,1/3)$, is $11/6 - x + (1/6)x^2$.
+
+
+```r
+f <- function(x){1/x}
+tee <- function(x){3-3*x+x^2}
+p <- function(x){11/6 - x + 1/6*x^2}
+xdata <- seq(from=1,to=3,length=3)
+x <- seq(from=1,to=3,length=200)
+plot(x,f(x),type="l",lwd=2)
+lines(x,tee(x),col="red",lwd=2)
+points(xdata,f(xdata),cex=2)
+lines(x,p(x),col="green",lwd=2)
+```
+
+![](coursenotes_files/figure-gfm/unnamed-chunk-22-1.png)<!-- -->
+
+A few important points to know about the interpolating polynomial through $n$ points with distinct $x$ coordinates include:
+
+* It exists
+* It is unique
+* It has degree at most $n-1$
+
+Let's examine some different ways to compute the interpolating polynomial.
+
+## Vandermonde matrix
+
+I also call this method of interpolation "brute force." Let's start with an example. Suppose we have three data points $(x_1,y_1)$, $(x_2,y_2)$, $(x_3,y_3)$. The interpolating polynomial is $P(x) = c_0 + c_1 x + c_2 x^2$, where we need to determine the coefficients. Let's determine them simply by plugging in. We have the equations
+$$
+\begin{align*}
+c_0 + c_1 x_1 + c_2 x_1^2 &= y_1 \\
+c_0 + c_1 x_2 + c_2 x_2^2 &= y_2 \\
+c_0 + c_1 x_3 + c_2 x_3^2 &= y_3
+\end{align*}
+$$
+We can write this in matrix form as
+$$
+\begin{pmatrix}
+1 & x_1 & x_1^2 \\
+1 & x_2 & x_2^2 \\
+1 & x_3 & x_3^2
+\end{pmatrix}
+\begin{pmatrix}
+c_0 \\ c_1 \\ c_2
+\end{pmatrix}
+=
+\begin{pmatrix}
+y_1 \\ y_2 \\ y_3
+\end{pmatrix}
+$$
+and solve the linear system to find the coefficients $c_i$. More generally, for $n$ data points, the problem is
+$$
+\begin{pmatrix}
+1 & x_1 & x_1^2 &  & x_1^{n-1} \\ 
+1 & x_2 & x_2^2 & \cdots & x_2^{n-1} \\ 
+1 & x_3 & x_3^2 &  & x_3^{n-1} \\ 
+&  \vdots &  &  & \vdots \\ 
+1 & x_n & x_n^2 & \cdots & x_n^{n-1} \\ 
+\end{pmatrix}
+\begin{pmatrix} c_0 \\ c_1 \\ c_2 \\ \vdots \\ c_{n-1} \end{pmatrix}
+= 
+\begin{pmatrix} y_1 \\ y_2 \\ y_3 \\ \vdots \\ y_n \end{pmatrix}.
+$$
+It can be proven that if the $x_i$ are distinct, the matrix has nonzero determinant, and hence the system is solvable with a unique solution.
+
+In solving problems using the Vandermonde matrix, we are using a basis for the interpolating polynomial that is $\{1,x,x^2,\ldots\}$. This seems very natural since this is how we usually think of polynomials! The problems is that to find the coefficients in this basis, we have to solve a linear problem whose matrix is very ill-conditioned. Let's see what happens if we sample more and more points from our function and construct the interpolating polynomial. We'll look at $\kappa$ for the Vandermonde matrix.
+
+
+```r
+Vandermonde <- function(x){
+  n <- length(x)
+  V <- outer(x, 0:(n-1), "^")
+  return(V)
+}
+nvals <- 2^(1:8)
+kappavals <- NULL
+for (n in nvals){
+  x <- seq(from=1,to=3,length=n)
+  kappavals <- c(kappavals,kappa(Vandermonde(x)))
+}
+kable(cbind(nvals,kappavals))
+```
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> nvals </th>
+   <th style="text-align:right;"> kappavals </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 7.50000000000e+00 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 2.49186893872e+03 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:right;"> 5.75363020789e+08 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 16 </td>
+   <td style="text-align:right;"> 4.55375073740e+19 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 32 </td>
+   <td style="text-align:right;"> 5.28513446750e+28 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 64 </td>
+   <td style="text-align:right;"> 4.59090930247e+45 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 128 </td>
+   <td style="text-align:right;"> 3.71656692973e+75 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 256 </td>
+   <td style="text-align:right;"> 4.38204448009e+135 </td>
+  </tr>
+</tbody>
+</table>
+
+## Lagrange interpolating polynomial
+
+Let's seek an alternative method that gets around these issues. There's actually a way to simply write down the interpolating polynomial without doing any calculation of coefficients at all. Let's do an example.
+
+For points $(1,10), (2, 6), (3,4), ( 4,10)$, consider the polynomial
+\begin{align*}
+p(x) &= 10 \frac{(x-2)(x-3)(x-4)}{(1-2)(1-3)(1-4)}
++ 6 \frac{(x-1)(x-3)(x-4)}{(2-1)(2-3)(2-4)} \\
+&+ 4 \frac{(x-1)(x-2)(x-4)}{(3-1)(3-2)(3-4)} + 10 \frac{(x-1)(x-2)(x-3)}{(4-1)(4-2)(4-3)}
+\end{align*}
+
+First, notice the pattern of how each term is constructed: there's a coefficient times a polynomial. The coefficient is the $y$-value of an interpolation point. The polynomial is one that is equal to $1$ at that the $x$-coordinate of that point, and $0$ at the $x$-coordinate of every other point. So now we ask...
+
+* Is the expression a polynomial?
+* Is it degree at most $n-1$?
+* Does it pass through each data point?
+
+Since the answer to all these questions is yes, it is the interpolating polynomial.
+
+If we expand out our Lagrange polynomial we find
+$p(x) = x^3 - 5 x^2 + 4 x+10$. We can use `R` to verify this result by solving the Vandermonde problem.
+
+```r
+x <- c(1,2,3,4)
+y <- c(10,6,4,10)
+c <- solve(Vandermonde(x),y)
+c
+```
+
+```
+## [1] 10  4 -5  1
+```
+
+Following the pattern we established above, the Langrange polynomial for points $(x_1,y_1),\ldots,(x_n,y_n)$ is 
+$$
+p(x) = \sum_{i = 1}^n y_i \prod_{j \not = i} \frac{(x - x_j)}{(x_i - x_j)}.
+$$
+
+The advantage of this method is that it doesn't require any numerical solution... just evaluation. Let's try a comparison: Vandermonde vs. Lagrange. Here, I'll use R's `baryalg` function. This function has some strengths and some weaknesses. Llater, I will ask you to write your own function to do Lagrange interpolation.
+
+```r
+set.seed(123)
+n <- 20
+x <- 1:n
+y <- runif(n)
+x0 <- 1.5
+c <- solve(Vandermonde(x),y)
+```
+
+```
+## Error in solve.default(Vandermonde(x), y): system is computationally singular: reciprocal condition number = 4.26216e-32
+```
+
+```r
+barylag(x,y,x0)
+```
+
+```
+## [1] -289.94101547
+```
+We can also do a speed comparison test.
+
+```r
+set.seed(123)
+numTrials <- 100000
+n <- 10
+x <- 1:n
+y <- runif(n)
+t1 <- system.time(
+  for (i in 1:numTrials){
+    c <- solve(Vandermonde(x),y)
+    Horner(c,x0)
+  }
+)[3]
+t2 <- system.time(
+  for (i in 1:numTrials){
+    barylag(x,y,x0)
+  }
+)[3]
+t1/t2
+```
+
+```
+##       elapsed 
+## 0.30483779169
+```
+
+<!-- But here's a shortcoming. Think about what happens if we add a point in, perhaps because we decide we want to incorporate additional data. Then every single term in the polynomial changes! -->
+
+<!-- ### Newton's divided differences -->
+
+<!-- Let's develop an interpolation method that allows us to add data without recomputing everything. For our same data as the previous example, consider the recursive triangle of divided differences -->
+<!-- $$ -->
+<!-- \begin{array}{c|cccc} -->
+<!-- \begin{array}{c} 1 \\2\\3\\4\end{array} -->
+<!-- &\!\! \begin{array}{c} 10 \\ 6\\4\\10\end{array}\!\! -->
+<!-- &\!\!\! \!\!\begin{array}{c} -4 \\-2\\6\end{array} -->
+<!-- &\!\!\! \!\!\begin{array}{c} 1 \\4\end{array} -->
+<!-- &\!\!\! \!\!\begin{array}{c} 1\end{array} -->
+<!-- \end{array} -->
+<!-- $$ -->
+<!-- and the polynomial -->
+<!-- $$ -->
+<!-- \begin{align*} -->
+<!-- p(x) &= 10(1) + (-4)(x-1) + (1)(x-1)(x-2) + (1)(x-1)(x-2)(x-3) \\ -->
+<!-- &=x^3-5x^2+4x+10 -->
+<!-- \end{align*} -->
+<!-- $$ -->
+<!-- which is the same result we obtained using Lagrange's method. Note the basis; we used the functions $1$, $(x-1)$, $(x-1)(x-2)$, $(x-1)(x-2)(x-3)$. -->
+
+<!-- This basis makes it very convenient to add a point. Suppose we add the point $(5,-18)$ to our data set. We can now compute -->
+<!-- $$ -->
+<!-- \begin{array}{c|ccccc} -->
+<!-- \begin{array}{c} 1 \\2\\3\\4\\ 5\end{array} -->
+<!-- &\!\! \begin{array}{c} 10 \\ 6\\4\\10\\-18 \end{array}\!\! -->
+<!-- &\!\!\! \!\!\begin{array}{c} -4 \\-2\\6\\\ -28 \end{array} -->
+<!-- &\!\!\! \!\!\begin{array}{c} 1 \\4\\\ -17 \end{array} -->
+<!-- &\!\!\! \!\!\begin{array}{c} 1\\\ -7 \end{array} -->
+<!-- &\!\!\! \!\!\begin{array}{c} \ -2 \end{array} -->
+<!-- \end{array} -->
+<!-- $$ -->
+<!-- and write down -->
+<!-- $$ -->
+<!-- p(x) = 10(1) + (-4)(x-1) + (1)(x-1)(x-2)  + (1)(x-1)(x-2)(x-3) + (-2)(x-1)(x-2)(x-3)(x-4). -->
+<!-- $$ -->
+
+<!-- The derivation of this Newton Divided Difference form of the interpolating polynomial can be found in the textbook and many other sources. That said, I hope you will be convinced by the reverse argument. You can check: -->
+
+<!-- * Is the expression a polynomial? -->
+<!-- * Is it degree at most $n-1$? -->
+<!-- * Does it pass through each data point? -->
+
+<!-- Since the answer to these questions is yes, it is the interpolating polynomial. -->
+
+## Data compression
+
+One of the powerful things interpolation can do is compress data. Let's do an example. Suppose that we need to know values for the function $\sin x$. A computer doesn't magically know this function, so it has to have some way to compute/evaluate it. One option would be to store a giant look-up table. There are an infinite number of numbers to store, though, even for the interval $[0,2\pi)$. Another option is to fit a polynomial based on a finite number of points, store the coefficients, and evaluate the polynomial as needed. Let's do this using 5 points to begin with. We'll write a function that takes a specified number of points, samples them from the function, constructs the interpolating polynomial, plots the function and the polynomial, and calculates the maximum error. The inputs are your $x$ data, your $y$ data, and the $x$ values at which you'd like interpolated values.
+
+
+```r
+interperror <- function(n,plotflag=FALSE){
+  x <- seq(from=0,to=2*pi,length=n)
+  y <- sin(x)
+  xexact <- seq(from=0,to=2*pi,length=1000)
+  yexact <- sin(xexact)
+  yinterp <- barylag(x,y,xexact)
+  if (plotflag==TRUE){
+    plot(xexact,yexact,type="l")
+    points(x,y)
+    lines(xexact,yinterp,col="blue")
+  }
+  error  <- max(abs(yexact-yinterp))
+  return(error)
+}
+interperror(5,plotflag=TRUE)
+```
+
+![](coursenotes_files/figure-gfm/unnamed-chunk-27-1.png)<!-- -->
+
+```
+## [1] 0.180757796555
+```
+
+Not bad for just 5 points. Let's examine how the error changes as a function of $n$.
+
+
+```r
+nvec <- 2:20
+errorvec <- NULL
+for (n in nvec){
+  errorvec <- c(errorvec,interperror(n))
+}
+orderofmag <- round(log10(errorvec))
+plot(nvec,orderofmag)
+```
+
+![](coursenotes_files/figure-gfm/unnamed-chunk-28-1.png)<!-- -->
+
+This means that we can represent the sine function with $10^{-13}$ error using only 20 pieces of information, instead of storing a huge lookup table.
+
+# Interpolation error and Chebyshev interpolation
+
+## Big picture
+
+We have been thinking about data and talking about polynomial interpolation as a way of estimating it, compressing it, and representing it conveniently to do other mathematical operations on it. So far, we have only examined error numerically. Now it is time to look at the error in more detail, including finding out when it is potentially large and thinking about how we can reduce it.
+
+## Goals
+- Describe and recognize Runge's phenomenon
+- State the error term for polynomial interpolation and bound it
+- Explain the advantages of Chebyshev integration and implement the technique
+- Compare approaches to interpolation
+
+## Runge's phenomenon
+
+Before doing polynomial interpolation, let's start out with an example that is about Taylor polynomials. We'll construct Taylor polynomials of increasing degree to estimate
+the function $f(x) = \cos(x)$ around the point $x_0=0$ on $[0,2\pi]$. The $n$th degree taylor polynomial is
+$$
+\sum_{i=1}^n (-1)^{i/2} \frac{x^i}{i!}.
+$$
+
+
+```r
+mytaylor1 <- function(x,n){
+  ans <- 0
+  for (i in seq(from=0,to=n,by=2)){
+    ans <- ans + (-1)^(i/2)*x^i/factorial(i)
+  }
+  return(ans)
+}
+x <- seq(from=0,to=2*pi,length=1000)
+plot(x,cos(x),type="l",col="red",lwd=5,xlim=c(0,2*pi),ylim=c(-1.5,1.5),xlab="x",ylab="y")
+for (n in seq(from=0,to=14,by=2)){
+  lines(x,mytaylor1(x,n))
+}
+```
+
+![](coursenotes_files/figure-gfm/unnamed-chunk-29-1.png)<!-- -->
+
+So more terms are better, right? Let's try again with 
+the function $f(x) = 1/x$ around the point $x_0=1$. The $n$th degree Taylor polynomial is
+$$
+\sum_{i=1}^n (-1)^i (x-1)^i.
+$$
+
+
+```r
+mytaylor2 <- function(x,n){
+  ans <- 0
+  for (i in seq(from=0,to=n,by=1)){
+    ans <- ans + (-1)^(i)*(x-1)^(i)
+  }
+  return(ans)
+}
+x <- seq(from=1,to=2.5,length=1000)
+plot(x,1/x,type="l",col="red",lwd=5,xlim=c(1,2.5),ylim=c(0,1.5),xlab="x",ylab="y")
+for (n in seq(from=0,to=40,by=4)){
+  lines(x,mytaylor2(x,n))
+}
+```
+
+![](coursenotes_files/figure-gfm/unnamed-chunk-30-1.png)<!-- -->
+
+Oh! I guess that more isn't always better.
+
+Now let's think now about interpolating polynomials. Let's consider $\cos(x)$ with $n$ equally sampled points across $[0,2\pi]$ for different values of $n$.
+
+```r
+x <- seq(from=0,to=2*pi,length=1000)
+y <- cos(x)
+plot(x,y,type="l",col="red",lwd=5,xlim=c(0,2*pi),ylim=c(-1.1,1.1))
+nvec <- 2:20
+error <- NULL
+for (n in nvec){
+  xdata <- seq(from=0,to=2*pi,length=n)
+  ydata <- cos(xdata)
+  yinterp <- Interpolator(xdata,ydata,x)
+  lines(x,yinterp)
+  error <- c(error,max(abs(y-yinterp)))
+}
+```
+
+![](coursenotes_files/figure-gfm/unnamed-chunk-31-1.png)<!-- -->
+
+```r
+plot(nvec,log10(error),xlab="n",ylab="log10 of error")
+```
+
+![](coursenotes_files/figure-gfm/unnamed-chunk-31-2.png)<!-- -->
+
+Looks good! Let's try again with a different function, $f(x) = (1+x^2)^{-1}$ on $[-1,1]$.
+
+```r
+x <- seq(from=-5,to=5,length=1000)
+y <- 1/(1+x^2)
+plot(x,y,type="l",col="red",lwd=5,xlim=c(-5,5),ylim=c(-3,3))
+nvec <- seq(from=2,to=32,by=6)
+error <- NULL
+for (n in nvec){
+  xdata <- seq(from=-5,to=5,length=n)
+  ydata <- 1/(1+xdata^2)
+  yinterp <- Interpolator(xdata,ydata,x)
+  lines(x,yinterp)
+  error <- c(error,max(abs(y-yinterp)))
+}
+```
+
+![](coursenotes_files/figure-gfm/unnamed-chunk-32-1.png)<!-- -->
+
+```r
+plot(nvec,log10(error),xlab="n",ylab="log10 of error")
+```
+
+![](coursenotes_files/figure-gfm/unnamed-chunk-32-2.png)<!-- -->
+
+Not good! The error goes up as we take more and more points. Equally-spaced nodes are very natural in many applications (scientific measurements, audio/video signals, etc.). But sadly, it turns out that in some circumstances, inteprolating with polynomials through equally-spaced nodes leads to very undesirable oscillations like those above, called **Runge's phenomenon**.
+
+## Interpolation error
+
+You might remember that for an $n-1$st degree Taylor series (that is, $n$ coefficients) of $f(x)$ centered around $x=x_0$, the magnitude of the error term is
+$$
+\left|\frac{f^{(n)}(c)}{n!}(x-x_0)^{n}\right|
+$$
+where $c$ is a number between $x$ and $x_0$. For an interpolating polynomial constructed from $n$ points on an interval $[x_1,x_n]$, the interpolation error is
+$$
+\left|\frac{f^{(n)}(c)}{n!}(x-x_1)(x-x_2)\cdots (x-x_n)\right|
+$$
+for some $c \in [x_1,x_n]$. If you are interested in the proof, it appears in your textbook and/or I am happy to go over it with you in office hours. Honestly, though, I find the proof to be totally nonintuitive and unenlightening.
+
+Let's use the error term to do an example, where we again ask the question HOW DO WE EVEN KNOW ANYTHING? For instance, suppose you want to calculate the value of an exponential function. [This turns out to be hard](https://math.stackexchange.com/questions/1239352/how-do-pocket-calculators-calculate-exponents)! Let's restrict the problem a bit. Suppose we want to calculate $\exp{x}$ on $[0,1]$ with 5 digits of accuracy. One way to do this would be to choose equally-spaced points on $[0,1]$ and make a table of $\exp{x}$ for those values using some very accurate method. Then, we let the user choose a value of $x$. We find the two values that surround it in our table, construct the linear interpolating polynomial between them, and use it to estimate our answer. For instance, if we chose $x$ values of $0.1, 0.2, \ldots, 1$ and the user input $x=0.3268$, we would construct the inteprolating polynomial through $(0.3,\exp{0.3})$ and $(0.4,\exp{0.4})$ and then plug in our $x$. Let's ask the question: to achieve 5-digit accuracy with this method, how many points must we take on $[0,1]$? (Note: crucially, this is not at all the same as creating a single interpolating polynomial that goes through all the points.) We have
+$$
+\begin{align*}
+|f(x) - P_1(x)| &= \left|\frac{f^{(n)}(c)}{n!}(x-x_1)(x-x_2)\cdots (x-x_n)\right|\\
+&= \left|\frac{\left(\exp{x}\right)^{''}|_c}{2!}(x-x_1)(x-x_2)\right| \\
+& = \left|\frac{\exp{c}}{2} (x-x_1)(x-x_1-h)\right|
+\end{align*}
+$$
+Here, I've called the spacing between the two points $h$, that is $x_2 = x_1 + h$. Now, we can ask what is the worst (biggest) that the term $\left|(x-x_1)(x-x_1-h)\right|$ can be, and via calculus, we can show it is $h^2/4$. Also, on our interval of interest, we know that $\exp{c} \leq \exp{1}$. Therefore, we can write
+$$
+|f(x) - P_1(x)| \leq \frac{\mathrm{e}h^2}{8}.
+$$
+For our desired level of accuracy, we need
+$$
+\frac{\mathrm{e}h^2}{8} \leq 0.5 \times 10^{-5}.
+$$
+Solving for $h$, we find $h \lessapprox 3.8 \times 10^{-3}$. That is the space between points, so on $[0,1]$ this corresponds to just over 260 points.
+
+## Chebyshev nodes
+
+Look at the error expression again. There are three parts of it. Factorial is the same for every function. If the derivative gets smaller with more $n$ then we're good. If it gets bigger, the error term could potentially grow overall with $n$. Since there's nothing we can do about the derivative (we can't choose it!) we should try to do what we can to minimize what we can control, namely the remaining part of the error term.
+
+Let's compare two approaches in Mathematica. Without loss of generality, we'll live on the interval $[-1,1]$. Please see the demos in [this notebook](https://drive.google.com/file/d/0B3Www1z6Tm8xNFlXOVhZZDFITlU/view?usp=sharing).
+
+Now let's summarize the comparison of equally-spaced nodes vs. Chebyshev nodes.
+
+
+```r
+nvec <- 1:30
+x <- seq(from=-1,to=1,length=5000)
+equallyspaced <- NULL
+for (n in nvec){
+  nodes <- seq(from=-1,to=1,length=n)
+  prod <- 1
+  for (i in 1:n){
+    prod <- prod*(x-nodes[i])
+  }
+  equallyspaced <- c(equallyspaced,unique(max(abs(prod))))
+}
+chebyshev <- 1/2^(nvec-1)
+plot(nvec,log10(chebyshev),col="green",pch=16,ylim=c(-10,0),xlab="points",ylab="bound on portion of error")
+points(nvec,log10(equallyspaced),col="red",pch=16)
+```
+
+![](coursenotes_files/figure-gfm/unnamed-chunk-33-1.png)<!-- -->
+
+Chebyshev is much better! We won't prove the result, but I hope my numerical experiment convinced you that for $n$ points on $[0,1]$, we should choose nodes
+$$
+x_i = \cos \frac{(2i-1)\pi}{2n}, \quad i = 1,\ldots,n
+$$
+and the maximum magnitude of the relevant portion of the error term is
+$$
+\max_{-1\leq x\leq 1}\left|\prod_{i=1}^n (x-x_i)\right| = \frac{1}{2^{n-1}}.
+$$
+If we generalize these results to the interval $[a,b]$, we find
+$$
+x_i = \frac{b+a}{2} + \frac{b-a}{2}\cos \frac{(2i-1)\pi}{2n}, \quad i = 1,\ldots,n
+$$
+with
+$$
+\max_{a\leq x\leq b}\left|\prod_{i=1}^n (x-x_i)\right| = \frac{\left(\frac{b-a}{2}\right)^n}{2^{n-1}}.
+$$
+
+The proof is not direct, which is why I have eliminated it here.
+
+## Comparing interpolation methods
+
+Let's do an example comparing interpolation approaches. Consider  $f(x)=(1/\sqrt{2\pi})\exp{-x^2/2}$. This is the standard normal distribution which plays a key role in probability and statistics.
+
+One thing to know is that the derivatives of this function grow with $n$.
+
+```r
+n <- 0:10
+maxderiv <- c(0.398942,0.241971,0.178032, 0.550588,1.19683,2.30711,4.24061,14.178,41.8889,115.091,302.425) # Computed in Mathematica
+plot(n,log(maxderiv))
+```
+
+![](coursenotes_files/figure-gfm/unnamed-chunk-34-1.png)<!-- -->
+
+Given this, using equally-spaced nodes seems reckless, but we can try it anyway, say, on $[-10,10]$ with 30 data points to start with.
+
+```r
+a <- -10
+b <- 10
+xexact <- seq(from=a,to=b,length=10000)
+f <- function(x){exp(-x^2/2)/sqrt(2*pi)}
+yexact <- f(xexact)
+plot(xexact,yexact,type="l",lwd=3,xlim=c(a,b),ylim=c(-0.2,0.5))
+n <- 30
+xequal <- seq(from=a,to=b,length=n)
+yequal <- Interpolator(xequal,f(xequal),xexact)
+lines(xexact,yequal,col="red",lwd=2)
+```
+
+![](coursenotes_files/figure-gfm/unnamed-chunk-35-1.png)<!-- -->
+
+Ok, that approach is not going to work! Let's try the approach of a lookup table with linear interpolation. Let's suppose we wish to achieve 4 digit accuracy.
+
+```r
+n <- 1
+error <- Inf
+while (error > 0.5e-4){
+  n <- n+1
+  xlookup <- seq(from=a,to=b,length=n)
+  ylookup <- f(xlookup)
+  ytable <- approx(xlookup,ylookup,xexact)$y
+  error <- max(abs(yexact-ytable))
+}
+nlookup <- n
+print(nlookup)
+```
+
+```
+## [1] 632
+```
+
+
+```r
+n <- 1
+error <- Inf
+while (error > 0.5e-4){
+  n <- n+1
+  odds <- seq(from=1,to=2*n-1,by=2)
+  xcheb <- (b+a)/2 + (b-a)/2*cos(odds*pi/2/n)
+  ycheb <- Interpolator(xcheb,f(xcheb),xexact)
+  error <- max(abs(yexact-ycheb))
+}
+ncheb <- n
+print(ncheb)
+```
+
+```
+## [1] 41
+```
+
+This is an improvement in compression by a factor of 632/41 = 15.4146341.
+
+# Splines
+
+## Big picture
+
+I've tried to convince you that it can be problematic to construct interpolating polynomials of high degree. When dealing with a lot of data, an alternative approach can be to construct low degree interpolating polynomials through successive sets of points. Typically we use cubics, and these are called cubic splines.
+
+## Goals
+- Explain advantages of interpolating data with cubic splines
+- Implement cubic spline interpolation
+
+## Why cubic splines?
+
+Before progressing to real data later on, let's do an illustrative example with a small amount of fake data. We make some data points and connect them with linear splines. We can do this using the built-in `approxfun` command which returns a function representing the linear spline.
+
+
+```r
+x <- c(-2,-1.5,-1,0.25,1,2,3.75,4,5)
+y <- c(4,4.2,3,5,0,-2,2,1,1)
+xplot <- seq(from=-2,to=5,length=200)
+linearspline <- approxfun(x,y)
+plot(x,y,ylim=c(-2.5,5.5))
+lines(xplot,linearspline(xplot),col="red",lwd=2)
+```
+
+![](coursenotes_files/figure-gfm/unnamed-chunk-38-1.png)<!-- -->
+
+Your eyeball might be telling you that this is a very jagged graph. Most things in nature and society are not this jagged, so it might feel desirable to represent the data with smoother functions. Let me show you what this looks like.
+
+```r
+cubicspline <- splinefun(x,y)
+plot(x,y,ylim=c(-2.5,5.5))
+lines(xplot,linearspline(xplot),col="red",lwd=2)
+lines(xplot,cubicspline(xplot),col="green",lwd=2)
+```
+
+![](coursenotes_files/figure-gfm/unnamed-chunk-39-1.png)<!-- -->
+
+This is smoother. What smoothness means here is continuity of derivatives from one spline to the next. Using cubic rather than linear splines gives us more coefficients, and using these coefficients we can make the derivatives of successive splines match up. How exactly does this work though?
+
+## Mathematical conditions for cubic splines
+
+Suppose we have data points $(x_1,y_1),\ldots,(x_n,y_n)$. We will connect successive points with cubic curves. With $n$ points, there are $n-1$ curves. Each curve is cubic, having the form
+$$
+S_i(x) = a_i + b_i(x-x_i) + c_i(x-x_i)^2 + d_i(x-x_i)^3.
+$$
+With $n-1$ curves each having four coefficients, there are $4(n-1)$ coefficients.
+
+First, we force each spline to pass through its two endpoints (which also makes the overall spline curve continuous). By inspection, this forces $a_i=y_i$, and it also enforces a condition on the relationship between $b_i, c_i, d_i$. So doing the bookkeeping, that is $2(n-1)$ conditions to enforce, which leaves $2n-2$ coefficients undetermined.
+
+Next, we force continuity of the first derivatives of successive splines. Note that at $x_1$ there's no condition to enforce, since there's no spline to the left of it. And at $x_n$ there's no condition to enforce, since there's no spline to the right of it. Therefore, we enforce conditions at the $n-2$ points $x_2,\ldots,x_{n-1}$. Specifically, the condition is $S_i^'(x_i)=S_{i-1}^'(x_i)$. Subtracting these $n-2$ conditions from our previous count of $2n-2$, there are $n$ conditions left.
+
+Finally, we enforce continuity of the second derivatives of successive splines. This is very similar to enforcing the previous condition. The condition is $S_i^{''}(x_i)=S_{i-1}^{''}(x_i)$ at the points $x_2,\ldots,x_{n-1}$. Substracting these $n-2$ conditions from our previous total of $n$ conditions, there are two conditions left.
+
+In short, thus far, the procedure for finding spline coefficients is underetermined because there are $4n-4$ unknowns but only $4n-2$ equations. To make the system solvable, we have to make a choice about what conditions to enforce at the leftmost and rightmost points. Some of the most common choices are:
+
+* **Natural spline**. The concavity at the left and right endpoints is zero, that is $S_1^{''}(x_1)=S_{n-1}^{''}(x_n)=0$.
+* **Clamped sline**. The concavity at the left and right endpoints is set to a user specified value, that is, $S_1^{''}(x_1)=m_1$ and $S_{n-1}^{''}(x_n)=m_n$.
+* **FMM (not-a-knot)**. $S_1=S_2$ is a single cubic equation that is run through the first 3 points, and $S_{n-2}=S_{n-1}$ is, similarly, a single cubic run through the last 3 points.
+
+Crucially, since we find the coefficients by solving an square linear system of dimension $4n-4$, these boundary conditions don't merely affect the first and last splines, but influence ALL of the splines.
+
+You don't need to memorize the details of these different types of splines. My main goals for you are to understand what they mean and to be able to implement them in R.
+
+## Splines and linear algebra
+
+As we have been discussing, to find spline coefficients, we have to solve a linear system. I won't write down the whole system here because we are going to use built-in tools to solve it. However, it's good mathematical literacy to know that by writing down the system of equations, you can see that it is tridiagonal and strictly diagonally dominant, which are nice numerical properties.
+
+## Implementing cubic spline interpolation
+
+Just to emphasize how splines avoid the problem of high-degree polynomial interpolation, let's do a cooked example.
+
+```r
+set.seed(123)
+n <- 30
+x <- sort(runif(n))
+y <- cumsum(abs(rnorm(n)))
+plot(x,y,pch=19,ylim=c(-2,35),cex=1.5)
+xx = seq(from=min(x),to=max(x),length=1000)
+yy = barylag(x,y,xx)
+lines(xx,yy,col="red",lwd=3)
+cubicspline <- splinefun(x,y,method='natural')
+lines(xx,cubicspline(xx),col="blue",lwd=3)
+```
+
+![](coursenotes_files/figure-gfm/unnamed-chunk-40-1.png)<!-- -->
+
+Now let's work with some real data, let's say, Tesla stock price for the last 100 days (we won't actually get 100 days because of days when the markets were closed, including weekends).
+
+```r
+# Set dates and stock symbol
+first.date <- Sys.Date()-100
+last.date <- Sys.Date()
+tickers <- c('TSLA')
+# Acquire data
+l.out <- BatchGetSymbols(tickers = tickers, first.date = first.date, last.date = last.date)
+```
+
+```
+## Warning: `BatchGetSymbols()` was deprecated in BatchGetSymbols 2.6.4.
+## Please use `yfR::yf_get()` instead.
+## 2022-05-01: Package BatchGetSymbols will soon be replaced by yfR. 
+## More details about the change is available at github <<www.github.com/msperlin/yfR>
+## You can install yfR by executing:
+## 
+## remotes::install_github('msperlin/yfR')
+```
+
+```
+## 
+## Running BatchGetSymbols for:
+##    tickers =TSLA
+##    Downloading data for benchmark ticker
+## ^GSPC | yahoo (1|1) | Not Cached | Saving cache
+## TSLA | yahoo (1|1) | Not Cached | Saving cache - Got 100% of valid prices | Youre doing good!
+```
+
+```r
+price <- l.out[[2]]$price.close
+day <- 1:length(price)
+# Sample every 5th day
+sampledday <- day[seq(from=1,to=length(price),by=5)]
+sampledprice <- price[seq(from=1,to=length(price),by=5)]
+# Fit interpolating polynomial
+interpolatedprice <- barylag(sampledday,sampledprice,day[1:max(sampledday)])
+plot(day[1:max(sampledday)],interpolatedprice,col="red",type="l",ylim=c(800,1200))
+points(day,price,col="blue")
+```
+
+![](coursenotes_files/figure-gfm/unnamed-chunk-41-1.png)<!-- -->
+
+```r
+# Fit splines
+TSLAspline <- splinefun(sampledday,sampledprice,method='natural')
+plot(day,TSLAspline(day),col="blue",type="l",ylim=c(800,1200))
+points(day,price,col="blue")
+```
+
+![](coursenotes_files/figure-gfm/unnamed-chunk-41-2.png)<!-- -->
+
+<!-- ## Data Scraping -->
+
+<!-- ### Big picture -->
+
+<!-- We are in the section of this course where we are emphasizing applications of linear algebra to data. However, we have skirted around the issue of how one might obtain data in the first place. One way to do it is by **scraping**, which refers to computational techniques for grabbing from the internet data that is not in an easily, direcly downloadable format. -->
+
+<!-- ### Goals -->
+
+<!-- - Utilize CSS selectors to identify chosen data -->
+<!-- - Write code to pull selected data and clean it -->
+<!-- - Recognize the limitations of this technique -->
+
+<!-- ### CSS selectors -->
+
+<!-- Winter is coming and I need to buy my daughter some boots, but shopping in Williamstown is impossible, so I want to look on [Amazon](http://www.amazon.com). In particular, I did a search for girls' boots in size 3 available via Amazon Prime, and I got [these 13 pages of results](https://www.amazon.com/s/ref=sr_pg_2?fst=p90x%3A1%2Cas%3Aoff&rh=n%3A7141123011%2Cn%3A7147442011%2Cn%3A679217011%2Cn%3A3420847011%2Ck%3Aboots%2Cp_n_size_four_browse-vebin%3A3491796011%2Cp_85%3A2470955011&page=1). -->
+
+<!-- Here's how we'll proceed. On a web page, data is stored with various metadata that specifies its format and other properties. We can use this feature to identify the metadata associated with the particular parts of the web page we want to grab. As prerequisite steps, we install a tool called **SelectorGadget** that lets us easily and interactively peek at the metadata. Install it [here](https://selectorgadget.com) and let's experiment to see how to choose data. For my chosen goal, I need to grab data identified with ``.sx-price-large`. -->
+
+<!-- ### Scraping web data in R -->
+
+<!-- Next we have to pull the data we've identified. Install and activate the `R` package called `rvest`. Then we proceed as followsd: -->
+
+<!-- 1. Go to the [first page of data we want to scrape](https://www.amazon.com/s/ref=sr_pg_2?fst=p90x%3A1%2Cas%3Aoff&rh=n%3A7141123011%2Cn%3A7147442011%2Cn%3A679217011%2Cn%3A3420847011%2Ck%3Aboots%2Cp_n_size_four_browse-vebin%3A3491796011%2Cp_85%3A2470955011&page=1). -->
+
+<!-- 2. Activate SelectorGadget and use it to highlight exactly the data you want to grab. Remember, this is `.sx-price-large`. -->
+
+<!-- 3. Take note of the URL of the web page, and take note of the maximum number of pages resulting from the search. -->
+
+<!-- 4. Use `R` to loop through each page, grabbing results. -->
+
+<!-- Here's code that does this. -->
+
+<!-- ```{r cache=TRUE} -->
+<!-- # Set base URL -- page number will need to be appended -->
+<!-- baseurl <- "https://www.amazon.com/s/ref=sr_pg_2?fst=p90x%3A1%2Cas%3Aoff&rh=n%3A7141123011%2Cn%3A7147442011%2Cn%3A679217011%2Cn%3A3420847011%2Ck%3Aboots%2Cp_n_size_four_browse-vebin%3A3491796011%2Cp_85%3A2470955011&page=" -->
+<!-- # Set maximum number of pages -->
+<!-- maxpage <- 13 -->
+<!-- # Initialize empty vector for price data -->
+<!-- prices <- NULL -->
+<!-- # Loop over each page -->
+<!-- for (i in 1:maxpage){ -->
+<!--   # Read all data from page -->
+<!--   data <- read_html(paste0(baseurl,i)) -->
+<!--   # Grab all data with metadata found by SelectorGadget and convert it to text -->
+<!--   newprices <- data %>% html_nodes(".sx-price-large") %>% html_text() -->
+<!--   # Append to master data structure -->
+<!--   prices <- c(prices,newprices) -->
+<!-- } -->
+<!-- ``` -->
+<!-- Let's look at the data. -->
+<!-- ```{r cache=TRUE} -->
+<!-- str(prices) -->
+<!-- head(prices) -->
+<!-- ``` -->
+<!-- Oh, it's a mess! We need to clean it up. First, let's remove everything up to the dollar sign, which is a convenient marker. -->
+<!-- ```{r cache=TRUE} -->
+<!-- prices <- sapply(strsplit(prices,"\\$"),function(x) x[[2]]) -->
+<!-- head(prices) -->
+<!-- ``` -->
+<!-- Next we want to get rid of the `\n` and extra spaces, and put in a decimal point. -->
+<!-- ```{r cache=TRUE} -->
+<!-- dollars <- sapply(strsplit(prices,"\n"),function(x) x[[1]]) -->
+<!-- cents <- sapply(strsplit(prices,"\n"),function(x) x[[2]]) -->
+<!-- cents <- trimws(cents) -->
+<!-- prices <- paste0(dollars,".",cents) -->
+<!-- prices <- as.numeric(prices) -->
+<!-- head(prices) -->
+<!-- ``` -->
+<!-- Now let's go ahead and plot as a histogram. -->
+<!-- ```{r cache=TRUE} -->
+<!-- hist(prices,breaks=20) -->
+<!-- ``` -->
+
+<!-- It's worthwhile to do another example. Suppose we'd like to scrape class sizes for courses at a college. We'll do my previous institution, Macalester College. -->
+<!-- ```{r cache=TRUE} -->
+<!-- url <- "https://www.macalester.edu/registrar/schedules/2018fall/class-schedule/" -->
+<!-- data <- read_html(url) -->
+<!-- course <- data %>% html_nodes(".class-schedule-course-number") %>% html_text() -->
+<!-- head(course) -->
+<!-- course <- strsplit(course,"\u00A0") -->
+<!-- department <- sapply(course,function(x) x[[1]]) -->
+<!-- coursenum <- sapply(course,function(x) x[[2]]) -->
+<!-- coursename <- data %>% html_nodes(".class-schedule-course-title") %>% html_text() -->
+<!-- head(coursename) -->
+<!-- enrollment <- data %>% html_nodes(".class-schedule-label:nth-child(7)") %>% html_text() -->
+<!-- head(enrollment) -->
+<!-- enrollment <- strsplit(enrollment,":") -->
+<!-- enrollment <- sapply(enrollment,function(x)x[[2]]) -->
+<!-- enrollment <- gsub("Closed","",enrollment) -->
+<!-- enrollment <- trimws(enrollment) -->
+<!-- enrollment <- strsplit(enrollment,"\u00A0/\u00A0") -->
+<!-- enrollment <- sapply(enrollment,function(x) as.numeric(x[[2]])-as.numeric(x[[1]])) -->
+<!-- macinfo <- data.frame(department,coursenum,coursename,enrollment) -->
+<!-- head(macinfo) -->
+<!-- ``` -->
+
+<!-- ### Limitations -->
+
+<!-- I've shown you a brief glimpse of one type of data scraping. This type of scraping is just one type of procedure. Data appear in many different formats online and might require a variety of techniques that we haven't delved into. Still, I've tried to show you the one technique I think might be the most useful to you. Even this technique involved a lot of new code. Don't panic. Try to glean what you can from my examples and from talking to me. Googling is also immensely valuable here. -->
+
+# Least squares
+
+## Big picture
+
+All of our study of interpolation has been based on the idea that the model (a polynomial or polynomnial spline) should precisely pass through every data point. But what if we loosen this restriction? What if the data is thought to have error or noise that we don't want to represent in our model? Or what if we just don't care about precise interpolation, and decide approximation even at the data points themselves is good enough?
+
+## Goals
+- Explain how least squares arises as a model fitting problem
+- Explain how the solution of least squares involves vector projection
+- Set up and solve least squares problems
+- Define, identify, and calculate crucial quantities such as basis, target, normal equations, least squares solution, residual, pseudoinverse, projection, projection operator
+- Recognize when a least squares approach is appropriate
+- Explain how least squares allows data compression
+
+## Model fitting
+
+By way of motivation, let's examine a pedagogical data set. Suppose $a$ represents the amount of money (in \$1,000's) a company spent on advertising during different quarters, and $s$ represents money the company earned on sales that quarter. We can plot the data to explore it.
+
+```r
+a <- c(3,4,5,6)
+s <- c(105,117,141,152)
+plot(a,s,xlab="advertising",ylab="sales")
+```
+
+![](coursenotes_files/figure-gfm/unnamed-chunk-42-1.png)<!-- -->
+
+The company would like to model this data so they can predict sales for other levels of advertising. The data looks roughly linear, and we have no reason to expect a complicated relationship, so let's try modeling the data with a line, $s = x_0 + x_1 a$ where $x_{0,1}$ are unknown coefficients. Plugging in to the model, we find
+$$
+\begin{align}
+x_0 + 3x_1 &= 105\\
+x_0 + 4x_1 &= 117\\
+x_0 + 5x_1 &= 141\\
+x_0 + 6x_1 &= 152
+\end{align}
+$$
+which we can write in vector form as
+$$
+x_0 \begin{pmatrix} 1 \\ 1 \\ 1 \\ 1 \end{pmatrix} + x_1 \begin{pmatrix} 3 \\ 4 \\ 5 \\ 6 \end{pmatrix} = \begin{pmatrix} 105 \\ 117 \\ 141 \\ 152 \end{pmatrix}.
+$$
+By writing it this way, we can remember one interpretation of linear systems. In this case we should imagine a four-dimensional space in which we are trying to reach a particular target (the right hand side vector) by taking linear combinations of the two vecors on the left. Unfortunately, those two vectors only span a two dimensional subspace, so the chance that we can make it to our target vector are pretty slim. Stated differently: the sysem is overdetermined. But we would still like to find a good model, so what should we do?
+
+## Projection onto a vector
+
+To examine the details, let's start with an even more fundamental example: a single vector in the plane. Suppose I hand you the vector $\vec{a} = (2,1)^T$ and tell you to use it to reach the target vector $\vec{b}=(6,8)^T$. Well, you can't do it exactly because there is no scalar $x$ such that $x\vec{a} = \vec{b}$. So let us do the next best thing: let's find the value of $x$ such that $x\vec{a}$ is as close as possible to $\vec{b}$. We can draw a picture to solve this problem.
+
+![](coursenotes_files/figure-gfm/unnamed-chunk-43-1.png)<!-- -->
+
+Where should we stop on the dotted line? When we are perpendicular to the end of $\vec{b}$. This results in the following picture.
+
+![](coursenotes_files/figure-gfm/unnamed-chunk-44-1.png)<!-- -->
+
+From this picture, two relationships arise.
+$$
+\begin{align}
+x\vec{a} + \vec{r}&=\vec{b}\\
+\vec{a} \cdot \vec{r} &=0.
+\end{align}
+$$
+Let us dot the first equation with the vector $\vec{a}$. Then we have
+$$
+\vec{a} \cdot \vec{a}x + \vec{a} \cdot \vec{r} = \vec{a} \cdot \vec{b}.
+$$
+From the second equation above, we can eliminate the second term on the left hand side to write
+$$
+\vec{a}^T \vec{a} x = \vec{a}^T \vec{b}
+$$
+where we have used the fact that $\vec{y}\cdot\vec{z}=\vec{y}^T\vec{z}$. We can solve for $\vec{x}$ by writing
+$x = \left(\vec{a}^T \vec{a}\right)^{-1}\vec{a}^T \vec{b}$. We can also calculate the vector that was as close as possible to $\vec{b}$. We will call it $\widehat{\vec{b}}$ and it is
+$$
+\begin{align}
+\widehat{\vec{b}} &= \vec{a}x \\
+&=\vec{a}\left(\vec{a}^T \vec{a}\right)^{-1}\vec{a}^T \vec{b}\\
+& = \mat{P} \vec{b}.
+\end{align}
+$$
+where thre last equation defines a new quantity that we call $\mat{P}$.
+
+Let us know revisit what we have done and emphasize/introduce some vocabulary. We started with a vector $\vec{a}$ that we used as a **basis** to try to reach the **target** $\vec{b}$. We couldn't do it exactly, so we calcualted the closest we could come to $\vec{b}$, which turned out to be $\widehat{\vec{b}}$. This is called the **projection** of $\vec{b}$ into the subspace spanned by $\vec{a}$. We found $\widehat{\vec{b}} = \vec{a}x$, where $x$ is called the **least squares solution**, which solved the **normal equations** $\vec{a}^T \vec{a} x = \vec{a}^T \vec{b}$. We can summarize the calculation of $x$ by remembering $x = \left(\vec{a}^T \vec{a}\right)^{-1}\vec{a}^T \vec{b}$ where $\left(\vec{a}^T \vec{a}\right)^{-1}\vec{a}^T$ is called the **pseudoinverse** of $\vec{a}$. Also, we can summarize the calculation of $\widehat{\vec{b}}$ as $\widehat{\vec{b}} = \mat{P} \vec{b}$ where $\mat{P} = \vec{a} (\vec{a}^T\vec{a})^{-1} \vec{a}^T$ is what we call a **projection operator** or a **projection matrix**. Since we didn't succeed in reaching $\vec{b}$, there is some error, and we call this the **residual**, $\vec{r} = \vec{b}-\widehat{\vec{b}}$.
+
+What are the words/ideas you should make sure you understand in the narrative above?
+
+* basis
+* target
+* normal equations
+* least squares solution
+* pseudoinverse
+* projection
+* projection operator
+* residual
+
+Let's calculuate this concretely in `R`.
+
+```r
+a <- c(2,1)
+b <- c(6,8)
+pseudoinv <- solve(t(a) %*% a) %*% t(a)
+x <- pseudoinv %*% b
+bhat <- a %*% x
+r <- b - bhat
+print(x)
+```
+
+```
+##      [,1]
+## [1,]    4
+```
+
+```r
+print(bhat)
+```
+
+```
+##      [,1]
+## [1,]    8
+## [2,]    4
+```
+
+```r
+dot <- function(v1,v2){sum(v1*v2)}
+dot(a,r)
+```
+
+```
+## [1] 0
+```
+
+## Projection onto a plane
+
+Let's apply these same conceps to our original problem of predicting sales from advertising. We had
+$$
+x_0 \begin{pmatrix} 1 \\ 1 \\ 1 \\ 1 \end{pmatrix} + x_1 \begin{pmatrix} 3 \\ 4 \\ 5 \\ 6 \end{pmatrix} = \begin{pmatrix} 105 \\ 117 \\ 141 \\ 152 \end{pmatrix}
+$$
+which we'll write symbolically as
+$$
+x_0 \vec{a}_0 + x_1 \vec{a}_1 = \vec{b}.
+$$
+We'd like to reach $\vec{b}$ using the basis vectors $\vec{a}_{0,1}$, but we can't, so let's consider getting as close as possible. The picture looks something like this.
+
+![](PlaneProjection.png)
+
+This picture gives rise to the equation
+$$
+\begin{align}
+x_0 \vec{a}_0 + x_1 \vec{a_1} + \vec{r} &= \vec{b} \\
+a_0 \cdot \vec{r} &= 0 \\
+a_1 \cdot \vec{r} &= 0.
+\end{align}
+$$
+Let's take the dot product of the first equaton with each basis vector. We find
+$$
+\begin{align}
+x_0 \vec{a}_0\cdot\vec{a}_0 + x_1 \vec{a}_0\cdot\vec{a}_1 &= \vec{a}_0 \cdot \vec{b}\\
+x_0 \vec{a}_1\cdot\vec{a}_0 + x_1 \vec{a}_1\cdot\vec{a}_1 &= \vec{a}_1 \cdot \vec{b}
+\end{align}
+$$
+where we have elminated terms that turn out to be zero thanks to the second and third equations previously. Note that there is a matrix way to write this. we can write
+$$
+\begin{pmatrix} \vec{a}_0^T \\ \vec{a}_1^T \end{pmatrix} \begin{pmatrix} \vec{a}_0 & \vec{a}_1 \end{pmatrix} \begin{pmatrix} x_0 \\ x_1 \end{pmatrix} = \begin{pmatrix} \vec{a}_0^T \\ \vec{a}_1^T \end{pmatrix} \vec{b}.
+$$
+If we let $\mat{A}$ represent the matrix with columns $\vec{a}_{0,1}$ and if we let $\vec{x}=(x_0,x_1)^T$ then we can write the last equation as
+$$
+\mat{A}^T \mat{A} \vec{x} = \mat{A}^T \vec{b}.
+$$
+These are the normal equations. For us, concretely, it looks like
+$$
+\begin{align}
+\begin{pmatrix} 1 & 1 & 1 & 1\\ 3 & 4 & 5 & 6\end{pmatrix} \begin{pmatrix} 1 & 3\\1 & 4\\ 1 & 5\\ 1& 6\end{pmatrix}\begin{pmatrix}x_1 \\ x_2 \end{pmatrix} &= \begin{pmatrix} 1 & 1 & 1 & 1\\ 3 & 4 & 5 & 6\end{pmatrix} \begin{pmatrix} 105 \\ 117 \\ 141 \\ 152\end{pmatrix}\\
+\begin{pmatrix} 4 & 18 \\ 18 & 86 \end{pmatrix} \begin{pmatrix} x_1 \\ x_2 \end{pmatrix} &= \begin{pmatrix} 515 \\ 2400 \end{pmatrix}
+\end{align}
+$$
+which has solution
+$$
+\begin{pmatrix} x_1 \\ x_2  \end{pmatrix} = \begin{pmatrix}  54.5 \\ 16.5 \end{pmatrix}.
+$$
+
+Let's calculuate this in `R`.
+
+```r
+a0 <- c(1,1,1,1)
+a1 <- c(3,4,5,6)
+A <- cbind(a0,a1)
+b <- c(105,117,141,152)
+pseudoinv <- solve(t(A) %*% A) %*% t(A)
+x <- pseudoinv %*% b
+bhat <- A %*% x
+r <- b - bhat
+print(x)
+```
+
+```
+##    [,1]
+## a0 54.5
+## a1 16.5
+```
+
+```r
+print(bhat)
+```
+
+```
+##       [,1]
+## [1,] 104.0
+## [2,] 120.5
+## [3,] 137.0
+## [4,] 153.5
+```
+
+```r
+dot(r,a0)
+```
+
+```
+## [1] 1.84741111298e-13
+```
+
+```r
+dot(r,a1)
+```
+
+```
+## [1] 8.81072992343e-13
+```
+
+```r
+plot(a1,b,xlab="advertising",ylab="sales")
+xx <- seq(from=0,to=6,length=200)
+lines(xx,Horner(as.numeric(x),xx))
+```
+
+![](coursenotes_files/figure-gfm/unnamed-chunk-46-1.png)<!-- -->
+
+Symbolically, we calculated the least squares solution
+$\vec{x} = \left(\mat{A}^T \mat{A}\right)^{-1}\mat{A}^T \vec{b}$ where $\left(\mat{A}^T \mat{A}\right)^{-1}\mat{A}^T$ is the pseudoinverse. The projection is $\widehat{\vec{b}} = \mat{A} \vec{x} = \mat{A} \left(\mat{A}^T \mat{A}\right)^{-1}\mat{A}^T \vec{b}$ where $\mat{A} \left(\mat{A}^T \mat{A}\right)^{-1}\mat{A}^T$ is the projection matrix.
+
+Though our example here has used merely two basis vectors, the ideas extend to any number.
+
+## Model fitting
+
+The technique we have developed here of solving a least squares problem by vector projection works in a model fitting context whenever the unknowns $\vec{x}$ appear linearly. It doesn't require that other quantities appear linearly.
+
+For instance, suppose that we wanted to fit a parabola to the data $(0,6)$, $(1,5)$, $(2,2)$, and $(3,2)$. We choose the model $y = c_0 + c_1 x + c_2 x^2$ where our unknown is the vector $\vec{c}=(c_0,c_1,c_2)^T$. Though $x$ appears nonlinearly, the coefficients $c_{0,1,2}$ don't, so we are fine! Let's solve this problem using linear algebra. We want to solve
+$$
+\begin{align}
+c_0 + c_1 \cdot 0 + c_2 \cdot 0^2 &= 6 \\
+c_0 + c_1 \cdot 1 + c_2 \cdot 1^2 &= 5 \\
+c_0 + c_1 \cdot 2 + c_2 \cdot 2^2 &= 2 \\
+c_0 + c_1 \cdot 3 + c_2 \cdot 3^2 &= 2
+\end{align}
+$$
+So, we calculuate in `R`:
+
+```r
+x <- c(0,1,2,3)
+A <- matrix(cbind(x^0,x^1,x^2),nrow=4)
+b <- c(6,5,2,12)
+pseudoinv <- solve(t(A) %*% A) %*% t(A)
+c <- pseudoinv %*% b
+bhat <- A %*% c
+r <- b - bhat
+print(c)
+```
+
+```
+##       [,1]
+## [1,]  6.75
+## [2,] -6.75
+## [3,]  2.75
+```
+
+```r
+plot(x,b)
+xx <- seq(from=0,to=3,length=200)
+lines(xx,Horner(c,xx))
+```
+
+![](coursenotes_files/figure-gfm/unnamed-chunk-47-1.png)<!-- -->
+
+```r
+print(r)
+```
+
+```
+##       [,1]
+## [1,] -0.75
+## [2,]  2.25
+## [3,] -2.25
+## [4,]  0.75
+```
+
+If model parameters don't appear in a linear fashion, sometimes you can transform the equation so that they do. For example, if you wanted to fit data to $y = C \exp{kx}$, you could take the log of both sides to obtain $\ln y = \ln C + kx$. By considering the data $(x,\ln y)$ you could take a least squares approach to find $\ln C$ and $k$.
+
+Overall, here's the process one would follow for model fitting in cases where the model parameters appear in a lienar fashion.
+
+1. Look at data.
+2. Propose a model.
+3. Force the model, resulting in $\mat{A}\vec{x}=\vec{b}$.
+4. Solve the normal equations $\mat{A}^T\mat{A}\vec{x}=\mat{A}^T \vec{b}$.
+5. Assess the fit of the model visually and/or using the residual vector.
+
+A statistics class would provide much more sophisticated ways of analyzing the error.
+
+## Least squares and data compression
+
+Adopting a least squares approach allows, potentially, massive compression of data. Suppose we had 100 points that looked like this
+
+```r
+x <- seq(from=0,to=1,length=100)
+y <- 3*x + 0.4*(2*runif(100)-1)
+plot(x,y)
+```
+
+![](coursenotes_files/figure-gfm/unnamed-chunk-48-1.png)<!-- -->
+
+If we decided to represent this data with a line, we'd go down from having 100 pieces of information (the original data points) to merely 2 (a slope and an intercept).
+
+## An optimization viewpoint on least squares
+
+So far, we've taken a geometric approach to solving least-squares problems, but there's another way to get the same result: optimization. We can start directly with the square of the norm of the residual vector (a factor of 1/2 is included for algebraic convenience, but it doesn't change the result)
+$$
+\frac{1}{2}||\vec{r}||^2 = \frac{1}{2}||\mat{A}\vec{x}-\vec{b}||^2.
+$$
+More formally, we can define the scalar **objective function**
+$$f(\vec{x}) = \frac{1}{2} ||\mat{A}\vec{x}-\vec{b}||^2$$
+and define our least squares solution $\vec{x}_{LS}$as the value of $\vec{x}$ that minimizes this objective function, that is,
+$$\vec{x}_{LS} = \argmin_{\vec{x}} f(\vec{x}).$$
+Now you know where the terminology least squares comes from!
+We can apply calculus to minimize this expression and the normal equations will result. This is a problem on your in-class exercise and your homework, and it is critical that you work through the details.
+
+# QR Factorization
+
+## Big picture
+
+We've talked about how to fit a model to data using least squares, and we've examined the theoretical aspect of this process, but thus far we've ignored computational issues. It turns out that solving the normal equations can be difficult on a computer, and a technique called QR factorization provides a potentially better way to solve a least squares problem.
+
+## Goals
+- Define orthonormal matrices
+- Perform Graham-Schmidt Orthogonalization
+- Solve least squares problems with **QR** decomposition
+
+## Orthogonality is nice
+
+The eventual goal of this lesson is to show you how to solve the least squares problem
+$$\vec{x}_{LS} = \argmin_x \frac{1}{2}||\mat{A}\vec{x}-\vec{b}||^2$$
+
+by writing the matrix $\mat{A}$ in a convenient way. But to build up to that, we need to introduce a number of ideas. First off: orthogonality.
+
+You might remember that two vectors $\vec{v}$ and $\vec{w}$ are **orthogonal** if $\vec{v} \cdot \vec{w} = \vec{v}^T \vec{w} = 0$. We say that two vectors are **orthonormal** if they are orthogonal and each have norm of one, that is $\vec{v} \cdot \vec{v} = \vec{w} \cdot \vec{w} = 1$.
+
+A matrix is called **orthogonal** or **orthonormal** (they are used interchangeably for matrices, sometimes) if its columns are orthonormal vectors. A cool property arises from this. Suppose these orthonormal columns are $\vec{v}_1,\ldots,\vec{v}_n$. Then we can consider the quantity $\mat{A}^T \mat{A}$:
+$$
+\begin{align}
+\mat{A}^T \mat{A} &= \begin{pmatrix} \vec{v}_1^T\\ \vec{v}_2^T \\ \vdots \\ \vec{v}_n^T \end{pmatrix} \begin{pmatrix} \vec{v}_1 & \vec{v}_2 & \cdots & \vec{v}_n \end{pmatrix} \\
+&= \begin{pmatrix} \vec{v}_1^T \vec{v}_1 & \vec{v}_1^T \vec{v}_2 & \cdots & \vec{v}_1^T \vec{v}_n \\ \vec{v}_2^T \vec{v}_1 & \vec{v}_2^T \vec{v}_2 & \cdots &  \vec{v}_2^T \vec{v}_n \\
+\vdots & \vdots & \cdots & \vdots \\
+\vec{v}_n^T \vec{v}_1 & \vec{v}_n^T \vec{v}_2 & \cdots & \vec{v}_n^T \vec{v}_n
+\end{pmatrix}\\
+&= \begin{pmatrix} 1 & 0 & \cdots & 0 \\ 0 & 1 & \cdots & 0\\ \vdots & \vdots & \cdots & \vdots \\ 0 & 0 & \cdots & 1\end{pmatrix}\\
+&= \mat{I}_n.
+\end{align}
+$$
+If $\mat{A}$ is square and orthonormal, since $\mat{A}^T\mat{A} = \mat{I}$, then by definition of inverse, $\mat{A}^T = \mat{A}^{-1}$. This is a pretty great way to calculate an inverse! Remember, though, that in our least squares context ,$\mat{A}$ is generally *not* a square matrix.
+
+Another helpful property of orthogonal matrices is that they preserve length, meaning that have norm of one. That is, suppose $\mat{Q}$ is orthogonal. Then
+$$
+\begin{align}
+||\mat{Q} \vec{v}||^2 &= \mat{Q} \vec{v} \cdot \mat{Q} \vec{v} \\
+& = (\mat{Q}\vec{v})^T (\mat{Q}\vec{v})\\
+& = \vec{v}^T \mat{Q}^T \mat{Q} \vec{v}\\
+& = \vec{v}^T \mat{Q}^{-1} \mat{Q} \vec{v}\\
+& = \vec{v}^T \vec{v}\\
+& = ||\vec{v}||^2.
+\end{align}
+$$
+Since $||\mat{Q}\vec{v}||^2 = ||\vec{v}||^2$, we know $||\mat{Q}\vec{v}|| = ||\vec{v}||$ and therefore $||\mat{Q}||=1$. A similar calculuation shows that $||\mat{Q}^{-1}||=1$. And then, by definition of condition number, $\kappa(\mat{Q}) = 1$. This means that orthogonal matrices are incredibly well-conditioned.
+
+Finally, let's consider projecting a vector into a subspace spanned by orthonormal vectors $\vec{q}_i$, $i=1,\ldots,n$. Define $\mat{A}$ as
+$$
+\mat{A} = \begin{pmatrix} | & | &  & | \\ \vec{q}_1 & \vec{q}_2 & \cdots & \  \vec{q}_n \\| & | &  & | \\ \end{pmatrix}.
+$$
+Let's project a vector $\vec{w}$ onto the subspace spanned by the columns of $\mat{A}$.
+By definition of the projection operator, and using the fact that $\mat{A}$ is orthogonal,
+$$
+\begin{align}
+\mat{P}\vec{w} &= \mat{A} (\mat{A}^T \mat{A})^{-1} \mat{A}^T \vec{w}\\
+&= \mat{A} \mat{A}^{-1} \mat{A} \mat{A}^T \vec{w} \\
+&= \mat{A} \mat{A}^T \vec{w} \\
+&= \vec{q}_1 \vec{q}_1^T \vec{w} + \vec{q}_2 \vec{q}_2^T \vec{w} + \cdots + \vec{q}_n \vec{q}_n^T \vec{w}.
+\end{align}
+$$
+So, when projecting onto the space spanned by orthonormal vectors, you can just project onto each vector separately and add up the results. In the calculation above, remember that $\vec{q}_i \vec{q}_i^T$ is a matrix.
+
+As an example, take 
+$$
+\vec{q}_1 = \left(\frac{1}{3},\frac{2}{3},\frac{2}{3}\right)^T, \quad \vec{q}_2 = \left(\frac{2}{15},\frac{2}{3},-\frac{11}{15}\right)^T
+$$
+so that
+$$
+\mat{A} = \begin{pmatrix} \frac{1}{3} & \frac{2}{15} \\ \frac{2}{3} & \frac{2}{3} \\ \frac{2}{3} & -\frac{11}{15} \end{pmatrix}.
+$$
+Then
+$$
+\begin{align}
+\mat{A} \mat{A}^T &= \begin{pmatrix} \frac{1}{3} & \frac{2}{15} \\ \frac{2}{3} & \frac{2}{3} \\ \frac{2}{3} & -\frac{11}{15} \end{pmatrix}
+\begin{pmatrix} \frac{1}{3} &  \frac{2}{3} & \frac{2}{3} \\ \frac{2}{15} & \frac{2}{3} & -\frac{11}{15} \end{pmatrix} \\
+&= \frac{1}{225}
+\begin{pmatrix}
+29 & 70 & 28 \\
+70 & 200 & -10 \\
+28 & -10 & 221
+\end{pmatrix}\\
+& = \underbrace{
+\begin{pmatrix}
+\frac{1}{9} & \frac{2}{9} & \frac{2}{9} \\
+\frac{2}{9} & \frac{4}{9} & \frac{4}{9} \\
+\frac{2}{9} & \frac{4}{9} & \frac{4}{9}
+\end{pmatrix}}_{\vec{q}_1 \vec{q}_1^T}  +  \underbrace{
+\begin{pmatrix}
+\frac{4}{225} & \frac{4}{45} & -\frac{22}{225} \\
+\frac{4}{45} & \frac{4}{9} & -\frac{22}{45} \\
+-\frac{22}{225} & -\frac{22}{45} & \frac{121}{225}
+\end{pmatrix}}_{\vec{q}_2 \vec{q}_2^T}.
+\end{align}
+$$
+
+## Gram-Schmidt orthogonalization
+
+Now that I've convinced you that it's nice to have an orthonormal basis, let's talk about how to get one. Gram-Schmidt orthogonalization is an iterative way of creating an orthonormal basis from a set of vectors.
+
+Let's see how it works via an example. Suppose we have $\vec{v}_1 = (3,4,0)^T$ and $\vec{v}_2 = (1,1,0)^T$.
+
+```r
+v1 <- c(1,2,2)
+v2 <- c(2,1,-2)
+v3 <- c(1,1,0)
+```
+
+1. Take the first vector and turn it into a unit vector.
+
+```r
+dot <- function(x,y) sum(x*y)
+y1 <- v1
+r11 <- vnorm(y1)
+q1 <- y1/r11
+```
+
+2. Think of $\vec{v}_2$ as made up of stuff in the subspace spanned by $\vec{q}_1$ and stuff orthogonal to it. Through away stuff in the span of $\vec{q}_1$ since we have it covered already. Take what's left of $\vec{v}_2$ and turn it unto a unit vector.
+
+```r
+y2 <- v2 - q1%*%t(q1)%*%v2
+r22 <- vnorm(y2)
+q2 <- y2/r22
+```
+
+3. Think of $\vec{v}_3$ as made up of stuff in the subspace spanned by $\vec{q}_{1,2}$ and stuff orthogonal to it. Through away stuff in the span of $\vec{q}_{1,2}$ since we have it covered already. Take what's left of $\vec{v}_3$ and turn it unto a unit vector.
+
+```r
+y3 <- v3 - q1%*%t(q1)%*%v3 - q2%*%t(q2)%*%v3
+r33 <- vnorm(y3)
+```
+Let's check the result and see if the procedure worked.
+
+```r
+q1
+```
+
+```
+## [1] 0.333333333333 0.666666666667 0.666666666667
+```
+
+```r
+q2
+```
+
+```
+##                 [,1]
+## [1,]  0.666666666667
+## [2,]  0.333333333333
+## [3,] -0.666666666667
+```
+
+```r
+vnorm(q1)
+```
+
+```
+## [1] 1
+```
+
+```r
+vnorm(q2)
+```
+
+```
+## [1] 1
+```
+
+```r
+dot(q1,q2)
+```
+
+```
+## [1] 0
+```
+
+## QR decomposition
+
+Just like LU decomposition is a way of using matrices to encode the process of Gaussian elimination, QR decomposition is a way of using matrices to encode the process of Gram-Schmidt orthogonalization. Let's take the equations we implemented above:
+$$
+\begin{align}
+\vec{y}_1 &= \vec{v}_1\\
+\vec{q}_1 &= \frac{1}{||\vec{y}_1||} \vec{y}_1 \\
+\vec{y}_2 &= \vec{v}_2 - \vec{q}_1 \vec{q}_1^T \vec{v}_2 \\
+\vec{q}_2 &= \frac{1}{||\vec{y}_2||} \vec{y}_2\\
+\vec{y}_3 &= \vec{v}_3 - ( \vec{q}_1 \vec{q}_1^T \vec{v}_3 + \vec{q}_2 \vec{q}_2^T \vec{v}_3)\\
+\vec{q}_3 &= \frac{1}{||\vec{y}_3||} \vec{y}_3.
+\end{align}
+$$
+Let's rewrite these equations, solving for the $\vec{v}_i$:
+$$
+\begin{align}
+\vec{v}_1 &= ||\vec{y}_1|| \vec{q}_1 \\
+\vec{v}_2 &= (\vec{q}_1\cdot \vec{v}_2) \vec{q}_1 + ||\vec{y}_2|| \vec{q}_2 \\
+\vec{v}_3 &= (\vec{q}_1\cdot \vec{v}_3) \vec{q}_1 + (\vec{q}_2\cdot \vec{v}_3) \vec{q}_2  + ||\vec{y}_3|| \vec{q}_3 
+\end{align}
+$$
+or, as matrices,
+$$
+\begin{pmatrix} | & | &   | \\ \vec{v}_1 & \vec{v}_2  & \vec{v}_3 \\| & | &   | \\ \end{pmatrix} = 
+\underbrace{ \begin{pmatrix} | & | &   | \\ \vec{q}_1 & \vec{q}_2  & \vec{q}_3 \\| & | &   | \\ \end{pmatrix}}_Q   \underbrace{\begin{pmatrix} r_{1,1} & r_{1,2} &   r_{1,3} \\ 0 &r_{2,2}  & r_{2,3} \\0 & 0 &   r_{3,3} \\ \end{pmatrix} }_R
+$$
+with 
+$$r_{i,i} = ||\vec{y}_i||, \qquad r_{i,j} = \vec{q}_i \cdot \vec{v}_j.
+$$
+
+The QR decomposition is a matrix decomposition that writes a $m \times n$ matrix $\mat{A}$ as a product $\mat{A} = \mat{Q} \mat{R}$ where:
+
+* $\mat{Q}$ is an $m \times r$ matrix with orthonormal columns, where $r$ is the number of linearly independent columns of $\mat{A}$.
+* $\mat{R}$ is an $r \times n$ matrix which is upper triangular if $r=n$, or the top portion of an upper triangular matrix if $r<n$.
+* The columns of $\mat{Q}$ span the same space as the columns of $\mat{A}$.
+* The matrix $\mat{R}$ gives the change of basis between the vectors in $\mat{Q}$ and the vectors in $\mat{A}$.
+* The decompisition is unique up to some sign changes, so if we require $R_{ii}\geq 0$, it is unique.
+* If the columns of $\mat{A}$ are independent, then $R_{ii}\neq 0$.
+* On the other hand, if column $j$ of $\mat{A}$ can be written as a linear combination of columns to the left, then $R_{jj}=0$.
+
+The QR decomposition we've done so far is actually called the partial QR decomposition We distinguish this from the **full** or **complete** QR decomposition. In the latter, we include vectors than span parts of the space not spanned by $\mat{A}$ itself. Of course, these contribute nothing to the matrix $\mat{Q}$, so it results in a bunch of 0's in $\mat{R}$. Below is the key picture to understand. Here, $\mat{Q}$ and $\mat{R}$ are the (partial) QR decomposition and $\overline{Q}$ and $\overline{R}$ are the full version.
+
+![](fullQR.png)
+
+Let's make this clear with numerous examples!
+
+First example. Let's start with a $3 \times 3$ matrix and perform Gram-Schmidt orthogonalization to obtain the QR decomposition.
+
+```r
+# Define matrix
+v1 <- c(2,3,6)
+v2 <- c(10,8,9)
+v3 <- c(19,-3,-13)
+A <- cbind(v1,v2,v3)
+
+# Step 1
+y1 <- v1
+r11 <- vnorm(y1)
+q1 <- y1/r11
+
+# Step2
+y2 <- v2 - (q1%*%t(q1))%*%v2
+r22 <- vnorm(y2)
+q2 <- y2/r22
+r12 <- dot(q1,v2)
+
+# Step 3
+y3 <- v3 - (q1%*%t(q1))%*%v3 - (q2%*%t(q2))%*%v3
+r33 <- vnorm(y3)
+q3 <- y3/r33
+r13 <- dot(q1,v3)
+r23 <- dot(q2,v3)
+
+# Assemble into Qbar and Rbar
+Qbar <- cbind(q1,q2,q3)
+Rbar <- rbind(c(r11,r12,r13),c(0,r22,r23),c(0,0,r33))
+Qbar
+```
+
+```
+##                  q1                                
+## [1,] 0.285714285714  0.857142857143  0.428571428571
+## [2,] 0.428571428571  0.285714285714 -0.857142857143
+## [3,] 0.857142857143 -0.428571428571  0.285714285714
+```
+
+```r
+Rbar
+```
+
+```
+##      [,1] [,2] [,3]
+## [1,]    7   14   -7
+## [2,]    0    7   21
+## [3,]    0    0    7
+```
+In this example, notice that $\overline{\mat{Q}}$ has three columns. This reflects the fact that the columns of $\mat{A}$ are linearly independent. Hence, it spans all of $\mathbb{R}^3$ and the QR and full QR decompositions are the same.
+
+Let's check our answer by hand and also check it against `R`'s built-in capabilities.
+
+```r
+Qbar%*%Rbar - A
+```
+
+```
+##      v1 v2 v3
+## [1,]  0  0  0
+## [2,]  0  0  0
+## [3,]  0  0  0
+```
+
+```r
+QRbarcheck <- qr(A)
+Qbarcheck <- qr.Q(QRbarcheck, complete=TRUE)
+Rbarcheck <- qr.R(QRbarcheck, complete=TRUE)
+Qbar
+```
+
+```
+##                  q1                                
+## [1,] 0.285714285714  0.857142857143  0.428571428571
+## [2,] 0.428571428571  0.285714285714 -0.857142857143
+## [3,] 0.857142857143 -0.428571428571  0.285714285714
+```
+
+```r
+Qbarcheck
+```
+
+```
+##                 [,1]            [,2]            [,3]
+## [1,] -0.285714285714 -0.857142857143 -0.428571428571
+## [2,] -0.428571428571 -0.285714285714  0.857142857143
+## [3,] -0.857142857143  0.428571428571 -0.285714285714
+```
+
+```r
+S <- diag(c(-1,-1,-1))
+Qbarcheck <- Qbarcheck%*%S
+Rbarcheck <- S%*%Rbarcheck
+Qbarcheck - Qbar
+```
+
+```
+##                      q1                                     
+## [1,] -1.11022302463e-16  0.00000000000e+00 1.66533453694e-16
+## [2,]  0.00000000000e+00 -1.11022302463e-16 3.33066907388e-16
+## [3,]  0.00000000000e+00 -1.11022302463e-16 6.10622663544e-16
+```
+
+```r
+Rbarcheck - Rbar
+```
+
+```
+##      v1               v2                v3
+## [1,]  0 1.7763568394e-15  0.0000000000e+00
+## [2,]  0 8.8817841970e-16  0.0000000000e+00
+## [3,]  0 0.0000000000e+00 -1.7763568394e-15
+```
+
+Let's try an example we looked at earlier.
+
+```r
+# Define matrix
+v1 <- c(1,2,2)
+v2 <- c(2,1,-2)
+v3 <- c(1,1,0)
+A <- cbind(v1,v2,v3)
+
+# Step 1
+y1 <- v1
+r11 <- vnorm(y1)
+q1 <- y1/r11
+
+# Step2
+y2 <- v2 - (q1%*%t(q1))%*%v2
+r22 <- vnorm(y2)
+q2 <- y2/r22
+r12 <- dot(q1,v2)
+
+# Step 3
+y3 <- v3 - (q1%*%t(q1))%*%v3 - (q2%*%t(q2))%*%v3
+y3
+```
+
+```
+##                   [,1]
+## [1,] 1.11022302463e-16
+## [2,] 5.55111512313e-17
+## [3,] 0.00000000000e+00
+```
+
+Oh! it turns out there's nothing left. If we want to compute the full QR decomposition, we need to find something orthogonal to the span of $q_{1,2}$. An easy way to do that is to pick a vector outside of their span and continue the orthogonalization procedure. You can algorithmically use your linear algebra skills to do this, but for little cases like ours, you can eyeball it.
+
+```r
+V3 <- c(1,1,1)
+y3 <- V3 - (q1%*%t(q1))%*%V3 - (q2%*%t(q2))%*%V3
+q3 <- y3/vnorm(y3) 
+r13 <- dot(q1,v3)
+r23 <- dot(q2,v3)
+r33 <- 0
+
+# Assemble into Qbar and Rbar
+Qbar <- cbind(q1,q2,q3)
+Rbar <- rbind(c(r11,r12,r13),c(0,r22,r23),c(0,0,r33))
+Qbar
+```
+
+```
+##                  q1                                
+## [1,] 0.333333333333  0.666666666667  0.666666666667
+## [2,] 0.666666666667  0.333333333333 -0.666666666667
+## [3,] 0.666666666667 -0.666666666667  0.333333333333
+```
+
+```r
+Rbar
+```
+
+```
+##      [,1] [,2] [,3]
+## [1,]    3    0    1
+## [2,]    0    3    1
+## [3,]    0    0    0
+```
+To reiterate, we ended up with a row of zeros at the bottom of $\overline{\mat{R}}$. That's because the columns of $\mat{A}$ are linearly dependent and don't span $\mathbb{R}^3$. At any rate, let's go ahead and check our result.
+
+```r
+Qbar%*%Rbar - A
+```
+
+```
+##      v1 v2 v3
+## [1,]  0  0  0
+## [2,]  0  0  0
+## [3,]  0  0  0
+```
+In this case, the full and reduced QR are not the same. Let's see how this works.
+
+```r
+Q <- Qbar[1:3,1:2]
+R <- Rbar[1:2,1:3]
+Q
+```
+
+```
+##                  q1                
+## [1,] 0.333333333333  0.666666666667
+## [2,] 0.666666666667  0.333333333333
+## [3,] 0.666666666667 -0.666666666667
+```
+
+```r
+R
+```
+
+```
+##      [,1] [,2] [,3]
+## [1,]    3    0    1
+## [2,]    0    3    1
+```
+
+```r
+Q%*%R - A
+```
+
+```
+##      v1 v2 v3
+## [1,]  0  0  0
+## [2,]  0  0  0
+## [3,]  0  0  0
+```
+
+Ok, and let's do one last example.
+
+```r
+# Define matrix
+v1 <- c(1,1,1,1)
+v2 <- c(0,1,1,1)
+v3 <- c(0,0,1,1)
+A <- cbind(v1,v2,v3)
+A
+```
+
+```
+##      v1 v2 v3
+## [1,]  1  0  0
+## [2,]  1  1  0
+## [3,]  1  1  1
+## [4,]  1  1  1
+```
+
+```r
+# Step 1
+y1 <- v1
+r11 <- vnorm(y1)
+q1 <- y1/r11
+
+# Step 2
+y2 <- v2 - (q1%*%t(q1))%*%v2
+r22 <- vnorm(y2)
+q2 <- y2/r22
+r12 <- dot(q1,v2)
+
+# Step 3
+y3 <- v3 - (q1%*%t(q1))%*%v3 - (q2%*%t(q2))%*%v3
+r33 <- vnorm(y3) 
+q3 <- y3/(r33)
+r13 <- dot(q1,v3)
+r23 <- dot(q2,v3)
+```
+But wait! We are living in $\mathbb{R}^4$ and we only have three vectors to far, $\vec{q}_{1,2,3}$. If we want the full decomposition, we have to find a basis for the orthogonal complement of $\mat{A}$.
+
+
+```r
+# Choose a vector not in the span of q1, q2, q3
+v4 <- c(1,2,3,4)
+y4 <- v4 - (q1%*%t(q1))%*%v4 - (q2%*%t(q2))%*%v4  - (q3%*%t(q3))%*%v4
+r44 <- vnorm(y4) 
+q4 <- y4/(r44)
+r14 <- dot(q1,v4)
+r24 <- dot(q2,v4)
+r34 <- dot(q3,v4)
+
+# Assemble into Qbar and Rbar, check answer
+Qbar <- cbind(q1,q2,q3,q4)
+Rbar <- rbind(c(r11,r12,r13),c(0,r22,r23),c(0,0,r33),c(0,0,0))
+Qbar
+```
+
+```
+##       q1                                                      
+## [1,] 0.5 -0.866025403784  1.35973995551e-16  3.92523114671e-16
+## [2,] 0.5  0.288675134595 -8.16496580928e-01 -3.14018491737e-16
+## [3,] 0.5  0.288675134595  4.08248290464e-01 -7.07106781187e-01
+## [4,] 0.5  0.288675134595  4.08248290464e-01  7.07106781187e-01
+```
+
+```r
+Rbar
+```
+
+```
+##      [,1]           [,2]           [,3]
+## [1,]    2 1.500000000000 1.000000000000
+## [2,]    0 0.866025403784 0.577350269190
+## [3,]    0 0.000000000000 0.816496580928
+## [4,]    0 0.000000000000 0.000000000000
+```
+
+```r
+Qbar%*%Rbar - A
+```
+
+```
+##      v1 v2                 v3
+## [1,]  0  0 -1.23259516441e-32
+## [2,]  0  0  0.00000000000e+00
+## [3,]  0  0  0.00000000000e+00
+## [4,]  0  0  0.00000000000e+00
+```
+
+```r
+# Make reduced QR and check
+Q <- Qbar[1:4,1:3]
+R <- Rbar[1:3,1:3]
+Q%*%R - A
+```
+
+```
+##      v1 v2                 v3
+## [1,]  0  0 -1.23259516441e-32
+## [2,]  0  0  0.00000000000e+00
+## [3,]  0  0  0.00000000000e+00
+## [4,]  0  0  0.00000000000e+00
+```
+
+## Computational considerations
+
+So far, we have calculated the QR decomposition using a methodology that is based on Gram-Schmidt orthogonalization. This is because Gram-Schmidt is the most conceptually straightforward method. For an $m \times n$ matrix, it turns out that the computational cost of factorization is $\mathcal{O})(2mn^2)$ multiplications and additions. An alternative choice for factorization uses objects called Householder reflections. I won't go in to these here, but the method requires fewer operations and is the one actually implemented in many software packages.
+
+## What is the point of QR factorization
+
+Finally, we ask: why have we bothered to do all of this? It is really, really convenient for least squares, and turns out to have very nice numerical properties because of small condition numbers. You'll work with the numerical issue on your activities and/or homework, but for now, here's how least squares works when you use QR decomposition on $\mat{A}\vec{x}=\vec{b}$. Note
+$$
+\begin{align}
+||\mat{A}\vec{x}-\vec{b}||^2 &= ||\bar{\mat{Q}}\bar{\mat{R}} \vec{x} - \vec{b}||^2 \\
+&= ||\bar{\mat{Q}}^T(\bar{\mat{Q}}\bar{\mat{R}} \vec{x} - \vec{b})||^2 \\
+&= ||\bar{\mat{Q}}^T \bar{\mat{Q}}\bar{\mat{R}} \vec{x} - \bar{\mat{Q}}^T \vec{b}||^2 \\
+&= ||\bar{\mat{R}} \vec{x} - \bar{\mat{Q}}^T \vec{b}||^2 \\
+& = ||\mat{R} \vec{x}-\mat{Q}^T \vec{b}||^2+ ||\widehat{\mat{Q}}^T \vec{b}||^2. 
+\end{align}
+$$
+Proceeding from the second to last line to the very last line is not obvious, and takes you a little bit of writing out expressions more explicitly. This is a good exercise for you to try.
+
+In any case, to minimize this, note that the second term doesn't even include $\vec{x}$ so there's nothing we can do about it (in fact, it is the norm of the residual). To minimize the quantity, we can then just force the first term to be zero. This is fine because it is a square system! There's a command that does this all automatically for you called `qr.solve`.
+
+# Eigenvalues
+
+## Big picture
+
+Along with solving the linear system $\mat{A}\vec{x}=\vec{b}$, finding the eigenvalues and eigenvectors of a matrix $\mat{A}$ is one of the most important problems in linear algebra. Knowing the eigenpairs can help simplify a problem and reveal important information about systems modeled with linear algebra.
+
+## Goals
+- Define eigenvalues and eigenvectors, and calculate them by hand for small matrices
+- Diagonalize matrices and state the algebraic and geometric multiplicity of eigenvalues
+- Apply the power iteration technique to find an eigenvalue
+
+## Eigenvalue fundamentals
+
+For an $n \times n$ matrix $\mat{A}$, a scalar $\lambda \in \mathbb{C}$, and vector $\vec{v} \in \mathbb{R}^n$, $\vec{v} \neq \vec{0}$, then we say $\lambda$ is an **eigenvalue**  of $\mat{A}$ and $\vec{v}$ is an **eigenvector** of $\mat{A}$ if $\mat{A}\vec{v}=\lambda \vec{v}$.
+
+Stated in words: an eigenvector and eigenvalue are the magical vector $\vec{v}$ and scalar $\lambda$ such that if you hit $\vec{v}$ with $\mat{A}$, you get back the same vector $\vec{v}$ but multiplied by a constant $\lambda$.
+
+How do  we calculate them? Let's take the definition $\mat{A} \vec{v} = \lambda \vec{v}$ and rearrange it to write $(\mat{A} - \mat{I} \lambda) \vec{v} = \vec{0}$. There are only two ways this can happen. One choice is $\vec{v}=0$, but that's trivial because it works for any $\mat{A}$. The other choice, by the Invertible Matrix Theorem, is that the matrix on the left is singular. Also from the Invertible Matrix Theorem, if it is singular, then it has determinant zero, that is $\det (\mat{A}- \mat{I} \lambda) = 0$. This equation is a polynomial in $\lambda$ and is called the **characteristic polynomial**. When calculating by hand, we find the characteristic  polynomial first and then solve it to find the eigenvalues. To find eigenvectors, we remember that $\mat{A}\vec{v} = \lambda \vec{v} \rightarrow (\mat{A}-\mat{I}\lambda)\vec{v}=\vec{0}$ and solve for $\vec{v}$.
+
+To recap:
+
+1. Solve the characteristic equation $\det (\mat{A}- \mat{I} \lambda) = 0$ to find the $\lambda_i$.
+2. Solve $(\mat{A}-\mat{I}\lambda_i)\vec{v_i}=\vec{0}$ to find the $\vec{v}_i$.
+
+For example, let's find the eigenvalues and eigenvectors of
+$$
+\mat{A} = \begin{pmatrix} -3 & 2 \\ 2 & -3 \end{pmatrix}.
+$$
+Using the result above, we can write the characteristic polynomial:
+$$
+\begin{align}
+\det (\mat{A} - \mat{I} \lambda) &= 0\\
+\det \begin{pmatrix} -3 - \lambda & 2 \\ 2 & -3 - \lambda \end{pmatrix} &= 0\\
+(\lambda+3)^2-4 &= 0\\
+\lambda^2 + 6\lambda + 5 &= 0\\
+(\lambda+5)(\lambda+1) &= 0
+\end{align}
+$$
+and therefore $\lambda_{1,2} = -1, -5$.
+To find $\vec{v}_1$, we solve:
+$$
+\begin{align}
+(\mat{A}-\mat{I}\lambda_1)\vec{v}_1&=\vec{0}\\
+\begin{pmatrix} -2 & 2 \\ 2 & -2 \end{pmatrix}\vec{v}_1 &= \vec{0} \\
+\vec{v}_1 &= \begin{pmatrix} 1 \\ 1 \end{pmatrix}
+\end{align}
+$$
+or any scalar multiple of this vector. Similarly, we find
+$$
+\vec{v}_2 = \begin{pmatrix} 1 \\ -1 \end{pmatrix}.
+$$
+
+## Algebraic multiplicity, geometric multiplicity, and diagonalization
+
+Many applications of eigenvalues are intimiately tied up with the idea of **diagonalization** of matrices. Suppose $\mat{A}$ has eigenpairs $\lambda_i$, $\vec{v}_i$, $i = 1,\ldots,n$. Then we can write down the definition of eigenpair for all pairs simultaneously:
+$\mat{A} \vec{v}_i = \lambda_i \vec{v}_i$ implies
+$$
+\begin{align}
+\mat{A} \underbrace{\begin{pmatrix}
+\vert & \vert & \cdots & \vert \\
+\vec{v}_1 & \vec{v}_2 & \cdots & \vec{v}_n \\
+\vert & \vert & \cdots & \vert 
+\end{pmatrix}}_\mat{S} &= 
+{\begin{pmatrix} \vert & \vert & \cdots & \vert \\
+\lambda_1 \vec{v}_1 & \lambda_2 \vec{v}_2 & \cdots & \lambda_n \vec{v}_n \\
+\vert & \vert & \cdots & \vert 
+\end{pmatrix}} \\
+&=\underbrace{\begin{pmatrix} \vert & \vert & \cdots & \vert \\
+\vec{v}_1 & \vec{v}_2 & \cdots & \vec{v}_n \\
+\vert & \vert & \cdots & \vert 
+\end{pmatrix}}_\mat{S}
+\underbrace{\begin{pmatrix} \lambda_1 &&& \\ & \lambda_2 & & \\ && \ddots & \\ &&& \lambda_n   \end{pmatrix}}_\mat{\Lambda}.
+\end{align}
+$$
+Since $\mat{A}\mat{S} = \mat{S} \mat{\Lambda}$, we can write $\mat{A} = \mat{S} \mat{\Lambda} \mat{S}^{-1}$. If we think of $\mat{S}$ as describing a change of basis, this equation says that the action of $\mat{A}$ is like going into another basis, multiplying by a diagonal matrix, and then changing back to the original basis.
+
+Let's show that we can do this with our example matrix $\mat{A}$ from before,
+$$
+\mat{A} = \begin{pmatrix} -3 & 2 \\ 2 & -3 \end{pmatrix}.
+$$
+
+```r
+A <- matrix(c(-3,2,2,-3),byrow=TRUE,nrow=2)
+e <- eigen(A)
+e
+```
+
+```
+## eigen() decomposition
+## $values
+## [1] -1 -5
+## 
+## $vectors
+##                [,1]            [,2]
+## [1,] 0.707106781187  0.707106781187
+## [2,] 0.707106781187 -0.707106781187
+```
+
+```r
+Lambda <- diag(e$values)
+S <- e$vectors
+S%*%Lambda%*%solve(S)
+```
+
+```
+##      [,1] [,2]
+## [1,]   -3    2
+## [2,]    2   -3
+```
+Why would you ever need/want to diagonalize a matrix? There are many reasons related to data analysis, differential equations, graph theory, and more. During the next class you will see some of these applications of eigenvalues and eigenvectors.
+
+We'll do one classic example: the Fibonacci sequence. First though, let's do a quick warm-up problem. Suppose we have a sequence defined as
+$$
+A_0 = 2,\quad A_n = 5A_{n-1}.
+$$
+What is a formula for $A_n$? Well, notice that
+$$
+\begin{align}
+A_1 &= 2 \cdot 5\\
+A_2 &= 2 \cdot 5 \cdot 5\\
+&\vdots\\
+A_n &= 2 \cdot 5^n.
+\end{align}
+$$
+We'll need this result! Now recall the Fibonacci sequence,
+$$
+F_0 = 1,\quad F_1 = 1, \quad F_n = F_{n-1} + F_{n-2}, \quad n \geq 2.
+$$
+If I asked you for $F_{1000}$, then using the recursive definition above, you'd need to compute the $999$ terms that come before it. But is there a way to avoid doing this? That is, is there a way to come up with an explicit (non-recursive) formula for $F_n$?
+
+So that we can use tools of linear algebra, let's transform this to a problem involving a matrix. Define $G_n = F_{n-1}$. Then substituting into the definition of $F_n$, we can write $F_n = F_{n-1} + G_{n-1}$. Putting it all together,
+$$
+\begin{align}
+F_n &= F_{n-1} + G_{n-1} \\
+G_n &= F_{n-1} \\
+\begin{pmatrix} F_n \\ G_n \end{pmatrix} &= \begin{pmatrix} 1 & 1 \\ 1 & 0 \end{pmatrix} \begin{pmatrix} F_{n-1} \\ G_{n-1} \end{pmatrix} \\
+\vec{F}_n &= \mat{A} \vec{F}_{n-1}.
+\end{align}
+$$
+Let's diagonalize $\vec{A}$, and momentarily, you'll see why.
+
+```r
+A <- matrix(c(1,1,1,0),byrow=TRUE,nrow=2)
+lambdap <- (1+sqrt(5))/2
+lambdap
+```
+
+```
+## [1] 1.61803398875
+```
+
+```r
+lambdam <- (1-sqrt(5))/2
+lambdam
+```
+
+```
+## [1] -0.61803398875
+```
+
+```r
+e <- eigen(A)
+e$values
+```
+
+```
+## [1]  1.61803398875 -0.61803398875
+```
+
+```r
+Lambda <- diag(e$values)
+Lambda
+```
+
+```
+##               [,1]           [,2]
+## [1,] 1.61803398875  0.00000000000
+## [2,] 0.00000000000 -0.61803398875
+```
+
+```r
+S <- e$vectors
+v1 <- S[,1]/S[2,1]
+v2 <- S[,2]/S[2,2]
+S <- cbind(v1,v2)
+S
+```
+
+```
+##                 v1             v2
+## [1,] 1.61803398875 -0.61803398875
+## [2,] 1.00000000000  1.00000000000
+```
+
+```r
+S%*%Lambda%*%solve(S)
+```
+
+```
+##      [,1]               [,2]
+## [1,]    1  1.00000000000e+00
+## [2,]    1 -1.11022302463e-16
+```
+So to recap, we have
+$$
+\mat{\Lambda} = \begin{pmatrix} \lambda_+ & 0 \\ 0 & \lambda_- \end{pmatrix}, \quad \mat{S} = \begin{pmatrix} \lambda_+ & \lambda_- \\ 1 & 1 \end{pmatrix}.
+$$
+Why would we do this? Let's use the diagonalization to re-write our problem:
+$$
+\begin{align}
+\vec{F}_n &= \mat{A} \vec{F}_{n-1}\\
+\vec{F}_n &= \mat{S} \mat{\Lambda} \mat{S}^{-1} \vec{F}_{n-1}\\
+\mat{S}^{-1} \vec{F} &= \mat{\Lambda} \mat{S}^{-1} \vec{F}_{n-1}.
+\end{align}
+$$
+Now define
+$$
+\mat{S}^{-1} \vec{F} = \mat{S}^{-1} \begin{pmatrix} F_n \\ G_n \end{pmatrix} \equiv  \begin{pmatrix} A_n \\ B_n \end{pmatrix}.
+$$
+Then our problem becomes
+$$
+\begin{align}
+\begin{pmatrix} A_n \\ B_n \end{pmatrix} &= \mat{\Lambda} \begin{pmatrix} A_{n-1} \\ B_{n-1} \end{pmatrix} \\
+\begin{pmatrix} A_n \\ B_n \end{pmatrix} &= \begin{pmatrix} \lambda_+ &  0 \\ 0 & \lambda_- \end{pmatrix} \begin{pmatrix} A_{n-1} \\ B_{n-1}. \end{pmatrix}
+\end{align}
+$$
+Because this problem is diagonal, the top and bottom equations are uncoupled, which makes them much easier to solve. In fact, they are geometrtic, just like the warm-up problem we did. We can write
+$$
+\begin{pmatrix} A_n \\ B_n \end{pmatrix} = \begin{pmatrix}  A_0 \lambda_+^n \\ B_0 \lambda_-^n \end{pmatrix}.
+$$
+But we didn't want to know $A_n$ and $B_n$. We wanted to know $F_n$ and $G_n$. So we have to undo the transformation we did before. We have
+$$
+\begin{align}
+\mat{S}^{-1} \vec{F} &= \begin{pmatrix} A_n \\ B_n \end{pmatrix} \\
+\mat{S}^{-1} \vec{F} &= \begin{pmatrix}  A_0 \lambda_1^n \\ B_0 \lambda_2^n \end{pmatrix} \\
+\vec{F} &= \mat{S} \begin{pmatrix}  A_0 \lambda_1^n \\ B_0 \lambda_2^n \end{pmatrix} \\
+\vec{F} &= \begin{pmatrix} \lambda_1 & \lambda_2 \\ 1 & 1 \end{pmatrix} \begin{pmatrix}  A_0 \lambda_1^n \\ B_0 \lambda_2^n \end{pmatrix} \\
+\vec{F} &= \begin{pmatrix} \lambda_1 A_0 \lambda_1^n + \lambda_2 B_0 \lambda^2n \\ \mathrm{doesn't\ matter}\end{pmatrix}.
+\end{align}
+$$
+Therefore,
+$$
+F_n = A_0 \lambda_+^{n+1} + B_0 \lambda_-^{n+1}.
+$$
+To find the unknown constants, we plug in the initial conditions.
+$$
+\begin{align}
+F_0 &= A_0 \lambda_+ + B_0 \lambda_- = 1\\
+F_1 &= A_0 \lambda_+^2 + B_0 \lambda_-^2 = 1.
+\end{align}
+$$
+Solving, we find $A_0 = 1/\sqrt{5}$, $B_0 = -1/\sqrt{5}$. The final answer, then, is
+$$
+F_n = \frac{1}{\sqrt{5}}\lambda_+^{n+1} - \frac{1}{\sqrt{5}}\lambda_-^{n+1},\quad \lambda_\pm = \frac{1 \pm \sqrt{5}}{2}.
+$$
+Let's test this out.
+
+```r
+fib <- function(n){
+  lambdap <- (1+sqrt(5))/2
+  lambdam <- (1-sqrt(5))/2
+  Fn <- 1/sqrt(5)*lambdap^(n+1) - 1/sqrt(5)*lambdam^(n+1)
+  return(Fn)
+}
+fib(1:10)
+```
+
+```
+##  [1]  1  2  3  5  8 13 21 34 55 89
+```
+
+```r
+fib(1000)
+```
+
+```
+## [1] 7.03303677114e+208
+```
+One cool thing about this is that it lets us understand the behavior of $F_n$ for large $n$ in a simpler way. Since $|\lambda_-| < 1$, after many repeated iterations, the term involving $\lambda_-$ will die out and we can write, for large $n$,
+$$
+F_n \approx \frac{1}{\sqrt{5}}\lambda_+^{n+1}.
+$$
+Let's test this out!
+
+```r
+fibapprox <- function(n){
+  lambdap <- (1+sqrt(5))/2
+  Fn <- 1/sqrt(5)*lambdap^(n+1)
+  return(Fn)
+}
+n <- 1:10
+fib(n)
+```
+
+```
+##  [1]  1  2  3  5  8 13 21 34 55 89
+```
+
+```r
+fibapprox(n)
+```
+
+```
+##  [1]  1.17082039325  1.89442719100  3.06524758425  4.95967477525  8.02492235950
+##  [6] 12.98459713475 21.00951949425 33.99411662900 55.00363612325 88.99775275225
+```
+
+```r
+n <- 1:20
+error <- abs(fib(n)-fibapprox(n))
+plot(n,log10(error))
+```
+
+![](coursenotes_files/figure-gfm/unnamed-chunk-65-1.png)<!-- -->
+
+It's important to remember from linear algebra that not every matrix can be diagonalized. For a matrix to be diagonalizable, you need for the multiplicity of each eigenvalue to be the same as the dimension of the eigenspace. Here are a couple of examples.
+
+
+```r
+A <- matrix(c(5,-4,4,12,-11,12,4,-4,5),byrow=TRUE,nrow=3)
+e <- eigen(A)
+e$values
+```
+
+```
+## [1] -3  1  1
+```
+
+```r
+e$vectors
+```
+
+```
+##                 [,1]           [,2]            [,3]
+## [1,] -0.301511344578 0.534522483825 -0.588533689677
+## [2,] -0.904534033733 0.801783725737 -0.784390372213
+## [3,] -0.301511344578 0.267261241912 -0.195856682537
+```
+Here, the **algebraic multiplicity** of $-3$ is 1 because it is only an eigenvalue once, and the **geometric multiplicity** is 1 because it only has one eigenvector. The algebraic multiplicity of $1$ is $2$ because it is an eigenvalue twice. Since it has two independent eigenvectors, the geometric multiplicity is also 2. Therefore, this matrix is diagonalizable. Stated differently: we need enough independent eigenvectors to form the $\mat{S}$ matrix.
+
+By way of counterexample, consider this problem.
+
+```r
+A <- matrix(c(1,-1,0,1),byrow=TRUE,nrow=2)
+A
+```
+
+```
+##      [,1] [,2]
+## [1,]    1   -1
+## [2,]    0    1
+```
+
+```r
+e <- eigen(A)
+e$values
+```
+
+```
+## [1] 1 1
+```
+
+```r
+e$vectors
+```
+
+```
+##      [,1]              [,2]
+## [1,]    1 1.00000000000e+00
+## [2,]    0 2.22044604925e-16
+```
+The eigenvalue $1$ has algebraic multiplicity 2, but there is only one eigenvector (the trivial eigenvector doesn't count) so it has geometric multiplicity 1. We don't have enough eigenvectors to make $\mat{S}$, so the matrix is not diagonalizable.
+
+## Power iteration
+
+Please find the eigenvalues of this matrix:
+
+```r
+set.seed(123)
+A <- matrix(sample(-100:100,64),nrow=8)
+print(A)
+```
+
+```
+##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8]
+## [1,]   58   98   36  -23    8   62   -4   15
+## [2,]   78   97   -2  -20   80   77   87   -7
+## [3,]  -87   52  -29   93   99  -67  -63  -95
+## [4,]   94  -11  -75    2  -27  -32  -80  -15
+## [5,]   69  -10  -94   16  -78   82  -60   41
+## [6,]  -51   88   96  -25   54   71   89  -62
+## [7,]   17   84   86   42  -48  -38  -41   91
+## [8,]  -58   -9   63  -69   34   40  -85   95
+```
+Haha, you (probably) can't! That's because writing down the characteristic polynomial is messy, and also, because for any polynomial of degree greater than 4, we don't have a formula for the solution, so you'd have to resort to numerical methods to find the roots.
+
+Instead, we will develop numerical methods that can find an eigenvalue more directly. Let's do a numerical experiment.
+
+
+```r
+A <- matrix(c(-13,170,240,19,-224,-320,-14,166,237),byrow=TRUE,nrow=3)
+A
+```
+
+```
+##      [,1] [,2] [,3]
+## [1,]  -13  170  240
+## [2,]   19 -224 -320
+## [3,]  -14  166  237
+```
+
+```r
+v <- c(1,1,1)
+v <- A%*%v
+v
+```
+
+```
+##      [,1]
+## [1,]  397
+## [2,] -525
+## [3,]  389
+```
+
+```r
+v <- v/vnorm(v)
+v
+```
+
+```
+##                 [,1]
+## [1,]  0.519251568355
+## [2,] -0.686667691150
+## [3,]  0.508788060681
+```
+
+```r
+v <- A%*%v
+v
+```
+
+```
+##                 [,1]
+## [1,] -1.374643320759
+## [2,]  0.867163198538
+## [3,] -0.673588306557
+```
+
+```r
+v <- v/vnorm(v)
+for (i in 1:100){
+  v <- A%*%v
+  v <- v/vnorm(v)
+}
+(A%*%v)/v
+```
+
+```
+##      [,1]
+## [1,]   -3
+## [2,]   -3
+## [3,]   -3
+```
+
+```r
+e <- eigen(A)
+e$values
+```
+
+```
+## [1] -3  2  1
+```
+Interesting. Using this iteration, we found the eigenvalue $-3$. Any guesses why?
+
+Let's try another example.
+
+```r
+A <- matrix(c(2,-520,8,-90,468,-360,40,-698,160),byrow=TRUE,nrow=3)
+A
+```
+
+```
+##      [,1] [,2] [,3]
+## [1,]    2 -520    8
+## [2,]  -90  468 -360
+## [3,]   40 -698  160
+```
+
+```r
+v <- PI(A,k=1000,tol=1e-10)$vec
+(A%*%v)/v
+```
+
+```
+##               [,1]
+## [1,] 882.000000030
+## [2,] 881.999999991
+## [3,] 882.000000014
+```
+
+```r
+e <- eigen(A)
+e$values
+```
+
+```
+## [1]  8.82000000000e+02 -2.52000000000e+02 -4.63379334903e-14
+```
+This method if called **power iteration**. How and why, exactly, does it work though? This is the subject of your activity for today.
+
+You might not realize it, but you use power iteration nearly every day. Google searches are based on an algorithm called PageRank, which is applies power iteration to a matrix that encodes links between web pages. We may investigate this in class at some point. But as you can imagine, the matrix in question is gigantic, which is why numerical methods are necessary.

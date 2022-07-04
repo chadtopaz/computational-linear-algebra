@@ -1,25 +1,24 @@
-# Computational Linear Algebra
-
+Computational Linear Algebra
+================
 Chad M. Topaz
-
 Last updated: 2022-02-04
-
-# [Table of Contents](#table-of-contents)
 
 -   [R Bootcamp](#r-bootcamp)
 -   [How computers store numbers](#how-computers-store-numbers)
 -   [Linear systems review](#linear-systems-review)
 -   [Matrix norms and conditioning](#matrix-norms-and-conditioning)
 -   [LU decomposition](#lu-decomposition)
--   [Iterative methods for linear systems](#iterative-methods-for-linear-systems)
+-   [Iterative methods for linear
+    systems](#iterative-methods-for-linear-systems)
 -   [Polynomial interpolation](#polynomial-interpolation)
--   [Interpolation error and Chebyshev interpolation](#interpolation-error-and-chebyshev-interpolation)
+-   [Interpolation error and Chebyshev
+    interpolation](#interpolation-error-and-chebyshev-interpolation)
 -   [Splines](#splines)
 -   [Least squares](#least-squares)
 -   [QR Factorization](#qr-factorization)
 -   [Eigenvalues](#eigenvalues)
 
-# [R Bootcamp](#r-bootcamp)
+# R Bootcamp
 
 ## Big picture
 
