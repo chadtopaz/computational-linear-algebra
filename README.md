@@ -13,6 +13,7 @@
 
 ## Course Units
 
+* [Getting Started](#getting-started)
 * [R Bootcamp](#r-bootcamp)
 * [How Computers Store Numbers](#how-computers-store-numbers)
 * [Linear Systems](#linear-systems)
@@ -105,6 +106,19 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
 [Back to Table of Contents](#table-of-contents)
 
+## Getting Started
+
+### Wednesday, Feb. 2 (before class)
+
+*   Reading
+    *   [Why I Don't Grade, by Jesse Stommel](https://www.jessestommel.com/why-i-dont-grade/)
+    *   [The Mathematics of Mass Testing for COVID-19](https://sinews.siam.org/Details-Page/the-mathematics-of-mass-testing-for-covid-19)
+    *   [DataCamp Hid a Sexual Harassment Incident by its CEO](https://www.buzzfeednews.com/article/daveyalba/datacamp-sexual-harassment-metoo-tech-startup) \[CW/TW: Sexual Harassment\]. DataCamp is this course's default resource for learning R because it is the best-designed and most effective resource I know of. However, **DataCamp has a problematic past**, and I feel an ethical imperative to be transparent about this, which is why I am having you read the article linked above. If you feel you cannot or should not use DataCamp, I encourage you use an alternative option, including one of the choices I have listed on our [R Resources](#r-resources). In case it impacts your decision, please know that DataCamp does not gain financially from us using it, as instructors at colleges/universities can get six free months of DataCamp for their students. In any case, you are 100% free to make whatever choice you want and I will support you fully!
+*   Videos
+    *   [Why is Linear Algebra Useful (9:56)](https://www.youtube.com/watch?v=X0HXnHKPXSo&feature=youtu.be)
+*   DataCamp Coding Practice
+    *   [Introduction to R (course)](https://www.datacamp.com/courses/free-introduction-to-r)
+
 ## R Bootcamp
 
 *   Videos
@@ -115,12 +129,12 @@ To enable you to make easy and flexible use of the resources here, I have elimin
     *   [Course Notes: R Bootcamp](/coursenotes/coursenotes.md#r-bootcamp)
     *   [Machine Learning Has Been Used to Automatically Translate Long-Lost Languages](https://www.technologyreview.com/2019/07/01/65601/machine-learning-has-been-used-to-automatically-translate-long-lost-languages/)
     *   [The Best Bits](https://www.americanscientist.org/article/the-best-bits)
-*   Coding Practice
-    *   [DataCamp](http://www.datacamp.com/) Getting Started with R Markdown (single lesson)
-    *   [DataCamp](http://www.datacamp.com/) Introduction to Linear Algebra (single lesson)
-    *   [DataCamp](http://www.datacamp.com/) Conditionals and Control Flow (single lesson)
-    *   [DataCamp](http://www.datacamp.com/) Loops (single lesson)
-    *   [DataCamp](http://www.datacamp.com/) Functions (single lesson)
+*   DataCamp Coding Practice
+    *   [Getting Started with R Markdown (chapter)](https://www.datacamp.com/courses/reporting-with-rmarkdown)
+    *   [Introduction to Linear Algbra (chapter)](https://www.datacamp.com/courses/linear-algebra-for-data-science-in-r)
+    *   [Conditionals and Control Flow (chapter)](https://www.datacamp.com/courses/intermediate-r)
+    *   [Loops (chapter)](https://www.datacamp.com/courses/intermediate-r)
+    *   [Functions (chapter)](https://www.datacamp.com/courses/intermediate-r)
 *   Class Activity
     *   [Activity - R Bootcamp](https://rstudio.cloud/spaces/207853/project/3451797)
 *   [Pset - R Bootcamp](https://rstudio.cloud/spaces/207853/project/3472433)
