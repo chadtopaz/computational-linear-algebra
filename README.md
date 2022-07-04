@@ -27,7 +27,7 @@
 
 ## Introduction
 
-I am [Prof. Chad Topaz](http://www.chadtopaz.com). Welcome to the public-facing version of  my Computational Linear Algebra course. This course is a minimalist recreation of the one I use on my own campus at Williams College. You can access most of the basic course materials here. Since this site is for public sharing, I have eliminated certain items related to surveying my students, performing course evaluation, student assessment, and so forth. I enthusiastically credit colleagues from my time at Macalester College: Tom Halverson, Danny Kaplan, David Shuman, and Lori Ziegelmeier. Their versions of a Computational Linear Algebra course have influenced my own course, and I'm grateful to them for sharing wisdom and materials.
+I am [Prof. Chad Topaz](http://www.chadtopaz.com). Welcome to the public facing version of  my Computational Linear Algebra course. This course is a minimalist recreation of the one I use on my own campus at Williams College. You can access most of the basic course materials here. Since this site is for public sharing, I have eliminated certain items related to surveying my students, performing course evaluation, student assessment, and so forth. I enthusiastically credit colleagues from my time at Macalester College: Tom Halverson, Danny Kaplan, David Shuman, and Lori Ziegelmeier. Their versions of a Computational Linear Algebra course have influenced my own course, and I'm grateful to them for sharing wisdom and materials.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -51,7 +51,7 @@ If you find any problems with course materials (a typo, code that doesn't work, 
 
 ## Consulting/Speaking
 
-I have built this public-facing site as a free, shareable public good. If you are interested in assistance with technical/mathematical aspects of this course or related consulting, please [contact me here](mailto:chad.topaz+consulting@gmail.com). If you would like me to speak to your department/institution/organization about curriculum and/or pedagogy (of this course, or of anything else) then please see my [Speaking](http://www.chadtopaz.com/speaking) page and contact me [here](mailto:chad.topaz+speaking@gmail.com).
+I have built this public facing site as a free, shareable public good. If you are interested in assistance with technical/mathematical aspects of this course or related consulting, please [contact me here](mailto:chad.topaz+consulting@gmail.com). If you would like me to speak to your department/institution/organization about curriculum and/or pedagogy (of this course, or of anything else) then please see my [Speaking](http://www.chadtopaz.com/speaking) page and contact me [here](mailto:chad.topaz+speaking@gmail.com).
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -65,14 +65,24 @@ Rather than using a traditional text-based course syllabus, I use a rather conci
 
 ## R Resources
 
-This course uses the R programming language in the RStudio integrated development environment. RStudio Cloud is a free version of RStudio that you can run on any device that has an internet connection and a web browser.
+This course uses the R programming language in the RStudio integrated development environment. [RStudio Cloud](https://rstudio.cloud) is a free version of RStudio that you can run on any device that has an internet connection and a web browser.
 
-Learning R
-DataCamp | DataQuest | Learn R in Y Minutes | RStudio Primers | R for Data Science
-Cheat Sheets
-RStudio Environment | Base R | R Markdown | Data Visualization
-Help Resources
-Stack Overflow | My Favorite Choice
+Here are some help resources for R.
+
+*   Learning R
+    *   [DataCamp](https://www.datacamp.com/)
+    *   [DataQuest](http://dataquest.io/)
+    *   [Learn R in Y Minutes](https://learnxinyminutes.com/docs/r/)
+    *   [RStudio Primers](https://rstudio.cloud/learn/primers)
+    *   [R for Data Science](https://r4ds.had.co.nz/index.html)
+*   Cheat Sheets
+    *   [RStudio Environment](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rstudio-ide.pdf)
+    *   [Base R](http://github.com/rstudio/cheatsheets/blob/main/base-r.pdf)
+    *   [R Markdown](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rmarkdown.pdf)
+    *   [Data Visualization](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf)
+*   Help Resources
+    *   [Stack Overflow](http://stackoverflow.com)
+    *   [My Favorite Choice](https://letmegooglethat.com/?q=for+loop+in+R)
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -86,7 +96,12 @@ A few characteristics of my on-the-ground course include:
 * Organization around weekly blocks of material
 * Substantial in-class small-group discussion
 
-To enable you to make easy and flexible use of the resources here, I have eliminated these elements from this public-facing version of the course. Essentially, what I am providing here is a core dump of materials I use.
+To enable you to make easy and flexible use of the resources here, I have eliminated these elements from this public facing version of the course. Essentially, what I am providing here is a core dump of materials I use. The materials are linked throughout the various course units. Additionally, you can access them in this respository's subdirectories.
+
+* [Course Notes](/coursenotes)
+* [In-Class Demos](/demos)
+* [In-Class Activities](/activities)
+* [Problem Sets (Psets)](psets)
 
 [Back to Table of Contents](#table-of-contents)
 
