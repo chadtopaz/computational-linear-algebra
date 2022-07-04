@@ -1,5 +1,5 @@
-Computational Linear Algebra
-================
+# Computational Linear Algebra
+
 Chad M. Topaz
 Last updated: 2022-02-04
 
