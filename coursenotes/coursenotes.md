@@ -4,7 +4,7 @@ Chad M. Topaz
 
 Last updated: 2022-02-04
 
-# Table of Contents
+# [Table of Contents](#table-of-contents)
 
 -   [R Bootcamp](#r-bootcamp)
 -   [How computers store numbers](#how-computers-store-numbers)
@@ -19,7 +19,7 @@ Last updated: 2022-02-04
 -   [QR Factorization](#qr-factorization)
 -   [Eigenvalues](#eigenvalues)
 
-# R Bootcamp
+# [R Bootcamp](#r-bootcamp)
 
 ## Big picture
 
