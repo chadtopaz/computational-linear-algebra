@@ -93,11 +93,11 @@ A few characteristics of my on-the-ground course include:
 
 * Ungrading
 * Flipped classroom style, including pre-class quizzes
-* An introductory half-week that gets students oriented to the course
+* Introductory activities that get students oriented to the course
 * Organization around weekly blocks of material
 * Substantial in-class small-group discussion
 
-To enable you to make easy and flexible use of the resources here, I have eliminated these elements from this public facing version of the course. Essentially, what I am providing here is a core dump of materials I use. The materials are linked throughout the various course units. Additionally, you can access them in this respository's subdirectories.
+To enable you to make easy and flexible use of the resources here, I have eliminated most of these elements from this public facing version of the course. Essentially, what I am providing here is a core dump of materials I use. The materials are linked throughout the various course units. Additionally, you can access them in this respository's subdirectories.
 
 * [Course Notes](/coursenotes)
 * [In-Class Demos](/demos)
@@ -113,7 +113,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 *   Reading
     *   [Why I Don't Grade, by Jesse Stommel](https://www.jessestommel.com/why-i-dont-grade/)
     *   [The Mathematics of Mass Testing for COVID-19](https://sinews.siam.org/Details-Page/the-mathematics-of-mass-testing-for-covid-19)
-    *   [DataCamp Hid a Sexual Harassment Incident by its CEO](https://www.buzzfeednews.com/article/daveyalba/datacamp-sexual-harassment-metoo-tech-startup) \[CW/TW: Sexual Harassment\]. DataCamp is this course's default resource for learning R because it is the best-designed and most effective resource I know of. However, **DataCamp has a problematic past**, and I feel an ethical imperative to be transparent about this, which is why I am having you read the article linked above. If you feel you cannot or should not use DataCamp, I encourage you use an alternative option, including one of the choices I have listed on our [R Resources](#r-resources). In case it impacts your decision, please know that DataCamp does not gain financially from us using it, as instructors at colleges/universities can get six free months of DataCamp for their students. In any case, you are 100% free to make whatever choice you want and I will support you fully!
+    *   [DataCamp Hid a Sexual Harassment Incident by its CEO](https://www.buzzfeednews.com/article/daveyalba/datacamp-sexual-harassment-metoo-tech-startup) \[CW/TW: Sexual Harassment\]. DataCamp is this course's default resource for learning R because it is the best-designed and most effective resource I know of. However, **DataCamp has a problematic past**, and I feel an ethical imperative to be transparent about this, which is why I am having you read the article linked above. If you feel you cannot or should not use DataCamp, I encourage you use an alternative option, including one of the choices I have listed in the [R Resources](#r-resources) section. In case it impacts your decision, please know that DataCamp does not gain financially from us using it, as instructors at colleges/universities can get six free months of DataCamp for their students. In any case, you are 100% free to make whatever choice you want and I will support you fully!
 *   Videos
     *   [Why is Linear Algebra Useful (9:56)](https://www.youtube.com/watch?v=X0HXnHKPXSo&feature=youtu.be)
 *   DataCamp Coding Practice
@@ -144,6 +144,38 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 [Back to Course Units](#course-units)
 
 ## How Computers Store Numbers
+
+*   Videos
+    *   [Floating Point Numbers (17:29)](https://youtu.be/gc1Nl3mmCuY)
+    *   [Floating Point Representation and Rounding Error (16:26)](https://youtu.be/wbxSTxhTmrs) \[substantial conceptual overlap with previous video but good for reinforcement\]
+*   Reading
+    *   [Course Notes: How Computers Store Numbers](/coursenotes/coursenotes.md#how-computers-store-numbers)
+*   DataCamp Coding Practice
+    *   [Quick Introduction to Base R Graphics (chapter)](https://www.datacamp.com/courses/data-visualization-in-r)
+* Class Activity
+    *   [Activity - How Computers Store Numbers]() | [Solutions]()
+
+Thursday, Feb. 17 (before class)
+
+*   Reading
+    *   [Bits and Bugs](https://drive.google.com/file/d/1Ez-Vjk9e97o5lMMsSkFLFZF968q7rjyC/view?usp=sharing) 2.1 or 2.2 or 2.3 or 2.4 (choose one that interests you and come ready to discuss)
+*   Look over [Pset - How Computers Store Numbers](https://rstudio.cloud/spaces/207853/project/3540897)
+
+Thursday, Feb. 17 (in class)
+
+*   Discuss ungrading
+*   Discuss group collaboration
+*   Discuss the reading you chose for today
+    *   Each person (or set of people, if group members chose the same reading) should explain the context of the problem they read about and explain the mathematics of the error/challenge that occurred.
+    *   What did you think about the reading?
+    *   Any other thoughts/reactions?
+*   Q&A / Discussion
+*   [Pset - How Computers Store Numbers](https://rstudio.cloud/spaces/207853/project/3540897)
+
+Sunday, Feb. 20
+
+*   [Submit Pset - How Computers Store Numbers](https://glow.williams.edu/courses/3492142/assignments/37097006 "Pset - How Computers Store Numbers")
+*   [Submit Reflection - How Computers Store Numbers](https://glow.williams.edu/courses/3492142/assignments/37097015 "Reflection - How Computers Store Numbers")
 
 [Back to Course Units](#course-units)
 
