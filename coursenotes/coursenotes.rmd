@@ -1,5 +1,12 @@
 ---
-output: rmarkdown::github_document
+title: "Computational Linear Algebra: Course Notes"
+author: "Chad M. Topaz | Last Updated: 2022-07-04"
+output:
+  rmarkdown::github_document:
+    html_preview: false
+    toc: true
+    hard_line_breaks: true
+    toc_depth: 1
 ---
 
 \renewcommand{\vec}[1]{\mathbf{#1}}
@@ -16,30 +23,6 @@ library(kableExtra)
 library(pracma)
 source("https://dl.dropbox.com/s/cr1pxjp2ysakcyw/307Functions.r?dl=0")
 ```
-
-# Computational Linear Alegbra Course Notes
-
-### Chad M. Topaz
-
-### Last updated: 2022-02-04
-
-# [Table of Contents](#table-of-contents)
-
--   [R Bootcamp](#r-bootcamp)
--   [How computers store numbers](#how-computers-store-numbers)
--   [Linear systems review](#linear-systems-review)
--   [Matrix norms and conditioning](#matrix-norms-and-conditioning)
--   [LU decomposition](#lu-decomposition)
--   [Iterative methods for linear
-    systems](#iterative-methods-for-linear-systems)
--   [Polynomial interpolation](#polynomial-interpolation)
--   [Interpolation error and Chebyshev
-    interpolation](#interpolation-error-and-chebyshev-interpolation)
--   [Splines](#splines)
--   [Least squares](#least-squares)
--   [QR Factorization](#qr-factorization)
--   [Eigenvalues](#eigenvalues)
-
 
 # R Bootcamp
 

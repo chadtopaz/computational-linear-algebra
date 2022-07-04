@@ -1,11 +1,31 @@
-
-# Computational Linear Alegbra Course Notes
-
-### Chad M. Topaz
-
-### Last updated: 2022-02-04
-
-# [Table of Contents](#table-of-contents)
+<<<<<<< HEAD
+Computational Linear Algebra: Course Notes
+================
+Chad M. Topaz \| Last Updated: 2022-07-04
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+Computational Linear Algebra: Course Notes
+================
+Chad M. Topaz \| Last Updated: 2022-07-04
+=======
+=======
+>>>>>>> a7579586fc6975b568039d1e6b3ce14f5a46c907
+=======
+>>>>>>> a7579586fc6975b568039d1e6b3ce14f5a46c907
+Computational Linear Algebra
+================
+Chad M. Topaz
+Last updated: 2022-02-04
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> a7579586fc6975b568039d1e6b3ce14f5a46c907
+=======
+>>>>>>> a7579586fc6975b568039d1e6b3ce14f5a46c907
+=======
+>>>>>>> a7579586fc6975b568039d1e6b3ce14f5a46c907
+>>>>>>> c9ea49270a9f6fd9b7346781d471901340dbc334
 
 -   [R Bootcamp](#r-bootcamp)
 -   [How computers store numbers](#how-computers-store-numbers)
