@@ -4,118 +4,35 @@ Chad M. Topaz
 Last updated: 2022-02-04
 
 -   [R Bootcamp](#r-bootcamp)
-    -   [Big picture](#big-picture)
-    -   [Goals](#goals)
-    -   [Horner’s method](#horners-method)
-    -   [Inner and outer products](#inner-and-outer-products)
-    -   [Taylor’s theorem](#taylors-theorem)
 -   [How computers store numbers](#how-computers-store-numbers)
-    -   [Big picture](#big-picture-1)
-    -   [Goals](#goals-1)
-    -   [Binary numbers](#binary-numbers)
-    -   [Machine numbers](#machine-numbers)
-    -   [Machine addition](#machine-addition)
-    -   [Loss of significance](#loss-of-significance)
 -   [Linear systems review](#linear-systems-review)
-    -   [Big picture](#big-picture-2)
-    -   [Goals](#goals-2)
-    -   [Linear systems](#linear-systems)
-    -   [Linear algebra review and the Big
-        Theorem](#linear-algebra-review-and-the-big-theorem)
-    -   [Gaussian elimination](#gaussian-elimination)
-    -   [Operation counts and
-        complexity](#operation-counts-and-complexity)
 -   [Matrix norms and conditioning](#matrix-norms-and-conditioning)
-    -   [Big picture](#big-picture-3)
-    -   [Goals](#goals-3)
-    -   [Forward and backward error](#forward-and-backward-error)
-    -   [Vector norms](#vector-norms)
-    -   [Matrix norms](#matrix-norms)
-    -   [Condition number for Ax=b](#condition-number-for-axb)
-    -   [Calculating the condition
-        number](#calculating-the-condition-number)
 -   [LU decomposition](#lu-decomposition)
-    -   [Big picture](#big-picture-4)
-    -   [Goals](#goals-4)
-    -   [LU decomposition](#lu-decomposition-1)
 -   [Iterative methods for linear
     systems](#iterative-methods-for-linear-systems)
-    -   [Big picture](#big-picture-5)
-    -   [Goals](#goals-5)
-    -   [Fixed point iteration](#fixed-point-iteration)
-    -   [Jacobi iteration](#jacobi-iteration)
-    -   [Convergence of Jacobi’s method](#convergence-of-jacobis-method)
-    -   [Other iterative methods](#other-iterative-methods)
 -   [Polynomial interpolation](#polynomial-interpolation)
-    -   [Big picture](#big-picture-6)
-    -   [Goals](#goals-6)
-    -   [Why polynomials?](#why-polynomials)
-    -   [Vandermonde matrix](#vandermonde-matrix)
-    -   [Lagrange interpolating
-        polynomial](#lagrange-interpolating-polynomial)
-    -   [Data compression](#data-compression)
 -   [Interpolation error and Chebyshev
     interpolation](#interpolation-error-and-chebyshev-interpolation)
-    -   [Big picture](#big-picture-7)
-    -   [Goals](#goals-7)
-    -   [Runge’s phenomenon](#runges-phenomenon)
-    -   [Interpolation error](#interpolation-error)
-    -   [Chebyshev nodes](#chebyshev-nodes)
-    -   [Comparing interpolation
-        methods](#comparing-interpolation-methods)
 -   [Splines](#splines)
-    -   [Big picture](#big-picture-8)
-    -   [Goals](#goals-8)
-    -   [Why cubic splines?](#why-cubic-splines)
-    -   [Mathematical conditions for cubic
-        splines](#mathematical-conditions-for-cubic-splines)
-    -   [Splines and linear algebra](#splines-and-linear-algebra)
-    -   [Implementing cubic spline
-        interpolation](#implementing-cubic-spline-interpolation)
 -   [Least squares](#least-squares)
-    -   [Big picture](#big-picture-9)
-    -   [Goals](#goals-9)
-    -   [Model fitting](#model-fitting)
-    -   [Projection onto a vector](#projection-onto-a-vector)
-    -   [Projection onto a plane](#projection-onto-a-plane)
-    -   [Model fitting](#model-fitting-1)
-    -   [Least squares and data
-        compression](#least-squares-and-data-compression)
-    -   [An optimization viewpoint on least
-        squares](#an-optimization-viewpoint-on-least-squares)
 -   [QR Factorization](#qr-factorization)
-    -   [Big picture](#big-picture-10)
-    -   [Goals](#goals-10)
-    -   [Orthogonality is nice](#orthogonality-is-nice)
-    -   [Gram-Schmidt
-        orthogonalization](#gram-schmidt-orthogonalization)
-    -   [QR decomposition](#qr-decomposition)
-    -   [Computational considerations](#computational-considerations)
-    -   [What is the point of QR
-        factorization](#what-is-the-point-of-qr-factorization)
 -   [Eigenvalues](#eigenvalues)
-    -   [Big picture](#big-picture-11)
-    -   [Goals](#goals-11)
-    -   [Eigenvalue fundamentals](#eigenvalue-fundamentals)
-    -   [Algebraic multiplicity, geometric multiplicity, and
-        diagonalization](#algebraic-multiplicity-geometric-multiplicity-and-diagonalization)
-    -   [Power iteration](#power-iteration)
 
-### R Bootcamp
+# R Bootcamp
 
-#### Big picture
+## Big picture
 
 It’s time to review some math and start getting experience with R
 programming.
 
-#### Goals
+## Goals
 
 -   Implement Horner’s method
 -   Explain advantage of Horner’s method
 -   Define different ways to multiply vectors
 -   Compute Taylor polynomials and bound the error
 
-#### Horner’s method
+## Horner’s method
 
 Evaluating a polynomial might seem boring, and admittedly, it sort of
 is. But even a simple task like evaluating a polynomial can involve
@@ -166,7 +83,7 @@ t1/t2
     ##  elapsed 
     ## 1.779221
 
-#### Inner and outer products
+## Inner and outer products
 
 There are several different ways to “multiply” vectors
 ![\\mathbf{x}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7Bx%7D "\mathbf{x}")
@@ -267,7 +184,7 @@ x%o%z # outer product
     ## [2,]   14   16   18   20
     ## [3,]   21   24   27   30
 
-#### Taylor’s theorem
+## Taylor’s theorem
 
 This theorem will be especially useful for error analysis of some
 algorithms we use. The basic idea of Taylor’s theorem is that for many
@@ -338,16 +255,16 @@ abs(sin(0.1)-P3(0.1))
 
     ## [1] 8.331349e-08
 
-### How computers store numbers
+# How computers store numbers
 
-#### Big picture
+## Big picture
 
 Many mathematics and applied mathematics problems can only be solved
 numerically, on computers. There is, potentially, error in the way that
 computers store numbers and perform arithmetic, and it is crucial to
 understand this important source of error.
 
-#### Goals
+## Goals
 
 -   Convert between decimal and binary
 -   Explain the form of double precision floating point numbers
@@ -357,7 +274,7 @@ understand this important source of error.
 -   Implement strategies to reduce loss of significance
 -   Calculate/estimate the error arising in numerical computations
 
-#### Binary numbers
+## Binary numbers
 
 We usually work in the base 10 system, where each place in the number
 represents a power of 10 with a coefficient of 0 through 9, *e.g.*,
@@ -369,7 +286,7 @@ through 1, *e.g.*,
 
 ![1101.01 = 1 \\times 2^3 + 1\\times 2^2 + 0 \\times 2^1 + 1 \\times 2^0 + 0 \\times 2^{-1} + 1 \\times 2^{-2}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;1101.01%20%3D%201%20%5Ctimes%202%5E3%20%2B%201%5Ctimes%202%5E2%20%2B%200%20%5Ctimes%202%5E1%20%2B%201%20%5Ctimes%202%5E0%20%2B%200%20%5Ctimes%202%5E%7B-1%7D%20%2B%201%20%5Ctimes%202%5E%7B-2%7D. "1101.01 = 1 \times 2^3 + 1\times 2^2 + 0 \times 2^1 + 1 \times 2^0 + 0 \times 2^{-1} + 1 \times 2^{-2}.")
 
-#### Machine numbers
+## Machine numbers
 
 Arithmetic performed on a machine can be different from what we do in
 our heads. One fundamental difference is that computers can’t perfectly
@@ -479,7 +396,7 @@ which is the distance from the number 1 to the next smallest number that
 can be represented exactly in floating point form. This distance is
 ![\\epsilon\_{mach}=2^{-52}\\approx 2.2 \\times 10^{-16}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cepsilon_%7Bmach%7D%3D2%5E%7B-52%7D%5Capprox%202.2%20%5Ctimes%2010%5E%7B-16%7D "\epsilon_{mach}=2^{-52}\approx 2.2 \times 10^{-16}").
 
-#### Machine addition
+## Machine addition
 
 Machine addition is defined as
 
@@ -515,7 +432,7 @@ Let’s try:
 
     ## [1] 1
 
-#### Loss of significance
+## Loss of significance
 
 We’ve seen that computer storage of numbers can have error, and
 therefore arithmetic can have error. This error is sometimes called
@@ -704,8 +621,8 @@ because of subtraction of nearly equal numbers. In such problems, be
 aware and seek alternative ways to represent the necessary computation,
 as we did with the second option above.
 
-<!-- ### Root finding -->
-<!-- #### Big picture -->
+<!-- ## Root finding -->
+<!-- ### Big picture -->
 <!-- Arises in applications including -->
 <!-- - Optimization -->
 <!-- - Signals/systems (audio filtering, flight stabilization, etc.) -->
@@ -714,13 +631,13 @@ as we did with the second option above.
 <!-- - Dynamical systems -->
 <!-- - Much more -->
 <!-- And yet most equations $f(x)=0$ cannot be solved exactly, so we need numerical algorithms. -->
-<!-- #### Goals -->
+<!-- ### Goals -->
 <!-- - Explain order of convergence -->
 <!-- - Calculate order of convergence from data -->
 <!-- - Derive, explain and implement root finding algorithms -->
 <!-- - Compare advantages/disadvantages of root finding algorithms -->
 <!-- - Prove/demonstrate order of convergence analytically for bisection and Newton's method -->
-<!-- #### Rate of convergence -->
+<!-- ### Rate of convergence -->
 <!-- To talk about root-finding, we need the idea of convergence, so let's remember it. We say a sequence ${a_n}$ *converges* if it has a finite limit as $n \to \infty$. For instance, if $a_n = 4n^2/(2n^2+1)$ then the sequence converges to $2$. On the other hand, if $a_n = (-1)^n + 1$, the limit does not exist so the sequence diverges. -->
 <!-- In root finding, we will see algorithms that (hopefully) produce a sequence of approxiations to a true root. We want to know if that sequence converges, and if so, how fast. As a quick example, think of the sequences ${(1/2)^n}$ and ${(1/2)^{2^n}}$. Both converge to 0 but look at how differently they do so. -->
 <!-- ```{r cache=TRUE} -->
@@ -741,13 +658,13 @@ as we did with the second option above.
 <!-- plot(loge,logep) -->
 <!-- lm(logep[6:n]~loge[6:n]) -->
 <!-- ``` -->
-<!-- #### Bisection method -->
+<!-- ### Bisection method -->
 <!-- The *intermediate value theorem* states that if $f(x)$ is continuous on $[a,b]$ and $f(a)f(b)=0$, then there exists $r \in (a,b)$ such that $f(r)=0$. To apply the *bisection method* for root finding, start with the interval $[a,b]$, called a *bracketing interval*. Calculate $f(a)$, $f(b)$, and $f(\frac{a+b}{2})$. Then apply the intermediate value theorem to decide which half of the interval the root is in, and repeat. -->
 <!-- You also have to decide when to terminate the algorithm. This could be a maximum number of iterations, an upper bound on the error, or something else. To obtain an upper bound on the error, note that on the nth iteration, the maximum error is $(b-a)/2^{n+1}$. We say that the solution is *correct within $p$ decimal places$* if the error is less than $0.5 \times 10^{-p}$. For instance, for solving $\sin x - x -1/2 = 0$ beginning with $[-2,20]$ with guaranteed 6 decimal place accuracy, we need -->
 <!-- $$\frac{20-(-2)}{2^{n+1}} < 0.5 \times 10^{-6}$$ -->
 <!-- which results in $n > 24.391 = 25$ iterations. -->
 <!-- The bisection method is guaranteed to converge given a bracketing interval. On the downside, the error bound converges linearly, and this is considered slow. Arguably, we could expect this since the method doesn't use much information about the function -- only its sign. -->
-<!-- #### Newton's method -->
+<!-- ### Newton's method -->
 <!-- We can get a faster root finding method by using the slope of the function instead of just its sign. Equivalently, we can say we are using the first degree Taylor expansion of the function. -->
 <!-- If $x_i$ is the guess for a root, we make a new guess by finding where the tangent line through the guess has a root. This line is $y - f(x_i) = f'(x_i)(x-x_i)$ which has a root at $x_i - f(x_i)/f'(x_i)$. This is our next guess $x_{i+1}$. -->
 <!-- A weakness of this method is that it assumes the tangent line's root is close to the function's root. Unless our guess is close to the true root, there's no reason to expect this is true. As a result, Newton's method does not have guaranteed convergence. Another weakness is that this method requires computation of the derivative which can be costly. On the upside, when the algorithm converges, it does so quadratically so long as the root is a simple root of the function. -->
@@ -765,7 +682,7 @@ as we did with the second option above.
 <!-- &= c e_{n+1}^2. -->
 <!-- \end{aligned} -->
 <!-- Note that this calculation depends on $f'(x) \neq 0$. IN the case $f'(x)=0$, the root has multiplicity higher than one and convergence is linear (not proven here). However, there are algebraic manipulations you can perform that will turn the problem into one that converges to the root quadratically (if it converges). -->
-<!-- #### Root finding without derivatives -->
+<!-- ### Root finding without derivatives -->
 <!-- To avoid the problems with having to calculate a derivative, a number of other algorithms are available. They include: -->
 <!-- - Regula falsi. Like bisection, but connect endpoints of bracketing interval with a line and use its root. -->
 <!-- - Secant method. Like Newton's method, but draw a secant line between two successive guesses instead of using tangent line. -->
@@ -773,9 +690,9 @@ as we did with the second option above.
 <!-- - Inverse quadratic interpolation (IQI). Like Muller's method, but uses a sideways parabole. -->
 <!-- - Brent's method. Combines IQI, secant method, and bisection, depending on the conditions of each iteration. -->
 
-### Linear systems review
+# Linear systems review
 
-#### Big picture
+## Big picture
 
 We begin considering the solution of systems of linear equations,
 ![\\mathbf{A}\\mathbf{x}=\\mathbf{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7BA%7D%5Cmathbf%7Bx%7D%3D%5Cmathbf%7Bb%7D "\mathbf{A}\mathbf{x}=\mathbf{b}").
@@ -786,7 +703,7 @@ optimization, and many other applications. To understand solution of
 linear systems, it’s helpful to recall some fundamental ideas of linear
 algebra.
 
-#### Goals
+## Goals
 
 -   Interpret linear systems geometrically
 -   Define linear algebra terms including inverse, determinant,
@@ -795,7 +712,7 @@ algebra.
 -   Perform the steps of Gaussian elimination
 -   Establish the computational complexity of Gaussian elimination
 
-#### Linear systems
+## Linear systems
 
 For concreteness let’s work in three dimensions and let’s consider the
 system
@@ -869,7 +786,7 @@ This form suggests thinking of the linear combination of three basis
 vectors necessary to reach a particular target vector. There could be 0,
 1, or inifinity depending on the arrangement of those vectors.
 
-#### Linear algebra review and the Big Theorem
+## Linear algebra review and the Big Theorem
 
 Let’s consider an
 ![n \\times n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;n%20%5Ctimes%20n "n \times n")
@@ -1015,7 +932,7 @@ matrix
     is invertible, since you can left multiply by
     ![\\mathbf{A}^{-1}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7BA%7D%5E%7B-1%7D "\mathbf{A}^{-1}").
 
-#### Gaussian elimination
+## Gaussian elimination
 
 First, we define **row echelon form**. A matrix is in row echelon for if
 
@@ -1145,7 +1062,7 @@ eliminate(A)
     ## [2,]    0   -2   -2   -8
     ## [3,]    0    0    0    0
 
-#### Operation counts and complexity
+## Operation counts and complexity
 
 Because we are solving problems on computers, we should care about how
 long solution takes, which in turn depends on the number of
@@ -1222,16 +1139,16 @@ t2/t1
     ##       elapsed 
     ## 5.29104477612
 
-### Matrix norms and conditioning
+# Matrix norms and conditioning
 
-#### Big picture
+## Big picture
 
 As we consider the solution of problems on a computer, we have to think
 about the effect of small errors on the solution of the problem. This is
 called conditioning. In the linear algebra setting, conditioning is
 intimitely related to matrix and vector norms.
 
-#### Goals
+## Goals
 
 -   Define forward and backward error
 -   Define vector norms
@@ -1239,7 +1156,7 @@ intimitely related to matrix and vector norms.
 -   Define condition number for solution of
     ![\\mathbf{A}\\mathbf{x}=\\mathbf{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7BA%7D%5Cmathbf%7Bx%7D%3D%5Cmathbf%7Bb%7D "\mathbf{A}\mathbf{x}=\mathbf{b}")
 
-#### Forward and backward error
+## Forward and backward error
 
 In the solution of a computational problem, **forward error** is the
 difference between the exact and computed solution, and **backwards
@@ -1276,7 +1193,7 @@ Distance here is the length of the difference between two quantities.
 Notice that we haven’t specified what distance means! This is why we
 need to define vector and matrix norms.
 
-#### Vector norms
+## Vector norms
 
 A vector norm is a rule that assigns a real number to every vector.
 Intuitively, it measures length. There are a bunch of requirements that
@@ -1447,7 +1364,7 @@ for various values of
 that is, the set of points that are unit distance from the origin.
 ![](UnitCircleGrid.png)
 
-#### Matrix norms
+## Matrix norms
 
 The matrix
 ![p](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;p "p")-norm
@@ -1538,7 +1455,7 @@ To see this, we start with the right hand side and note
 
 ![\|\|\\mathbf{A}\|\|\_p \|\|\\mathbf{x}\|\|\_p = \\left( \\max\_{\\mathbf{y} \\not = \\mathbf{ 0}} \\frac{ \|\| \\mathbf{A} \\mathbf{y}\|\|\_p} { \|\|\\mathbf{y}\|\|\_p} \\right) \|\|\\mathbf{x}\|\|\_p \\geq \\frac{ \|\| \\mathbf{A} \\mathbf{x}\|\|\_p} { \|\|\\mathbf{x}\|\|\_p} \|\|\\mathbf{x}\|\|\_p = \|\| \\mathbf{A} \\mathbf{x}\|\|\_p.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7C%7C%5Cmathbf%7BA%7D%7C%7C_p%20%7C%7C%5Cmathbf%7Bx%7D%7C%7C_p%20%3D%20%5Cleft%28%20%5Cmax_%7B%5Cmathbf%7By%7D%20%5Cnot%20%3D%20%5Cmathbf%7B%200%7D%7D%20%5Cfrac%7B%20%7C%7C%20%5Cmathbf%7BA%7D%20%5Cmathbf%7By%7D%7C%7C_p%7D%20%7B%20%7C%7C%5Cmathbf%7By%7D%7C%7C_p%7D%20%5Cright%29%20%7C%7C%5Cmathbf%7Bx%7D%7C%7C_p%20%5Cgeq%20%5Cfrac%7B%20%7C%7C%20%5Cmathbf%7BA%7D%20%5Cmathbf%7Bx%7D%7C%7C_p%7D%20%7B%20%7C%7C%5Cmathbf%7Bx%7D%7C%7C_p%7D%20%7C%7C%5Cmathbf%7Bx%7D%7C%7C_p%20%3D%20%7C%7C%20%5Cmathbf%7BA%7D%20%5Cmathbf%7Bx%7D%7C%7C_p. "||\mathbf{A}||_p ||\mathbf{x}||_p = \left( \max_{\mathbf{y} \not = \mathbf{ 0}} \frac{ || \mathbf{A} \mathbf{y}||_p} { ||\mathbf{y}||_p} \right) ||\mathbf{x}||_p \geq \frac{ || \mathbf{A} \mathbf{x}||_p} { ||\mathbf{x}||_p} ||\mathbf{x}||_p = || \mathbf{A} \mathbf{x}||_p.")
 
-#### Condition number for Ax=b
+## Condition number for Ax=b
 
 Let us consider solving
 ![\\mathbf{A}\\mathbf{x}=\\mathbf{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7BA%7D%5Cmathbf%7Bx%7D%3D%5Cmathbf%7Bb%7D "\mathbf{A}\mathbf{x}=\mathbf{b}").
@@ -1623,7 +1540,7 @@ kappa(A,exact=TRUE)
 
     ## [1] 12485.031416
 
-#### Calculating the condition number
+## Calculating the condition number
 
 Remember that the condition number isn’t merely an error magnification –
 it’s the maximum possible error magnificaton. Computing
@@ -1649,9 +1566,9 @@ ans1 <- norm(A,"2")*norm(solve(A),"2")
 ans2 <- kappa(A,norm="2",exact=TRUE)
 ```
 
-### LU decomposition
+# LU decomposition
 
-#### Big picture
+## Big picture
 
 When solving systems of linear equations, depending on the context,
 solution by Gaussian elimination can be computationally costly.
@@ -1659,7 +1576,7 @@ Sometimes it is better to decompose (factor) the matrix. There are a
 number of useful ways to do this but the one we will focus on is called
 LU decomposision.
 
-#### Goals
+## Goals
 
 -   Define and implement LU decomposition and state the potential
     advantages
@@ -1667,7 +1584,7 @@ LU decomposision.
     <!-- - Assess whether a matrix is symmetric positive definite -->
     <!-- - Explain the idea and potential advantages of Cholesky decomposition -->
 
-#### LU decomposition
+## LU decomposition
 
 Recall that when solving an
 ![n \\times n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;n%20%5Ctimes%20n "n \times n")
@@ -1951,7 +1868,7 @@ t1/(t2+t3)
     ##  elapsed 
     ## 40.78125
 
-<!-- #### $\mat{PA}=\mat{LU}$ decomposition -->
+<!-- ### $\mat{PA}=\mat{LU}$ decomposition -->
 <!-- LU decomposition can have problems. -->
 <!-- First, try applying it to the matrix -->
 <!-- $$\mat{A}=\begin{pmatrix} 0 & 1\\ 1 & 0\end{pmatrix}.$$ -->
@@ -1983,7 +1900,7 @@ t1/(t2+t3)
 <!-- P = \begin{pmatrix} 0 & 1 \\ 1 & 0\end{pmatrix} $$ -->
 <!-- exchanges the rows of A. -->
 <!-- To solve $\mat{PA}\vec{x}=\mat{LU}\vec{x}=\vec{b}$, first we must perform the decomposition, which is $\mathcal{O}(n^3)$. Next we solve $\mat{L}\vec{y}=\mat{P}\vec{b}$ for $\vec{y}$ which is $\mathcal{O}(n^2)$. Then we solve $\mat{U}\vec{x}=\vec{y}$ for $\vec{x}$ which is also $\mathcal{O}(n^2)$. -->
-<!-- #### Symmetric positive-definite matrices -->
+<!-- ### Symmetric positive-definite matrices -->
 <!-- A special type of matrix is a **symmetric positive-definite matrix**. These show up in a range of applications. Let's define these properties. -->
 <!-- 1. An $n \times n$ matrix $\mat{A}$ is **symmetric** if $\mat{A}^T = \mat{A}$. -->
 <!-- 2. $\mat{A}$ is **positive-definite** if $\vec{x}^T \mat{A} \vec{x} > 0$ for all $\vec{x} \neq 0$.  If we allow greater than or equal to zero, the matrix is called **positive semi-definite**. For example, take -->
@@ -2013,7 +1930,7 @@ t1/(t2+t3)
 <!-- \begin{pmatrix} 8 & 4\\4 & 6\end{pmatrix}, \qquad \begin{pmatrix} 6 & 0\\0 & 3\end{pmatrix}, \qquad \begin{pmatrix} 8\end{pmatrix} -->
 <!-- $$ -->
 <!-- and so forth. Each of these is symmetric positive-definite. -->
-<!-- #### Cholesky decomposition -->
+<!-- ### Cholesky decomposition -->
 <!-- If $\mat{A}$ is symmetric positive-definite, then it has a special decomposition where it can be written as the product of an upper triangular matrix $\mat{R}$ and its transpose, that is, $\mat{A} = \mat{R}^T \mat{R}$. Solve $\mat{A}\vec{x}=\vec{b}$ with Cholesky decomposition is totally identical to LU in the back substitution step, but the decomposition itself is faster because if you know $\mat{R}$ then you immediately know $\mat{R}^T$. Let's demonstrate. -->
 <!-- ```{r cache=TRUE} -->
 <!-- n <- 100 -->
@@ -2032,9 +1949,9 @@ t1/(t2+t3)
 <!-- t1/t2 -->
 <!-- ``` -->
 
-### Iterative methods for linear systems
+# Iterative methods for linear systems
 
-#### Big picture
+## Big picture
 
 So far, all of the methods you have seen for solving linear systems
 provide exact solutions (excluding numerical error). They are called
@@ -2043,7 +1960,7 @@ direct methods. However, they all involve at least one step that is
 If this computational cost is prohibitive, consider a potentially faster
 iterative method at the expense of giving up having an exact solution.
 
-#### Goals
+## Goals
 
 -   Explain how fixed point iteration relates to solution of an equation
 -   Derive and implement Jacobi’s method, and explain advantages and
@@ -2051,7 +1968,7 @@ iterative method at the expense of giving up having an exact solution.
 -   Use convergence criteria for Jacobi’s method
 -   State other iterative solution methods
 
-#### Fixed point iteration
+## Fixed point iteration
 
 Sometimes you can solve a problem by a method called **fixed point
 iteration** whereby you just keep plugging into an expression until the
@@ -2090,7 +2007,7 @@ But if it converges, it’s pretty nifty. It’s computationally cheap – all
 we have to do is evaluate the right hand side of our iteration
 repeatedly.
 
-#### Jacobi iteration
+## Jacobi iteration
 
 Let’s take this idea and apply it to solving
 ![\\mathbf{A}\\mathbf{x}=\\mathbf{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7BA%7D%5Cmathbf%7Bx%7D%3D%5Cmathbf%7Bb%7D "\mathbf{A}\mathbf{x}=\mathbf{b}").
@@ -2176,7 +2093,7 @@ t1/t2
     ##       elapsed 
     ## 250.788732394
 
-#### Convergence of Jacobi’s method
+## Convergence of Jacobi’s method
 
 There’s no reason at all to expect that Jacobi’s method converges.
 There’s a really useful theorem that says it it will converge if and
@@ -2199,16 +2116,16 @@ is **strictly diagonally dominant**. This means
 |a_{ii}| > \sum_{j \not=i} |a_{ij}| \quad\text{in each row $i$.}
 ")
 
-#### Other iterative methods
+## Other iterative methods
 
 There are other iterative solution methods for linear systems that all
 are inspired by Jacobi’s method. Some of these include Gauss-Seidel
 iteration and Successive Over-Relaxation. Details of these appear in
 book and you are welcome to discuss them with me.
 
-### Polynomial interpolation
+# Polynomial interpolation
 
-#### Big picture
+## Big picture
 
 Now we enter into the part of this course that is about data. As
 scientists, often we will have access only to noisy or partial data such
@@ -2222,14 +2139,14 @@ points. Approximation refers to finding an approximation to given
 function by choosing a function from a predetermined class, which in
 this case, is polynomials.
 
-#### Goals
+## Goals
 
 -   Explain the advantage of using polynomials to describe data
 -   Implement Vandermonde interpolation and explain its pros/cons
 -   Implement Lagrange inteprolation and explain its pros/cons
 -   Explain and implement data compression via interpolation
 
-#### Why polynomials?
+## Why polynomials?
 
 Suppose we have incomplete data and we’d like to estimate a piece of
 information that we don’t have.
@@ -2318,7 +2235,7 @@ coordinates include:
 Let’s examine some different ways to compute the interpolating
 polynomial.
 
-#### Vandermonde matrix
+## Vandermonde matrix
 
 I also call this method of interpolation “brute force.” Let’s start with
 an example. Suppose we have three data points
@@ -2515,7 +2432,7 @@ kappavals
 </tbody>
 </table>
 
-#### Lagrange interpolating polynomial
+## Lagrange interpolating polynomial
 
 Let’s seek an alternative method that gets around these issues. There’s
 actually a way to simply write down the interpolating polynomial without
@@ -2619,7 +2536,7 @@ t1/t2
     ## 0.30483779169
 
 <!-- But here's a shortcoming. Think about what happens if we add a point in, perhaps because we decide we want to incorporate additional data. Then every single term in the polynomial changes! -->
-<!-- #### Newton's divided differences -->
+<!-- ### Newton's divided differences -->
 <!-- Let's develop an interpolation method that allows us to add data without recomputing everything. For our same data as the previous example, consider the recursive triangle of divided differences -->
 <!-- $$ -->
 <!-- \begin{array}{c|cccc} -->
@@ -2659,7 +2576,7 @@ t1/t2
 <!-- * Does it pass through each data point? -->
 <!-- Since the answer to these questions is yes, it is the interpolating polynomial. -->
 
-#### Data compression
+## Data compression
 
 One of the powerful things interpolation can do is compress data. Let’s
 do an example. Suppose that we need to know values for the function
@@ -2725,9 +2642,9 @@ This means that we can represent the sine function with
 error using only 20 pieces of information, instead of storing a huge
 lookup table.
 
-### Interpolation error and Chebyshev interpolation
+# Interpolation error and Chebyshev interpolation
 
-#### Big picture
+## Big picture
 
 We have been thinking about data and talking about polynomial
 interpolation as a way of estimating it, compressing it, and
@@ -2736,7 +2653,7 @@ So far, we have only examined error numerically. Now it is time to look
 at the error in more detail, including finding out when it is
 potentially large and thinking about how we can reduce it.
 
-#### Goals
+## Goals
 
 -   Describe and recognize Runge’s phenomenon
 -   State the error term for polynomial interpolation and bound it
@@ -2744,7 +2661,7 @@ potentially large and thinking about how we can reduce it.
     technique
 -   Compare approaches to interpolation
 
-#### Runge’s phenomenon
+## Runge’s phenomenon
 
 Before doing polynomial interpolation, let’s start out with an example
 that is about Taylor polynomials. We’ll construct Taylor polynomials of
@@ -2881,7 +2798,7 @@ in some circumstances, inteprolating with polynomials through
 equally-spaced nodes leads to very undesirable oscillations like those
 above, called **Runge’s phenomenon**.
 
-#### Interpolation error
+## Interpolation error
 
 You might remember that for an
 ![n-1](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;n-1 "n-1")st
@@ -3007,7 +2924,7 @@ That is the space between points, so on
 ![\[0,1\]](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5B0%2C1%5D "[0,1]")
 this corresponds to just over 260 points.
 
-#### Chebyshev nodes
+## Chebyshev nodes
 
 Look at the error expression again. There are three parts of it.
 Factorial is the same for every function. If the derivative gets smaller
@@ -3089,7 +3006,7 @@ with
 
 The proof is not direct, which is why I have eliminated it here.
 
-#### Comparing interpolation methods
+## Comparing interpolation methods
 
 Let’s do an example comparing interpolation approaches. Consider
 ![f(x)=(1/\\sqrt{2\\pi})\\mathrm{e}^{-x^2/2}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;f%28x%29%3D%281%2F%5Csqrt%7B2%5Cpi%7D%29%5Cmathrm%7Be%7D%5E%7B-x%5E2%2F2%7D "f(x)=(1/\sqrt{2\pi})\mathrm{e}^{-x^2/2}").
@@ -3166,9 +3083,9 @@ print(ncheb)
 This is an improvement in compression by a factor of 632/41 =
 15.4146341.
 
-### Splines
+# Splines
 
-#### Big picture
+## Big picture
 
 I’ve tried to convince you that it can be problematic to construct
 interpolating polynomials of high degree. When dealing with a lot of
@@ -3176,12 +3093,12 @@ data, an alternative approach can be to construct low degree
 interpolating polynomials through successive sets of points. Typically
 we use cubics, and these are called cubic splines.
 
-#### Goals
+## Goals
 
 -   Explain advantages of interpolating data with cubic splines
 -   Implement cubic spline interpolation
 
-#### Why cubic splines?
+## Why cubic splines?
 
 Before progressing to real data later on, let’s do an illustrative
 example with a small amount of fake data. We make some data points and
@@ -3220,7 +3137,7 @@ splines gives us more coefficients, and using these coefficients we can
 make the derivatives of successive splines match up. How exactly does
 this work though?
 
-#### Mathematical conditions for cubic splines
+## Mathematical conditions for cubic splines
 
 Suppose we have data points
 ![(x_1,y_1),\\ldots,(x_n,y_n)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%28x_1%2Cy_1%29%2C%5Cldots%2C%28x_n%2Cy_n%29 "(x_1,y_1),\ldots,(x_n,y_n)").
@@ -3321,7 +3238,7 @@ You don’t need to memorize the details of these different types of
 splines. My main goals for you are to understand what they mean and to
 be able to implement them in R.
 
-#### Splines and linear algebra
+## Splines and linear algebra
 
 As we have been discussing, to find spline coefficients, we have to
 solve a linear system. I won’t write down the whole system here because
@@ -3330,7 +3247,7 @@ mathematical literacy to know that by writing down the system of
 equations, you can see that it is tridiagonal and strictly diagonally
 dominant, which are nice numerical properties.
 
-#### Implementing cubic spline interpolation
+## Implementing cubic spline interpolation
 
 Just to emphasize how splines avoid the problem of high-degree
 polynomial interpolation, let’s do a cooked example.
@@ -3401,17 +3318,17 @@ points(day,price,col="blue")
 
 ![](coursenotes_files/figure-gfm/unnamed-chunk-41-2.png)<!-- -->
 
-<!-- ### Data Scraping -->
-<!-- #### Big picture -->
+<!-- ## Data Scraping -->
+<!-- ### Big picture -->
 <!-- We are in the section of this course where we are emphasizing applications of linear algebra to data. However, we have skirted around the issue of how one might obtain data in the first place. One way to do it is by **scraping**, which refers to computational techniques for grabbing from the internet data that is not in an easily, direcly downloadable format. -->
-<!-- #### Goals -->
+<!-- ### Goals -->
 <!-- - Utilize CSS selectors to identify chosen data -->
 <!-- - Write code to pull selected data and clean it -->
 <!-- - Recognize the limitations of this technique -->
-<!-- #### CSS selectors -->
+<!-- ### CSS selectors -->
 <!-- Winter is coming and I need to buy my daughter some boots, but shopping in Williamstown is impossible, so I want to look on [Amazon](http://www.amazon.com). In particular, I did a search for girls' boots in size 3 available via Amazon Prime, and I got [these 13 pages of results](https://www.amazon.com/s/ref=sr_pg_2?fst=p90x%3A1%2Cas%3Aoff&rh=n%3A7141123011%2Cn%3A7147442011%2Cn%3A679217011%2Cn%3A3420847011%2Ck%3Aboots%2Cp_n_size_four_browse-vebin%3A3491796011%2Cp_85%3A2470955011&page=1). -->
 <!-- Here's how we'll proceed. On a web page, data is stored with various metadata that specifies its format and other properties. We can use this feature to identify the metadata associated with the particular parts of the web page we want to grab. As prerequisite steps, we install a tool called **SelectorGadget** that lets us easily and interactively peek at the metadata. Install it [here](https://selectorgadget.com) and let's experiment to see how to choose data. For my chosen goal, I need to grab data identified with ``.sx-price-large`. -->
-<!-- #### Scraping web data in R -->
+<!-- ### Scraping web data in R -->
 <!-- Next we have to pull the data we've identified. Install and activate the `R` package called `rvest`. Then we proceed as followsd: -->
 <!-- 1. Go to the [first page of data we want to scrape](https://www.amazon.com/s/ref=sr_pg_2?fst=p90x%3A1%2Cas%3Aoff&rh=n%3A7141123011%2Cn%3A7147442011%2Cn%3A679217011%2Cn%3A3420847011%2Ck%3Aboots%2Cp_n_size_four_browse-vebin%3A3491796011%2Cp_85%3A2470955011&page=1). -->
 <!-- 2. Activate SelectorGadget and use it to highlight exactly the data you want to grab. Remember, this is `.sx-price-large`. -->
@@ -3480,12 +3397,12 @@ points(day,price,col="blue")
 <!-- macinfo <- data.frame(department,coursenum,coursename,enrollment) -->
 <!-- head(macinfo) -->
 <!-- ``` -->
-<!-- #### Limitations -->
+<!-- ### Limitations -->
 <!-- I've shown you a brief glimpse of one type of data scraping. This type of scraping is just one type of procedure. Data appear in many different formats online and might require a variety of techniques that we haven't delved into. Still, I've tried to show you the one technique I think might be the most useful to you. Even this technique involved a lot of new code. Don't panic. Try to glean what you can from my examples and from talking to me. Googling is also immensely valuable here. -->
 
-### Least squares
+# Least squares
 
-#### Big picture
+## Big picture
 
 All of our study of interpolation has been based on the idea that the
 model (a polynomial or polynomnial spline) should precisely pass through
@@ -3495,7 +3412,7 @@ in our model? Or what if we just don’t care about precise interpolation,
 and decide approximation even at the data points themselves is good
 enough?
 
-#### Goals
+## Goals
 
 -   Explain how least squares arises as a model fitting problem
 -   Explain how the solution of least squares involves vector projection
@@ -3506,7 +3423,7 @@ enough?
 -   Recognize when a least squares approach is appropriate
 -   Explain how least squares allows data compression
 
-#### Model fitting
+## Model fitting
 
 By way of motivation, let’s examine a pedagogical data set. Suppose
 ![a](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;a "a")
@@ -3566,7 +3483,7 @@ so the chance that we can make it to our target vector are pretty slim.
 Stated differently: the sysem is overdetermined. But we would still like
 to find a good model, so what should we do?
 
-#### Projection onto a vector
+## Projection onto a vector
 
 To examine the details, let’s start with an even more fundamental
 example: a single vector in the plane. Suppose I hand you the vector
@@ -3738,7 +3655,7 @@ dot(a,r)
 
     ## [1] 0
 
-#### Projection onto a plane
+## Projection onto a plane
 
 Let’s apply these same conceps to our original problem of predicting
 sales from advertising. We had
@@ -3904,7 +3821,7 @@ is the projection matrix.
 Though our example here has used merely two basis vectors, the ideas
 extend to any number.
 
-#### Model fitting
+## Model fitting
 
 The technique we have developed here of solving a least squares problem
 by vector projection works in a model fitting context whenever the
@@ -4010,7 +3927,7 @@ where the model parameters appear in a lienar fashion.
 A statistics class would provide much more sophisticated ways of
 analyzing the error.
 
-#### Least squares and data compression
+## Least squares and data compression
 
 Adopting a least squares approach allows, potentially, massive
 compression of data. Suppose we had 100 points that looked like this
@@ -4027,7 +3944,7 @@ If we decided to represent this data with a line, we’d go down from
 having 100 pieces of information (the original data points) to merely 2
 (a slope and an intercept).
 
-#### An optimization viewpoint on least squares
+## An optimization viewpoint on least squares
 
 So far, we’ve taken a geometric approach to solving least-squares
 problems, but there’s another way to get the same result: optimization.
@@ -4058,9 +3975,9 @@ apply calculus to minimize this expression and the normal equations will
 result. This is a problem on your in-class exercise and your homework,
 and it is critical that you work through the details.
 
-### QR Factorization
+# QR Factorization
 
-#### Big picture
+## Big picture
 
 We’ve talked about how to fit a model to data using least squares, and
 we’ve examined the theoretical aspect of this process, but thus far
@@ -4069,13 +3986,13 @@ equations can be difficult on a computer, and a technique called QR
 factorization provides a potentially better way to solve a least squares
 problem.
 
-#### Goals
+## Goals
 
 -   Define orthonormal matrices
 -   Perform Graham-Schmidt Orthogonalization
 -   Solve least squares problems with **QR** decomposition
 
-#### Orthogonality is nice
+## Orthogonality is nice
 
 The eventual goal of this lesson is to show you how to solve the least
 squares problem
@@ -4283,7 +4200,7 @@ Then
 \end{align}
 ")
 
-#### Gram-Schmidt orthogonalization
+## Gram-Schmidt orthogonalization
 
 Now that I’ve convinced you that it’s nice to have an orthonormal basis,
 let’s talk about how to get one. Gram-Schmidt orthogonalization is an
@@ -4375,7 +4292,7 @@ dot(q1,q2)
 
     ## [1] 0
 
-#### QR decomposition
+## QR decomposition
 
 Just like LU decomposition is a way of using matrices to encode the
 process of Gaussian elimination, QR decomposition is a way of using
@@ -4831,7 +4748,7 @@ Q%*%R - A
     ## [3,]  0  0  0.00000000000e+00
     ## [4,]  0  0  0.00000000000e+00
 
-#### Computational considerations
+## Computational considerations
 
 So far, we have calculated the QR decomposition using a methodology that
 is based on Gram-Schmidt orthogonalization. This is because Gram-Schmidt
@@ -4844,7 +4761,7 @@ uses objects called Householder reflections. I won’t go in to these
 here, but the method requires fewer operations and is the one actually
 implemented in many software packages.
 
-#### What is the point of QR factorization
+## What is the point of QR factorization
 
 Finally, we ask: why have we bothered to do all of this? It is really,
 really convenient for least squares, and turns out to have very nice
@@ -4884,9 +4801,9 @@ residual). To minimize the quantity, we can then just force the first
 term to be zero. This is fine because it is a square system! There’s a
 command that does this all automatically for you called `qr.solve`.
 
-### Eigenvalues
+# Eigenvalues
 
-#### Big picture
+## Big picture
 
 Along with solving the linear system
 ![\\mathbf{A}\\mathbf{x}=\\mathbf{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7BA%7D%5Cmathbf%7Bx%7D%3D%5Cmathbf%7Bb%7D "\mathbf{A}\mathbf{x}=\mathbf{b}"),
@@ -4896,7 +4813,7 @@ is one of the most important problems in linear algebra. Knowing the
 eigenpairs can help simplify a problem and reveal important information
 about systems modeled with linear algebra.
 
-#### Goals
+## Goals
 
 -   Define eigenvalues and eigenvectors, and calculate them by hand for
     small matrices
@@ -4904,7 +4821,7 @@ about systems modeled with linear algebra.
     multiplicity of eigenvalues
 -   Apply the power iteration technique to find an eigenvalue
 
-#### Eigenvalue fundamentals
+## Eigenvalue fundamentals
 
 For an
 ![n \\times n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;n%20%5Ctimes%20n "n \times n")
@@ -5027,7 +4944,7 @@ or any scalar multiple of this vector. Similarly, we find
 \mathbf{v}_2 = \begin{pmatrix} 1 \\ -1 \end{pmatrix}.
 ")
 
-#### Algebraic multiplicity, geometric multiplicity, and diagonalization
+## Algebraic multiplicity, geometric multiplicity, and diagonalization
 
 Many applications of eigenvalues are intimiately tied up with the idea
 of **diagonalization** of matrices. Suppose
@@ -5509,7 +5426,7 @@ We don’t have enough eigenvectors to make
 ![\\mathbf{S}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7BS%7D "\mathbf{S}"),
 so the matrix is not diagonalizable.
 
-#### Power iteration
+## Power iteration
 
 Please find the eigenvalues of this matrix:
 
