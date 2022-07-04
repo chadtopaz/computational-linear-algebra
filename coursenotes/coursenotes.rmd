@@ -6,7 +6,7 @@ date: "Last updated: 2022-02-04"
 output:
   rmarkdown::github_document:
     toc: true
-    toc_depth: 5
+    toc_depth: 4
 ---
 
 \renewcommand{\vec}[1]{\mathbf{#1}}
