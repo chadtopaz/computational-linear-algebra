@@ -97,12 +97,12 @@ A few characteristics of my on-the-ground course include:
 * Organization around weekly blocks of material
 * Substantial in-class small-group discussion
 
-To enable you to make easy and flexible use of the resources here, I have eliminated most of these elements from this public facing version of the course. Essentially, what I am providing here is a core dump of materials I use. The materials are linked throughout the various course units. Additionally, you can access them in this respository's subdirectories.
+To enable you to make easy and flexible use of the resources here, I have eliminated most of these elements from this public facing version of the course. Essentially, what I am providing here is a core dump of materials I use. The materials are linked throughout the various course units. Additionally, you can access the raw mateerials in this respository's subdirectories:
 
-* [Course Notes](/coursenotes)
-* [In-Class Demos](/demos)
-* [In-Class Activities](/activities)
-* [Problem Sets (Psets)](psets)
+* [/coursenotes](/coursenotes)
+* [/demos](/demos)
+* [/activities](/activities)
+* [/psets](psets)
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -135,8 +135,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
     *   [Conditionals and Control Flow (chapter)](https://www.datacamp.com/courses/intermediate-r)
     *   [Loops (chapter)](https://www.datacamp.com/courses/intermediate-r)
     *   [Functions (chapter)](https://www.datacamp.com/courses/intermediate-r)
-*   Class Activity
-    *   [Activity - R Bootcamp](https://rstudio.cloud/spaces/207853/project/3451797)
+*   [Activity - R Bootcamp](https://rstudio.cloud/spaces/207853/project/3451797)
 *   [Pset - R Bootcamp](https://rstudio.cloud/spaces/207853/project/3472433)
 *   Looking ahead
     *   8.2 - 7.2 - 1 = ?
@@ -150,32 +149,11 @@ To enable you to make easy and flexible use of the resources here, I have elimin
     *   [Floating Point Representation and Rounding Error (16:26)](https://youtu.be/wbxSTxhTmrs) \[substantial conceptual overlap with previous video but good for reinforcement\]
 *   Reading
     *   [Course Notes: How Computers Store Numbers](/coursenotes/coursenotes.md#how-computers-store-numbers)
+    *   [Bits and Bugs](https://drive.google.com/file/d/1Ez-Vjk9e97o5lMMsSkFLFZF968q7rjyC/view?usp=sharing) 2.1 or 2.2 or 2.3 or 2.4 (choose one that interests you and come ready to discuss)
 *   DataCamp Coding Practice
     *   [Quick Introduction to Base R Graphics (chapter)](https://www.datacamp.com/courses/data-visualization-in-r)
-* Class Activity
-    *   [Activity - How Computers Store Numbers]() | [Solutions]()
-
-Thursday, Feb. 17 (before class)
-
-*   Reading
-    *   [Bits and Bugs](https://drive.google.com/file/d/1Ez-Vjk9e97o5lMMsSkFLFZF968q7rjyC/view?usp=sharing) 2.1 or 2.2 or 2.3 or 2.4 (choose one that interests you and come ready to discuss)
-*   Look over [Pset - How Computers Store Numbers](https://rstudio.cloud/spaces/207853/project/3540897)
-
-Thursday, Feb. 17 (in class)
-
-*   Discuss ungrading
-*   Discuss group collaboration
-*   Discuss the reading you chose for today
-    *   Each person (or set of people, if group members chose the same reading) should explain the context of the problem they read about and explain the mathematics of the error/challenge that occurred.
-    *   What did you think about the reading?
-    *   Any other thoughts/reactions?
-*   Q&A / Discussion
+*   [Activity - How Computers Store Numbers]() | [Solutions]()
 *   [Pset - How Computers Store Numbers](https://rstudio.cloud/spaces/207853/project/3540897)
-
-Sunday, Feb. 20
-
-*   [Submit Pset - How Computers Store Numbers](https://glow.williams.edu/courses/3492142/assignments/37097006 "Pset - How Computers Store Numbers")
-*   [Submit Reflection - How Computers Store Numbers](https://glow.williams.edu/courses/3492142/assignments/37097015 "Reflection - How Computers Store Numbers")
 
 [Back to Course Units](#course-units)
 
