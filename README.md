@@ -135,7 +135,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
     *   [Conditionals and Control Flow (chapter)](https://www.datacamp.com/courses/intermediate-r)
     *   [Loops (chapter)](https://www.datacamp.com/courses/intermediate-r)
     *   [Functions (chapter)](https://www.datacamp.com/courses/intermediate-r)
-*   Activity - R Bootcamp [viewable](activities/Activity-R-Bootcamp.md) [.Rmd](activities/Activity-R-Bootcamp.Rmd)
+*   Activity - R Bootcamp [[.md for viewing](activities/Activity-R-Bootcamp.md)] [[.Rmd for editing](activities/Activity-R-Bootcamp.Rmd)]
 *   Looking ahead
     *   8.2 - 7.2 - 1 = ?
 
