@@ -5,8 +5,6 @@ output:
   rmarkdown::github_document:
     html_preview: false
     toc: true
-=======
-    hard_line_breaks: true
     toc_depth: 1
 ---
 
