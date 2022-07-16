@@ -1,7 +1,8 @@
 ---
 title: "Pset - R Bootcamp"
-author: "Insert your full name here"
-output: html_document
+output:
+  rmarkdown::github_document:
+    html_preview: false
 ---
 
 Load necessary packages.
@@ -9,14 +10,6 @@ Load necessary packages.
 ```{r message = FALSE}
 library(tictoc)
 ```
-
-### Problem 0
-
-Please disclose any issues relating to academic integrity, including (but not limited to) collaborations, unusual resources used, and so forth.
-
-### Problem 0 Solution
-
-Your solution goes here.
 
 ### Problem 1
 
@@ -53,7 +46,9 @@ The first line sets up 10,000 accounts with values uniformly between 100 and 100
 
 For the main part of your code, I strongly recommend a `while` loop, which would look something like:
 ```{r eval = FALSE}
-while (illegal < 1000000) { do stuff here }
+while (illegal < 1000000) {
+  do stuff here
+}
 ```
 
 ### Problem 1 Solution
