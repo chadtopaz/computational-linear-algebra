@@ -108,14 +108,12 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
 ## Getting Started
 
-### Wednesday, Feb. 2 (before class)
-
+*   Videos
+    *   [Why is Linear Algebra Useful (9:56)](https://www.youtube.com/watch?v=X0HXnHKPXSo&feature=youtu.be)
 *   Reading
     *   [Why I Don't Grade, by Jesse Stommel](https://www.jessestommel.com/why-i-dont-grade/)
     *   [The Mathematics of Mass Testing for COVID-19](https://sinews.siam.org/Details-Page/the-mathematics-of-mass-testing-for-covid-19)
     *   [DataCamp Hid a Sexual Harassment Incident by its CEO](https://www.buzzfeednews.com/article/daveyalba/datacamp-sexual-harassment-metoo-tech-startup) \[CW/TW: Sexual Harassment\]. DataCamp is this course's default resource for learning R because it is the best-designed and most effective resource I know of. However, **DataCamp has a problematic past**, and I feel an ethical imperative to be transparent about this, which is why I am having you read the article linked above. If you feel you cannot or should not use DataCamp, I encourage you use an alternative option, including one of the choices I have listed in the [R Resources](#r-resources) section. In case it impacts your decision, please know that DataCamp does not gain financially from us using it, as instructors at colleges/universities can get six free months of DataCamp for their students. In any case, you are 100% free to make whatever choice you want and I will support you fully!
-*   Videos
-    *   [Why is Linear Algebra Useful (9:56)](https://www.youtube.com/watch?v=X0HXnHKPXSo&feature=youtu.be)
 *   DataCamp Coding Practice
     *   [Introduction to R (course)](https://www.datacamp.com/courses/free-introduction-to-r)
 
