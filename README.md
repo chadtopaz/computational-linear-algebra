@@ -173,7 +173,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 -   Reading
 
     -   [Course Notes: How Computers Store Numbers](/coursenotes/coursenotes.md#how-computers-store-numbers)
-    -   [Bits and Bugs](https://drive.google.com/file/d/1Ez-Vjk9e97o5lMMsSkFLFZF968q7rjyC/view?usp=sharing) 2.1 - 2.4
+    -   [Bits and Bugs](https://epubs.siam.org/doi/book/10.1137/1.9781611975567) 2.1 - 2.4
 
 -   DataCamp Coding Practice
 
