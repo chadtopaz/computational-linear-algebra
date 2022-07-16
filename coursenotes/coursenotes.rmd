@@ -10,7 +10,7 @@ output:
    - \usepackage{amsmath}
 ---
 
-```{=tex}
+```{=latex}
 \renewcommand{\vec}[1]{\mathbf{#1}}
 \renewcommand{\mat}[1]{\mathbf{#1}}
 \newcommand{\exp}[1]{\mathrm{e}^{#1}}
@@ -149,15 +149,11 @@ Most computers use a standard representation of real numbers called a *floating 
 
 We focus on double precision floats. A double precision float consists of 64 bits (1's and 0's) and, expressed in base 10, is equal to $$(-1)^s 2^{c-1023}(1+f)$$ The parts of this number are:
 
-+-----------------+-----------------+-------------------+---------------------------------------------------+
-| Part of number  | Name            | Bits              | Notes                                             |
-+=================+=================+===================+===================================================+
-| s               | sign            | 1                 | Determines positive or negative                   |
-+-----------------+-----------------+-------------------+---------------------------------------------------+
-| c               | exponent        | 2 - 12 (11 bits)  | Subtract 1023 to correct exponential bias         |
-+-----------------+-----------------+-------------------+---------------------------------------------------+
-| f               | mantissa        | 13 - 64 (52 bits) | Interpreted as a binary fraction (after radix pt) |
-+-----------------+-----------------+-------------------+---------------------------------------------------+
+| Part of number | Name     | Bits              | Notes                                             |
+|----------------|----------|-------------------|---------------------------------------------------|
+| s              | sign     | 1                 | Determines positive or negative                   |
+| c              | exponent | 2 - 12 (11 bits)  | Subtract 1023 to correct exponential bias         |
+| f              | mantissa | 13 - 64 (52 bits) | Interpreted as a binary fraction (after radix pt) |
 
 For example, suppose our 64 bits are $$1 | 10000000111 | 1101000000000000000000000000000000000000000000000000$$ Then expressed in base 10, $s=1$, $c=1024+4+2+1=1031$, and $f=1/2+1/4+1/16=0.8125$. So the floating point number is $(-1)^1 \cdot 2^{1031-1023} \cdot 1.8125=-208$.
 
@@ -986,10 +982,10 @@ kable(cbind(nvals,kappavals))
 Let's seek an alternative method that gets around these issues. There's actually a way to simply write down the interpolating polynomial without doing any calculation of coefficients at all. Let's do an example.
 
 For points $(1,10), (2, 6), (3,4), ( 4,10)$, consider the polynomial \begin{align*}
-p(x) &= 10 \frac{(x-2)(x-3)(x-4)}{(1-2)(1-3)(1-4)}
-+ 6 \frac{(x-1)(x-3)(x-4)}{(2-1)(2-3)(2-4)} \\
-&+ 4 \frac{(x-1)(x-2)(x-4)}{(3-1)(3-2)(3-4)} + 10 \frac{(x-1)(x-2)(x-3)}{(4-1)(4-2)(4-3)}
-\end{align*}
+p(x) &= 10 \\frac{(x-2)(x-3)(x-4)}{(1-2)(1-3)(1-4)}
++ 6 \\frac{(x-1)(x-3)(x-4)}{(2-1)(2-3)(2-4)} \\\\
+&+ 4 \\frac{(x-1)(x-2)(x-4)}{(3-1)(3-2)(3-4)} + 10 \\frac{(x-1)(x-2)(x-3)}{(4-1)(4-2)(4-3)}
+\\end{align\*}
 
 First, notice the pattern of how each term is constructed: there's a coefficient times a polynomial. The coefficient is the $y$-value of an interpolation point. The polynomial is one that is equal to $1$ at that the $x$-coordinate of that point, and $0$ at the $x$-coordinate of every other point. So now we ask...
 
