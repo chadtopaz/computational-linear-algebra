@@ -181,7 +181,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
 -   Activity - How Computers Store Numbers [[.md for viewing](activities/Activity-How-Computers-Store-Numbers.md)] [[.Rmd for editing](activities/Activity-How-Computers-Store-Numbers.Rmd)]
 
--   Activity - How Computers Store Numbers [[.md for viewing](activities/Activity-How-Computers-Store-Numbers.md)] [[.Rmd for editing](activities/Activity-How-Computers-Store-Numbers.Rmd)]
+-   Pset - How Computers Store Numbers [[.md for viewing](psets/Pset-How-Computers-Store-Numbers.md)] [[.Rmd for editing](psets/Pset-How-Computers-Store-Numbers.Rmd)]
 
 [Back to Course Units](#course-units)
 

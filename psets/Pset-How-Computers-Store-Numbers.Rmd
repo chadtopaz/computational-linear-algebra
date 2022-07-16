@@ -1,16 +1,11 @@
 ---
 title: "Pset - How Computers Store Numbers"
-author: "Insert your full name here"
-output: html_document
+output:
+  rmarkdown::github_document:
+    html_preview: false
+  header-includes:
+   - \usepackage{amsmath}
 ---
-
-### Problem 0
-
-Please disclose any issues relating to academic integrity, including (but not limited to) collaborations, unusual resources used, and so forth.
-
-### Problem 0 Solution
-
-Your solution goes here.
 
 ### Problem 1
 
