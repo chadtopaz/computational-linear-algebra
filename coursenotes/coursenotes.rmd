@@ -223,8 +223,7 @@ We begin considering the solution of systems of linear equations, $\mathbf{A}\ma
 
 ## Linear systems
 
-For concreteness let's work in three dimensions and let's consider the system $$
-\begin{pmatrix}
+For concreteness let's work in three dimensions and let's consider the system $$\begin{pmatrix}
 2 & 4 & -2\\
 1 & 4 & -3\\
 -2 & -6 & 7
@@ -235,28 +234,18 @@ x_1 \\ x_2 \\ x_3
 =
 \begin{pmatrix}
 8 \\ 8 \\ -3
-\end{pmatrix}.
-$$ Let's interpret this system two ways.
+\end{pmatrix}.$$ Let's interpret this system two ways.
 
-**Intersecting hyperplanes.** Carrying out the matrix multiplication, we write the equations
-$$
-\begin{eqnarray}
+**Intersecting hyperplanes.** Carrying out the matrix multiplication, we write the equations $$ \begin{eqnarray}
 2x_1 + 4x_2 -2x_3 & = & 8\\
 x_1 + 4x_2 -3x_3 & = & 8\\
 -2x_1 -6x_2 + 7x_3 & = & -3
-\end{eqnarray}
-$$
-This form suggests thinking of the set of points that are at the intersection of these three planes, which could be the empty set, or a point, or a line, or a plane.
+\end{eqnarray}.$$ This form suggests thinking of the set of points that are at the intersection of these three planes, which could be the empty set, or a point, or a line, or a plane.
 
-**Vector spans.** Write the equation in terms of its columns, as
-$$
-x_1 \begin{pmatrix} 2 \\ 1 \\ -2 \end{pmatrix}
+**Vector spans.** Write the equation in terms of its columns, as $$x_1 \begin{pmatrix} 2 \\ 1 \\ -2 \end{pmatrix}
 + x_2 \begin{pmatrix} 4 \\ 4 \\ -6 \end{pmatrix}
 + x_3 \begin{pmatrix} -2 \\ -3 \\ 7 \end{pmatrix}
-= \begin{pmatrix} 8 \\ 8 \\ -3 \end{pmatrix}
-$$
-
-This form suggests thinking of the linear combination of three basis vectors necessary to reach a particular target vector. There could be 0, 1, or inifinity depending on the arrangement of those vectors.
+= \begin{pmatrix} 8 \\ 8 \\ -3 \end{pmatrix}.$$ This form suggests thinking of the linear combination of three basis vectors necessary to reach a particular target vector. There could be 0, 1, or inifinity depending on the arrangement of those vectors.
 
 ## Linear algebra review and the Big Theorem
 
