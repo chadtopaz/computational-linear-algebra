@@ -3,6 +3,8 @@ title: "Pset - R Bootcamp"
 output:
   rmarkdown::github_document:
     html_preview: false
+  header-includes:
+   - \usepackage{amsmath}
 ---
 
 Load necessary packages.
