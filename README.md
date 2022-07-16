@@ -136,6 +136,8 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 *   Activity - R Bootcamp [[.md for viewing](activities/Activity-R-Bootcamp.md)] [[.Rmd for editing](activities/Activity-R-Bootcamp.Rmd)]
 *   Looking ahead
     *   8.2 - 7.2 - 1 = ?
+*   Challenge Problems
+    * Many students take the formula for Taylor series as a given, but you can derive it using calculus. Derive the Taylor series formula.
 
 [Back to Course Units](#course-units)
 
