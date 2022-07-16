@@ -655,7 +655,8 @@ norms.
 For concreteness let’s work in three dimensions and let’s consider the
 system
 
-![\\begin{pmatrix}
+![
+\\begin{pmatrix}
 2 & 4 & -2\\\\
 1 & 4 & -3\\\\
 -2 & -6 & 7
@@ -666,7 +667,9 @@ x\_1 \\\\ x\_2 \\\\ x\_3
 =
 \\begin{pmatrix}
 8 \\\\ 8 \\\\ -3
-\\end{pmatrix}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbegin%7Bpmatrix%7D%0A2%20%26%204%20%26%20-2%5C%5C%0A1%20%26%204%20%26%20-3%5C%5C%0A-2%20%26%20-6%20%26%207%0A%5Cend%7Bpmatrix%7D%0A%5Cbegin%7Bpmatrix%7D%0Ax_1%20%5C%5C%20x_2%20%5C%5C%20x_3%0A%5Cend%7Bpmatrix%7D%0A%3D%0A%5Cbegin%7Bpmatrix%7D%0A8%20%5C%5C%208%20%5C%5C%20-3%0A%5Cend%7Bpmatrix%7D. "\begin{pmatrix}
+\\end{pmatrix}.
+](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0A%5Cbegin%7Bpmatrix%7D%0A2%20%26%204%20%26%20-2%5C%5C%0A1%20%26%204%20%26%20-3%5C%5C%0A-2%20%26%20-6%20%26%207%0A%5Cend%7Bpmatrix%7D%0A%5Cbegin%7Bpmatrix%7D%0Ax_1%20%5C%5C%20x_2%20%5C%5C%20x_3%0A%5Cend%7Bpmatrix%7D%0A%3D%0A%5Cbegin%7Bpmatrix%7D%0A8%20%5C%5C%208%20%5C%5C%20-3%0A%5Cend%7Bpmatrix%7D.%0A "
+\begin{pmatrix}
 2 & 4 & -2\\
 1 & 4 & -3\\
 -2 & -6 & 7
@@ -677,22 +680,27 @@ x_1 \\ x_2 \\ x_3
 =
 \begin{pmatrix}
 8 \\ 8 \\ -3
-\end{pmatrix}.")
+\end{pmatrix}.
+")
 
 Let’s interpret this system two ways.
 
 **Intersecting hyperplanes.** Carrying out the matrix multiplication, we
 write the equations
 
-![ \\begin{eqnarray}
+![
+\\begin{eqnarray}
 2x\_1 + 4x\_2 -2x\_3 & = & 8\\\\
 x\_1 + 4x\_2 -3x\_3 & = & 8\\\\
 -2x\_1 -6x\_2 + 7x\_3 & = & -3
-\\end{eqnarray}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%20%5Cbegin%7Beqnarray%7D%0A2x_1%20%2B%204x_2%20-2x_3%20%26%20%3D%20%26%208%5C%5C%0Ax_1%20%2B%204x_2%20-3x_3%20%26%20%3D%20%26%208%5C%5C%0A-2x_1%20-6x_2%20%2B%207x_3%20%26%20%3D%20%26%20-3%0A%5Cend%7Beqnarray%7D. " \begin{eqnarray}
+\\end{eqnarray}
+](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0A%5Cbegin%7Beqnarray%7D%0A2x_1%20%2B%204x_2%20-2x_3%20%26%20%3D%20%26%208%5C%5C%0Ax_1%20%2B%204x_2%20-3x_3%20%26%20%3D%20%26%208%5C%5C%0A-2x_1%20-6x_2%20%2B%207x_3%20%26%20%3D%20%26%20-3%0A%5Cend%7Beqnarray%7D%0A "
+\begin{eqnarray}
 2x_1 + 4x_2 -2x_3 & = & 8\\
 x_1 + 4x_2 -3x_3 & = & 8\\
 -2x_1 -6x_2 + 7x_3 & = & -3
-\end{eqnarray}.")
+\end{eqnarray}
+")
 
 This form suggests thinking of the set of points that are at the
 intersection of these three planes, which could be the empty set, or a
@@ -700,13 +708,17 @@ point, or a line, or a plane.
 
 **Vector spans.** Write the equation in terms of its columns, as
 
-![x\_1 \\begin{pmatrix} 2 \\\\ 1 \\\\ -2 \\end{pmatrix}
+![
+x\_1 \\begin{pmatrix} 2 \\\\ 1 \\\\ -2 \\end{pmatrix}
 + x\_2 \\begin{pmatrix} 4 \\\\ 4 \\\\ -6 \\end{pmatrix}
 + x\_3 \\begin{pmatrix} -2 \\\\ -3 \\\\ 7 \\end{pmatrix}
-= \\begin{pmatrix} 8 \\\\ 8 \\\\ -3 \\end{pmatrix}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_1%20%5Cbegin%7Bpmatrix%7D%202%20%5C%5C%201%20%5C%5C%20-2%20%5Cend%7Bpmatrix%7D%0A%2B%20x_2%20%5Cbegin%7Bpmatrix%7D%204%20%5C%5C%204%20%5C%5C%20-6%20%5Cend%7Bpmatrix%7D%0A%2B%20x_3%20%5Cbegin%7Bpmatrix%7D%20-2%20%5C%5C%20-3%20%5C%5C%207%20%5Cend%7Bpmatrix%7D%0A%3D%20%5Cbegin%7Bpmatrix%7D%208%20%5C%5C%208%20%5C%5C%20-3%20%5Cend%7Bpmatrix%7D. "x_1 \begin{pmatrix} 2 \\ 1 \\ -2 \end{pmatrix}
+= \\begin{pmatrix} 8 \\\\ 8 \\\\ -3 \\end{pmatrix}
+](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0Ax_1%20%5Cbegin%7Bpmatrix%7D%202%20%5C%5C%201%20%5C%5C%20-2%20%5Cend%7Bpmatrix%7D%0A%2B%20x_2%20%5Cbegin%7Bpmatrix%7D%204%20%5C%5C%204%20%5C%5C%20-6%20%5Cend%7Bpmatrix%7D%0A%2B%20x_3%20%5Cbegin%7Bpmatrix%7D%20-2%20%5C%5C%20-3%20%5C%5C%207%20%5Cend%7Bpmatrix%7D%0A%3D%20%5Cbegin%7Bpmatrix%7D%208%20%5C%5C%208%20%5C%5C%20-3%20%5Cend%7Bpmatrix%7D%0A "
+x_1 \begin{pmatrix} 2 \\ 1 \\ -2 \end{pmatrix}
 + x_2 \begin{pmatrix} 4 \\ 4 \\ -6 \end{pmatrix}
 + x_3 \begin{pmatrix} -2 \\ -3 \\ 7 \end{pmatrix}
-= \begin{pmatrix} 8 \\ 8 \\ -3 \end{pmatrix}.")
+= \begin{pmatrix} 8 \\ 8 \\ -3 \end{pmatrix}
+")
 
 This form suggests thinking of the linear combination of three basis
 vectors necessary to reach a particular target vector. There could be 0,
