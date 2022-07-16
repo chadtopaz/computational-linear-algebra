@@ -4,8 +4,7 @@ Chad M. Topaz \| Last Updated: 2022-07-04
 
 -   [R Bootcamp](#r-bootcamp)
 -   [How computers store numbers](#how-computers-store-numbers)
--   [Linear systems review](#linear-systems-review)
--   [Matrix norms and conditioning](#matrix-norms-and-conditioning)
+-   [Fundamentals of Linear Systems](#fundamentals-of-linear-systems)
 -   [LU decomposition](#lu-decomposition)
 -   [Iterative methods for linear
     systems](#iterative-methods-for-linear-systems)
@@ -188,7 +187,7 @@ x%o%z # outer product
 This theorem will be especially useful for error analysis of some
 algorithms we use. The basic idea of Taylor’s theorem is that for many
 functions, we can approximate the function around a point
-![x_0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_0 "x_0")
+![x\_0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_0 "x_0")
 as a polynomial of finite degree, called the Taylor polynomial, plus an
 error term that accounts for all the higher degree terms we ignored.
 
@@ -197,24 +196,24 @@ More formally, suppose
 is
 ![n+1](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;n%2B1 "n+1")
 times continuously differentiably on the interval between
-![x_0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_0 "x_0")
+![x\_0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_0 "x_0")
 and
 ![x](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x "x").
 Then
 
-![ f(x) = \\left( \\displaystyle \\sum\_{k=0}^n \\frac{f^{(k)}(x_0)}{k!}(x-x_0)^k \\right) + \\frac{f^{(n+1)}(c)}{(n+1)!}(x-x_0)^{n+1}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%20f%28x%29%20%3D%20%5Cleft%28%20%5Cdisplaystyle%20%5Csum_%7Bk%3D0%7D%5En%20%5Cfrac%7Bf%5E%7B%28k%29%7D%28x_0%29%7D%7Bk%21%7D%28x-x_0%29%5Ek%20%5Cright%29%20%2B%20%5Cfrac%7Bf%5E%7B%28n%2B1%29%7D%28c%29%7D%7B%28n%2B1%29%21%7D%28x-x_0%29%5E%7Bn%2B1%7D " f(x) = \left( \displaystyle \sum_{k=0}^n \frac{f^{(k)}(x_0)}{k!}(x-x_0)^k \right) + \frac{f^{(n+1)}(c)}{(n+1)!}(x-x_0)^{n+1}")
+![ f(x) = \\left( \\displaystyle \\sum\_{k=0}^n \\frac{f^{(k)}(x\_0)}{k!}(x-x\_0)^k \\right) + \\frac{f^{(n+1)}(c)}{(n+1)!}(x-x\_0)^{n+1}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%20f%28x%29%20%3D%20%5Cleft%28%20%5Cdisplaystyle%20%5Csum_%7Bk%3D0%7D%5En%20%5Cfrac%7Bf%5E%7B%28k%29%7D%28x_0%29%7D%7Bk%21%7D%28x-x_0%29%5Ek%20%5Cright%29%20%2B%20%5Cfrac%7Bf%5E%7B%28n%2B1%29%7D%28c%29%7D%7B%28n%2B1%29%21%7D%28x-x_0%29%5E%7Bn%2B1%7D " f(x) = \left( \displaystyle \sum_{k=0}^n \frac{f^{(k)}(x_0)}{k!}(x-x_0)^k \right) + \frac{f^{(n+1)}(c)}{(n+1)!}(x-x_0)^{n+1}")
 
 where
 ![c](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;c "c")
 is an (unknown) number between
-![x_0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_0 "x_0")
+![x\_0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_0 "x_0")
 and
 ![x](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x "x").
 
 For example, suppose
 ![f(x)=\\sin(x)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;f%28x%29%3D%5Csin%28x%29 "f(x)=\sin(x)")
 and
-![x_0=0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_0%3D0 "x_0=0").
+![x\_0=0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_0%3D0 "x_0=0").
 We can pre-compute some derivatives,
 ![f(0)=\\sin(0)=0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;f%280%29%3D%5Csin%280%29%3D0 "f(0)=\sin(0)=0"),
 ![f^{(1)}(0)=\\cos(0)=1](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;f%5E%7B%281%29%7D%280%29%3D%5Ccos%280%29%3D1 "f^{(1)}(0)=\cos(0)=1"),
@@ -620,76 +619,7 @@ because of subtraction of nearly equal numbers. In such problems, be
 aware and seek alternative ways to represent the necessary computation,
 as we did with the second option above.
 
-<!-- ## Root finding -->
-<!-- ### Big picture -->
-<!-- Arises in applications including -->
-<!-- - Optimization -->
-<!-- - Signals/systems (audio filtering, flight stabilization, etc.) -->
-<!-- - Cryptography -->
-<!-- - Economics -->
-<!-- - Dynamical systems -->
-<!-- - Much more -->
-<!-- And yet most equations $f(x)=0$ cannot be solved exactly, so we need numerical algorithms. -->
-<!-- ### Goals -->
-<!-- - Explain order of convergence -->
-<!-- - Calculate order of convergence from data -->
-<!-- - Derive, explain and implement root finding algorithms -->
-<!-- - Compare advantages/disadvantages of root finding algorithms -->
-<!-- - Prove/demonstrate order of convergence analytically for bisection and Newton's method -->
-<!-- ### Rate of convergence -->
-<!-- To talk about root-finding, we need the idea of convergence, so let's remember it. We say a sequence ${a_n}$ *converges* if it has a finite limit as $n \to \infty$. For instance, if $a_n = 4n^2/(2n^2+1)$ then the sequence converges to $2$. On the other hand, if $a_n = (-1)^n + 1$, the limit does not exist so the sequence diverges. -->
-<!-- In root finding, we will see algorithms that (hopefully) produce a sequence of approxiations to a true root. We want to know if that sequence converges, and if so, how fast. As a quick example, think of the sequences ${(1/2)^n}$ and ${(1/2)^{2^n}}$. Both converge to 0 but look at how differently they do so. -->
-<!-- ```{r cache=TRUE} -->
-<!-- n <- 0:6 -->
-<!-- an <- (0.5)^n -->
-<!-- bn <- (0.5)^(2^n-1) -->
-<!-- kable(cbind(n,an,bn)) -->
-<!-- ``` -->
-<!-- We'll often talk about the rate of convergence of a sequence, and the sequence we will look at is the error sequence, namely the difference between the approximation of a root and the true value of a root, namely $e_n = |x_n - x|$ for $f(x)=0$. The rate of convergence is defined as the positive number $q$ satisfying -->
-<!-- $e_{n+1} = Ce_n^q$ as $n \to \infty$. If we have numerical data, we can estimate the convergence by making a log-log plot of error data. Note -->
-<!-- $$\log e_{n+1} = \log C + q \log e_n.$$ -->
-<!-- If we plot $(\log e_n,\log e_{n+1})$ and observe linear behavior for large enough $n$, then the slope is the convergence rate $q$.  -->
-<!-- ```{r cache=TRUE} -->
-<!-- n <- 18 -->
-<!-- e <- c(1,0.9,0.79,0.67,0.54,0.4*(0.5)^((0:12))) -->
-<!-- loge <- log(e[1:(n-1)]) -->
-<!-- logep <- log(e[2:n]) -->
-<!-- plot(loge,logep) -->
-<!-- lm(logep[6:n]~loge[6:n]) -->
-<!-- ``` -->
-<!-- ### Bisection method -->
-<!-- The *intermediate value theorem* states that if $f(x)$ is continuous on $[a,b]$ and $f(a)f(b)=0$, then there exists $r \in (a,b)$ such that $f(r)=0$. To apply the *bisection method* for root finding, start with the interval $[a,b]$, called a *bracketing interval*. Calculate $f(a)$, $f(b)$, and $f(\frac{a+b}{2})$. Then apply the intermediate value theorem to decide which half of the interval the root is in, and repeat. -->
-<!-- You also have to decide when to terminate the algorithm. This could be a maximum number of iterations, an upper bound on the error, or something else. To obtain an upper bound on the error, note that on the nth iteration, the maximum error is $(b-a)/2^{n+1}$. We say that the solution is *correct within $p$ decimal places$* if the error is less than $0.5 \times 10^{-p}$. For instance, for solving $\sin x - x -1/2 = 0$ beginning with $[-2,20]$ with guaranteed 6 decimal place accuracy, we need -->
-<!-- $$\frac{20-(-2)}{2^{n+1}} < 0.5 \times 10^{-6}$$ -->
-<!-- which results in $n > 24.391 = 25$ iterations. -->
-<!-- The bisection method is guaranteed to converge given a bracketing interval. On the downside, the error bound converges linearly, and this is considered slow. Arguably, we could expect this since the method doesn't use much information about the function -- only its sign. -->
-<!-- ### Newton's method -->
-<!-- We can get a faster root finding method by using the slope of the function instead of just its sign. Equivalently, we can say we are using the first degree Taylor expansion of the function. -->
-<!-- If $x_i$ is the guess for a root, we make a new guess by finding where the tangent line through the guess has a root. This line is $y - f(x_i) = f'(x_i)(x-x_i)$ which has a root at $x_i - f(x_i)/f'(x_i)$. This is our next guess $x_{i+1}$. -->
-<!-- A weakness of this method is that it assumes the tangent line's root is close to the function's root. Unless our guess is close to the true root, there's no reason to expect this is true. As a result, Newton's method does not have guaranteed convergence. Another weakness is that this method requires computation of the derivative which can be costly. On the upside, when the algorithm converges, it does so quadratically so long as the root is a simple root of the function. -->
-<!-- \begin{aligned} -->
-<!-- e_{n+1} &= x - x_{n+1}\\ -->
-<!-- & = x - \left(x_n - \frac{f(x_n)}{f'(x_n)}\right) -->
-<!-- \end{aligned} -->
-<!-- By Taylor's theorem, note -->
-<!-- $$f(x) = f(x_n) + f'(x_n)(x-x_n)+\frac{1}{2}f''(\xi)(x-x_n)^2.$$ -->
-<!-- However, $f(x)=0$ since $x$ is a root. Solving for $f(x_n)$ and plugging into the previous equation yields -->
-<!-- \begin{aligned} -->
-<!-- e_{n+1} &= x - x_n + \frac{ -f'(x_n)(x-x_n)-(1/2)f''(\xi)(x-x_n)^2}{f'(x_n)}\\ -->
-<!-- &= x - x_n -(x-x_n) - \frac{f''(\xi)}{2f'(x_n)}(x-x_n)^2\\ -->
-<!-- &= -\frac{f''(x)}{2f'(x)}(x-x_n)^2\text{ as }n \to \infty\\ -->
-<!-- &= c e_{n+1}^2. -->
-<!-- \end{aligned} -->
-<!-- Note that this calculation depends on $f'(x) \neq 0$. IN the case $f'(x)=0$, the root has multiplicity higher than one and convergence is linear (not proven here). However, there are algebraic manipulations you can perform that will turn the problem into one that converges to the root quadratically (if it converges). -->
-<!-- ### Root finding without derivatives -->
-<!-- To avoid the problems with having to calculate a derivative, a number of other algorithms are available. They include: -->
-<!-- - Regula falsi. Like bisection, but connect endpoints of bracketing interval with a line and use its root. -->
-<!-- - Secant method. Like Newton's method, but draw a secant line between two successive guesses instead of using tangent line. -->
-<!-- - Muller's method. Like secant method, but use three successive guesses to construct a parabola and find its root. -->
-<!-- - Inverse quadratic interpolation (IQI). Like Muller's method, but uses a sideways parabole. -->
-<!-- - Brent's method. Combines IQI, secant method, and bisection, depending on the conditions of each iteration. -->
-
-# Linear systems review
+# Fundamentals of Linear Systems
 
 ## Big picture
 
@@ -700,7 +630,11 @@ macromolecules, electromagnetics, heat flow, wave motion, structural
 engineering, a million other examples), in curve fitting, in
 optimization, and many other applications. To understand solution of
 linear systems, it’s helpful to recall some fundamental ideas of linear
-algebra.
+algebra. Additionally, as we consider the solution of problems on a
+computer, we have to think about the effect of small errors on the
+solution of the problem. This is called conditioning. In the linear
+algebra setting, conditioning is intimately related to matrix and vector
+norms.
 
 ## Goals
 
@@ -710,6 +644,11 @@ algebra.
 -   Give intuitive explanations for the “big theorem” of linear algebra
 -   Perform the steps of Gaussian elimination
 -   Establish the computational complexity of Gaussian elimination
+-   Define forward and backward error
+-   Define vector norms
+-   Define matrix norms
+-   Define condition number for solution of
+    ![\\mathbf{A}\\mathbf{x}=\\mathbf{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7BA%7D%5Cmathbf%7Bx%7D%3D%5Cmathbf%7Bb%7D "\mathbf{A}\mathbf{x}=\mathbf{b}")
 
 ## Linear systems
 
@@ -723,7 +662,7 @@ system
 -2 & -6 & 7
 \\end{pmatrix}
 \\begin{pmatrix}
-x_1 \\\\ x_2 \\\\ x_3
+x\_1 \\\\ x\_2 \\\\ x\_3
 \\end{pmatrix}
 =
 \\begin{pmatrix}
@@ -751,9 +690,9 @@ write the equations
 
 ![
 \\begin{eqnarray}
-2x_1 + 4x_2 -2x_3 & = & 8\\\\
-x_1 + 4x_2 -3x_3 & = & 8\\\\
--2x_1 -6x_2 + 7x_3 & = & -3
+2x\_1 + 4x\_2 -2x\_3 & = & 8\\\\
+x\_1 + 4x\_2 -3x\_3 & = & 8\\\\
+-2x\_1 -6x\_2 + 7x\_3 & = & -3
 \\end{eqnarray}
 ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0A%5Cbegin%7Beqnarray%7D%0A2x_1%20%2B%204x_2%20-2x_3%20%26%20%3D%20%26%208%5C%5C%0Ax_1%20%2B%204x_2%20-3x_3%20%26%20%3D%20%26%208%5C%5C%0A-2x_1%20-6x_2%20%2B%207x_3%20%26%20%3D%20%26%20-3%0A%5Cend%7Beqnarray%7D%0A "
 \begin{eqnarray}
@@ -770,9 +709,9 @@ point, or a line, or a plane.
 **Vector spans.** Write the equation in terms of its columns, as
 
 ![
-x_1 \\begin{pmatrix} 2 \\\\ 1 \\\\ -2 \\end{pmatrix}
-+ x_2 \\begin{pmatrix} 4 \\\\ 4 \\\\ -6 \\end{pmatrix}
-+ x_3 \\begin{pmatrix} -2 \\\\ -3 \\\\ 7 \\end{pmatrix}
+x\_1 \\begin{pmatrix} 2 \\\\ 1 \\\\ -2 \\end{pmatrix}
++ x\_2 \\begin{pmatrix} 4 \\\\ 4 \\\\ -6 \\end{pmatrix}
++ x\_3 \\begin{pmatrix} -2 \\\\ -3 \\\\ 7 \\end{pmatrix}
 = \\begin{pmatrix} 8 \\\\ 8 \\\\ -3 \\end{pmatrix}
 ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0Ax_1%20%5Cbegin%7Bpmatrix%7D%202%20%5C%5C%201%20%5C%5C%20-2%20%5Cend%7Bpmatrix%7D%0A%2B%20x_2%20%5Cbegin%7Bpmatrix%7D%204%20%5C%5C%204%20%5C%5C%20-6%20%5Cend%7Bpmatrix%7D%0A%2B%20x_3%20%5Cbegin%7Bpmatrix%7D%20-2%20%5C%5C%20-3%20%5C%5C%207%20%5Cend%7Bpmatrix%7D%0A%3D%20%5Cbegin%7Bpmatrix%7D%208%20%5C%5C%208%20%5C%5C%20-3%20%5Cend%7Bpmatrix%7D%0A "
 x_1 \begin{pmatrix} 2 \\ 1 \\ -2 \end{pmatrix}
@@ -808,11 +747,11 @@ matrix
     transformation defined by a matrix. That is, multiplication by
     ![\\mathbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7BA%7D "\mathbf{A}")
     can cause a region to contract
-    (![\|\\det \\mathbf{A}\| \< 1](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7C%5Cdet%20%5Cmathbf%7BA%7D%7C%20%3C%201 "|\det \mathbf{A}| < 1"))
+    (![\|\\det \\mathbf{A}\| &lt; 1](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7C%5Cdet%20%5Cmathbf%7BA%7D%7C%20%3C%201 "|\det \mathbf{A}| < 1"))
     or expand
-    (![\|\\det \\mathbf{A}\| \> 1](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7C%5Cdet%20%5Cmathbf%7BA%7D%7C%20%3E%201 "|\det \mathbf{A}| > 1"))
+    (![\|\\det \\mathbf{A}\| &gt; 1](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7C%5Cdet%20%5Cmathbf%7BA%7D%7C%20%3E%201 "|\det \mathbf{A}| > 1"))
     and/or reflect
-    (![\\det \\mathbf{A} \< 0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cdet%20%5Cmathbf%7BA%7D%20%3C%200 "\det \mathbf{A} < 0")).
+    (![\\det \\mathbf{A} &lt; 0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cdet%20%5Cmathbf%7BA%7D%20%3C%200 "\det \mathbf{A} < 0")).
     As an example, let
 
     ![\\mathbf{A}=\\begin{pmatrix}a & b\\\\c & d\\end{pmatrix}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7BA%7D%3D%5Cbegin%7Bpmatrix%7Da%20%26%20b%5C%5Cc%20%26%20d%5Cend%7Bpmatrix%7D. "\mathbf{A}=\begin{pmatrix}a & b\\c & d\end{pmatrix}.")
@@ -827,21 +766,21 @@ matrix
     ![\\iff \\det \\mathbf{A} \\neq 0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ciff%20%5Cdet%20%5Cmathbf%7BA%7D%20%5Cneq%200 "\iff \det \mathbf{A} \neq 0").
 
 3.  The **eigenvalues**
-    ![\\lambda_i](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Clambda_i "\lambda_i")
+    ![\\lambda\_i](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Clambda_i "\lambda_i")
     of
     ![\\mathbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7BA%7D "\mathbf{A}")
     satisfy
 
-    ![\\mathbf{A}\\mathbf{v_i}=\\lambda_i \\mathbf{v_i},](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7BA%7D%5Cmathbf%7Bv_i%7D%3D%5Clambda_i%20%5Cmathbf%7Bv_i%7D%2C "\mathbf{A}\mathbf{v_i}=\lambda_i \mathbf{v_i},")
+    ![\\mathbf{A}\\mathbf{v\_i}=\\lambda\_i \\mathbf{v\_i},](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7BA%7D%5Cmathbf%7Bv_i%7D%3D%5Clambda_i%20%5Cmathbf%7Bv_i%7D%2C "\mathbf{A}\mathbf{v_i}=\lambda_i \mathbf{v_i},")
 
     where
-    ![\\mathbf{v_i}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7Bv_i%7D "\mathbf{v_i}")
+    ![\\mathbf{v\_i}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7Bv_i%7D "\mathbf{v_i}")
     are the **eigenvectors**. You can prove that
 
-    ![\\prod_i \\lambda_i = \\det \\mathbf{A},](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cprod_i%20%5Clambda_i%20%3D%20%5Cdet%20%5Cmathbf%7BA%7D%2C "\prod_i \lambda_i = \det \mathbf{A},")
+    ![\\prod\_i \\lambda\_i = \\det \\mathbf{A},](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cprod_i%20%5Clambda_i%20%3D%20%5Cdet%20%5Cmathbf%7BA%7D%2C "\prod_i \lambda_i = \det \mathbf{A},")
 
     so no
-    ![\\lambda_i = 0 \\iff \\det \\mathbf{A} \\neq 0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Clambda_i%20%3D%200%20%5Ciff%20%5Cdet%20%5Cmathbf%7BA%7D%20%5Cneq%200 "\lambda_i = 0 \iff \det \mathbf{A} \neq 0").
+    ![\\lambda\_i = 0 \\iff \\det \\mathbf{A} \\neq 0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Clambda_i%20%3D%200%20%5Ciff%20%5Cdet%20%5Cmathbf%7BA%7D%20%5Cneq%200 "\lambda_i = 0 \iff \det \mathbf{A} \neq 0").
 
 4.  ![\\mathbf{A} \\mathbf{z} \\neq 0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7BA%7D%20%5Cmathbf%7Bz%7D%20%5Cneq%200 "\mathbf{A} \mathbf{z} \neq 0")
     for all
@@ -889,7 +828,7 @@ matrix
     ![\\mathbf{0}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7B0%7D "\mathbf{0}")
     nontrivially, for instance,
 
-    ![\\begin{pmatrix}1 & -2\\\\2 & -4\\end{pmatrix}\\begin{pmatrix}x_1 \\\\ x_2 \\end{pmatrix}=\\begin{pmatrix}0 \\\\ 0\\end{pmatrix}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbegin%7Bpmatrix%7D1%20%26%20-2%5C%5C2%20%26%20-4%5Cend%7Bpmatrix%7D%5Cbegin%7Bpmatrix%7Dx_1%20%5C%5C%20x_2%20%5Cend%7Bpmatrix%7D%3D%5Cbegin%7Bpmatrix%7D0%20%5C%5C%200%5Cend%7Bpmatrix%7D. "\begin{pmatrix}1 & -2\\2 & -4\end{pmatrix}\begin{pmatrix}x_1 \\ x_2 \end{pmatrix}=\begin{pmatrix}0 \\ 0\end{pmatrix}.")
+    ![\\begin{pmatrix}1 & -2\\\\2 & -4\\end{pmatrix}\\begin{pmatrix}x\_1 \\\\ x\_2 \\end{pmatrix}=\\begin{pmatrix}0 \\\\ 0\\end{pmatrix}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbegin%7Bpmatrix%7D1%20%26%20-2%5C%5C2%20%26%20-4%5Cend%7Bpmatrix%7D%5Cbegin%7Bpmatrix%7Dx_1%20%5C%5C%20x_2%20%5Cend%7Bpmatrix%7D%3D%5Cbegin%7Bpmatrix%7D0%20%5C%5C%200%5Cend%7Bpmatrix%7D. "\begin{pmatrix}1 & -2\\2 & -4\end{pmatrix}\begin{pmatrix}x_1 \\ x_2 \end{pmatrix}=\begin{pmatrix}0 \\ 0\end{pmatrix}.")
 
     This violates our previous condition (above) about the nullspace
     only being
@@ -981,7 +920,7 @@ For example, take
 Write augmented matrix
 
 ![
-\\mathbf{A_a} = \\begin{pmatrix}
+\\mathbf{A\_a} = \\begin{pmatrix}
 1 & 3 & 1 & 9 \\\\
 1 & 1 & -1 & 1\\\\
 3 & 11 & 5 & 35
@@ -1000,7 +939,7 @@ and
 ![III \\leftarrow III - 3 I](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;III%20%5Cleftarrow%20III%20-%203%20I "III \leftarrow III - 3 I").
 
 ![
-\\mathbf{A_a} = \\begin{pmatrix}
+\\mathbf{A\_a} = \\begin{pmatrix}
 1 & 3 & 1 & 9 \\\\
 0 & -2 & -2 & -8\\\\
 0 & 2 & 2 & 8
@@ -1017,7 +956,7 @@ Apply
 ![III \\leftarrow III + II](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;III%20%5Cleftarrow%20III%20%2B%20II "III \leftarrow III + II").
 
 ![
-\\mathbf{A_a} = \\begin{pmatrix}
+\\mathbf{A\_a} = \\begin{pmatrix}
 1 & 3 & 1 & 9 \\\\
 0 & -2 & -2 & -8\\\\
 0 & 0 & 0 & 0
@@ -1032,18 +971,18 @@ Apply
 
 The bottom row tells us nothing. The second row tells us there is a free
 variable, which we take to be
-![x_3](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_3 "x_3").
+![x\_3](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_3 "x_3").
 So we solve this equation for
-![x_2](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_2 "x_2"),
+![x\_2](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_2 "x_2"),
 finding
-![x_2 = 4 -x_3](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_2%20%3D%204%20-x_3 "x_2 = 4 -x_3").
+![x\_2 = 4 -x\_3](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_2%20%3D%204%20-x_3 "x_2 = 4 -x_3").
 This is called back substitution. Then we do back substitution on the
 top row, from which we find
-![x_1 = 9 - x_3 - 3 x_2 = 9 - x_3 - 3(4 - x_3) = -3 + 2x_3](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_1%20%3D%209%20-%20x_3%20-%203%20x_2%20%3D%209%20-%20x_3%20-%203%284%20-%20x_3%29%20%3D%20-3%20%2B%202x_3 "x_1 = 9 - x_3 - 3 x_2 = 9 - x_3 - 3(4 - x_3) = -3 + 2x_3").
+![x\_1 = 9 - x\_3 - 3 x\_2 = 9 - x\_3 - 3(4 - x\_3) = -3 + 2x\_3](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_1%20%3D%209%20-%20x_3%20-%203%20x_2%20%3D%209%20-%20x_3%20-%203%284%20-%20x_3%29%20%3D%20-3%20%2B%202x_3 "x_1 = 9 - x_3 - 3 x_2 = 9 - x_3 - 3(4 - x_3) = -3 + 2x_3").
 Therefore, the solution is
 
 ![
-\\mathbf{x} = \\begin{pmatrix}  -3 + 2x_3 \\\\ 4 - x_3 \\\\ x_3 \\end{pmatrix} = \\begin{pmatrix}  -3 \\\\ 4\\\\ 0 \\end{pmatrix} + x_3 \\begin{pmatrix}  2 \\\\ -1 \\\\ 1 \\end{pmatrix}.
+\\mathbf{x} = \\begin{pmatrix}  -3 + 2x\_3 \\\\ 4 - x\_3 \\\\ x\_3 \\end{pmatrix} = \\begin{pmatrix}  -3 \\\\ 4\\\\ 0 \\end{pmatrix} + x\_3 \\begin{pmatrix}  2 \\\\ -1 \\\\ 1 \\end{pmatrix}.
 ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0A%5Cmathbf%7Bx%7D%20%3D%20%5Cbegin%7Bpmatrix%7D%20%20-3%20%2B%202x_3%20%5C%5C%204%20-%20x_3%20%5C%5C%20x_3%20%5Cend%7Bpmatrix%7D%20%3D%20%5Cbegin%7Bpmatrix%7D%20%20-3%20%5C%5C%204%5C%5C%200%20%5Cend%7Bpmatrix%7D%20%2B%20x_3%20%5Cbegin%7Bpmatrix%7D%20%202%20%5C%5C%20-1%20%5C%5C%201%20%5Cend%7Bpmatrix%7D.%0A "
 \mathbf{x} = \begin{pmatrix}  -3 + 2x_3 \\ 4 - x_3 \\ x_3 \end{pmatrix} = \begin{pmatrix}  -3 \\ 4\\ 0 \end{pmatrix} + x_3 \begin{pmatrix}  2 \\ -1 \\ 1 \end{pmatrix}.
 ")
@@ -1138,23 +1077,6 @@ t2/t1
     ##       elapsed 
     ## 5.29104477612
 
-# Matrix norms and conditioning
-
-## Big picture
-
-As we consider the solution of problems on a computer, we have to think
-about the effect of small errors on the solution of the problem. This is
-called conditioning. In the linear algebra setting, conditioning is
-intimitely related to matrix and vector norms.
-
-## Goals
-
--   Define forward and backward error
--   Define vector norms
--   Define matrix norms
--   Define condition number for solution of
-    ![\\mathbf{A}\\mathbf{x}=\\mathbf{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7BA%7D%5Cmathbf%7Bx%7D%3D%5Cmathbf%7Bb%7D "\mathbf{A}\mathbf{x}=\mathbf{b}")
-
 ## Forward and backward error
 
 In the solution of a computational problem, **forward error** is the
@@ -1164,18 +1086,6 @@ modified problem that the approximate solution satisfies. This probably
 sounds abstract, so let’s make it concrete in the cases of a
 root-finding problem and a linear algebra problem.
 
-<!-- For root-finding, suppose we want to solve $f(x)=0$. The true root is $x=r$ but our computational method finds an approximate solution $x=r_a$. The forward error is the distance between the two roots, that is, $|r-r_a|$. The backwards error is the difference between what you get when you plug in those roots, that is $|f(r)-f(r_a)|=|f(r_a)|\neq 0$. -->
-<!-- Here's a numerical example. -->
-<!-- ```{r cache=TRUE} -->
-<!-- P <- function(x){x^20} -->
-<!-- r <- 0 -->
-<!-- ra <- 0.2 -->
-<!-- P(r) -->
-<!-- P(ra) -->
-<!-- ``` -->
-<!-- The backwards error is minuscule but the forwards error is larger by a factor of about $2 \times 10^{13}$. -->
-<!-- Turning to linear algebra, s -->
-
 Suppose we want to solve
 ![\\mathbf{A}\\mathbf{x}=b](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7BA%7D%5Cmathbf%7Bx%7D%3Db "\mathbf{A}\mathbf{x}=b").
 The true solution is
@@ -1183,7 +1093,7 @@ The true solution is
 but our computational method finds an approximate solution
 ![\\mathbf{x}\_a](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7Bx%7D_a "\mathbf{x}_a").
 The forward error is the distance between the two solutions, that is,
-![\|\|\\mathbf{x}-\\mathbf{x_a}\|\|](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7C%7C%5Cmathbf%7Bx%7D-%5Cmathbf%7Bx_a%7D%7C%7C "||\mathbf{x}-\mathbf{x_a}||").
+![\|\|\\mathbf{x}-\\mathbf{x\_a}\|\|](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7C%7C%5Cmathbf%7Bx%7D-%5Cmathbf%7Bx_a%7D%7C%7C "||\mathbf{x}-\mathbf{x_a}||").
 The backward error is the distance between what the matrix outputs when
 applied to those solutions, that is,
 ![\|\|\\mathbf{A}\\mathbf{x}-\\mathbf{A}\\mathbf{x}\_a\|\|=\|\|\\mathbf{b}-\\mathbf{A}\\mathbf{x}\_a\|\|](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7C%7C%5Cmathbf%7BA%7D%5Cmathbf%7Bx%7D-%5Cmathbf%7BA%7D%5Cmathbf%7Bx%7D_a%7C%7C%3D%7C%7C%5Cmathbf%7Bb%7D-%5Cmathbf%7BA%7D%5Cmathbf%7Bx%7D_a%7C%7C "||\mathbf{A}\mathbf{x}-\mathbf{A}\mathbf{x}_a||=||\mathbf{b}-\mathbf{A}\mathbf{x}_a||").
@@ -1200,7 +1110,7 @@ this rule must satisfy in order to be a norm, but rather than stating
 those requirements, I’m going to just tell you some practicalities.
 
 The vector norm we’ll work with is called the
-**![p](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;p "p")-norm**.
+![p](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;p "p")-norm.
 The
 ![p](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;p "p")-norm
 for
@@ -1208,7 +1118,7 @@ for
 is defined as
 
 ![
-\|\| \\mathbf{x} \|\|\_p = \\left({\|x_1\|^p + \|x_2\|^p + \\cdots + \|x_n\|^p} \\right)^{1/p}.
+\|\| \\mathbf{x} \|\|\_p = \\left({\|x\_1\|^p + \|x\_2\|^p + \\cdots + \|x\_n\|^p} \\right)^{1/p}.
 ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0A%7C%7C%20%5Cmathbf%7Bx%7D%20%7C%7C_p%20%3D%20%5Cleft%28%7B%7Cx_1%7C%5Ep%20%2B%20%7Cx_2%7C%5Ep%20%2B%20%5Ccdots%20%2B%20%7Cx_n%7C%5Ep%7D%20%5Cright%29%5E%7B1%2Fp%7D.%0A "
 || \mathbf{x} ||_p = \left({|x_1|^p + |x_2|^p + \cdots + |x_n|^p} \right)^{1/p}.
 ")
@@ -1224,7 +1134,7 @@ most natural:
     (the Manhattan or taxicab norm)
 
     ![
-    \|\| \\mathbf{x} \|\|\_1 =\|x_1\| + \|x_2\| + \\cdots + \|x_n\|
+    \|\| \\mathbf{x} \|\|\_1 =\|x\_1\| + \|x\_2\| + \\cdots + \|x\_n\|
     ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0A%7C%7C%20%5Cmathbf%7Bx%7D%20%7C%7C_1%20%3D%7Cx_1%7C%20%2B%20%7Cx_2%7C%20%2B%20%5Ccdots%20%2B%20%7Cx_n%7C%0A "
     || \mathbf{x} ||_1 =|x_1| + |x_2| + \cdots + |x_n|
     ")
@@ -1232,14 +1142,14 @@ most natural:
     (the Euclidean norm)
 
     ![
-    \|\| \\mathbf{x} \|\|\_2 = \\sqrt{x_1^2 + x_2^2 + \\cdots + x_n^2\\ } = \\sqrt{\\mathbf{x} \\cdot \\mathbf{x}}
+    \|\| \\mathbf{x} \|\|\_2 = \\sqrt{x\_1^2 + x\_2^2 + \\cdots + x\_n^2\\ } = \\sqrt{\\mathbf{x} \\cdot \\mathbf{x}}
     ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0A%7C%7C%20%5Cmathbf%7Bx%7D%20%7C%7C_2%20%3D%20%5Csqrt%7Bx_1%5E2%20%2B%20x_2%5E2%20%2B%20%5Ccdots%20%2B%20x_n%5E2%5C%20%7D%20%3D%20%5Csqrt%7B%5Cmathbf%7Bx%7D%20%5Ccdot%20%5Cmathbf%7Bx%7D%7D%0A "
     || \mathbf{x} ||_2 = \sqrt{x_1^2 + x_2^2 + \cdots + x_n^2\ } = \sqrt{\mathbf{x} \cdot \mathbf{x}}
     ")
 -   ![p=\\infty](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;p%3D%5Cinfty "p=\infty")
 
     ![
-    \|\| \\mathbf{x} \|\|\_\\infty = \\max{\\left(\| x_1\|, \| x_2\|,  \\ldots, \|x_n\|\\right)}
+    \|\| \\mathbf{x} \|\|\_\\infty = \\max{\\left(\| x\_1\|, \| x\_2\|,  \\ldots, \|x\_n\|\\right)}
     ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0A%7C%7C%20%5Cmathbf%7Bx%7D%20%7C%7C_%5Cinfty%20%3D%20%5Cmax%7B%5Cleft%28%7C%20x_1%7C%2C%20%7C%20x_2%7C%2C%20%20%5Cldots%2C%20%7Cx_n%7C%5Cright%29%7D%0A "
     || \mathbf{x} ||_\infty = \max{\left(| x_1|, | x_2|,  \ldots, |x_n|\right)}
     ")
@@ -1488,7 +1398,7 @@ Consider:
 -   Let
     ![\\mathbf{A} = \\begin{pmatrix}0.913 & 0.659 \\\\ 0.457 & 0.330 \\end{pmatrix}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7BA%7D%20%3D%20%5Cbegin%7Bpmatrix%7D0.913%20%26%200.659%20%5C%5C%200.457%20%26%200.330%20%5Cend%7Bpmatrix%7D "\mathbf{A} = \begin{pmatrix}0.913 & 0.659 \\ 0.457 & 0.330 \end{pmatrix}")
 -   Then
-    ![\\kappa_2(A) = 1.25\\times10^4](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ckappa_2%28A%29%20%3D%201.25%5Ctimes10%5E4 "\kappa_2(A) = 1.25\times10^4")
+    ![\\kappa\_2(A) = 1.25\\times10^4](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ckappa_2%28A%29%20%3D%201.25%5Ctimes10%5E4 "\kappa_2(A) = 1.25\times10^4")
 -   Let
     ![\\mathbf{b} = \\begin{pmatrix} 0.254 \\\\ 0.127 \\end{pmatrix}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7Bb%7D%20%3D%20%5Cbegin%7Bpmatrix%7D%200.254%20%5C%5C%200.127%20%5Cend%7Bpmatrix%7D "\mathbf{b} = \begin{pmatrix} 0.254 \\ 0.127 \end{pmatrix}")
 -   Then
@@ -1551,7 +1461,7 @@ acting on.
 
 Fortunately, there’s another way to calculate condition number:
 
-![\\kappa_p(\\mathbf{A})=\|\|\\mathbf{A}\|\|\_p\|\|\\mathbf{A}^{-1}\|\|\_p](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ckappa_p%28%5Cmathbf%7BA%7D%29%3D%7C%7C%5Cmathbf%7BA%7D%7C%7C_p%7C%7C%5Cmathbf%7BA%7D%5E%7B-1%7D%7C%7C_p "\kappa_p(\mathbf{A})=||\mathbf{A}||_p||\mathbf{A}^{-1}||_p")
+![\\kappa\_p(\\mathbf{A})=\|\|\\mathbf{A}\|\|\_p\|\|\\mathbf{A}^{-1}\|\|\_p](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ckappa_p%28%5Cmathbf%7BA%7D%29%3D%7C%7C%5Cmathbf%7BA%7D%7C%7C_p%7C%7C%5Cmathbf%7BA%7D%5E%7B-1%7D%7C%7C_p "\kappa_p(\mathbf{A})=||\mathbf{A}||_p||\mathbf{A}^{-1}||_p")
 
 The derivation of this identity is about 10 to 20 lines of linear
 algebra that I am happy to show you if you are interested. We can check
@@ -1980,7 +1890,7 @@ write
 as
 ![x = 3/(x-2)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x%20%3D%203%2F%28x-2%29 "x = 3/(x-2)").
 So you define an iteration
-![x\_{i+1} = 3/(x_i-2)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_%7Bi%2B1%7D%20%3D%203%2F%28x_i-2%29 "x_{i+1} = 3/(x_i-2)").
+![x\_{i+1} = 3/(x\_i-2)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_%7Bi%2B1%7D%20%3D%203%2F%28x_i-2%29 "x_{i+1} = 3/(x_i-2)").
 
 ``` r
 x <- -2
@@ -2110,7 +2020,7 @@ easier to check computationally, namely that
 is **strictly diagonally dominant**. This means
 
 ![
-\|a\_{ii}\| \> \\sum\_{j \\not=i} \|a\_{ij}\| \\quad\\text{in each row $i$.}
+\|a\_{ii}\| &gt; \\sum\_{j \\not=i} \|a\_{ij}\| \\quad\\text{in each row $i$.}
 ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0A%7Ca_%7Bii%7D%7C%20%3E%20%5Csum_%7Bj%20%5Cnot%3Di%7D%20%7Ca_%7Bij%7D%7C%20%5Cquad%5Ctext%7Bin%20each%20row%20%24i%24.%7D%0A "
 |a_{ii}| > \sum_{j \not=i} |a_{ij}| \quad\text{in each row $i$.}
 ")
@@ -2169,11 +2079,11 @@ given function as desired. Stated more precisely, this is the
 is defined and continuous on
 ![\[a,b\]](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ba%2Cb%5D "[a,b]").
 For each
-![\\epsilon \> 0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cepsilon%20%3E%200 "\epsilon > 0"),
+![\\epsilon &gt; 0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cepsilon%20%3E%200 "\epsilon > 0"),
 there exists a polynomial
 ![P(x)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;P%28x%29 "P(x)")
 with the property that
-![\|f(x)-P(x)\| \< \\epsilon](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7Cf%28x%29-P%28x%29%7C%20%3C%20%5Cepsilon "|f(x)-P(x)| < \epsilon")
+![\|f(x)-P(x)\| &lt; \\epsilon](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7Cf%28x%29-P%28x%29%7C%20%3C%20%5Cepsilon "|f(x)-P(x)| < \epsilon")
 for all
 ![x \\in \[a,b\]](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x%20%5Cin%20%5Ba%2Cb%5D "x \in [a,b]").
 
@@ -2238,19 +2148,19 @@ polynomial.
 
 I also call this method of interpolation “brute force.” Let’s start with
 an example. Suppose we have three data points
-![(x_1,y_1)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%28x_1%2Cy_1%29 "(x_1,y_1)"),
-![(x_2,y_2)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%28x_2%2Cy_2%29 "(x_2,y_2)"),
-![(x_3,y_3)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%28x_3%2Cy_3%29 "(x_3,y_3)").
+![(x\_1,y\_1)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%28x_1%2Cy_1%29 "(x_1,y_1)"),
+![(x\_2,y\_2)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%28x_2%2Cy_2%29 "(x_2,y_2)"),
+![(x\_3,y\_3)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%28x_3%2Cy_3%29 "(x_3,y_3)").
 The interpolating polynomial is
-![P(x) = c_0 + c_1 x + c_2 x^2](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;P%28x%29%20%3D%20c_0%20%2B%20c_1%20x%20%2B%20c_2%20x%5E2 "P(x) = c_0 + c_1 x + c_2 x^2"),
+![P(x) = c\_0 + c\_1 x + c\_2 x^2](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;P%28x%29%20%3D%20c_0%20%2B%20c_1%20x%20%2B%20c_2%20x%5E2 "P(x) = c_0 + c_1 x + c_2 x^2"),
 where we need to determine the coefficients. Let’s determine them simply
 by plugging in. We have the equations
 
 ![
 \\begin{align\*}
-c_0 + c_1 x_1 + c_2 x_1^2 &= y_1 \\\\
-c_0 + c_1 x_2 + c_2 x_2^2 &= y_2 \\\\
-c_0 + c_1 x_3 + c_2 x_3^2 &= y_3
+c\_0 + c\_1 x\_1 + c\_2 x\_1^2 &= y\_1 \\\\
+c\_0 + c\_1 x\_2 + c\_2 x\_2^2 &= y\_2 \\\\
+c\_0 + c\_1 x\_3 + c\_2 x\_3^2 &= y\_3
 \\end{align\*}
 ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0A%5Cbegin%7Balign%2A%7D%0Ac_0%20%2B%20c_1%20x_1%20%2B%20c_2%20x_1%5E2%20%26%3D%20y_1%20%5C%5C%0Ac_0%20%2B%20c_1%20x_2%20%2B%20c_2%20x_2%5E2%20%26%3D%20y_2%20%5C%5C%0Ac_0%20%2B%20c_1%20x_3%20%2B%20c_2%20x_3%5E2%20%26%3D%20y_3%0A%5Cend%7Balign%2A%7D%0A "
 \begin{align*}
@@ -2264,16 +2174,16 @@ We can write this in matrix form as
 
 ![
 \\begin{pmatrix}
-1 & x_1 & x_1^2 \\\\
-1 & x_2 & x_2^2 \\\\
-1 & x_3 & x_3^2
+1 & x\_1 & x\_1^2 \\\\
+1 & x\_2 & x\_2^2 \\\\
+1 & x\_3 & x\_3^2
 \\end{pmatrix}
 \\begin{pmatrix}
-c_0 \\\\ c_1 \\\\ c_2
+c\_0 \\\\ c\_1 \\\\ c\_2
 \\end{pmatrix}
 =
 \\begin{pmatrix}
-y_1 \\\\ y_2 \\\\ y_3
+y\_1 \\\\ y\_2 \\\\ y\_3
 \\end{pmatrix}
 ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0A%5Cbegin%7Bpmatrix%7D%0A1%20%26%20x_1%20%26%20x_1%5E2%20%5C%5C%0A1%20%26%20x_2%20%26%20x_2%5E2%20%5C%5C%0A1%20%26%20x_3%20%26%20x_3%5E2%0A%5Cend%7Bpmatrix%7D%0A%5Cbegin%7Bpmatrix%7D%0Ac_0%20%5C%5C%20c_1%20%5C%5C%20c_2%0A%5Cend%7Bpmatrix%7D%0A%3D%0A%5Cbegin%7Bpmatrix%7D%0Ay_1%20%5C%5C%20y_2%20%5C%5C%20y_3%0A%5Cend%7Bpmatrix%7D%0A "
 \begin{pmatrix}
@@ -2291,22 +2201,22 @@ y_1 \\ y_2 \\ y_3
 ")
 
 and solve the linear system to find the coefficients
-![c_i](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;c_i "c_i").
+![c\_i](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;c_i "c_i").
 More generally, for
 ![n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;n "n")
 data points, the problem is
 
 ![
 \\begin{pmatrix}
-1 & x_1 & x_1^2 &  & x_1^{n-1} \\\\ 
-1 & x_2 & x_2^2 & \\cdots & x_2^{n-1} \\\\ 
-1 & x_3 & x_3^2 &  & x_3^{n-1} \\\\ 
+1 & x\_1 & x\_1^2 &  & x\_1^{n-1} \\\\ 
+1 & x\_2 & x\_2^2 & \\cdots & x\_2^{n-1} \\\\ 
+1 & x\_3 & x\_3^2 &  & x\_3^{n-1} \\\\ 
 &  \\vdots &  &  & \\vdots \\\\ 
-1 & x_n & x_n^2 & \\cdots & x_n^{n-1} \\\\ 
+1 & x\_n & x\_n^2 & \\cdots & x\_n^{n-1} \\\\ 
 \\end{pmatrix}
-\\begin{pmatrix} c_0 \\\\ c_1 \\\\ c_2 \\\\ \\vdots \\\\ c\_{n-1} \\end{pmatrix}
+\\begin{pmatrix} c\_0 \\\\ c\_1 \\\\ c\_2 \\\\ \\vdots \\\\ c\_{n-1} \\end{pmatrix}
 = 
-\\begin{pmatrix} y_1 \\\\ y_2 \\\\ y_3 \\\\ \\vdots \\\\ y_n \\end{pmatrix}.
+\\begin{pmatrix} y\_1 \\\\ y\_2 \\\\ y\_3 \\\\ \\vdots \\\\ y\_n \\end{pmatrix}.
 ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0A%5Cbegin%7Bpmatrix%7D%0A1%20%26%20x_1%20%26%20x_1%5E2%20%26%20%20%26%20x_1%5E%7Bn-1%7D%20%5C%5C%20%0A1%20%26%20x_2%20%26%20x_2%5E2%20%26%20%5Ccdots%20%26%20x_2%5E%7Bn-1%7D%20%5C%5C%20%0A1%20%26%20x_3%20%26%20x_3%5E2%20%26%20%20%26%20x_3%5E%7Bn-1%7D%20%5C%5C%20%0A%26%20%20%5Cvdots%20%26%20%20%26%20%20%26%20%5Cvdots%20%5C%5C%20%0A1%20%26%20x_n%20%26%20x_n%5E2%20%26%20%5Ccdots%20%26%20x_n%5E%7Bn-1%7D%20%5C%5C%20%0A%5Cend%7Bpmatrix%7D%0A%5Cbegin%7Bpmatrix%7D%20c_0%20%5C%5C%20c_1%20%5C%5C%20c_2%20%5C%5C%20%5Cvdots%20%5C%5C%20c_%7Bn-1%7D%20%5Cend%7Bpmatrix%7D%0A%3D%20%0A%5Cbegin%7Bpmatrix%7D%20y_1%20%5C%5C%20y_2%20%5C%5C%20y_3%20%5C%5C%20%5Cvdots%20%5C%5C%20y_n%20%5Cend%7Bpmatrix%7D.%0A "
 \begin{pmatrix}
 1 & x_1 & x_1^2 &  & x_1^{n-1} \\ 
@@ -2321,7 +2231,7 @@ data points, the problem is
 ")
 
 It can be proven that if the
-![x_i](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_i "x_i")
+![x\_i](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_i "x_i")
 are distinct, the matrix has nonzero determinant, and hence the system
 is solvable with a unique solution.
 
@@ -2477,11 +2387,11 @@ c
 
 Following the pattern we established above, the Langrange polynomial for
 points
-![(x_1,y_1),\\ldots,(x_n,y_n)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%28x_1%2Cy_1%29%2C%5Cldots%2C%28x_n%2Cy_n%29 "(x_1,y_1),\ldots,(x_n,y_n)")
+![(x\_1,y\_1),\\ldots,(x\_n,y\_n)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%28x_1%2Cy_1%29%2C%5Cldots%2C%28x_n%2Cy_n%29 "(x_1,y_1),\ldots,(x_n,y_n)")
 is
 
 ![
-p(x) = \\sum\_{i = 1}^n y_i \\prod\_{j \\not = i} \\frac{(x - x_j)}{(x_i - x_j)}.
+p(x) = \\sum\_{i = 1}^n y\_i \\prod\_{j \\not = i} \\frac{(x - x\_j)}{(x\_i - x\_j)}.
 ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0Ap%28x%29%20%3D%20%5Csum_%7Bi%20%3D%201%7D%5En%20y_i%20%5Cprod_%7Bj%20%5Cnot%20%3D%20i%7D%20%5Cfrac%7B%28x%20-%20x_j%29%7D%7B%28x_i%20-%20x_j%29%7D.%0A "
 p(x) = \sum_{i = 1}^n y_i \prod_{j \not = i} \frac{(x - x_j)}{(x_i - x_j)}.
 ")
@@ -2667,7 +2577,7 @@ that is about Taylor polynomials. We’ll construct Taylor polynomials of
 increasing degree to estimate the function
 ![f(x) = \\cos(x)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;f%28x%29%20%3D%20%5Ccos%28x%29 "f(x) = \cos(x)")
 around the point
-![x_0=0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_0%3D0 "x_0=0")
+![x\_0=0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_0%3D0 "x_0=0")
 on
 ![\[0,2\\pi\]](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5B0%2C2%5Cpi%5D "[0,2\pi]").
 The
@@ -2700,7 +2610,7 @@ for (n in seq(from=0,to=14,by=2)){
 So more terms are better, right? Let’s try again with the function
 ![f(x) = 1/x](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;f%28x%29%20%3D%201%2Fx "f(x) = 1/x")
 around the point
-![x_0=1](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_0%3D1 "x_0=1").
+![x\_0=1](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_0%3D1 "x_0=1").
 The
 ![n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;n "n")th
 degree Taylor polynomial is
@@ -2806,11 +2716,11 @@ degree Taylor series (that is,
 coefficients) of
 ![f(x)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;f%28x%29 "f(x)")
 centered around
-![x=x_0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x%3Dx_0 "x=x_0"),
+![x=x\_0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x%3Dx_0 "x=x_0"),
 the magnitude of the error term is
 
 ![
-\\left\|\\frac{f^{(n)}(c)}{n!}(x-x_0)^{n}\\right\|
+\\left\|\\frac{f^{(n)}(c)}{n!}(x-x\_0)^{n}\\right\|
 ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0A%5Cleft%7C%5Cfrac%7Bf%5E%7B%28n%29%7D%28c%29%7D%7Bn%21%7D%28x-x_0%29%5E%7Bn%7D%5Cright%7C%0A "
 \left|\frac{f^{(n)}(c)}{n!}(x-x_0)^{n}\right|
 ")
@@ -2820,21 +2730,21 @@ where
 is a number between
 ![x](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x "x")
 and
-![x_0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_0 "x_0").
+![x\_0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_0 "x_0").
 For an interpolating polynomial constructed from
 ![n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;n "n")
 points on an interval
-![\[x_1,x_n\]](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Bx_1%2Cx_n%5D "[x_1,x_n]"),
+![\[x\_1,x\_n\]](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Bx_1%2Cx_n%5D "[x_1,x_n]"),
 the interpolation error is
 
 ![
-\\left\|\\frac{f^{(n)}(c)}{n!}(x-x_1)(x-x_2)\\cdots (x-x_n)\\right\|
+\\left\|\\frac{f^{(n)}(c)}{n!}(x-x\_1)(x-x\_2)\\cdots (x-x\_n)\\right\|
 ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0A%5Cleft%7C%5Cfrac%7Bf%5E%7B%28n%29%7D%28c%29%7D%7Bn%21%7D%28x-x_1%29%28x-x_2%29%5Ccdots%20%28x-x_n%29%5Cright%7C%0A "
 \left|\frac{f^{(n)}(c)}{n!}(x-x_1)(x-x_2)\cdots (x-x_n)\right|
 ")
 
 for some
-![c \\in \[x_1,x_n\]](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;c%20%5Cin%20%5Bx_1%2Cx_n%5D "c \in [x_1,x_n]").
+![c \\in \[x\_1,x\_n\]](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;c%20%5Cin%20%5Bx_1%2Cx_n%5D "c \in [x_1,x_n]").
 If you are interested in the proof, it appears in your textbook and/or I
 am happy to go over it with you in office hours. Honestly, though, I
 find the proof to be totally nonintuitive and unenlightening.
@@ -2877,9 +2787,9 @@ interpolating polynomial that goes through all the points.) We have
 
 ![
 \\begin{align\*}
-\|f(x) - P_1(x)\| &= \\left\|\\frac{f^{(n)}(c)}{n!}(x-x_1)(x-x_2)\\cdots (x-x_n)\\right\|\\\\
-&= \\left\|\\frac{\\left(\\mathrm{e}^{x}\\right)^{''}\|\_c}{2!}(x-x_1)(x-x_2)\\right\| \\\\
-& = \\left\|\\frac{\\mathrm{e}^{c}}{2} (x-x_1)(x-x_1-h)\\right\|
+\|f(x) - P\_1(x)\| &= \\left\|\\frac{f^{(n)}(c)}{n!}(x-x\_1)(x-x\_2)\\cdots (x-x\_n)\\right\|\\\\
+&= \\left\|\\frac{\\left(\\mathrm{e}^{x}\\right)^{''}\|\_c}{2!}(x-x\_1)(x-x\_2)\\right\| \\\\
+& = \\left\|\\frac{\\mathrm{e}^{c}}{2} (x-x\_1)(x-x\_1-h)\\right\|
 \\end{align\*}
 ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0A%5Cbegin%7Balign%2A%7D%0A%7Cf%28x%29%20-%20P_1%28x%29%7C%20%26%3D%20%5Cleft%7C%5Cfrac%7Bf%5E%7B%28n%29%7D%28c%29%7D%7Bn%21%7D%28x-x_1%29%28x-x_2%29%5Ccdots%20%28x-x_n%29%5Cright%7C%5C%5C%0A%26%3D%20%5Cleft%7C%5Cfrac%7B%5Cleft%28%5Cmathrm%7Be%7D%5E%7Bx%7D%5Cright%29%5E%7B%27%27%7D%7C_c%7D%7B2%21%7D%28x-x_1%29%28x-x_2%29%5Cright%7C%20%5C%5C%0A%26%20%3D%20%5Cleft%7C%5Cfrac%7B%5Cmathrm%7Be%7D%5E%7Bc%7D%7D%7B2%7D%20%28x-x_1%29%28x-x_1-h%29%5Cright%7C%0A%5Cend%7Balign%2A%7D%0A "
 \begin{align*}
@@ -2892,9 +2802,9 @@ interpolating polynomial that goes through all the points.) We have
 Here, I’ve called the spacing between the two points
 ![h](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;h "h"),
 that is
-![x_2 = x_1 + h](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_2%20%3D%20x_1%20%2B%20h "x_2 = x_1 + h").
+![x\_2 = x\_1 + h](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_2%20%3D%20x_1%20%2B%20h "x_2 = x_1 + h").
 Now, we can ask what is the worst (biggest) that the term
-![\\left\|(x-x_1)(x-x_1-h)\\right\|](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cleft%7C%28x-x_1%29%28x-x_1-h%29%5Cright%7C "\left|(x-x_1)(x-x_1-h)\right|")
+![\\left\|(x-x\_1)(x-x\_1-h)\\right\|](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cleft%7C%28x-x_1%29%28x-x_1-h%29%5Cright%7C "\left|(x-x_1)(x-x_1-h)\right|")
 can be, and via calculus, we can show it is
 ![h^2/4](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;h%5E2%2F4 "h^2/4").
 Also, on our interval of interest, we know that
@@ -2902,7 +2812,7 @@ Also, on our interval of interest, we know that
 Therefore, we can write
 
 ![
-\|f(x) - P_1(x)\| \\leq \\frac{\\mathrm{e}h^2}{8}.
+\|f(x) - P\_1(x)\| \\leq \\frac{\\mathrm{e}h^2}{8}.
 ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0A%7Cf%28x%29%20-%20P_1%28x%29%7C%20%5Cleq%20%5Cfrac%7B%5Cmathrm%7Be%7Dh%5E2%7D%7B8%7D.%0A "
 |f(x) - P_1(x)| \leq \frac{\mathrm{e}h^2}{8}.
 ")
@@ -2972,7 +2882,7 @@ points on
 we should choose nodes
 
 ![
-x_i = \\cos \\frac{(2i-1)\\pi}{2n}, \\quad i = 1,\\ldots,n
+x\_i = \\cos \\frac{(2i-1)\\pi}{2n}, \\quad i = 1,\\ldots,n
 ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0Ax_i%20%3D%20%5Ccos%20%5Cfrac%7B%282i-1%29%5Cpi%7D%7B2n%7D%2C%20%5Cquad%20i%20%3D%201%2C%5Cldots%2Cn%0A "
 x_i = \cos \frac{(2i-1)\pi}{2n}, \quad i = 1,\ldots,n
 ")
@@ -2980,7 +2890,7 @@ x_i = \cos \frac{(2i-1)\pi}{2n}, \quad i = 1,\ldots,n
 and the maximum magnitude of the relevant portion of the error term is
 
 ![
-\\max\_{-1\\leq x\\leq 1}\\left\|\\prod\_{i=1}^n (x-x_i)\\right\| = \\frac{1}{2^{n-1}}.
+\\max\_{-1\\leq x\\leq 1}\\left\|\\prod\_{i=1}^n (x-x\_i)\\right\| = \\frac{1}{2^{n-1}}.
 ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0A%5Cmax_%7B-1%5Cleq%20x%5Cleq%201%7D%5Cleft%7C%5Cprod_%7Bi%3D1%7D%5En%20%28x-x_i%29%5Cright%7C%20%3D%20%5Cfrac%7B1%7D%7B2%5E%7Bn-1%7D%7D.%0A "
 \max_{-1\leq x\leq 1}\left|\prod_{i=1}^n (x-x_i)\right| = \frac{1}{2^{n-1}}.
 ")
@@ -2990,7 +2900,7 @@ If we generalize these results to the interval
 we find
 
 ![
-x_i = \\frac{b+a}{2} + \\frac{b-a}{2}\\cos \\frac{(2i-1)\\pi}{2n}, \\quad i = 1,\\ldots,n
+x\_i = \\frac{b+a}{2} + \\frac{b-a}{2}\\cos \\frac{(2i-1)\\pi}{2n}, \\quad i = 1,\\ldots,n
 ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0Ax_i%20%3D%20%5Cfrac%7Bb%2Ba%7D%7B2%7D%20%2B%20%5Cfrac%7Bb-a%7D%7B2%7D%5Ccos%20%5Cfrac%7B%282i-1%29%5Cpi%7D%7B2n%7D%2C%20%5Cquad%20i%20%3D%201%2C%5Cldots%2Cn%0A "
 x_i = \frac{b+a}{2} + \frac{b-a}{2}\cos \frac{(2i-1)\pi}{2n}, \quad i = 1,\ldots,n
 ")
@@ -2998,7 +2908,7 @@ x_i = \frac{b+a}{2} + \frac{b-a}{2}\cos \frac{(2i-1)\pi}{2n}, \quad i = 1,\ldots
 with
 
 ![
-\\max\_{a\\leq x\\leq b}\\left\|\\prod\_{i=1}^n (x-x_i)\\right\| = \\frac{\\left(\\frac{b-a}{2}\\right)^n}{2^{n-1}}.
+\\max\_{a\\leq x\\leq b}\\left\|\\prod\_{i=1}^n (x-x\_i)\\right\| = \\frac{\\left(\\frac{b-a}{2}\\right)^n}{2^{n-1}}.
 ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0A%5Cmax_%7Ba%5Cleq%20x%5Cleq%20b%7D%5Cleft%7C%5Cprod_%7Bi%3D1%7D%5En%20%28x-x_i%29%5Cright%7C%20%3D%20%5Cfrac%7B%5Cleft%28%5Cfrac%7Bb-a%7D%7B2%7D%5Cright%29%5En%7D%7B2%5E%7Bn-1%7D%7D.%0A "
 \max_{a\leq x\leq b}\left|\prod_{i=1}^n (x-x_i)\right| = \frac{\left(\frac{b-a}{2}\right)^n}{2^{n-1}}.
 ")
@@ -3139,7 +3049,7 @@ this work though?
 ## Mathematical conditions for cubic splines
 
 Suppose we have data points
-![(x_1,y_1),\\ldots,(x_n,y_n)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%28x_1%2Cy_1%29%2C%5Cldots%2C%28x_n%2Cy_n%29 "(x_1,y_1),\ldots,(x_n,y_n)").
+![(x\_1,y\_1),\\ldots,(x\_n,y\_n)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%28x_1%2Cy_1%29%2C%5Cldots%2C%28x_n%2Cy_n%29 "(x_1,y_1),\ldots,(x_n,y_n)").
 We will connect successive points with cubic curves. With
 ![n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;n "n")
 points, there are
@@ -3147,7 +3057,7 @@ points, there are
 curves. Each curve is cubic, having the form
 
 ![
-S_i(x) = a_i + b_i(x-x_i) + c_i(x-x_i)^2 + d_i(x-x_i)^3.
+S\_i(x) = a\_i + b\_i(x-x\_i) + c\_i(x-x\_i)^2 + d\_i(x-x\_i)^3.
 ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0AS_i%28x%29%20%3D%20a_i%20%2B%20b_i%28x-x_i%29%20%2B%20c_i%28x-x_i%29%5E2%20%2B%20d_i%28x-x_i%29%5E3.%0A "
 S_i(x) = a_i + b_i(x-x_i) + c_i(x-x_i)^2 + d_i(x-x_i)^3.
 ")
@@ -3161,9 +3071,9 @@ coefficients.
 First, we force each spline to pass through its two endpoints (which
 also makes the overall spline curve continuous). By inspection, this
 forces
-![a_i=y_i](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;a_i%3Dy_i "a_i=y_i"),
+![a\_i=y\_i](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;a_i%3Dy_i "a_i=y_i"),
 and it also enforces a condition on the relationship between
-![b_i, c_i, d_i](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;b_i%2C%20c_i%2C%20d_i "b_i, c_i, d_i").
+![b\_i, c\_i, d\_i](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;b_i%2C%20c_i%2C%20d_i "b_i, c_i, d_i").
 So doing the bookkeeping, that is
 ![2(n-1)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;2%28n-1%29 "2(n-1)")
 conditions to enforce, which leaves
@@ -3172,17 +3082,17 @@ coefficients undetermined.
 
 Next, we force continuity of the first derivatives of successive
 splines. Note that at
-![x_1](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_1 "x_1")
+![x\_1](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_1 "x_1")
 there’s no condition to enforce, since there’s no spline to the left of
 it. And at
-![x_n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_n "x_n")
+![x\_n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_n "x_n")
 there’s no condition to enforce, since there’s no spline to the right of
 it. Therefore, we enforce conditions at the
 ![n-2](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;n-2 "n-2")
 points
-![x_2,\\ldots,x\_{n-1}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_2%2C%5Cldots%2Cx_%7Bn-1%7D "x_2,\ldots,x_{n-1}").
+![x\_2,\\ldots,x\_{n-1}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_2%2C%5Cldots%2Cx_%7Bn-1%7D "x_2,\ldots,x_{n-1}").
 Specifically, the condition is
-![S_i^'(x_i)=S\_{i-1}^'(x_i)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;S_i%5E%27%28x_i%29%3DS_%7Bi-1%7D%5E%27%28x_i%29 "S_i^'(x_i)=S_{i-1}^'(x_i)").
+![S\_i^'(x\_i)=S\_{i-1}^'(x\_i)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;S_i%5E%27%28x_i%29%3DS_%7Bi-1%7D%5E%27%28x_i%29 "S_i^'(x_i)=S_{i-1}^'(x_i)").
 Subtracting these
 ![n-2](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;n-2 "n-2")
 conditions from our previous count of
@@ -3194,9 +3104,9 @@ conditions left.
 Finally, we enforce continuity of the second derivatives of successive
 splines. This is very similar to enforcing the previous condition. The
 condition is
-![S_i^{''}(x_i)=S\_{i-1}^{''}(x_i)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;S_i%5E%7B%27%27%7D%28x_i%29%3DS_%7Bi-1%7D%5E%7B%27%27%7D%28x_i%29 "S_i^{''}(x_i)=S_{i-1}^{''}(x_i)")
+![S\_i^{''}(x\_i)=S\_{i-1}^{''}(x\_i)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;S_i%5E%7B%27%27%7D%28x_i%29%3DS_%7Bi-1%7D%5E%7B%27%27%7D%28x_i%29 "S_i^{''}(x_i)=S_{i-1}^{''}(x_i)")
 at the points
-![x_2,\\ldots,x\_{n-1}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_2%2C%5Cldots%2Cx_%7Bn-1%7D "x_2,\ldots,x_{n-1}").
+![x\_2,\\ldots,x\_{n-1}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_2%2C%5Cldots%2Cx_%7Bn-1%7D "x_2,\ldots,x_{n-1}").
 Substracting these
 ![n-2](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;n-2 "n-2")
 conditions from our previous total of
@@ -3214,14 +3124,14 @@ the most common choices are:
 
 -   **Natural spline**. The concavity at the left and right endpoints is
     zero, that is
-    ![S_1^{''}(x_1)=S\_{n-1}^{''}(x_n)=0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;S_1%5E%7B%27%27%7D%28x_1%29%3DS_%7Bn-1%7D%5E%7B%27%27%7D%28x_n%29%3D0 "S_1^{''}(x_1)=S_{n-1}^{''}(x_n)=0").
+    ![S\_1^{''}(x\_1)=S\_{n-1}^{''}(x\_n)=0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;S_1%5E%7B%27%27%7D%28x_1%29%3DS_%7Bn-1%7D%5E%7B%27%27%7D%28x_n%29%3D0 "S_1^{''}(x_1)=S_{n-1}^{''}(x_n)=0").
 -   **Clamped sline**. The concavity at the left and right endpoints is
     set to a user specified value, that is,
-    ![S_1^{''}(x_1)=m_1](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;S_1%5E%7B%27%27%7D%28x_1%29%3Dm_1 "S_1^{''}(x_1)=m_1")
+    ![S\_1^{''}(x\_1)=m\_1](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;S_1%5E%7B%27%27%7D%28x_1%29%3Dm_1 "S_1^{''}(x_1)=m_1")
     and
-    ![S\_{n-1}^{''}(x_n)=m_n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;S_%7Bn-1%7D%5E%7B%27%27%7D%28x_n%29%3Dm_n "S_{n-1}^{''}(x_n)=m_n").
+    ![S\_{n-1}^{''}(x\_n)=m\_n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;S_%7Bn-1%7D%5E%7B%27%27%7D%28x_n%29%3Dm_n "S_{n-1}^{''}(x_n)=m_n").
 -   **FMM (not-a-knot)**.
-    ![S_1=S_2](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;S_1%3DS_2 "S_1=S_2")
+    ![S\_1=S\_2](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;S_1%3DS_2 "S_1=S_2")
     is a single cubic equation that is run through the first 3 points,
     and
     ![S\_{n-2}=S\_{n-1}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;S_%7Bn-2%7D%3DS_%7Bn-1%7D "S_{n-2}=S_{n-1}")
@@ -3444,17 +3354,17 @@ The company would like to model this data so they can predict sales for
 other levels of advertising. The data looks roughly linear, and we have
 no reason to expect a complicated relationship, so let’s try modeling
 the data with a line,
-![s = x_0 + x_1 a](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;s%20%3D%20x_0%20%2B%20x_1%20a "s = x_0 + x_1 a")
+![s = x\_0 + x\_1 a](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;s%20%3D%20x_0%20%2B%20x_1%20a "s = x_0 + x_1 a")
 where
 ![x\_{0,1}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_%7B0%2C1%7D "x_{0,1}")
 are unknown coefficients. Plugging in to the model, we find
 
 ![
 \\begin{align}
-x_0 + 3x_1 &= 105\\\\
-x_0 + 4x_1 &= 117\\\\
-x_0 + 5x_1 &= 141\\\\
-x_0 + 6x_1 &= 152
+x\_0 + 3x\_1 &= 105\\\\
+x\_0 + 4x\_1 &= 117\\\\
+x\_0 + 5x\_1 &= 141\\\\
+x\_0 + 6x\_1 &= 152
 \\end{align}
 ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0A%5Cbegin%7Balign%7D%0Ax_0%20%2B%203x_1%20%26%3D%20105%5C%5C%0Ax_0%20%2B%204x_1%20%26%3D%20117%5C%5C%0Ax_0%20%2B%205x_1%20%26%3D%20141%5C%5C%0Ax_0%20%2B%206x_1%20%26%3D%20152%0A%5Cend%7Balign%7D%0A "
 \begin{align}
@@ -3468,7 +3378,7 @@ x_0 + 6x_1 &= 152
 which we can write in vector form as
 
 ![
-x_0 \\begin{pmatrix} 1 \\\\ 1 \\\\ 1 \\\\ 1 \\end{pmatrix} + x_1 \\begin{pmatrix} 3 \\\\ 4 \\\\ 5 \\\\ 6 \\end{pmatrix} = \\begin{pmatrix} 105 \\\\ 117 \\\\ 141 \\\\ 152 \\end{pmatrix}.
+x\_0 \\begin{pmatrix} 1 \\\\ 1 \\\\ 1 \\\\ 1 \\end{pmatrix} + x\_1 \\begin{pmatrix} 3 \\\\ 4 \\\\ 5 \\\\ 6 \\end{pmatrix} = \\begin{pmatrix} 105 \\\\ 117 \\\\ 141 \\\\ 152 \\end{pmatrix}.
 ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0Ax_0%20%5Cbegin%7Bpmatrix%7D%201%20%5C%5C%201%20%5C%5C%201%20%5C%5C%201%20%5Cend%7Bpmatrix%7D%20%2B%20x_1%20%5Cbegin%7Bpmatrix%7D%203%20%5C%5C%204%20%5C%5C%205%20%5C%5C%206%20%5Cend%7Bpmatrix%7D%20%3D%20%5Cbegin%7Bpmatrix%7D%20105%20%5C%5C%20117%20%5C%5C%20141%20%5C%5C%20152%20%5Cend%7Bpmatrix%7D.%0A "
 x_0 \begin{pmatrix} 1 \\ 1 \\ 1 \\ 1 \end{pmatrix} + x_1 \begin{pmatrix} 3 \\ 4 \\ 5 \\ 6 \end{pmatrix} = \begin{pmatrix} 105 \\ 117 \\ 141 \\ 152 \end{pmatrix}.
 ")
@@ -3660,7 +3570,7 @@ Let’s apply these same conceps to our original problem of predicting
 sales from advertising. We had
 
 ![
-x_0 \\begin{pmatrix} 1 \\\\ 1 \\\\ 1 \\\\ 1 \\end{pmatrix} + x_1 \\begin{pmatrix} 3 \\\\ 4 \\\\ 5 \\\\ 6 \\end{pmatrix} = \\begin{pmatrix} 105 \\\\ 117 \\\\ 141 \\\\ 152 \\end{pmatrix}
+x\_0 \\begin{pmatrix} 1 \\\\ 1 \\\\ 1 \\\\ 1 \\end{pmatrix} + x\_1 \\begin{pmatrix} 3 \\\\ 4 \\\\ 5 \\\\ 6 \\end{pmatrix} = \\begin{pmatrix} 105 \\\\ 117 \\\\ 141 \\\\ 152 \\end{pmatrix}
 ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0Ax_0%20%5Cbegin%7Bpmatrix%7D%201%20%5C%5C%201%20%5C%5C%201%20%5C%5C%201%20%5Cend%7Bpmatrix%7D%20%2B%20x_1%20%5Cbegin%7Bpmatrix%7D%203%20%5C%5C%204%20%5C%5C%205%20%5C%5C%206%20%5Cend%7Bpmatrix%7D%20%3D%20%5Cbegin%7Bpmatrix%7D%20105%20%5C%5C%20117%20%5C%5C%20141%20%5C%5C%20152%20%5Cend%7Bpmatrix%7D%0A "
 x_0 \begin{pmatrix} 1 \\ 1 \\ 1 \\ 1 \end{pmatrix} + x_1 \begin{pmatrix} 3 \\ 4 \\ 5 \\ 6 \end{pmatrix} = \begin{pmatrix} 105 \\ 117 \\ 141 \\ 152 \end{pmatrix}
 ")
@@ -3668,7 +3578,7 @@ x_0 \begin{pmatrix} 1 \\ 1 \\ 1 \\ 1 \end{pmatrix} + x_1 \begin{pmatrix} 3 \\ 4 
 which we’ll write symbolically as
 
 ![
-x_0 \\mathbf{a}\_0 + x_1 \\mathbf{a}\_1 = \\mathbf{b}.
+x\_0 \\mathbf{a}\_0 + x\_1 \\mathbf{a}\_1 = \\mathbf{b}.
 ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0Ax_0%20%5Cmathbf%7Ba%7D_0%20%2B%20x_1%20%5Cmathbf%7Ba%7D_1%20%3D%20%5Cmathbf%7Bb%7D.%0A "
 x_0 \mathbf{a}_0 + x_1 \mathbf{a}_1 = \mathbf{b}.
 ")
@@ -3686,9 +3596,9 @@ This picture gives rise to the equation
 
 ![
 \\begin{align}
-x_0 \\mathbf{a}\_0 + x_1 \\mathbf{a_1} + \\mathbf{r} &= \\mathbf{b} \\\\
-a_0 \\cdot \\mathbf{r} &= 0 \\\\
-a_1 \\cdot \\mathbf{r} &= 0.
+x\_0 \\mathbf{a}\_0 + x\_1 \\mathbf{a\_1} + \\mathbf{r} &= \\mathbf{b} \\\\
+a\_0 \\cdot \\mathbf{r} &= 0 \\\\
+a\_1 \\cdot \\mathbf{r} &= 0.
 \\end{align}
 ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0A%5Cbegin%7Balign%7D%0Ax_0%20%5Cmathbf%7Ba%7D_0%20%2B%20x_1%20%5Cmathbf%7Ba_1%7D%20%2B%20%5Cmathbf%7Br%7D%20%26%3D%20%5Cmathbf%7Bb%7D%20%5C%5C%0Aa_0%20%5Ccdot%20%5Cmathbf%7Br%7D%20%26%3D%200%20%5C%5C%0Aa_1%20%5Ccdot%20%5Cmathbf%7Br%7D%20%26%3D%200.%0A%5Cend%7Balign%7D%0A "
 \begin{align}
@@ -3703,8 +3613,8 @@ We find
 
 ![
 \\begin{align}
-x_0 \\mathbf{a}\_0\\cdot\\mathbf{a}\_0 + x_1 \\mathbf{a}\_0\\cdot\\mathbf{a}\_1 &= \\mathbf{a}\_0 \\cdot \\mathbf{b}\\\\
-x_0 \\mathbf{a}\_1\\cdot\\mathbf{a}\_0 + x_1 \\mathbf{a}\_1\\cdot\\mathbf{a}\_1 &= \\mathbf{a}\_1 \\cdot \\mathbf{b}
+x\_0 \\mathbf{a}\_0\\cdot\\mathbf{a}\_0 + x\_1 \\mathbf{a}\_0\\cdot\\mathbf{a}\_1 &= \\mathbf{a}\_0 \\cdot \\mathbf{b}\\\\
+x\_0 \\mathbf{a}\_1\\cdot\\mathbf{a}\_0 + x\_1 \\mathbf{a}\_1\\cdot\\mathbf{a}\_1 &= \\mathbf{a}\_1 \\cdot \\mathbf{b}
 \\end{align}
 ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0A%5Cbegin%7Balign%7D%0Ax_0%20%5Cmathbf%7Ba%7D_0%5Ccdot%5Cmathbf%7Ba%7D_0%20%2B%20x_1%20%5Cmathbf%7Ba%7D_0%5Ccdot%5Cmathbf%7Ba%7D_1%20%26%3D%20%5Cmathbf%7Ba%7D_0%20%5Ccdot%20%5Cmathbf%7Bb%7D%5C%5C%0Ax_0%20%5Cmathbf%7Ba%7D_1%5Ccdot%5Cmathbf%7Ba%7D_0%20%2B%20x_1%20%5Cmathbf%7Ba%7D_1%5Ccdot%5Cmathbf%7Ba%7D_1%20%26%3D%20%5Cmathbf%7Ba%7D_1%20%5Ccdot%20%5Cmathbf%7Bb%7D%0A%5Cend%7Balign%7D%0A "
 \begin{align}
@@ -3718,7 +3628,7 @@ second and third equations previously. Note that there is a matrix way
 to write this. we can write
 
 ![
-\\begin{pmatrix} \\mathbf{a}\_0^T \\\\ \\mathbf{a}\_1^T \\end{pmatrix} \\begin{pmatrix} \\mathbf{a}\_0 & \\mathbf{a}\_1 \\end{pmatrix} \\begin{pmatrix} x_0 \\\\ x_1 \\end{pmatrix} = \\begin{pmatrix} \\mathbf{a}\_0^T \\\\ \\mathbf{a}\_1^T \\end{pmatrix} \\mathbf{b}.
+\\begin{pmatrix} \\mathbf{a}\_0^T \\\\ \\mathbf{a}\_1^T \\end{pmatrix} \\begin{pmatrix} \\mathbf{a}\_0 & \\mathbf{a}\_1 \\end{pmatrix} \\begin{pmatrix} x\_0 \\\\ x\_1 \\end{pmatrix} = \\begin{pmatrix} \\mathbf{a}\_0^T \\\\ \\mathbf{a}\_1^T \\end{pmatrix} \\mathbf{b}.
 ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0A%5Cbegin%7Bpmatrix%7D%20%5Cmathbf%7Ba%7D_0%5ET%20%5C%5C%20%5Cmathbf%7Ba%7D_1%5ET%20%5Cend%7Bpmatrix%7D%20%5Cbegin%7Bpmatrix%7D%20%5Cmathbf%7Ba%7D_0%20%26%20%5Cmathbf%7Ba%7D_1%20%5Cend%7Bpmatrix%7D%20%5Cbegin%7Bpmatrix%7D%20x_0%20%5C%5C%20x_1%20%5Cend%7Bpmatrix%7D%20%3D%20%5Cbegin%7Bpmatrix%7D%20%5Cmathbf%7Ba%7D_0%5ET%20%5C%5C%20%5Cmathbf%7Ba%7D_1%5ET%20%5Cend%7Bpmatrix%7D%20%5Cmathbf%7Bb%7D.%0A "
 \begin{pmatrix} \mathbf{a}_0^T \\ \mathbf{a}_1^T \end{pmatrix} \begin{pmatrix} \mathbf{a}_0 & \mathbf{a}_1 \end{pmatrix} \begin{pmatrix} x_0 \\ x_1 \end{pmatrix} = \begin{pmatrix} \mathbf{a}_0^T \\ \mathbf{a}_1^T \end{pmatrix} \mathbf{b}.
 ")
@@ -3728,7 +3638,7 @@ If we let
 represent the matrix with columns
 ![\\mathbf{a}\_{0,1}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7Ba%7D_%7B0%2C1%7D "\mathbf{a}_{0,1}")
 and if we let
-![\\mathbf{x}=(x_0,x_1)^T](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7Bx%7D%3D%28x_0%2Cx_1%29%5ET "\mathbf{x}=(x_0,x_1)^T")
+![\\mathbf{x}=(x\_0,x\_1)^T](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7Bx%7D%3D%28x_0%2Cx_1%29%5ET "\mathbf{x}=(x_0,x_1)^T")
 then we can write the last equation as
 
 ![
@@ -3741,8 +3651,8 @@ These are the normal equations. For us, concretely, it looks like
 
 ![
 \\begin{align}
-\\begin{pmatrix} 1 & 1 & 1 & 1\\\\ 3 & 4 & 5 & 6\\end{pmatrix} \\begin{pmatrix} 1 & 3\\\\1 & 4\\\\ 1 & 5\\\\ 1& 6\\end{pmatrix}\\begin{pmatrix}x_1 \\\\ x_2 \\end{pmatrix} &= \\begin{pmatrix} 1 & 1 & 1 & 1\\\\ 3 & 4 & 5 & 6\\end{pmatrix} \\begin{pmatrix} 105 \\\\ 117 \\\\ 141 \\\\ 152\\end{pmatrix}\\\\
-\\begin{pmatrix} 4 & 18 \\\\ 18 & 86 \\end{pmatrix} \\begin{pmatrix} x_1 \\\\ x_2 \\end{pmatrix} &= \\begin{pmatrix} 515 \\\\ 2400 \\end{pmatrix}
+\\begin{pmatrix} 1 & 1 & 1 & 1\\\\ 3 & 4 & 5 & 6\\end{pmatrix} \\begin{pmatrix} 1 & 3\\\\1 & 4\\\\ 1 & 5\\\\ 1& 6\\end{pmatrix}\\begin{pmatrix}x\_1 \\\\ x\_2 \\end{pmatrix} &= \\begin{pmatrix} 1 & 1 & 1 & 1\\\\ 3 & 4 & 5 & 6\\end{pmatrix} \\begin{pmatrix} 105 \\\\ 117 \\\\ 141 \\\\ 152\\end{pmatrix}\\\\
+\\begin{pmatrix} 4 & 18 \\\\ 18 & 86 \\end{pmatrix} \\begin{pmatrix} x\_1 \\\\ x\_2 \\end{pmatrix} &= \\begin{pmatrix} 515 \\\\ 2400 \\end{pmatrix}
 \\end{align}
 ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0A%5Cbegin%7Balign%7D%0A%5Cbegin%7Bpmatrix%7D%201%20%26%201%20%26%201%20%26%201%5C%5C%203%20%26%204%20%26%205%20%26%206%5Cend%7Bpmatrix%7D%20%5Cbegin%7Bpmatrix%7D%201%20%26%203%5C%5C1%20%26%204%5C%5C%201%20%26%205%5C%5C%201%26%206%5Cend%7Bpmatrix%7D%5Cbegin%7Bpmatrix%7Dx_1%20%5C%5C%20x_2%20%5Cend%7Bpmatrix%7D%20%26%3D%20%5Cbegin%7Bpmatrix%7D%201%20%26%201%20%26%201%20%26%201%5C%5C%203%20%26%204%20%26%205%20%26%206%5Cend%7Bpmatrix%7D%20%5Cbegin%7Bpmatrix%7D%20105%20%5C%5C%20117%20%5C%5C%20141%20%5C%5C%20152%5Cend%7Bpmatrix%7D%5C%5C%0A%5Cbegin%7Bpmatrix%7D%204%20%26%2018%20%5C%5C%2018%20%26%2086%20%5Cend%7Bpmatrix%7D%20%5Cbegin%7Bpmatrix%7D%20x_1%20%5C%5C%20x_2%20%5Cend%7Bpmatrix%7D%20%26%3D%20%5Cbegin%7Bpmatrix%7D%20515%20%5C%5C%202400%20%5Cend%7Bpmatrix%7D%0A%5Cend%7Balign%7D%0A "
 \begin{align}
@@ -3754,7 +3664,7 @@ These are the normal equations. For us, concretely, it looks like
 which has solution
 
 ![
-\\begin{pmatrix} x_1 \\\\ x_2  \\end{pmatrix} = \\begin{pmatrix}  54.5 \\\\ 16.5 \\end{pmatrix}.
+\\begin{pmatrix} x\_1 \\\\ x\_2  \\end{pmatrix} = \\begin{pmatrix}  54.5 \\\\ 16.5 \\end{pmatrix}.
 ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0A%5Cbegin%7Bpmatrix%7D%20x_1%20%5C%5C%20x_2%20%20%5Cend%7Bpmatrix%7D%20%3D%20%5Cbegin%7Bpmatrix%7D%20%2054.5%20%5C%5C%2016.5%20%5Cend%7Bpmatrix%7D.%0A "
 \begin{pmatrix} x_1 \\ x_2  \end{pmatrix} = \begin{pmatrix}  54.5 \\ 16.5 \end{pmatrix}.
 ")
@@ -3836,9 +3746,9 @@ For instance, suppose that we wanted to fit a parabola to the data
 and
 ![(3,2)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%283%2C2%29 "(3,2)").
 We choose the model
-![y = c_0 + c_1 x + c_2 x^2](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;y%20%3D%20c_0%20%2B%20c_1%20x%20%2B%20c_2%20x%5E2 "y = c_0 + c_1 x + c_2 x^2")
+![y = c\_0 + c\_1 x + c\_2 x^2](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;y%20%3D%20c_0%20%2B%20c_1%20x%20%2B%20c_2%20x%5E2 "y = c_0 + c_1 x + c_2 x^2")
 where our unknown is the vector
-![\\mathbf{c}=(c_0,c_1,c_2)^T](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7Bc%7D%3D%28c_0%2Cc_1%2Cc_2%29%5ET "\mathbf{c}=(c_0,c_1,c_2)^T").
+![\\mathbf{c}=(c\_0,c\_1,c\_2)^T](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7Bc%7D%3D%28c_0%2Cc_1%2Cc_2%29%5ET "\mathbf{c}=(c_0,c_1,c_2)^T").
 Though
 ![x](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x "x")
 appears nonlinearly, the coefficients
@@ -3848,10 +3758,10 @@ want to solve
 
 ![
 \\begin{align}
-c_0 + c_1 \\cdot 0 + c_2 \\cdot 0^2 &= 6 \\\\
-c_0 + c_1 \\cdot 1 + c_2 \\cdot 1^2 &= 5 \\\\
-c_0 + c_1 \\cdot 2 + c_2 \\cdot 2^2 &= 2 \\\\
-c_0 + c_1 \\cdot 3 + c_2 \\cdot 3^2 &= 2
+c\_0 + c\_1 \\cdot 0 + c\_2 \\cdot 0^2 &= 6 \\\\
+c\_0 + c\_1 \\cdot 1 + c\_2 \\cdot 1^2 &= 5 \\\\
+c\_0 + c\_1 \\cdot 2 + c\_2 \\cdot 2^2 &= 2 \\\\
+c\_0 + c\_1 \\cdot 3 + c\_2 \\cdot 3^2 &= 2
 \\end{align}
 ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0A%5Cbegin%7Balign%7D%0Ac_0%20%2B%20c_1%20%5Ccdot%200%20%2B%20c_2%20%5Ccdot%200%5E2%20%26%3D%206%20%5C%5C%0Ac_0%20%2B%20c_1%20%5Ccdot%201%20%2B%20c_2%20%5Ccdot%201%5E2%20%26%3D%205%20%5C%5C%0Ac_0%20%2B%20c_1%20%5Ccdot%202%20%2B%20c_2%20%5Ccdot%202%5E2%20%26%3D%202%20%5C%5C%0Ac_0%20%2B%20c_1%20%5Ccdot%203%20%2B%20c_2%20%5Ccdot%203%5E2%20%26%3D%202%0A%5Cend%7Balign%7D%0A "
 \begin{align}
@@ -4372,7 +4282,7 @@ where:
     matrix which is upper triangular if
     ![r=n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;r%3Dn "r=n"),
     or the top portion of an upper triangular matrix if
-    ![r\<n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;r%3Cn "r<n").
+    ![r&lt;n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;r%3Cn "r<n").
 -   The columns of
     ![\\mathbf{Q}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7BQ%7D "\mathbf{Q}")
     span the same space as the columns of
@@ -4881,9 +4791,9 @@ To recap:
 1.  Solve the characteristic equation
     ![\\det (\\mathbf{A}- \\mathbf{I} \\lambda) = 0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cdet%20%28%5Cmathbf%7BA%7D-%20%5Cmathbf%7BI%7D%20%5Clambda%29%20%3D%200 "\det (\mathbf{A}- \mathbf{I} \lambda) = 0")
     to find the
-    ![\\lambda_i](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Clambda_i "\lambda_i").
+    ![\\lambda\_i](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Clambda_i "\lambda_i").
 2.  Solve
-    ![(\\mathbf{A}-\\mathbf{I}\\lambda_i)\\mathbf{v_i}=\\mathbf{0}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%28%5Cmathbf%7BA%7D-%5Cmathbf%7BI%7D%5Clambda_i%29%5Cmathbf%7Bv_i%7D%3D%5Cmathbf%7B0%7D "(\mathbf{A}-\mathbf{I}\lambda_i)\mathbf{v_i}=\mathbf{0}")
+    ![(\\mathbf{A}-\\mathbf{I}\\lambda\_i)\\mathbf{v\_i}=\\mathbf{0}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%28%5Cmathbf%7BA%7D-%5Cmathbf%7BI%7D%5Clambda_i%29%5Cmathbf%7Bv_i%7D%3D%5Cmathbf%7B0%7D "(\mathbf{A}-\mathbf{I}\lambda_i)\mathbf{v_i}=\mathbf{0}")
     to find the
     ![\\mathbf{v}\_i](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7Bv%7D_i "\mathbf{v}_i").
 
@@ -4923,7 +4833,7 @@ we solve:
 
 ![
 \\begin{align}
-(\\mathbf{A}-\\mathbf{I}\\lambda_1)\\mathbf{v}\_1&=\\mathbf{0}\\\\
+(\\mathbf{A}-\\mathbf{I}\\lambda\_1)\\mathbf{v}\_1&=\\mathbf{0}\\\\
 \\begin{pmatrix} -2 & 2 \\\\ 2 & -2 \\end{pmatrix}\\mathbf{v}\_1 &= \\mathbf{0} \\\\
 \\mathbf{v}\_1 &= \\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix}
 \\end{align}
@@ -4949,12 +4859,12 @@ Many applications of eigenvalues are intimiately tied up with the idea
 of **diagonalization** of matrices. Suppose
 ![\\mathbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7BA%7D "\mathbf{A}")
 has eigenpairs
-![\\lambda_i](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Clambda_i "\lambda_i"),
+![\\lambda\_i](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Clambda_i "\lambda_i"),
 ![\\mathbf{v}\_i](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7Bv%7D_i "\mathbf{v}_i"),
 ![i = 1,\\ldots,n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;i%20%3D%201%2C%5Cldots%2Cn "i = 1,\ldots,n").
 Then we can write down the definition of eigenpair for all pairs
 simultaneously:
-![\\mathbf{A} \\mathbf{v}\_i = \\lambda_i \\mathbf{v}\_i](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7BA%7D%20%5Cmathbf%7Bv%7D_i%20%3D%20%5Clambda_i%20%5Cmathbf%7Bv%7D_i "\mathbf{A} \mathbf{v}_i = \lambda_i \mathbf{v}_i")
+![\\mathbf{A} \\mathbf{v}\_i = \\lambda\_i \\mathbf{v}\_i](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7BA%7D%20%5Cmathbf%7Bv%7D_i%20%3D%20%5Clambda_i%20%5Cmathbf%7Bv%7D_i "\mathbf{A} \mathbf{v}_i = \lambda_i \mathbf{v}_i")
 implies
 
 ![
@@ -4965,14 +4875,14 @@ implies
 \\vert & \\vert & \\cdots & \\vert 
 \\end{pmatrix}}\_\\mathbf{S} &= 
 {\\begin{pmatrix} \\vert & \\vert & \\cdots & \\vert \\\\
-\\lambda_1 \\mathbf{v}\_1 & \\lambda_2 \\mathbf{v}\_2 & \\cdots & \\lambda_n \\mathbf{v}\_n \\\\
+\\lambda\_1 \\mathbf{v}\_1 & \\lambda\_2 \\mathbf{v}\_2 & \\cdots & \\lambda\_n \\mathbf{v}\_n \\\\
 \\vert & \\vert & \\cdots & \\vert 
 \\end{pmatrix}} \\\\
 &=\\underbrace{\\begin{pmatrix} \\vert & \\vert & \\cdots & \\vert \\\\
 \\mathbf{v}\_1 & \\mathbf{v}\_2 & \\cdots & \\mathbf{v}\_n \\\\
 \\vert & \\vert & \\cdots & \\vert 
 \\end{pmatrix}}\_\\mathbf{S}
-\\underbrace{\\begin{pmatrix} \\lambda_1 &&& \\\\ & \\lambda_2 & & \\\\ && \\ddots & \\\\ &&& \\lambda_n   \\end{pmatrix}}\_\\mathbf{\\Lambda}.
+\\underbrace{\\begin{pmatrix} \\lambda\_1 &&& \\\\ & \\lambda\_2 & & \\\\ && \\ddots & \\\\ &&& \\lambda\_n   \\end{pmatrix}}\_\\mathbf{\\Lambda}.
 \\end{align}
 ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0A%5Cbegin%7Balign%7D%0A%5Cmathbf%7BA%7D%20%5Cunderbrace%7B%5Cbegin%7Bpmatrix%7D%0A%5Cvert%20%26%20%5Cvert%20%26%20%5Ccdots%20%26%20%5Cvert%20%5C%5C%0A%5Cmathbf%7Bv%7D_1%20%26%20%5Cmathbf%7Bv%7D_2%20%26%20%5Ccdots%20%26%20%5Cmathbf%7Bv%7D_n%20%5C%5C%0A%5Cvert%20%26%20%5Cvert%20%26%20%5Ccdots%20%26%20%5Cvert%20%0A%5Cend%7Bpmatrix%7D%7D_%5Cmathbf%7BS%7D%20%26%3D%20%0A%7B%5Cbegin%7Bpmatrix%7D%20%5Cvert%20%26%20%5Cvert%20%26%20%5Ccdots%20%26%20%5Cvert%20%5C%5C%0A%5Clambda_1%20%5Cmathbf%7Bv%7D_1%20%26%20%5Clambda_2%20%5Cmathbf%7Bv%7D_2%20%26%20%5Ccdots%20%26%20%5Clambda_n%20%5Cmathbf%7Bv%7D_n%20%5C%5C%0A%5Cvert%20%26%20%5Cvert%20%26%20%5Ccdots%20%26%20%5Cvert%20%0A%5Cend%7Bpmatrix%7D%7D%20%5C%5C%0A%26%3D%5Cunderbrace%7B%5Cbegin%7Bpmatrix%7D%20%5Cvert%20%26%20%5Cvert%20%26%20%5Ccdots%20%26%20%5Cvert%20%5C%5C%0A%5Cmathbf%7Bv%7D_1%20%26%20%5Cmathbf%7Bv%7D_2%20%26%20%5Ccdots%20%26%20%5Cmathbf%7Bv%7D_n%20%5C%5C%0A%5Cvert%20%26%20%5Cvert%20%26%20%5Ccdots%20%26%20%5Cvert%20%0A%5Cend%7Bpmatrix%7D%7D_%5Cmathbf%7BS%7D%0A%5Cunderbrace%7B%5Cbegin%7Bpmatrix%7D%20%5Clambda_1%20%26%26%26%20%5C%5C%20%26%20%5Clambda_2%20%26%20%26%20%5C%5C%20%26%26%20%5Cddots%20%26%20%5C%5C%20%26%26%26%20%5Clambda_n%20%20%20%5Cend%7Bpmatrix%7D%7D_%5Cmathbf%7B%5CLambda%7D.%0A%5Cend%7Balign%7D%0A "
 \begin{align}
@@ -5048,21 +4958,21 @@ We’ll do one classic example: the Fibonacci sequence. First though,
 let’s do a quick warm-up problem. Suppose we have a sequence defined as
 
 ![
-A_0 = 2,\\quad A_n = 5A\_{n-1}.
+A\_0 = 2,\\quad A\_n = 5A\_{n-1}.
 ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0AA_0%20%3D%202%2C%5Cquad%20A_n%20%3D%205A_%7Bn-1%7D.%0A "
 A_0 = 2,\quad A_n = 5A_{n-1}.
 ")
 
 What is a formula for
-![A_n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;A_n "A_n")?
+![A\_n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;A_n "A_n")?
 Well, notice that
 
 ![
 \\begin{align}
-A_1 &= 2 \\cdot 5\\\\
-A_2 &= 2 \\cdot 5 \\cdot 5\\\\
+A\_1 &= 2 \\cdot 5\\\\
+A\_2 &= 2 \\cdot 5 \\cdot 5\\\\
 &\\vdots\\\\
-A_n &= 2 \\cdot 5^n.
+A\_n &= 2 \\cdot 5^n.
 \\end{align}
 ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0A%5Cbegin%7Balign%7D%0AA_1%20%26%3D%202%20%5Ccdot%205%5C%5C%0AA_2%20%26%3D%202%20%5Ccdot%205%20%5Ccdot%205%5C%5C%0A%26%5Cvdots%5C%5C%0AA_n%20%26%3D%202%20%5Ccdot%205%5En.%0A%5Cend%7Balign%7D%0A "
 \begin{align}
@@ -5076,7 +4986,7 @@ A_n &= 2 \cdot 5^n.
 We’ll need this result! Now recall the Fibonacci sequence,
 
 ![
-F_0 = 1,\\quad F_1 = 1, \\quad F_n = F\_{n-1} + F\_{n-2}, \\quad n \\geq 2.
+F\_0 = 1,\\quad F\_1 = 1, \\quad F\_n = F\_{n-1} + F\_{n-2}, \\quad n \\geq 2.
 ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0AF_0%20%3D%201%2C%5Cquad%20F_1%20%3D%201%2C%20%5Cquad%20F_n%20%3D%20F_%7Bn-1%7D%20%2B%20F_%7Bn-2%7D%2C%20%5Cquad%20n%20%5Cgeq%202.%0A "
 F_0 = 1,\quad F_1 = 1, \quad F_n = F_{n-1} + F_{n-2}, \quad n \geq 2.
 ")
@@ -5088,22 +4998,22 @@ then using the recursive definition above, you’d need to compute the
 terms that come before it. But is there a way to avoid doing this? That
 is, is there a way to come up with an explicit (non-recursive) formula
 for
-![F_n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;F_n "F_n")?
+![F\_n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;F_n "F_n")?
 
 So that we can use tools of linear algebra, let’s transform this to a
 problem involving a matrix. Define
-![G_n = F\_{n-1}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;G_n%20%3D%20F_%7Bn-1%7D "G_n = F_{n-1}").
+![G\_n = F\_{n-1}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;G_n%20%3D%20F_%7Bn-1%7D "G_n = F_{n-1}").
 Then substituting into the definition of
-![F_n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;F_n "F_n"),
+![F\_n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;F_n "F_n"),
 we can write
-![F_n = F\_{n-1} + G\_{n-1}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;F_n%20%3D%20F_%7Bn-1%7D%20%2B%20G_%7Bn-1%7D "F_n = F_{n-1} + G_{n-1}").
+![F\_n = F\_{n-1} + G\_{n-1}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;F_n%20%3D%20F_%7Bn-1%7D%20%2B%20G_%7Bn-1%7D "F_n = F_{n-1} + G_{n-1}").
 Putting it all together,
 
 ![
 \\begin{align}
-F_n &= F\_{n-1} + G\_{n-1} \\\\
-G_n &= F\_{n-1} \\\\
-\\begin{pmatrix} F_n \\\\ G_n \\end{pmatrix} &= \\begin{pmatrix} 1 & 1 \\\\ 1 & 0 \\end{pmatrix} \\begin{pmatrix} F\_{n-1} \\\\ G\_{n-1} \\end{pmatrix} \\\\
+F\_n &= F\_{n-1} + G\_{n-1} \\\\
+G\_n &= F\_{n-1} \\\\
+\\begin{pmatrix} F\_n \\\\ G\_n \\end{pmatrix} &= \\begin{pmatrix} 1 & 1 \\\\ 1 & 0 \\end{pmatrix} \\begin{pmatrix} F\_{n-1} \\\\ G\_{n-1} \\end{pmatrix} \\\\
 \\mathbf{F}\_n &= \\mathbf{A} \\mathbf{F}\_{n-1}.
 \\end{align}
 ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0A%5Cbegin%7Balign%7D%0AF_n%20%26%3D%20F_%7Bn-1%7D%20%2B%20G_%7Bn-1%7D%20%5C%5C%0AG_n%20%26%3D%20F_%7Bn-1%7D%20%5C%5C%0A%5Cbegin%7Bpmatrix%7D%20F_n%20%5C%5C%20G_n%20%5Cend%7Bpmatrix%7D%20%26%3D%20%5Cbegin%7Bpmatrix%7D%201%20%26%201%20%5C%5C%201%20%26%200%20%5Cend%7Bpmatrix%7D%20%5Cbegin%7Bpmatrix%7D%20F_%7Bn-1%7D%20%5C%5C%20G_%7Bn-1%7D%20%5Cend%7Bpmatrix%7D%20%5C%5C%0A%5Cmathbf%7BF%7D_n%20%26%3D%20%5Cmathbf%7BA%7D%20%5Cmathbf%7BF%7D_%7Bn-1%7D.%0A%5Cend%7Balign%7D%0A "
@@ -5198,7 +5108,7 @@ problem:
 Now define
 
 ![
-\\mathbf{S}^{-1} \\mathbf{F} = \\mathbf{S}^{-1} \\begin{pmatrix} F_n \\\\ G_n \\end{pmatrix} \\equiv  \\begin{pmatrix} A_n \\\\ B_n \\end{pmatrix}.
+\\mathbf{S}^{-1} \\mathbf{F} = \\mathbf{S}^{-1} \\begin{pmatrix} F\_n \\\\ G\_n \\end{pmatrix} \\equiv  \\begin{pmatrix} A\_n \\\\ B\_n \\end{pmatrix}.
 ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0A%5Cmathbf%7BS%7D%5E%7B-1%7D%20%5Cmathbf%7BF%7D%20%3D%20%5Cmathbf%7BS%7D%5E%7B-1%7D%20%5Cbegin%7Bpmatrix%7D%20F_n%20%5C%5C%20G_n%20%5Cend%7Bpmatrix%7D%20%5Cequiv%20%20%5Cbegin%7Bpmatrix%7D%20A_n%20%5C%5C%20B_n%20%5Cend%7Bpmatrix%7D.%0A "
 \mathbf{S}^{-1} \mathbf{F} = \mathbf{S}^{-1} \begin{pmatrix} F_n \\ G_n \end{pmatrix} \equiv  \begin{pmatrix} A_n \\ B_n \end{pmatrix}.
 ")
@@ -5207,8 +5117,8 @@ Then our problem becomes
 
 ![
 \\begin{align}
-\\begin{pmatrix} A_n \\\\ B_n \\end{pmatrix} &= \\mathbf{\\Lambda} \\begin{pmatrix} A\_{n-1} \\\\ B\_{n-1} \\end{pmatrix} \\\\
-\\begin{pmatrix} A_n \\\\ B_n \\end{pmatrix} &= \\begin{pmatrix} \\lambda\_+ &  0 \\\\ 0 & \\lambda\_- \\end{pmatrix} \\begin{pmatrix} A\_{n-1} \\\\ B\_{n-1}. \\end{pmatrix}
+\\begin{pmatrix} A\_n \\\\ B\_n \\end{pmatrix} &= \\mathbf{\\Lambda} \\begin{pmatrix} A\_{n-1} \\\\ B\_{n-1} \\end{pmatrix} \\\\
+\\begin{pmatrix} A\_n \\\\ B\_n \\end{pmatrix} &= \\begin{pmatrix} \\lambda\_+ &  0 \\\\ 0 & \\lambda\_- \\end{pmatrix} \\begin{pmatrix} A\_{n-1} \\\\ B\_{n-1}. \\end{pmatrix}
 \\end{align}
 ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0A%5Cbegin%7Balign%7D%0A%5Cbegin%7Bpmatrix%7D%20A_n%20%5C%5C%20B_n%20%5Cend%7Bpmatrix%7D%20%26%3D%20%5Cmathbf%7B%5CLambda%7D%20%5Cbegin%7Bpmatrix%7D%20A_%7Bn-1%7D%20%5C%5C%20B_%7Bn-1%7D%20%5Cend%7Bpmatrix%7D%20%5C%5C%0A%5Cbegin%7Bpmatrix%7D%20A_n%20%5C%5C%20B_n%20%5Cend%7Bpmatrix%7D%20%26%3D%20%5Cbegin%7Bpmatrix%7D%20%5Clambda_%2B%20%26%20%200%20%5C%5C%200%20%26%20%5Clambda_-%20%5Cend%7Bpmatrix%7D%20%5Cbegin%7Bpmatrix%7D%20A_%7Bn-1%7D%20%5C%5C%20B_%7Bn-1%7D.%20%5Cend%7Bpmatrix%7D%0A%5Cend%7Balign%7D%0A "
 \begin{align}
@@ -5222,28 +5132,28 @@ uncoupled, which makes them much easier to solve. In fact, they are
 geometrtic, just like the warm-up problem we did. We can write
 
 ![
-\\begin{pmatrix} A_n \\\\ B_n \\end{pmatrix} = \\begin{pmatrix}  A_0 \\lambda\_+^n \\\\ B_0 \\lambda\_-^n \\end{pmatrix}.
+\\begin{pmatrix} A\_n \\\\ B\_n \\end{pmatrix} = \\begin{pmatrix}  A\_0 \\lambda\_+^n \\\\ B\_0 \\lambda\_-^n \\end{pmatrix}.
 ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0A%5Cbegin%7Bpmatrix%7D%20A_n%20%5C%5C%20B_n%20%5Cend%7Bpmatrix%7D%20%3D%20%5Cbegin%7Bpmatrix%7D%20%20A_0%20%5Clambda_%2B%5En%20%5C%5C%20B_0%20%5Clambda_-%5En%20%5Cend%7Bpmatrix%7D.%0A "
 \begin{pmatrix} A_n \\ B_n \end{pmatrix} = \begin{pmatrix}  A_0 \lambda_+^n \\ B_0 \lambda_-^n \end{pmatrix}.
 ")
 
 But we didn’t want to know
-![A_n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;A_n "A_n")
+![A\_n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;A_n "A_n")
 and
-![B_n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;B_n "B_n").
+![B\_n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;B_n "B_n").
 We wanted to know
-![F_n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;F_n "F_n")
+![F\_n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;F_n "F_n")
 and
-![G_n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;G_n "G_n").
+![G\_n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;G_n "G_n").
 So we have to undo the transformation we did before. We have
 
 ![
 \\begin{align}
-\\mathbf{S}^{-1} \\mathbf{F} &= \\begin{pmatrix} A_n \\\\ B_n \\end{pmatrix} \\\\
-\\mathbf{S}^{-1} \\mathbf{F} &= \\begin{pmatrix}  A_0 \\lambda_1^n \\\\ B_0 \\lambda_2^n \\end{pmatrix} \\\\
-\\mathbf{F} &= \\mathbf{S} \\begin{pmatrix}  A_0 \\lambda_1^n \\\\ B_0 \\lambda_2^n \\end{pmatrix} \\\\
-\\mathbf{F} &= \\begin{pmatrix} \\lambda_1 & \\lambda_2 \\\\ 1 & 1 \\end{pmatrix} \\begin{pmatrix}  A_0 \\lambda_1^n \\\\ B_0 \\lambda_2^n \\end{pmatrix} \\\\
-\\mathbf{F} &= \\begin{pmatrix} \\lambda_1 A_0 \\lambda_1^n + \\lambda_2 B_0 \\lambda^2n \\\\ \\mathrm{doesn't\\ matter}\\end{pmatrix}.
+\\mathbf{S}^{-1} \\mathbf{F} &= \\begin{pmatrix} A\_n \\\\ B\_n \\end{pmatrix} \\\\
+\\mathbf{S}^{-1} \\mathbf{F} &= \\begin{pmatrix}  A\_0 \\lambda\_1^n \\\\ B\_0 \\lambda\_2^n \\end{pmatrix} \\\\
+\\mathbf{F} &= \\mathbf{S} \\begin{pmatrix}  A\_0 \\lambda\_1^n \\\\ B\_0 \\lambda\_2^n \\end{pmatrix} \\\\
+\\mathbf{F} &= \\begin{pmatrix} \\lambda\_1 & \\lambda\_2 \\\\ 1 & 1 \\end{pmatrix} \\begin{pmatrix}  A\_0 \\lambda\_1^n \\\\ B\_0 \\lambda\_2^n \\end{pmatrix} \\\\
+\\mathbf{F} &= \\begin{pmatrix} \\lambda\_1 A\_0 \\lambda\_1^n + \\lambda\_2 B\_0 \\lambda^2n \\\\ \\mathrm{doesn't\\ matter}\\end{pmatrix}.
 \\end{align}
 ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0A%5Cbegin%7Balign%7D%0A%5Cmathbf%7BS%7D%5E%7B-1%7D%20%5Cmathbf%7BF%7D%20%26%3D%20%5Cbegin%7Bpmatrix%7D%20A_n%20%5C%5C%20B_n%20%5Cend%7Bpmatrix%7D%20%5C%5C%0A%5Cmathbf%7BS%7D%5E%7B-1%7D%20%5Cmathbf%7BF%7D%20%26%3D%20%5Cbegin%7Bpmatrix%7D%20%20A_0%20%5Clambda_1%5En%20%5C%5C%20B_0%20%5Clambda_2%5En%20%5Cend%7Bpmatrix%7D%20%5C%5C%0A%5Cmathbf%7BF%7D%20%26%3D%20%5Cmathbf%7BS%7D%20%5Cbegin%7Bpmatrix%7D%20%20A_0%20%5Clambda_1%5En%20%5C%5C%20B_0%20%5Clambda_2%5En%20%5Cend%7Bpmatrix%7D%20%5C%5C%0A%5Cmathbf%7BF%7D%20%26%3D%20%5Cbegin%7Bpmatrix%7D%20%5Clambda_1%20%26%20%5Clambda_2%20%5C%5C%201%20%26%201%20%5Cend%7Bpmatrix%7D%20%5Cbegin%7Bpmatrix%7D%20%20A_0%20%5Clambda_1%5En%20%5C%5C%20B_0%20%5Clambda_2%5En%20%5Cend%7Bpmatrix%7D%20%5C%5C%0A%5Cmathbf%7BF%7D%20%26%3D%20%5Cbegin%7Bpmatrix%7D%20%5Clambda_1%20A_0%20%5Clambda_1%5En%20%2B%20%5Clambda_2%20B_0%20%5Clambda%5E2n%20%5C%5C%20%5Cmathrm%7Bdoesn%27t%5C%20matter%7D%5Cend%7Bpmatrix%7D.%0A%5Cend%7Balign%7D%0A "
 \begin{align}
@@ -5258,7 +5168,7 @@ So we have to undo the transformation we did before. We have
 Therefore,
 
 ![
-F_n = A_0 \\lambda\_+^{n+1} + B_0 \\lambda\_-^{n+1}.
+F\_n = A\_0 \\lambda\_+^{n+1} + B\_0 \\lambda\_-^{n+1}.
 ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0AF_n%20%3D%20A_0%20%5Clambda_%2B%5E%7Bn%2B1%7D%20%2B%20B_0%20%5Clambda_-%5E%7Bn%2B1%7D.%0A "
 F_n = A_0 \lambda_+^{n+1} + B_0 \lambda_-^{n+1}.
 ")
@@ -5267,8 +5177,8 @@ To find the unknown constants, we plug in the initial conditions.
 
 ![
 \\begin{align}
-F_0 &= A_0 \\lambda\_+ + B_0 \\lambda\_- = 1\\\\
-F_1 &= A_0 \\lambda\_+^2 + B_0 \\lambda\_-^2 = 1.
+F\_0 &= A\_0 \\lambda\_+ + B\_0 \\lambda\_- = 1\\\\
+F\_1 &= A\_0 \\lambda\_+^2 + B\_0 \\lambda\_-^2 = 1.
 \\end{align}
 ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0A%5Cbegin%7Balign%7D%0AF_0%20%26%3D%20A_0%20%5Clambda_%2B%20%2B%20B_0%20%5Clambda_-%20%3D%201%5C%5C%0AF_1%20%26%3D%20A_0%20%5Clambda_%2B%5E2%20%2B%20B_0%20%5Clambda_-%5E2%20%3D%201.%0A%5Cend%7Balign%7D%0A "
 \begin{align}
@@ -5278,12 +5188,12 @@ F_1 &= A_0 \lambda_+^2 + B_0 \lambda_-^2 = 1.
 ")
 
 Solving, we find
-![A_0 = 1/\\sqrt{5}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;A_0%20%3D%201%2F%5Csqrt%7B5%7D "A_0 = 1/\sqrt{5}"),
-![B_0 = -1/\\sqrt{5}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;B_0%20%3D%20-1%2F%5Csqrt%7B5%7D "B_0 = -1/\sqrt{5}").
+![A\_0 = 1/\\sqrt{5}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;A_0%20%3D%201%2F%5Csqrt%7B5%7D "A_0 = 1/\sqrt{5}"),
+![B\_0 = -1/\\sqrt{5}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;B_0%20%3D%20-1%2F%5Csqrt%7B5%7D "B_0 = -1/\sqrt{5}").
 The final answer, then, is
 
 ![
-F_n = \\frac{1}{\\sqrt{5}}\\lambda\_+^{n+1} - \\frac{1}{\\sqrt{5}}\\lambda\_-^{n+1},\\quad \\lambda\_\\pm = \\frac{1 \\pm \\sqrt{5}}{2}.
+F\_n = \\frac{1}{\\sqrt{5}}\\lambda\_+^{n+1} - \\frac{1}{\\sqrt{5}}\\lambda\_-^{n+1},\\quad \\lambda\_\\pm = \\frac{1 \\pm \\sqrt{5}}{2}.
 ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0AF_n%20%3D%20%5Cfrac%7B1%7D%7B%5Csqrt%7B5%7D%7D%5Clambda_%2B%5E%7Bn%2B1%7D%20-%20%5Cfrac%7B1%7D%7B%5Csqrt%7B5%7D%7D%5Clambda_-%5E%7Bn%2B1%7D%2C%5Cquad%20%5Clambda_%5Cpm%20%3D%20%5Cfrac%7B1%20%5Cpm%20%5Csqrt%7B5%7D%7D%7B2%7D.%0A "
 F_n = \frac{1}{\sqrt{5}}\lambda_+^{n+1} - \frac{1}{\sqrt{5}}\lambda_-^{n+1},\quad \lambda_\pm = \frac{1 \pm \sqrt{5}}{2}.
 ")
@@ -5309,18 +5219,18 @@ fib(1000)
     ## [1] 7.03303677114e+208
 
 One cool thing about this is that it lets us understand the behavior of
-![F_n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;F_n "F_n")
+![F\_n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;F_n "F_n")
 for large
 ![n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;n "n")
 in a simpler way. Since
-![\|\\lambda\_-\| \< 1](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7C%5Clambda_-%7C%20%3C%201 "|\lambda_-| < 1"),
+![\|\\lambda\_-\| &lt; 1](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7C%5Clambda_-%7C%20%3C%201 "|\lambda_-| < 1"),
 after many repeated iterations, the term involving
 ![\\lambda\_-](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Clambda_- "\lambda_-")
 will die out and we can write, for large
 ![n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;n "n"),
 
 ![
-F_n \\approx \\frac{1}{\\sqrt{5}}\\lambda\_+^{n+1}.
+F\_n \\approx \\frac{1}{\\sqrt{5}}\\lambda\_+^{n+1}.
 ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0AF_n%20%5Capprox%20%5Cfrac%7B1%7D%7B%5Csqrt%7B5%7D%7D%5Clambda_%2B%5E%7Bn%2B1%7D.%0A "
 F_n \approx \frac{1}{\sqrt{5}}\lambda_+^{n+1}.
 ")

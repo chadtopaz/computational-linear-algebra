@@ -188,33 +188,33 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
 ## Fundamentals of Linear Systems
 
-\* Videos
+-   Videos
 
-\* [Two Views of Linear Equations (18:21)](<https://youtu.be/X-WmwI2jfEg)>
+    -   [Two Views of Linear Equations (18:21)](<https://youtu.be/X-WmwI2jfEg)>
 
-\* [The Big Theorem (4:35)](<https://youtu.be/MxFO_wubF7s)>
+    -   [The Big Theorem (4:35)](<https://youtu.be/MxFO_wubF7s)>
 
-\* [Gaussian Elimination (7:11)](<https://youtu.be/CsTOUbeMPUo)>
+    -   [Gaussian Elimination (7:11)](<https://youtu.be/CsTOUbeMPUo)>
 
-\* [Matrix Norms (9:56)](<https://youtu.be/DkyM93Wgh_0)>
+    -   [Matrix Norms (9:56)](<https://youtu.be/DkyM93Wgh_0)>
 
-\* [Condition Number \\[starting at 8:30\\] (7:54)](<https://youtu.be/BVM3NAt6QoM?t=510)>
+    -   [Condition Number \\[starting at 8:30\\] (7:54)](<https://youtu.be/BVM3NAt6QoM?t=510)>
 
-\* Reading
+-   Reading
 
-\* [An Ill-Advised Linear Algebra Tutorial](<https://chadtopaz.com/download/an-ill-advised-linear-algebra-tutorial/)>
+    -   [An Ill-Advised Linear Algebra Tutorial](<https://chadtopaz.com/download/an-ill-advised-linear-algebra-tutorial/)>
 
-\* [Course Notes](<https://htmlpreview.github.io/?https://github.com/chadtopaz/computationallineaaralgebra/blob/main/coursenotes/coursenotes.html):> Linear Systems Review, Matrix Norms and Conditioning
+    -   [Course Notes](<https://htmlpreview.github.io/?https://github.com/chadtopaz/computationallineaaralgebra/blob/main/coursenotes/coursenotes.html):> Linear Systems Review, Matrix Norms and Conditioning
 
 \* Sauer 2.1, 2.3 \\[completely optional\\]
 
-\* [Checkpoint - Linear Systems](<https://glow.williams.edu/courses/3492142/quizzes/9100832> "Checkpoint - Linear Systems")
+\* [Checkpoint - Linear Systems](https://glow.williams.edu/courses/3492142/quizzes/9100832 "Checkpoint - Linear Systems")
 
 \#\#\# Tuesday, Feb. 22 (in class)
 
 \* Q&A / Discussion
 
-\* [Activity - Linear Systems](<https://rstudio.cloud/spaces/207853/project/3584679)> \\[[submit](<https://glow.williams.edu/courses/3492142/assignments/37097002> "Activity - Linear Systems")\\] \\[[solutions]([https://htmlpreview.github.io/?https://github.com/chadtopaz/computationallineaaralgebra/blob/main/activities/Activity-Linear-Systems-Solutions.html)\\]](https://htmlpreview.github.io/?https://github.com/chadtopaz/computationallineaaralgebra/blob/main/activities/Activity-Linear-Systems-Solutions.html)\])
+\* [Activity - Linear Systems](<https://rstudio.cloud/spaces/207853/project/3584679)> \\[[submit](https://glow.williams.edu/courses/3492142/assignments/37097002 "Activity - Linear Systems")\\] \\[[solutions]([https://htmlpreview.github.io/?https://github.com/chadtopaz/computationallineaaralgebra/blob/main/activities/Activity-Linear-Systems-Solutions.html)\\]](https://htmlpreview.github.io/?https://github.com/chadtopaz/computationallineaaralgebra/blob/main/activities/Activity-Linear-Systems-Solutions.html)])
 
 Thursday, Feb. 24 (before class)
 
@@ -228,19 +228,19 @@ Thursday, Feb. 24 (in class)
 
 Sunday, Feb. 27
 
-\* [Submit Pset - Linear Systems](<https://glow.williams.edu/courses/3492142/assignments/37097009> "Pset - Linear Systems")
+\* [Submit Pset - Linear Systems](https://glow.williams.edu/courses/3492142/assignments/37097009 "Pset - Linear Systems")
 
-\* [Submit Reflection - Linear Systems](<https://glow.williams.edu/courses/3492142/assignments/37097020> "Reflection - Linear Systems")
+\* [Submit Reflection - Linear Systems](https://glow.williams.edu/courses/3492142/assignments/37097020 "Reflection - Linear Systems")
 
 Other Resources
 
 \* Challenge problems
 
-1. A theory problem: prove that the condition number of a matrix is equal to the norm of the matrix times the norm of the inverse of the matrix.
+1.  A theory problem: prove that the condition number of a matrix is equal to the norm of the matrix times the norm of the inverse of the matrix.
 
-2. An applied problem: do the "reality check" on the Euler-Bernoulli beam in section 2.4 of the optional textbook by Sauer. If you don't have that book (and honestly, there's no reason you SHOULD have it) I can send you a .pdf of the relevant pages if you want me to.
+2.  An applied problem: do the "reality check" on the Euler-Bernoulli beam in section 2.4 of the optional textbook by Sauer. If you don't have that book (and honestly, there's no reason you SHOULD have it) I can send you a .pdf of the relevant pages if you want me to.
 
-3. Very open ended: go learn about the Cholesky decomposition.
+3.  Very open ended: go learn about the Cholesky decomposition.
 
 [Back to Course Units](#course-units)
 
