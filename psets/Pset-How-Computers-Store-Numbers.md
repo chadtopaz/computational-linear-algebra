@@ -63,8 +63,6 @@ Your solution goes here.
 
 ### Problem 5
 
-### Problem 5
-
 Choose one section from 2.1 - 2.4 of [Bits and
 Bugs](https://epubs.siam.org/doi/book/10.1137/1.9781611975567). Explain
 the context of the problem you read about and give a mathematical

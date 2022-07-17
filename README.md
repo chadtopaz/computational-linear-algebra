@@ -155,7 +155,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
 -   Challenge Problems
 
-    1. Many students take the formula for Taylor series as a given, but it's valuable to understand how it comes from calculus. Derive the Taylor series formula [hint: start with the Fundamental Theorem of Calculus].
+    - Many students take the formula for Taylor series as a given, but it's valuable to understand how it comes from calculus. Derive the Taylor series formula [hint: start with the Fundamental Theorem of Calculus].
 
 -   Looking ahead
 
@@ -198,7 +198,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
     -   [Matrix Norms (9:56)](https://youtu.be/DkyM93Wgh_0)
 
-    -   [Condition Number \\[starting at 8:30\\] (7:54)](https://youtu.be/BVM3NAt6QoM?t=510)
+    -   [Condition Number [starting at 8:30] (7:54)](https://youtu.be/BVM3NAt6QoM?t=510)
 
 -   Reading
 
@@ -212,12 +212,10 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
 - Challenge problems
 
-    1.  A theory problem: prove that the condition number of a matrix is equal to the norm of the matrix times the norm of the inverse of the matrix.
+    -  A theory problem: prove that the condition number of a matrix is equal to the norm of the matrix times the norm of the inverse of the matrix.
 
-    2.  An applied problem: do the "reality check" on the Euler-Bernoulli beam in section 2.4 of [Sauer's Numerical Analysis](https://www.amazon.com/Numerical-Analysis-3rd-Timothy-Sauer/dp/013469645X).
+    -  An applied problem: do the "reality check" on the Euler-Bernoulli beam in section 2.4 of [Sauer's Numerical Analysis](https://www.amazon.com/Numerical-Analysis-3rd-Timothy-Sauer/dp/013469645X).
     
-    3.  Very open ended: go learn about the Cholesky decomposition.
-
 [Back to Course Units](#course-units)
 
 ## Solving Linear Systems

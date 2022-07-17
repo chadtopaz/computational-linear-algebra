@@ -1,11 +1,16 @@
 ---
-title: "Pset - Linear Systems"
-author: "Insert your full name here"
-output: html_document
+title: "Pset - How Computers Store Numbers"
+output:
+  rmarkdown::github_document:
+    html_preview: false
+  header-includes:
+   - \usepackage{amsmath}
 ---
 
 \renewcommand{\vec}[1]{\mathbf{#1}}
 \renewcommand{\mat}[1]{\mathbf{#1}}
+
+Load necessary packages:
 
 ```{r,message=FALSE}
 library("Matrix")
@@ -13,17 +18,7 @@ library("igraph")
 library("pracma")
 ```
 
-### Problem 0
-
-Please disclose any issues relating to academic integrity, including (but not limited to) collaborations, unusual resources used, and so forth.
-
-### Problem 0 Solution
-
-Your solution goes here.
-
 ### Problem 1
-
-The point of this problem is to use definitions of norms and condition numbers and to develop proof skills. This is a pencil-and-apper problem, but please write it up here in markdown as usual!
 
 A real $n \times n$ matrix $\mat{Q}$ is *orthonormal* if 
 
@@ -72,21 +67,23 @@ Your solution goes here.
 ### Problem 4
 
 The following command loads a matrix $\mat{M}$ describing the western power network of the United States. Each element is zero or one. A one in row $i$ and column $j$ means that component $i$ of the network is connected to component $j$. This type of matrix is called a network's *adjacency matrix*.
-```{r cache=TRUE}
+```{r cache = TRUE}
 M <- as.matrix(readMM(gzcon(url("https://math.nist.gov/pub/MatrixMarket2/Harwell-Boeing/bcspwr/bcspwr10.mtx.gz")))+0)
 ```
 These commands visualize the network for you using a package called `igraph`. It may take a little bit of time (several minutes) to run because the graph is really large!
-```{r cache=TRUE, out.width='70%', crop=TRUE}
+```{r cache = TRUE, out.width='70%', crop=TRUE}
 knitr::knit_hooks$set(crop = knitr::hook_pdfcrop)
-g <- graph_from_adjacency_matrix(M,mode="undirected")
+g <- graph_from_adjacency_matrix(M, mode="undirected")
 V(g)$color <- "grey"
 V(g)$size <- 2
 myLayout <- layout_nicely(g)
-plot(simplify(g),layout=myLayout,vertex.color=V(g)$color,vertex.size=V(g)$size,vertex.label="")
+plot(simplify(g), layout=myLayout, vertex.color=V(g)$color, vertex.size=V(g)$size, vertex.label="")
 ```
 
 a. In the analysis of networks, one is often concerned with finding the most important (most central, in some sense) component. One measure of importance is called Katz centrality. The Katz centrality of the nodes, $\vec{x}$, satisfies
-$$(\mat{I} - \alpha \mat{M}^T)\vec{x} = \vec{1}$$
+$$
+\bigl(\mat{I} - \alpha M^T)(\vec{x} + \vec{1}) = \mat{I}
+$$
 where $\mat{I}$ is the identity matrix, $\alpha$ is a small number, and $\vec{1}$ is a vector of all ones. Take $\alpha = 0.05$ and solve for $\vec{x}$ using any method you want. Print out the largest element of $\vec{x}$ so that I can verify your answer.
 
 b. Re-plot the network using your same graph layout as before, color the most important node red and plot it with size 5. This way, the most important node (at least, according to the Katz measure) will stand out on your plot.
