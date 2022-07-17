@@ -24,7 +24,11 @@ Your solution goes here.
 What is the dimension of the intersection of the following two planes in
 ![\\mathbb{R}^3](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbb%7BR%7D%5E3 "\mathbb{R}^3")?
 
-![x + 2y − z = 0, \\quad 3x − 3y + z = 0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x%20%2B%202y%20%E2%88%92%20z%20%3D%200%2C%20%5Cquad%203x%20%E2%88%92%203y%20%2B%20z%20%3D%200 "x + 2y − z = 0, \quad 3x − 3y + z = 0")
+![
+x + 2y − z = 0, \\quad 3x − 3y + z = 0
+](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0Ax%20%2B%202y%20%E2%88%92%20z%20%3D%200%2C%20%5Cquad%203x%20%E2%88%92%203y%20%2B%20z%20%3D%200%0A "
+x + 2y − z = 0, \quad 3x − 3y + z = 0
+")
 
 ### Problem 2 Solution
 
@@ -107,7 +111,11 @@ Your solution goes here.
 
 Compute by hand the eigenvalues of the matrices
 
-![\\mathbf{A}=\\begin{pmatrix} 1 & 1000 \\\\ 0 & 1\\end{pmatrix}, \\qquad \\widetilde{\\mathbf{A}}=\\begin{pmatrix} 1 & 1000 \\\\ 0.001 & 1\\end{pmatrix}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7BA%7D%3D%5Cbegin%7Bpmatrix%7D%201%20%26%201000%20%5C%5C%200%20%26%201%5Cend%7Bpmatrix%7D%2C%20%5Cqquad%20%5Cwidetilde%7B%5Cmathbf%7BA%7D%7D%3D%5Cbegin%7Bpmatrix%7D%201%20%26%201000%20%5C%5C%200.001%20%26%201%5Cend%7Bpmatrix%7D. "\mathbf{A}=\begin{pmatrix} 1 & 1000 \\ 0 & 1\end{pmatrix}, \qquad \widetilde{\mathbf{A}}=\begin{pmatrix} 1 & 1000 \\ 0.001 & 1\end{pmatrix}.")
+![
+\\mathbf{A}=\\begin{pmatrix} 1 & 1000 \\\\ 0 & 1\\end{pmatrix}, \\qquad \\widetilde{\\mathbf{A}}=\\begin{pmatrix} 1 & 1000 \\\\ 0.001 & 1\\end{pmatrix}.
+](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0A%5Cmathbf%7BA%7D%3D%5Cbegin%7Bpmatrix%7D%201%20%26%201000%20%5C%5C%200%20%26%201%5Cend%7Bpmatrix%7D%2C%20%5Cqquad%20%5Cwidetilde%7B%5Cmathbf%7BA%7D%7D%3D%5Cbegin%7Bpmatrix%7D%201%20%26%201000%20%5C%5C%200.001%20%26%201%5Cend%7Bpmatrix%7D.%0A "
+\mathbf{A}=\begin{pmatrix} 1 & 1000 \\ 0 & 1\end{pmatrix}, \qquad \widetilde{\mathbf{A}}=\begin{pmatrix} 1 & 1000 \\ 0.001 & 1\end{pmatrix}.
+")
 
 Would you say that the problem of computing eigenvalues is
 well-conditioned or ill-conditioned? Check the condition number of
