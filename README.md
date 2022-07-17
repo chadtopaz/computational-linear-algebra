@@ -155,7 +155,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
 -   Challenge Problems
 
-    -   Many students take the formula for Taylor series as a given, but it's valuable to understand how it comes from calculus. Derive the Taylor series formula [hint: start with the Fundamental Theorem of Calculus].
+    1. Many students take the formula for Taylor series as a given, but it's valuable to understand how it comes from calculus. Derive the Taylor series formula [hint: start with the Fundamental Theorem of Calculus].
 
 -   Looking ahead
 
@@ -204,43 +204,17 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
     -   [An Ill-Advised Linear Algebra Tutorial](<https://chadtopaz.com/download/an-ill-advised-linear-algebra-tutorial/)>
 
-    -   [Course Notes](<https://htmlpreview.github.io/?https://github.com/chadtopaz/computationallineaaralgebra/blob/main/coursenotes/coursenotes.html):> Linear Systems Review, Matrix Norms and Conditioning
+    -   [Course Notes: Fundamentals of Linear Systems](    -   [Course Notes: R Bootcamp](/coursenotes/coursenotes.md#fundamentals-of-linear-systems)
 
-\* Sauer 2.1, 2.3 \\[completely optional\\]
+- 
 
-\* [Checkpoint - Linear Systems](https://glow.williams.edu/courses/3492142/quizzes/9100832 "Checkpoint - Linear Systems")
+- Challenge problems
 
-\#\#\# Tuesday, Feb. 22 (in class)
+    1.  A theory problem: prove that the condition number of a matrix is equal to the norm of the matrix times the norm of the inverse of the matrix.
 
-\* Q&A / Discussion
-
-\* [Activity - Linear Systems](<https://rstudio.cloud/spaces/207853/project/3584679)> \\[[submit](https://glow.williams.edu/courses/3492142/assignments/37097002 "Activity - Linear Systems")\\] \\[[solutions]([https://htmlpreview.github.io/?https://github.com/chadtopaz/computationallineaaralgebra/blob/main/activities/Activity-Linear-Systems-Solutions.html)\\]](https://htmlpreview.github.io/?https://github.com/chadtopaz/computationallineaaralgebra/blob/main/activities/Activity-Linear-Systems-Solutions.html)])
-
-Thursday, Feb. 24 (before class)
-
-\* [Look over Pset - Linear Systems](<https://rstudio.cloud/spaces/207853/project/3636579)>
-
-Thursday, Feb. 24 (in class)
-
-\* Q&A / Discussion
-
-\* [Pset - Linear Systems](<https://rstudio.cloud/spaces/207853/project/3636579)>
-
-Sunday, Feb. 27
-
-\* [Submit Pset - Linear Systems](https://glow.williams.edu/courses/3492142/assignments/37097009 "Pset - Linear Systems")
-
-\* [Submit Reflection - Linear Systems](https://glow.williams.edu/courses/3492142/assignments/37097020 "Reflection - Linear Systems")
-
-Other Resources
-
-\* Challenge problems
-
-1.  A theory problem: prove that the condition number of a matrix is equal to the norm of the matrix times the norm of the inverse of the matrix.
-
-2.  An applied problem: do the "reality check" on the Euler-Bernoulli beam in section 2.4 of the optional textbook by Sauer. If you don't have that book (and honestly, there's no reason you SHOULD have it) I can send you a .pdf of the relevant pages if you want me to.
-
-3.  Very open ended: go learn about the Cholesky decomposition.
+    2.  An applied problem: do the "reality check" on the Euler-Bernoulli beam in section 2.4 of [Sauer's Numerical Analysis](https://www.amazon.com/Numerical-Analysis-3rd-Timothy-Sauer/dp/013469645X).
+    
+    3.  Very open ended: go learn about the Cholesky decomposition.
 
 [Back to Course Units](#course-units)
 
