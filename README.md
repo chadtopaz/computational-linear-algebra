@@ -190,25 +190,25 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
 -   Videos
 
-    -   [Two Views of Linear Equations (18:21)](<https://youtu.be/X-WmwI2jfEg)>
+    -   [Two Views of Linear Equations (18:21)](https://youtu.be/X-WmwI2jfEg)
 
-    -   [The Big Theorem (4:35)](<https://youtu.be/MxFO_wubF7s)>
+    -   [The Big Theorem (4:35)](https://youtu.be/MxFO_wubF7s)
 
-    -   [Gaussian Elimination (7:11)](<https://youtu.be/CsTOUbeMPUo)>
+    -   [Gaussian Elimination (7:11)](https://youtu.be/CsTOUbeMPUo)
 
-    -   [Matrix Norms (9:56)](<https://youtu.be/DkyM93Wgh_0)>
+    -   [Matrix Norms (9:56)](https://youtu.be/DkyM93Wgh_0)
 
-    -   [Condition Number \\[starting at 8:30\\] (7:54)](<https://youtu.be/BVM3NAt6QoM?t=510)>
+    -   [Condition Number \\[starting at 8:30\\] (7:54)](https://youtu.be/BVM3NAt6QoM?t=510)
 
 -   Reading
 
-    -   [An Ill-Advised Linear Algebra Tutorial](<https://chadtopaz.com/download/an-ill-advised-linear-algebra-tutorial/)>
+    -   [An Ill-Advised Linear Algebra Tutorial](https://chadtopaz.com/download/an-ill-advised-linear-algebra-tutorial/)
 
     -   [Course Notes: Fundamentals of Linear Systems](/coursenotes/coursenotes.md#fundamentals-of-linear-systems)
     
--   Activity - How Computers Store Numbers [[.md for viewing](activities/Activity-Fundamenals-of-Linear-Systems.md)] [[.Rmd for editing](activities/Activity-Fundamenals-of-Linear-Systems.Rmd)]
+-   Activity - Fundamentals of Linear Systems [[.md for viewing](activities/Activity-Fundamentals-of-Linear-Systems.md)] [[.Rmd for editing](activities/Activity-Fundamentals-of-Linear-Systems.Rmd)]
 
--   Pset - How Computers Store Numbers [[.md for viewing](psets/Pset-Fundamentals-of-Linear-Systems.md)] [[.Rmd for editing](psets/Pset-Fundamentals-of-Linear-Systems.Rmd)]
+-   Pset - Fundamentals of Linear Systems [[.md for viewing](psets/Pset-Fundamentals-of-Linear-Systems.md)] [[.Rmd for editing](psets/Pset-Fundamentals-of-Linear-Systems.Rmd)]
 
 - Challenge problems
 
