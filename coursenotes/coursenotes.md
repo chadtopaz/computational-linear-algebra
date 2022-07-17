@@ -78,29 +78,27 @@ We can test:
 
 ## Inner and outer products
 
-There are several different ways to “multiply” vectors **x** and **y**:
+There are several different ways to “multiply” vectors *x⃗* and *y⃗*:
 
-1.  Element-wise. Just multiply each element of **x** with the element
-    in the corresponding poisiotn in **y**. Note that **x** and **y**
-    must have the same number of elements, and the result is a vector
-    with the same number of elements.
+1.  Element-wise. Just multiply each element of *x⃗* with the element in
+    the corresponding poisiotn in *y⃗*. Note that *x⃗* and *y⃗* must have
+    the same number of elements, and the result is a vector with the
+    same number of elements.
 
 2.  Dot product, also known as the inner product. To compute, calculate
-    *x* ⋅ *y* ≡ **x**<sup>*T*</sup>**y** where the superscript *T*
-    indicates transpose. Dot product is related to the angle *θ* between
-    the two vectors as **x** ⋅ **y** = |**x**||**y**|cos *θ*.
-    Rearranging this as **x** ⋅ **y**/|**y**| = |**x**|cos *θ* suggests
-    the intuition of the dot product. It calculates a *projection* of
-    one vector onto the other, or restated, it tells us how much of one
-    vector is pointing in the direction of the other vector. Note that
-    **x** and **y** must have the same number of elements, and the
-    result is a scalar.
+    *x* ⋅ *y* ≡ *x⃗*<sup>*T*</sup>*y⃗* where the superscript *T* indicates
+    transpose. Dot product is related to the angle *θ* between the two
+    vectors as *x⃗* ⋅ *y⃗* = |*x⃗*||*y⃗*|cos *θ*. Rearranging this as
+    *x⃗* ⋅ *y⃗*/|*y⃗*| = |*x⃗*|cos *θ* suggests the intuition of the dot
+    product. It calculates a *projection* of one vector onto the other,
+    or restated, it tells us how much of one vector is pointing in the
+    direction of the other vector. Note that *x⃗* and *y⃗* must have the
+    same number of elements, and the result is a scalar.
 
 3.  Outer product. To compute, calculate
-    *x* ⊗ *y* ≡ **x****y**<sup>*T*</sup>. Note that **x** and **y** do
-    not need to have the same number of elements, and the result is a
-    matrix. If **x** is *m* × 1 and **y** is *n* × 1 then *x* ⊗ *y* is
-    *m* × *n*.
+    *x* ⊗ *y* ≡ *x⃗**y⃗*<sup>*T*</sup>. Note that *x⃗* and *y⃗* do not need
+    to have the same number of elements, and the result is a matrix. If
+    *x⃗* is *m* × 1 and *y⃗* is *n* × 1 then *x* ⊗ *y* is *m* × *n*.
 
 4.  Cross product. We are not going to worry about this one for now.
 
@@ -513,7 +511,7 @@ the second option above.
 ## Big picture
 
 We begin considering the solution of systems of linear equations,
-**A****x** = **b**. Linear systems arise in analysis of different
+$\mat{A}\vec{x}=\vec{b}$. Linear systems arise in analysis of different
 equations (modeling macromolecules, electromagnetics, heat flow, wave
 motion, structural engineering, a million other examples), in curve
 fitting, in optimization, and many other applications. To understand
@@ -535,7 +533,7 @@ and vector norms.
 -   Define forward and backward error
 -   Define vector norms
 -   Define matrix norms
--   Define condition number for solution of **A****x** = **b**
+-   Define condition number for solution of $\mat{A}\vec{x}=\vec{b}$
 
 ## Linear systems
 
@@ -585,48 +583,49 @@ vectors necessary to reach a particular target vector. There could be 0,
 
 ## Linear algebra review and the Big Theorem
 
-Let’s consider an *n* × *n* matrix **A**.
+Let’s consider an *n* × *n* matrix $\mat{A}$.
 
-1.  **Invertible** means that the inverse **A**<sup>−1</sup> exists.
-    This matrix satisfies **A****A**<sup>−1</sup> = *I*, where *I* is
+1.  **Invertible** means that the inverse $\mat{A}^{-1}$ exists. This
+    matrix satisfies $\mat{A}\mat{A}^{-1} = \mat{I}$, where $\mat{I}$ is
     the *n* × *n* identity matrix.
 
 2.  The notation det  means **determinant**. Think of it as a scaling
     factor for the transformation defined by a matrix. That is,
-    multiplication by **A** can cause a region to contract
-    (|det**A**| &lt; 1) or expand (|det**A**| &gt; 1) and/or reflect
-    (det **A** &lt; 0). As an example, let
-    $$\mathbf{A}=\begin{pmatrix}a & b\\\c & d\end{pmatrix}.$$
+    multiplication by $\mat{A}$ can cause a region to contract
+    ($|\det \mat{A}| &lt; 1$) or expand ($|\det \mat{A}| &gt; 1$) and/or
+    reflect ($\det \mat{A} &lt; 0$). As an example, let
+    $$\mat{A}=\begin{pmatrix}a & b\\\c & d\end{pmatrix}.$$
     For this example,
-    $$\mathbf{A}^{-1} = \frac{1}{ad-bc}\begin{pmatrix}d & -b\\\\-c & a\end{pmatrix}.$$
-    So **A** invertible  ⇔ det **A** ≠ 0.
+    $$\mat{A}^{-1} = \frac{1}{ad-bc}\begin{pmatrix}d & -b\\\\-c & a\end{pmatrix}.$$
+    So $\mat{A}$ invertible $\iff \det \mat{A} \neq 0$.
 
-3.  The **eigenvalues** *λ*<sub>*i*</sub> of **A** satisfy
-    **A****v**<sub>**i**</sub> = *λ*<sub>*i*</sub>**v**<sub>**i**</sub>,
+3.  The **eigenvalues** *λ*<sub>*i*</sub> of $\mat{A}$ satisfy
+    $$\mat{A}\mathbf{v\_i}=\lambda\_i \mathbf{v\_i},$$
     where **v**<sub>**i**</sub> are the **eigenvectors**. You can prove
     that
-    ∏<sub>*i*</sub>*λ*<sub>*i*</sub> = det **A**,
-    so no *λ*<sub>*i*</sub> = 0 ⇔ det **A** ≠ 0.
+    $$\prod\_i \lambda\_i = \det \mat{A},$$
+    so no $\lambda\_i = 0 \iff \det \mat{A} \neq 0$.
 
-4.  **A****z** ≠ 0 for all **z** ∈ ℝ<sup>*n*</sup> except
-    **z** = 0 ⇔ **A** is invertible. Why? If **A****z** = 0 for
-    **z** ≠ 0, then **A****z** = 0**z**, so 0 is an eigenvalue. But for
-    **A** to be invertible, we know 0 can’t be an eigenvalue. (If you
-    are proof oriented you might notice that the implication needs to be
-    shown both ways, but I am trying purposely not to prove here – just
-    to give you some intuition.)
+4.  $\mat{A} \mathbf{z} \neq 0$ for all **z** ∈ ℝ<sup>*n*</sup> except
+    $\mathbf{z}=0 \iff \mat{A}$ is invertible. Why? If
+    $\mat{A} \mathbf{z} = 0$ for **z** ≠ 0, then
+    $\mat{A} \mathbf{z} = 0 \mathbf{z}$, so 0 is an eigenvalue. But for
+    $\mat{A}$ to be invertible, we know 0 can’t be an eigenvalue. (If
+    you are proof oriented you might notice that the implication needs
+    to be shown both ways, but I am trying purposely not to prove here –
+    just to give you some intuition.)
 
 5.  **Nullspace** just means the parts of ℝ<sup>*n*</sup> that gets
-    mapped to **0** by **A**. Another name for nullspace is **kernel**.
-    Mathematically, the nullspace is all the vectors **v** for which
-    **A****v** = 0. So for an invertible matrix **A**, the nullspace is
-    **0**. This is basically assigning a definition to the previous
-    point (above).
+    mapped to **0** by $\mat{A}$. Another name for nullspace is
+    **kernel**. Mathematically, the nullspace is all the vectors **v**
+    for which $\mat{A} \mathbf{v}=0$. So for an invertible matrix
+    $\mat{A}$, the nullspace is **0**. This is basically assigning a
+    definition to the previous point (above).
 
 6.  If vectors are **linearly independent**, it means that none of the
     vectors can be written as a linear combination of the others. If
-    **A** is invertible, then its columns are linearly independent. Why?
-    If the columns were linearly dependent, you could take a linear
+    $\mat{A}$ is invertible, then its columns are linearly independent.
+    Why? If the columns were linearly dependent, you could take a linear
     combination of them to reach **0** nontrivially, for instance,
     $$\begin{pmatrix}1 & -2\\\2 & -4\end{pmatrix}\begin{pmatrix}x\_1 \\\\ x\_2 \end{pmatrix}=\begin{pmatrix}0 \\\\ 0\end{pmatrix}.$$
     This violates our previous condition (above) about the nullspace
@@ -638,14 +637,15 @@ Let’s consider an *n* × *n* matrix **A**.
     The **rank** of 𝔸 is just the dimension of the space spanned by the
     column vectors.
 
-8.  The **image** of **A** means all the points that **A** can map to.
-    This is synonymous with the point above: it’s the span of the
-    columns of **A**. If the rank of **A** is *n*, then the column
-    vectors are linearly independent so they span ℝ<sup>*n*</sup>, so
-    the image of **A** is ℝ<sup>*n*</sup>.
+8.  The **image** of $\mat{A}$ means all the points that $\mat{A}$ can
+    map to. This is synonymous with the point above: it’s the span of
+    the columns of $\mat{A}$. If the rank of $\mat{A}$ is *n*, then the
+    column vectors are linearly independent so they span
+    ℝ<sup>*n*</sup>, so the image of $\mat{A}$ is ℝ<sup>*n*</sup>.
 
-9.  **A****x** = **b** has a unique solution for all **b**⇔ **A** is
-    invertible, since you can left multiply by **A**<sup>−1</sup>.
+9.  $\mat{A}\mathbf{x}=\mathbf{b}$ has a unique solution for all **b**⇔
+    $\mat{A}$ is invertible, since you can left multiply by
+    $\mat{A}^{-1}$.
 
 ## Gaussian elimination
 
@@ -665,14 +665,14 @@ set:
 -   multiply a row by a nonzero scalar
 -   Add one row to a scalar multiple of another
 
-To solve a linear system **A****x** = **b**, write it as an augmented
-matrix, reduce it to row echelon form, and then use back substitution to
-solve.
+To solve a linear system $\mat{A}\mathbf{x}=\mathbf{b}$, write it as an
+augmented matrix, reduce it to row echelon form, and then use back
+substitution to solve.
 
 For example, take
 
 $$
-\mathbf{A} = 
+\mat{A} = 
 \begin{pmatrix}
 1 & 3 & 1\\\\
 1 & 1 & -1 \\\\
@@ -735,11 +735,12 @@ the elimination.
 Because we are solving problems on computers, we should care about how
 long solution takes, which in turn depends on the number of
 computational operations carried out. This is called the *complexity* of
-the method. For solving **A****x** = *b*, with **A** an *n* × *n*
-matrix, we write the complexity in terms of *n*. Then, we are usually
-concerned with the behavior of the operation count for *n* large, so we
-might retain just the leading term in *n* as an approximation, or even
-ignore the coefficient in front that leading term.
+the method. For solving $\mat{A}\mathbf{x}=b$, with $\mat{A}$ an
+*n* × *n* matrix, we write the complexity in terms of *n*. Then, we are
+usually concerned with the behavior of the operation count for *n*
+large, so we might retain just the leading term in *n* as an
+approximation, or even ignore the coefficient in front that leading
+term.
 
 For Gaussian elimination, we have to compute the complexity of the two
 stages.
@@ -791,13 +792,13 @@ modified problem that the approximate solution satisfies. This probably
 sounds abstract, so let’s make it concrete in the cases of a
 root-finding problem and a linear algebra problem.
 
-Suppose we want to solve **A****x** = *b*. The true solution is **x**
-but our computational method finds an approximate solution
+Suppose we want to solve $\mat{A}\mathbf{x}=b$. The true solution is
+**x** but our computational method finds an approximate solution
 **x**<sub>*a*</sub>. The forward error is the distance between the two
 solutions, that is, ||**x** − **x**<sub>**a**</sub>||. The backward
 error is the distance between what the matrix outputs when applied to
 those solutions, that is,
-||**A****x** − **A****x**<sub>*a*</sub>|| = ||**b** − **A****x**<sub>*a*</sub>||.
+$||\mat{A}\mathbf{x}-\mat{A}\mathbf{x}\_a||=||\mathbf{b}-\mat{A}\mathbf{x}\_a||$.
 Distance here is the length of the difference between two quantities.
 
 Notice that we haven’t specified what distance means! This is why we
@@ -945,30 +946,30 @@ The matrix *p*-norm is closely related to the vector *p*-norm, and is
 given by
 
 $$
-||\mathbf{A}||\_p = \max\_{\mathbf{x} \not = \mathbf{ 0}} \frac{ || \mathbf{A} \mathbf{x}||\_p} { ||\mathbf{x}||\_p} = \max\_{||\mathbf{x}||\_p  = 1}  || \mathbf{A} \mathbf{x}||\_p
+||\mat{A}||\_p = \max\_{\mathbf{x} \not = \mathbf{ 0}} \frac{ || \mat{A} \mathbf{x}||\_p} { ||\mathbf{x}||\_p} = \max\_{||\mathbf{x}||\_p  = 1}  || \mat{A} \mathbf{x}||\_p
 $$
 
 The matrix *p*-norm says: apply *A* to the unit sphere, and
-||**A**||<sub>*p*</sub> is the length of the vector that is farthest
-from the origin. This is not trivial to calculate! You have an infinite
-number of vectors to consider.
+$||\mat{A}||\_p$ is the length of the vector that is farthest from the
+origin. This is not trivial to calculate! You have an infinite number of
+vectors to consider.
 
 Fortunately, just like for the vector case, the matrix *p*-norm has a
 few special values of *p* for which it is easy to compute. We have:
 
 -   *p* = 1
     $$
-    ||\mathbf{A} ||\_1 = \displaystyle{\max\_{1 \le j \le n} \sum\_{i=1}^n |a\_{ij}|} = \text{maximum absolute column sum}
+    ||\mat{A} ||\_1 = \displaystyle{\max\_{1 \le j \le n} \sum\_{i=1}^n |a\_{ij}|} = \text{maximum absolute column sum}
     $$
 
 -   *p* = 2
     $$
-    || \mathbf{A} ||\_2 = \sqrt{\max\\{ \text{eigenvalue}(A^TA) \\} }
+    || \mat{A} ||\_2 = \sqrt{\max\\{ \text{eigenvalue}(A^TA) \\} }
     $$
 
 -   *p* = ∞
     $$
-    || \mathbf{A} ||\_\infty = \displaystyle{\max\_{1 \le i \le n} \sum\_{j=1}^n |a\_{ij}|} = \text{maximum absolute row sum}
+    || \mat{A} ||\_\infty = \displaystyle{\max\_{1 \le i \le n} \sum\_{j=1}^n |a\_{ij}|} = \text{maximum absolute row sum}
     $$
 
 To see why these definitions are true requires some analysis. If you are
@@ -992,23 +993,24 @@ You can calculate the 1, 2, and ∞ matrix norms using the R command
 
 There is one really useful identity you should know about matrix norms:
 
-||**A****x**||<sub>*p*</sub> ≤ ||**A**||<sub>*p*</sub>||**x**||<sub>*p*</sub>.
+$$||\mat{A}\mathbf{x}||\_p \leq ||\mat{A}||\_p ||\mathbf{x}||\_p.$$
 
 To see this, we start with the right hand side and note
 
-$$||\mathbf{A}||\_p ||\mathbf{x}||\_p = \left( \max\_{\mathbf{y} \not = \mathbf{ 0}} \frac{ || \mathbf{A} \mathbf{y}||\_p} { ||\mathbf{y}||\_p} \right) ||\mathbf{x}||\_p \geq \frac{ || \mathbf{A} \mathbf{x}||\_p} { ||\mathbf{x}||\_p} ||\mathbf{x}||\_p = || \mathbf{A} \mathbf{x}||\_p.$$
+$$||\mat{A}||\_p ||\mathbf{x}||\_p = \left( \max\_{\mathbf{y} \not = \mathbf{ 0}} \frac{ || \mat{A} \mathbf{y}||\_p} { ||\mathbf{y}||\_p} \right) ||\mathbf{x}||\_p \geq \frac{ || \mat{A} \mathbf{x}||\_p} { ||\mathbf{x}||\_p} ||\mathbf{x}||\_p = || \mat{A} \mathbf{x}||\_p.$$
 
 ## Condition number for **Ax**=**b**
 
-Let us consider solving **A****x** = **b**. Suppose we find approximate
-solution **x**<sub>*a*</sub>. The **relative forward error** is
+Let us consider solving $\mat{A}\mathbf{x}=\mathbf{b}$. Suppose we find
+approximate solution **x**<sub>*a*</sub>. The **relative forward error**
+is
 $$\frac{||\mathbf{x}-\mathbf{x}\_a||}{||\mathbf{x}||}$$
 and the **relative backward error** is
-$$\frac{||\mathbf{A}\mathbf{x}-\mathbf{A}\mathbf{x}\_a||}{||\mathbf{A}\mathbf{x}||}=\frac{||\mathbf{b}-\mathbf{A}\mathbf{x}\_a||}{||\mathbf{b}||}.$$
+$$\frac{||\mat{A}\mathbf{x}-\mat{A}\mathbf{x}\_a||}{||\mat{A}\mathbf{x}||}=\frac{||\mathbf{b}-\mat{A}\mathbf{x}\_a||}{||\mathbf{b}||}.$$
 We define **error magnification** as the ratio
-$$\frac{\text{relative forward error}}{\text{relative backward error}}=\frac{\frac{||\mathbf{x}-\mathbf{x}\_a||}{||\mathbf{x}||}}{\frac{||\mathbf{b}-\mathbf{A}\mathbf{x}\_a||}{||\mathbf{b}||}}.$$
+$$\frac{\text{relative forward error}}{\text{relative backward error}}=\frac{\frac{||\mathbf{x}-\mathbf{x}\_a||}{||\mathbf{x}||}}{\frac{||\mathbf{b}-\mat{A}\mathbf{x}\_a||}{||\mathbf{b}||}}.$$
 
-The **condition number** *κ*(**A**) is the largest possible error
+The **condition number** $\kappa(\mat{A})$ is the largest possible error
 magnification (over all possible **x**). Or restated, it’s the worst
 possible ratio of relative forward error to relative backward error.
 
@@ -1019,7 +1021,7 @@ concrete with an example.
 Consider:
 
 -   Let
-    $\mathbf{A} = \begin{pmatrix}0.913 & 0.659 \\\\ 0.457 & 0.330 \end{pmatrix}$
+    $\mat{A} = \begin{pmatrix}0.913 & 0.659 \\\\ 0.457 & 0.330 \end{pmatrix}$
 -   Then *κ*<sub>2</sub>(*A*) = 1.25 × 10<sup>4</sup>
 -   Let $\mathbf{b} = \begin{pmatrix} 0.254 \\\\ 0.127 \end{pmatrix}$
 -   Then **x** = (1,−1).
@@ -1057,11 +1059,13 @@ approximately by default, or exactly if specified.
 Remember that the condition number isn’t merely an error magnification –
 it’s the maximum possible error magnificaton. Computing *κ* exactly
 using this definition is impossible because there are an infinite number
-vectors one must consider **A** acting on.
+vectors one must consider $\mat{A}$ acting on.
 
 Fortunately, there’s another way to calculate condition number:
 
-*κ*<sub>*p*</sub>(**A**) = ||**A**||<sub>*p*</sub>||**A**<sup>−1</sup>||<sub>*p*</sub>
+$$
+\kappa\_p(\mat{A})=||\mat{A}||\_p||\mat{A}^{-1}||\_p
+$$
 
 The derivation of this identity is about 10 to 20 lines of linear
 algebra that I am happy to show you if you are interested. We can check
@@ -1090,19 +1094,21 @@ LU decomposision.
 
 ## LU decomposition
 
-Recall that when solving an *n* × *n* system **A****x** = **b** with
-Gaussian elimination, the elimination step is 𝒪(*n*<sup>3</sup>) and
-back substitution is 𝒪(*n*<sup>2</sup>). In some applications, it is
-necessary to solve
-**A****x** = **b**<sub>1</sub>,  **A****x** = **b**<sub>2</sub>,  **A****x** = **b**<sub>3</sub>,  …,  **A****x** = **b**<sub>*M*</sub>
-where **A** is the same each time and *M* is large. **A** itself needs
-the same row reductions each time. Only the augmented part **b**
+Recall that when solving an *n* × *n* system
+$\mat{A}\mathbf{x} = \mathbf{b}$ with Gaussian elimination, the
+elimination step is 𝒪(*n*<sup>3</sup>) and back substitution is
+𝒪(*n*<sup>2</sup>). In some applications, it is necessary to solve
+$$
+\mat{A}\mathbf{x} = \mathbf{b}\_1, \quad \mat{A}\mathbf{x} = \mathbf{b}\_2, \quad \mat{A}\mathbf{x} = \mathbf{b}\_3, \quad \ldots, \quad \mat{A}\mathbf{x} = \mathbf{b}\_M
+$$
+where $\mat{A}$ is the same each time and *M* is large. $\mat{A}$ itself
+needs the same row reductions each time. Only the augmented part **b**
 changes. It would be a waste of computation to run Gaussian elimination
 *M* times.
 
 LU decomposition is a way of storing the Gaussian elimination steps in
-matrix form so that they can be applied to many **b**. We take **A** and
-decompose (or factorize) it as the product
+matrix form so that they can be applied to many **b**. We take $\mat{A}$
+and decompose (or factorize) it as the product
 
 $$
 A  = 
@@ -1129,24 +1135,24 @@ $$
 
 The **L** matrix encodes the multipliers used to eliminate elements
 during Gaussian elimination and the **U** matrix is the result of the
-elimination process. Therefore, putting **A** into its LU factorization
-takes one application of Gaussian elimination, or approximately
-$\frac{2}{3} n^3$ operations. Solving **L****U****x** = **b** requires 2
-back substitutions, namely one to solve **L****y** = **b** for **y** and
-one to solve **U****x** = **y** for **x**. This takes 2*n*<sup>2</sup>
-operations. So, to solve
-**A****x** = **b**<sub>1</sub>, …, **A****x** = **b**<sub>*M*</sub>
+elimination process. Therefore, putting $\mat{A}$ into its LU
+factorization takes one application of Gaussian elimination, or
+approximately $\frac{2}{3} n^3$ operations. Solving
+**L****U****x** = **b** requires 2 back substitutions, namely one to
+solve **L****y** = **b** for **y** and one to solve **U****x** = **y**
+for **x**. This takes 2*n*<sup>2</sup> operations. So, to solve
+$\mat{A}\mathbf{x} = \mathbf{b}\_1, \ldots, \mat{A}\mathbf{x} = \mathbf{b}\_M$
 takes approximately $\frac{2}{3}n^3 + 2 M n^2$ operations, in contrast
 to $\frac{2}{3}Mn^3 + Mn^2$ for Gaussian elimination.
 
 The LU decomposition exists if and only if the upper-left sub-blocks
-**A**<sub>1 : *k*, 1 : *k*</sub> are non-singular for all 1 ≤ *k* ≤ *n*
-(not proven here). If the decomposition exists, it is unique.
+$\mat{A}\_{1:k,1:k}$ are non-singular for all 1 ≤ *k* ≤ *n* (not proven
+here). If the decomposition exists, it is unique.
 
 Let’s do an example of how LU decomposition works. Take
 
 $$
-\mathbf{A} = 
+\mat{A} = 
 \begin{pmatrix}
 1 & 3 & 1\\\\
 1 & 1 & -1 \\\\
@@ -1154,8 +1160,8 @@ $$
 \end{pmatrix}.
 $$
 
-Start by defining **U** = **A** (it’s not upper triangluar yet, but I am
-still calling it **U**) and
+Start by defining $\mathbf{U} = \mat{A}$ (it’s not upper triangluar yet,
+but I am still calling it **U**) and
 
 $$
 \mathbf{L} = \mathbf{I}\_3 = 
@@ -1317,13 +1323,14 @@ repeatedly.
 
 ## Jacobi iteration
 
-Let’s take this idea and apply it to solving **A****x** = **b**. Let
-**A** = **D** + **R** where **D** contains the diagonal elements of
-**A** and **R** contains everything else. Then we can write
+Let’s take this idea and apply it to solving
+$\mat{A}\mathbf{x}=\mathbf{b}$. Let $\mat{A} = \mathbf{D} + \mathbf{R}$
+where **D** contains the diagonal elements of $\mat{A}$ and **R**
+contains everything else. Then we can write
 
 $$
 \begin{align}
-\mathbf{A}\mathbf{x} &= \mathbf{b} \\\\
+\mat{A}\mathbf{x} &= \mathbf{b} \\\\
 (\mathbf{D}+\mathbf{R})\mathbf{x} &= \mathbf{b} \\\\
 \mathbf{D}\mathbf{x} + \mathbf{R} \mathbf{x} &= \mathbf{b}\\\\
 \mathbf{D} \mathbf{x} &= \mathbf{b} - \mathbf{R} \mathbf{x}\\\\
@@ -1388,7 +1395,7 @@ so feel free to ask me for the proof.
 
 However, calculating the eigenvalues of that matrix could be really hard
 and costly! There’s a sufficient condition for convergence that is much
-easier to check computationally, namely that **A** is **strictly
+easier to check computationally, namely that $\mat{A}$ is **strictly
 diagonally dominant**. This means
 
 |*a*<sub>*i**i*</sub>| &gt; ∑<sub>*j* ≠ *i*</sub>|*a*<sub>*i**j*</sub>|  in each row *i*.
@@ -2353,12 +2360,11 @@ to find a good model, so what should we do?
 
 To examine the details, let’s start with an even more fundamental
 example: a single vector in the plane. Suppose I hand you the vector
-**a** = (2,1)<sup>*T*</sup> and tell you to use it to reach the target
-vector **b** = (6,8)<sup>*T*</sup>. Well, you can’t do it exactly
-because there is no scalar *x* such that *x***a** = **b**. So let us do
-the next best thing: let’s find the value of *x* such that *x***a** is
-as close as possible to **b**. We can draw a picture to solve this
-problem.
+$\mat{A} = (2,1)^T$ and tell you to use it to reach the target vector
+**b** = (6,8)<sup>*T*</sup>. Well, you can’t do it exactly because there
+is no scalar *x* such that $x\mat{A} = \mathbf{b}$. So let us do the
+next best thing: let’s find the value of *x* such that $x\mat{A}$ is as
+close as possible to **b**. We can draw a picture to solve this problem.
 
 ![](coursenotes_files/figure-markdown_strict/unnamed-chunk-44-1.png)
 
@@ -2371,31 +2377,34 @@ From this picture, two relationships arise:
 
 $$
 \begin{align}
-x\mathbf{a} + \mathbf{r}&=\mathbf{b}\\\\
-\mathbf{a} \cdot \mathbf{r} &=0.
+x\mat{A} + \mathbf{r}&=\mathbf{b}\\\\
+\mat{A} \cdot \mathbf{r} &=0.
 \end{align}
 $$
 
-Let us dot the first equation with the vector **a**. Then we have
+Let us dot the first equation with the vector $\mat{A}$. Then we have
 
-**a** ⋅ **a***x* + **a** ⋅ **r** = **a** ⋅ **b**.
+$$
+\mat{A} \cdot \mat{A}x + \mat{A} \cdot \mathbf{r} = \mat{A} \cdot \mathbf{b}.
+$$
 
 From the second equation above, we can eliminate the second term on the
 left hand side to write
 
-**a**<sup>*T*</sup>**a***x* = **a**<sup>*T*</sup>**b**
+$$
+\mat{A}^T \mat{A} x = \mat{A}^T \mathbf{b}
+$$
 
 where we have used the fact that
 **y** ⋅ **z** = **y**<sup>*T*</sup>**z**. We can solve for **x** by
-writing
-*x* = (**a**<sup>*T*</sup>**a**)<sup>−1</sup>**a**<sup>*T*</sup>**b**.
+writing $x = \left(\mat{A}^T \mat{A}\right)^{-1}\mat{A}^T \mathbf{b}$.
 We can also calculate the vector that was as close as possible to **b**.
 We will call it $\widehat{\mathbf{b}}$ and it is
 
 $$
 \begin{align}
-\widehat{\mathbf{b}} &= \mathbf{a}x \\\\
-&=\mathbf{a}\left(\mathbf{a}^T \mathbf{a}\right)^{-1}\mathbf{a}^T \mathbf{b}\\\\
+\widehat{\mathbf{b}} &= \mat{A}x \\\\
+&=\mat{A}\left(\mat{A}^T \mat{A}\right)^{-1}\mat{A}^T \mathbf{b}\\\\
 & = \mathbf{P} \mathbf{b}.
 \end{align}
 $$
@@ -2403,25 +2412,24 @@ $$
 where thre last equation defines a new quantity that we call **P**.
 
 Let us know revisit what we have done and emphasize/introduce some
-vocabulary. We started with a vector **a** that we used as a **basis**
-to try to reach the **target** **b**. We couldn’t do it exactly, so we
-calcualted the closest we could come to **b**, which turned out to be
-$\widehat{\mathbf{b}}$. This is called the **projection** of **b** into
-the subspace spanned by **a**. We found
-$\widehat{\mathbf{b}} = \mathbf{a}x$, where *x* is called the **least
+vocabulary. We started with a vector $\mat{A}$ that we used as a
+**basis** to try to reach the **target** **b**. We couldn’t do it
+exactly, so we calcualted the closest we could come to **b**, which
+turned out to be $\widehat{\mathbf{b}}$. This is called the
+**projection** of **b** into the subspace spanned by $\mat{A}$. We found
+$\widehat{\mathbf{b}} = \mat{A}x$, where *x* is called the **least
 squares solution**, which solved the **normal equations**
-**a**<sup>*T*</sup>**a***x* = **a**<sup>*T*</sup>**b**. We can summarize
-the calculation of *x* by remembering
-*x* = (**a**<sup>*T*</sup>**a**)<sup>−1</sup>**a**<sup>*T*</sup>**b**
-where (**a**<sup>*T*</sup>**a**)<sup>−1</sup>**a**<sup>*T*</sup> is
-called the **pseudoinverse** of **a**. Also, we can summarize the
-calculation of $\widehat{\mathbf{b}}$ as
+$\mat{A}^T \mat{A} x = \mat{A}^T \mathbf{b}$. We can summarize the
+calculation of *x* by remembering
+$x = \left(\mat{A}^T \mat{A}\right)^{-1}\mat{A}^T \mathbf{b}$ where
+$\left(\mat{A}^T \mat{A}\right)^{-1}\mat{A}^T$ is called the
+**pseudoinverse** of $\mat{A}$. Also, we can summarize the calculation
+of $\widehat{\mathbf{b}}$ as
 $\widehat{\mathbf{b}} = \mathbf{P} \mathbf{b}$ where
-**P** = **a**(**a**<sup>*T*</sup>**a**)<sup>−1</sup>**a**<sup>*T*</sup>
-is what we call a **projection operator** or a **projection matrix**.
-Since we didn’t succeed in reaching **b**, there is some error, and we
-call this the **residual**,
-$\mathbf{r} = \mathbf{b}-\widehat{\mathbf{b}}$.
+$\mathbf{P} = \mat{A} (\mat{A}^T\mat{A})^{-1} \mat{A}^T$ is what we call
+a **projection operator** or a **projection matrix**. Since we didn’t
+succeed in reaching **b**, there is some error, and we call this the
+**residual**, $\mathbf{r} = \mathbf{b}-\widehat{\mathbf{b}}$.
 
 What are the words/ideas you should make sure you understand in the
 narrative above?
@@ -2470,11 +2478,13 @@ $$
 
 which we’ll write symbolically as
 
-*x*<sub>0</sub>**a**<sub>0</sub> + *x*<sub>1</sub>**a**<sub>1</sub> = **b**.
+$$
+x\_0 \mat{A}\_0 + x\_1 \mat{A}\_1 = \mathbf{b}.
+$$
 
-We’d like to reach **b** using the basis vectors **a**<sub>0, 1</sub>,
-but we can’t, so let’s consider getting as close as possible. The
-picture looks something like this.
+We’d like to reach **b** using the basis vectors $\mat{A}\_{0,1}$, but
+we can’t, so let’s consider getting as close as possible. The picture
+looks something like this.
 
 ![](PlaneProjection.png)
 
@@ -2482,7 +2492,7 @@ This picture gives rise to the equation
 
 $$
 \begin{align}
-x\_0 \mathbf{a}\_0 + x\_1 \mathbf{a\_1} + \mathbf{r} &= \mathbf{b} \\\\
+x\_0 \mat{A}\_0 + x\_1 \mathbf{a\_1} + \mathbf{r} &= \mathbf{b} \\\\
 a\_0 \cdot \mathbf{r} &= 0 \\\\
 a\_1 \cdot \mathbf{r} &= 0.
 \end{align}
@@ -2493,8 +2503,8 @@ We find
 
 $$
 \begin{align}
-x\_0 \mathbf{a}\_0\cdot\mathbf{a}\_0 + x\_1 \mathbf{a}\_0\cdot\mathbf{a}\_1 &= \mathbf{a}\_0 \cdot \mathbf{b}\\\\
-x\_0 \mathbf{a}\_1\cdot\mathbf{a}\_0 + x\_1 \mathbf{a}\_1\cdot\mathbf{a}\_1 &= \mathbf{a}\_1 \cdot \mathbf{b}
+x\_0 \mat{A}\_0\cdot\mat{A}\_0 + x\_1 \mat{A}\_0\cdot\mat{A}\_1 &= \mat{A}\_0 \cdot \mathbf{b}\\\\
+x\_0 \mat{A}\_1\cdot\mat{A}\_0 + x\_1 \mat{A}\_1\cdot\mat{A}\_1 &= \mat{A}\_1 \cdot \mathbf{b}
 \end{align}
 $$
 
@@ -2503,14 +2513,16 @@ second and third equations previously. Note that there is a matrix way
 to write this. we can write
 
 $$
-\begin{pmatrix} \mathbf{a}\_0^T \\\\ \mathbf{a}\_1^T \end{pmatrix} \begin{pmatrix} \mathbf{a}\_0 & \mathbf{a}\_1 \end{pmatrix} \begin{pmatrix} x\_0 \\\\ x\_1 \end{pmatrix} = \begin{pmatrix} \mathbf{a}\_0^T \\\\ \mathbf{a}\_1^T \end{pmatrix} \mathbf{b}.
+\begin{pmatrix} \mat{A}\_0^T \\\\ \mat{A}\_1^T \end{pmatrix} \begin{pmatrix} \mat{A}\_0 & \mat{A}\_1 \end{pmatrix} \begin{pmatrix} x\_0 \\\\ x\_1 \end{pmatrix} = \begin{pmatrix} \mat{A}\_0^T \\\\ \mat{A}\_1^T \end{pmatrix} \mathbf{b}.
 $$
 
-If we let **A** represent the matrix with columns **a**<sub>0, 1</sub>
+If we let $\mat{A}$ represent the matrix with columns $\mat{A}\_{0,1}$
 and if we let **x** = (*x*<sub>0</sub>,*x*<sub>1</sub>)<sup>*T*</sup>
 then we can write the last equation as
 
-**A**<sup>*T*</sup>**A****x** = **A**<sup>*T*</sup>**b**.
+$$
+\mat{A}^T \mat{A} \mathbf{x} = \mat{A}^T \mathbf{b}.
+$$
 
 These are the normal equations. For us, concretely, it looks like
 
@@ -2566,12 +2578,12 @@ Let’s calculuate this in `R`.
 ![](coursenotes_files/figure-markdown_strict/unnamed-chunk-47-1.png)
 
 Symbolically, we calculated the least squares solution
-**x** = (**A**<sup>*T*</sup>**A**)<sup>−1</sup>**A**<sup>*T*</sup>**b**
-where (**A**<sup>*T*</sup>**A**)<sup>−1</sup>**A**<sup>*T*</sup> is the
+$\mathbf{x} = \left(\mat{A}^T \mat{A}\right)^{-1}\mat{A}^T \mathbf{b}$
+where $\left(\mat{A}^T \mat{A}\right)^{-1}\mat{A}^T$ is the
 pseudoinverse. The projection is
-$\widehat{\mathbf{b}} = \mathbf{A} \mathbf{x} = \mathbf{A} \left(\mathbf{A}^T \mathbf{A}\right)^{-1}\mathbf{A}^T \mathbf{b}$
-where **A**(**A**<sup>*T*</sup>**A**)<sup>−1</sup>**A**<sup>*T*</sup> is
-the projection matrix.
+$\widehat{\mathbf{b}} = \mat{A} \mathbf{x} = \mat{A} \left(\mat{A}^T \mat{A}\right)^{-1}\mat{A}^T \mathbf{b}$
+where $\mat{A} \left(\mat{A}^T \mat{A}\right)^{-1}\mat{A}^T$ is the
+projection matrix.
 
 Though our example here has used merely two basis vectors, the ideas
 extend to any number.
@@ -2641,9 +2653,9 @@ where the model parameters appear in a lienar fashion.
 
 1.  Look at data.
 2.  Propose a model.
-3.  Force the model, resulting in **A****x** = **b**.
+3.  Force the model, resulting in $\mat{A}\mathbf{x}=\mathbf{b}$.
 4.  Solve the normal equations
-    **A**<sup>*T*</sup>**A****x** = **A**<sup>*T*</sup>**b**.
+    $\mat{A}^T\mat{A}\mathbf{x}=\mat{A}^T \mathbf{b}$.
 5.  Assess the fit of the model visually and/or using the residual
     vector.
 
@@ -2673,10 +2685,10 @@ We can start directly with the square of the norm of the residual vector
 (a factor of 1/2 is included for algebraic convenience, but it doesn’t
 change the result)
 $$
-\frac{1}{2}||\mathbf{r}||^2 = \frac{1}{2}||\mathbf{A}\mathbf{x}-\mathbf{b}||^2.
+\frac{1}{2}||\mathbf{r}||^2 = \frac{1}{2}||\mat{A}\mathbf{x}-\mathbf{b}||^2.
 $$
 More formally, we can define the scalar **objective function**
-$$f(\mathbf{x}) = \frac{1}{2} ||\mathbf{A}\mathbf{x}-\mathbf{b}||^2$$
+$$f(\mathbf{x}) = \frac{1}{2} ||\mat{A}\mathbf{x}-\mathbf{b}||^2$$
 and define our least squares solution **x**<sub>*L**S*</sub>as the value
 of **x** that minimizes this objective function, that is,
 **x**<sub>*L**S*</sub> = arg min<sub>**x**</sub>*f*(**x**).
@@ -2706,9 +2718,9 @@ problem.
 
 The eventual goal of this lesson is to show you how to solve the least
 squares problem
-$$\mathbf{x}\_{LS} = \mathop{\mathrm{arg\\,min}}\_x \frac{1}{2}||\mathbf{A}\mathbf{x}-\mathbf{b}||^2$$
+$$\mathbf{x}\_{LS} = \mathop{\mathrm{arg\\,min}}\_x \frac{1}{2}||\mat{A}\mathbf{x}-\mathbf{b}||^2$$
 
-by writing the matrix **A** in a convenient way. But to build up to
+by writing the matrix $\mat{A}$ in a convenient way. But to build up to
 that, we need to introduce a number of ideas. First off: orthogonality.
 
 You might remember that two vectors **v** and **w** are **orthogonal**
@@ -2720,10 +2732,10 @@ A matrix is called **orthogonal** or **orthonormal** (they are used
 interchangeably for matrices, sometimes) if its columns are orthonormal
 vectors. A cool property arises from this. Suppose these orthonormal
 columns are **v**<sub>1</sub>, …, **v**<sub>*n*</sub>. Then we can
-consider the quantity **A**<sup>*T*</sup>**A**:
+consider the quantity $\mat{A}^T \mat{A}$:
 $$
 \begin{align}
-\mathbf{A}^T \mathbf{A} &= \begin{pmatrix} \mathbf{v}\_1^T\\\\ \mathbf{v}\_2^T \\\\ \vdots \\\\ \mathbf{v}\_n^T \end{pmatrix} \begin{pmatrix} \mathbf{v}\_1 & \mathbf{v}\_2 & \cdots & \mathbf{v}\_n \end{pmatrix} \\\\
+\mat{A}^T \mat{A} &= \begin{pmatrix} \mathbf{v}\_1^T\\\\ \mathbf{v}\_2^T \\\\ \vdots \\\\ \mathbf{v}\_n^T \end{pmatrix} \begin{pmatrix} \mathbf{v}\_1 & \mathbf{v}\_2 & \cdots & \mathbf{v}\_n \end{pmatrix} \\\\
 &= \begin{pmatrix} \mathbf{v}\_1^T \mathbf{v}\_1 & \mathbf{v}\_1^T \mathbf{v}\_2 & \cdots & \mathbf{v}\_1^T \mathbf{v}\_n \\\\ \mathbf{v}\_2^T \mathbf{v}\_1 & \mathbf{v}\_2^T \mathbf{v}\_2 & \cdots &  \mathbf{v}\_2^T \mathbf{v}\_n \\\\
 \vdots & \vdots & \cdots & \vdots \\\\
 \mathbf{v}\_n^T \mathbf{v}\_1 & \mathbf{v}\_n^T \mathbf{v}\_2 & \cdots & \mathbf{v}\_n^T \mathbf{v}\_n
@@ -2732,11 +2744,11 @@ $$
 &= \mathbf{I}\_n.
 \end{align}
 $$
-If **A** is square and orthonormal, since
-**A**<sup>*T*</sup>**A** = **I**, then by definition of inverse,
-**A**<sup>*T*</sup> = **A**<sup>−1</sup>. This is a pretty great way to
-calculate an inverse! Remember, though, that in our least squares
-context ,**A** is generally *not* a square matrix.
+If $\mat{A}$ is square and orthonormal, since
+$\mat{A}^T\mat{A} = \mathbf{I}$, then by definition of inverse,
+$\mat{A}^T = \mat{A}^{-1}$. This is a pretty great way to calculate an
+inverse! Remember, though, that in our least squares context ,$\mat{A}$
+is generally *not* a square matrix.
 
 Another helpful property of orthogonal matrices is that they preserve
 length, meaning that have norm of one. That is, suppose **Q** is
@@ -2758,19 +2770,19 @@ definition of condition number, *κ*(**Q**) = 1. This means that
 orthogonal matrices are incredibly well-conditioned.
 
 Finally, let’s consider projecting a vector into a subspace spanned by
-orthonormal vectors **q**<sub>*i*</sub>, *i* = 1, …, *n*. Define **A**
-as
+orthonormal vectors **q**<sub>*i*</sub>, *i* = 1, …, *n*. Define
+$\mat{A}$ as
 $$
-\mathbf{A} = \begin{pmatrix} | & | &  & | \\\\ \mathbf{q}\_1 & \mathbf{q}\_2 & \cdots & \\  \mathbf{q}\_n \\\\| & | &  & | \\\\ \end{pmatrix}.
+\mat{A} = \begin{pmatrix} | & | &  & | \\\\ \mathbf{q}\_1 & \mathbf{q}\_2 & \cdots & \\  \mathbf{q}\_n \\\\| & | &  & | \\\\ \end{pmatrix}.
 $$
 Let’s project a vector **w** onto the subspace spanned by the columns of
-**A**. By definition of the projection operator, and using the fact that
-**A** is orthogonal,
+$\mat{A}$. By definition of the projection operator, and using the fact
+that $\mat{A}$ is orthogonal,
 $$
 \begin{align}
-\mathbf{P}\mathbf{w} &= \mathbf{A} (\mathbf{A}^T \mathbf{A})^{-1} \mathbf{A}^T \mathbf{w}\\\\
-&= \mathbf{A} \mathbf{A}^{-1} \mathbf{A} \mathbf{A}^T \mathbf{w} \\\\
-&= \mathbf{A} \mathbf{A}^T \mathbf{w} \\\\
+\mathbf{P}\mathbf{w} &= \mat{A} (\mat{A}^T \mat{A})^{-1} \mat{A}^T \mathbf{w}\\\\
+&= \mat{A} \mat{A}^{-1} \mat{A} \mat{A}^T \mathbf{w} \\\\
+&= \mat{A} \mat{A}^T \mathbf{w} \\\\
 &= \mathbf{q}\_1 \mathbf{q}\_1^T \mathbf{w} + \mathbf{q}\_2 \mathbf{q}\_2^T \mathbf{w} + \cdots + \mathbf{q}\_n \mathbf{q}\_n^T \mathbf{w}.
 \end{align}
 $$
@@ -2785,12 +2797,12 @@ $$
 $$
 so that
 $$
-\mathbf{A} = \begin{pmatrix} \frac{1}{3} & \frac{2}{15} \\\\ \frac{2}{3} & \frac{2}{3} \\\\ \frac{2}{3} & -\frac{11}{15} \end{pmatrix}.
+\mat{A} = \begin{pmatrix} \frac{1}{3} & \frac{2}{15} \\\\ \frac{2}{3} & \frac{2}{3} \\\\ \frac{2}{3} & -\frac{11}{15} \end{pmatrix}.
 $$
 Then
 $$
 \begin{align}
-\mathbf{A} \mathbf{A}^T &= \begin{pmatrix} \frac{1}{3} & \frac{2}{15} \\\\ \frac{2}{3} & \frac{2}{3} \\\\ \frac{2}{3} & -\frac{11}{15} \end{pmatrix}
+\mat{A} \mat{A}^T &= \begin{pmatrix} \frac{1}{3} & \frac{2}{15} \\\\ \frac{2}{3} & \frac{2}{3} \\\\ \frac{2}{3} & -\frac{11}{15} \end{pmatrix}
 \begin{pmatrix} \frac{1}{3} &  \frac{2}{3} & \frac{2}{3} \\\\ \frac{2}{15} & \frac{2}{3} & -\frac{11}{15} \end{pmatrix} \\\\
 &= \frac{1}{225}
 \begin{pmatrix}
@@ -2915,30 +2927,32 @@ with
 *r*<sub>*i*, *i*</sub> = ||**y**<sub>*i*</sub>||,   *r*<sub>*i*, *j*</sub> = **q**<sub>*i*</sub> ⋅ **v**<sub>*j*</sub>.
 
 The QR decomposition is a matrix decomposition that writes a *m* × *n*
-matrix **A** as a product **A** = **Q****R** where:
+matrix $\mat{A}$ as a product $\mat{A} = \mathbf{Q} \mathbf{R}$ where:
 
 -   **Q** is an *m* × *r* matrix with orthonormal columns, where *r* is
-    the number of linearly independent columns of **A**.
+    the number of linearly independent columns of $\mat{A}$.
 -   **R** is an *r* × *n* matrix which is upper triangular if *r* = *n*,
     or the top portion of an upper triangular matrix if *r* &lt; *n*.
--   The columns of **Q** span the same space as the columns of **A**.
+-   The columns of **Q** span the same space as the columns of
+    $\mat{A}$.
 -   The matrix **R** gives the change of basis between the vectors in
-    **Q** and the vectors in **A**.
+    **Q** and the vectors in $\mat{A}$.
 -   The decompisition is unique up to some sign changes, so if we
     require *R*<sub>*i**i*</sub> ≥ 0, it is unique.
--   If the columns of **A** are independent, then
+-   If the columns of $\mat{A}$ are independent, then
     *R*<sub>*i**i*</sub> ≠ 0.
--   On the other hand, if column *j* of **A** can be written as a linear
-    combination of columns to the left, then *R*<sub>*j**j*</sub> = 0.
+-   On the other hand, if column *j* of $\mat{A}$ can be written as a
+    linear combination of columns to the left, then
+    *R*<sub>*j**j*</sub> = 0.
 
 The QR decomposition we’ve done so far is actually called the partial QR
 decomposition We distinguish this from the **full** or **complete** QR
 decomposition. In the latter, we include vectors than span parts of the
-space not spanned by **A** itself. Of course, these contribute nothing
-to the matrix **Q**, so it results in a bunch of 0’s in **R**. Below is
-the key picture to understand. Here, **Q** and **R** are the (partial)
-QR decomposition and $\overline{Q}$ and $\overline{R}$ are the full
-version.
+space not spanned by $\mat{A}$ itself. Of course, these contribute
+nothing to the matrix **Q**, so it results in a bunch of 0’s in **R**.
+Below is the key picture to understand. Here, **Q** and **R** are the
+(partial) QR decomposition and $\overline{Q}$ and $\overline{R}$ are the
+full version.
 
 ![](fullQR.png)
 
@@ -2989,7 +3003,7 @@ orthogonalization to obtain the QR decomposition.
     ## [3,]    0    0    7
 
 In this example, notice that $\overline{\mathbf{Q}}$ has three columns.
-This reflects the fact that the columns of **A** are linearly
+This reflects the fact that the columns of $\mat{A}$ are linearly
 independent. Hence, it spans all of ℝ<sup>3</sup> and the QR and full QR
 decompositions are the same.
 
@@ -3097,7 +3111,7 @@ little cases like ours, you can eyeball it.
     ## [3,]    0    0    0
 
 To reiterate, we ended up with a row of zeros at the bottom of
-$\overline{\mathbf{R}}$. That’s because the columns of **A** are
+$\overline{\mathbf{R}}$. That’s because the columns of $\mat{A}$ are
 linearly dependent and don’t span ℝ<sup>3</sup>. At any rate, let’s go
 ahead and check our result.
 
@@ -3168,7 +3182,7 @@ Ok, and let’s do one last example.
 
 But wait! We are living in ℝ<sup>4</sup> and we only have three vectors
 to far, **q**<sub>1, 2, 3</sub>. If we want the full decomposition, we
-have to find a basis for the orthogonal complement of **A**.
+have to find a basis for the orthogonal complement of $\mat{A}$.
 
     # Choose a vector not in the span of q1, q2, q3
     v4 <- c(1,2,3,4)
@@ -3235,10 +3249,10 @@ really convenient for least squares, and turns out to have very nice
 numerical properties because of small condition numbers. You’ll work
 with the numerical issue on your activities and/or homework, but for
 now, here’s how least squares works when you use QR decomposition on
-**A****x** = **b**. Note
+$\mat{A}\mathbf{x}=\mathbf{b}$. Note
 $$
 \begin{align}
-||\mathbf{A}\mathbf{x}-\mathbf{b}||^2 &= ||\bar{\mathbf{Q}}\bar{\mathbf{R}} \mathbf{x} - \mathbf{b}||^2 \\\\
+||\mat{A}\mathbf{x}-\mathbf{b}||^2 &= ||\bar{\mathbf{Q}}\bar{\mathbf{R}} \mathbf{x} - \mathbf{b}||^2 \\\\
 &= ||\bar{\mathbf{Q}}^T(\bar{\mathbf{Q}}\bar{\mathbf{R}} \mathbf{x} - \mathbf{b})||^2 \\\\
 &= ||\bar{\mathbf{Q}}^T \bar{\mathbf{Q}}\bar{\mathbf{R}} \mathbf{x} - \bar{\mathbf{Q}}^T \mathbf{b}||^2 \\\\
 &= ||\bar{\mathbf{R}} \mathbf{x} - \bar{\mathbf{Q}}^T \mathbf{b}||^2 \\\\
@@ -3260,11 +3274,11 @@ There’s a command that does this all automatically for you called
 
 ## Big picture
 
-Along with solving the linear system **A****x** = **b**, finding the
-eigenvalues and eigenvectors of a matrix **A** is one of the most
-important problems in linear algebra. Knowing the eigenpairs can help
-simplify a problem and reveal important information about systems
-modeled with linear algebra.
+Along with solving the linear system $\mat{A}\mathbf{x}=\mathbf{b}$,
+finding the eigenvalues and eigenvectors of a matrix $\mat{A}$ is one of
+the most important problems in linear algebra. Knowing the eigenpairs
+can help simplify a problem and reveal important information about
+systems modeled with linear algebra.
 
 ## Goals
 
@@ -3276,44 +3290,46 @@ modeled with linear algebra.
 
 ## Eigenvalue fundamentals
 
-For an *n* × *n* matrix **A**, a scalar *λ* ∈ ℂ, and vector
+For an *n* × *n* matrix $\mat{A}$, a scalar *λ* ∈ ℂ, and vector
 **v** ∈ ℝ<sup>*n*</sup>, **v** ≠ **0**, then we say *λ* is an
-**eigenvalue** of **A** and **v** is an **eigenvector** of **A** if
-**A****v** = *λ***v**.
+**eigenvalue** of $\mat{A}$ and **v** is an **eigenvector** of $\mat{A}$
+if $\mat{A}\mathbf{v}=\lambda \mathbf{v}$.
 
 Stated in words: an eigenvector and eigenvalue are the magical vector
-**v** and scalar *λ* such that if you hit **v** with **A**, you get back
-the same vector **v** but multiplied by a constant *λ*.
+**v** and scalar *λ* such that if you hit **v** with $\mat{A}$, you get
+back the same vector **v** but multiplied by a constant *λ*.
 
 How do we calculate them? Let’s take the definition
-**A****v** = *λ***v** and rearrange it to write
-(**A**−**I***λ*)**v** = **0**. There are only two ways this can happen.
-One choice is **v** = 0, but that’s trivial because it works for any
-**A**. The other choice, by the Invertible Matrix Theorem, is that the
-matrix on the left is singular. Also from the Invertible Matrix Theorem,
-if it is singular, then it has determinant zero, that is
-det (**A**−**I***λ*) = 0. This equation is a polynomial in *λ* and is
-called the **characteristic polynomial**. When calculating by hand, we
-find the characteristic polynomial first and then solve it to find the
-eigenvalues. To find eigenvectors, we remember that
-**A****v** = *λ***v** → (**A**−**I***λ*)**v** = **0** and solve for
-**v**.
+$\mat{A} \mathbf{v} = \lambda \mathbf{v}$ and rearrange it to write
+$(\mat{A} - \mathbf{I} \lambda) \mathbf{v} = \mathbf{0}$. There are only
+two ways this can happen. One choice is **v** = 0, but that’s trivial
+because it works for any $\mat{A}$. The other choice, by the Invertible
+Matrix Theorem, is that the matrix on the left is singular. Also from
+the Invertible Matrix Theorem, if it is singular, then it has
+determinant zero, that is $\det (\mat{A}- \mathbf{I} \lambda) = 0$. This
+equation is a polynomial in *λ* and is called the **characteristic
+polynomial**. When calculating by hand, we find the characteristic
+polynomial first and then solve it to find the eigenvalues. To find
+eigenvectors, we remember that
+$\mat{A}\mathbf{v} = \lambda \mathbf{v} \rightarrow (\mat{A}-\mathbf{I}\lambda)\mathbf{v}=\mathbf{0}$
+and solve for **v**.
 
 To recap:
 
-1.  Solve the characteristic equation det (**A**−**I***λ*) = 0 to find
-    the *λ*<sub>*i*</sub>.
-2.  Solve (**A**−**I***λ*<sub>*i*</sub>)**v**<sub>**i**</sub> = **0** to
+1.  Solve the characteristic equation
+    $\det (\mat{A}- \mathbf{I} \lambda) = 0$ to find the
+    *λ*<sub>*i*</sub>.
+2.  Solve $(\mat{A}-\mathbf{I}\lambda\_i)\mathbf{v\_i}=\mathbf{0}$ to
     find the **v**<sub>*i*</sub>.
 
 For example, let’s find the eigenvalues and eigenvectors of
 $$
-\mathbf{A} = \begin{pmatrix} -3 & 2 \\\\ 2 & -3 \end{pmatrix}.
+\mat{A} = \begin{pmatrix} -3 & 2 \\\\ 2 & -3 \end{pmatrix}.
 $$
 Using the result above, we can write the characteristic polynomial:
 $$
 \begin{align}
-\det (\mathbf{A} - \mathbf{I} \lambda) &= 0\\\\
+\det (\mat{A} - \mathbf{I} \lambda) &= 0\\\\
 \det \begin{pmatrix} -3 - \lambda & 2 \\\\ 2 & -3 - \lambda \end{pmatrix} &= 0\\\\
 (\lambda+3)^2-4 &= 0\\\\
 \lambda^2 + 6\lambda + 5 &= 0\\\\
@@ -3324,7 +3340,7 @@ and therefore *λ*<sub>1, 2</sub> =  − 1,  − 5. To find
 **v**<sub>1</sub>, we solve:
 $$
 \begin{align}
-(\mathbf{A}-\mathbf{I}\lambda\_1)\mathbf{v}\_1&=\mathbf{0}\\\\
+(\mat{A}-\mathbf{I}\lambda\_1)\mathbf{v}\_1&=\mathbf{0}\\\\
 \begin{pmatrix} -2 & 2 \\\\ 2 & -2 \end{pmatrix}\mathbf{v}\_1 &= \mathbf{0} \\\\
 \mathbf{v}\_1 &= \begin{pmatrix} 1 \\\\ 1 \end{pmatrix}
 \end{align}
@@ -3337,13 +3353,13 @@ $$
 ## Algebraic multiplicity, geometric multiplicity, and diagonalization
 
 Many applications of eigenvalues are intimiately tied up with the idea
-of **diagonalization** of matrices. Suppose **A** has eigenpairs
+of **diagonalization** of matrices. Suppose $\mat{A}$ has eigenpairs
 *λ*<sub>*i*</sub>, **v**<sub>*i*</sub>, *i* = 1, …, *n*. Then we can
 write down the definition of eigenpair for all pairs simultaneously:
-**A****v**<sub>*i*</sub> = *λ*<sub>*i*</sub>**v**<sub>*i*</sub> implies
+$\mat{A} \mathbf{v}\_i = \lambda\_i \mathbf{v}\_i$ implies
 $$
 \begin{align}
-\mathbf{A} \underbrace{\begin{pmatrix}
+\mat{A} \underbrace{\begin{pmatrix}
 \vert & \vert & \cdots & \vert \\\\
 \mathbf{v}\_1 & \mathbf{v}\_2 & \cdots & \mathbf{v}\_n \\\\
 \vert & \vert & \cdots & \vert 
@@ -3359,17 +3375,17 @@ $$
 \underbrace{\begin{pmatrix} \lambda\_1 &&& \\\\ & \lambda\_2 & & \\\\ && \ddots & \\\\ &&& \lambda\_n   \end{pmatrix}}\_\mathbf{\Lambda}.
 \end{align}
 $$
-Since **A****S** = **S****Λ**, we can write
-**A** = **S****Λ****S**<sup>−1</sup>. If we think of **S** as describing
-a change of basis, this equation says that the action of **A** is like
-going into another basis, multiplying by a diagonal matrix, and then
-changing back to the original basis.
+Since $\mat{A}\mathbf{S} = \mathbf{S} \mathbf{\Lambda}$, we can write
+$\mat{A} = \mathbf{S} \mathbf{\Lambda} \mathbf{S}^{-1}$. If we think of
+**S** as describing a change of basis, this equation says that the
+action of $\mat{A}$ is like going into another basis, multiplying by a
+diagonal matrix, and then changing back to the original basis.
 
-Let’s show that we can do this with our example matrix **A** from
+Let’s show that we can do this with our example matrix $\mat{A}$ from
 before,
 
 $$
-\mathbf{A} = \begin{pmatrix} -3 & 2 \\\\ 2 & -3 \end{pmatrix}.
+\mat{A} = \begin{pmatrix} -3 & 2 \\\\ 2 & -3 \end{pmatrix}.
 $$
 
     A <- matrix(c(-3,2,2,-3),byrow=TRUE,nrow=2)
@@ -3428,10 +3444,10 @@ $$
 F\_n &= F\_{n-1} + G\_{n-1} \\\\
 G\_n &= F\_{n-1} \\\\
 \begin{pmatrix} F\_n \\\\ G\_n \end{pmatrix} &= \begin{pmatrix} 1 & 1 \\\\ 1 & 0 \end{pmatrix} \begin{pmatrix} F\_{n-1} \\\\ G\_{n-1} \end{pmatrix} \\\\
-\mathbf{F}\_n &= \mathbf{A} \mathbf{F}\_{n-1}.
+\mathbf{F}\_n &= \mat{A} \mathbf{F}\_{n-1}.
 \end{align}
 $$
-Let’s diagonalize **A**, and momentarily, you’ll see why.
+Let’s diagonalize $\mat{A}$, and momentarily, you’ll see why.
 
     A <- matrix(c(1,1,1,0),byrow=TRUE,nrow=2)
     lambdap <- (1+sqrt(5))/2
@@ -3480,7 +3496,7 @@ Why would we do this? Let’s use the diagonalization to re-write our
 problem:
 $$
 \begin{align}
-\mathbf{F}\_n &= \mathbf{A} \mathbf{F}\_{n-1}\\\\
+\mathbf{F}\_n &= \mat{A} \mathbf{F}\_{n-1}\\\\
 \mathbf{F}\_n &= \mathbf{S} \mathbf{\Lambda} \mathbf{S}^{-1} \mathbf{F}\_{n-1}\\\\
 \mathbf{S}^{-1} \mathbf{F} &= \mathbf{\Lambda} \mathbf{S}^{-1} \mathbf{F}\_{n-1}.
 \end{align}
