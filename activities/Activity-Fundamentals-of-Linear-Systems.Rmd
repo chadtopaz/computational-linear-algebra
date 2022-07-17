@@ -1,8 +1,7 @@
 ---
 title: "Activity - Fundamentals of Linear Systems"
 output:
-  rmarkdown::github_document:
-    html_preview: false
+  rmarkdown::md_document:
   header-includes:
    - \usepackage{amsmath}
 ---
