@@ -160,7 +160,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 -   Looking ahead
 
     -   8.2 - 7.2 - 1 = ?
-    -   10<sup>18</sup> + 100 - 10<sup>18</sup> = ?
+    -   $10^{18} + 100 - 10^{18} = ?$
 
 [Back to Course Units](#course-units)
 

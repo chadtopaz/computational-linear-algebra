@@ -2,8 +2,7 @@
 title: "Computational Linear Algebra: Course Notes"
 author: "Chad M. Topaz | Last Updated: 2022-07-04"
 output:
-  rmarkdown::github_document:
-    html_preview: false
+  rmarkdown::md_document:
     toc: true
     toc_depth: 1
   header-includes:
@@ -16,13 +15,28 @@ output:
 \newcommand{\exp}[1]{\mathrm{e}^{#1}}
 \DeclareMathOperator*{\argmin}{arg\,min}
 ```
-```{r,message=FALSE, warning=FALSE, include=FALSE}
+```{r, message=FALSE, warning=FALSE, include=FALSE}
 library(knitr)
 knitr::opts_chunk$set(cache = TRUE)
 library(BatchGetSymbols, quietly = T)
-library(rvest)
 library(kableExtra)
 library(pracma)
+library(matlib)
+library(PolynomF)
+```
+
+```{r, message=FALSE, warning=FALSE, include=FALSE}
+eliminate <- function(A, tol = 10^-8) {
+  n <- nrow(A)
+  for ( j in 1:(n-1) ) {
+    pivot <- A[j,j]
+    if (abs(pivot) < tol) stop('zero pivot encountered')
+    for ( i in (j+1):n ) {
+      A[i,] <- A[i,] - A[i,j]/pivot * A[j,]
+    }
+  }
+  return(A)
+}
 ```
 
 # R Bootcamp
@@ -58,7 +72,7 @@ Consider some methods for evaluating the polynomial $2x^4+3x^3-3x^2+5x-1$:
 
 We can test:
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 xvec <- runif(10^6)
 t1 <- system.time(
   for (x in xvec){
@@ -87,7 +101,7 @@ There are several different ways to "multiply" vectors $\mathbf{x}$ and $\mathbf
 
 Let's calculate some examples.
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 x <- c(1,2,3)
 y <- c(4,5,6)
 z <- c(7,8,9,10)
@@ -106,7 +120,7 @@ More formally, suppose $f$ is $n+1$ times continuously differentiably on the int
 
 For example, suppose $f(x)=\sin(x)$ and $x_0=0$. We can pre-compute some derivatives, $f(0)=\sin(0)=0$, $f^{(1)}(0)=\cos(0)=1$, $f^{(2)}(0)=-\sin(0)=0$, $f^{(3)}(0)=-\cos(0)=-1$, $f^{(4)}(0)=\sin(0)=0$, and so on. Then the Taylor polynomial to 4th order and the error term are are $$ 0 + x + 0x^2 - \frac{x^3}{6} + 0*x^4 + \frac{x^5}{120}\cos c.$$ Here is a plot of the function and the subsequent Taylor approximations.
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 P1 <- function(x) {x}
 P3 <- function(x) {x-x^3/6}
 x = seq(from=-pi/2,to=pi/2,length=200)
@@ -117,7 +131,7 @@ lines(x,P3(x),col="red")
 
 We can also calculaute a bound on the error if we use the fourth degree polynomial to approxiamte $\sin(0.1)$. Note $\sin$ is at most one in magnitude, so the error term is at most $(0.1)^5/120\approx 8.333 \times 10^{-8}$. The actual error achieved is
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 abs(sin(0.1)-P3(0.1))
 ```
 
@@ -149,15 +163,15 @@ Most computers use a standard representation of real numbers called a *floating 
 
 We focus on double precision floats. A double precision float consists of 64 bits (1's and 0's) and, expressed in base 10, is equal to $$(-1)^s 2^{c-1023}(1+f)$$ The parts of this number are:
 
-+----------------+-----------+-------------------+---------------------------------------------------+
-| Part of number | Name      | Bits              | Notes                                             |
-+================+===========+===================+===================================================+
-| s              | sign      | 1                 | Determines positive or negative                   |
-+----------------+-----------+-------------------+---------------------------------------------------+
-| c              | exponent  | 2 - 12 (11 bits)  | Subtract 1023 to correct exponential bias         |
-+----------------+-----------+-------------------+---------------------------------------------------+
-| f              | mantissa  | 13 - 64 (52 bits) | Interpreted as a binary fraction (after radix pt) |
-+----------------+-----------+-------------------+---------------------------------------------------+
++----------------+----------+-------------------+---------------------------------------------------+
+| Part of number | Name     | Bits              | Notes                                             |
++================+==========+===================+===================================================+
+| s              | sign     | 1                 | Determines positive or negative                   |
++----------------+----------+-------------------+---------------------------------------------------+
+| c              | exponent | 2 - 12 (11 bits)  | Subtract 1023 to correct exponential bias         |
++----------------+----------+-------------------+---------------------------------------------------+
+| f              | mantissa | 13 - 64 (52 bits) | Interpreted as a binary fraction (after radix pt) |
++----------------+----------+-------------------+---------------------------------------------------+
 
 For example, suppose our 64 bits are $$1 | 10000000111 | 1101000000000000000000000000000000000000000000000000$$ Then expressed in base 10, $s=1$, $c=1024+4+2+1=1031$, and $f=1/2+1/4+1/16=0.8125$. So the floating point number is $(-1)^1 \cdot 2^{1031-1023} \cdot 1.8125=-208$.
 
@@ -185,7 +199,7 @@ Machine addition is defined as $$fl(x+y) = fl(fl(x)+fl(y)).$$ That is, take $x$ 
 
 For example, let's add $1$ and $2^{-53}$. Well, $fl(1)=1$ and $fl(2^{-53})=2^{-53}$. The (exact) sum is $1+2^{-53}$ but due to the rounding rules on machines, $fl(1+2^{-53})=1$. Therefore, on a machine, the sum is $1$. Let's try:
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 1+2^(-53)
 ```
 
@@ -193,7 +207,7 @@ For example, let's add $1$ and $2^{-53}$. Well, $fl(1)=1$ and $fl(2^{-53})=2^{-5
 
 We've seen that computer storage of numbers can have error, and therefore arithmetic can have error. This error is sometimes called *loss of significance* and the most dangerous operation is subtraction of nearly equal numbers. Consider the expression $(1-\cos x)/\sin^2 x$, which can also be written as $1/(1+\cos x)$. We compute this both ways for $x$ decreasing from $1$.
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 options(digits=12)
 x <- 10^(-(0:12))
 E1 <- (1-cos(x))/sin(x)^2
@@ -223,8 +237,7 @@ We begin considering the solution of systems of linear equations, $\mathbf{A}\ma
 
 ## Linear systems
 
-For concreteness let's work in three dimensions and let's consider the system
-$$
+For concreteness let's work in three dimensions and let's consider the system $$
 \begin{pmatrix}
 2 & 4 & -2\\
 1 & 4 & -3\\
@@ -237,8 +250,7 @@ x_1 \\ x_2 \\ x_3
 \begin{pmatrix}
 8 \\ 8 \\ -3
 \end{pmatrix}.
-$$
-Let's interpret this system two ways.
+$$ Let's interpret this system two ways.
 
 **Intersecting hyperplanes.** Carrying out the matrix multiplication, we write the equations$$
 \begin{eqnarray}
@@ -336,7 +348,7 @@ $$
 
 By the way, we can go ahead and use a routine I've written to perform the elimination.
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 A <- matrix(c(1,3,1,9,1,1,-1,1,3,11,5,35),nrow=3,byrow = TRUE)
 eliminate(A)
 ```
@@ -359,7 +371,7 @@ For example, suppose row reduction on a $500 \times 500$ matrix takes 1 second. 
 
 Let's test scaling of the reduction step on Chad's machine for a random matrix.
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 set.seed(123)
 n1 <- 200
 A1 <- matrix(runif(n1^2), ncol=n1)
@@ -382,32 +394,34 @@ Notice that we haven't specified what distance means! This is why we need to def
 
 A vector norm is a rule that assigns a real number to every vector. Intuitively, it measures length. There are a bunch of requirements that this rule must satisfy in order to be a norm, but rather than stating those requirements, I'm going to just tell you some practicalities.
 
-The vector norm we'll work with is called the $p$-norm. The $p$-norm for $1 \le p \le \infty$ is defined as $$
+The vector norm we'll work with is called the $p$-norm. The $p$-norm for $1 \le p \le \infty$ is defined as
+
+$$
 || \mathbf{x} ||_p = \left({|x_1|^p + |x_2|^p + \cdots + |x_n|^p} \right)^{1/p}.
 $$
 
 The three most common $p$-norms are $p = 1, 2, \infty$ since they are the easiest to compute with and in some sense are the most natural:
 
 -   $p=1$ (the Manhattan or taxicab norm) $$
-    || \mathbf{x} ||_1 =|x_1| + |x_2| + \cdots + |x_n|
-    $$
+|| \mathbf{x} ||_1 =|x_1| + |x_2| + \cdots + |x_n|
+$$
 -   $p =2$ (the Euclidean norm) $$
-    || \mathbf{x} ||_2 = \sqrt{x_1^2 + x_2^2 + \cdots + x_n^2\ } = \sqrt{\mathbf{x} \cdot \mathbf{x}}
-    $$
+|| \mathbf{x} ||_2 = \sqrt{x_1^2 + x_2^2 + \cdots + x_n^2\ } = \sqrt{\mathbf{x} \cdot \mathbf{x}}
+$$
 -   $p=\infty$ $$
-    || \mathbf{x} ||_\infty = \max{\left(| x_1|, | x_2|,  \ldots, |x_n|\right)}
-    $$
+|| \mathbf{x} ||_\infty = \max{\left(| x_1|, | x_2|,  \ldots, |x_n|\right)}
+$$
 
-For $p = \infty$ it takes a little analysis to show why the computational definition is what it is, but a numerical study is usually convincing. We can use a piece of code I wrote for you called `vnorm.`
+For $p = \infty$ it takes a little analysis to show why the computational definition is what it is, but a numerical study is usually convincing. We can use the `Norm` command
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 v <- c(3,-2,2,3,1,4,1,2,3)
 pvals <- c(1,1.5,2,3,4,5,6,7,20)
 res <- NULL
 for (p in pvals){
-  res <- c(res,vnorm(v,p))
+  res <- c(res,Norm(v,p))
 }
-res <- c(res,vnorm(v,"I"))
+res <- c(res,Norm(v,Inf))
 kable(cbind(c(pvals,"Infinity"),res),col.names=c("p","norm"))
 ```
 
@@ -426,31 +440,37 @@ The matrix $p$-norm says: apply $A$ to the unit sphere, and $||\mathbf{A}||_p$ i
 Fortunately, just like for the vector case, the matrix $p$-norm has a few special values of $p$ for which it is easy to compute. We have:
 
 -   $p=1$ $$
-    ||\mathbf{A} ||_1 = \displaystyle{\max_{1 \le j \le n} \sum_{i=1}^n |a_{ij}|} = \text{maximum absolute column sum}
-    $$
+||\mathbf{A} ||_1 = \displaystyle{\max_{1 \le j \le n} \sum_{i=1}^n |a_{ij}|} = \text{maximum absolute column sum}
+$$
 
 -   $p=2$ $$
-    || \mathbf{A} ||_2 = \sqrt{\max\{ \text{eigenvalue}(A^TA) \} }
-    $$
+|| \mathbf{A} ||_2 = \sqrt{\max\{ \text{eigenvalue}(A^TA) \} }
+$$
 
 -   $p=\infty$ $$
-    || \mathbf{A} ||_\infty = \displaystyle{\max_{1 \le i \le n} \sum_{j=1}^n |a_{ij}|} = \text{maximum absolute row sum}
-    $$
+|| \mathbf{A} ||_\infty = \displaystyle{\max_{1 \le i \le n} \sum_{j=1}^n |a_{ij}|} = \text{maximum absolute row sum}
+$$
 
 To see why these definitions are true requires some analysis. If you are interested, I am happy to point you to proofs.
 
 You can calculate the $1$, $2$, and $\infty$ matrix norms using the R command `norm`.
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 A <- matrix(c(2,-1,1,1,0,1,3,-1,4),byrow = TRUE, nrow = 3)
 norm(A,"1")
 norm(A,"2")
 norm(A,"I")
 ```
 
-There is one really useful identity you should know about matrix norms: $$||\mathbf{A}\mathbf{x}||_p \leq ||\mathbf{A}||_p ||\mathbf{x}||_p.$$ To see this, we start with the right hand side and note $$||\mathbf{A}||_p ||\mathbf{x}||_p = \left( \max_{\mathbf{y} \not = \mathbf{ 0}} \frac{ || \mathbf{A} \mathbf{y}||_p} { ||\mathbf{y}||_p} \right) ||\mathbf{x}||_p \geq \frac{ || \mathbf{A} \mathbf{x}||_p} { ||\mathbf{x}||_p} ||\mathbf{x}||_p = || \mathbf{A} \mathbf{x}||_p.$$
+There is one really useful identity you should know about matrix norms:
 
-## Condition number for Ax=b
+$$||\mathbf{A}\mathbf{x}||_p \leq ||\mathbf{A}||_p ||\mathbf{x}||_p.$$
+
+To see this, we start with the right hand side and note
+
+$$||\mathbf{A}||_p ||\mathbf{x}||_p = \left( \max_{\mathbf{y} \not = \mathbf{ 0}} \frac{ || \mathbf{A} \mathbf{y}||_p} { ||\mathbf{y}||_p} \right) ||\mathbf{x}||_p \geq \frac{ || \mathbf{A} \mathbf{x}||_p} { ||\mathbf{x}||_p} ||\mathbf{x}||_p = || \mathbf{A} \mathbf{x}||_p.$$
+
+## Condition number for **Ax**=**b**
 
 Let us consider solving $\mathbf{A}\mathbf{x}=\mathbf{b}$. Suppose we find approximate solution $\mathbf{x}_a$. The **relative forward error** is $$\frac{||\mathbf{x}-\mathbf{x}_a||}{||\mathbf{x}||}$$ and the **relative backward error** is $$\frac{||\mathbf{A}\mathbf{x}-\mathbf{A}\mathbf{x}_a||}{||\mathbf{A}\mathbf{x}||}=\frac{||\mathbf{b}-\mathbf{A}\mathbf{x}_a||}{||\mathbf{b}||}.$$ We define **error magnification** as the ratio $$\frac{\text{relative forward error}}{\text{relative backward error}}=\frac{\frac{||\mathbf{x}-\mathbf{x}_a||}{||\mathbf{x}||}}{\frac{||\mathbf{b}-\mathbf{A}\mathbf{x}_a||}{||\mathbf{b}||}}.$$
 
@@ -464,23 +484,25 @@ Consider:
 -   Then $\kappa_2(A) = 1.25\times10^4$
 -   Let $\mathbf{b} = \begin{pmatrix} 0.254 \\ 0.127 \end{pmatrix}$
 -   Then $\mathbf{x} =(1,-1)$.
--   Consider two approximate solutions $\mathbf{x}_{1,2}$ $$
-    \begin{array}{lcl}
-    \mathbf{x}_1 = (-0.0827,0.5) && \mathbf{x}_2 = (0.999,-1.001) \\
-    \triangle \mathbf{x}_1 = (1.0827, -1.5) && \triangle \mathbf{x}_2 = (0.001,0.001) \\
-    ||\triangle \mathbf{x}_1 || = 1.85&& ||\triangle \mathbf{x}_2|| = .0014\\
-    ||\triangle \mathbf{x}_1 ||/||\mathbf{x}|| = 1.308&& ||\triangle \mathbf{x}_2||/||\mathbf{x}|| = .001\\
-    \mathbf{b}_1 = (0.2539949, 0.1272061) &&  \mathbf{b}_2 = (0.252428, 0.126213) \\
-    \triangle\mathbf{b}_1 = (0.0000051,- 0.0002061) &&  \triangle\mathbf{b}_2 = (0.001572, 0.000787) \\
-    ||\triangle \mathbf{b}_1 || = 0.000206&& ||\triangle \mathbf{b}_2|| = .00176\\
-    ||\triangle \mathbf{b}_1 ||/||\mathbf{b}|| = 0.000726&& ||\triangle \mathbf{b}_2||/||\mathbf{b}|| = .0062\\
-    mag = 1.8 \times 10^3 && mag = 1.6 \times 10^1
-    \end{array}
-    $$
+-   Consider two approximate solutions $\mathbf{x}_{1,2}$
+
+$$
+\begin{array}{lcl}
+\mathbf{x}_1 = (-0.0827,0.5) && \mathbf{x}_2 = (0.999,-1.001) \\
+\triangle \mathbf{x}_1 = (1.0827, -1.5) && \triangle \mathbf{x}_2 = (0.001,0.001) \\
+||\triangle \mathbf{x}_1 || = 1.85&& ||\triangle \mathbf{x}_2|| = .0014\\
+||\triangle \mathbf{x}_1 ||/||\mathbf{x}|| = 1.308&& ||\triangle \mathbf{x}_2||/||\mathbf{x}|| = .001\\
+\mathbf{b}_1 = (0.2539949, 0.1272061) &&  \mathbf{b}_2 = (0.252428, 0.126213) \\
+\triangle\mathbf{b}_1 = (0.0000051,- 0.0002061) &&  \triangle\mathbf{b}_2 = (0.001572, 0.000787) \\
+||\triangle \mathbf{b}_1 || = 0.000206&& ||\triangle \mathbf{b}_2|| = .00176\\
+||\triangle \mathbf{b}_1 ||/||\mathbf{b}|| = 0.000726&& ||\triangle \mathbf{b}_2||/||\mathbf{b}|| = .0062\\
+mag = 1.8 \times 10^3 && mag = 1.6 \times 10^1
+\end{array}
+$$
 
 We can go ahead and calculate the actual condition number of the matrix. R has a command called `kappa` that computes the condition number approximately by default, or exactly if specified.
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 A <- matrix(c(0.913,0.659,0.457,0.330),nrow=2,byrow=TRUE)
 kappa(A)
 kappa(A,exact=TRUE)
@@ -492,11 +514,13 @@ Remember that the condition number isn't merely an error magnification -- it's t
 
 Fortunately, there's another way to calculate condition number:
 
-$$\kappa_p(\mathbf{A})=||\mathbf{A}||_p||\mathbf{A}^{-1}||_p$$
+$$
+\kappa_p(\mathbf{A})=||\mathbf{A}||_p||\mathbf{A}^{-1}||_p
+$$
 
 The derivation of this identity is about 10 to 20 lines of linear algebra that I am happy to show you if you are interested. We can check it numerically for now.
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 set.seed(123)
 N <- 10
 A <- matrix(runif(N^2),nrow=N)
@@ -512,7 +536,7 @@ When solving systems of linear equations, depending on the context, solution by 
 
 ## Goals
 
--   Define and implement LU decomposition and state the potential advantages <!-- - Explain $\mat{PA}=\mat{LU}$ decomposition and state the potential advantages --> <!-- - Assess whether a matrix is symmetric positive definite --> <!-- - Explain the idea and potential advantages of Cholesky decomposition -->
+-   Define and implement LU decomposition and state the potential advantages 
 
 ## LU decomposition
 
@@ -520,7 +544,9 @@ Recall that when solving an $n \times n$ system $\mathbf{A}\mathbf{x} = \mathbf{
 \mathbf{A}\mathbf{x} = \mathbf{b}_1, \quad \mathbf{A}\mathbf{x} = \mathbf{b}_2, \quad \mathbf{A}\mathbf{x} = \mathbf{b}_3, \quad \ldots, \quad \mathbf{A}\mathbf{x} = \mathbf{b}_M
 $$ where $\mathbf{A}$ is the same each time and $M$ is large. $\mathbf{A}$ itself needs the same row reductions each time. Only the augmented part $\mathbf{b}$ changes. It would be a waste of computation to run Gaussian elimination $M$ times.
 
-LU decomposition is a way of storing the Gaussian elimination steps in matrix form so that they can be applied to many $\mathbf{b}$. We take $\mathbf{A}$ and decompose (or factorize) it as the product $$
+LU decomposition is a way of storing the Gaussian elimination steps in matrix form so that they can be applied to many $\mathbf{b}$. We take $\mathbf{A}$ and decompose (or factorize) it as the product
+
+$$
 A  = 
 \underbrace{\begin{array}{|cccccc|}
 \hline
@@ -547,238 +573,115 @@ The $\mathbf{L}$ matrix encodes the multipliers used to eliminate elements durin
 
 The LU decomposition exists if and only if the upper-left sub-blocks $\mathbf{A}_{1:k,1:k}$ are non-singular for all $1\leq k \leq n$ (not proven here). If the decomposition exists, it is unique.
 
-Let's do an example of how LU decomposition works. Take $$\mathbf{A} = 
+Let's do an example of how LU decomposition works. Take
+
+$$
+\mathbf{A} = 
 \begin{pmatrix}
 1 & 3 & 1\\
 1 & 1 & -1 \\
 3 & 11 & 5
-\end{pmatrix}.$$ Start by defining $\mathbf{U} = \mathbf{A}$ (it's not upper triangluar yet, but I am still calling it $\mathbf{U}$) and $$\mathbf{L} = \mathbf{I}_3 = 
+\end{pmatrix}.
+$$
+
+Start by defining $\mathbf{U} = \mathbf{A}$ (it's not upper triangluar yet, but I am still calling it $\mathbf{U}$) and
+
+$$
+\mathbf{L} = \mathbf{I}_3 = 
 \begin{pmatrix}
 1 & 0 & 0\\
 0 & 1 & 0 \\
 0 & 0 & 1
-\end{pmatrix}.$$ Apply $II \leftarrow II - 1\cdot I$ and $III \leftarrow III - 3\cdot I$ to $\mathbf{U}$ $$
+\end{pmatrix}.
+$$
+
+Apply $II \leftarrow II - 1\cdot I$ and $III \leftarrow III - 3\cdot I$ to $\mathbf{U}$, so
+
+$$
 \mathbf{U} = \begin{pmatrix}
 1 & 3 & 1  \\
 0 & -2 & -2\\
 0 & 2 & 2
 \end{pmatrix}.
-$$ Also, store the multupliers $1$ and $3$ in their corresponding rows in the first column of $\mathbf{L}$, so that $$\mathbf{L} =
+$$
+
+Also, store the multupliers $1$ and $3$ in their corresponding rows in the first column of $\mathbf{L}$, so that
+
+$$
+\mathbf{L} =
 \begin{pmatrix}
 1 & 0 & 0\\
 1 & 1 & 0 \\
 3 & 0 & 1
-\end{pmatrix}.$$ Now apply $III \leftarrow III + II$, which yields $$
+\end{pmatrix}.
+$$
+
+Now apply $III \leftarrow III + II$, which yields
+
+$$
 \mathbf{U} = \begin{pmatrix}
 1 & 3 & 1  \\
 0 & -2 & -2\\
 0 & 0 & 0
 \end{pmatrix}
-$$ and $$\mathbf{L} =
+$$
+
+and
+
+$$
+\mathbf{L} =
 \begin{pmatrix}
 1 & 0 & 0\\
 1 & 1 & 0 \\
 3 & -1 & 1
-\end{pmatrix}.$$ Since $\mathbf{U}$ is in echelon form, we are done! We can check that our decomposition worked.
+\end{pmatrix}.
+$$
 
-```{r cache=TRUE}
+Since $\mathbf{U}$ is in echelon form, we are done! We can check that our decomposition worked.
+
+```{r cache = TRUE}
 A <- matrix(c(1,3,1,1,1,-1,3,11,5),nrow=3,byrow=TRUE)
 L <- matrix(c(1,0,0,1,1,0,3,-1,1),nrow=3,byrow=TRUE)
 U <- matrix(c(1,3,1,0,-2,-2,0,0,0),nrow=3,byrow=TRUE)
 A - L%*%U
 ```
 
-We can also use the `myLU` routine loaded automatically for you.
+We can also use the `lu` command.
 
-```{r cache=TRUE}
-sol <- myLU(A)
+```{r cache = TRUE}
+sol <-  lu(A, scheme = "ijk")
 L <- sol$L
 U <- sol$U
 A - L%*%U
 ```
 
-Let's use Gaussian elimination and LU decomposition to compare the time for solving a $100 \times 100$ system for $100$ different right hand sides.
+Let's use Gaussian elimination with the `echelon` command and LU decomposition with the to compare the time for solving a $100 \times 100$ system for $100$ different right hand sides.
 
-```{r cache=TRUE}
-n <- 100
+```{r cache = TRUE}
+n <- 10
 A <- matrix(runif(n^2),nrow=n)
 set.seed(123)
 t1 <- system.time(
   for (i in 1:n){
     b <- runif(n)
-    MySolve(A,b)
+    x <- echelon(A,b)
   }
 )[3]
-t2 <- system.time(sol <- myLU(A))[3]
+t2 <- system.time(
+  LU <- lu(A, scheme = "ijk")
+)[3]
+L <- LU$L
+U <- LU$U
 set.seed(123)
 t3 <- system.time(
   for (i in 1:n){
     b <- runif(n)
-    myLUSolve(sol$L,sol$U,b)
+    y <- forwardsolve(L,b)
+    x <- backsolve(U,y)
   }
 )[3]
-t1/(t2+t3)
+as.numeric(t1/(t2 + t3))
 ```
-
-<!-- ### $\mat{PA}=\mat{LU}$ decomposition -->
-
-<!-- LU decomposition can have problems. -->
-
-<!-- First, try applying it to the matrix -->
-
-<!-- $$\mat{A}=\begin{pmatrix} 0 & 1\\ 1 & 0\end{pmatrix}.$$ -->
-
-<!-- It fails immediately because no multiple of the first row can be used to eliminate the first entry of the second row. In general, if any of the pivots turns out to be zero, LU decomposition will fail. -->
-
-<!-- Second, if a pivot is very small, numerical error can dominate. Consider the example -->
-
-<!-- $$A = \begin{pmatrix} \epsilon & 1 \\ 1 & 1 \end{pmatrix} = \mat{LU} = \begin{pmatrix} 1 & 0 \\ 1/\epsilon & 1 \end{pmatrix} \begin{pmatrix} \epsilon & 1 \\ 0 & 1 - 1/\epsilon \end{pmatrix} -->
-
-<!-- $$ -->
-
-<!-- where $\epsilon$ is very small. On a computer, this may be carried out as -->
-
-<!-- $$ -->
-
-<!-- \mat{LU} = \begin{pmatrix} 1 & 0 \\ 1/\epsilon & 1 \end{pmatrix} \begin{pmatrix} \epsilon & 1 \\ 0 & - 1/\epsilon \end{pmatrix} = \begin{pmatrix} \epsilon & 1 \\ 1 & 0 \end{pmatrix} \neq \mat{A}. -->
-
-<!-- $$ -->
-
-<!-- We can demonstrate this on the computer. -->
-
-<!-- ```{r cache=TRUE} -->
-
-<!-- epsilon <- 1e-16 -->
-
-<!-- A <- matrix(c(epsilon,1,1,1),nrow=2,byrow=TRUE) -->
-
-<!-- A -->
-
-<!-- sol <- myLU(A,tol=1e-17) -->
-
-<!-- sol$L %*% sol$U -->
-
-<!-- ``` -->
-
-<!-- A solution is to allow row swapping. If we swapped the rows of $\mat{A}$, everything would work. When working on a column, we simply swap rows so that the pivot with the largest magnitude in the column is in the uppermost position. Then everything works. This is called **partial pivoting**. Let's demonstrate. -->
-
-<!-- ```{r cache=TRUE} -->
-
-<!-- B <- A[2:1,] -->
-
-<!-- B -->
-
-<!-- sol <- myLU(B,tol=1e-17) -->
-
-<!-- sol$L %*% sol$U -->
-
-<!-- ``` -->
-
-<!-- We can encode partial pivoting in matrix form by means of a **permutation matrix** $\mat{P}$ that has a single 1 in each row and column. For instance, the matrix -->
-
-<!-- $$ -->
-
-<!-- P = \begin{pmatrix} 0 & 1 \\ 1 & 0\end{pmatrix} $$ -->
-
-<!-- exchanges the rows of A. -->
-
-<!-- To solve $\mat{PA}\vec{x}=\mat{LU}\vec{x}=\vec{b}$, first we must perform the decomposition, which is $\mathcal{O}(n^3)$. Next we solve $\mat{L}\vec{y}=\mat{P}\vec{b}$ for $\vec{y}$ which is $\mathcal{O}(n^2)$. Then we solve $\mat{U}\vec{x}=\vec{y}$ for $\vec{x}$ which is also $\mathcal{O}(n^2)$. -->
-
-<!-- ### Symmetric positive-definite matrices -->
-
-<!-- A special type of matrix is a **symmetric positive-definite matrix**. These show up in a range of applications. Let's define these properties. -->
-
-<!-- 1. An $n \times n$ matrix $\mat{A}$ is **symmetric** if $\mat{A}^T = \mat{A}$. -->
-
-<!-- 2. $\mat{A}$ is **positive-definite** if $\vec{x}^T \mat{A} \vec{x} > 0$ for all $\vec{x} \neq 0$.  If we allow greater than or equal to zero, the matrix is called **positive semi-definite**. For example, take -->
-
-<!-- $$ -->
-
-<!-- \mat{A} = \begin{pmatrix} 3 & 2 \\ 2 & 6 \end{pmatrix}. -->
-
-<!-- $$ -->
-
-<!-- Then -->
-
-<!-- $$ -->
-
-<!-- \begin{pmatrix} x_1 & x_2 \end{pmatrix} \begin{pmatrix} 3 & 2 \\ 2 & 6 \end{pmatrix} \begin{pmatrix} x_1 \\ x_2 \end{pmatrix} -->
-
-<!-- = 3 x_1^2 + 4 x_1 x_2 + 6x_2^2 = x_1^2  + 2 (x_1 + x_2)^2 + 4 x_2^2 > 0 -->
-
-<!-- $$ -->
-
-<!-- so $\mat{A}$ is positive definite. -->
-
-<!-- There are two useful properties to know about these special matrices. -->
-
-<!-- 1. If $\mat{A}$ is symmetric, then it is positive-definite if and only if all of its eigenvalues are positive. We won't prove this here but the proof is in Section 2.6.1 of your book. For example, consider -->
-
-<!-- $$ -->
-
-<!-- \mat{A} = \begin{pmatrix} 8 & 4 & 2 \\ 4 & 6 & 0 \\ 2 & 0 & 3\end{pmatrix}. -->
-
-<!-- $$ -->
-
-<!-- ```{r cache=TRUE} -->
-
-<!-- A <- matrix(c(8,4,2,4,6,0,2,0,3),nrow=3,byrow=TRUE) -->
-
-<!-- isSymmetric(A) -->
-
-<!-- lambda <- eigen(A)$values -->
-
-<!-- lambda -->
-
-<!-- ``` -->
-
-<!-- So the matrix is symmetric positive definite. -->
-
-<!-- 2. Any principal supmatrix of $\mat{A}$ is symmetric positive-definite. A principal supmatrix is just any square supmatrix whose diagonal entries are entries of $\mat{A}$. For the same matrix $\mat{A}$ in one above, some principal submatrices are -->
-
-<!-- $$ -->
-
-<!-- \begin{pmatrix} 8 & 4\\4 & 6\end{pmatrix}, \qquad \begin{pmatrix} 6 & 0\\0 & 3\end{pmatrix}, \qquad \begin{pmatrix} 8\end{pmatrix} -->
-
-<!-- $$ -->
-
-<!-- and so forth. Each of these is symmetric positive-definite. -->
-
-<!-- ### Cholesky decomposition -->
-
-<!-- If $\mat{A}$ is symmetric positive-definite, then it has a special decomposition where it can be written as the product of an upper triangular matrix $\mat{R}$ and its transpose, that is, $\mat{A} = \mat{R}^T \mat{R}$. Solve $\mat{A}\vec{x}=\vec{b}$ with Cholesky decomposition is totally identical to LU in the back substitution step, but the decomposition itself is faster because if you know $\mat{R}$ then you immediately know $\mat{R}^T$. Let's demonstrate. -->
-
-<!-- ```{r cache=TRUE} -->
-
-<!-- n <- 100 -->
-
-<!-- reps <- 100 -->
-
-<!-- set.seed(123) -->
-
-<!-- a <- matrix(runif(n^2),nrow=n) -->
-
-<!-- A <- 0.5*(a+t(a))+n*diag(n) -->
-
-<!-- t1 <- system.time( -->
-
-<!--   for (i in 1:reps){ -->
-
-<!--     solve(A) # I'm even using R's fancy LU decomposition -->
-
-<!--   })[3] -->
-
-<!-- t2 <- system.time( -->
-
-<!--   for (i in 1:reps){ -->
-
-<!--     chol(A) -->
-
-<!--   })[3] -->
-
-<!-- t1/t2 -->
-
-<!-- ``` -->
 
 # Iterative methods for linear systems
 
@@ -797,7 +700,7 @@ So far, all of the methods you have seen for solving linear systems provide exac
 
 Sometimes you can solve a problem by a method called **fixed point iteration** whereby you just keep plugging into an expression until the output equals the input. For example, suppose you want to solve $(x-3)(x+1)=x^2-2x-3=0$. Pretend you don't know where the roots are but you think there is one near x = -2, so you start out with that guess. You also notice you can write $x^2 - 2x - 3 =0$ as $x = 3/(x-2)$. So you define an iteration $x_{i+1} = 3/(x_i-2)$.
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 x <- -2
 for (i in 1:10){
   x <-  3/(x-2)
@@ -806,7 +709,7 @@ for (i in 1:10){
 
 The iteration seems to be converging to a root. What if we try a guess near the other root?
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 x <- 3.00001
 for (i in 1:20){
   x <-  3/(x-2)
@@ -819,7 +722,9 @@ But if it converges, it's pretty nifty. It's computationally cheap -- all we hav
 
 ## Jacobi iteration
 
-Let's take this idea and apply it to solving $\mathbf{A}\mathbf{x}=\mathbf{b}$. Let $\mathbf{A} = \mathbf{D} + \mathbf{R}$ where $\mathbf{D}$ contains the diagonal elements of $\mathbf{A}$ and $\mathbf{R}$ contains everything else. Then we can write $$
+Let's take this idea and apply it to solving $\mathbf{A}\mathbf{x}=\mathbf{b}$. Let $\mathbf{A} = \mathbf{D} + \mathbf{R}$ where $\mathbf{D}$ contains the diagonal elements of $\mathbf{A}$ and $\mathbf{R}$ contains everything else. Then we can write
+
+$$
 \begin{align}
 \mathbf{A}\mathbf{x} &= \mathbf{b} \\
 (\mathbf{D}+\mathbf{R})\mathbf{x} &= \mathbf{b} \\
@@ -827,9 +732,15 @@ Let's take this idea and apply it to solving $\mathbf{A}\mathbf{x}=\mathbf{b}$. 
 \mathbf{D} \mathbf{x} &= \mathbf{b} - \mathbf{R} \mathbf{x}\\
 \mathbf{x} &= \mathbf{D}^{-1} (\mathbf{b}-\mathbf{R}\mathbf{x})
 \end{align}
-$$ We can consider this a fixed point iteration, $$
+$$
+
+We can consider this a fixed point iteration,
+
+$$
 \mathbf{x}_{i+1} = \mathbf{D}^{-1} (\mathbf{b}-\mathbf{R}\mathbf{x}_i).
-$$ Here are some computational advantages of this method.
+$$
+
+Here are some computational advantages of this method.
 
 1.  The matrix $\mathbf{D}$ is very cheap to invert, because it is a diagonal matrix. The inverse is simply the diagonal matrix with the reciprocals of the original elements.
 2.  Each iteration is only $\mathcal{O}(n^2)$, and if the matrix is sparse, it is even cheaper.
@@ -838,13 +749,15 @@ The usual way we stop iterating is that we choose in advance a threshold for the
 
 Here's an example.
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 set.seed(123)
 n <- 1000
-A <- matrix(runif(n^2),nrow=n)
+A <- matrix(runif(n^2), nrow = n)
 diag(A) <- n + 1 + diag(A)
 b <- runif(n)
-t1 <- system.time(xexact <- MySolve(A,b))[3]
+t1 <- system.time(
+  xexact <- solve(A,b)
+)[3]
 xapprox <- rep(0,n)
 d <- diag(A)
 R <- A - diag(d)
@@ -853,10 +766,10 @@ tol <- 1e-10
 t2 <- system.time(
   while (err > tol){
     xapprox <- (b - R%*%xapprox)/d
-    err <- vnorm(b-A%*%xapprox,"I")/vnorm(b,"I")
+    err <- Norm(b-A%*%xapprox,Inf)/Norm(b,Inf)
   }
 )[3]
-vnorm(xapprox-xexact,"I")
+Norm(xapprox-xexact,Inf)
 t1/t2
 ```
 
@@ -864,7 +777,9 @@ t1/t2
 
 There's no reason at all to expect that Jacobi's method converges. There's a really useful theorem that says it it will converge if and only if the eigenvalues of $-\mathbf{D}^{-1}\mathbf{R}$ are all less than one in magnitude. If this criterion is met, then the closer to one the eigenvalues are in magnitude, the slower convergence will be. This takes about half a page to prove and is a worthwhile exercise to understand, so feel free to ask me for the proof.
 
-However, calculating the eigenvalues of that matrix could be really hard and costly! There's a sufficient condition for convergence that is much easier to check computationally, namely that $\mathbf{A}$ is **strictly diagonally dominant**. This means $$
+However, calculating the eigenvalues of that matrix could be really hard and costly! There's a sufficient condition for convergence that is much easier to check computationally, namely that $\mathbf{A}$ is **strictly diagonally dominant**. This means
+
+$$
 |a_{ii}| > \sum_{j \not=i} |a_{ij}| \quad\text{in each row $i$.}
 $$
 
@@ -887,7 +802,7 @@ Now we enter into the part of this course that is about data. As scientists, oft
 
 ## Why polynomials?
 
-```{r echo=FALSE, cache=TRUE}
+```{r echo = FALSE, cache = TRUE}
 f <- function(x){1/x}
 x <- seq(from=1,to=3,length=8)
 y <- f(x)
@@ -895,7 +810,7 @@ y <- f(x)
 
 Suppose we have incomplete data and we'd like to estimate a piece of information that we don't have.
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 # I created some mystery data and hid it from you
 plot(x,y)
 ```
@@ -912,7 +827,7 @@ In contrast, a polynomial that passes through every data point is called the int
 
 Even though I haven't yet told you how to find an interpolating polynomial, let's compare the Taylor and interpolating approaches. Consider $f(x) = 1/x$ on the interval $[1,3]$. The second degree Taylor polynomal through $x=1$ (as an example) is $T(x)=3-3x+x^2$. The interpolating polynomial using three points from sampled equally across the interval, namely $(1,1),(2,1/2),(3,1/3)$, is $11/6 - x + (1/6)x^2$.
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 f <- function(x){1/x}
 tee <- function(x){3-3*x+x^2}
 p <- function(x){11/6 - x + 1/6*x^2}
@@ -934,13 +849,19 @@ Let's examine some different ways to compute the interpolating polynomial.
 
 ## Vandermonde matrix
 
-I also call this method of interpolation "brute force." Let's start with an example. Suppose we have three data points $(x_1,y_1)$, $(x_2,y_2)$, $(x_3,y_3)$. The interpolating polynomial is $P(x) = c_0 + c_1 x + c_2 x^2$, where we need to determine the coefficients. Let's determine them simply by plugging in. We have the equations $$
+I also call this method of interpolation "brute force." Let's start with an example. Suppose we have three data points $(x_1,y_1)$, $(x_2,y_2)$, $(x_3,y_3)$. The interpolating polynomial is $P(x) = c_0 + c_1 x + c_2 x^2$, where we need to determine the coefficients. Let's determine them simply by plugging in. We have the equations
+
+$$
 \begin{align*}
 c_0 + c_1 x_1 + c_2 x_1^2 &= y_1 \\
 c_0 + c_1 x_2 + c_2 x_2^2 &= y_2 \\
 c_0 + c_1 x_3 + c_2 x_3^2 &= y_3
 \end{align*}
-$$ We can write this in matrix form as $$
+$$
+
+We can write this in matrix form as
+
+$$
 \begin{pmatrix}
 1 & x_1 & x_1^2 \\
 1 & x_2 & x_2^2 \\
@@ -953,7 +874,11 @@ c_0 \\ c_1 \\ c_2
 \begin{pmatrix}
 y_1 \\ y_2 \\ y_3
 \end{pmatrix}
-$$ and solve the linear system to find the coefficients $c_i$. More generally, for $n$ data points, the problem is $$
+$$
+
+and solve the linear system to find the coefficients $c_i$. More generally, for $n$ data points, the problem is
+
+$$
 \begin{pmatrix}
 1 & x_1 & x_1^2 &  & x_1^{n-1} \\ 
 1 & x_2 & x_2^2 & \cdots & x_2^{n-1} \\ 
@@ -964,11 +889,13 @@ $$ and solve the linear system to find the coefficients $c_i$. More generally, f
 \begin{pmatrix} c_0 \\ c_1 \\ c_2 \\ \vdots \\ c_{n-1} \end{pmatrix}
 = 
 \begin{pmatrix} y_1 \\ y_2 \\ y_3 \\ \vdots \\ y_n \end{pmatrix}.
-$$ It can be proven that if the $x_i$ are distinct, the matrix has nonzero determinant, and hence the system is solvable with a unique solution.
+$$
+
+It can be proven that if the $x_i$ are distinct, the matrix has nonzero determinant, and hence the system is solvable with a unique solution.
 
 In solving problems using the Vandermonde matrix, we are using a basis for the interpolating polynomial that is $\{1,x,x^2,\ldots\}$. This seems very natural since this is how we usually think of polynomials! The problems is that to find the coefficients in this basis, we have to solve a linear problem whose matrix is very ill-conditioned. Let's see what happens if we sample more and more points from our function and construct the interpolating polynomial. We'll look at $\kappa$ for the Vandermonde matrix.
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 Vandermonde <- function(x){
   n <- length(x)
   V <- outer(x, 0:(n-1), "^")
@@ -987,152 +914,80 @@ kable(cbind(nvals,kappavals))
 
 Let's seek an alternative method that gets around these issues. There's actually a way to simply write down the interpolating polynomial without doing any calculation of coefficients at all. Let's do an example.
 
-For points $(1,10), (2, 6), (3,4), ( 4,10)$, consider the polynomial \begin{align*}
-p(x) &= 10 \\frac{(x-2)(x-3)(x-4)}{(1-2)(1-3)(1-4)}
-+ 6 \\frac{(x-1)(x-3)(x-4)}{(2-1)(2-3)(2-4)} \\\\
-&+ 4 \\frac{(x-1)(x-2)(x-4)}{(3-1)(3-2)(3-4)} + 10 \\frac{(x-1)(x-2)(x-3)}{(4-1)(4-2)(4-3)}
-\\end{align\*}
+For points $(1,10), (2, 6), (3,4), (4,10)$, consider the polynomial
+
+$$
+\begin{align*}
+p(x) &= 10 \frac{(x-2)(x-3)(x-4)}{(1-2)(1-3)(1-4)}
++ 6 \frac{(x-1)(x-3)(x-4)}{(2-1)(2-3)(2-4)} \\
+&+ 4 \frac{(x-1)(x-2)(x-4)}{(3-1)(3-2)(3-4)} + 10 \frac{(x-1)(x-2)(x-3)}{(4-1)(4-2)(4-3)}
+\end{align*}
+$$
 
 First, notice the pattern of how each term is constructed: there's a coefficient times a polynomial. The coefficient is the $y$-value of an interpolation point. The polynomial is one that is equal to $1$ at that the $x$-coordinate of that point, and $0$ at the $x$-coordinate of every other point. So now we ask...
 
--   Is the expression a polynomial?
--   Is it degree at most $n-1$?
--   Does it pass through each data point?
+- Is the expression a polynomial?
+- Is it degree at most $n-1$?
+- Does it pass through each data point?
 
 Since the answer to all these questions is yes, it is the interpolating polynomial.
 
 If we expand out our Lagrange polynomial we find $p(x) = x^3 - 5 x^2 + 4 x+10$. We can use `R` to verify this result by solving the Vandermonde problem.
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 x <- c(1,2,3,4)
 y <- c(10,6,4,10)
 c <- solve(Vandermonde(x),y)
 c
 ```
 
-Following the pattern we established above, the Langrange polynomial for points $(x_1,y_1),\ldots,(x_n,y_n)$ is $$
+Following the pattern we established above, the Langrange polynomial for points $(x_1,y_1),\ldots,(x_n,y_n)$ is
+
+$$
 p(x) = \sum_{i = 1}^n y_i \prod_{j \not = i} \frac{(x - x_j)}{(x_i - x_j)}.
 $$
 
-The advantage of this method is that it doesn't require any numerical solution... just evaluation. Let's try a comparison: Vandermonde vs. Lagrange. Here, I'll use R's `baryalg` function. This function has some strengths and some weaknesses. Llater, I will ask you to write your own function to do Lagrange interpolation.
+The advantage of this method is that it doesn't require any numerical solution... just evaluation. Let's try a comparison: Vandermonde vs. Lagrange. Here, I'll use R's `baryalg` function. This function has some strengths and some weaknesses.
 
-```{r error=TRUE, cache=TRUE}
+```{r error = TRUE, cache = TRUE}
 set.seed(123)
-n <- 20
+n <- 10
 x <- 1:n
 y <- runif(n)
 x0 <- 1.5
-c <- solve(Vandermonde(x),y)
+c <- solve(vander(x),y)
+horner(c, x0)
 barylag(x,y,x0)
 ```
 
 We can also do a speed comparison test.
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 set.seed(123)
-numTrials <- 100000
+numTrials <- 1000
 n <- 10
 x <- 1:n
-y <- runif(n)
 t1 <- system.time(
   for (i in 1:numTrials){
-    c <- solve(Vandermonde(x),y)
-    Horner(c,x0)
+    y <- runif(n)
+    c <- echelon(vander(x),y)[, n+1]
+    horner(c,x0)
   }
 )[3]
 t2 <- system.time(
   for (i in 1:numTrials){
+    y <- runif(n)
     barylag(x,y,x0)
   }
 )[3]
-t1/t2
+as.numeric(t1/t2)
 ```
-
-<!-- But here's a shortcoming. Think about what happens if we add a point in, perhaps because we decide we want to incorporate additional data. Then every single term in the polynomial changes! -->
-
-<!-- ### Newton's divided differences -->
-
-<!-- Let's develop an interpolation method that allows us to add data without recomputing everything. For our same data as the previous example, consider the recursive triangle of divided differences -->
-
-<!-- $$ -->
-
-<!-- \begin{array}{c|cccc} -->
-
-<!-- \begin{array}{c} 1 \\2\\3\\4\end{array} -->
-
-<!-- &\!\! \begin{array}{c} 10 \\ 6\\4\\10\end{array}\!\! -->
-
-<!-- &\!\!\! \!\!\begin{array}{c} -4 \\-2\\6\end{array} -->
-
-<!-- &\!\!\! \!\!\begin{array}{c} 1 \\4\end{array} -->
-
-<!-- &\!\!\! \!\!\begin{array}{c} 1\end{array} -->
-
-<!-- \end{array} -->
-
-<!-- $$ -->
-
-<!-- and the polynomial -->
-
-<!-- $$ -->
-
-<!-- \begin{align*} -->
-
-<!-- p(x) &= 10(1) + (-4)(x-1) + (1)(x-1)(x-2) + (1)(x-1)(x-2)(x-3) \\ -->
-
-<!-- &=x^3-5x^2+4x+10 -->
-
-<!-- \end{align*} -->
-
-<!-- $$ -->
-
-<!-- which is the same result we obtained using Lagrange's method. Note the basis; we used the functions $1$, $(x-1)$, $(x-1)(x-2)$, $(x-1)(x-2)(x-3)$. -->
-
-<!-- This basis makes it very convenient to add a point. Suppose we add the point $(5,-18)$ to our data set. We can now compute -->
-
-<!-- $$ -->
-
-<!-- \begin{array}{c|ccccc} -->
-
-<!-- \begin{array}{c} 1 \\2\\3\\4\\ 5\end{array} -->
-
-<!-- &\!\! \begin{array}{c} 10 \\ 6\\4\\10\\-18 \end{array}\!\! -->
-
-<!-- &\!\!\! \!\!\begin{array}{c} -4 \\-2\\6\\\ -28 \end{array} -->
-
-<!-- &\!\!\! \!\!\begin{array}{c} 1 \\4\\\ -17 \end{array} -->
-
-<!-- &\!\!\! \!\!\begin{array}{c} 1\\\ -7 \end{array} -->
-
-<!-- &\!\!\! \!\!\begin{array}{c} \ -2 \end{array} -->
-
-<!-- \end{array} -->
-
-<!-- $$ -->
-
-<!-- and write down -->
-
-<!-- $$ -->
-
-<!-- p(x) = 10(1) + (-4)(x-1) + (1)(x-1)(x-2)  + (1)(x-1)(x-2)(x-3) + (-2)(x-1)(x-2)(x-3)(x-4). -->
-
-<!-- $$ -->
-
-<!-- The derivation of this Newton Divided Difference form of the interpolating polynomial can be found in the textbook and many other sources. That said, I hope you will be convinced by the reverse argument. You can check: -->
-
-<!-- * Is the expression a polynomial? -->
-
-<!-- * Is it degree at most $n-1$? -->
-
-<!-- * Does it pass through each data point? -->
-
-<!-- Since the answer to these questions is yes, it is the interpolating polynomial. -->
 
 ## Data compression
 
 One of the powerful things interpolation can do is compress data. Let's do an example. Suppose that we need to know values for the function $\sin x$. A computer doesn't magically know this function, so it has to have some way to compute/evaluate it. One option would be to store a giant look-up table. There are an infinite number of numbers to store, though, even for the interval $[0,2\pi)$. Another option is to fit a polynomial based on a finite number of points, store the coefficients, and evaluate the polynomial as needed. Let's do this using 5 points to begin with. We'll write a function that takes a specified number of points, samples them from the function, constructs the interpolating polynomial, plots the function and the polynomial, and calculates the maximum error. The inputs are your $x$ data, your $y$ data, and the $x$ values at which you'd like interpolated values.
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 interperror <- function(n,plotflag=FALSE){
   x <- seq(from=0,to=2*pi,length=n)
   y <- sin(x)
@@ -1144,7 +999,7 @@ interperror <- function(n,plotflag=FALSE){
     points(x,y)
     lines(xexact,yinterp,col="blue")
   }
-  error  <- max(abs(yexact-yinterp))
+  error <- max(abs(yexact-yinterp))
   return(error)
 }
 interperror(5,plotflag=TRUE)
@@ -1152,7 +1007,7 @@ interperror(5,plotflag=TRUE)
 
 Not bad for just 5 points. Let's examine how the error changes as a function of $n$.
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 nvec <- 2:20
 errorvec <- NULL
 for (n in nvec){
@@ -1172,18 +1027,18 @@ We have been thinking about data and talking about polynomial interpolation as a
 
 ## Goals
 
--   Describe and recognize Runge's phenomenon
--   State the error term for polynomial interpolation and bound it
--   Explain the advantages of Chebyshev integration and implement the technique
--   Compare approaches to interpolation
+- Describe and recognize Runge's phenomenon
+- State the error term for polynomial interpolation and bound it
+- Explain the advantages of Chebyshev integration and implement the technique
+- Compare approaches to interpolation
 
 ## Runge's phenomenon
 
-Before doing polynomial interpolation, let's start out with an example that is about Taylor polynomials. We'll construct Taylor polynomials of increasing degree to estimate the function $f(x) = \cos(x)$ around the point $x_0=0$ on $[0,2\pi]$. The $n$th degree taylor polynomial is $$
-\sum_{i=1}^n (-1)^{i/2} \frac{x^i}{i!}.
+Before doing polynomial interpolation, let's start out with an example that is about Taylor polynomials. We'll construct Taylor polynomials of increasing degree to estimate the function $f(x) = \\cos(x)$ around the point $x_0=0$ on $[0,2\\pi]$. The $n$th degree taylor polynomial is $$
+\\sum\_{i=1}^n (-1)^{i/2} \\frac{x^i}{i!}.
 $$
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 mytaylor1 <- function(x,n){
   ans <- 0
   for (i in seq(from=0,to=n,by=2)){
@@ -1199,10 +1054,10 @@ for (n in seq(from=0,to=14,by=2)){
 ```
 
 So more terms are better, right? Let's try again with the function $f(x) = 1/x$ around the point $x_0=1$. The $n$th degree Taylor polynomial is $$
-\sum_{i=1}^n (-1)^i (x-1)^i.
+\\sum\_{i=1}^n (-1)^i (x-1)^i.
 $$
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 mytaylor2 <- function(x,n){
   ans <- 0
   for (i in seq(from=0,to=n,by=1)){
@@ -1219,9 +1074,9 @@ for (n in seq(from=0,to=40,by=4)){
 
 Oh! I guess that more isn't always better.
 
-Now let's think now about interpolating polynomials. Let's consider $\cos(x)$ with $n$ equally sampled points across $[0,2\pi]$ for different values of $n$.
+Now let's think now about interpolating polynomials. Let's consider $\\cos(x)$ with $n$ equally sampled points across $[0,2\\pi]$ for different values of $n$.
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 x <- seq(from=0,to=2*pi,length=1000)
 y <- cos(x)
 plot(x,y,type="l",col="red",lwd=5,xlim=c(0,2*pi),ylim=c(-1.1,1.1))
@@ -1230,7 +1085,7 @@ error <- NULL
 for (n in nvec){
   xdata <- seq(from=0,to=2*pi,length=n)
   ydata <- cos(xdata)
-  yinterp <- Interpolator(xdata,ydata,x)
+  yinterp <- barylag(xdata,ydata,x)
   lines(x,yinterp)
   error <- c(error,max(abs(y-yinterp)))
 }
@@ -1239,7 +1094,7 @@ plot(nvec,log10(error),xlab="n",ylab="log10 of error")
 
 Looks good! Let's try again with a different function, $f(x) = (1+x^2)^{-1}$ on $[-1,1]$.
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 x <- seq(from=-5,to=5,length=1000)
 y <- 1/(1+x^2)
 plot(x,y,type="l",col="red",lwd=5,xlim=c(-5,5),ylim=c(-3,3))
@@ -1248,34 +1103,29 @@ error <- NULL
 for (n in nvec){
   xdata <- seq(from=-5,to=5,length=n)
   ydata <- 1/(1+xdata^2)
-  yinterp <- Interpolator(xdata,ydata,x)
+  yinterp <- barylag(xdata,ydata,x)
   lines(x,yinterp)
   error <- c(error,max(abs(y-yinterp)))
 }
 plot(nvec,log10(error),xlab="n",ylab="log10 of error")
 ```
 
-Not good! The error goes up as we take more and more points. Equally-spaced nodes are very natural in many applications (scientific measurements, audio/video signals, etc.). But sadly, it turns out that in some circumstances, inteprolating with polynomials through equally-spaced nodes leads to very undesirable oscillations like those above, called **Runge's phenomenon**.
+Not good! The error goes up as we take more and more points. Equally-spaced nodes are very natural in many applications (scientific measurements, audio/video signals, etc.). But sadly, it turns out that in some circumstances, inteprolating with polynomials through equally-spaced nodes leads to very undesirable oscillations like those above, called \*\*Runge's phenomenon\*\*.
 
 ## Interpolation error
 
 You might remember that for an $n-1$st degree Taylor series (that is, $n$ coefficients) of $f(x)$ centered around $x=x_0$, the magnitude of the error term is $$
-\left|\frac{f^{(n)}(c)}{n!}(x-x_0)^{n}\right|
+\\left\|\\frac{f^{(n)}(c)}{n!}(x-x_0)^{n}\\right\|
 $$ where $c$ is a number between $x$ and $x_0$. For an interpolating polynomial constructed from $n$ points on an interval $[x_1,x_n]$, the interpolation error is $$
-\left|\frac{f^{(n)}(c)}{n!}(x-x_1)(x-x_2)\cdots (x-x_n)\right|
-$$ for some $c \in [x_1,x_n]$. If you are interested in the proof, it appears in your textbook and/or I am happy to go over it with you in office hours. Honestly, though, I find the proof to be totally nonintuitive and unenlightening.
+\\left\|\\frac{f^{(n)}(c)}{n!}(x-x_1)(x-x_2)\\cdots (x-x_n)\\right\|
+$$ for some $c \\in [x_1,x_n]$. If you are interested in the proof, it appears in your textbook and/or I am happy to go over it with you in office hours. Honestly, though, I find the proof to be totally nonintuitive and unenlightening.
 
-Let's use the error term to do an example, where we again ask the question HOW DO WE EVEN KNOW ANYTHING? For instance, suppose you want to calculate the value of an exponential function. [This turns out to be hard](https://math.stackexchange.com/questions/1239352/how-do-pocket-calculators-calculate-exponents)! Let's restrict the problem a bit. Suppose we want to calculate $\mathrm{e}^{x}$ on $[0,1]$ with 5 digits of accuracy. One way to do this would be to choose equally-spaced points on $[0,1]$ and make a table of $\mathrm{e}^{x}$ for those values using some very accurate method. Then, we let the user choose a value of $x$. We find the two values that surround it in our table, construct the linear interpolating polynomial between them, and use it to estimate our answer. For instance, if we chose $x$ values of $0.1, 0.2, \ldots, 1$ and the user input $x=0.3268$, we would construct the inteprolating polynomial through $(0.3,\mathrm{e}^{0.3})$ and $(0.4,\mathrm{e}^{0.4})$ and then plug in our $x$. Let's ask the question: to achieve 5-digit accuracy with this method, how many points must we take on $[0,1]$? (Note: crucially, this is not at all the same as creating a single interpolating polynomial that goes through all the points.) We have $$
-\begin{align*}
-|f(x) - P_1(x)| &= \left|\frac{f^{(n)}(c)}{n!}(x-x_1)(x-x_2)\cdots (x-x_n)\right|\\
-&= \left|\frac{\left(\mathrm{e}^{x}\right)^{''}|_c}{2!}(x-x_1)(x-x_2)\right| \\
-& = \left|\frac{\mathrm{e}^{c}}{2} (x-x_1)(x-x_1-h)\right|
-\end{align*}
-$$ Here, I've called the spacing between the two points $h$, that is $x_2 = x_1 + h$. Now, we can ask what is the worst (biggest) that the term $\left|(x-x_1)(x-x_1-h)\right|$ can be, and via calculus, we can show it is $h^2/4$. Also, on our interval of interest, we know that $\mathrm{e}^{c} \leq \mathrm{e}^{1}$. Therefore, we can write $$
-|f(x) - P_1(x)| \leq \frac{\mathrm{e}h^2}{8}.
-$$ For our desired level of accuracy, we need $$
-\frac{\mathrm{e}h^2}{8} \leq 0.5 \times 10^{-5}.
-$$ Solving for $h$, we find $h \lessapprox 3.8 \times 10^{-3}$. That is the space between points, so on $[0,1]$ this corresponds to just over 260 points.
+Let's use the error term to do an example, where we again ask the question HOW DO WE EVEN KNOW ANYTHING? For instance, suppose you want to calculate the value of an exponential function. [This turns out to be hard](https://math.stackexchange.com/questions/1239352/how-do-pocket-calculators-calculate-exponents)! Let's restrict the problem a bit. Suppose we want to calculate $\\mathrm{e}^{x}$ on $[0,1]$ with 5 digits of accuracy. One way to do this would be to choose equally-spaced points on $[0,1]$ and make a table of $\\mathrm{e}^{x}$ for those values using some very accurate method. Then, we let the user choose a value of $x$. We find the two values that surround it in our table, construct the linear interpolating polynomial between them, and use it to estimate our answer. For instance, if we chose $x$ values of $0.1, 0.2, \\ldots, 1$ and the user input $x=0.3268$, we would construct the inteprolating polynomial through $(0.3,\\mathrm{e}^{0.3})$ and $(0.4,\\mathrm{e}^{0.4})$ and then plug in our $x$. Let's ask the question: to achieve 5-digit accuracy with this method, how many points must we take on $[0,1]$? (Note: crucially, this is not at all the same as creating a single interpolating polynomial that goes through all the points.) We have $$
+\\begin{align\*}
+\|f(x) - P_1(x)\| &= \\left\|\\frac{f^{(n)}(c)}{n!}(x-x_1)(x-x_2)\\cdots (x-x_n)\\right\|\
+&= \\left\|\\frac{\\left(\\mathrm{e}^{x}\\right)^{''}\|\_c}{2!}(x-x_1)(x-x_2)\\right\| \
+& = \\left\|\\frac{\\mathrm{e}^{c}}{2} (x-x_1)(x-x_1-h)\\right\|
+\\end{align\*} $$ Here, I've called the spacing between the two points $h$, that is $x_2 = x_1 + h$. Now, we can ask what is the worst (biggest) that the term $\left|(x-x_1)(x-x_1-h)\right|$ can be, and via calculus, we can show it is $h^2/4$. Also, on our interval of interest, we know that $\mathrm{e}^{c} \leq \mathrm{e}^{1}$. Therefore, we can write $$ \|f(x) - P_1(x)\| \leq \\frac{\\mathrm{e}h^2}{8}. $$ For our desired level of accuracy, we need $$ \frac{\mathrm{e}h^2}{8} \leq 0.5 \times 10^{-5}. $$ Solving for $h$, we find $h \lessapprox 3.8 \times 10^{-3}$. That is the space between points, so on $[0,1]$ this corresponds to just over 260 points.
 
 ## Chebyshev nodes
 
@@ -1285,7 +1135,7 @@ Let's compare two approaches in Mathematica. Without loss of generality, we'll l
 
 Now let's summarize the comparison of equally-spaced nodes vs. Chebyshev nodes.
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 nvec <- 1:30
 x <- seq(from=-1,to=1,length=5000)
 equallyspaced <- NULL
@@ -1302,13 +1152,27 @@ plot(nvec,log10(chebyshev),col="green",pch=16,ylim=c(-10,0),xlab="points",ylab="
 points(nvec,log10(equallyspaced),col="red",pch=16)
 ```
 
-Chebyshev is much better! We won't prove the result, but I hope my numerical experiment convinced you that for $n$ points on $[0,1]$, we should choose nodes $$
+Chebyshev is much better! We won't prove the result, but I hope my numerical experiment convinced you that for $n$ points on $[0,1]$, we should choose nodes 
+
+$$
 x_i = \cos \frac{(2i-1)\pi}{2n}, \quad i = 1,\ldots,n
-$$ and the maximum magnitude of the relevant portion of the error term is $$
+$$
+
+and the maximum magnitude of the relevant portion of the error term is
+
+$$
 \max_{-1\leq x\leq 1}\left|\prod_{i=1}^n (x-x_i)\right| = \frac{1}{2^{n-1}}.
-$$ If we generalize these results to the interval $[a,b]$, we find $$
+$$
+
+If we generalize these results to the interval $[a,b]$, we find
+
+$$
 x_i = \frac{b+a}{2} + \frac{b-a}{2}\cos \frac{(2i-1)\pi}{2n}, \quad i = 1,\ldots,n
-$$ with $$
+$$
+
+with
+
+$$
 \max_{a\leq x\leq b}\left|\prod_{i=1}^n (x-x_i)\right| = \frac{\left(\frac{b-a}{2}\right)^n}{2^{n-1}}.
 $$
 
@@ -1328,7 +1192,7 @@ plot(n,log(maxderiv))
 
 Given this, using equally-spaced nodes seems reckless, but we can try it anyway, say, on $[-10,10]$ with 30 data points to start with.
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 a <- -10
 b <- 10
 xexact <- seq(from=a,to=b,length=10000)
@@ -1337,13 +1201,13 @@ yexact <- f(xexact)
 plot(xexact,yexact,type="l",lwd=3,xlim=c(a,b),ylim=c(-0.2,0.5))
 n <- 30
 xequal <- seq(from=a,to=b,length=n)
-yequal <- Interpolator(xequal,f(xequal),xexact)
+yequal <- lagrange(xequal,f(xequal),xexact)
 lines(xexact,yequal,col="red",lwd=2)
 ```
 
 Ok, that approach is not going to work! Let's try the approach of a lookup table with linear interpolation. Let's suppose we wish to achieve 4 digit accuracy.
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 n <- 1
 error <- Inf
 while (error > 0.5e-4){
@@ -1357,14 +1221,15 @@ nlookup <- n
 print(nlookup)
 ```
 
-```{r cache=TRUE}
-n <- 1
+Now we can go back to polynomial interpolation with Chebyshev nodes.
+```{r cache = TRUE}
+n <- 30
 error <- Inf
 while (error > 0.5e-4){
   n <- n+1
   odds <- seq(from=1,to=2*n-1,by=2)
-  xcheb <- (b+a)/2 + (b-a)/2*cos(odds*pi/2/n)
-  ycheb <- Interpolator(xcheb,f(xcheb),xexact)
+  xcheb <- sort((b+a)/2 + (b-a)/2*cos(odds*pi/2/n))
+  ycheb <- lagrange(xcheb, f(xcheb), xexact)
   error <- max(abs(yexact-ycheb))
 }
 ncheb <- n
@@ -1388,7 +1253,7 @@ I've tried to convince you that it can be problematic to construct interpolating
 
 Before progressing to real data later on, let's do an illustrative example with a small amount of fake data. We make some data points and connect them with linear splines. We can do this using the built-in `approxfun` command which returns a function representing the linear spline.
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 x <- c(-2,-1.5,-1,0.25,1,2,3.75,4,5)
 y <- c(4,4.2,3,5,0,-2,2,1,1)
 xplot <- seq(from=-2,to=5,length=200)
@@ -1399,7 +1264,7 @@ lines(xplot,linearspline(xplot),col="red",lwd=2)
 
 Your eyeball might be telling you that this is a very jagged graph. Most things in nature and society are not this jagged, so it might feel desirable to represent the data with smoother functions. Let me show you what this looks like.
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 cubicspline <- splinefun(x,y)
 plot(x,y,ylim=c(-2.5,5.5))
 lines(xplot,linearspline(xplot),col="red",lwd=2)
@@ -1410,9 +1275,13 @@ This is smoother. What smoothness means here is continuity of derivatives from o
 
 ## Mathematical conditions for cubic splines
 
-Suppose we have data points $(x_1,y_1),\ldots,(x_n,y_n)$. We will connect successive points with cubic curves. With $n$ points, there are $n-1$ curves. Each curve is cubic, having the form $$
+Suppose we have data points $(x_1,y_1),\ldots,(x_n,y_n)$. We will connect successive points with cubic curves. With $n$ points, there are $n-1$ curves. Each curve is cubic, having the form
+
+$$
 S_i(x) = a_i + b_i(x-x_i) + c_i(x-x_i)^2 + d_i(x-x_i)^3.
-$$ With $n-1$ curves each having four coefficients, there are $4(n-1)$ coefficients.
+$$
+
+With $n-1$ curves each having four coefficients, there are $4(n-1)$ coefficients.
 
 First, we force each spline to pass through its two endpoints (which also makes the overall spline curve continuous). By inspection, this forces $a_i=y_i$, and it also enforces a condition on the relationship between $b_i, c_i, d_i$. So doing the bookkeeping, that is $2(n-1)$ conditions to enforce, which leaves $2n-2$ coefficients undetermined.
 
@@ -1453,7 +1322,7 @@ lines(xx,cubicspline(xx),col="blue",lwd=3)
 
 Now let's work with some real data, let's say, Tesla stock price for the last 100 days (we won't actually get 100 days because of days when the markets were closed, including weekends).
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 # Set dates and stock symbol
 first.date <- Sys.Date()-100
 last.date <- Sys.Date()
@@ -1475,168 +1344,6 @@ plot(day,TSLAspline(day),col="blue",type="l",ylim=c(800,1200))
 points(day,price,col="blue")
 ```
 
-<!-- ## Data Scraping -->
-
-<!-- ### Big picture -->
-
-<!-- We are in the section of this course where we are emphasizing applications of linear algebra to data. However, we have skirted around the issue of how one might obtain data in the first place. One way to do it is by **scraping**, which refers to computational techniques for grabbing from the internet data that is not in an easily, direcly downloadable format. -->
-
-<!-- ### Goals -->
-
-<!-- - Utilize CSS selectors to identify chosen data -->
-
-<!-- - Write code to pull selected data and clean it -->
-
-<!-- - Recognize the limitations of this technique -->
-
-<!-- ### CSS selectors -->
-
-<!-- Winter is coming and I need to buy my daughter some boots, but shopping in Williamstown is impossible, so I want to look on [Amazon](http://www.amazon.com). In particular, I did a search for girls' boots in size 3 available via Amazon Prime, and I got [these 13 pages of results](https://www.amazon.com/s/ref=sr_pg_2?fst=p90x%3A1%2Cas%3Aoff&rh=n%3A7141123011%2Cn%3A7147442011%2Cn%3A679217011%2Cn%3A3420847011%2Ck%3Aboots%2Cp_n_size_four_browse-vebin%3A3491796011%2Cp_85%3A2470955011&page=1). -->
-
-<!-- Here's how we'll proceed. On a web page, data is stored with various metadata that specifies its format and other properties. We can use this feature to identify the metadata associated with the particular parts of the web page we want to grab. As prerequisite steps, we install a tool called **SelectorGadget** that lets us easily and interactively peek at the metadata. Install it [here](https://selectorgadget.com) and let's experiment to see how to choose data. For my chosen goal, I need to grab data identified with ``.sx-price-large`. -->
-
-<!-- ### Scraping web data in R -->
-
-<!-- Next we have to pull the data we've identified. Install and activate the `R` package called `rvest`. Then we proceed as followsd: -->
-
-<!-- 1. Go to the [first page of data we want to scrape](https://www.amazon.com/s/ref=sr_pg_2?fst=p90x%3A1%2Cas%3Aoff&rh=n%3A7141123011%2Cn%3A7147442011%2Cn%3A679217011%2Cn%3A3420847011%2Ck%3Aboots%2Cp_n_size_four_browse-vebin%3A3491796011%2Cp_85%3A2470955011&page=1). -->
-
-<!-- 2. Activate SelectorGadget and use it to highlight exactly the data you want to grab. Remember, this is `.sx-price-large`. -->
-
-<!-- 3. Take note of the URL of the web page, and take note of the maximum number of pages resulting from the search. -->
-
-<!-- 4. Use `R` to loop through each page, grabbing results. -->
-
-<!-- Here's code that does this. -->
-
-<!-- ```{r cache=TRUE} -->
-
-<!-- # Set base URL -- page number will need to be appended -->
-
-<!-- baseurl <- "https://www.amazon.com/s/ref=sr_pg_2?fst=p90x%3A1%2Cas%3Aoff&rh=n%3A7141123011%2Cn%3A7147442011%2Cn%3A679217011%2Cn%3A3420847011%2Ck%3Aboots%2Cp_n_size_four_browse-vebin%3A3491796011%2Cp_85%3A2470955011&page=" -->
-
-<!-- # Set maximum number of pages -->
-
-<!-- maxpage <- 13 -->
-
-<!-- # Initialize empty vector for price data -->
-
-<!-- prices <- NULL -->
-
-<!-- # Loop over each page -->
-
-<!-- for (i in 1:maxpage){ -->
-
-<!--   # Read all data from page -->
-
-<!--   data <- read_html(paste0(baseurl,i)) -->
-
-<!--   # Grab all data with metadata found by SelectorGadget and convert it to text -->
-
-<!--   newprices <- data %>% html_nodes(".sx-price-large") %>% html_text() -->
-
-<!--   # Append to master data structure -->
-
-<!--   prices <- c(prices,newprices) -->
-
-<!-- } -->
-
-<!-- ``` -->
-
-<!-- Let's look at the data. -->
-
-<!-- ```{r cache=TRUE} -->
-
-<!-- str(prices) -->
-
-<!-- head(prices) -->
-
-<!-- ``` -->
-
-<!-- Oh, it's a mess! We need to clean it up. First, let's remove everything up to the dollar sign, which is a convenient marker. -->
-
-<!-- ```{r cache=TRUE} -->
-
-<!-- prices <- sapply(strsplit(prices,"\\$"),function(x) x[[2]]) -->
-
-<!-- head(prices) -->
-
-<!-- ``` -->
-
-<!-- Next we want to get rid of the `\n` and extra spaces, and put in a decimal point. -->
-
-<!-- ```{r cache=TRUE} -->
-
-<!-- dollars <- sapply(strsplit(prices,"\n"),function(x) x[[1]]) -->
-
-<!-- cents <- sapply(strsplit(prices,"\n"),function(x) x[[2]]) -->
-
-<!-- cents <- trimws(cents) -->
-
-<!-- prices <- paste0(dollars,".",cents) -->
-
-<!-- prices <- as.numeric(prices) -->
-
-<!-- head(prices) -->
-
-<!-- ``` -->
-
-<!-- Now let's go ahead and plot as a histogram. -->
-
-<!-- ```{r cache=TRUE} -->
-
-<!-- hist(prices,breaks=20) -->
-
-<!-- ``` -->
-
-<!-- It's worthwhile to do another example. Suppose we'd like to scrape class sizes for courses at a college. We'll do my previous institution, Macalester College. -->
-
-<!-- ```{r cache=TRUE} -->
-
-<!-- url <- "https://www.macalester.edu/registrar/schedules/2018fall/class-schedule/" -->
-
-<!-- data <- read_html(url) -->
-
-<!-- course <- data %>% html_nodes(".class-schedule-course-number") %>% html_text() -->
-
-<!-- head(course) -->
-
-<!-- course <- strsplit(course,"\u00A0") -->
-
-<!-- department <- sapply(course,function(x) x[[1]]) -->
-
-<!-- coursenum <- sapply(course,function(x) x[[2]]) -->
-
-<!-- coursename <- data %>% html_nodes(".class-schedule-course-title") %>% html_text() -->
-
-<!-- head(coursename) -->
-
-<!-- enrollment <- data %>% html_nodes(".class-schedule-label:nth-child(7)") %>% html_text() -->
-
-<!-- head(enrollment) -->
-
-<!-- enrollment <- strsplit(enrollment,":") -->
-
-<!-- enrollment <- sapply(enrollment,function(x)x[[2]]) -->
-
-<!-- enrollment <- gsub("Closed","",enrollment) -->
-
-<!-- enrollment <- trimws(enrollment) -->
-
-<!-- enrollment <- strsplit(enrollment,"\u00A0/\u00A0") -->
-
-<!-- enrollment <- sapply(enrollment,function(x) as.numeric(x[[2]])-as.numeric(x[[1]])) -->
-
-<!-- macinfo <- data.frame(department,coursenum,coursename,enrollment) -->
-
-<!-- head(macinfo) -->
-
-<!-- ``` -->
-
-<!-- ### Limitations -->
-
-<!-- I've shown you a brief glimpse of one type of data scraping. This type of scraping is just one type of procedure. Data appear in many different formats online and might require a variety of techniques that we haven't delved into. Still, I've tried to show you the one technique I think might be the most useful to you. Even this technique involved a lot of new code. Don't panic. Try to glean what you can from my examples and from talking to me. Googling is also immensely valuable here. -->
-
 # Least squares
 
 ## Big picture
@@ -1654,9 +1361,9 @@ All of our study of interpolation has been based on the idea that the model (a p
 
 ## Model fitting
 
-By way of motivation, let's examine a pedagogical data set. Suppose $a$ represents the amount of money (in \$1,000's) a company spent on advertising during different quarters, and $s$ represents money the company earned on sales that quarter. We can plot the data to explore it.
+By way of motivation, let's examine a pedagogical data set. Suppose $a$ represents the amount of money (in $1,000's) a company spent on advertising during different quarters, and $s$ represents money the company earned on sales that quarter. We can plot the data to explore it.
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 a <- c(3,4,5,6)
 s <- c(105,117,141,152)
 plot(a,s,xlab="advertising",ylab="sales")
@@ -1702,22 +1409,38 @@ text(7.8,2.8,labels=expression(x*bolditalic(a)))
 text(8,7,labels=expression(bolditalic(r)==bolditalic(b)-x*bolditalic(a)))
 ```
 
-From this picture, two relationships arise. $$
+From this picture, two relationships arise:
+
+$$
 \begin{align}
 x\mathbf{a} + \mathbf{r}&=\mathbf{b}\\
 \mathbf{a} \cdot \mathbf{r} &=0.
 \end{align}
-$$ Let us dot the first equation with the vector $\mathbf{a}$. Then we have $$
+$$
+
+Let us dot the first equation with the vector $\mathbf{a}$. Then we have
+
+$$
 \mathbf{a} \cdot \mathbf{a}x + \mathbf{a} \cdot \mathbf{r} = \mathbf{a} \cdot \mathbf{b}.
-$$ From the second equation above, we can eliminate the second term on the left hand side to write $$
+$$
+
+From the second equation above, we can eliminate the second term on the left hand side to write
+
+$$
 \mathbf{a}^T \mathbf{a} x = \mathbf{a}^T \mathbf{b}
-$$ where we have used the fact that $\mathbf{y}\cdot\mathbf{z}=\mathbf{y}^T\mathbf{z}$. We can solve for $\mathbf{x}$ by writing $x = \left(\mathbf{a}^T \mathbf{a}\right)^{-1}\mathbf{a}^T \mathbf{b}$. We can also calculate the vector that was as close as possible to $\mathbf{b}$. We will call it $\widehat{\mathbf{b}}$ and it is $$
+$$
+
+where we have used the fact that $\mathbf{y}\cdot\mathbf{z}=\mathbf{y}^T\mathbf{z}$. We can solve for $\mathbf{x}$ by writing $x = \left(\mathbf{a}^T \mathbf{a}\right)^{-1}\mathbf{a}^T \mathbf{b}$. We can also calculate the vector that was as close as possible to $\mathbf{b}$. We will call it $\widehat{\mathbf{b}}$ and it is
+
+$$
 \begin{align}
 \widehat{\mathbf{b}} &= \mathbf{a}x \\
 &=\mathbf{a}\left(\mathbf{a}^T \mathbf{a}\right)^{-1}\mathbf{a}^T \mathbf{b}\\
 & = \mathbf{P} \mathbf{b}.
 \end{align}
-$$ where thre last equation defines a new quantity that we call $\mathbf{P}$.
+$$
+
+where thre last equation defines a new quantity that we call $\mathbf{P}$.
 
 Let us know revisit what we have done and emphasize/introduce some vocabulary. We started with a vector $\mathbf{a}$ that we used as a **basis** to try to reach the **target** $\mathbf{b}$. We couldn't do it exactly, so we calcualted the closest we could come to $\mathbf{b}$, which turned out to be $\widehat{\mathbf{b}}$. This is called the **projection** of $\mathbf{b}$ into the subspace spanned by $\mathbf{a}$. We found $\widehat{\mathbf{b}} = \mathbf{a}x$, where $x$ is called the **least squares solution**, which solved the **normal equations** $\mathbf{a}^T \mathbf{a} x = \mathbf{a}^T \mathbf{b}$. We can summarize the calculation of $x$ by remembering $x = \left(\mathbf{a}^T \mathbf{a}\right)^{-1}\mathbf{a}^T \mathbf{b}$ where $\left(\mathbf{a}^T \mathbf{a}\right)^{-1}\mathbf{a}^T$ is called the **pseudoinverse** of $\mathbf{a}$. Also, we can summarize the calculation of $\widehat{\mathbf{b}}$ as $\widehat{\mathbf{b}} = \mathbf{P} \mathbf{b}$ where $\mathbf{P} = \mathbf{a} (\mathbf{a}^T\mathbf{a})^{-1} \mathbf{a}^T$ is what we call a **projection operator** or a **projection matrix**. Since we didn't succeed in reaching $\mathbf{b}$, there is some error, and we call this the **residual**, $\mathbf{r} = \mathbf{b}-\widehat{\mathbf{b}}$.
 
@@ -1732,9 +1455,9 @@ What are the words/ideas you should make sure you understand in the narrative ab
 -   projection operator
 -   residual
 
-Let's calculuate this concretely in `R`.
+Let's calculate this concretely in `R`.
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 a <- c(2,1)
 b <- c(6,8)
 pseudoinv <- solve(t(a) %*% a) %*% t(a)
@@ -1749,41 +1472,71 @@ dot(a,r)
 
 ## Projection onto a plane
 
-Let's apply these same conceps to our original problem of predicting sales from advertising. We had $$
+Let's apply these same conceps to our original problem of predicting sales from advertising. We had
+
+$$
 x_0 \begin{pmatrix} 1 \\ 1 \\ 1 \\ 1 \end{pmatrix} + x_1 \begin{pmatrix} 3 \\ 4 \\ 5 \\ 6 \end{pmatrix} = \begin{pmatrix} 105 \\ 117 \\ 141 \\ 152 \end{pmatrix}
-$$ which we'll write symbolically as $$
+$$
+
+which we'll write symbolically as
+
+$$
 x_0 \mathbf{a}_0 + x_1 \mathbf{a}_1 = \mathbf{b}.
-$$ We'd like to reach $\mathbf{b}$ using the basis vectors $\mathbf{a}_{0,1}$, but we can't, so let's consider getting as close as possible. The picture looks something like this.
+$$
+
+We'd like to reach $\mathbf{b}$ using the basis vectors $\mathbf{a}_{0,1}$, but we can't, so let's consider getting as close as possible. The picture looks something like this.
 
 ![](PlaneProjection.png)
 
-This picture gives rise to the equation $$
+This picture gives rise to the equation
+
+$$
 \begin{align}
 x_0 \mathbf{a}_0 + x_1 \mathbf{a_1} + \mathbf{r} &= \mathbf{b} \\
 a_0 \cdot \mathbf{r} &= 0 \\
 a_1 \cdot \mathbf{r} &= 0.
 \end{align}
-$$ Let's take the dot product of the first equaton with each basis vector. We find $$
+$$
+
+Let's take the dot product of the first equaton with each basis vector. We find
+
+$$
 \begin{align}
 x_0 \mathbf{a}_0\cdot\mathbf{a}_0 + x_1 \mathbf{a}_0\cdot\mathbf{a}_1 &= \mathbf{a}_0 \cdot \mathbf{b}\\
 x_0 \mathbf{a}_1\cdot\mathbf{a}_0 + x_1 \mathbf{a}_1\cdot\mathbf{a}_1 &= \mathbf{a}_1 \cdot \mathbf{b}
 \end{align}
-$$ where we have elminated terms that turn out to be zero thanks to the second and third equations previously. Note that there is a matrix way to write this. we can write $$
+$$
+
+where we have elminated terms that turn out to be zero thanks to the second and third equations previously. Note that there is a matrix way to write this. we can write
+
+$$
 \begin{pmatrix} \mathbf{a}_0^T \\ \mathbf{a}_1^T \end{pmatrix} \begin{pmatrix} \mathbf{a}_0 & \mathbf{a}_1 \end{pmatrix} \begin{pmatrix} x_0 \\ x_1 \end{pmatrix} = \begin{pmatrix} \mathbf{a}_0^T \\ \mathbf{a}_1^T \end{pmatrix} \mathbf{b}.
-$$ If we let $\mathbf{A}$ represent the matrix with columns $\mathbf{a}_{0,1}$ and if we let $\mathbf{x}=(x_0,x_1)^T$ then we can write the last equation as $$
+$$
+
+If we let $\mathbf{A}$ represent the matrix with columns $\mathbf{a}_{0,1}$ and if we let $\mathbf{x}=(x_0,x_1)^T$ then we can write the last equation as
+
+$$
 \mathbf{A}^T \mathbf{A} \mathbf{x} = \mathbf{A}^T \mathbf{b}.
-$$ These are the normal equations. For us, concretely, it looks like $$
+$$
+
+These are the normal equations. For us, concretely, it looks like
+
+$$
 \begin{align}
 \begin{pmatrix} 1 & 1 & 1 & 1\\ 3 & 4 & 5 & 6\end{pmatrix} \begin{pmatrix} 1 & 3\\1 & 4\\ 1 & 5\\ 1& 6\end{pmatrix}\begin{pmatrix}x_1 \\ x_2 \end{pmatrix} &= \begin{pmatrix} 1 & 1 & 1 & 1\\ 3 & 4 & 5 & 6\end{pmatrix} \begin{pmatrix} 105 \\ 117 \\ 141 \\ 152\end{pmatrix}\\
 \begin{pmatrix} 4 & 18 \\ 18 & 86 \end{pmatrix} \begin{pmatrix} x_1 \\ x_2 \end{pmatrix} &= \begin{pmatrix} 515 \\ 2400 \end{pmatrix}
 \end{align}
-$$ which has solution $$
+$$
+
+which has solution
+
+$$
 \begin{pmatrix} x_1 \\ x_2  \end{pmatrix} = \begin{pmatrix}  54.5 \\ 16.5 \end{pmatrix}.
 $$
 
 Let's calculuate this in `R`.
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 a0 <- c(1,1,1,1)
 a1 <- c(3,4,5,6)
 A <- cbind(a0,a1)
@@ -1798,7 +1551,7 @@ dot(r,a0)
 dot(r,a1)
 plot(a1,b,xlab="advertising",ylab="sales")
 xx <- seq(from=0,to=6,length=200)
-lines(xx,Horner(as.numeric(x),xx))
+lines(xx,horner(as.numeric(x),xx)$y)
 ```
 
 Symbolically, we calculated the least squares solution $\mathbf{x} = \left(\mathbf{A}^T \mathbf{A}\right)^{-1}\mathbf{A}^T \mathbf{b}$ where $\left(\mathbf{A}^T \mathbf{A}\right)^{-1}\mathbf{A}^T$ is the pseudoinverse. The projection is $\widehat{\mathbf{b}} = \mathbf{A} \mathbf{x} = \mathbf{A} \left(\mathbf{A}^T \mathbf{A}\right)^{-1}\mathbf{A}^T \mathbf{b}$ where $\mathbf{A} \left(\mathbf{A}^T \mathbf{A}\right)^{-1}\mathbf{A}^T$ is the projection matrix.
@@ -1818,7 +1571,7 @@ c_0 + c_1 \cdot 3 + c_2 \cdot 3^2 &= 2
 \end{align}
 $$ So, we calculuate in `R`:
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 x <- c(0,1,2,3)
 A <- matrix(cbind(x^0,x^1,x^2),nrow=4)
 b <- c(6,5,2,12)
@@ -1829,7 +1582,7 @@ r <- b - bhat
 print(c)
 plot(x,b)
 xx <- seq(from=0,to=3,length=200)
-lines(xx,Horner(c,xx))
+lines(xx,horner(c,xx)$y)
 print(r)
 ```
 
@@ -1951,7 +1704,7 @@ Now that I've convinced you that it's nice to have an orthonormal basis, let's t
 
 Let's see how it works via an example. Suppose we have $\mathbf{v}_1 = (3,4,0)^T$ and $\mathbf{v}_2 = (1,1,0)^T$.
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 v1 <- c(1,2,2)
 v2 <- c(2,1,-2)
 v3 <- c(1,1,0)
@@ -1959,10 +1712,9 @@ v3 <- c(1,1,0)
 
 1.  Take the first vector and turn it into a unit vector.
 
-```{r cache=TRUE}
-dot <- function(x,y) sum(x*y)
+```{r cache = TRUE}
 y1 <- v1
-r11 <- vnorm(y1)
+r11 <- Norm(y1,2)
 q1 <- y1/r11
 ```
 
@@ -1970,7 +1722,7 @@ q1 <- y1/r11
 
 ```{r}
 y2 <- v2 - q1%*%t(q1)%*%v2
-r22 <- vnorm(y2)
+r22 <- Norm(y2,2)
 q2 <- y2/r22
 ```
 
@@ -1978,16 +1730,16 @@ q2 <- y2/r22
 
 ```{r}
 y3 <- v3 - q1%*%t(q1)%*%v3 - q2%*%t(q2)%*%v3
-r33 <- vnorm(y3)
+r33 <- Norm(y3,2)
 ```
 
 Let's check the result and see if the procedure worked.
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 q1
 q2
-vnorm(q1)
-vnorm(q2)
+Norm(q1,2)
+Norm(q2,2)
 dot(q1,q2)
 ```
 
@@ -2032,7 +1784,7 @@ Let's make this clear with numerous examples!
 
 First example. Let's start with a $3 \times 3$ matrix and perform Gram-Schmidt orthogonalization to obtain the QR decomposition.
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 # Define matrix
 v1 <- c(2,3,6)
 v2 <- c(10,8,9)
@@ -2041,18 +1793,18 @@ A <- cbind(v1,v2,v3)
 
 # Step 1
 y1 <- v1
-r11 <- vnorm(y1)
+r11 <- Norm(y1,2)
 q1 <- y1/r11
 
 # Step2
 y2 <- v2 - (q1%*%t(q1))%*%v2
-r22 <- vnorm(y2)
+r22 <- Norm(y2, 2)
 q2 <- y2/r22
 r12 <- dot(q1,v2)
 
 # Step 3
 y3 <- v3 - (q1%*%t(q1))%*%v3 - (q2%*%t(q2))%*%v3
-r33 <- vnorm(y3)
+r33 <- Norm(y3,2)
 q3 <- y3/r33
 r13 <- dot(q1,v3)
 r23 <- dot(q2,v3)
@@ -2068,7 +1820,7 @@ In this example, notice that $\overline{\mathbf{Q}}$ has three columns. This ref
 
 Let's check our answer by hand and also check it against `R`'s built-in capabilities.
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 Qbar%*%Rbar - A
 QRbarcheck <- qr(A)
 Qbarcheck <- qr.Q(QRbarcheck, complete=TRUE)
@@ -2084,7 +1836,7 @@ Rbarcheck - Rbar
 
 Let's try an example we looked at earlier.
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 # Define matrix
 v1 <- c(1,2,2)
 v2 <- c(2,1,-2)
@@ -2093,12 +1845,12 @@ A <- cbind(v1,v2,v3)
 
 # Step 1
 y1 <- v1
-r11 <- vnorm(y1)
+r11 <- Norm(y1,2)
 q1 <- y1/r11
 
 # Step2
 y2 <- v2 - (q1%*%t(q1))%*%v2
-r22 <- vnorm(y2)
+r22 <- Norm(y2,2)
 q2 <- y2/r22
 r12 <- dot(q1,v2)
 
@@ -2112,7 +1864,7 @@ Oh! it turns out there's nothing left. If we want to compute the full QR decompo
 ```{r}
 V3 <- c(1,1,1)
 y3 <- V3 - (q1%*%t(q1))%*%V3 - (q2%*%t(q2))%*%V3
-q3 <- y3/vnorm(y3) 
+q3 <- y3/Norm(y3,2)
 r13 <- dot(q1,v3)
 r23 <- dot(q2,v3)
 r33 <- 0
@@ -2126,13 +1878,13 @@ Rbar
 
 To reiterate, we ended up with a row of zeros at the bottom of $\overline{\mathbf{R}}$. That's because the columns of $\mathbf{A}$ are linearly dependent and don't span $\mathbb{R}^3$. At any rate, let's go ahead and check our result.
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 Qbar%*%Rbar - A
 ```
 
 In this case, the full and reduced QR are not the same. Let's see how this works.
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 Q <- Qbar[1:3,1:2]
 R <- Rbar[1:2,1:3]
 Q
@@ -2142,7 +1894,7 @@ Q%*%R - A
 
 Ok, and let's do one last example.
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 # Define matrix
 v1 <- c(1,1,1,1)
 v2 <- c(0,1,1,1)
@@ -2152,18 +1904,18 @@ A
 
 # Step 1
 y1 <- v1
-r11 <- vnorm(y1)
+r11 <- Norm(y1,2)
 q1 <- y1/r11
 
 # Step 2
 y2 <- v2 - (q1%*%t(q1))%*%v2
-r22 <- vnorm(y2)
+r22 <- Norm(y2,2)
 q2 <- y2/r22
 r12 <- dot(q1,v2)
 
 # Step 3
 y3 <- v3 - (q1%*%t(q1))%*%v3 - (q2%*%t(q2))%*%v3
-r33 <- vnorm(y3) 
+r33 <- Norm(y3,2)
 q3 <- y3/(r33)
 r13 <- dot(q1,v3)
 r23 <- dot(q2,v3)
@@ -2171,11 +1923,11 @@ r23 <- dot(q2,v3)
 
 But wait! We are living in $\mathbb{R}^4$ and we only have three vectors to far, $\mathbf{q}_{1,2,3}$. If we want the full decomposition, we have to find a basis for the orthogonal complement of $\mathbf{A}$.
 
-```{r cache=TRUE}
+```{r cache = TRUE}
 # Choose a vector not in the span of q1, q2, q3
 v4 <- c(1,2,3,4)
 y4 <- v4 - (q1%*%t(q1))%*%v4 - (q2%*%t(q2))%*%v4  - (q3%*%t(q3))%*%v4
-r44 <- vnorm(y4) 
+r44 <- Norm(y4,2) 
 q4 <- y4/(r44)
 r14 <- dot(q1,v4)
 r24 <- dot(q2,v4)
@@ -2278,7 +2030,9 @@ Many applications of eigenvalues are intimiately tied up with the idea of **diag
 \end{align}
 $$ Since $\mathbf{A}\mathbf{S} = \mathbf{S} \mathbf{\Lambda}$, we can write $\mathbf{A} = \mathbf{S} \mathbf{\Lambda} \mathbf{S}^{-1}$. If we think of $\mathbf{S}$ as describing a change of basis, this equation says that the action of $\mathbf{A}$ is like going into another basis, multiplying by a diagonal matrix, and then changing back to the original basis.
 
-Let's show that we can do this with our example matrix $\mathbf{A}$ from before, $$
+Let's show that we can do this with our example matrix $\mathbf{A}$ from before, 
+
+$$
 \mathbf{A} = \begin{pmatrix} -3 & 2 \\ 2 & -3 \end{pmatrix}.
 $$
 
@@ -2441,14 +2195,14 @@ A
 v <- c(1,1,1)
 v <- A%*%v
 v
-v <- v/vnorm(v)
+v <- v/Norm(v,2)
 v
 v <- A%*%v
 v
-v <- v/vnorm(v)
+v <- v/Norm(v,2)
 for (i in 1:100){
   v <- A%*%v
-  v <- v/vnorm(v)
+  v <- v/Norm(v,2)
 }
 (A%*%v)/v
 e <- eigen(A)
@@ -2461,8 +2215,11 @@ Let's try another example.
 
 ```{r}
 A <- matrix(c(2,-520,8,-90,468,-360,40,-698,160),byrow=TRUE,nrow=3)
-A
-v <- PI(A,k=1000,tol=1e-10)$vec
+v <- c(1,1,1)
+for (i in 1:100){
+  v <- A%*%v
+  v <- v/Norm(v,2)
+}
 (A%*%v)/v
 e <- eigen(A)
 e$values
