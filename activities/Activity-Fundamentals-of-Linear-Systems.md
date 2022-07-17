@@ -8,14 +8,29 @@ Remember to show your work / give your reasoning, as applicable.
 Which of the following sets of vectors are bases for
 ![\\mathbb{R}^2](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbb%7BR%7D%5E2 "\mathbb{R}^2")?
 
-1.  ![\\{(0, 1), (1, 1)\\}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5C%7B%280%2C%201%29%2C%20%281%2C%201%29%5C%7D "\{(0, 1), (1, 1)\}")
-2.  ![\\{(1, 0), (0, 1), (1, 1)\\}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5C%7B%281%2C%200%29%2C%20%280%2C%201%29%2C%20%281%2C%201%29%5C%7D "\{(1, 0), (0, 1), (1, 1)\}")
-3.  ![\\{(1, 0), (−1, 0)\\}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5C%7B%281%2C%200%29%2C%20%28%E2%88%921%2C%200%29%5C%7D "\{(1, 0), (−1, 0)\}")
-4.  ![\\{(1, 1), (1, −1)\\}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5C%7B%281%2C%201%29%2C%20%281%2C%20%E2%88%921%29%5C%7D "\{(1, 1), (1, −1)\}")
-5.  ![\\{(1, 1), (2, 2)\\}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5C%7B%281%2C%201%29%2C%20%282%2C%202%29%5C%7D "\{(1, 1), (2, 2)\}")
-6.  ![\\{(1, 2)\\}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5C%7B%281%2C%202%29%5C%7D "\{(1, 2)\}")
+    (a)  $\{(0, 1), (1, 1)\}$
+    (b)  $\{(1, 0), (0, 1), (1, 1)\}$
+    (c)  $\{(1, 0), (−1, 0)\}$
+    (d)  $\{(1, 1), (1, −1)\}$
+    (e)  $\{(1, 1), (2, 2)\}$
+    (f)  $\{(1, 2)\}$
 
 ### Problem 1 solution
+
+Your solution goes here.
+
+### Problem 2
+
+What is the dimension of the intersection of the following two planes in
+![\\mathbb{R}^3](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbb%7BR%7D%5E3 "\mathbb{R}^3")?
+
+![
+x + 2y − z = 0, \\quad 3x − 3y + z = 0
+](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0Ax%20%2B%202y%20%E2%88%92%20z%20%3D%200%2C%20%5Cquad%203x%20%E2%88%92%203y%20%2B%20z%20%3D%200%0A "
+x + 2y − z = 0, \quad 3x − 3y + z = 0
+")
+
+### Problem 2 Solution
 
 Your solution goes here.
 
