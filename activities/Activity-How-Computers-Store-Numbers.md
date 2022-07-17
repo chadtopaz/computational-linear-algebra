@@ -1,6 +1,8 @@
 Activity - How Computers Store Numbers
 ================
 
+Remember to show your work / give your reasoning, as applicable.
+
 # Problem 1
 
 Convert the binary number 110111.001 to base 10.

@@ -204,9 +204,11 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
     -   [An Ill-Advised Linear Algebra Tutorial](<https://chadtopaz.com/download/an-ill-advised-linear-algebra-tutorial/)>
 
-    -   [Course Notes: Fundamentals of Linear Systems](    -   [Course Notes: R Bootcamp](/coursenotes/coursenotes.md#fundamentals-of-linear-systems)
+    -   [Course Notes: Fundamentals of Linear Systems](/coursenotes/coursenotes.md#fundamentals-of-linear-systems)
+    
+-   Activity - How Computers Store Numbers [[.md for viewing](activities/Activity-Fundamenals-of-Linear-Systems.md)] [[.Rmd for editing](activities/Activity-Fundamenals-of-Linear-Systems.Rmd)]
 
-- 
+-   Pset - How Computers Store Numbers [[.md for viewing](psets/Pset-Fundamentals-of-Linear-Systems.md)] [[.Rmd for editing](psets/Pset-Fundamentals-of-Linear-Systems.Rmd)]
 
 - Challenge problems
 

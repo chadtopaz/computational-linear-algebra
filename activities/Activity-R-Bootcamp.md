@@ -1,6 +1,8 @@
 Activity - R Bootcamp
 ================
 
+Remember to show your work / give your reasoning, as applicable.
+
 # Problem 1
 
 Generate the following matrices with as little code as possible.
