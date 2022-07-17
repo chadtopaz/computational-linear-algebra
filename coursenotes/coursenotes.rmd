@@ -6,14 +6,13 @@ output:
       toc_depth: 1
   header-includes:
    - \usepackage{amsmath}
+   - \usepackage{bm}
 ---
 
-```{=latex}
-\renewcommand{\vec}[1]{\mathbf{#1}}
-\renewcommand{\mat}[1]{\mathbf{#1}}
+\renewcommand{\vec}[1]{\bm{#1}}
+\renewcommand{\mat}[1]{\bm{#1}}
 \newcommand{\exp}[1]{\mathrm{e}^{#1}}
 \DeclareMathOperator*{\argmin}{arg\,min}
-```
 
 ```{r, message=FALSE, warning=FALSE, include=FALSE}
 library(knitr)
@@ -93,7 +92,7 @@ There are several different ways to "multiply" vectors $\vec{x}$ and $\vec{y}$:
 
 1.  Element-wise. Just multiply each element of $\vec{x}$ with the element in the corresponding poisiotn in $\vec{y}$. Note that $\vec{x}$ and $\vec{y}$ must have the same number of elements, and the result is a vector with the same number of elements.
 
-2.  Dot product, also known as the inner product. To compute, calculate $x \cdot y \equiv \vec{x}^T\vec{y}$ where the superscript $T$ indicates transpose. Dot product is related to the angle $\theta$ between the two vectors as $\vec{x} \cdot \vec{y} = |\vec{x}||\vec{y}| \cos \theta$. Rearranging this as $\vec{x} \cdot \vec{y}/|\vec{y}| = |\vec{x}| \cos \theta$ suggests the intuition of the dot product. It calculates a *projection* of one vector onto the other, or restated, it tells us how much of one vector is pointing in the direction of the other vector. Note that $\vec{x}$ and $\vec{y}$ must have the same number of elements, and the result is a scalar.
+2.  Dot product, also known as the inner product. To compute, calculate $x \cdot y \equiv \vec{x}^T \vec{y}$ where the superscript $T$ indicates transpose. Dot product is related to the angle $\theta$ between the two vectors as $\vec{x} \cdot \vec{y} = |\vec{x}||\vec{y}| \cos \theta$. Rearranging this as $\vec{x} \cdot \vec{y}/|\vec{y}| = |\vec{x}| \cos \theta$ suggests the intuition of the dot product. It calculates a *projection* of one vector onto the other, or restated, it tells us how much of one vector is pointing in the direction of the other vector. Note that $\vec{x}$ and $\vec{y}$ must have the same number of elements, and the result is a scalar.
 
 3.  Outer product. To compute, calculate $x \otimes y \equiv \vec{x}\vec{y}^T$. Note that $\vec{x}$ and $\vec{y}$ do not need to have the same number of elements, and the result is a matrix. If $\vec{x}$ is $m \times 1$ and $\vec{y}$ is $n \times 1$ then $x \otimes y$ is $m \times n$.
 
