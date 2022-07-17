@@ -7,6 +7,8 @@ output:
    - \usepackage{amsmath}
 ---
 
+Fuck
+
 \renewcommand{\vec}[1]{\mathbf{#1}}
 \renewcommand{\mat}[1]{\mathbf{#1}}
 
