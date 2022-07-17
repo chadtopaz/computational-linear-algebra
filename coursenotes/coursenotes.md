@@ -1,25 +1,3 @@
--   <a href="#r-bootcamp" id="toc-r-bootcamp">R Bootcamp</a>
--   <a href="#how-computers-store-numbers"
-    id="toc-how-computers-store-numbers">How computers store numbers</a>
--   <a href="#fundamentals-of-linear-systems"
-    id="toc-fundamentals-of-linear-systems">Fundamentals of Linear
-    Systems</a>
--   <a href="#lu-decomposition" id="toc-lu-decomposition">LU
-    decomposition</a>
--   <a href="#iterative-methods-for-linear-systems"
-    id="toc-iterative-methods-for-linear-systems">Iterative methods for
-    linear systems</a>
--   <a href="#polynomial-interpolation"
-    id="toc-polynomial-interpolation">Polynomial interpolation</a>
--   <a href="#interpolation-error-and-chebyshev-interpolation"
-    id="toc-interpolation-error-and-chebyshev-interpolation">Interpolation
-    error and Chebyshev interpolation</a>
--   <a href="#splines" id="toc-splines">Splines</a>
--   <a href="#least-squares" id="toc-least-squares">Least squares</a>
--   <a href="#qr-factorization" id="toc-qr-factorization">QR
-    Factorization</a>
--   <a href="#eigenvalues" id="toc-eigenvalues">Eigenvalues</a>
-
 # R Bootcamp
 
 ## Big picture
@@ -74,7 +52,7 @@ We can test:
     t1/t2
 
     ##  elapsed 
-    ## 2.386364
+    ## 2.195652
 
 ## Inner and outer products
 
@@ -780,7 +758,7 @@ matrix.
     t2/t1
 
     ##       elapsed 
-    ## 6.35507246377
+    ## 5.25694444444
 
 ## Forward and backward error
 
@@ -984,7 +962,7 @@ You can calculate the 1, 2, and ∞ matrix norms using the R command
 
     norm(A,"2")
 
-    ## [1] 5.722927
+    ## [1] 5.72292695333
 
     norm(A,"I")
 
@@ -1046,11 +1024,11 @@ approximately by default, or exactly if specified.
     A <- matrix(c(0.913,0.659,0.457,0.330),nrow=2,byrow=TRUE)
     kappa(A)
 
-    ## [1] 14132.03
+    ## [1] 14132.0316376
 
     kappa(A,exact=TRUE)
 
-    ## [1] 12485.03
+    ## [1] 12485.031416
 
 ## Calculating the condition number
 
@@ -1263,7 +1241,7 @@ system for 100 different right hand sides.
     )[3]
     as.numeric(t1/(t2 + t3))
 
-    ## [1] 5
+    ## [1] 6.66666666667
 
 # Iterative methods for linear systems
 
@@ -1369,12 +1347,12 @@ Here’s an example.
     )[3]
     Norm(xapprox-xexact,Inf)
 
-    ## [1] 3.642326e-14
+    ## [1] 3.64232569886e-14
 
     t1/t2
 
-    ##  elapsed 
-    ## 2.285714
+    ##       elapsed 
+    ## 2.25316455696
 
 ## Convergence of Jacobi’s method
 
@@ -1581,7 +1559,7 @@ kappavals
 2
 </td>
 <td style="text-align:right;">
-7.500000e+00
+7.50000000000e+00
 </td>
 </tr>
 <tr>
@@ -1589,7 +1567,7 @@ kappavals
 4
 </td>
 <td style="text-align:right;">
-2.491869e+03
+2.49186893872e+03
 </td>
 </tr>
 <tr>
@@ -1597,7 +1575,7 @@ kappavals
 8
 </td>
 <td style="text-align:right;">
-5.753630e+08
+5.75363020789e+08
 </td>
 </tr>
 <tr>
@@ -1605,7 +1583,7 @@ kappavals
 16
 </td>
 <td style="text-align:right;">
-4.555646e+19
+4.55564575643e+19
 </td>
 </tr>
 <tr>
@@ -1613,7 +1591,7 @@ kappavals
 32
 </td>
 <td style="text-align:right;">
-4.913265e+28
+4.91326454030e+28
 </td>
 </tr>
 <tr>
@@ -1621,7 +1599,7 @@ kappavals
 64
 </td>
 <td style="text-align:right;">
-5.173402e+44
+5.17340173411e+44
 </td>
 </tr>
 <tr>
@@ -1629,7 +1607,7 @@ kappavals
 128
 </td>
 <td style="text-align:right;">
-3.078066e+76
+3.07806605038e+76
 </td>
 </tr>
 <tr>
@@ -1637,7 +1615,7 @@ kappavals
 256
 </td>
 <td style="text-align:right;">
-5.916265e+136
+5.91626505144e+136
 </td>
 </tr>
 </tbody>
@@ -1706,14 +1684,14 @@ some strengths and some weaknesses.
     horner(c, x0)
 
     ## $y
-    ## [1] -0.1570601
+    ## [1] -0.157060132098
     ## 
     ## $dy
-    ## [1] 2.414389
+    ## [1] 2.41438899384
 
     barylag(x,y,x0)
 
-    ## [1] -0.1570601
+    ## [1] -0.157060132133
 
 We can also do a speed comparison test.
 
@@ -1736,7 +1714,7 @@ We can also do a speed comparison test.
     )[3]
     as.numeric(t1/t2)
 
-    ## [1] 23.4625
+    ## [1] 24.1125
 
 ## Data compression
 
@@ -1772,7 +1750,7 @@ values at which you’d like interpolated values.
 
 ![](coursenotes_files/figure-markdown_strict/unnamed-chunk-28-1.png)
 
-    ## [1] 0.1807578
+    ## [1] 0.180757796555
 
 Not bad for just 5 points. Let’s examine how the error changes as a
 function of *n*.
@@ -2096,7 +2074,7 @@ Now we can go back to polynomial interpolation with Chebyshev nodes.
     ## [1] 41
 
 This is an improvement in compression by a factor of 632/41 =
-15.4146341.
+15.414634146341.
 
 # Splines
 
@@ -2553,11 +2531,11 @@ Let’s calculuate this in `R`.
 
     dot(r,a0)
 
-    ## [1] 1.847411e-13
+    ## [1] 1.84741111298e-13
 
     dot(r,a1)
 
-    ## [1] 8.81073e-13
+    ## [1] 8.81072992343e-13
 
     plot(a1,b,xlab="advertising",ylab="sales")
     xx <- seq(from=0,to=6,length=200)
@@ -2861,14 +2839,14 @@ Let’s check the result and see if the procedure worked.
 
     q1
 
-    ## [1] 0.3333333 0.6666667 0.6666667
+    ## [1] 0.333333333333 0.666666666667 0.666666666667
 
     q2
 
-    ##            [,1]
-    ## [1,]  0.6666667
-    ## [2,]  0.3333333
-    ## [3,] -0.6666667
+    ##                 [,1]
+    ## [1,]  0.666666666667
+    ## [2,]  0.333333333333
+    ## [3,] -0.666666666667
 
     Norm(q1,2)
 
@@ -2976,10 +2954,10 @@ orthogonalization to obtain the QR decomposition.
     Rbar <- rbind(c(r11,r12,r13),c(0,r22,r23),c(0,0,r33))
     Qbar
 
-    ##             q1                      
-    ## [1,] 0.2857143  0.8571429  0.4285714
-    ## [2,] 0.4285714  0.2857143 -0.8571429
-    ## [3,] 0.8571429 -0.4285714  0.2857143
+    ##                  q1                                
+    ## [1,] 0.285714285714  0.857142857143  0.428571428571
+    ## [2,] 0.428571428571  0.285714285714 -0.857142857143
+    ## [3,] 0.857142857143 -0.428571428571  0.285714285714
 
     Rbar
 
@@ -3008,34 +2986,34 @@ capabilities.
     Rbarcheck <- qr.R(QRbarcheck, complete=TRUE)
     Qbar
 
-    ##             q1                      
-    ## [1,] 0.2857143  0.8571429  0.4285714
-    ## [2,] 0.4285714  0.2857143 -0.8571429
-    ## [3,] 0.8571429 -0.4285714  0.2857143
+    ##                  q1                                
+    ## [1,] 0.285714285714  0.857142857143  0.428571428571
+    ## [2,] 0.428571428571  0.285714285714 -0.857142857143
+    ## [3,] 0.857142857143 -0.428571428571  0.285714285714
 
     Qbarcheck
 
-    ##            [,1]       [,2]       [,3]
-    ## [1,] -0.2857143 -0.8571429 -0.4285714
-    ## [2,] -0.4285714 -0.2857143  0.8571429
-    ## [3,] -0.8571429  0.4285714 -0.2857143
+    ##                 [,1]            [,2]            [,3]
+    ## [1,] -0.285714285714 -0.857142857143 -0.428571428571
+    ## [2,] -0.428571428571 -0.285714285714  0.857142857143
+    ## [3,] -0.857142857143  0.428571428571 -0.285714285714
 
     S <- diag(c(-1,-1,-1))
     Qbarcheck <- Qbarcheck%*%S
     Rbarcheck <- S%*%Rbarcheck
     Qbarcheck - Qbar
 
-    ##                 q1                           
-    ## [1,] -1.110223e-16  0.000000e+00 1.665335e-16
-    ## [2,]  0.000000e+00 -1.110223e-16 3.330669e-16
-    ## [3,]  0.000000e+00 -1.110223e-16 6.106227e-16
+    ##                      q1                                     
+    ## [1,] -1.11022302463e-16  0.00000000000e+00 1.66533453694e-16
+    ## [2,]  0.00000000000e+00 -1.11022302463e-16 3.33066907388e-16
+    ## [3,]  0.00000000000e+00 -1.11022302463e-16 6.10622663544e-16
 
     Rbarcheck - Rbar
 
-    ##      v1           v2            v3
-    ## [1,]  0 1.776357e-15  0.000000e+00
-    ## [2,]  0 8.881784e-16  0.000000e+00
-    ## [3,]  0 0.000000e+00 -1.776357e-15
+    ##      v1               v2                v3
+    ## [1,]  0 1.7763568394e-15  0.0000000000e+00
+    ## [2,]  0 8.8817841970e-16  0.0000000000e+00
+    ## [3,]  0 0.0000000000e+00 -1.7763568394e-15
 
 Let’s try an example we looked at earlier.
 
@@ -3060,10 +3038,10 @@ Let’s try an example we looked at earlier.
     y3 <- v3 - (q1%*%t(q1))%*%v3 - (q2%*%t(q2))%*%v3
     y3
 
-    ##              [,1]
-    ## [1,] 1.110223e-16
-    ## [2,] 5.551115e-17
-    ## [3,] 0.000000e+00
+    ##                   [,1]
+    ## [1,] 1.11022302463e-16
+    ## [2,] 5.55111512313e-17
+    ## [3,] 0.00000000000e+00
 
 Oh! it turns out there’s nothing left. If we want to compute the full QR
 decomposition, we need to find something orthogonal to the span of
@@ -3084,10 +3062,10 @@ little cases like ours, you can eyeball it.
     Rbar <- rbind(c(r11,r12,r13),c(0,r22,r23),c(0,0,r33))
     Qbar
 
-    ##             q1                      
-    ## [1,] 0.3333333  0.6666667  0.6666667
-    ## [2,] 0.6666667  0.3333333 -0.6666667
-    ## [3,] 0.6666667 -0.6666667  0.3333333
+    ##                  q1                                
+    ## [1,] 0.333333333333  0.666666666667  0.666666666667
+    ## [2,] 0.666666666667  0.333333333333 -0.666666666667
+    ## [3,] 0.666666666667 -0.666666666667  0.333333333333
 
     Rbar
 
@@ -3115,10 +3093,10 @@ this works.
     R <- Rbar[1:2,1:3]
     Q
 
-    ##             q1           
-    ## [1,] 0.3333333  0.6666667
-    ## [2,] 0.6666667  0.3333333
-    ## [3,] 0.6666667 -0.6666667
+    ##                  q1                
+    ## [1,] 0.333333333333  0.666666666667
+    ## [2,] 0.666666666667  0.333333333333
+    ## [3,] 0.666666666667 -0.666666666667
 
     R
 
@@ -3184,38 +3162,38 @@ have to find a basis for the orthogonal complement of **A**.
     Rbar <- rbind(c(r11,r12,r13),c(0,r22,r23),c(0,0,r33),c(0,0,0))
     Qbar
 
-    ##       q1                                       
-    ## [1,] 0.5 -0.8660254  1.359740e-16  3.925231e-16
-    ## [2,] 0.5  0.2886751 -8.164966e-01 -3.140185e-16
-    ## [3,] 0.5  0.2886751  4.082483e-01 -7.071068e-01
-    ## [4,] 0.5  0.2886751  4.082483e-01  7.071068e-01
+    ##       q1                                                      
+    ## [1,] 0.5 -0.866025403784  1.35973995551e-16  3.92523114671e-16
+    ## [2,] 0.5  0.288675134595 -8.16496580928e-01 -3.14018491737e-16
+    ## [3,] 0.5  0.288675134595  4.08248290464e-01 -7.07106781187e-01
+    ## [4,] 0.5  0.288675134595  4.08248290464e-01  7.07106781187e-01
 
     Rbar
 
-    ##      [,1]      [,2]      [,3]
-    ## [1,]    2 1.5000000 1.0000000
-    ## [2,]    0 0.8660254 0.5773503
-    ## [3,]    0 0.0000000 0.8164966
-    ## [4,]    0 0.0000000 0.0000000
+    ##      [,1]           [,2]           [,3]
+    ## [1,]    2 1.500000000000 1.000000000000
+    ## [2,]    0 0.866025403784 0.577350269190
+    ## [3,]    0 0.000000000000 0.816496580928
+    ## [4,]    0 0.000000000000 0.000000000000
 
     Qbar%*%Rbar - A
 
-    ##      v1 v2            v3
-    ## [1,]  0  0 -1.232595e-32
-    ## [2,]  0  0  0.000000e+00
-    ## [3,]  0  0  0.000000e+00
-    ## [4,]  0  0  0.000000e+00
+    ##      v1 v2                 v3
+    ## [1,]  0  0 -1.23259516441e-32
+    ## [2,]  0  0  0.00000000000e+00
+    ## [3,]  0  0  0.00000000000e+00
+    ## [4,]  0  0  0.00000000000e+00
 
     # Make reduced QR and check
     Q <- Qbar[1:4,1:3]
     R <- Rbar[1:3,1:3]
     Q%*%R - A
 
-    ##      v1 v2            v3
-    ## [1,]  0  0 -1.232595e-32
-    ## [2,]  0  0  0.000000e+00
-    ## [3,]  0  0  0.000000e+00
-    ## [4,]  0  0  0.000000e+00
+    ##      v1 v2                 v3
+    ## [1,]  0  0 -1.23259516441e-32
+    ## [2,]  0  0  0.00000000000e+00
+    ## [3,]  0  0  0.00000000000e+00
+    ## [4,]  0  0  0.00000000000e+00
 
 ## Computational considerations
 
@@ -3381,9 +3359,9 @@ $$
     ## [1] -1 -5
     ## 
     ## $vectors
-    ##           [,1]       [,2]
-    ## [1,] 0.7071068  0.7071068
-    ## [2,] 0.7071068 -0.7071068
+    ##                [,1]            [,2]
+    ## [1,] 0.707106781187  0.707106781187
+    ## [2,] 0.707106781187 -0.707106781187
 
     Lambda <- diag(e$values)
     S <- e$vectors
@@ -3437,24 +3415,24 @@ Let’s diagonalize **A**, and momentarily, you’ll see why.
     lambdap <- (1+sqrt(5))/2
     lambdap
 
-    ## [1] 1.618034
+    ## [1] 1.61803398875
 
     lambdam <- (1-sqrt(5))/2
     lambdam
 
-    ## [1] -0.618034
+    ## [1] -0.61803398875
 
     e <- eigen(A)
     e$values
 
-    ## [1]  1.618034 -0.618034
+    ## [1]  1.61803398875 -0.61803398875
 
     Lambda <- diag(e$values)
     Lambda
 
-    ##          [,1]      [,2]
-    ## [1,] 1.618034  0.000000
-    ## [2,] 0.000000 -0.618034
+    ##               [,1]           [,2]
+    ## [1,] 1.61803398875  0.00000000000
+    ## [2,] 0.00000000000 -0.61803398875
 
     S <- e$vectors
     v1 <- S[,1]/S[2,1]
@@ -3462,15 +3440,15 @@ Let’s diagonalize **A**, and momentarily, you’ll see why.
     S <- cbind(v1,v2)
     S
 
-    ##            v1        v2
-    ## [1,] 1.618034 -0.618034
-    ## [2,] 1.000000  1.000000
+    ##                 v1             v2
+    ## [1,] 1.61803398875 -0.61803398875
+    ## [2,] 1.00000000000  1.00000000000
 
     S%*%Lambda%*%solve(S)
 
-    ##      [,1]          [,2]
-    ## [1,]    1  1.000000e+00
-    ## [2,]    1 -1.110223e-16
+    ##      [,1]               [,2]
+    ## [1,]    1  1.00000000000e+00
+    ## [2,]    1 -1.11022302463e-16
 
 So to recap, we have
 $$
@@ -3542,7 +3520,7 @@ Let’s test this out.
 
     fib(1000)
 
-    ## [1] 7.033037e+208
+    ## [1] 7.03303677114e+208
 
 One cool thing about this is that it lets us understand the behavior of
 *F*<sub>*n*</sub> for large *n* in a simpler way. Since
@@ -3565,8 +3543,8 @@ Let’s test this out!
 
     fibapprox(n)
 
-    ##  [1]  1.170820  1.894427  3.065248  4.959675  8.024922 12.984597 21.009519
-    ##  [8] 33.994117 55.003636 88.997753
+    ##  [1]  1.17082039325  1.89442719100  3.06524758425  4.95967477525  8.02492235950
+    ##  [6] 12.98459713475 21.00951949425 33.99411662900 55.00363612325 88.99775275225
 
     n <- 1:20
     error <- abs(fib(n)-fibapprox(n))
@@ -3587,10 +3565,10 @@ eigenspace. Here are a couple of examples.
 
     e$vectors
 
-    ##            [,1]      [,2]       [,3]
-    ## [1,] -0.3015113 0.5345225 -0.5885337
-    ## [2,] -0.9045340 0.8017837 -0.7843904
-    ## [3,] -0.3015113 0.2672612 -0.1958567
+    ##                 [,1]           [,2]            [,3]
+    ## [1,] -0.301511344578 0.534522483825 -0.588533689677
+    ## [2,] -0.904534033733 0.801783725737 -0.784390372213
+    ## [3,] -0.301511344578 0.267261241912 -0.195856682537
 
 Here, the **algebraic multiplicity** of  − 3 is 1 because it is only an
 eigenvalue once, and the **geometric multiplicity** is 1 because it only
@@ -3616,9 +3594,9 @@ By way of counterexample, consider this problem.
 
     e$vectors
 
-    ##      [,1]         [,2]
-    ## [1,]    1 1.000000e+00
-    ## [2,]    0 2.220446e-16
+    ##      [,1]              [,2]
+    ## [1,]    1 1.00000000000e+00
+    ## [2,]    0 2.22044604925e-16
 
 The eigenvalue 1 has algebraic multiplicity 2, but there is only one
 eigenvector (the trivial eigenvector doesn’t count) so it has geometric
@@ -3671,18 +3649,18 @@ more directly. Let’s do a numerical experiment.
     v <- v/Norm(v,2)
     v
 
-    ##            [,1]
-    ## [1,]  0.5192516
-    ## [2,] -0.6866677
-    ## [3,]  0.5087881
+    ##                 [,1]
+    ## [1,]  0.519251568355
+    ## [2,] -0.686667691150
+    ## [3,]  0.508788060681
 
     v <- A%*%v
     v
 
-    ##            [,1]
-    ## [1,] -1.3746433
-    ## [2,]  0.8671632
-    ## [3,] -0.6735883
+    ##                 [,1]
+    ## [1,] -1.374643320759
+    ## [2,]  0.867163198538
+    ## [3,] -0.673588306557
 
     v <- v/Norm(v,2)
     for (i in 1:100){
@@ -3722,7 +3700,7 @@ Let’s try another example.
     e <- eigen(A)
     e$values
 
-    ## [1]  8.820000e+02 -2.520000e+02 -4.633793e-14
+    ## [1]  8.82000000000e+02 -2.52000000000e+02 -4.63379334903e-14
 
 This method if called **power iteration**. How and why, exactly, does it
 work though? This is the subject of your activity for today.

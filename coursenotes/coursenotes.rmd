@@ -3,8 +3,6 @@ title: "Computational Linear Algebra: Course Notes"
 author: "Chad M. Topaz | Last Updated: 2022-07-04"
 output:
   rmarkdown::md_document:
-    toc: true
-    toc_depth: 1
   header-includes:
    - \usepackage{amsmath}
 ---
