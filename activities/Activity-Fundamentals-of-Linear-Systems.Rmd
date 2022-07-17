@@ -12,7 +12,20 @@ output:
 
 Remember to show your work / give your reasoning, as applicable.
 
+### Problem 1
 
+Which of the following sets of vectors are bases for $\mathbb{R}^2$?
+
+a. $\{(0, 1), (1, 1)\}$
+b. $\{(1, 0), (0, 1), (1, 1)\}$
+c. $\{(1, 0), (−1, 0)\}$
+d. $\{(1, 1), (1, −1)\}$
+e. $\{(1, 1), (2, 2)\}$
+f. $\{(1, 2)\}$
+
+### Problem 1 solution
+
+Your solution goes here.
 
 ### Problem 3
 
