@@ -10,6 +10,8 @@ output:
 \renewcommand{\vec}[1]{\mathbf{#1}}
 \renewcommand{\mat}[1]{\mathbf{#1}}
 
+Fuck
+
 Remember to show your work / give your reasoning, as applicable.
 
 ### Problem 1
