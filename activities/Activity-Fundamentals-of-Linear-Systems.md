@@ -8,12 +8,12 @@ Remember to show your work / give your reasoning, as applicable.
 Which of the following sets of vectors are bases for
 ![\\mathbb{R}^2](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbb%7BR%7D%5E2 "\mathbb{R}^2")?
 
-    (a)  $\{(0, 1), (1, 1)\}$
-    (b)  $\{(1, 0), (0, 1), (1, 1)\}$
-    (c)  $\{(1, 0), (−1, 0)\}$
-    (d)  $\{(1, 1), (1, −1)\}$
-    (e)  $\{(1, 1), (2, 2)\}$
-    (f)  $\{(1, 2)\}$
+![\\{(0, 1), (1, 1)\\}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5C%7B%280%2C%201%29%2C%20%281%2C%201%29%5C%7D "\{(0, 1), (1, 1)\}")
+![\\{(1, 0), (0, 1), (1, 1)\\}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5C%7B%281%2C%200%29%2C%20%280%2C%201%29%2C%20%281%2C%201%29%5C%7D "\{(1, 0), (0, 1), (1, 1)\}")
+![\\{(1, 0), (−1, 0)\\}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5C%7B%281%2C%200%29%2C%20%28%E2%88%921%2C%200%29%5C%7D "\{(1, 0), (−1, 0)\}")
+![\\{(1, 1), (1, −1)\\}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5C%7B%281%2C%201%29%2C%20%281%2C%20%E2%88%921%29%5C%7D "\{(1, 1), (1, −1)\}")
+![\\{(1, 1), (2, 2)\\}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5C%7B%281%2C%201%29%2C%20%282%2C%202%29%5C%7D "\{(1, 1), (2, 2)\}")
+![\\{(1, 2)\\}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5C%7B%281%2C%202%29%5C%7D "\{(1, 2)\}")
 
 ### Problem 1 solution
 
