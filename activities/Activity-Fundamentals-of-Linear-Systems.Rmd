@@ -18,8 +18,8 @@ Which of the following sets of vectors are bases for $\mathbb{R}^2$?
 
 -   $\{(0, 1), (1, 1)\}$
 -   $\{(1, 0), (0, 1), (1, 1)\}$
--   $\{(1, 0), (−1, 0)\}$
--   $\{(1, 1), (1, −1)\}$
+-   $\{(1, 0), (-1, 0)\}$
+-   $\{(1, 1), (1, -1)\}$
 -   $\{(1, 1), (2, 2)\}$
 -   $\{(1, 2)\}$
 
@@ -30,10 +30,10 @@ Your solution goes here.
 ### Problem 2
 
 What is the dimension of the intersection of the following two planes in $\mathbb{R}^3$?
-$$
-x + 2y − z = 0, \quad 3x − 3y + z = 0
-$$
 
+$$
+x + 2y - z = 0, \ \ \ 3x - 3y + z = 0
+$$
 ### Problem 2 Solution
 
 Your solution goes here.
