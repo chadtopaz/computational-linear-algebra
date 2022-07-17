@@ -3,6 +3,8 @@ title: "Computational Linear Algebra: Course Notes"
 author: "Chad M. Topaz | Last Updated: 2022-07-04"
 output:
   rmarkdown::md_document:
+      toc: true
+      toc_depth: 1
   header-includes:
    - \usepackage{amsmath}
 ---
@@ -13,6 +15,7 @@ output:
 \newcommand{\exp}[1]{\mathrm{e}^{#1}}
 \DeclareMathOperator*{\argmin}{arg\,min}
 ```
+
 ```{r, message=FALSE, warning=FALSE, include=FALSE}
 library(knitr)
 knitr::opts_chunk$set(cache = TRUE)
@@ -56,7 +59,7 @@ Evaluating a polynomial might seem boring, and admittedly, it sort of is. But ev
 
 Consider some methods for evaluating the polynomial $2x^4+3x^3-3x^2+5x-1$:
 
-1.  Naively, $2 \times x \times x \times x \times x + 3 \times x \times x \times x \ldots$.
+1.  Naively, $2 \cdot x \cdot x \cdot x \cdot x + 3 \cdot x \cdot x \cdot x \ldots$.
 
 -   10 multiplications, 4 additions (includes subtractions)
 

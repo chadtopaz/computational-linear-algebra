@@ -1,3 +1,25 @@
+-   <a href="#r-bootcamp" id="toc-r-bootcamp">R Bootcamp</a>
+-   <a href="#how-computers-store-numbers"
+    id="toc-how-computers-store-numbers">How computers store numbers</a>
+-   <a href="#fundamentals-of-linear-systems"
+    id="toc-fundamentals-of-linear-systems">Fundamentals of Linear
+    Systems</a>
+-   <a href="#lu-decomposition" id="toc-lu-decomposition">LU
+    decomposition</a>
+-   <a href="#iterative-methods-for-linear-systems"
+    id="toc-iterative-methods-for-linear-systems">Iterative methods for
+    linear systems</a>
+-   <a href="#polynomial-interpolation"
+    id="toc-polynomial-interpolation">Polynomial interpolation</a>
+-   <a href="#interpolation-error-and-chebyshev-interpolation"
+    id="toc-interpolation-error-and-chebyshev-interpolation">Interpolation
+    error and Chebyshev interpolation</a>
+-   <a href="#splines" id="toc-splines">Splines</a>
+-   <a href="#least-squares" id="toc-least-squares">Least squares</a>
+-   <a href="#qr-factorization" id="toc-qr-factorization">QR
+    Factorization</a>
+-   <a href="#eigenvalues" id="toc-eigenvalues">Eigenvalues</a>
+
 # R Bootcamp
 
 ## Big picture
@@ -23,7 +45,7 @@ heavy-duty industrial problem that requires millions of evaluations?
 Consider some methods for evaluating the polynomial
 2*x*<sup>4</sup> + 3*x*<sup>3</sup> − 3*x*<sup>2</sup> + 5*x* − 1:
 
-1.  Naively, 2 × *x* × *x* × *x* × *x* + 3 × *x* × *x* × *x*….
+1.  Naively, 2 ⋅ *x* ⋅ *x* ⋅ *x* ⋅ *x* + 3 ⋅ *x* ⋅ *x* ⋅ *x*….
 
 -   10 multiplications, 4 additions (includes subtractions)
 
