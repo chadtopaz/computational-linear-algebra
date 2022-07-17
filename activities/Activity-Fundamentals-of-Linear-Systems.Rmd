@@ -16,12 +16,12 @@ Remember to show your work / give your reasoning, as applicable.
 
 Which of the following sets of vectors are bases for $\mathbb{R}^2$?
 
-$\{(0, 1), (1, 1)\}$
-$\{(1, 0), (0, 1), (1, 1)\}$
-$\{(1, 0), (−1, 0)\}$
-$\{(1, 1), (1, −1)\}$
-$\{(1, 1), (2, 2)\}$
-$\{(1, 2)\}$
+- $\{(0, 1), (1, 1)\}$
+- $\{(1, 0), (0, 1), (1, 1)\}$
+- $\{(1, 0), (−1, 0)\}$
+- $\{(1, 1), (1, −1)\}$
+- $\{(1, 1), (2, 2)\}$
+- $\{(1, 2)\}$
 
 ### Problem 1 solution
 
