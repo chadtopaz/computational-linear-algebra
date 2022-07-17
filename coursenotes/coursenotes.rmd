@@ -223,7 +223,8 @@ We begin considering the solution of systems of linear equations, $\mathbf{A}\ma
 
 ## Linear systems
 
-For concreteness let's work in three dimensions and let's consider the system $$
+For concreteness let's work in three dimensions and let's consider the system
+$$
 \begin{pmatrix}
 2 & 4 & -2\\
 1 & 4 & -3\\
@@ -236,7 +237,8 @@ x_1 \\ x_2 \\ x_3
 \begin{pmatrix}
 8 \\ 8 \\ -3
 \end{pmatrix}.
-$$ Let's interpret this system two ways.
+$$
+Let's interpret this system two ways.
 
 **Intersecting hyperplanes.** Carrying out the matrix multiplication, we write the equations$$
 \begin{eqnarray}
