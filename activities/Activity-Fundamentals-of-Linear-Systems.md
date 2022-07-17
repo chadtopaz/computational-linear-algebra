@@ -21,7 +21,8 @@ What is the dimension of the intersection of the following two planes in
 ℝ<sup>3</sup>?
 
 *x* + 2*y* − *z* = 0,   3*x* − 3*y* + *z* = 0
-\#\#\# Problem 2 Solution
+
+### Problem 2 Solution
 
 Your solution goes here.
 
@@ -40,6 +41,7 @@ Your solution goes here.
 ### Problem 4
 
 Put the augmented coefficient matrix for the system of equations
+
 $$
 \\begin{aligned}
 x+y+z&=2\\\\
@@ -47,6 +49,7 @@ x+3y+3z&=0\\\\
 x+3y+6z&=3
 \\end{aligned}
 $$
+
 into row echelon form.
 
 ### Problem 4 Solution
@@ -83,9 +86,11 @@ Your solution goes here.
 ### Problem 6
 
 Compute by hand the eigenvalues of the matrices
+
 $$
 \\mathbf{A}=\\begin{pmatrix} 1 & 1000 \\\\ 0 & 1\\end{pmatrix}, \\qquad \\widetilde{\\mathbf{A}}=\\begin{pmatrix} 1 & 1000 \\\\ 0.001 & 1\\end{pmatrix}.
 $$
+
 Would you say that the problem of computing eigenvalues is
 well-conditioned or ill-conditioned? Check the condition number of **A**
 using the `kappa` command. For concreteness, use the 2-norm, though
