@@ -606,7 +606,8 @@ Let’s consider an *n* × *n* matrix **A**.
     (det **A** &lt; 0). As an example, let
 
 $$
-\bm{A} = \begin{pmatrix}
+\bm{A} =
+\begin{pmatrix}
 a & b\\\c & d
 \end{pmatrix}.
 $$
