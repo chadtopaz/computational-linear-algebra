@@ -113,7 +113,7 @@ Let’s calculate some examples.
 
     ## [1]  4 10 18
 
-    t(x)%*%y # dot product
+    t(x) %*% y # dot product
 
     ##      [,1]
     ## [1,]   32
@@ -122,14 +122,14 @@ Let’s calculate some examples.
 
     ## [1] 32
 
-    x%*%t(z) # outer product
+    x %*% t(z) # outer product
 
     ##      [,1] [,2] [,3] [,4]
     ## [1,]    7    8    9   10
     ## [2,]   14   16   18   20
     ## [3,]   21   24   27   30
 
-    x%o%z # outer product
+    x %o% z # outer product
 
     ##      [,1] [,2] [,3] [,4]
     ## [1,]    7    8    9   10
@@ -226,9 +226,9 @@ store most numbers.
 
 Most computers use a standard representation of real numbers called a
 *floating point* number. Sometimes we just say *float* for short. We
-represent the floating point version of a number *x* as *f**l*(*x*), and
-to reiterate the point above, it is not necessarily true that
-*f**l*(*x*) = *x*.
+represent the floating point version of a number *x* as fl (*x*), and to
+reiterate the point above, it is not necessarily true that
+fl (*x*) = *x*.
 
 We focus on double precision floats. A double precision float consists
 of 64 bits (1’s and 0’s) and, expressed in base 10, is equal to

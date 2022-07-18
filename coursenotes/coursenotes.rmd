@@ -13,7 +13,7 @@ output:
 \renewcommand{\mat}[1]{\bm{#1}}
 \newcommand{\exp}[1]{\mathrm{e}^{#1}}
 \DeclareMathOperator*{\argmin}{arg\,min}
-\DeclareMathOperator*{\float}[1]{\float{#1}}
+\DeclareMathOperator*{\float}{fl}
 
 ```{r, message=FALSE, warning=FALSE, include=FALSE}
 library(knitr)
