@@ -217,7 +217,7 @@ The relative error in the storage of this number is $$\frac{|59\ 1/3 -  59.33333
 
 ## Machine addition
 
-Machine addition is defined as $$fl(x+y) = fl(fl(x)+fl(y)).$$ That is, take $x$ and $y$, convert each to a machine number, add them (exactly, since more registers are available for this operation), and convert the result to a machine number. Subtraction is just addition with a negative sign.
+Machine addition is defined as $$\float(x+y) = fl(fl(x)+fl(y)).$$ That is, take $x$ and $y$, convert each to a machine number, add them (exactly, since more registers are available for this operation), and convert the result to a machine number. Subtraction is just addition with a negative sign.
 
 For example, let's add $1$ and $2^{-53}$. Well, $fl(1)=1$ and $fl(2^{-53})=2^{-53}$. The (exact) sum is $1+2^{-53}$ but due to the rounding rules on machines, $fl(1+2^{-53})=1$. Therefore, on a machine, the sum is $1$. Let's try:
 
