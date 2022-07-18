@@ -221,7 +221,13 @@ The relative error in the storage of this number is $$\frac{|59\ 1/3 -  59.33333
 
 ## Machine Addition
 
-Machine addition is defined as $$\float(x+y) = fl(fl(x)+fl(y)).$$ That is, take $x$ and $y$, convert each to a machine number, add them (exactly, since more registers are available for this operation), and convert the result to a machine number. Subtraction is just addition with a negative sign.
+Machine addition is defined as
+
+$$
+\float(x+y) = \float(\float(x)+\float(y)).
+$$
+
+That is, take $x$ and $y$, convert each to a machine number, add them (exactly, since more registers are available for this operation), and convert the result to a machine number. Subtraction is just addition with a negative sign.
 
 For example, let's add $1$ and $2^{-53}$. Well, $\float(1)=1$ and $\float(2^{-53})=2^{-53}$. The (exact) sum is $1+2^{-53}$ but due to the rounding rules on machines, $\float(1+2^{-53})=1$. Therefore, on a machine, the sum is $1$. Let's try:
 
@@ -266,21 +272,11 @@ We begin considering the solution of systems of linear equations, $\mat{A}\vec{x
 For concreteness let's work in three dimensions and let's consider the system
 
 $$
-\usepackage{amsmath}
 \begin{pmatrix}
 2 & 4 & -2\\
 1 & 4 & -3\\
 -2 & -6 & 7
 \end{pmatrix}
-\begin{pmatrix}
-x_1 \\ x_2 \\ x_3
-\end{pmatrix}
-
-=
-
-\begin{pmatrix}
-8 \\ 8 \\ -3
-\end{pmatrix}.
 $$
 
 Let's interpret this system two ways.
