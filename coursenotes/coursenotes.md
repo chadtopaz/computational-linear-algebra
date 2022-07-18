@@ -736,12 +736,12 @@ matrix
 
     For this example,
 
-![\textbf{A}^{-1} = \frac{1}{ad-bc}\begin{pmatrix}d & -b\\\\-c & a\end{pmatrix}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%5E%7B-1%7D%20%3D%20%5Cfrac%7B1%7D%7Bad-bc%7D%5Cbegin%7Bpmatrix%7Dd%20%26%20-b%5C%5C-c%20%26%20a%5Cend%7Bpmatrix%7D. "\textbf{A}^{-1} = \frac{1}{ad-bc}\begin{pmatrix}d & -b\\-c & a\end{pmatrix}.")
+    ![\textbf{A}^{-1} = \frac{1}{ad-bc}\begin{pmatrix}d & -b\\\\-c & a\end{pmatrix}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%5E%7B-1%7D%20%3D%20%5Cfrac%7B1%7D%7Bad-bc%7D%5Cbegin%7Bpmatrix%7Dd%20%26%20-b%5C%5C-c%20%26%20a%5Cend%7Bpmatrix%7D. "\textbf{A}^{-1} = \frac{1}{ad-bc}\begin{pmatrix}d & -b\\-c & a\end{pmatrix}.")
 
-So
-![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}")
-invertible
-![\iff \det \textbf{A} \neq 0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ciff%20%5Cdet%20%5Ctextbf%7BA%7D%20%5Cneq%200 "\iff \det \textbf{A} \neq 0").
+    So
+    ![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}")
+    invertible
+    ![\iff \det \textbf{A} \neq 0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ciff%20%5Cdet%20%5Ctextbf%7BA%7D%20%5Cneq%200 "\iff \det \textbf{A} \neq 0").
 
 3.  The **eigenvalues**
     ![\lambda_i](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Clambda_i "\lambda_i")
@@ -749,16 +749,16 @@ invertible
     ![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}")
     satisfy
 
-![\textbf{A}\mathbf{v_i}=\lambda_i \mathbf{v_i},](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%5Cmathbf%7Bv_i%7D%3D%5Clambda_i%20%5Cmathbf%7Bv_i%7D%2C "\textbf{A}\mathbf{v_i}=\lambda_i \mathbf{v_i},")
+    ![\textbf{A}\mathbf{v_i}=\lambda_i \mathbf{v_i},](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%5Cmathbf%7Bv_i%7D%3D%5Clambda_i%20%5Cmathbf%7Bv_i%7D%2C "\textbf{A}\mathbf{v_i}=\lambda_i \mathbf{v_i},")
 
-where
-![\mathbf{v_i}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7Bv_i%7D "\mathbf{v_i}")
-are the **eigenvectors**. You can prove that
+    where
+    ![\mathbf{v_i}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7Bv_i%7D "\mathbf{v_i}")
+    are the **eigenvectors**. You can prove that
 
-![\prod_i \lambda_i = \det \textbf{A},](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cprod_i%20%5Clambda_i%20%3D%20%5Cdet%20%5Ctextbf%7BA%7D%2C "\prod_i \lambda_i = \det \textbf{A},")
+    ![\prod_i \lambda_i = \det \textbf{A},](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cprod_i%20%5Clambda_i%20%3D%20%5Cdet%20%5Ctextbf%7BA%7D%2C "\prod_i \lambda_i = \det \textbf{A},")
 
-so no
-![\lambda_i = 0 \iff \det \textbf{A} \neq 0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Clambda_i%20%3D%200%20%5Ciff%20%5Cdet%20%5Ctextbf%7BA%7D%20%5Cneq%200 "\lambda_i = 0 \iff \det \textbf{A} \neq 0").
+    so no
+    ![\lambda_i = 0 \iff \det \textbf{A} \neq 0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Clambda_i%20%3D%200%20%5Ciff%20%5Cdet%20%5Ctextbf%7BA%7D%20%5Cneq%200 "\lambda_i = 0 \iff \det \textbf{A} \neq 0").
 
 4.  ![\textbf{A} \mathbf{z} \neq 0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%20%5Cmathbf%7Bz%7D%20%5Cneq%200 "\textbf{A} \mathbf{z} \neq 0")
     for all
@@ -806,11 +806,11 @@ so no
     ![\mathbf{0}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7B0%7D "\mathbf{0}")
     nontrivially, for instance,
 
-![\begin{pmatrix}1 & -2\\\2 & -4\end{pmatrix}\begin{pmatrix}x_1 \\\\ x_2 \end{pmatrix}=\begin{pmatrix}0 \\\\ 0\end{pmatrix}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbegin%7Bpmatrix%7D1%20%26%20-2%5C%5C2%20%26%20-4%5Cend%7Bpmatrix%7D%5Cbegin%7Bpmatrix%7Dx_1%20%5C%5C%20x_2%20%5Cend%7Bpmatrix%7D%3D%5Cbegin%7Bpmatrix%7D0%20%5C%5C%200%5Cend%7Bpmatrix%7D. "\begin{pmatrix}1 & -2\\2 & -4\end{pmatrix}\begin{pmatrix}x_1 \\ x_2 \end{pmatrix}=\begin{pmatrix}0 \\ 0\end{pmatrix}.")
+    ![\begin{pmatrix}1 & -2\\\2 & -4\end{pmatrix}\begin{pmatrix}x_1 \\\\ x_2 \end{pmatrix}=\begin{pmatrix}0 \\\\ 0\end{pmatrix}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbegin%7Bpmatrix%7D1%20%26%20-2%5C%5C2%20%26%20-4%5Cend%7Bpmatrix%7D%5Cbegin%7Bpmatrix%7Dx_1%20%5C%5C%20x_2%20%5Cend%7Bpmatrix%7D%3D%5Cbegin%7Bpmatrix%7D0%20%5C%5C%200%5Cend%7Bpmatrix%7D. "\begin{pmatrix}1 & -2\\2 & -4\end{pmatrix}\begin{pmatrix}x_1 \\ x_2 \end{pmatrix}=\begin{pmatrix}0 \\ 0\end{pmatrix}.")
 
-This violates our previous condition (above) about the nullspace only
-being
-![\mathbf{0}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7B0%7D "\mathbf{0}").
+    This violates our previous condition (above) about the nullspace
+    only being
+    ![\mathbf{0}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7B0%7D "\mathbf{0}").
 
 7.  **Span** means the set of points reachable by taking linear
     combinations of a set of vectors. If you have
@@ -986,9 +986,9 @@ stages.
 
 1.  Reduce to echelon form. This takes
 
-![\frac{2}{3}n^3 + \frac{1}{2}n^2-\frac{7}{6}n = \mathcal{O}(n^3)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cfrac%7B2%7D%7B3%7Dn%5E3%20%2B%20%5Cfrac%7B1%7D%7B2%7Dn%5E2-%5Cfrac%7B7%7D%7B6%7Dn%20%3D%20%5Cmathcal%7BO%7D%28n%5E3%29 "\frac{2}{3}n^3 + \frac{1}{2}n^2-\frac{7}{6}n = \mathcal{O}(n^3)")
+    ![\frac{2}{3}n^3 + \frac{1}{2}n^2-\frac{7}{6}n = \mathcal{O}(n^3)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cfrac%7B2%7D%7B3%7Dn%5E3%20%2B%20%5Cfrac%7B1%7D%7B2%7Dn%5E2-%5Cfrac%7B7%7D%7B6%7Dn%20%3D%20%5Cmathcal%7BO%7D%28n%5E3%29 "\frac{2}{3}n^3 + \frac{1}{2}n^2-\frac{7}{6}n = \mathcal{O}(n^3)")
 
-operations.
+    operations.
 
 2.  Back substitute. This takes
     ![n^2 = \mathcal{O}(n^2)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;n%5E2%20%3D%20%5Cmathcal%7BO%7D%28n%5E2%29 "n^2 = \mathcal{O}(n^2)")
@@ -1087,16 +1087,18 @@ since they are the easiest to compute with and in some sense are the
 most natural:
 
 -   ![p=1](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;p%3D1 "p=1")
-    (the Manhattan or taxicab norm) $$ \|\| \|\|\_1 =\|x_1\| +
-    \|x_2\| + + \|x_n\|
+    (the Manhattan or taxicab norm)
 
-![-   $p =2$ (the Euclidean norm)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;-%20%20%20%24p%20%3D2%24%20%28the%20Euclidean%20norm%29 "-   $p =2$ (the Euclidean norm)")
+    ![\|\| \textbf{x} \|\|\_1 =\|x_1\| + \|x_2\| + \cdots + \|x_n\|](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7C%7C%20%5Ctextbf%7Bx%7D%20%7C%7C_1%20%3D%7Cx_1%7C%20%2B%20%7Cx_2%7C%20%2B%20%5Ccdots%20%2B%20%7Cx_n%7C "|| \textbf{x} ||_1 =|x_1| + |x_2| + \cdots + |x_n|")
 
-\|\| \|\|\_2 = = $$
+-   ![p =2](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;p%20%3D2 "p =2")
+    (the Euclidean norm)
+
+    ![\|\| \textbf{x} \|\|\_2 = \sqrt{x_1^2 + x_2^2 + \cdots + x_n^2\\ } = \sqrt{\textbf{x} \cdot \textbf{x}}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7C%7C%20%5Ctextbf%7Bx%7D%20%7C%7C_2%20%3D%20%5Csqrt%7Bx_1%5E2%20%2B%20x_2%5E2%20%2B%20%5Ccdots%20%2B%20x_n%5E2%5C%20%7D%20%3D%20%5Csqrt%7B%5Ctextbf%7Bx%7D%20%5Ccdot%20%5Ctextbf%7Bx%7D%7D "|| \textbf{x} ||_2 = \sqrt{x_1^2 + x_2^2 + \cdots + x_n^2\ } = \sqrt{\textbf{x} \cdot \textbf{x}}")
 
 -   ![p=\infty](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;p%3D%5Cinfty "p=\infty")
 
-![\|\| \textbf{x} \|\|\_\infty = \max{\left(\| x_1\|, \| x_2\|,  \ldots, \|x_n\|\right)}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7C%7C%20%5Ctextbf%7Bx%7D%20%7C%7C_%5Cinfty%20%3D%20%5Cmax%7B%5Cleft%28%7C%20x_1%7C%2C%20%7C%20x_2%7C%2C%20%20%5Cldots%2C%20%7Cx_n%7C%5Cright%29%7D "|| \textbf{x} ||_\infty = \max{\left(| x_1|, | x_2|,  \ldots, |x_n|\right)}")
+    ![\|\| \textbf{x} \|\|\_\infty = \max{\left(\| x_1\|, \| x_2\|,  \ldots, \|x_n\|\right)}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7C%7C%20%5Ctextbf%7Bx%7D%20%7C%7C_%5Cinfty%20%3D%20%5Cmax%7B%5Cleft%28%7C%20x_1%7C%2C%20%7C%20x_2%7C%2C%20%20%5Cldots%2C%20%7Cx_n%7C%5Cright%29%7D "|| \textbf{x} ||_\infty = \max{\left(| x_1|, | x_2|,  \ldots, |x_n|\right)}")
 
 For
 ![p = \infty](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;p%20%3D%20%5Cinfty "p = \infty")
