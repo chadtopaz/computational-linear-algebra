@@ -147,9 +147,11 @@ terms we ignored.
 
 More formally, suppose *f* is *n* + 1 times continuously differentiable
 on the interval between *x*<sub>0</sub> and *x*. Then
+
 $$
 f(x) = \left( \displaystyle \sum\_{k=0}^n \frac{f^{(k)}(x\_0)}{k!}(x-x\_0)^k \right) + \frac{f^{(n+1)}(c)}{(n+1)!}(x-x\_0)^{n+1}
 $$
+
 where *c* is an (unknown) number between *x*<sub>0</sub> and *x*.
 
 For example, suppose *f*(*x*) = sin (*x*) and *x*<sub>0</sub> = 0. We
