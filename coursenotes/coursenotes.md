@@ -203,7 +203,7 @@ More formally, suppose
 ![f](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;f "f")
 is
 ![n+1](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;n%2B1 "n+1")
-times continuously differentiablw on the interval between
+times continuously differentiable on the interval between
 ![x_0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_0 "x_0")
 and
 ![x](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x "x").
@@ -3447,7 +3447,7 @@ So far, we’ve taken a geometric approach to solving least-squares
 problems, but there’s another way to get the same result: optimization.
 We can start directly with the square of the norm of the residual vector
 (a factor of 1/2 is included for algebraic convenience, but it doesn’t
-change the result)
+change the result):
 
 ![\frac{1}{2}\|\|\mathbf{r}\|\|^2 = \frac{1}{2}\|\|\textbf{A}\textbf{x}-\textbf{b}\|\|^2.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cfrac%7B1%7D%7B2%7D%7C%7C%5Cmathbf%7Br%7D%7C%7C%5E2%20%3D%20%5Cfrac%7B1%7D%7B2%7D%7C%7C%5Ctextbf%7BA%7D%5Ctextbf%7Bx%7D-%5Ctextbf%7Bb%7D%7C%7C%5E2. "\frac{1}{2}||\mathbf{r}||^2 = \frac{1}{2}||\textbf{A}\textbf{x}-\textbf{b}||^2.")
 
