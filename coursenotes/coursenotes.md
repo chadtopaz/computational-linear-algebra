@@ -1,6 +1,6 @@
 -   <a href="#r-bootcamp" id="toc-r-bootcamp">R Bootcamp</a>
 -   <a href="#how-computers-store-numbers"
-    id="toc-how-computers-store-numbers">How computers store numbers</a>
+    id="toc-how-computers-store-numbers">How Computers Store Numbers</a>
 -   <a href="#fundamentals-of-linear-systems"
     id="toc-fundamentals-of-linear-systems">Fundamentals of Linear
     Systems</a>
@@ -22,7 +22,7 @@
 
 # R Bootcamp
 
-## Big picture
+## Big Picture
 
 It’s time to review some math and start getting experience with R
 programming.
@@ -34,7 +34,7 @@ programming.
 -   Define different ways to multiply vectors
 -   Compute Taylor polynomials and bound the error
 
-## Horner’s method
+## Horner’s Method
 
 Evaluating a polynomial might seem boring, and admittedly, it sort of
 is. But even a simple task like evaluating a polynomial can involve
@@ -63,20 +63,20 @@ We can test:
     xvec <- runif(10^6)
     t1 <- system.time(
       for (x in xvec){
-        2*x^4+3*x^3-3*x^2+5*x-1
+        2*x^4 + 3*x^3 - 3*x^2 + 5*x - 1
       }
     )[3]
     t2 <- system.time(
       for (x in xvec){
-        -1+x*(5+x*(-3+x*(3+2*x)))
+        -1 + x*(5 + x*(-3 + x*(3 + 2*x)))
       }
     )[3]
     t1/t2
 
     ##  elapsed 
-    ## 2.195652
+    ## 2.348837
 
-## Inner and outer products
+## Inner and Outer Products
 
 There are several different ways to “multiply” vectors **x** and **y**:
 
@@ -136,7 +136,7 @@ Let’s calculate some examples.
     ## [2,]   14   16   18   20
     ## [3,]   21   24   27   30
 
-## Taylor’s theorem
+## Taylor’s Theorem
 
 This theorem will be especially useful for error analysis of some
 algorithms we use. The basic idea of Taylor’s theorem is that for many
@@ -145,7 +145,7 @@ functions, we can approximate the function around a point
 polynomial, plus an error term that accounts for all the higher degree
 terms we ignored.
 
-More formally, suppose *f* is *n* + 1 times continuously differentiably
+More formally, suppose *f* is *n* + 1 times continuously differentiablw
 on the interval between *x*<sub>0</sub> and *x*. Then
 
 $$
@@ -163,17 +163,17 @@ can pre-compute some derivatives, *f*(0) = sin (0) = 0,
 polynomial to 4th order and the error term are are
 
 $$
-0 + x + 0x^2 - \frac{x^3}{6} + 0\*x^4 + \frac{x^5}{120}\cos c.
+0 + x + 0x^2 - \frac{x^3}{6} + 0x^4 + \frac{x^5}{120}\cos c.
 $$
 
 Here is a plot of the function and the subsequent Taylor approximations.
 
     P1 <- function(x) {x}
     P3 <- function(x) {x-x^3/6}
-    x = seq(from=-pi/2,to=pi/2,length=200)
-    plot(x,sin(x),col="black",type="l")
-    lines(x,P1(x),col="green")
-    lines(x,P3(x),col="red")
+    x = seq(from = -pi/2, to = pi/2, length = 200)
+    plot(x, sin(x), col = "black", type = "l")
+    lines(x, P1(x), col = "green")
+    lines(x, P3(x), col = "red")
 
 ![](coursenotes_files/figure-markdown_strict/unnamed-chunk-5-1.png)
 
@@ -183,13 +183,13 @@ magnitude, so the error term is at most
 (0.1)<sup>5</sup>/120 ≈ 8.333 × 10<sup>−8</sup>. The actual error
 achieved is
 
-    abs(sin(0.1)-P3(0.1))
+    abs(sin(0.1) - P3(0.1))
 
     ## [1] 8.331349e-08
 
-# How computers store numbers
+# How Computers Store Numbers
 
-## Big picture
+## Big Picture
 
 Many mathematics and applied mathematics problems can only be solved
 numerically, on computers. There is, potentially, error in the way that
@@ -210,12 +210,15 @@ understand this important source of error.
 
 We usually work in the base 10 system, where each place in the number
 represents a power of 10 with a coefficient of 0 through 9, *e.g.*,
+
 13.25 = 1 × 10<sup>1</sup> + 3 × 10<sup>0</sup> + 2 × 10<sup>−1</sup> + 5 × 10<sup>−2</sup>.
+
 In the binary system, we instead use powers of 2 with coefficients of 0
 through 1, *e.g.*,
+
 1101.01 = 1 × 2<sup>3</sup> + 1 × 2<sup>2</sup> + 0 × 2<sup>1</sup> + 1 × 2<sup>0</sup> + 0 × 2<sup>−1</sup> + 1 × 2<sup>−2</sup>.
 
-## Machine numbers
+## Machine Numbers
 
 Arithmetic performed on a machine can be different from what we do in
 our heads. One fundamental difference is that computers can’t perfectly
