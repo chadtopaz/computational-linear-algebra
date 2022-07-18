@@ -9,6 +9,10 @@ output:
    - \usepackage{bm}
 ---
 
+# Computational Linear Algebra Course Notes
+Author: Chad M. Topaz
+Last Updated: 2022-07-18
+
 \renewcommand{\vec}[1]{\bm{#1}}
 \renewcommand{\mat}[1]{\bm{#1}}
 \newcommand{\exp}[1]{\mathrm{e}^{#1}}
@@ -219,10 +223,10 @@ The relative error in the storage of this number is $$\frac{|59\ 1/3 -  59.33333
 
 Machine addition is defined as $$\float(x+y) = fl(fl(x)+fl(y)).$$ That is, take $x$ and $y$, convert each to a machine number, add them (exactly, since more registers are available for this operation), and convert the result to a machine number. Subtraction is just addition with a negative sign.
 
-For example, let's add $1$ and $2^{-53}$. Well, $fl(1)=1$ and $fl(2^{-53})=2^{-53}$. The (exact) sum is $1+2^{-53}$ but due to the rounding rules on machines, $fl(1+2^{-53})=1$. Therefore, on a machine, the sum is $1$. Let's try:
+For example, let's add $1$ and $2^{-53}$. Well, $\float(1)=1$ and $\float(2^{-53})=2^{-53}$. The (exact) sum is $1+2^{-53}$ but due to the rounding rules on machines, $\float(1+2^{-53})=1$. Therefore, on a machine, the sum is $1$. Let's try:
 
 ```{r cache = TRUE}
-1+2^(-53)
+1 + 2^(-53)
 ```
 
 ## Loss of significance
@@ -232,16 +236,16 @@ We've seen that computer storage of numbers can have error, and therefore arithm
 ```{r cache = TRUE}
 options(digits=12)
 x <- 10^(-(0:12))
-E1 <- (1-cos(x))/sin(x)^2
-E2 <- 1/(1+cos(x))
-kable(cbind(x,E1,E2))
+E1 <- (1 - cos(x))/sin(x)^2
+E2 <- 1/(1 + cos(x))
+kable(cbind(x, E1, E2))
 ```
 
 The result becomes drastically wrong for small $x$ because of subtraction of nearly equal numbers. In such problems, be aware and seek alternative ways to represent the necessary computation, as we did with the second option above.
 
 # Fundamentals of Linear Systems
 
-## Big picture
+## Big Picture
 
 We begin considering the solution of systems of linear equations, $\mat{A}\vec{x}=\vec{b}$. Linear systems arise in analysis of different equations (modeling macromolecules, electromagnetics, heat flow, wave motion, structural engineering, a million other examples), in curve fitting, in optimization, and many other applications. To understand solution of linear systems, it's helpful to recall some fundamental ideas of linear algebra. Additionally, as we consider the solution of problems on a computer, we have to think about the effect of small errors on the solution of the problem. This is called conditioning. In the linear algebra setting, conditioning is intimately related to matrix and vector norms.
 
@@ -259,7 +263,9 @@ We begin considering the solution of systems of linear equations, $\mat{A}\vec{x
 
 ## Linear systems
 
-For concreteness let's work in three dimensions and let's consider the system $$
+For concreteness let's work in three dimensions and let's consider the system
+
+$$
 \begin{pmatrix}
 2 & 4 & -2\\
 1 & 4 & -3\\
@@ -272,15 +278,21 @@ x_1 \\ x_2 \\ x_3
 \begin{pmatrix}
 8 \\ 8 \\ -3
 \end{pmatrix}.
-$$ Let's interpret this system two ways.
+$$
 
-**Intersecting hyperplanes.** Carrying out the matrix multiplication, we write the equations$$
+Let's interpret this system two ways.
+
+**Intersecting hyperplanes.** Carrying out the matrix multiplication, we write the equations
+
+$$
 \begin{eqnarray}
 2x_1 + 4x_2 -2x_3 & = & 8\\
 x_1 + 4x_2 -3x_3 & = & 8\\
 -2x_1 -6x_2 + 7x_3 & = & -3
 \end{eqnarray}
-$$ This form suggests thinking of the set of points that are at the intersection of these three planes, which could be the empty set, or a point, or a line, or a plane.
+$$
+
+This form suggests thinking of the set of points that are at the intersection of these three planes, which could be the empty set, or a point, or a line, or a plane.
 
 **Vector spans.** Write the equation in terms of its columns, as
 
@@ -313,9 +325,9 @@ Let's consider an $n \times n$ matrix $\mat{A}$.
 
 8.  The **image** of $\mat{A}$ means all the points that $\mat{A}$ can map to. This is synonymous with the point above: it's the span of the columns of $\mat{A}$. If the rank of $\mat{A}$ is $n$, then the column vectors are linearly independent so they span $\mathbb{R}^n$, so the image of $\mat{A}$ is $\mathbb{R}^n$.
 
-9.  $\mat{A}\mathbf{x}=\mathbf{b}$ has a unique solution for all $\mathbf{b} \iff$ $\mat{A}$ is invertible, since you can left multiply by $\mat{A}^{-1}$.
+9.  $\mat{A}\vec{x}=\vec{b}$ has a unique solution for all $\vec{b} \iff$ $\mat{A}$ is invertible, since you can left multiply by $\mat{A}^{-1}$.
 
-## Gaussian elimination
+## Gaussian Elimination
 
 First, we define **row echelon form**. A matrix is in row echelon for if
 
@@ -328,7 +340,7 @@ Gaussian elimination refers to transforming a matrix to row echelon form by appl
 -   multiply a row by a nonzero scalar
 -   Add one row to a scalar multiple of another
 
-To solve a linear system $\mat{A}\mathbf{x}=\mathbf{b}$, write it as an augmented matrix, reduce it to row echelon form, and then use back substitution to solve.
+To solve a linear system $\mat{A}\vec{x}=\vec{b}$, write it as an augmented matrix, reduce it to row echelon form, and then use back substitution to solve.
 
 For example, take
 
@@ -339,16 +351,22 @@ $$
 1 & 1 & -1 \\
 3 & 11 & 5
 \end{pmatrix}, \quad
-\mathbf{b} = \begin{pmatrix}
+\vec{b} = \begin{pmatrix}
 9 \\ 1 \\ 35
 \end{pmatrix}.
-$$ Write augmented matrix $$
+$$
+
+Write the augmented matrix
+
+$$
 \mathbf{A_a} = \begin{pmatrix}
 1 & 3 & 1 & 9 \\
 1 & 1 & -1 & 1\\
 3 & 11 & 5 & 35
 \end{pmatrix}.
-$$ Apply $II \leftarrow II - I$ and $III \leftarrow III - 3 I$.
+$$
+
+Apply $II \leftarrow II - I$ and $III \leftarrow III - 3 I$ to obtain:
 
 $$
 \mathbf{A_a} = \begin{pmatrix}
@@ -356,7 +374,11 @@ $$
 0 & -2 & -2 & -8\\
 0 & 2 & 2 & 8
 \end{pmatrix}.
-$$ Apply $III \leftarrow III + II$. $$
+$$
+
+Apply $III \leftarrow III + II$ to obtain:
+
+$$
 \mathbf{A_a} = \begin{pmatrix}
 1 & 3 & 1 & 9 \\
 0 & -2 & -2 & -8\\
@@ -364,28 +386,36 @@ $$ Apply $III \leftarrow III + II$. $$
 \end{pmatrix}.
 $$
 
-The bottom row tells us nothing. The second row tells us there is a free variable, which we take to be $x_3$. So we solve this equation for $x_2$, finding $x_2 = 4 -x_3$. This is called back substitution. Then we do back substitution on the top row, from which we find $x_1 = 9 - x_3 - 3 x_2 = 9 - x_3 - 3(4 - x_3) = -3 + 2x_3$. Therefore, the solution is $$
-\mathbf{x} = \begin{pmatrix}  -3 + 2x_3 \\ 4 - x_3 \\ x_3 \end{pmatrix} = \begin{pmatrix}  -3 \\ 4\\ 0 \end{pmatrix} + x_3 \begin{pmatrix}  2 \\ -1 \\ 1 \end{pmatrix}.
+The bottom row tells us nothing. The second row tells us there is a free variable, which we take to be $x_3$. So we solve this equation for $x_2$, finding $x_2 = 4 -x_3$. This is called back substitution. Then we do back substitution on the top row, from which we find $x_1 = 9 - x_3 - 3 x_2 = 9 - x_3 - 3(4 - x_3) = -3 + 2x_3$. Therefore, the solution is
+
+$$
+\vec{x} = \begin{pmatrix}  -3 + 2x_3 \\ 4 - x_3 \\ x_3 \end{pmatrix} = \begin{pmatrix}  -3 \\ 4\\ 0 \end{pmatrix} + x_3 \begin{pmatrix}  2 \\ -1 \\ 1 \end{pmatrix}.
 $$
 
 By the way, we can go ahead and use a routine I've written to perform the elimination.
 
 ```{r cache = TRUE}
-A <- matrix(c(1,3,1,9,1,1,-1,1,3,11,5,35),nrow=3,byrow = TRUE)
+A <- matrix(c(1,3,1,9,1,1,-1,1,3,11,5,35), nrow = 3, byrow = TRUE)
 eliminate(A)
 ```
 
-## Operation counts and complexity
+## Operation Counts and Complexity
 
-Because we are solving problems on computers, we should care about how long solution takes, which in turn depends on the number of computational operations carried out. This is called the *complexity* of the method. For solving $\mat{A}\mathbf{x}=b$, with $\mat{A}$ an $n \times n$ matrix, we write the complexity in terms of $n$. Then, we are usually concerned with the behavior of the operation count for $n$ large, so we might retain just the leading term in $n$ as an approximation, or even ignore the coefficient in front that leading term.
+Because we are solving problems on computers, we should care about how long solution takes, which in turn depends on the number of computational operations carried out. This is called the *complexity* of the method. For solving $\mat{A}\vec{x}=\vec{b}$, with $\mat{A}$ an $n \times n$ matrix, we write the complexity in terms of $n$. Then, we are usually concerned with the behavior of the operation count for $n$ large, so we might retain just the leading term in $n$ as an approximation, or even ignore the coefficient in front that leading term.
 
 For Gaussian elimination, we have to compute the complexity of the two stages.
 
-1.  Reduce to echelon form. This takes $$\frac{2}{3}n^3 + \frac{1}{2}n^2-\frac{7}{6}n = \mathcal{O}(n^3)$$ operations.
+1.  Reduce to echelon form. This takes
+
+$$
+\frac{2}{3}n^3 + \frac{1}{2}n^2-\frac{7}{6}n = \mathcal{O}(n^3)
+$$
+
+operations.
 
 2.  Back substitute. This takes $n^2 = \mathcal{O}(n^2)$ operations.
 
-Back substitution is comptuationally cheap compared to row reduction. For large enough $n$, the back substitution step is negligible since $n^3 \gg n^2$.
+Back substitution is comptutationally cheap compared to row reduction. For large enough $n$, the back substitution step is negligible since $n^3 \gg n^2$.
 
 We can use these operation counts to make estimates of how long calculations should take.
 
@@ -396,42 +426,46 @@ Let's test scaling of the reduction step on Chad's machine for a random matrix.
 ```{r cache = TRUE}
 set.seed(123)
 n1 <- 200
-A1 <- matrix(runif(n1^2), ncol=n1)
+A1 <- matrix(runif(n1^2), ncol = n1)
 t1 <- system.time(eliminate(A1))[3]
 n2 <- 2*n1
-A2 <- matrix(runif(n2^2), ncol=n2)
+A2 <- matrix(runif(n2^2), ncol = n2)
 t2 <- system.time(eliminate(A2))[3]
 t2/t1
 ```
 
-## Forward and backward error
+## Forward and Backward Error
 
 In the solution of a computational problem, **forward error** is the difference between the exact and computed solution, and **backwards error** is the difference between the original problem and the so-called modified problem that the approximate solution satisfies. This probably sounds abstract, so let's make it concrete in the cases of a root-finding problem and a linear algebra problem.
 
-Suppose we want to solve $\mat{A}\mathbf{x}=b$. The true solution is $\mathbf{x}$ but our computational method finds an approximate solution $\mathbf{x}_a$. The forward error is the distance between the two solutions, that is, $||\mathbf{x}-\mathbf{x_a}||$. The backward error is the distance between what the matrix outputs when applied to those solutions, that is, $||\mat{A}\mathbf{x}-\mat{A}\mathbf{x}_a||=||\mathbf{b}-\mat{A}\mathbf{x}_a||$. Distance here is the length of the difference between two quantities.
+Suppose we want to solve $\mat{A}\vec{x}=\vec{b}$. The true solution is $\vec{x}$ but our computational method finds an approximate solution $\vec{x}_a$. The forward error is the distance between the two solutions, that is, $||\vec{x}-\mathbf{x_a}||$. The backward error is the distance between what the matrix outputs when applied to those solutions, that is, $||\mat{A}\vec{x}-\mat{A}\vec{x}_a||=||\vec{b}-\mat{A}\vec{x}_a||$. Distance here is the length of the difference between two quantities.
 
 Notice that we haven't specified what distance means! This is why we need to define vector and matrix norms.
 
-## Vector norms
+## Vector Norms
 
 A vector norm is a rule that assigns a real number to every vector. Intuitively, it measures length. There are a bunch of requirements that this rule must satisfy in order to be a norm, but rather than stating those requirements, I'm going to just tell you some practicalities.
 
 The vector norm we'll work with is called the $p$-norm. The $p$-norm for $1 \le p \le \infty$ is defined as
 
 $$
-|| \mathbf{x} ||_p = \left({|x_1|^p + |x_2|^p + \cdots + |x_n|^p} \right)^{1/p}.
+|| \vec{x} ||_p = \left({|x_1|^p + |x_2|^p + \cdots + |x_n|^p} \right)^{1/p}.
 $$
 
 The three most common $p$-norms are $p = 1, 2, \infty$ since they are the easiest to compute with and in some sense are the most natural:
 
 -   $p=1$ (the Manhattan or taxicab norm) $$
-|| \mathbf{x} ||_1 =|x_1| + |x_2| + \cdots + |x_n|
+|| \vec{x} ||_1 =|x_1| + |x_2| + \cdots + |x_n|
+
 $$
 -   $p =2$ (the Euclidean norm) $$
-|| \mathbf{x} ||_2 = \sqrt{x_1^2 + x_2^2 + \cdots + x_n^2\ } = \sqrt{\mathbf{x} \cdot \mathbf{x}}
+|| \vec{x} ||_2 = \sqrt{x_1^2 + x_2^2 + \cdots + x_n^2\ } = \sqrt{\vec{x} \cdot \vec{x}}
 $$
--   $p=\infty$ $$
-|| \mathbf{x} ||_\infty = \max{\left(| x_1|, | x_2|,  \ldots, |x_n|\right)}
+
+-   $p=\infty$
+
+$$
+|| \vec{x} ||_\infty = \max{\left(| x_1|, | x_2|,  \ldots, |x_n|\right)}
 $$
 
 For $p = \infty$ it takes a little analysis to show why the computational definition is what it is, but a numerical study is usually convincing. We can use the `Norm` command
@@ -441,35 +475,41 @@ v <- c(3,-2,2,3,1,4,1,2,3)
 pvals <- c(1,1.5,2,3,4,5,6,7,20)
 res <- NULL
 for (p in pvals){
-  res <- c(res,Norm(v,p))
+  res <- c(res, Norm(v,p))
 }
-res <- c(res,Norm(v,Inf))
-kable(cbind(c(pvals,"Infinity"),res),col.names=c("p","norm"))
+res <- c(res, Norm(v, Inf))
+kable(cbind(c(pvals, "Infinity"), res), col.names=c("p", "norm"))
 ```
 
 To further build intuition, we can plot the unit sphere in $\mathbb{R}^2$ for various values of $p$, that is, the set of points that are unit distance from the origin. ![](UnitCircleGrid.png)
 
-## Matrix norms
+## Matrix Norms
 
 The matrix $p$-norm is closely related to the vector $p$-norm, and is given by
 
 $$
-||\mat{A}||_p = \max_{\mathbf{x} \not = \mathbf{ 0}} \frac{ || \mat{A} \mathbf{x}||_p} { ||\mathbf{x}||_p} = \max_{||\mathbf{x}||_p  = 1}  || \mat{A} \mathbf{x}||_p
+||\mat{A}||_p = \max_{\vec{x} \not = \mathbf{ 0}} \frac{ || \mat{A} \vec{x}||_p} { ||\vec{x}||_p} = \max_{||\vec{x}||_p  = 1}  || \mat{A} \vec{x}||_p
 $$
 
 The matrix $p$-norm says: apply $A$ to the unit sphere, and $||\mat{A}||_p$ is the length of the vector that is farthest from the origin. This is not trivial to calculate! You have an infinite number of vectors to consider.
 
 Fortunately, just like for the vector case, the matrix $p$-norm has a few special values of $p$ for which it is easy to compute. We have:
 
--   $p=1$ $$
+-   $p=1$
+
+$$
 ||\mat{A} ||_1 = \displaystyle{\max_{1 \le j \le n} \sum_{i=1}^n |a_{ij}|} = \text{maximum absolute column sum}
 $$
 
--   $p=2$ $$
+-   $p=2$
+
+$$
 || \mat{A} ||_2 = \sqrt{\max\{ \text{eigenvalue}(A^TA) \} }
 $$
 
--   $p=\infty$ $$
+-   $p=\infty$
+
+$$
 || \mat{A} ||_\infty = \displaystyle{\max_{1 \le i \le n} \sum_{j=1}^n |a_{ij}|} = \text{maximum absolute row sum}
 $$
 
@@ -478,25 +518,38 @@ To see why these definitions are true requires some analysis. If you are interes
 You can calculate the $1$, $2$, and $\infty$ matrix norms using the R command `norm`.
 
 ```{r cache = TRUE}
-A <- matrix(c(2,-1,1,1,0,1,3,-1,4),byrow = TRUE, nrow = 3)
-norm(A,"1")
-norm(A,"2")
-norm(A,"I")
+A <- matrix(c(2,-1,1,1,0,1,3,-1,4), byrow = TRUE, nrow = 3)
+norm(A, "1")
+norm(A, "2")
+norm(A, "I")
 ```
 
 There is one really useful identity you should know about matrix norms:
 
-$$||\mat{A}\mathbf{x}||_p \leq ||\mat{A}||_p ||\mathbf{x}||_p.$$
+$$||\mat{A}\vec{x}||_p \leq ||\mat{A}||_p ||\vec{x}||_p.$$
 
 To see this, we start with the right hand side and note
 
-$$||\mat{A}||_p ||\mathbf{x}||_p = \left( \max_{\mathbf{y} \not = \mathbf{ 0}} \frac{ || \mat{A} \mathbf{y}||_p} { ||\mathbf{y}||_p} \right) ||\mathbf{x}||_p \geq \frac{ || \mat{A} \mathbf{x}||_p} { ||\mathbf{x}||_p} ||\mathbf{x}||_p = || \mat{A} \mathbf{x}||_p.$$
+$$
+||\mat{A}||_p ||\vec{x}||_p = \left( \max_{\mathbf{y} \not = \mathbf{ 0}} \frac{ || \mat{A} \mathbf{y}||_p} { ||\mathbf{y}||_p} \right) ||\vec{x}||_p \geq \frac{ || \mat{A} \vec{x}||_p} { ||\vec{x}||_p} ||\vec{x}||_p = || \mat{A} \vec{x}||_p.
+$$
 
-## Condition number for **Ax**=**b**
+## Condition Number for $\mat{A} \vec{x} = \vec{b}$
 
-Let us consider solving $\mat{A}\mathbf{x}=\mathbf{b}$. Suppose we find approximate solution $\mathbf{x}_a$. The **relative forward error** is $$\frac{||\mathbf{x}-\mathbf{x}_a||}{||\mathbf{x}||}$$ and the **relative backward error** is $$\frac{||\mat{A}\mathbf{x}-\mat{A}\mathbf{x}_a||}{||\mat{A}\mathbf{x}||}=\frac{||\mathbf{b}-\mat{A}\mathbf{x}_a||}{||\mathbf{b}||}.$$ We define **error magnification** as the ratio $$\frac{\text{relative forward error}}{\text{relative backward error}}=\frac{\frac{||\mathbf{x}-\mathbf{x}_a||}{||\mathbf{x}||}}{\frac{||\mathbf{b}-\mat{A}\mathbf{x}_a||}{||\mathbf{b}||}}.$$
+Let us consider solving $\mat{A}\vec{x}=\vec{b}$. Suppose we find approximate solution $\vec{x}_a$. The **relative forward error** is 
+$$
+\frac{||\vec{x}-\vec{x}_a||}{||\vec{x}||}
+$$
+and the **relative backward error** is
+$$
+\frac{||\mat{A}\vec{x}-\mat{A}\vec{x}_a||}{||\mat{A}\vec{x}||}=\frac{||\vec{b}-\mat{A}\vec{x}_a||}{||\vec{b}||}.
+$$
+We define **error magnification** as the ratio
+$$
+\frac{\text{relative forward error}}{\text{relative backward error}}=\frac{\frac{||\vec{x}-\vec{x}_a||}{||\vec{x}||}}{\frac{||\vec{b}-\mat{A}\vec{x}_a||}{||\vec{b}||}}.
+$$
 
-The **condition number** $\kappa(\mat{A})$ is the largest possible error magnification (over all possible $\mathbf{x}$). Or restated, it's the worst possible ratio of relative forward error to relative backward error.
+The **condition number** $\kappa(\mat{A})$ is the largest possible error magnification (over all possible $\vec{x}$). Or restated, it's the worst possible ratio of relative forward error to relative backward error.
 
 Why do we care about this? It tells us whether we expect a small residual to imply a small error in the solution or not. Let's make this concrete with an example.
 
@@ -504,20 +557,20 @@ Consider:
 
 -   Let $\mat{A} = \begin{pmatrix}0.913 & 0.659 \\ 0.457 & 0.330 \end{pmatrix}$
 -   Then $\kappa_2(A) = 1.25\times10^4$
--   Let $\mathbf{b} = \begin{pmatrix} 0.254 \\ 0.127 \end{pmatrix}$
--   Then $\mathbf{x} =(1,-1)$.
--   Consider two approximate solutions $\mathbf{x}_{1,2}$
+-   Let $\vec{b} = \begin{pmatrix} 0.254 \\ 0.127 \end{pmatrix}$
+-   Then $\vec{x} =(1,-1)$.
+-   Consider two approximate solutions $\vec{x}_{1,2}$
 
 $$
 \begin{array}{lcl}
-\mathbf{x}_1 = (-0.0827,0.5) && \mathbf{x}_2 = (0.999,-1.001) \\
-\triangle \mathbf{x}_1 = (1.0827, -1.5) && \triangle \mathbf{x}_2 = (0.001,0.001) \\
-||\triangle \mathbf{x}_1 || = 1.85&& ||\triangle \mathbf{x}_2|| = .0014\\
-||\triangle \mathbf{x}_1 ||/||\mathbf{x}|| = 1.308&& ||\triangle \mathbf{x}_2||/||\mathbf{x}|| = .001\\
-\mathbf{b}_1 = (0.2539949, 0.1272061) &&  \mathbf{b}_2 = (0.252428, 0.126213) \\
-\triangle\mathbf{b}_1 = (0.0000051,- 0.0002061) &&  \triangle\mathbf{b}_2 = (0.001572, 0.000787) \\
-||\triangle \mathbf{b}_1 || = 0.000206&& ||\triangle \mathbf{b}_2|| = .00176\\
-||\triangle \mathbf{b}_1 ||/||\mathbf{b}|| = 0.000726&& ||\triangle \mathbf{b}_2||/||\mathbf{b}|| = .0062\\
+\vec{x}_1 = (-0.0827,0.5) && \vec{x}_2 = (0.999,-1.001) \\
+\triangle \vec{x}_1 = (1.0827, -1.5) && \triangle \vec{x}_2 = (0.001,0.001) \\
+||\triangle \vec{x}_1 || = 1.85&& ||\triangle \vec{x}_2|| = .0014\\
+||\triangle \vec{x}_1 ||/||\vec{x}|| = 1.308&& ||\triangle \vec{x}_2||/||\vec{x}|| = .001\\
+\vec{b}_1 = (0.2539949, 0.1272061) &&  \vec{b}_2 = (0.252428, 0.126213) \\
+\triangle\vec{b}_1 = (0.0000051,- 0.0002061) &&  \triangle\vec{b}_2 = (0.001572, 0.000787) \\
+||\triangle \vec{b}_1 || = 0.000206&& ||\triangle \vec{b}_2|| = .00176\\
+||\triangle \vec{b}_1 ||/||\vec{b}|| = 0.000726&& ||\triangle \vec{b}_2||/||\vec{b}|| = .0062\\
 mag = 1.8 \times 10^3 && mag = 1.6 \times 10^1
 \end{array}
 $$
@@ -525,14 +578,14 @@ $$
 We can go ahead and calculate the actual condition number of the matrix. R has a command called `kappa` that computes the condition number approximately by default, or exactly if specified.
 
 ```{r cache = TRUE}
-A <- matrix(c(0.913,0.659,0.457,0.330),nrow=2,byrow=TRUE)
+A <- matrix(c(0.913,0.659,0.457,0.330), nrow = 2, byrow = TRUE)
 kappa(A)
-kappa(A,exact=TRUE)
+kappa(A, exact = TRUE)
 ```
 
-## Calculating the condition number
+## Calculating the Condition Number
 
-Remember that the condition number isn't merely an error magnification -- it's the maximum possible error magnificaton. Computing $\kappa$ exactly using this definition is impossible because there are an infinite number vectors one must consider $\mat{A}$ acting on.
+Remember that the condition number isn't merely an error magnification -- it's the maximum possible error magnification. Computing $\kappa$ exactly using this definition is impossible because there are an infinite number vectors one must consider $\mat{A}$ acting on.
 
 Fortunately, there's another way to calculate condition number:
 
@@ -545,9 +598,9 @@ The derivation of this identity is about 10 to 20 lines of linear algebra that I
 ```{r cache = TRUE}
 set.seed(123)
 N <- 10
-A <- matrix(runif(N^2),nrow=N)
-ans1 <- norm(A,"2")*norm(solve(A),"2")
-ans2 <- kappa(A,norm="2",exact=TRUE)
+A <- matrix(runif(N^2), nrow = N)
+ans1 <- norm(A, "2") * norm(solve(A), "2")
+ans2 <- kappa(A, norm = "2", exact = TRUE)
 ```
 
 # LU decomposition
@@ -562,11 +615,11 @@ When solving systems of linear equations, depending on the context, solution by 
 
 ## LU decomposition
 
-Recall that when solving an $n \times n$ system $\mat{A}\mathbf{x} = \mathbf{b}$ with Gaussian elimination, the elimination step is $\mathcal{O}(n^3)$ and back substitution is $\mathcal{O}(n^2)$. In some applications, it is necessary to solve $$
-\mat{A}\mathbf{x} = \mathbf{b}_1, \quad \mat{A}\mathbf{x} = \mathbf{b}_2, \quad \mat{A}\mathbf{x} = \mathbf{b}_3, \quad \ldots, \quad \mat{A}\mathbf{x} = \mathbf{b}_M
-$$ where $\mat{A}$ is the same each time and $M$ is large. $\mat{A}$ itself needs the same row reductions each time. Only the augmented part $\mathbf{b}$ changes. It would be a waste of computation to run Gaussian elimination $M$ times.
+Recall that when solving an $n \times n$ system $\mat{A}\vec{x} = \vec{b}$ with Gaussian elimination, the elimination step is $\mathcal{O}(n^3)$ and back substitution is $\mathcal{O}(n^2)$. In some applications, it is necessary to solve $$
+\mat{A}\vec{x} = \vec{b}_1, \quad \mat{A}\vec{x} = \vec{b}_2, \quad \mat{A}\vec{x} = \vec{b}_3, \quad \ldots, \quad \mat{A}\vec{x} = \vec{b}_M
+$$ where $\mat{A}$ is the same each time and $M$ is large. $\mat{A}$ itself needs the same row reductions each time. Only the augmented part $\vec{b}$ changes. It would be a waste of computation to run Gaussian elimination $M$ times.
 
-LU decomposition is a way of storing the Gaussian elimination steps in matrix form so that they can be applied to many $\mathbf{b}$. We take $\mat{A}$ and decompose (or factorize) it as the product
+LU decomposition is a way of storing the Gaussian elimination steps in matrix form so that they can be applied to many $\vec{b}$. We take $\mat{A}$ and decompose (or factorize) it as the product
 
 $$
 A  = 
@@ -591,7 +644,7 @@ A  =
 \end{array}}_{\mathbf{U}=\text{Upper triangular}}
 $$
 
-The $\mathbf{L}$ matrix encodes the multipliers used to eliminate elements during Gaussian elimination and the $\mathbf{U}$ matrix is the result of the elimination process. Therefore, putting $\mat{A}$ into its LU factorization takes one application of Gaussian elimination, or approximately $\frac{2}{3} n^3$ operations. Solving $\mathbf{LU}\mathbf{x} = \mathbf{b}$ requires 2 back substitutions, namely one to solve $\mathbf{L}\mathbf{y} = \mathbf{b}$ for $\mathbf{y}$ and one to solve $\mathbf{U}\mathbf{x}=\mathbf{y}$ for $\mathbf{x}$. This takes $2n^2$ operations. So, to solve $\mat{A}\mathbf{x} = \mathbf{b}_1, \ldots, \mat{A}\mathbf{x} = \mathbf{b}_M$ takes approximately $\frac{2}{3}n^3 + 2 M n^2$ operations, in contrast to $\frac{2}{3}Mn^3 + Mn^2$ for Gaussian elimination.
+The $\mathbf{L}$ matrix encodes the multipliers used to eliminate elements during Gaussian elimination and the $\mathbf{U}$ matrix is the result of the elimination process. Therefore, putting $\mat{A}$ into its LU factorization takes one application of Gaussian elimination, or approximately $\frac{2}{3} n^3$ operations. Solving $\mathbf{LU}\vec{x} = \vec{b}$ requires 2 back substitutions, namely one to solve $\mathbf{L}\mathbf{y} = \vec{b}$ for $\mathbf{y}$ and one to solve $\mathbf{U}\vec{x}=\mathbf{y}$ for $\vec{x}$. This takes $2n^2$ operations. So, to solve $\mat{A}\vec{x} = \vec{b}_1, \ldots, \mat{A}\vec{x} = \vec{b}_M$ takes approximately $\frac{2}{3}n^3 + 2 M n^2$ operations, in contrast to $\frac{2}{3}Mn^3 + Mn^2$ for Gaussian elimination.
 
 The LU decomposition exists if and only if the upper-left sub-blocks $\mat{A}_{1:k,1:k}$ are non-singular for all $1\leq k \leq n$ (not proven here). If the decomposition exists, it is unique.
 
@@ -744,22 +797,22 @@ But if it converges, it's pretty nifty. It's computationally cheap -- all we hav
 
 ## Jacobi iteration
 
-Let's take this idea and apply it to solving $\mat{A}\mathbf{x}=\mathbf{b}$. Let $\mat{A} = \mathbf{D} + \mathbf{R}$ where $\mathbf{D}$ contains the diagonal elements of $\mat{A}$ and $\mathbf{R}$ contains everything else. Then we can write
+Let's take this idea and apply it to solving $\mat{A}\vec{x}=\vec{b}$. Let $\mat{A} = \mathbf{D} + \mathbf{R}$ where $\mathbf{D}$ contains the diagonal elements of $\mat{A}$ and $\mathbf{R}$ contains everything else. Then we can write
 
 $$
 \begin{align}
-\mat{A}\mathbf{x} &= \mathbf{b} \\
-(\mathbf{D}+\mathbf{R})\mathbf{x} &= \mathbf{b} \\
-\mathbf{D}\mathbf{x} + \mathbf{R} \mathbf{x} &= \mathbf{b}\\
-\mathbf{D} \mathbf{x} &= \mathbf{b} - \mathbf{R} \mathbf{x}\\
-\mathbf{x} &= \mathbf{D}^{-1} (\mathbf{b}-\mathbf{R}\mathbf{x})
+\mat{A}\vec{x} &= \vec{b} \\
+(\mathbf{D}+\mathbf{R})\vec{x} &= \vec{b} \\
+\mathbf{D}\vec{x} + \mathbf{R} \vec{x} &= \vec{b}\\
+\mathbf{D} \vec{x} &= \vec{b} - \mathbf{R} \vec{x}\\
+\vec{x} &= \mathbf{D}^{-1} (\vec{b}-\mathbf{R}\vec{x})
 \end{align}
 $$
 
 We can consider this a fixed point iteration,
 
 $$
-\mathbf{x}_{i+1} = \mathbf{D}^{-1} (\mathbf{b}-\mathbf{R}\mathbf{x}_i).
+\vec{x}_{i+1} = \mathbf{D}^{-1} (\vec{b}-\mathbf{R}\vec{x}_i).
 $$
 
 Here are some computational advantages of this method.
@@ -1404,7 +1457,7 @@ $$ By writing it this way, we can remember one interpretation of linear systems.
 
 ## Projection onto a vector
 
-To examine the details, let's start with an even more fundamental example: a single vector in the plane. Suppose I hand you the vector $\mat{A} = (2,1)^T$ and tell you to use it to reach the target vector $\mathbf{b}=(6,8)^T$. Well, you can't do it exactly because there is no scalar $x$ such that $x\mat{A} = \mathbf{b}$. So let us do the next best thing: let's find the value of $x$ such that $x\mat{A}$ is as close as possible to $\mathbf{b}$. We can draw a picture to solve this problem.
+To examine the details, let's start with an even more fundamental example: a single vector in the plane. Suppose I hand you the vector $\mat{A} = (2,1)^T$ and tell you to use it to reach the target vector $\vec{b}=(6,8)^T$. Well, you can't do it exactly because there is no scalar $x$ such that $x\mat{A} = \vec{b}$. So let us do the next best thing: let's find the value of $x$ such that $x\mat{A}$ is as close as possible to $\vec{b}$. We can draw a picture to solve this problem.
 
 ```{r cache = TRUE, echo = FALSE}
 par(pty="s")
@@ -1416,7 +1469,7 @@ text(3,4.5,labels=expression(bolditalic(b)))
 lines(c(0,10),c(0,5),type="l",lty=5)
 ```
 
-Where should we stop on the dotted line? When we are perpendicular to the end of $\mathbf{b}$. This results in the following picture.
+Where should we stop on the dotted line? When we are perpendicular to the end of $\vec{b}$. This results in the following picture.
 
 ```{r cache = TRUE, echo= FALSE}
 par(pty="s")
@@ -1435,7 +1488,7 @@ From this picture, two relationships arise:
 
 $$
 \begin{align}
-x\mat{A} + \mathbf{r}&=\mathbf{b}\\
+x\mat{A} + \mathbf{r}&=\vec{b}\\
 \mat{A} \cdot \mathbf{r} &=0.
 \end{align}
 $$
@@ -1443,28 +1496,28 @@ $$
 Let us dot the first equation with the vector $\mat{A}$. Then we have
 
 $$
-\mat{A} \cdot \mat{A}x + \mat{A} \cdot \mathbf{r} = \mat{A} \cdot \mathbf{b}.
+\mat{A} \cdot \mat{A}x + \mat{A} \cdot \mathbf{r} = \mat{A} \cdot \vec{b}.
 $$
 
 From the second equation above, we can eliminate the second term on the left hand side to write
 
 $$
-\mat{A}^T \mat{A} x = \mat{A}^T \mathbf{b}
+\mat{A}^T \mat{A} x = \mat{A}^T \vec{b}
 $$
 
-where we have used the fact that $\mathbf{y}\cdot\mathbf{z}=\mathbf{y}^T\mathbf{z}$. We can solve for $\mathbf{x}$ by writing $x = \left(\mat{A}^T \mat{A}\right)^{-1}\mat{A}^T \mathbf{b}$. We can also calculate the vector that was as close as possible to $\mathbf{b}$. We will call it $\widehat{\mathbf{b}}$ and it is
+where we have used the fact that $\mathbf{y}\cdot\mathbf{z}=\mathbf{y}^T\mathbf{z}$. We can solve for $\vec{x}$ by writing $x = \left(\mat{A}^T \mat{A}\right)^{-1}\mat{A}^T \vec{b}$. We can also calculate the vector that was as close as possible to $\vec{b}$. We will call it $\widehat{\vec{b}}$ and it is
 
 $$
 \begin{align}
-\widehat{\mathbf{b}} &= \mat{A}x \\
-&=\mat{A}\left(\mat{A}^T \mat{A}\right)^{-1}\mat{A}^T \mathbf{b}\\
-& = \mathbf{P} \mathbf{b}.
+\widehat{\vec{b}} &= \mat{A}x \\
+&=\mat{A}\left(\mat{A}^T \mat{A}\right)^{-1}\mat{A}^T \vec{b}\\
+& = \mathbf{P} \vec{b}.
 \end{align}
 $$
 
 where thre last equation defines a new quantity that we call $\mathbf{P}$.
 
-Let us know revisit what we have done and emphasize/introduce some vocabulary. We started with a vector $\mat{A}$ that we used as a **basis** to try to reach the **target** $\mathbf{b}$. We couldn't do it exactly, so we calcualted the closest we could come to $\mathbf{b}$, which turned out to be $\widehat{\mathbf{b}}$. This is called the **projection** of $\mathbf{b}$ into the subspace spanned by $\mat{A}$. We found $\widehat{\mathbf{b}} = \mat{A}x$, where $x$ is called the **least squares solution**, which solved the **normal equations** $\mat{A}^T \mat{A} x = \mat{A}^T \mathbf{b}$. We can summarize the calculation of $x$ by remembering $x = \left(\mat{A}^T \mat{A}\right)^{-1}\mat{A}^T \mathbf{b}$ where $\left(\mat{A}^T \mat{A}\right)^{-1}\mat{A}^T$ is called the **pseudoinverse** of $\mat{A}$. Also, we can summarize the calculation of $\widehat{\mathbf{b}}$ as $\widehat{\mathbf{b}} = \mathbf{P} \mathbf{b}$ where $\mathbf{P} = \mat{A} (\mat{A}^T\mat{A})^{-1} \mat{A}^T$ is what we call a **projection operator** or a **projection matrix**. Since we didn't succeed in reaching $\mathbf{b}$, there is some error, and we call this the **residual**, $\mathbf{r} = \mathbf{b}-\widehat{\mathbf{b}}$.
+Let us know revisit what we have done and emphasize/introduce some vocabulary. We started with a vector $\mat{A}$ that we used as a **basis** to try to reach the **target** $\vec{b}$. We couldn't do it exactly, so we calcualted the closest we could come to $\vec{b}$, which turned out to be $\widehat{\vec{b}}$. This is called the **projection** of $\vec{b}$ into the subspace spanned by $\mat{A}$. We found $\widehat{\vec{b}} = \mat{A}x$, where $x$ is called the **least squares solution**, which solved the **normal equations** $\mat{A}^T \mat{A} x = \mat{A}^T \vec{b}$. We can summarize the calculation of $x$ by remembering $x = \left(\mat{A}^T \mat{A}\right)^{-1}\mat{A}^T \vec{b}$ where $\left(\mat{A}^T \mat{A}\right)^{-1}\mat{A}^T$ is called the **pseudoinverse** of $\mat{A}$. Also, we can summarize the calculation of $\widehat{\vec{b}}$ as $\widehat{\vec{b}} = \mathbf{P} \vec{b}$ where $\mathbf{P} = \mat{A} (\mat{A}^T\mat{A})^{-1} \mat{A}^T$ is what we call a **projection operator** or a **projection matrix**. Since we didn't succeed in reaching $\vec{b}$, there is some error, and we call this the **residual**, $\mathbf{r} = \vec{b}-\widehat{\vec{b}}$.
 
 What are the words/ideas you should make sure you understand in the narrative above?
 
@@ -1503,10 +1556,10 @@ $$
 which we'll write symbolically as
 
 $$
-x_0 \mat{A}_0 + x_1 \mat{A}_1 = \mathbf{b}.
+x_0 \mat{A}_0 + x_1 \mat{A}_1 = \vec{b}.
 $$
 
-We'd like to reach $\mathbf{b}$ using the basis vectors $\mat{A}_{0,1}$, but we can't, so let's consider getting as close as possible. The picture looks something like this.
+We'd like to reach $\vec{b}$ using the basis vectors $\mat{A}_{0,1}$, but we can't, so let's consider getting as close as possible. The picture looks something like this.
 
 ![](PlaneProjection.png)
 
@@ -1514,7 +1567,7 @@ This picture gives rise to the equation
 
 $$
 \begin{align}
-x_0 \mat{A}_0 + x_1 \mathbf{a_1} + \mathbf{r} &= \mathbf{b} \\
+x_0 \mat{A}_0 + x_1 \mathbf{a_1} + \mathbf{r} &= \vec{b} \\
 a_0 \cdot \mathbf{r} &= 0 \\
 a_1 \cdot \mathbf{r} &= 0.
 \end{align}
@@ -1524,21 +1577,21 @@ Let's take the dot product of the first equaton with each basis vector. We find
 
 $$
 \begin{align}
-x_0 \mat{A}_0\cdot\mat{A}_0 + x_1 \mat{A}_0\cdot\mat{A}_1 &= \mat{A}_0 \cdot \mathbf{b}\\
-x_0 \mat{A}_1\cdot\mat{A}_0 + x_1 \mat{A}_1\cdot\mat{A}_1 &= \mat{A}_1 \cdot \mathbf{b}
+x_0 \mat{A}_0\cdot\mat{A}_0 + x_1 \mat{A}_0\cdot\mat{A}_1 &= \mat{A}_0 \cdot \vec{b}\\
+x_0 \mat{A}_1\cdot\mat{A}_0 + x_1 \mat{A}_1\cdot\mat{A}_1 &= \mat{A}_1 \cdot \vec{b}
 \end{align}
 $$
 
 where we have elminated terms that turn out to be zero thanks to the second and third equations previously. Note that there is a matrix way to write this. we can write
 
 $$
-\begin{pmatrix} \mat{A}_0^T \\ \mat{A}_1^T \end{pmatrix} \begin{pmatrix} \mat{A}_0 & \mat{A}_1 \end{pmatrix} \begin{pmatrix} x_0 \\ x_1 \end{pmatrix} = \begin{pmatrix} \mat{A}_0^T \\ \mat{A}_1^T \end{pmatrix} \mathbf{b}.
+\begin{pmatrix} \mat{A}_0^T \\ \mat{A}_1^T \end{pmatrix} \begin{pmatrix} \mat{A}_0 & \mat{A}_1 \end{pmatrix} \begin{pmatrix} x_0 \\ x_1 \end{pmatrix} = \begin{pmatrix} \mat{A}_0^T \\ \mat{A}_1^T \end{pmatrix} \vec{b}.
 $$
 
-If we let $\mat{A}$ represent the matrix with columns $\mat{A}_{0,1}$ and if we let $\mathbf{x}=(x_0,x_1)^T$ then we can write the last equation as
+If we let $\mat{A}$ represent the matrix with columns $\mat{A}_{0,1}$ and if we let $\vec{x}=(x_0,x_1)^T$ then we can write the last equation as
 
 $$
-\mat{A}^T \mat{A} \mathbf{x} = \mat{A}^T \mathbf{b}.
+\mat{A}^T \mat{A} \vec{x} = \mat{A}^T \vec{b}.
 $$
 
 These are the normal equations. For us, concretely, it looks like
@@ -1576,13 +1629,13 @@ xx <- seq(from=0,to=6,length=200)
 lines(xx,horner(as.numeric(x),xx)$y)
 ```
 
-Symbolically, we calculated the least squares solution $\mathbf{x} = \left(\mat{A}^T \mat{A}\right)^{-1}\mat{A}^T \mathbf{b}$ where $\left(\mat{A}^T \mat{A}\right)^{-1}\mat{A}^T$ is the pseudoinverse. The projection is $\widehat{\mathbf{b}} = \mat{A} \mathbf{x} = \mat{A} \left(\mat{A}^T \mat{A}\right)^{-1}\mat{A}^T \mathbf{b}$ where $\mat{A} \left(\mat{A}^T \mat{A}\right)^{-1}\mat{A}^T$ is the projection matrix.
+Symbolically, we calculated the least squares solution $\vec{x} = \left(\mat{A}^T \mat{A}\right)^{-1}\mat{A}^T \vec{b}$ where $\left(\mat{A}^T \mat{A}\right)^{-1}\mat{A}^T$ is the pseudoinverse. The projection is $\widehat{\vec{b}} = \mat{A} \vec{x} = \mat{A} \left(\mat{A}^T \mat{A}\right)^{-1}\mat{A}^T \vec{b}$ where $\mat{A} \left(\mat{A}^T \mat{A}\right)^{-1}\mat{A}^T$ is the projection matrix.
 
 Though our example here has used merely two basis vectors, the ideas extend to any number.
 
 ## Model fitting
 
-The technique we have developed here of solving a least squares problem by vector projection works in a model fitting context whenever the unknowns $\mathbf{x}$ appear linearly. It doesn't require that other quantities appear linearly.
+The technique we have developed here of solving a least squares problem by vector projection works in a model fitting context whenever the unknowns $\vec{x}$ appear linearly. It doesn't require that other quantities appear linearly.
 
 For instance, suppose that we wanted to fit a parabola to the data $(0,6)$, $(1,5)$, $(2,2)$, and $(3,2)$. We choose the model $y = c_0 + c_1 x + c_2 x^2$ where our unknown is the vector $\mathbf{c}=(c_0,c_1,c_2)^T$. Though $x$ appears nonlinearly, the coefficients $c_{0,1,2}$ don't, so we are fine! Let's solve this problem using linear algebra. We want to solve $$
 \begin{align}
@@ -1614,8 +1667,8 @@ Overall, here's the process one would follow for model fitting in cases where th
 
 1.  Look at data.
 2.  Propose a model.
-3.  Force the model, resulting in $\mat{A}\mathbf{x}=\mathbf{b}$.
-4.  Solve the normal equations $\mat{A}^T\mat{A}\mathbf{x}=\mat{A}^T \mathbf{b}$.
+3.  Force the model, resulting in $\mat{A}\vec{x}=\vec{b}$.
+4.  Solve the normal equations $\mat{A}^T\mat{A}\vec{x}=\mat{A}^T \vec{b}$.
 5.  Assess the fit of the model visually and/or using the residual vector.
 
 A statistics class would provide much more sophisticated ways of analyzing the error.
@@ -1635,8 +1688,8 @@ If we decided to represent this data with a line, we'd go down from having 100 p
 ## An optimization viewpoint on least squares
 
 So far, we've taken a geometric approach to solving least-squares problems, but there's another way to get the same result: optimization. We can start directly with the square of the norm of the residual vector (a factor of 1/2 is included for algebraic convenience, but it doesn't change the result) $$
-\frac{1}{2}||\mathbf{r}||^2 = \frac{1}{2}||\mat{A}\mathbf{x}-\mathbf{b}||^2.
-$$ More formally, we can define the scalar **objective function** $$f(\mathbf{x}) = \frac{1}{2} ||\mat{A}\mathbf{x}-\mathbf{b}||^2$$ and define our least squares solution $\mathbf{x}_{LS}$as the value of $\mathbf{x}$ that minimizes this objective function, that is, $$\mathbf{x}_{LS} = \mathop{\mathrm{arg\,min}}_{\mathbf{x}} f(\mathbf{x}).$$ Now you know where the terminology least squares comes from! We can apply calculus to minimize this expression and the normal equations will result. This is a problem on your in-class exercise and your homework, and it is critical that you work through the details.
+\frac{1}{2}||\mathbf{r}||^2 = \frac{1}{2}||\mat{A}\vec{x}-\vec{b}||^2.
+$$ More formally, we can define the scalar **objective function** $$f(\vec{x}) = \frac{1}{2} ||\mat{A}\vec{x}-\vec{b}||^2$$ and define our least squares solution $\vec{x}_{LS}$as the value of $\vec{x}$ that minimizes this objective function, that is, $$\vec{x}_{LS} = \mathop{\mathrm{arg\,min}}_{\vec{x}} f(\vec{x}).$$ Now you know where the terminology least squares comes from! We can apply calculus to minimize this expression and the normal equations will result. This is a problem on your in-class exercise and your homework, and it is critical that you work through the details.
 
 # QR Factorization
 
@@ -1652,7 +1705,7 @@ We've talked about how to fit a model to data using least squares, and we've exa
 
 ## Orthogonality is nice
 
-The eventual goal of this lesson is to show you how to solve the least squares problem $$\mathbf{x}_{LS} = \mathop{\mathrm{arg\,min}}_x \frac{1}{2}||\mat{A}\mathbf{x}-\mathbf{b}||^2$$
+The eventual goal of this lesson is to show you how to solve the least squares problem $$\vec{x}_{LS} = \mathop{\mathrm{arg\,min}}_x \frac{1}{2}||\mat{A}\vec{x}-\vec{b}||^2$$
 
 by writing the matrix $\mat{A}$ in a convenient way. But to build up to that, we need to introduce a number of ideas. First off: orthogonality.
 
@@ -1974,23 +2027,23 @@ So far, we have calculated the QR decomposition using a methodology that is base
 
 ## What is the point of QR factorization
 
-Finally, we ask: why have we bothered to do all of this? It is really, really convenient for least squares, and turns out to have very nice numerical properties because of small condition numbers. You'll work with the numerical issue on your activities and/or homework, but for now, here's how least squares works when you use QR decomposition on $\mat{A}\mathbf{x}=\mathbf{b}$. Note $$
+Finally, we ask: why have we bothered to do all of this? It is really, really convenient for least squares, and turns out to have very nice numerical properties because of small condition numbers. You'll work with the numerical issue on your activities and/or homework, but for now, here's how least squares works when you use QR decomposition on $\mat{A}\vec{x}=\vec{b}$. Note $$
 \begin{align}
-||\mat{A}\mathbf{x}-\mathbf{b}||^2 &= ||\bar{\mathbf{Q}}\bar{\mathbf{R}} \mathbf{x} - \mathbf{b}||^2 \\
-&= ||\bar{\mathbf{Q}}^T(\bar{\mathbf{Q}}\bar{\mathbf{R}} \mathbf{x} - \mathbf{b})||^2 \\
-&= ||\bar{\mathbf{Q}}^T \bar{\mathbf{Q}}\bar{\mathbf{R}} \mathbf{x} - \bar{\mathbf{Q}}^T \mathbf{b}||^2 \\
-&= ||\bar{\mathbf{R}} \mathbf{x} - \bar{\mathbf{Q}}^T \mathbf{b}||^2 \\
-& = ||\mathbf{R} \mathbf{x}-\mathbf{Q}^T \mathbf{b}||^2+ ||\widehat{\mathbf{Q}}^T \mathbf{b}||^2. 
+||\mat{A}\vec{x}-\vec{b}||^2 &= ||\bar{\mathbf{Q}}\bar{\mathbf{R}} \vec{x} - \vec{b}||^2 \\
+&= ||\bar{\mathbf{Q}}^T(\bar{\mathbf{Q}}\bar{\mathbf{R}} \vec{x} - \vec{b})||^2 \\
+&= ||\bar{\mathbf{Q}}^T \bar{\mathbf{Q}}\bar{\mathbf{R}} \vec{x} - \bar{\mathbf{Q}}^T \vec{b}||^2 \\
+&= ||\bar{\mathbf{R}} \vec{x} - \bar{\mathbf{Q}}^T \vec{b}||^2 \\
+& = ||\mathbf{R} \vec{x}-\mathbf{Q}^T \vec{b}||^2+ ||\widehat{\mathbf{Q}}^T \vec{b}||^2. 
 \end{align}
 $$ Proceeding from the second to last line to the very last line is not obvious, and takes you a little bit of writing out expressions more explicitly. This is a good exercise for you to try.
 
-In any case, to minimize this, note that the second term doesn't even include $\mathbf{x}$ so there's nothing we can do about it (in fact, it is the norm of the residual). To minimize the quantity, we can then just force the first term to be zero. This is fine because it is a square system! There's a command that does this all automatically for you called `qr.solve`.
+In any case, to minimize this, note that the second term doesn't even include $\vec{x}$ so there's nothing we can do about it (in fact, it is the norm of the residual). To minimize the quantity, we can then just force the first term to be zero. This is fine because it is a square system! There's a command that does this all automatically for you called `qr.solve`.
 
 # Eigenvalues
 
 ## Big picture
 
-Along with solving the linear system $\mat{A}\mathbf{x}=\mathbf{b}$, finding the eigenvalues and eigenvectors of a matrix $\mat{A}$ is one of the most important problems in linear algebra. Knowing the eigenpairs can help simplify a problem and reveal important information about systems modeled with linear algebra.
+Along with solving the linear system $\mat{A}\vec{x}=\vec{b}$, finding the eigenvalues and eigenvectors of a matrix $\mat{A}$ is one of the most important problems in linear algebra. Knowing the eigenpairs can help simplify a problem and reveal important information about systems modeled with linear algebra.
 
 ## Goals
 

@@ -1,3 +1,6 @@
+-   <a href="#computational-linear-algebra-course-notes"
+    id="toc-computational-linear-algebra-course-notes">Computational Linear
+    Algebra Course Notes</a>
 -   <a href="#r-bootcamp" id="toc-r-bootcamp">R Bootcamp</a>
 -   <a href="#how-computers-store-numbers"
     id="toc-how-computers-store-numbers">How Computers Store Numbers</a>
@@ -19,6 +22,10 @@
 -   <a href="#qr-factorization" id="toc-qr-factorization">QR
     Factorization</a>
 -   <a href="#eigenvalues" id="toc-eigenvalues">Eigenvalues</a>
+
+# Computational Linear Algebra Course Notes
+
+Author: Chad M. Topaz Last Updated: 2022-07-18
 
 # R Bootcamp
 
@@ -322,19 +329,19 @@ point form. This distance is
 ## Machine addition
 
 Machine addition is defined as
-*f**l*(*x*+*y*) = *f**l*(*f**l*(*x*)+*f**l*(*y*)).
+fl (*x*+*y*) = *f**l*(*f**l*(*x*)+*f**l*(*y*)).
 That is, take *x* and *y*, convert each to a machine number, add them
 (exactly, since more registers are available for this operation), and
 convert the result to a machine number. Subtraction is just addition
 with a negative sign.
 
-For example, let’s add 1 and 2<sup>−53</sup>. Well, *f**l*(1) = 1 and
-*f**l*(2<sup>−53</sup>) = 2<sup>−53</sup>. The (exact) sum is
+For example, let’s add 1 and 2<sup>−53</sup>. Well, fl (1) = 1 and
+fl (2<sup>−53</sup>) = 2<sup>−53</sup>. The (exact) sum is
 1 + 2<sup>−53</sup> but due to the rounding rules on machines,
-*f**l*(1+2<sup>−53</sup>) = 1. Therefore, on a machine, the sum is 1.
-Let’s try:
+fl (1+2<sup>−53</sup>) = 1. Therefore, on a machine, the sum is 1. Let’s
+try:
 
-    1+2^(-53)
+    1 + 2^(-53)
 
     ## [1] 1
 
@@ -349,9 +356,9 @@ of nearly equal numbers. Consider the expression
 
     options(digits=12)
     x <- 10^(-(0:12))
-    E1 <- (1-cos(x))/sin(x)^2
-    E2 <- 1/(1+cos(x))
-    kable(cbind(x,E1,E2))
+    E1 <- (1 - cos(x))/sin(x)^2
+    E2 <- 1/(1 + cos(x))
+    kable(cbind(x, E1, E2))
 
 <table>
 <thead>
@@ -521,7 +528,7 @@ the second option above.
 
 # Fundamentals of Linear Systems
 
-## Big picture
+## Big Picture
 
 We begin considering the solution of systems of linear equations,
 **A****x** = **b**. Linear systems arise in analysis of different
@@ -552,6 +559,7 @@ and vector norms.
 
 For concreteness let’s work in three dimensions and let’s consider the
 system
+
 $$
 \begin{pmatrix}
 2 & 4 & -2\\\\
@@ -566,10 +574,12 @@ x\_1 \\\\ x\_2 \\\\ x\_3
 8 \\\\ 8 \\\\ -3
 \end{pmatrix}.
 $$
+
 Let’s interpret this system two ways.
 
 **Intersecting hyperplanes.** Carrying out the matrix multiplication, we
 write the equations
+
 $$
 \begin{eqnarray}
 2x\_1 + 4x\_2 -2x\_3 & = & 8\\\\
@@ -577,6 +587,7 @@ x\_1 + 4x\_2 -3x\_3 & = & 8\\\\
 -2x\_1 -6x\_2 + 7x\_3 & = & -3
 \end{eqnarray}
 $$
+
 This form suggests thinking of the set of points that are at the
 intersection of these three planes, which could be the empty set, or a
 point, or a line, or a plane.
@@ -658,7 +669,7 @@ Let’s consider an *n* × *n* matrix **A**.
 9.  **A****x** = **b** has a unique solution for all **b**⇔ **A** is
     invertible, since you can left multiply by **A**<sup>−1</sup>.
 
-## Gaussian elimination
+## Gaussian Elimination
 
 First, we define **row echelon form**. A matrix is in row echelon for if
 
@@ -689,11 +700,13 @@ $$
 1 & 1 & -1 \\\\
 3 & 11 & 5
 \end{pmatrix}, \quad
-\mathbf{b} = \begin{pmatrix}
+\bm{b} = \begin{pmatrix}
 9 \\\\ 1 \\\\ 35
 \end{pmatrix}.
 $$
-Write augmented matrix
+
+Write the augmented matrix
+
 $$
 \mathbf{A\_a} = \begin{pmatrix}
 1 & 3 & 1 & 9 \\\\
@@ -701,7 +714,8 @@ $$
 3 & 11 & 5 & 35
 \end{pmatrix}.
 $$
-Apply *I**I* ← *I**I* − *I* and *I**I**I* ← *I**I**I* − 3*I*.
+
+Apply *I**I* ← *I**I* − *I* and *I**I**I* ← *I**I**I* − 3*I* to obtain:
 
 $$
 \mathbf{A\_a} = \begin{pmatrix}
@@ -710,7 +724,9 @@ $$
 0 & 2 & 2 & 8
 \end{pmatrix}.
 $$
-Apply *I**I**I* ← *I**I**I* + *I**I*.
+
+Apply *I**I**I* ← *I**I**I* + *I**I* to obtain:
+
 $$
 \mathbf{A\_a} = \begin{pmatrix}
 1 & 3 & 1 & 9 \\\\
@@ -726,14 +742,15 @@ is called back substitution. Then we do back substitution on the top
 row, from which we find
 *x*<sub>1</sub> = 9 − *x*<sub>3</sub> − 3*x*<sub>2</sub> = 9 − *x*<sub>3</sub> − 3(4−*x*<sub>3</sub>) =  − 3 + 2*x*<sub>3</sub>.
 Therefore, the solution is
+
 $$
-\mathbf{x} = \begin{pmatrix}  -3 + 2x\_3 \\\\ 4 - x\_3 \\\\ x\_3 \end{pmatrix} = \begin{pmatrix}  -3 \\\\ 4\\\\ 0 \end{pmatrix} + x\_3 \begin{pmatrix}  2 \\\\ -1 \\\\ 1 \end{pmatrix}.
+\bm{x} = \begin{pmatrix}  -3 + 2x\_3 \\\\ 4 - x\_3 \\\\ x\_3 \end{pmatrix} = \begin{pmatrix}  -3 \\\\ 4\\\\ 0 \end{pmatrix} + x\_3 \begin{pmatrix}  2 \\\\ -1 \\\\ 1 \end{pmatrix}.
 $$
 
 By the way, we can go ahead and use a routine I’ve written to perform
 the elimination.
 
-    A <- matrix(c(1,3,1,9,1,1,-1,1,3,11,5,35),nrow=3,byrow = TRUE)
+    A <- matrix(c(1,3,1,9,1,1,-1,1,3,11,5,35), nrow = 3, byrow = TRUE)
     eliminate(A)
 
     ##      [,1] [,2] [,3] [,4]
@@ -741,12 +758,12 @@ the elimination.
     ## [2,]    0   -2   -2   -8
     ## [3,]    0    0    0    0
 
-## Operation counts and complexity
+## Operation Counts and Complexity
 
 Because we are solving problems on computers, we should care about how
 long solution takes, which in turn depends on the number of
 computational operations carried out. This is called the *complexity* of
-the method. For solving **A****x** = *b*, with **A** an *n* × *n*
+the method. For solving **A****x** = **b**, with **A** an *n* × *n*
 matrix, we write the complexity in terms of *n*. Then, we are usually
 concerned with the behavior of the operation count for *n* large, so we
 might retain just the leading term in *n* as an approximation, or even
@@ -756,13 +773,17 @@ For Gaussian elimination, we have to compute the complexity of the two
 stages.
 
 1.  Reduce to echelon form. This takes
-    $$\frac{2}{3}n^3 + \frac{1}{2}n^2-\frac{7}{6}n = \mathcal{O}(n^3)$$
+
+$$
+\frac{2}{3}n^3 + \frac{1}{2}n^2-\frac{7}{6}n = \mathcal{O}(n^3)
+$$
+
+operations.
+
+1.  Back substitute. This takes *n*<sup>2</sup> = 𝒪(*n*<sup>2</sup>)
     operations.
 
-2.  Back substitute. This takes *n*<sup>2</sup> = 𝒪(*n*<sup>2</sup>)
-    operations.
-
-Back substitution is comptuationally cheap compared to row reduction.
+Back substitution is comptutationally cheap compared to row reduction.
 For large enough *n*, the back substitution step is negligible since
 *n*<sup>3</sup> ≫ *n*<sup>2</sup>.
 
@@ -783,17 +804,17 @@ matrix.
 
     set.seed(123)
     n1 <- 200
-    A1 <- matrix(runif(n1^2), ncol=n1)
+    A1 <- matrix(runif(n1^2), ncol = n1)
     t1 <- system.time(eliminate(A1))[3]
     n2 <- 2*n1
-    A2 <- matrix(runif(n2^2), ncol=n2)
+    A2 <- matrix(runif(n2^2), ncol = n2)
     t2 <- system.time(eliminate(A2))[3]
     t2/t1
 
     ##       elapsed 
-    ## 5.25694444444
+    ## 4.86301369863
 
-## Forward and backward error
+## Forward and Backward Error
 
 In the solution of a computational problem, **forward error** is the
 difference between the exact and computed solution, and **backwards
@@ -802,7 +823,7 @@ modified problem that the approximate solution satisfies. This probably
 sounds abstract, so let’s make it concrete in the cases of a
 root-finding problem and a linear algebra problem.
 
-Suppose we want to solve **A****x** = *b*. The true solution is **x**
+Suppose we want to solve **A****x** = **b**. The true solution is **x**
 but our computational method finds an approximate solution
 **x**<sub>*a*</sub>. The forward error is the distance between the two
 solutions, that is, ||**x** − **x**<sub>**a**</sub>||. The backward
@@ -814,7 +835,7 @@ Distance here is the length of the difference between two quantities.
 Notice that we haven’t specified what distance means! This is why we
 need to define vector and matrix norms.
 
-## Vector norms
+## Vector Norms
 
 A vector norm is a rule that assigns a real number to every vector.
 Intuitively, it measures length. There are a bunch of requirements that
@@ -829,14 +850,16 @@ The vector norm we’ll work with is called the *p*-norm. The *p*-norm for
 The three most common *p*-norms are *p* = 1, 2, ∞ since they are the
 easiest to compute with and in some sense are the most natural:
 
--   *p* = 1 (the Manhattan or taxicab norm)
-    ||**x**||<sub>1</sub> = |*x*<sub>1</sub>| + |*x*<sub>2</sub>| + ⋯ + |*x*<sub>*n*</sub>|
--   *p* = 2 (the Euclidean norm)
-    $$
-    || \mathbf{x} ||\_2 = \sqrt{x\_1^2 + x\_2^2 + \cdots + x\_n^2\\ } = \sqrt{\mathbf{x} \cdot \mathbf{x}}
-    $$
+-   *p* = 1 (the Manhattan or taxicab norm) $$ || ||\_1 =|x\_1| +
+    |x\_2| + + |x\_n|
+
+$$
+-   $p =2$ (the Euclidean norm) $$
+|| ||\_2 = = $$
+
 -   *p* = ∞
-    ||**x**||<sub>∞</sub> = max (|*x*<sub>1</sub>|,|*x*<sub>2</sub>|,…,|*x*<sub>*n*</sub>|)
+
+||**x**||<sub>∞</sub> = max (|*x*<sub>1</sub>|,|*x*<sub>2</sub>|,…,|*x*<sub>*n*</sub>|)
 
 For *p* = ∞ it takes a little analysis to show why the computational
 definition is what it is, but a numerical study is usually convincing.
@@ -846,10 +869,10 @@ We can use the `Norm` command
     pvals <- c(1,1.5,2,3,4,5,6,7,20)
     res <- NULL
     for (p in pvals){
-      res <- c(res,Norm(v,p))
+      res <- c(res, Norm(v,p))
     }
-    res <- c(res,Norm(v,Inf))
-    kable(cbind(c(pvals,"Infinity"),res),col.names=c("p","norm"))
+    res <- c(res, Norm(v, Inf))
+    kable(cbind(c(pvals, "Infinity"), res), col.names=c("p", "norm"))
 
 <table>
 <thead>
@@ -950,13 +973,13 @@ To further build intuition, we can plot the unit sphere in ℝ<sup>2</sup>
 for various values of *p*, that is, the set of points that are unit
 distance from the origin. ![](UnitCircleGrid.png)
 
-## Matrix norms
+## Matrix Norms
 
 The matrix *p*-norm is closely related to the vector *p*-norm, and is
 given by
 
 $$
-||\bm{A}||\_p = \max\_{\mathbf{x} \not = \mathbf{ 0}} \frac{ || \bm{A} \mathbf{x}||\_p} { ||\mathbf{x}||\_p} = \max\_{||\mathbf{x}||\_p  = 1}  || \bm{A} \mathbf{x}||\_p
+||\bm{A}||\_p = \max\_{\bm{x} \not = \mathbf{ 0}} \frac{ || \bm{A} \bm{x}||\_p} { ||\bm{x}||\_p} = \max\_{||\bm{x}||\_p  = 1}  || \bm{A} \bm{x}||\_p
 $$
 
 The matrix *p*-norm says: apply *A* to the unit sphere, and
@@ -968,19 +991,22 @@ Fortunately, just like for the vector case, the matrix *p*-norm has a
 few special values of *p* for which it is easy to compute. We have:
 
 -   *p* = 1
-    $$
-    ||\bm{A} ||\_1 = \displaystyle{\max\_{1 \le j \le n} \sum\_{i=1}^n |a\_{ij}|} = \text{maximum absolute column sum}
-    $$
+
+$$
+||\bm{A} ||\_1 = \displaystyle{\max\_{1 \le j \le n} \sum\_{i=1}^n |a\_{ij}|} = \text{maximum absolute column sum}
+$$
 
 -   *p* = 2
-    $$
-    || \bm{A} ||\_2 = \sqrt{\max\\{ \text{eigenvalue}(A^TA) \\} }
-    $$
+
+$$
+|| \bm{A} ||\_2 = \sqrt{\max\\{ \text{eigenvalue}(A^TA) \\} }
+$$
 
 -   *p* = ∞
-    $$
-    || \bm{A} ||\_\infty = \displaystyle{\max\_{1 \le i \le n} \sum\_{j=1}^n |a\_{ij}|} = \text{maximum absolute row sum}
-    $$
+
+$$
+|| \bm{A} ||\_\infty = \displaystyle{\max\_{1 \le i \le n} \sum\_{j=1}^n |a\_{ij}|} = \text{maximum absolute row sum}
+$$
 
 To see why these definitions are true requires some analysis. If you are
 interested, I am happy to point you to proofs.
@@ -988,16 +1014,16 @@ interested, I am happy to point you to proofs.
 You can calculate the 1, 2, and ∞ matrix norms using the R command
 `norm`.
 
-    A <- matrix(c(2,-1,1,1,0,1,3,-1,4),byrow = TRUE, nrow = 3)
-    norm(A,"1")
+    A <- matrix(c(2,-1,1,1,0,1,3,-1,4), byrow = TRUE, nrow = 3)
+    norm(A, "1")
 
     ## [1] 6
 
-    norm(A,"2")
+    norm(A, "2")
 
     ## [1] 5.72292695333
 
-    norm(A,"I")
+    norm(A, "I")
 
     ## [1] 8
 
@@ -1007,17 +1033,25 @@ There is one really useful identity you should know about matrix norms:
 
 To see this, we start with the right hand side and note
 
-$$||\bm{A}||\_p ||\mathbf{x}||\_p = \left( \max\_{\mathbf{y} \not = \mathbf{ 0}} \frac{ || \bm{A} \mathbf{y}||\_p} { ||\mathbf{y}||\_p} \right) ||\mathbf{x}||\_p \geq \frac{ || \bm{A} \mathbf{x}||\_p} { ||\mathbf{x}||\_p} ||\mathbf{x}||\_p = || \bm{A} \mathbf{x}||\_p.$$
+$$
+||\bm{A}||\_p ||\bm{x}||\_p = \left( \max\_{\mathbf{y} \not = \mathbf{ 0}} \frac{ || \bm{A} \mathbf{y}||\_p} { ||\mathbf{y}||\_p} \right) ||\bm{x}||\_p \geq \frac{ || \bm{A} \bm{x}||\_p} { ||\bm{x}||\_p} ||\bm{x}||\_p = || \bm{A} \bm{x}||\_p.
+$$
 
-## Condition number for **Ax**=**b**
+## Condition Number for **A****x** = **b**
 
 Let us consider solving **A****x** = **b**. Suppose we find approximate
 solution **x**<sub>*a*</sub>. The **relative forward error** is
-$$\frac{||\mathbf{x}-\mathbf{x}\_a||}{||\mathbf{x}||}$$
+$$
+\frac{||\bm{x}-\bm{x}\_a||}{||\bm{x}||}
+$$
 and the **relative backward error** is
-$$\frac{||\bm{A}\mathbf{x}-\bm{A}\mathbf{x}\_a||}{||\bm{A}\mathbf{x}||}=\frac{||\mathbf{b}-\bm{A}\mathbf{x}\_a||}{||\mathbf{b}||}.$$
+$$
+\frac{||\bm{A}\bm{x}-\bm{A}\bm{x}\_a||}{||\bm{A}\bm{x}||}=\frac{||\bm{b}-\bm{A}\bm{x}\_a||}{||\bm{b}||}.
+$$
 We define **error magnification** as the ratio
-$$\frac{\text{relative forward error}}{\text{relative backward error}}=\frac{\frac{||\mathbf{x}-\mathbf{x}\_a||}{||\mathbf{x}||}}{\frac{||\mathbf{b}-\bm{A}\mathbf{x}\_a||}{||\mathbf{b}||}}.$$
+$$
+\frac{\text{relative forward error}}{\text{relative backward error}}=\frac{\frac{||\bm{x}-\bm{x}\_a||}{||\bm{x}||}}{\frac{||\bm{b}-\bm{A}\bm{x}\_a||}{||\bm{b}||}}.
+$$
 
 The **condition number** *κ*(**A**) is the largest possible error
 magnification (over all possible **x**). Or restated, it’s the worst
@@ -1032,20 +1066,20 @@ Consider:
 -   Let
     $\bm{A} = \begin{pmatrix}0.913 & 0.659 \\\\ 0.457 & 0.330 \end{pmatrix}$
 -   Then *κ*<sub>2</sub>(*A*) = 1.25 × 10<sup>4</sup>
--   Let $\mathbf{b} = \begin{pmatrix} 0.254 \\\\ 0.127 \end{pmatrix}$
+-   Let $\bm{b} = \begin{pmatrix} 0.254 \\\\ 0.127 \end{pmatrix}$
 -   Then **x** = (1,−1).
 -   Consider two approximate solutions **x**<sub>1, 2</sub>
 
 $$
 \begin{array}{lcl}
-\mathbf{x}\_1 = (-0.0827,0.5) && \mathbf{x}\_2 = (0.999,-1.001) \\\\
-\triangle \mathbf{x}\_1 = (1.0827, -1.5) && \triangle \mathbf{x}\_2 = (0.001,0.001) \\\\
-||\triangle \mathbf{x}\_1 || = 1.85&& ||\triangle \mathbf{x}\_2|| = .0014\\\\
-||\triangle \mathbf{x}\_1 ||/||\mathbf{x}|| = 1.308&& ||\triangle \mathbf{x}\_2||/||\mathbf{x}|| = .001\\\\
-\mathbf{b}\_1 = (0.2539949, 0.1272061) &&  \mathbf{b}\_2 = (0.252428, 0.126213) \\\\
-\triangle\mathbf{b}\_1 = (0.0000051,- 0.0002061) &&  \triangle\mathbf{b}\_2 = (0.001572, 0.000787) \\\\
-||\triangle \mathbf{b}\_1 || = 0.000206&& ||\triangle \mathbf{b}\_2|| = .00176\\\\
-||\triangle \mathbf{b}\_1 ||/||\mathbf{b}|| = 0.000726&& ||\triangle \mathbf{b}\_2||/||\mathbf{b}|| = .0062\\\\
+\bm{x}\_1 = (-0.0827,0.5) && \bm{x}\_2 = (0.999,-1.001) \\\\
+\triangle \bm{x}\_1 = (1.0827, -1.5) && \triangle \bm{x}\_2 = (0.001,0.001) \\\\
+||\triangle \bm{x}\_1 || = 1.85&& ||\triangle \bm{x}\_2|| = .0014\\\\
+||\triangle \bm{x}\_1 ||/||\bm{x}|| = 1.308&& ||\triangle \bm{x}\_2||/||\bm{x}|| = .001\\\\
+\bm{b}\_1 = (0.2539949, 0.1272061) &&  \bm{b}\_2 = (0.252428, 0.126213) \\\\
+\triangle\bm{b}\_1 = (0.0000051,- 0.0002061) &&  \triangle\bm{b}\_2 = (0.001572, 0.000787) \\\\
+||\triangle \bm{b}\_1 || = 0.000206&& ||\triangle \bm{b}\_2|| = .00176\\\\
+||\triangle \bm{b}\_1 ||/||\bm{b}|| = 0.000726&& ||\triangle \bm{b}\_2||/||\bm{b}|| = .0062\\\\
 mag = 1.8 \times 10^3 && mag = 1.6 \times 10^1
 \end{array}
 $$
@@ -1054,19 +1088,19 @@ We can go ahead and calculate the actual condition number of the matrix.
 R has a command called `kappa` that computes the condition number
 approximately by default, or exactly if specified.
 
-    A <- matrix(c(0.913,0.659,0.457,0.330),nrow=2,byrow=TRUE)
+    A <- matrix(c(0.913,0.659,0.457,0.330), nrow = 2, byrow = TRUE)
     kappa(A)
 
     ## [1] 14132.0316376
 
-    kappa(A,exact=TRUE)
+    kappa(A, exact = TRUE)
 
     ## [1] 12485.031416
 
-## Calculating the condition number
+## Calculating the Condition Number
 
 Remember that the condition number isn’t merely an error magnification –
-it’s the maximum possible error magnificaton. Computing *κ* exactly
+it’s the maximum possible error magnification. Computing *κ* exactly
 using this definition is impossible because there are an infinite number
 vectors one must consider **A** acting on.
 
@@ -1080,9 +1114,9 @@ it numerically for now.
 
     set.seed(123)
     N <- 10
-    A <- matrix(runif(N^2),nrow=N)
-    ans1 <- norm(A,"2")*norm(solve(A),"2")
-    ans2 <- kappa(A,norm="2",exact=TRUE)
+    A <- matrix(runif(N^2), nrow = N)
+    ans1 <- norm(A, "2") * norm(solve(A), "2")
+    ans2 <- kappa(A, norm = "2", exact = TRUE)
 
 # LU decomposition
 
@@ -1334,11 +1368,11 @@ Let’s take this idea and apply it to solving **A****x** = **b**. Let
 
 $$
 \begin{align}
-\bm{A}\mathbf{x} &= \mathbf{b} \\\\
-(\mathbf{D}+\mathbf{R})\mathbf{x} &= \mathbf{b} \\\\
-\mathbf{D}\mathbf{x} + \mathbf{R} \mathbf{x} &= \mathbf{b}\\\\
-\mathbf{D} \mathbf{x} &= \mathbf{b} - \mathbf{R} \mathbf{x}\\\\
-\mathbf{x} &= \mathbf{D}^{-1} (\mathbf{b}-\mathbf{R}\mathbf{x})
+\bm{A}\bm{x} &= \bm{b} \\\\
+(\mathbf{D}+\mathbf{R})\bm{x} &= \bm{b} \\\\
+\mathbf{D}\bm{x} + \mathbf{R} \bm{x} &= \bm{b}\\\\
+\mathbf{D} \bm{x} &= \bm{b} - \mathbf{R} \bm{x}\\\\
+\bm{x} &= \mathbf{D}^{-1} (\bm{b}-\mathbf{R}\bm{x})
 \end{align}
 $$
 
@@ -2382,7 +2416,7 @@ From this picture, two relationships arise:
 
 $$
 \begin{align}
-x\bm{A} + \mathbf{r}&=\mathbf{b}\\\\
+x\bm{A} + \mathbf{r}&=\bm{b}\\\\
 \bm{A} \cdot \mathbf{r} &=0.
 \end{align}
 $$
@@ -2401,13 +2435,13 @@ where we have used the fact that
 writing
 *x* = (**A**<sup>*T*</sup>**A**)<sup>−1</sup>**A**<sup>*T*</sup>**b**.
 We can also calculate the vector that was as close as possible to **b**.
-We will call it $\widehat{\mathbf{b}}$ and it is
+We will call it $\widehat{\bm{b}}$ and it is
 
 $$
 \begin{align}
-\widehat{\mathbf{b}} &= \bm{A}x \\\\
-&=\bm{A}\left(\bm{A}^T \bm{A}\right)^{-1}\bm{A}^T \mathbf{b}\\\\
-& = \mathbf{P} \mathbf{b}.
+\widehat{\bm{b}} &= \bm{A}x \\\\
+&=\bm{A}\left(\bm{A}^T \bm{A}\right)^{-1}\bm{A}^T \bm{b}\\\\
+& = \mathbf{P} \bm{b}.
 \end{align}
 $$
 
@@ -2417,22 +2451,20 @@ Let us know revisit what we have done and emphasize/introduce some
 vocabulary. We started with a vector **A** that we used as a **basis**
 to try to reach the **target** **b**. We couldn’t do it exactly, so we
 calcualted the closest we could come to **b**, which turned out to be
-$\widehat{\mathbf{b}}$. This is called the **projection** of **b** into
-the subspace spanned by **A**. We found
-$\widehat{\mathbf{b}} = \bm{A}x$, where *x* is called the **least
-squares solution**, which solved the **normal equations**
-**A**<sup>*T*</sup>**A***x* = **A**<sup>*T*</sup>**b**. We can summarize
-the calculation of *x* by remembering
+$\widehat{\bm{b}}$. This is called the **projection** of **b** into the
+subspace spanned by **A**. We found $\widehat{\bm{b}} = \bm{A}x$, where
+*x* is called the **least squares solution**, which solved the **normal
+equations** **A**<sup>*T*</sup>**A***x* = **A**<sup>*T*</sup>**b**. We
+can summarize the calculation of *x* by remembering
 *x* = (**A**<sup>*T*</sup>**A**)<sup>−1</sup>**A**<sup>*T*</sup>**b**
 where (**A**<sup>*T*</sup>**A**)<sup>−1</sup>**A**<sup>*T*</sup> is
 called the **pseudoinverse** of **A**. Also, we can summarize the
-calculation of $\widehat{\mathbf{b}}$ as
-$\widehat{\mathbf{b}} = \mathbf{P} \mathbf{b}$ where
+calculation of $\widehat{\bm{b}}$ as
+$\widehat{\bm{b}} = \mathbf{P} \bm{b}$ where
 **P** = **A**(**A**<sup>*T*</sup>**A**)<sup>−1</sup>**A**<sup>*T*</sup>
 is what we call a **projection operator** or a **projection matrix**.
 Since we didn’t succeed in reaching **b**, there is some error, and we
-call this the **residual**,
-$\mathbf{r} = \mathbf{b}-\widehat{\mathbf{b}}$.
+call this the **residual**, $\mathbf{r} = \bm{b}-\widehat{\bm{b}}$.
 
 What are the words/ideas you should make sure you understand in the
 narrative above?
@@ -2493,7 +2525,7 @@ This picture gives rise to the equation
 
 $$
 \begin{align}
-x\_0 \bm{A}\_0 + x\_1 \mathbf{a\_1} + \mathbf{r} &= \mathbf{b} \\\\
+x\_0 \bm{A}\_0 + x\_1 \mathbf{a\_1} + \mathbf{r} &= \bm{b} \\\\
 a\_0 \cdot \mathbf{r} &= 0 \\\\
 a\_1 \cdot \mathbf{r} &= 0.
 \end{align}
@@ -2504,8 +2536,8 @@ We find
 
 $$
 \begin{align}
-x\_0 \bm{A}\_0\cdot\bm{A}\_0 + x\_1 \bm{A}\_0\cdot\bm{A}\_1 &= \bm{A}\_0 \cdot \mathbf{b}\\\\
-x\_0 \bm{A}\_1\cdot\bm{A}\_0 + x\_1 \bm{A}\_1\cdot\bm{A}\_1 &= \bm{A}\_1 \cdot \mathbf{b}
+x\_0 \bm{A}\_0\cdot\bm{A}\_0 + x\_1 \bm{A}\_0\cdot\bm{A}\_1 &= \bm{A}\_0 \cdot \bm{b}\\\\
+x\_0 \bm{A}\_1\cdot\bm{A}\_0 + x\_1 \bm{A}\_1\cdot\bm{A}\_1 &= \bm{A}\_1 \cdot \bm{b}
 \end{align}
 $$
 
@@ -2514,7 +2546,7 @@ second and third equations previously. Note that there is a matrix way
 to write this. we can write
 
 $$
-\begin{pmatrix} \bm{A}\_0^T \\\\ \bm{A}\_1^T \end{pmatrix} \begin{pmatrix} \bm{A}\_0 & \bm{A}\_1 \end{pmatrix} \begin{pmatrix} x\_0 \\\\ x\_1 \end{pmatrix} = \begin{pmatrix} \bm{A}\_0^T \\\\ \bm{A}\_1^T \end{pmatrix} \mathbf{b}.
+\begin{pmatrix} \bm{A}\_0^T \\\\ \bm{A}\_1^T \end{pmatrix} \begin{pmatrix} \bm{A}\_0 & \bm{A}\_1 \end{pmatrix} \begin{pmatrix} x\_0 \\\\ x\_1 \end{pmatrix} = \begin{pmatrix} \bm{A}\_0^T \\\\ \bm{A}\_1^T \end{pmatrix} \bm{b}.
 $$
 
 If we let **A** represent the matrix with columns **A**<sub>0, 1</sub>
@@ -2580,7 +2612,7 @@ Symbolically, we calculated the least squares solution
 **x** = (**A**<sup>*T*</sup>**A**)<sup>−1</sup>**A**<sup>*T*</sup>**b**
 where (**A**<sup>*T*</sup>**A**)<sup>−1</sup>**A**<sup>*T*</sup> is the
 pseudoinverse. The projection is
-$\widehat{\mathbf{b}} = \bm{A} \mathbf{x} = \bm{A} \left(\bm{A}^T \bm{A}\right)^{-1}\bm{A}^T \mathbf{b}$
+$\widehat{\bm{b}} = \bm{A} \bm{x} = \bm{A} \left(\bm{A}^T \bm{A}\right)^{-1}\bm{A}^T \bm{b}$
 where **A**(**A**<sup>*T*</sup>**A**)<sup>−1</sup>**A**<sup>*T*</sup> is
 the projection matrix.
 
@@ -2684,10 +2716,10 @@ We can start directly with the square of the norm of the residual vector
 (a factor of 1/2 is included for algebraic convenience, but it doesn’t
 change the result)
 $$
-\frac{1}{2}||\mathbf{r}||^2 = \frac{1}{2}||\bm{A}\mathbf{x}-\mathbf{b}||^2.
+\frac{1}{2}||\mathbf{r}||^2 = \frac{1}{2}||\bm{A}\bm{x}-\bm{b}||^2.
 $$
 More formally, we can define the scalar **objective function**
-$$f(\mathbf{x}) = \frac{1}{2} ||\bm{A}\mathbf{x}-\mathbf{b}||^2$$
+$$f(\bm{x}) = \frac{1}{2} ||\bm{A}\bm{x}-\bm{b}||^2$$
 and define our least squares solution **x**<sub>*L**S*</sub>as the value
 of **x** that minimizes this objective function, that is,
 **x**<sub>*L**S*</sub> = arg min<sub>**x**</sub>*f*(**x**).
@@ -2717,7 +2749,7 @@ problem.
 
 The eventual goal of this lesson is to show you how to solve the least
 squares problem
-$$\mathbf{x}\_{LS} = \mathop{\mathrm{arg\\,min}}\_x \frac{1}{2}||\bm{A}\mathbf{x}-\mathbf{b}||^2$$
+$$\bm{x}\_{LS} = \mathop{\mathrm{arg\\,min}}\_x \frac{1}{2}||\bm{A}\bm{x}-\bm{b}||^2$$
 
 by writing the matrix **A** in a convenient way. But to build up to
 that, we need to introduce a number of ideas. First off: orthogonality.
@@ -3249,11 +3281,11 @@ now, here’s how least squares works when you use QR decomposition on
 **A****x** = **b**. Note
 $$
 \begin{align}
-||\bm{A}\mathbf{x}-\mathbf{b}||^2 &= ||\bar{\mathbf{Q}}\bar{\mathbf{R}} \mathbf{x} - \mathbf{b}||^2 \\\\
-&= ||\bar{\mathbf{Q}}^T(\bar{\mathbf{Q}}\bar{\mathbf{R}} \mathbf{x} - \mathbf{b})||^2 \\\\
-&= ||\bar{\mathbf{Q}}^T \bar{\mathbf{Q}}\bar{\mathbf{R}} \mathbf{x} - \bar{\mathbf{Q}}^T \mathbf{b}||^2 \\\\
-&= ||\bar{\mathbf{R}} \mathbf{x} - \bar{\mathbf{Q}}^T \mathbf{b}||^2 \\\\
-& = ||\mathbf{R} \mathbf{x}-\mathbf{Q}^T \mathbf{b}||^2+ ||\widehat{\mathbf{Q}}^T \mathbf{b}||^2. 
+||\bm{A}\bm{x}-\bm{b}||^2 &= ||\bar{\mathbf{Q}}\bar{\mathbf{R}} \bm{x} - \bm{b}||^2 \\\\
+&= ||\bar{\mathbf{Q}}^T(\bar{\mathbf{Q}}\bar{\mathbf{R}} \bm{x} - \bm{b})||^2 \\\\
+&= ||\bar{\mathbf{Q}}^T \bar{\mathbf{Q}}\bar{\mathbf{R}} \bm{x} - \bar{\mathbf{Q}}^T \bm{b}||^2 \\\\
+&= ||\bar{\mathbf{R}} \bm{x} - \bar{\mathbf{Q}}^T \bm{b}||^2 \\\\
+& = ||\mathbf{R} \bm{x}-\mathbf{Q}^T \bm{b}||^2+ ||\widehat{\mathbf{Q}}^T \bm{b}||^2. 
 \end{align}
 $$
 Proceeding from the second to last line to the very last line is not
