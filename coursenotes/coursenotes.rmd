@@ -5,6 +5,7 @@ output:
   rmarkdown::github_document:
       toc: true
       toc_depth: 1
+      html_preview: false
   header-includes:
    - \usepackage{amsmath}
    - \usepackage{bm}
