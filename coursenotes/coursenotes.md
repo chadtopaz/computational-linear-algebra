@@ -606,13 +606,19 @@ Let’s consider an *n* × *n* matrix **A**.
     (det **A** &lt; 0). As an example, let
 
 $$
-\bm{A}=\begin{pmatrix}a & b\\\c & d\end{pmatrix}.
+\bm{A} = \begin{pmatrix}
+a & b\\\c & d
+\end{pmatrix}.
 $$
 
-For this example,
+    For this example,
 
 $$
-\bm{A}^{-1} = \frac{1}{ad-bc}\begin{pmatrix}d & -b\\\\-c & a\end{pmatrix}.
+\bm{A}^{-1} = \frac{1}{ad-bc}
+\begin{pmatrix}
+d & -b\\\\
+-c & a
+\end{pmatrix}.
 $$
 
 So **A** invertible  ⇔ det **A** ≠ 0.
