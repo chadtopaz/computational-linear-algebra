@@ -86,7 +86,7 @@ There are several different ways to “multiply” vectors **x** and **y**:
     with the same number of elements.
 
 2.  Dot product, also known as the inner product. To compute, calculate
-    *x* ⋅ *y* ≡ **x**<sup>*T*</sup>**y** where the superscript *T*
+    **x** ⋅ **y** ≡ **x**<sup>*T*</sup>**y** where the superscript *T*
     indicates transpose. Dot product is related to the angle *θ* between
     the two vectors as **x** ⋅ **y** = |**x**||**y**|cos *θ*.
     Rearranging this as **x** ⋅ **y**/|**y**| = |**x**|cos *θ* suggests
