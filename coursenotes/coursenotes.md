@@ -992,16 +992,13 @@ stages.
 
 2.  Back substitute. This takes
     ![n^2 = \mathcal{O}(n^2)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;n%5E2%20%3D%20%5Cmathcal%7BO%7D%28n%5E2%29 "n^2 = \mathcal{O}(n^2)")
-    operations.
-
-Back substitution is comptutationally cheap compared to row reduction.
-For large enough
-![n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;n "n"),
-the back substitution step is negligible since
-![n^3 \gg n^2](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;n%5E3%20%5Cgg%20n%5E2 "n^3 \gg n^2").
-
-We can use these operation counts to make estimates of how long
-calculations should take.
+    operations. Back substitution is comptutationally cheap compared to
+    row reduction. For large enough
+    ![n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;n "n"),
+    the back substitution step is negligible since
+    ![n^3 \gg n^2](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;n%5E3%20%5Cgg%20n%5E2 "n^3 \gg n^2").
+    We can use these operation counts to make estimates of how long
+    calculations should take.
 
 For example, suppose row reduction on a
 ![500 \times 500](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;500%20%5Ctimes%20500 "500 \times 500")

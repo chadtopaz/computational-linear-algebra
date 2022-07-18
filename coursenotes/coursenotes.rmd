@@ -412,16 +412,11 @@ $$
 $$
 operations.
 
-2.  Back substitute. This takes $n^2 = \mathcal{O}(n^2)$ operations.
-
-Back substitution is comptutationally cheap compared to row reduction. For large enough $n$, the back substitution step is negligible since $n^3 \gg n^2$.
-
-We can use these operation counts to make estimates of how long calculations should take.
+2.  Back substitute. This takes $n^2 = \mathcal{O}(n^2)$ operations. Back substitution is comptutationally cheap compared to row reduction. For large enough $n$, the back substitution step is negligible since $n^3 \gg n^2$. We can use these operation counts to make estimates of how long calculations should take.
 
 For example, suppose row reduction on a $500 \times 500$ matrix takes 1 second. How long does back substitution take? Well, we just use leading terms in the complexity. Since $n=500$, we have $(2/3)*500^3 t =1$ where $t$ is time per operation. Solving, $t = 1.2 \times 10^{-8}$. Back substitution takes $n^2=500^2$ operations, so the total time is $n^2t=500^2\times 1.2 \times 10^{-8}=0.003$ seconds.
 
 Let's test scaling of the reduction step on Chad's machine for a random matrix.
-
 ```{r cache = TRUE}
 set.seed(123)
 n1 <- 200
@@ -452,20 +447,11 @@ $$
 
 The three most common $p$-norms are $p = 1, 2, \infty$ since they are the easiest to compute with and in some sense are the most natural:
 
--   $p=1$ (the Manhattan or taxicab norm)
-$$
-|| \vec{x} ||_1 =|x_1| + |x_2| + \cdots + |x_n|
-$$
+-   $p=1$ (the Manhattan or taxicab norm) $$|| \vec{x} ||_1 =|x_1| + |x_2| + \cdots + |x_n|$$
 
--   $p =2$ (the Euclidean norm)
-$$
-|| \vec{x} ||_2 = \sqrt{x_1^2 + x_2^2 + \cdots + x_n^2\ } = \sqrt{\vec{x} \cdot \vec{x}}
-$$
+-   $p =2$ (the Euclidean norm) $$|| \vec{x} ||_2 = \sqrt{x_1^2 + x_2^2 + \cdots + x_n^2\ } = \sqrt{\vec{x} \cdot \vec{x}}$$
 
--   $p=\infty$
-$$
-|| \vec{x} ||_\infty = \max{\left(| x_1|, | x_2|,  \ldots, |x_n|\right)}
-$$
+-   $p=\infty$ $$|| \vec{x} ||_\infty = \max{\left(| x_1|, | x_2|,  \ldots, |x_n|\right)}$$
 
 For $p = \infty$ it takes a little analysis to show why the computational definition is what it is, but a numerical study is usually convincing. We can use the `Norm` command
 ```{r cache = TRUE}
