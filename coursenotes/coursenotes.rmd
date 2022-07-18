@@ -9,8 +9,8 @@ output:
 
 \usepackage{amsmath}
 \usepackage{bm}
-\renewcommand{\vec}[1]{\bm{#1}}
-\renewcommand{\mat}[1]{\bm{#1}}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\renewcommand{\mat}[1]{\mathbf{#1}}
 \newcommand{\exp}[1]{\mathrm{e}^{#1}}
 \DeclareMathOperator*{\argmin}{arg\,min}
 \DeclareMathOperator*{\float}{fl}

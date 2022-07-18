@@ -606,7 +606,7 @@ Let’s consider an *n* × *n* matrix **A**.
     (det **A** &lt; 0). As an example, let
 
 $$
-\bm{A} =
+\mathbf{A} =
 \begin{pmatrix}
 a & b\\\c & d
 \end{pmatrix}.
@@ -615,7 +615,7 @@ $$
 For this example,
 
 $$
-\bm{A}^{-1} = \frac{1}{ad-bc}
+\mathbf{A}^{-1} = \frac{1}{ad-bc}
 \begin{pmatrix}
 d & -b\\\\
 -c & a
@@ -702,13 +702,13 @@ solve.
 For example, take
 
 $$
-\bm{A} = 
+\mathbf{A} = 
 \begin{pmatrix}
 1 & 3 & 1\\\\
 1 & 1 & -1 \\\\
 3 & 11 & 5
 \end{pmatrix}, \quad
-\bm{b} = \begin{pmatrix}
+\mathbf{b} = \begin{pmatrix}
 9 \\\\ 1 \\\\ 35
 \end{pmatrix}.
 $$
@@ -752,7 +752,7 @@ row, from which we find
 Therefore, the solution is
 
 $$
-\bm{x} = \begin{pmatrix}  -3 + 2x\_3 \\\\ 4 - x\_3 \\\\ x\_3 \end{pmatrix} = \begin{pmatrix}  -3 \\\\ 4\\\\ 0 \end{pmatrix} + x\_3 \begin{pmatrix}  2 \\\\ -1 \\\\ 1 \end{pmatrix}.
+\mathbf{x} = \begin{pmatrix}  -3 + 2x\_3 \\\\ 4 - x\_3 \\\\ x\_3 \end{pmatrix} = \begin{pmatrix}  -3 \\\\ 4\\\\ 0 \end{pmatrix} + x\_3 \begin{pmatrix}  2 \\\\ -1 \\\\ 1 \end{pmatrix}.
 $$
 
 By the way, we can go ahead and use a routine I’ve written to perform
@@ -856,7 +856,7 @@ easiest to compute with and in some sense are the most natural:
     ||**x**||<sub>1</sub> = |*x*<sub>1</sub>| + |*x*<sub>2</sub>| + ⋯ + |*x*<sub>*n*</sub>|
 
 -   *p* = 2 (the Euclidean norm)
-    $$|| \bm{x} ||\_2 = \sqrt{x\_1^2 + x\_2^2 + \cdots + x\_n^2\\ } = \sqrt{\bm{x} \cdot \bm{x}}$$
+    $$|| \mathbf{x} ||\_2 = \sqrt{x\_1^2 + x\_2^2 + \cdots + x\_n^2\\ } = \sqrt{\mathbf{x} \cdot \mathbf{x}}$$
 
 -   *p* = ∞
     ||**x**||<sub>∞</sub> = max (|*x*<sub>1</sub>|,|*x*<sub>2</sub>|,…,|*x*<sub>*n*</sub>|)
@@ -979,7 +979,7 @@ The matrix *p*-norm is closely related to the vector *p*-norm, and is
 given by
 
 $$
-||\bm{A}||\_p = \max\_{\bm{x} \not = \mathbf{ 0}} \frac{ || \bm{A} \bm{x}||\_p} { ||\bm{x}||\_p} = \max\_{||\bm{x}||\_p  = 1}  || \bm{A} \bm{x}||\_p
+||\mathbf{A}||\_p = \max\_{\mathbf{x} \not = \mathbf{ 0}} \frac{ || \mathbf{A} \mathbf{x}||\_p} { ||\mathbf{x}||\_p} = \max\_{||\mathbf{x}||\_p  = 1}  || \mathbf{A} \mathbf{x}||\_p
 $$
 
 The matrix *p*-norm says: apply *A* to the unit sphere, and
@@ -993,19 +993,19 @@ few special values of *p* for which it is easy to compute. We have:
 -   *p* = 1
 
 $$
-||\bm{A} ||\_1 = \displaystyle{\max\_{1 \le j \le n} \sum\_{i=1}^n |a\_{ij}|} = \text{maximum absolute column sum}
+||\mathbf{A} ||\_1 = \displaystyle{\max\_{1 \le j \le n} \sum\_{i=1}^n |a\_{ij}|} = \text{maximum absolute column sum}
 $$
 
 -   *p* = 2
 
 $$
-|| \bm{A} ||\_2 = \sqrt{\max\\{ \text{eigenvalue}(A^TA) \\} }
+|| \mathbf{A} ||\_2 = \sqrt{\max\\{ \text{eigenvalue}(A^TA) \\} }
 $$
 
 -   *p* = ∞
 
 $$
-|| \bm{A} ||\_\infty = \displaystyle{\max\_{1 \le i \le n} \sum\_{j=1}^n |a\_{ij}|} = \text{maximum absolute row sum}
+|| \mathbf{A} ||\_\infty = \displaystyle{\max\_{1 \le i \le n} \sum\_{j=1}^n |a\_{ij}|} = \text{maximum absolute row sum}
 $$
 
 To see why these definitions are true requires some analysis. If you are
@@ -1034,7 +1034,7 @@ There is one really useful identity you should know about matrix norms:
 To see this, we start with the right hand side and note
 
 $$
-||\bm{A}||\_p ||\bm{x}||\_p = \left( \max\_{\mathbf{y} \not = \mathbf{ 0}} \frac{ || \bm{A} \mathbf{y}||\_p} { ||\mathbf{y}||\_p} \right) ||\bm{x}||\_p \geq \frac{ || \bm{A} \bm{x}||\_p} { ||\bm{x}||\_p} ||\bm{x}||\_p = || \bm{A} \bm{x}||\_p.
+||\mathbf{A}||\_p ||\mathbf{x}||\_p = \left( \max\_{\mathbf{y} \not = \mathbf{ 0}} \frac{ || \mathbf{A} \mathbf{y}||\_p} { ||\mathbf{y}||\_p} \right) ||\mathbf{x}||\_p \geq \frac{ || \mathbf{A} \mathbf{x}||\_p} { ||\mathbf{x}||\_p} ||\mathbf{x}||\_p = || \mathbf{A} \mathbf{x}||\_p.
 $$
 
 ## Condition Number for **A****x** = **b**
@@ -1042,15 +1042,15 @@ $$
 Let us consider solving **A****x** = **b**. Suppose we find approximate
 solution **x**<sub>*a*</sub>. The **relative forward error** is
 $$
-\frac{||\bm{x}-\bm{x}\_a||}{||\bm{x}||}
+\frac{||\mathbf{x}-\mathbf{x}\_a||}{||\mathbf{x}||}
 $$
 and the **relative backward error** is
 $$
-\frac{||\bm{A}\bm{x}-\bm{A}\bm{x}\_a||}{||\bm{A}\bm{x}||}=\frac{||\bm{b}-\bm{A}\bm{x}\_a||}{||\bm{b}||}.
+\frac{||\mathbf{A}\mathbf{x}-\mathbf{A}\mathbf{x}\_a||}{||\mathbf{A}\mathbf{x}||}=\frac{||\mathbf{b}-\mathbf{A}\mathbf{x}\_a||}{||\mathbf{b}||}.
 $$
 We define **error magnification** as the ratio
 $$
-\frac{\text{relative forward error}}{\text{relative backward error}}=\frac{\frac{||\bm{x}-\bm{x}\_a||}{||\bm{x}||}}{\frac{||\bm{b}-\bm{A}\bm{x}\_a||}{||\bm{b}||}}.
+\frac{\text{relative forward error}}{\text{relative backward error}}=\frac{\frac{||\mathbf{x}-\mathbf{x}\_a||}{||\mathbf{x}||}}{\frac{||\mathbf{b}-\mathbf{A}\mathbf{x}\_a||}{||\mathbf{b}||}}.
 $$
 
 The **condition number** *κ*(**A**) is the largest possible error
@@ -1064,22 +1064,22 @@ concrete with an example.
 Consider:
 
 -   Let
-    $\bm{A} = \begin{pmatrix}0.913 & 0.659 \\\\ 0.457 & 0.330 \end{pmatrix}$
+    $\mathbf{A} = \begin{pmatrix}0.913 & 0.659 \\\\ 0.457 & 0.330 \end{pmatrix}$
 -   Then *κ*<sub>2</sub>(*A*) = 1.25 × 10<sup>4</sup>
--   Let $\bm{b} = \begin{pmatrix} 0.254 \\\\ 0.127 \end{pmatrix}$
+-   Let $\mathbf{b} = \begin{pmatrix} 0.254 \\\\ 0.127 \end{pmatrix}$
 -   Then **x** = (1,−1).
 -   Consider two approximate solutions **x**<sub>1, 2</sub>
 
 $$
 \begin{array}{lcl}
-\bm{x}\_1 = (-0.0827,0.5) && \bm{x}\_2 = (0.999,-1.001) \\\\
-\triangle \bm{x}\_1 = (1.0827, -1.5) && \triangle \bm{x}\_2 = (0.001,0.001) \\\\
-||\triangle \bm{x}\_1 || = 1.85&& ||\triangle \bm{x}\_2|| = .0014\\\\
-||\triangle \bm{x}\_1 ||/||\bm{x}|| = 1.308&& ||\triangle \bm{x}\_2||/||\bm{x}|| = .001\\\\
-\bm{b}\_1 = (0.2539949, 0.1272061) &&  \bm{b}\_2 = (0.252428, 0.126213) \\\\
-\triangle\bm{b}\_1 = (0.0000051,- 0.0002061) &&  \triangle\bm{b}\_2 = (0.001572, 0.000787) \\\\
-||\triangle \bm{b}\_1 || = 0.000206&& ||\triangle \bm{b}\_2|| = .00176\\\\
-||\triangle \bm{b}\_1 ||/||\bm{b}|| = 0.000726&& ||\triangle \bm{b}\_2||/||\bm{b}|| = .0062\\\\
+\mathbf{x}\_1 = (-0.0827,0.5) && \mathbf{x}\_2 = (0.999,-1.001) \\\\
+\triangle \mathbf{x}\_1 = (1.0827, -1.5) && \triangle \mathbf{x}\_2 = (0.001,0.001) \\\\
+||\triangle \mathbf{x}\_1 || = 1.85&& ||\triangle \mathbf{x}\_2|| = .0014\\\\
+||\triangle \mathbf{x}\_1 ||/||\mathbf{x}|| = 1.308&& ||\triangle \mathbf{x}\_2||/||\mathbf{x}|| = .001\\\\
+\mathbf{b}\_1 = (0.2539949, 0.1272061) &&  \mathbf{b}\_2 = (0.252428, 0.126213) \\\\
+\triangle\mathbf{b}\_1 = (0.0000051,- 0.0002061) &&  \triangle\mathbf{b}\_2 = (0.001572, 0.000787) \\\\
+||\triangle \mathbf{b}\_1 || = 0.000206&& ||\triangle \mathbf{b}\_2|| = .00176\\\\
+||\triangle \mathbf{b}\_1 ||/||\mathbf{b}|| = 0.000726&& ||\triangle \mathbf{b}\_2||/||\mathbf{b}|| = .0062\\\\
 mag = 1.8 \times 10^3 && mag = 1.6 \times 10^1
 \end{array}
 $$
@@ -1191,7 +1191,7 @@ The LU decomposition exists if and only if the upper-left sub-blocks
 Let’s do an example of how LU decomposition works. Take
 
 $$
-\bm{A} = 
+\mathbf{A} = 
 \begin{pmatrix}
 1 & 3 & 1\\\\
 1 & 1 & -1 \\\\
@@ -1368,11 +1368,11 @@ Let’s take this idea and apply it to solving **A****x** = **b**. Let
 
 $$
 \begin{align}
-\bm{A}\bm{x} &= \bm{b} \\\\
-(\mathbf{D}+\mathbf{R})\bm{x} &= \bm{b} \\\\
-\mathbf{D}\bm{x} + \mathbf{R} \bm{x} &= \bm{b}\\\\
-\mathbf{D} \bm{x} &= \bm{b} - \mathbf{R} \bm{x}\\\\
-\bm{x} &= \mathbf{D}^{-1} (\bm{b}-\mathbf{R}\bm{x})
+\mathbf{A}\mathbf{x} &= \mathbf{b} \\\\
+(\mathbf{D}+\mathbf{R})\mathbf{x} &= \mathbf{b} \\\\
+\mathbf{D}\mathbf{x} + \mathbf{R} \mathbf{x} &= \mathbf{b}\\\\
+\mathbf{D} \mathbf{x} &= \mathbf{b} - \mathbf{R} \mathbf{x}\\\\
+\mathbf{x} &= \mathbf{D}^{-1} (\mathbf{b}-\mathbf{R}\mathbf{x})
 \end{align}
 $$
 
@@ -2416,8 +2416,8 @@ From this picture, two relationships arise:
 
 $$
 \begin{align}
-x\bm{A} + \mathbf{r}&=\bm{b}\\\\
-\bm{A} \cdot \mathbf{r} &=0.
+x\mathbf{A} + \mathbf{r}&=\mathbf{b}\\\\
+\mathbf{A} \cdot \mathbf{r} &=0.
 \end{align}
 $$
 
@@ -2435,13 +2435,13 @@ where we have used the fact that
 writing
 *x* = (**A**<sup>*T*</sup>**A**)<sup>−1</sup>**A**<sup>*T*</sup>**b**.
 We can also calculate the vector that was as close as possible to **b**.
-We will call it $\widehat{\bm{b}}$ and it is
+We will call it $\widehat{\mathbf{b}}$ and it is
 
 $$
 \begin{align}
-\widehat{\bm{b}} &= \bm{A}x \\\\
-&=\bm{A}\left(\bm{A}^T \bm{A}\right)^{-1}\bm{A}^T \bm{b}\\\\
-& = \mathbf{P} \bm{b}.
+\widehat{\mathbf{b}} &= \mathbf{A}x \\\\
+&=\mathbf{A}\left(\mathbf{A}^T \mathbf{A}\right)^{-1}\mathbf{A}^T \mathbf{b}\\\\
+& = \mathbf{P} \mathbf{b}.
 \end{align}
 $$
 
@@ -2451,20 +2451,22 @@ Let us know revisit what we have done and emphasize/introduce some
 vocabulary. We started with a vector **A** that we used as a **basis**
 to try to reach the **target** **b**. We couldn’t do it exactly, so we
 calcualted the closest we could come to **b**, which turned out to be
-$\widehat{\bm{b}}$. This is called the **projection** of **b** into the
-subspace spanned by **A**. We found $\widehat{\bm{b}} = \bm{A}x$, where
-*x* is called the **least squares solution**, which solved the **normal
-equations** **A**<sup>*T*</sup>**A***x* = **A**<sup>*T*</sup>**b**. We
-can summarize the calculation of *x* by remembering
+$\widehat{\mathbf{b}}$. This is called the **projection** of **b** into
+the subspace spanned by **A**. We found
+$\widehat{\mathbf{b}} = \mathbf{A}x$, where *x* is called the **least
+squares solution**, which solved the **normal equations**
+**A**<sup>*T*</sup>**A***x* = **A**<sup>*T*</sup>**b**. We can summarize
+the calculation of *x* by remembering
 *x* = (**A**<sup>*T*</sup>**A**)<sup>−1</sup>**A**<sup>*T*</sup>**b**
 where (**A**<sup>*T*</sup>**A**)<sup>−1</sup>**A**<sup>*T*</sup> is
 called the **pseudoinverse** of **A**. Also, we can summarize the
-calculation of $\widehat{\bm{b}}$ as
-$\widehat{\bm{b}} = \mathbf{P} \bm{b}$ where
+calculation of $\widehat{\mathbf{b}}$ as
+$\widehat{\mathbf{b}} = \mathbf{P} \mathbf{b}$ where
 **P** = **A**(**A**<sup>*T*</sup>**A**)<sup>−1</sup>**A**<sup>*T*</sup>
 is what we call a **projection operator** or a **projection matrix**.
 Since we didn’t succeed in reaching **b**, there is some error, and we
-call this the **residual**, $\mathbf{r} = \bm{b}-\widehat{\bm{b}}$.
+call this the **residual**,
+$\mathbf{r} = \mathbf{b}-\widehat{\mathbf{b}}$.
 
 What are the words/ideas you should make sure you understand in the
 narrative above?
@@ -2525,7 +2527,7 @@ This picture gives rise to the equation
 
 $$
 \begin{align}
-x\_0 \bm{A}\_0 + x\_1 \mathbf{a\_1} + \mathbf{r} &= \bm{b} \\\\
+x\_0 \mathbf{A}\_0 + x\_1 \mathbf{a\_1} + \mathbf{r} &= \mathbf{b} \\\\
 a\_0 \cdot \mathbf{r} &= 0 \\\\
 a\_1 \cdot \mathbf{r} &= 0.
 \end{align}
@@ -2536,8 +2538,8 @@ We find
 
 $$
 \begin{align}
-x\_0 \bm{A}\_0\cdot\bm{A}\_0 + x\_1 \bm{A}\_0\cdot\bm{A}\_1 &= \bm{A}\_0 \cdot \bm{b}\\\\
-x\_0 \bm{A}\_1\cdot\bm{A}\_0 + x\_1 \bm{A}\_1\cdot\bm{A}\_1 &= \bm{A}\_1 \cdot \bm{b}
+x\_0 \mathbf{A}\_0\cdot\mathbf{A}\_0 + x\_1 \mathbf{A}\_0\cdot\mathbf{A}\_1 &= \mathbf{A}\_0 \cdot \mathbf{b}\\\\
+x\_0 \mathbf{A}\_1\cdot\mathbf{A}\_0 + x\_1 \mathbf{A}\_1\cdot\mathbf{A}\_1 &= \mathbf{A}\_1 \cdot \mathbf{b}
 \end{align}
 $$
 
@@ -2546,7 +2548,7 @@ second and third equations previously. Note that there is a matrix way
 to write this. we can write
 
 $$
-\begin{pmatrix} \bm{A}\_0^T \\\\ \bm{A}\_1^T \end{pmatrix} \begin{pmatrix} \bm{A}\_0 & \bm{A}\_1 \end{pmatrix} \begin{pmatrix} x\_0 \\\\ x\_1 \end{pmatrix} = \begin{pmatrix} \bm{A}\_0^T \\\\ \bm{A}\_1^T \end{pmatrix} \bm{b}.
+\begin{pmatrix} \mathbf{A}\_0^T \\\\ \mathbf{A}\_1^T \end{pmatrix} \begin{pmatrix} \mathbf{A}\_0 & \mathbf{A}\_1 \end{pmatrix} \begin{pmatrix} x\_0 \\\\ x\_1 \end{pmatrix} = \begin{pmatrix} \mathbf{A}\_0^T \\\\ \mathbf{A}\_1^T \end{pmatrix} \mathbf{b}.
 $$
 
 If we let **A** represent the matrix with columns **A**<sub>0, 1</sub>
@@ -2612,7 +2614,7 @@ Symbolically, we calculated the least squares solution
 **x** = (**A**<sup>*T*</sup>**A**)<sup>−1</sup>**A**<sup>*T*</sup>**b**
 where (**A**<sup>*T*</sup>**A**)<sup>−1</sup>**A**<sup>*T*</sup> is the
 pseudoinverse. The projection is
-$\widehat{\bm{b}} = \bm{A} \bm{x} = \bm{A} \left(\bm{A}^T \bm{A}\right)^{-1}\bm{A}^T \bm{b}$
+$\widehat{\mathbf{b}} = \mathbf{A} \mathbf{x} = \mathbf{A} \left(\mathbf{A}^T \mathbf{A}\right)^{-1}\mathbf{A}^T \mathbf{b}$
 where **A**(**A**<sup>*T*</sup>**A**)<sup>−1</sup>**A**<sup>*T*</sup> is
 the projection matrix.
 
@@ -2716,11 +2718,11 @@ We can start directly with the square of the norm of the residual vector
 (a factor of 1/2 is included for algebraic convenience, but it doesn’t
 change the result):
 $$
-\frac{1}{2}||\mathbf{r}||^2 = \frac{1}{2}||\bm{A}\bm{x}-\bm{b}||^2.
+\frac{1}{2}||\mathbf{r}||^2 = \frac{1}{2}||\mathbf{A}\mathbf{x}-\mathbf{b}||^2.
 $$
 More formally, we can define the scalar **objective function**
 $$
-f(\bm{x}) = \frac{1}{2} ||\bm{A}\bm{x}-\bm{b}||^2
+f(\mathbf{x}) = \frac{1}{2} ||\mathbf{A}\mathbf{x}-\mathbf{b}||^2
 $$
 and define our least squares solution **x**<sub>*L**S*</sub>as the value
 of **x** that minimizes this objective function, that is,
@@ -2751,7 +2753,7 @@ problem.
 
 The eventual goal of this lesson is to show you how to solve the least
 squares problem
-$$\bm{x}\_{LS} = \mathop{\mathrm{arg\\,min}}\_x \frac{1}{2}||\bm{A}\bm{x}-\bm{b}||^2$$
+$$\mathbf{x}\_{LS} = \mathop{\mathrm{arg\\,min}}\_x \frac{1}{2}||\mathbf{A}\mathbf{x}-\mathbf{b}||^2$$
 
 by writing the matrix **A** in a convenient way. But to build up to
 that, we need to introduce a number of ideas. First off: orthogonality.
@@ -2768,7 +2770,7 @@ columns are **v**<sub>1</sub>, …, **v**<sub>*n*</sub>. Then we can
 consider the quantity **A**<sup>*T*</sup>**A**:
 $$
 \begin{align}
-\bm{A}^T \bm{A} &= \begin{pmatrix} \mathbf{v}\_1^T\\\\ \mathbf{v}\_2^T \\\\ \vdots \\\\ \mathbf{v}\_n^T \end{pmatrix} \begin{pmatrix} \mathbf{v}\_1 & \mathbf{v}\_2 & \cdots & \mathbf{v}\_n \end{pmatrix} \\\\
+\mathbf{A}^T \mathbf{A} &= \begin{pmatrix} \mathbf{v}\_1^T\\\\ \mathbf{v}\_2^T \\\\ \vdots \\\\ \mathbf{v}\_n^T \end{pmatrix} \begin{pmatrix} \mathbf{v}\_1 & \mathbf{v}\_2 & \cdots & \mathbf{v}\_n \end{pmatrix} \\\\
 &= \begin{pmatrix} \mathbf{v}\_1^T \mathbf{v}\_1 & \mathbf{v}\_1^T \mathbf{v}\_2 & \cdots & \mathbf{v}\_1^T \mathbf{v}\_n \\\\ \mathbf{v}\_2^T \mathbf{v}\_1 & \mathbf{v}\_2^T \mathbf{v}\_2 & \cdots &  \mathbf{v}\_2^T \mathbf{v}\_n \\\\
 \vdots & \vdots & \cdots & \vdots \\\\
 \mathbf{v}\_n^T \mathbf{v}\_1 & \mathbf{v}\_n^T \mathbf{v}\_2 & \cdots & \mathbf{v}\_n^T \mathbf{v}\_n
@@ -2806,16 +2808,16 @@ Finally, let’s consider projecting a vector into a subspace spanned by
 orthonormal vectors **q**<sub>*i*</sub>, *i* = 1, …, *n*. Define **A**
 as
 $$
-\bm{A} = \begin{pmatrix} | & | &  & | \\\\ \mathbf{q}\_1 & \mathbf{q}\_2 & \cdots & \\  \mathbf{q}\_n \\\\| & | &  & | \\\\ \end{pmatrix}.
+\mathbf{A} = \begin{pmatrix} | & | &  & | \\\\ \mathbf{q}\_1 & \mathbf{q}\_2 & \cdots & \\  \mathbf{q}\_n \\\\| & | &  & | \\\\ \end{pmatrix}.
 $$
 Let’s project a vector **w** onto the subspace spanned by the columns of
 **A**. By definition of the projection operator, and using the fact that
 **A** is orthogonal,
 $$
 \begin{align}
-\mathbf{P}\mathbf{w} &= \bm{A} (\bm{A}^T \bm{A})^{-1} \bm{A}^T \mathbf{w}\\\\
-&= \bm{A} \bm{A}^{-1} \bm{A} \bm{A}^T \mathbf{w} \\\\
-&= \bm{A} \bm{A}^T \mathbf{w} \\\\
+\mathbf{P}\mathbf{w} &= \mathbf{A} (\mathbf{A}^T \mathbf{A})^{-1} \mathbf{A}^T \mathbf{w}\\\\
+&= \mathbf{A} \mathbf{A}^{-1} \mathbf{A} \mathbf{A}^T \mathbf{w} \\\\
+&= \mathbf{A} \mathbf{A}^T \mathbf{w} \\\\
 &= \mathbf{q}\_1 \mathbf{q}\_1^T \mathbf{w} + \mathbf{q}\_2 \mathbf{q}\_2^T \mathbf{w} + \cdots + \mathbf{q}\_n \mathbf{q}\_n^T \mathbf{w}.
 \end{align}
 $$
@@ -2830,12 +2832,12 @@ $$
 $$
 so that
 $$
-\bm{A} = \begin{pmatrix} \frac{1}{3} & \frac{2}{15} \\\\ \frac{2}{3} & \frac{2}{3} \\\\ \frac{2}{3} & -\frac{11}{15} \end{pmatrix}.
+\mathbf{A} = \begin{pmatrix} \frac{1}{3} & \frac{2}{15} \\\\ \frac{2}{3} & \frac{2}{3} \\\\ \frac{2}{3} & -\frac{11}{15} \end{pmatrix}.
 $$
 Then
 $$
 \begin{align}
-\bm{A} \bm{A}^T &= \begin{pmatrix} \frac{1}{3} & \frac{2}{15} \\\\ \frac{2}{3} & \frac{2}{3} \\\\ \frac{2}{3} & -\frac{11}{15} \end{pmatrix}
+\mathbf{A} \mathbf{A}^T &= \begin{pmatrix} \frac{1}{3} & \frac{2}{15} \\\\ \frac{2}{3} & \frac{2}{3} \\\\ \frac{2}{3} & -\frac{11}{15} \end{pmatrix}
 \begin{pmatrix} \frac{1}{3} &  \frac{2}{3} & \frac{2}{3} \\\\ \frac{2}{15} & \frac{2}{3} & -\frac{11}{15} \end{pmatrix} \\\\
 &= \frac{1}{225}
 \begin{pmatrix}
@@ -3283,11 +3285,11 @@ now, here’s how least squares works when you use QR decomposition on
 **A****x** = **b**. Note
 $$
 \begin{align}
-||\bm{A}\bm{x}-\bm{b}||^2 &= ||\bar{\mathbf{Q}}\bar{\mathbf{R}} \bm{x} - \bm{b}||^2 \\\\
-&= ||\bar{\mathbf{Q}}^T(\bar{\mathbf{Q}}\bar{\mathbf{R}} \bm{x} - \bm{b})||^2 \\\\
-&= ||\bar{\mathbf{Q}}^T \bar{\mathbf{Q}}\bar{\mathbf{R}} \bm{x} - \bar{\mathbf{Q}}^T \bm{b}||^2 \\\\
-&= ||\bar{\mathbf{R}} \bm{x} - \bar{\mathbf{Q}}^T \bm{b}||^2 \\\\
-& = ||\mathbf{R} \bm{x}-\mathbf{Q}^T \bm{b}||^2+ ||\widehat{\mathbf{Q}}^T \bm{b}||^2. 
+||\mathbf{A}\mathbf{x}-\mathbf{b}||^2 &= ||\bar{\mathbf{Q}}\bar{\mathbf{R}} \mathbf{x} - \mathbf{b}||^2 \\\\
+&= ||\bar{\mathbf{Q}}^T(\bar{\mathbf{Q}}\bar{\mathbf{R}} \mathbf{x} - \mathbf{b})||^2 \\\\
+&= ||\bar{\mathbf{Q}}^T \bar{\mathbf{Q}}\bar{\mathbf{R}} \mathbf{x} - \bar{\mathbf{Q}}^T \mathbf{b}||^2 \\\\
+&= ||\bar{\mathbf{R}} \mathbf{x} - \bar{\mathbf{Q}}^T \mathbf{b}||^2 \\\\
+& = ||\mathbf{R} \mathbf{x}-\mathbf{Q}^T \mathbf{b}||^2+ ||\widehat{\mathbf{Q}}^T \mathbf{b}||^2. 
 \end{align}
 $$
 Proceeding from the second to last line to the very last line is not
@@ -3353,12 +3355,12 @@ To recap:
 
 For example, let’s find the eigenvalues and eigenvectors of
 $$
-\bm{A} = \begin{pmatrix} -3 & 2 \\\\ 2 & -3 \end{pmatrix}.
+\mathbf{A} = \begin{pmatrix} -3 & 2 \\\\ 2 & -3 \end{pmatrix}.
 $$
 Using the result above, we can write the characteristic polynomial:
 $$
 \begin{align}
-\det (\bm{A} - \mathbf{I} \lambda) &= 0\\\\
+\det (\mathbf{A} - \mathbf{I} \lambda) &= 0\\\\
 \det \begin{pmatrix} -3 - \lambda & 2 \\\\ 2 & -3 - \lambda \end{pmatrix} &= 0\\\\
 (\lambda+3)^2-4 &= 0\\\\
 \lambda^2 + 6\lambda + 5 &= 0\\\\
@@ -3369,7 +3371,7 @@ and therefore *λ*<sub>1, 2</sub> =  − 1,  − 5. To find
 **v**<sub>1</sub>, we solve:
 $$
 \begin{align}
-(\bm{A}-\mathbf{I}\lambda\_1)\mathbf{v}\_1&=\mathbf{0}\\\\
+(\mathbf{A}-\mathbf{I}\lambda\_1)\mathbf{v}\_1&=\mathbf{0}\\\\
 \begin{pmatrix} -2 & 2 \\\\ 2 & -2 \end{pmatrix}\mathbf{v}\_1 &= \mathbf{0} \\\\
 \mathbf{v}\_1 &= \begin{pmatrix} 1 \\\\ 1 \end{pmatrix}
 \end{align}
@@ -3388,7 +3390,7 @@ write down the definition of eigenpair for all pairs simultaneously:
 **A****v**<sub>*i*</sub> = *λ*<sub>*i*</sub>**v**<sub>*i*</sub> implies
 $$
 \begin{align}
-\bm{A} \underbrace{\begin{pmatrix}
+\mathbf{A} \underbrace{\begin{pmatrix}
 \vert & \vert & \cdots & \vert \\\\
 \mathbf{v}\_1 & \mathbf{v}\_2 & \cdots & \mathbf{v}\_n \\\\
 \vert & \vert & \cdots & \vert 
@@ -3414,7 +3416,7 @@ Let’s show that we can do this with our example matrix **A** from
 before,
 
 $$
-\bm{A} = \begin{pmatrix} -3 & 2 \\\\ 2 & -3 \end{pmatrix}.
+\mathbf{A} = \begin{pmatrix} -3 & 2 \\\\ 2 & -3 \end{pmatrix}.
 $$
 
     A <- matrix(c(-3,2,2,-3),byrow=TRUE,nrow=2)
@@ -3473,7 +3475,7 @@ $$
 F\_n &= F\_{n-1} + G\_{n-1} \\\\
 G\_n &= F\_{n-1} \\\\
 \begin{pmatrix} F\_n \\\\ G\_n \end{pmatrix} &= \begin{pmatrix} 1 & 1 \\\\ 1 & 0 \end{pmatrix} \begin{pmatrix} F\_{n-1} \\\\ G\_{n-1} \end{pmatrix} \\\\
-\mathbf{F}\_n &= \bm{A} \mathbf{F}\_{n-1}.
+\mathbf{F}\_n &= \mathbf{A} \mathbf{F}\_{n-1}.
 \end{align}
 $$
 Let’s diagonalize **A**, and momentarily, you’ll see why.
@@ -3525,7 +3527,7 @@ Why would we do this? Let’s use the diagonalization to re-write our
 problem:
 $$
 \begin{align}
-\mathbf{F}\_n &= \bm{A} \mathbf{F}\_{n-1}\\\\
+\mathbf{F}\_n &= \mathbf{A} \mathbf{F}\_{n-1}\\\\
 \mathbf{F}\_n &= \mathbf{S} \mathbf{\Lambda} \mathbf{S}^{-1} \mathbf{F}\_{n-1}\\\\
 \mathbf{S}^{-1} \mathbf{F} &= \mathbf{\Lambda} \mathbf{S}^{-1} \mathbf{F}\_{n-1}.
 \end{align}
