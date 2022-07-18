@@ -611,7 +611,8 @@ $$
 a & b\\\c & d
 \end{pmatrix}.
 $$
-For this example,
+
+    For this example,
 
 $$
 \mathbf{A}^{-1} = \frac{1}{ad-bc}
