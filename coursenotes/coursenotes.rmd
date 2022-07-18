@@ -266,6 +266,7 @@ We begin considering the solution of systems of linear equations, $\mat{A}\vec{x
 For concreteness let's work in three dimensions and let's consider the system
 
 $$
+\usepackage{amsmath}
 \begin{pmatrix}
 2 & 4 & -2\\
 1 & 4 & -3\\
@@ -536,7 +537,7 @@ $$
 ||\mat{A}||_p ||\vec{x}||_p = \left( \max_{\mathbf{y} \not = \mathbf{ 0}} \frac{ || \mat{A} \mathbf{y}||_p} { ||\mathbf{y}||_p} \right) ||\vec{x}||_p \geq \frac{ || \mat{A} \vec{x}||_p} { ||\vec{x}||_p} ||\vec{x}||_p = || \mat{A} \vec{x}||_p.
 $$
 
-## Condition Number for $\mat{A} \vec{x} = \vec{b}$
+## Condition Number for $\mat{A}\,\vec{x} = \vec{b}$
 
 Let us consider solving $\mat{A}\vec{x}=\vec{b}$. Suppose we find approximate solution $\vec{x}_a$. The **relative forward error** is 
 $$

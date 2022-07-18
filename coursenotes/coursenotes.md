@@ -1027,7 +1027,7 @@ $$
 ||\bm{A}||\_p ||\bm{x}||\_p = \left( \max\_{\mathbf{y} \not = \mathbf{ 0}} \frac{ || \bm{A} \mathbf{y}||\_p} { ||\mathbf{y}||\_p} \right) ||\bm{x}||\_p \geq \frac{ || \bm{A} \bm{x}||\_p} { ||\bm{x}||\_p} ||\bm{x}||\_p = || \bm{A} \bm{x}||\_p.
 $$
 
-## Condition Number for **A****x** = **b**
+## Condition Number for **A** **x** = **b**
 
 Let us consider solving **A****x** = **b**. Suppose we find approximate
 solution **x**<sub>*a*</sub>. The **relative forward error** is
