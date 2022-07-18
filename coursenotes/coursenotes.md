@@ -213,7 +213,7 @@ understand this important source of error.
 -   Implement strategies to reduce loss of significance
 -   Calculate/estimate the error arising in numerical computations
 
-## Binary numbers
+## Binary Numbers
 
 We usually work in the base 10 system, where each place in the number
 represents a power of 10 with a coefficient of 0 through 9, *e.g.*,
@@ -326,7 +326,7 @@ the next smallest number that can be represented exactly in floating
 point form. This distance is
 *ϵ*<sub>*m**a**c**h*</sub> = 2<sup>−52</sup> ≈ 2.2 × 10<sup>−16</sup>.
 
-## Machine addition
+## Machine Addition
 
 Machine addition is defined as
 fl (*x*+*y*) = *f**l*(*f**l*(*x*)+*f**l*(*y*)).
@@ -345,7 +345,7 @@ try:
 
     ## [1] 1
 
-## Loss of significance
+## Loss of Significance
 
 We’ve seen that computer storage of numbers can have error, and
 therefore arithmetic can have error. This error is sometimes called
@@ -555,7 +555,7 @@ and vector norms.
 -   Define matrix norms
 -   Define condition number for solution of **A****x** = **b**
 
-## Linear systems
+## Linear Systems
 
 For concreteness let’s work in three dimensions and let’s consider the
 system
@@ -605,7 +605,7 @@ This form suggests thinking of the linear combination of three basis
 vectors necessary to reach a particular target vector. There could be 0,
 1, or inifinity depending on the arrangement of those vectors.
 
-## Linear algebra review and the Big Theorem
+## Linear Algebra Review and the Big Theorem
 
 Let’s consider an *n* × *n* matrix **A**.
 
