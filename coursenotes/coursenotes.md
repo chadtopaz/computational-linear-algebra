@@ -624,7 +624,7 @@ $$
 
 So **A** invertible  ⇔ det **A** ≠ 0.
 
-1.  The **eigenvalues** *λ*<sub>*i*</sub> of **A** satisfy
+(3.) The **eigenvalues** *λ*<sub>*i*</sub> of **A** satisfy
 
 **A****v**<sub>**i**</sub> = *λ*<sub>*i*</sub>**v**<sub>**i**</sub>,
 

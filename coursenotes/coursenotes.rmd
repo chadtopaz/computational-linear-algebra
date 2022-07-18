@@ -325,7 +325,7 @@ $$
 
 So $\mat{A}$ invertible $\iff \det \mat{A} \neq 0$.
 
-   3. The **eigenvalues** $\lambda_i$ of $\mat{A}$ satisfy
+   (3.) The **eigenvalues** $\lambda_i$ of $\mat{A}$ satisfy
 
 $$
 \mat{A}\mathbf{v_i}=\lambda_i \mathbf{v_i},
