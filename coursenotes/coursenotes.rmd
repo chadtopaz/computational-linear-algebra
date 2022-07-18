@@ -2,15 +2,15 @@
 title: "Computational Linear Algebra Course Notes"
 author: "Chad M. Topaz"
 output:
-  rmarkdown::github_document:
+  rmarkdown::md_document:
       toc: true
       toc_depth: 1
-      html_preview: false
 ---
 
 \usepackage{amsmath}
-\renewcommand{\vec}[1]{\textbf{#1}}
-\renewcommand{\mat}[1]{\textbf{#1}}
+\usepackage{bm}
+\renewcommand{\vec}[1]{\bm{#1}}
+\renewcommand{\mat}[1]{\bm{#1}}
 \newcommand{\exp}[1]{\mathrm{e}^{#1}}
 \DeclareMathOperator*{\argmin}{arg\,min}
 \DeclareMathOperator*{\float}{fl}
