@@ -688,13 +688,7 @@ point, or a line, or a plane.
 
 **Vector spans.** Write the equation in terms of its columns, as
 
-![x_1 \begin{pmatrix} 2 \\\\ 1 \\\\ -2 \end{pmatrix}
-+ x_2 \begin{pmatrix} 4 \\\\ 4 \\\\ -6 \end{pmatrix}
-+ x_3 \begin{pmatrix} -2 \\\\ -3 \\\\ 7 \end{pmatrix}
-= \begin{pmatrix} 8 \\\\ 8 \\\\ -3 \end{pmatrix}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_1%20%5Cbegin%7Bpmatrix%7D%202%20%5C%5C%201%20%5C%5C%20-2%20%5Cend%7Bpmatrix%7D%0A%2B%20x_2%20%5Cbegin%7Bpmatrix%7D%204%20%5C%5C%204%20%5C%5C%20-6%20%5Cend%7Bpmatrix%7D%0A%2B%20x_3%20%5Cbegin%7Bpmatrix%7D%20-2%20%5C%5C%20-3%20%5C%5C%207%20%5Cend%7Bpmatrix%7D%0A%3D%20%5Cbegin%7Bpmatrix%7D%208%20%5C%5C%208%20%5C%5C%20-3%20%5Cend%7Bpmatrix%7D "x_1 \begin{pmatrix} 2 \\ 1 \\ -2 \end{pmatrix}
-+ x_2 \begin{pmatrix} 4 \\ 4 \\ -6 \end{pmatrix}
-+ x_3 \begin{pmatrix} -2 \\ -3 \\ 7 \end{pmatrix}
-= \begin{pmatrix} 8 \\ 8 \\ -3 \end{pmatrix}")
+![x_1 \begin{pmatrix} 2 \\\\ 1 \\\\ -2 \end{pmatrix} + x_2 \begin{pmatrix} 4 \\\\ 4 \\\\ -6 \end{pmatrix} + x_3 \begin{pmatrix} -2 \\\\ -3 \\\\ 7 \end{pmatrix} = \begin{pmatrix} 8 \\\\ 8 \\\\ -3 \end{pmatrix}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_1%20%5Cbegin%7Bpmatrix%7D%202%20%5C%5C%201%20%5C%5C%20-2%20%5Cend%7Bpmatrix%7D%20%2B%20x_2%20%5Cbegin%7Bpmatrix%7D%204%20%5C%5C%204%20%5C%5C%20-6%20%5Cend%7Bpmatrix%7D%20%2B%20x_3%20%5Cbegin%7Bpmatrix%7D%20-2%20%5C%5C%20-3%20%5C%5C%207%20%5Cend%7Bpmatrix%7D%20%3D%20%5Cbegin%7Bpmatrix%7D%208%20%5C%5C%208%20%5C%5C%20-3%20%5Cend%7Bpmatrix%7D "x_1 \begin{pmatrix} 2 \\ 1 \\ -2 \end{pmatrix} + x_2 \begin{pmatrix} 4 \\ 4 \\ -6 \end{pmatrix} + x_3 \begin{pmatrix} -2 \\ -3 \\ 7 \end{pmatrix} = \begin{pmatrix} 8 \\ 8 \\ -3 \end{pmatrix}")
 
 This form suggests thinking of the linear combination of three basis
 vectors necessary to reach a particular target vector. There could be 0,
