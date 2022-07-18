@@ -283,9 +283,9 @@ Let's interpret this system two ways.
 **Intersecting hyperplanes.** Carrying out the matrix multiplication, we write the equations
 
 $$
-\begin{align} 2x_1 + 4x_2 -2x_3 & = 8\\
+\begin{align*} 2x_1 + 4x_2 -2x_3 & = 8\\
 x_1 + 4x_2 -3x_3 & = 8\\
--2x_1 -6x_2 + 7x_3 & = -3 \end{align}
+-2x_1 -6x_2 + 7x_3 & = -3 \end{align*}
 $$
 
 This form suggests thinking of the set of points that are at the intersection of these three planes, which could be the empty set, or a point, or a line, or a plane.
@@ -305,11 +305,9 @@ Let's consider an $n \times n$ matrix $\mat{A}$.
 1.  **Invertible** means that the inverse $\mat{A}^{-1}$ exists. This matrix satisfies $\mat{A}\mat{A}^{-1} = \mat{I}$, where $\mat{I}$ is the $n \times n$ identity matrix.
 
 2.  The notation $\det$ means **determinant**. Think of it as a scaling factor for the transformation defined by a matrix. That is, multiplication by $\mat{A}$ can cause a region to contract ($|\det \mat{A}| < 1$) or expand ($|\det \mat{A}| > 1$) and/or reflect ($\det \mat{A} < 0$). As an example, let
-
 $$
 \mat{A}=\begin{pmatrix}a & b\\c & d\end{pmatrix}.
 $$
-
 For this example,
 
 $$

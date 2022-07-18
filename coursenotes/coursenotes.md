@@ -684,11 +684,11 @@ Let’s interpret this system two ways.
 **Intersecting hyperplanes.** Carrying out the matrix multiplication, we
 write the equations
 
-![\begin{align} 2x_1 + 4x_2 -2x_3 & = 8\\\\
+![\begin{align\*} 2x_1 + 4x_2 -2x_3 & = 8\\\\
 x_1 + 4x_2 -3x_3 & = 8\\\\
--2x_1 -6x_2 + 7x_3 & = -3 \end{align}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbegin%7Balign%7D%202x_1%20%2B%204x_2%20-2x_3%20%26%20%3D%208%5C%5C%0Ax_1%20%2B%204x_2%20-3x_3%20%26%20%3D%208%5C%5C%0A-2x_1%20-6x_2%20%2B%207x_3%20%26%20%3D%20-3%20%5Cend%7Balign%7D "\begin{align} 2x_1 + 4x_2 -2x_3 & = 8\\
+-2x_1 -6x_2 + 7x_3 & = -3 \end{align\*}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbegin%7Balign%2A%7D%202x_1%20%2B%204x_2%20-2x_3%20%26%20%3D%208%5C%5C%0Ax_1%20%2B%204x_2%20-3x_3%20%26%20%3D%208%5C%5C%0A-2x_1%20-6x_2%20%2B%207x_3%20%26%20%3D%20-3%20%5Cend%7Balign%2A%7D "\begin{align*} 2x_1 + 4x_2 -2x_3 & = 8\\
 x_1 + 4x_2 -3x_3 & = 8\\
--2x_1 -6x_2 + 7x_3 & = -3 \end{align}")
+-2x_1 -6x_2 + 7x_3 & = -3 \end{align*}")
 
 This form suggests thinking of the set of points that are at the
 intersection of these three planes, which could be the empty set, or a
@@ -732,9 +732,9 @@ matrix
     (![\det \textbf{A} \< 0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cdet%20%5Ctextbf%7BA%7D%20%3C%200 "\det \textbf{A} < 0")).
     As an example, let
 
-![\textbf{A}=\begin{pmatrix}a & b\\\c & d\end{pmatrix}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%3D%5Cbegin%7Bpmatrix%7Da%20%26%20b%5C%5Cc%20%26%20d%5Cend%7Bpmatrix%7D. "\textbf{A}=\begin{pmatrix}a & b\\c & d\end{pmatrix}.")
+    ![\textbf{A}=\begin{pmatrix}a & b\\\c & d\end{pmatrix}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%3D%5Cbegin%7Bpmatrix%7Da%20%26%20b%5C%5Cc%20%26%20d%5Cend%7Bpmatrix%7D. "\textbf{A}=\begin{pmatrix}a & b\\c & d\end{pmatrix}.")
 
-For this example,
+    For this example,
 
 ![\textbf{A}^{-1} = \frac{1}{ad-bc}\begin{pmatrix}d & -b\\\\-c & a\end{pmatrix}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%5E%7B-1%7D%20%3D%20%5Cfrac%7B1%7D%7Bad-bc%7D%5Cbegin%7Bpmatrix%7Dd%20%26%20-b%5C%5C-c%20%26%20a%5Cend%7Bpmatrix%7D. "\textbf{A}^{-1} = \frac{1}{ad-bc}\begin{pmatrix}d & -b\\-c & a\end{pmatrix}.")
 
