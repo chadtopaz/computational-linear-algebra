@@ -1,7 +1,8 @@
 ---
 title: "Computational Linear Algebra Course Notes"
+author: "Chad M. Topaz"
 output:
-  rmarkdown::md_document:
+  rmarkdown::github_document:
       toc: true
       toc_depth: 1
   header-includes:
@@ -9,15 +10,13 @@ output:
    - \usepackage{bm}
 ---
 
-# Computational Linear Algebra Course Notes
-Author: Chad M. Topaz
-Last Updated: 2022-07-18
-
+```{= latex}
 \renewcommand{\vec}[1]{\bm{#1}}
 \renewcommand{\mat}[1]{\bm{#1}}
 \newcommand{\exp}[1]{\mathrm{e}^{#1}}
 \DeclareMathOperator*{\argmin}{arg\,min}
 \DeclareMathOperator*{\float}{fl}
+```
 
 ```{r, message=FALSE, warning=FALSE, include=FALSE}
 library(knitr)
@@ -99,7 +98,7 @@ There are several different ways to "multiply" vectors $\vec{x}$ and $\vec{y}$:
 
 2.  Dot product, also known as the inner product. To compute, calculate $\vec{x} \cdot \vec{y} \equiv \vec{x}^T \vec{y}$ where the superscript $T$ indicates transpose. Dot product is related to the angle $\theta$ between the two vectors as $\vec{x} \cdot \vec{y} = |\vec{x}||\vec{y}| \cos \theta$. Rearranging this as $\vec{x} \cdot \vec{y}/|\vec{y}| = |\vec{x}| \cos \theta$ suggests the intuition of the dot product. It calculates a *projection* of one vector onto the other, or restated, it tells us how much of one vector is pointing in the direction of the other vector. Note that $\vec{x}$ and $\vec{y}$ must have the same number of elements, and the result is a scalar.
 
-3.  Outer product. To compute, calculate $\vec{x} \otimes \vec{y} \equiv \vec{x}\,\vec{y}^T$. Note that $\vec{x}$ and $\vec{y}$ do not need to have the same number of elements, and the result is a matrix. If $\vec{x}$ is $m \times 1$ and $\vec{y}$ is $n \times 1$ then $\vec{x} \otimes \vec{y}$ is $m \times n$.
+3.  Outer product. To compute, calculate $\vec{x} \otimes \vec{y} \equiv \vec{x}\vec{y}^T$. Note that $\vec{x}$ and $\vec{y}$ do not need to have the same number of elements, and the result is a matrix. If $\vec{x}$ is $m \times 1$ and $\vec{y}$ is $n \times 1$ then $\vec{x} \otimes \vec{y}$ is $m \times n$.
 
 4.  Cross product. We are not going to worry about this one for now.
 
@@ -281,6 +280,10 @@ $$
 \begin{pmatrix}
 x_1 \\ x_2 \\ x_3
 \end{pmatrix}
+=
+\begin{pmatrix}
+8 \\ 8 \\ -3
+\end{pmatrix}.
 $$
 
 Let's interpret this system two ways.
@@ -567,7 +570,7 @@ $$
 ||\mat{A}||_p ||\vec{x}||_p = \left( \max_{\mathbf{y} \not = \mathbf{ 0}} \frac{ || \mat{A} \mathbf{y}||_p} { ||\mathbf{y}||_p} \right) ||\vec{x}||_p \geq \frac{ || \mat{A} \vec{x}||_p} { ||\vec{x}||_p} ||\vec{x}||_p = || \mat{A} \vec{x}||_p.
 $$
 
-## Condition Number for $\mat{A}\,\vec{x} = \vec{b}$
+## Condition Number for $\mat{A}\vec{x} = \vec{b}$
 
 Let us consider solving $\mat{A}\vec{x}=\vec{b}$. Suppose we find approximate solution $\vec{x}_a$. The **relative forward error** is 
 $$
