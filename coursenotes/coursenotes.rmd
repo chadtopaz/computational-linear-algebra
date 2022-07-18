@@ -243,7 +243,7 @@ kable(cbind(x, E1, E2))
 
 The result becomes drastically wrong for small $x$ because of subtraction of nearly equal numbers. In such problems, be aware and seek alternative ways to represent the necessary computation, as we did with the second option above.
 
-# Fundamentals of Linear Systems
+# Fundamentals of Linear Systems Poo
 
 ## Big Picture
 
