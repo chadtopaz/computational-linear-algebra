@@ -45,18 +45,18 @@ heavy-duty industrial problem that requires millions of evaluations?
 Consider some methods for evaluating the polynomial
 2*x*<sup>4</sup> + 3*x*<sup>3</sup> − 3*x*<sup>2</sup> + 5*x* − 1:
 
-1.  Naively, 2 ⋅ *x* ⋅ *x* ⋅ *x* ⋅ *x* + 3 ⋅ *x* ⋅ *x* ⋅ *x*….
+-   Naively, 2 ⋅ *x* ⋅ *x* ⋅ *x* ⋅ *x* + 3 ⋅ *x* ⋅ *x* ⋅ *x*….
 
--   10 multiplications, 4 additions (includes subtractions)
+    -   10 multiplications, 4 additions (includes subtractions)
 
-1.  Store (1/2)(1/2), bootstrap to (1/2)(1/2)(1/2), and so forth.
+-   Store (1/2)(1/2), bootstrap to (1/2)(1/2)(1/2), and so forth.
 
--   7 multiplications, 4 additions
+    -   7 multiplications, 4 additions
 
-1.  Horner’s method, factoring out successive powers of *x*, as in
+-   Horner’s method, factoring out successive powers of *x*, as in
      − 1 + *x*(5+*x*(−3+*x*(3+2*x*))).
 
--   4 multiplications, 4 additions
+    -   4 multiplications, 4 additions
 
 We can test:
 
@@ -81,7 +81,7 @@ We can test:
 There are several different ways to “multiply” vectors **x** and **y**:
 
 1.  Element-wise. Just multiply each element of **x** with the element
-    in the corresponding poisiotn in **y**. Note that **x** and **y**
+    in the corresponding position in **y**. Note that **x** and **y**
     must have the same number of elements, and the result is a vector
     with the same number of elements.
 
