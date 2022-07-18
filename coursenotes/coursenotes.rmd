@@ -302,9 +302,9 @@ This form suggests thinking of the linear combination of three basis vectors nec
 
 Let's consider an $n \times n$ matrix $\mat{A}$.
 
-1.  **Invertible** means that the inverse $\mat{A}^{-1}$ exists. This matrix satisfies $\mat{A}\,\mat{A}^{-1} = \mat{I}$, where $\mat{I}$ is the $n \times n$ identity matrix.
+   1.  **Invertible** means that the inverse $\mat{A}^{-1}$ exists. This matrix satisfies $\mat{A}\,\mat{A}^{-1} = \mat{I}$, where $\mat{I}$ is the $n \times n$ identity matrix.
 
-2.  The notation $\det$ means **determinant**. Think of it as a scaling factor for the transformation defined by a matrix. That is, multiplication by $\mat{A}$ can cause a region to contract ($|\det \mat{A}| < 1$) or expand ($|\det \mat{A}| > 1$) and/or reflect ($\det \mat{A} < 0$). As an example, let
+   2.  The notation $\det$ means **determinant**. Think of it as a scaling factor for the transformation defined by a matrix. That is, multiplication by $\mat{A}$ can cause a region to contract ($|\det \mat{A}| < 1$) or expand ($|\det \mat{A}| > 1$) and/or reflect ($\det \mat{A} < 0$). As an example, let
 
 $$
 \mat{A} =
@@ -325,8 +325,7 @@ $$
 
 So $\mat{A}$ invertible $\iff \det \mat{A} \neq 0$.
 
-{:start="3"}
-3. The **eigenvalues** $\lambda_i$ of $\mat{A}$ satisfy
+   3. The **eigenvalues** $\lambda_i$ of $\mat{A}$ satisfy
 
 $$
 \mat{A}\mathbf{v_i}=\lambda_i \mathbf{v_i},
@@ -340,12 +339,11 @@ $$
 
    so no $\lambda_i = 0 \iff \det \mat{A} \neq 0$.
 
-{:start="4"}
-4.  $\mat{A} \mathbf{z} \neq 0$ for all $\mathbf{z} \in \mathbb{R}^n$ except $\mathbf{z}=0 \iff \mat{A}$ is invertible. Why? If $\mat{A} \mathbf{z} = 0$ for $\mathbf{z} \neq 0$, then $\mat{A} \mathbf{z} = 0 \mathbf{z}$, so 0 is an eigenvalue. But for $\mat{A}$ to be invertible, we know $0$ can't be an eigenvalue. (If you are proof oriented you might notice that the implication needs to be shown both ways, but I am trying purposely not to prove here -- just to give you some intuition.)
+   4.  $\mat{A} \mathbf{z} \neq 0$ for all $\mathbf{z} \in \mathbb{R}^n$ except $\mathbf{z}=0 \iff \mat{A}$ is invertible. Why? If $\mat{A} \mathbf{z} = 0$ for $\mathbf{z} \neq 0$, then $\mat{A} \mathbf{z} = 0 \mathbf{z}$, so 0 is an eigenvalue. But for $\mat{A}$ to be invertible, we know $0$ can't be an eigenvalue. (If you are proof oriented you might notice that the implication needs to be shown both ways, but I am trying purposely not to prove here -- just to give you some intuition.)
 
-5.  **Nullspace** just means the parts of $\mathbb{R}^n$ that gets mapped to $\mathbf{0}$ by $\mat{A}$. Another name for nullspace is **kernel**. Mathematically, the nullspace is all the vectors $\mathbf{v}$ for which $\mat{A} \mathbf{v}=0$. So for an invertible matrix $\mat{A}$, the nullspace is $\mathbf{0}$. This is basically assigning a definition to the previous point (above).
+   5.  **Nullspace** just means the parts of $\mathbb{R}^n$ that gets mapped to $\mathbf{0}$ by $\mat{A}$. Another name for nullspace is **kernel**. Mathematically, the nullspace is all the vectors $\mathbf{v}$ for which $\mat{A} \mathbf{v}=0$. So for an invertible matrix $\mat{A}$, the nullspace is $\mathbf{0}$. This is basically assigning a definition to the previous point (above).
 
-6.  If vectors are **linearly independent**, it means that none of the vectors can be written as a linear combination of the others. If $\mat{A}$ is invertible, then its columns are linearly independent. Why? If the columns were linearly dependent, you could take a linear combination of them to reach $\mathbf{0}$ nontrivially, for instance,
+   6.  If vectors are **linearly independent**, it means that none of the vectors can be written as a linear combination of the others. If $\mat{A}$ is invertible, then its columns are linearly independent. Why? If the columns were linearly dependent, you could take a linear combination of them to reach $\mathbf{0}$ nontrivially, for instance,
 
 $$
 \begin{pmatrix}1 & -2\\2 & -4\end{pmatrix}\begin{pmatrix}x_1 \\ x_2 \end{pmatrix}=\begin{pmatrix}0 \\ 0\end{pmatrix}.
@@ -353,12 +351,11 @@ $$
 
    This violates our previous condition (above) about the nullspace only being $\mathbf{0}$.
 
-{:start="7"}
-7.  **Span** means the set of points reachable by taking linear combinations of a set of vectors. If you have $n$ linearly independent vectors in $\mathbb{R}^n$, they span $\mathbb{R}^n$. The **rank** of $\mathbb{A}$ is just the dimension of the space spanned by the column vectors.
+   7.  **Span** means the set of points reachable by taking linear combinations of a set of vectors. If you have $n$ linearly independent vectors in $\mathbb{R}^n$, they span $\mathbb{R}^n$. The **rank** of $\mathbb{A}$ is just the dimension of the space spanned by the column vectors.
 
-8.  The **image** of $\mat{A}$ means all the points that $\mat{A}$ can map to. This is synonymous with the point above: it's the span of the columns of $\mat{A}$. If the rank of $\mat{A}$ is $n$, then the column vectors are linearly independent so they span $\mathbb{R}^n$, so the image of $\mat{A}$ is $\mathbb{R}^n$.
+   8.  The **image** of $\mat{A}$ means all the points that $\mat{A}$ can map to. This is synonymous with the point above: it's the span of the columns of $\mat{A}$. If the rank of $\mat{A}$ is $n$, then the column vectors are linearly independent so they span $\mathbb{R}^n$, so the image of $\mat{A}$ is $\mathbb{R}^n$.
 
-9.  $\mat{A}\vec{x}=\vec{b}$ has a unique solution for all $\vec{b} \iff$ $\mat{A}$ is invertible, since you can left multiply by $\mat{A}^{-1}$.
+   9.  $\mat{A}\vec{x}=\vec{b}$ has a unique solution for all $\vec{b} \iff$ $\mat{A}$ is invertible, since you can left multiply by $\mat{A}^{-1}$.
 
 ## Gaussian Elimination
 
