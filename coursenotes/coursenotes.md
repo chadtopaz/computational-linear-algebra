@@ -563,11 +563,6 @@ For concreteness let’s work in three dimensions and let’s consider the
 system
 
 $$
-\begin{pmatrix}
-2 & 4 & -2\\\\
-1 & 4 & -3\\\\
--2 & -6 & 7
-\end{pmatrix}
 $$
 
 Let’s interpret this system two ways.

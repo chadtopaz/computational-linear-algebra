@@ -277,6 +277,10 @@ $$
 1 & 4 & -3\\
 -2 & -6 & 7
 \end{pmatrix}
+
+\begin{pmatrix}
+x_1 \\ x_2 \\ x_3
+\end{pmatrix}
 $$
 
 Let's interpret this system two ways.
