@@ -663,9 +663,21 @@ norms.
 For concreteness let’s work in three dimensions and let’s consider the
 system
 
-$$
-=
-. $$
+![\begin{pmatrix}
+2 & 4 & -2\\\\
+1 & 4 & -3\\\\
+-2 & -6 & 7
+\end{pmatrix} \begin{pmatrix}
+x_1 \\\\ x_2 \\\\ x_3
+\end{pmatrix} = \begin{pmatrix}
+8 \\\\ 8 \\\\ -3 \end{pmatrix}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbegin%7Bpmatrix%7D%0A2%20%26%204%20%26%20-2%5C%5C%0A1%20%26%204%20%26%20-3%5C%5C%0A-2%20%26%20-6%20%26%207%0A%5Cend%7Bpmatrix%7D%20%5Cbegin%7Bpmatrix%7D%0Ax_1%20%5C%5C%20x_2%20%5C%5C%20x_3%0A%5Cend%7Bpmatrix%7D%20%3D%20%5Cbegin%7Bpmatrix%7D%0A8%20%5C%5C%208%20%5C%5C%20-3%20%5Cend%7Bpmatrix%7D. "\begin{pmatrix}
+2 & 4 & -2\\
+1 & 4 & -3\\
+-2 & -6 & 7
+\end{pmatrix} \begin{pmatrix}
+x_1 \\ x_2 \\ x_3
+\end{pmatrix} = \begin{pmatrix}
+8 \\ 8 \\ -3 \end{pmatrix}.")
 
 Let’s interpret this system two ways.
 
