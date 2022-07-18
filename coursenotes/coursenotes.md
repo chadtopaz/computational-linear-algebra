@@ -4,9 +4,9 @@
 -   <a href="#r-bootcamp" id="toc-r-bootcamp">R Bootcamp</a>
 -   <a href="#how-computers-store-numbers"
     id="toc-how-computers-store-numbers">How Computers Store Numbers</a>
--   <a href="#fundamentals-of-linear-systems-poo"
-    id="toc-fundamentals-of-linear-systems-poo">Fundamentals of Linear
-    Systems Poo</a>
+-   <a href="#fundamentals-of-linear-systems"
+    id="toc-fundamentals-of-linear-systems">Fundamentals of Linear
+    Systems</a>
 -   <a href="#lu-decomposition" id="toc-lu-decomposition">LU
     decomposition</a>
 -   <a href="#iterative-methods-for-linear-systems"
@@ -526,7 +526,7 @@ subtraction of nearly equal numbers. In such problems, be aware and seek
 alternative ways to represent the necessary computation, as we did with
 the second option above.
 
-# Fundamentals of Linear Systems Poo
+# Fundamentals of Linear Systems
 
 ## Big Picture
 
@@ -561,19 +561,9 @@ For concreteness let’s work in three dimensions and let’s consider the
 system
 
 $$
-\begin{pmatrix}
-2 & 4 & -2\\\\
-1 & 4 & -3\\\\
--2 & -6 & 7
-\end{pmatrix}
-\begin{pmatrix}
-x\_1 \\\\ x\_2 \\\\ x\_3
-\end{pmatrix}
 =
-\begin{pmatrix}
-8 \\\\ 8 \\\\ -3
-\end{pmatrix}.
-$$
+
+. $$
 
 Let’s interpret this system two ways.
 
