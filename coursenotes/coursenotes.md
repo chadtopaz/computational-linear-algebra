@@ -611,9 +611,7 @@ $$
 a & b\\\c & d
 \end{pmatrix}.
 $$
-
 For this example,
-
 $$
 \mathbf{A}^{-1} = \frac{1}{ad-bc}
 \begin{pmatrix}
@@ -621,7 +619,6 @@ d & -b\\\\
 -c & a
 \end{pmatrix}.
 $$
-
 So **A** invertible  ⇔ det **A** ≠ 0.
 
 1.  The **eigenvalues** *λ*<sub>*i*</sub> of **A** satisfy
