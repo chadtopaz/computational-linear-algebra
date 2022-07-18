@@ -147,7 +147,11 @@ terms we ignored.
 
 More formally, suppose *f* is *n* + 1 times continuously differentiably
 on the interval between *x*<sub>0</sub> and *x*. Then
-$$ f(x) = \left( \displaystyle \sum\_{k=0}^n \frac{f^{(k)}(x\_0)}{k!}(x-x\_0)^k \right) + \frac{f^{(n+1)}(c)}{(n+1)!}(x-x\_0)^{n+1}$$
+
+$$
+f(x) = \left( \displaystyle \sum\_{k=0}^n \frac{f^{(k)}(x\_0)}{k!}(x-x\_0)^k \right) + \frac{f^{(n+1)}(c)}{(n+1)!}(x-x\_0)^{n+1}
+$$
+
 where *c* is an (unknown) number between *x*<sub>0</sub> and *x*.
 
 For example, suppose *f*(*x*) = sin (*x*) and *x*<sub>0</sub> = 0. We
@@ -157,7 +161,11 @@ can pre-compute some derivatives, *f*(0) = sin (0) = 0,
 *f*<sup>(3)</sup>(0) =  − cos (0) =  − 1,
 *f*<sup>(4)</sup>(0) = sin (0) = 0, and so on. Then the Taylor
 polynomial to 4th order and the error term are are
-$$ 0 + x + 0x^2 - \frac{x^3}{6} + 0\*x^4 + \frac{x^5}{120}\cos c.$$
+
+$$
+0 + x + 0x^2 - \frac{x^3}{6} + 0\*x^4 + \frac{x^5}{120}\cos c.
+$$
+
 Here is a plot of the function and the subsequent Taylor approximations.
 
     P1 <- function(x) {x}

@@ -115,9 +115,21 @@ x%o%z # outer product
 
 This theorem will be especially useful for error analysis of some algorithms we use. The basic idea of Taylor's theorem is that for many functions, we can approximate the function around a point $x_0$ as a polynomial of finite degree, called the Taylor polynomial, plus an error term that accounts for all the higher degree terms we ignored.
 
-More formally, suppose $f$ is $n+1$ times continuously differentiably on the interval between $x_0$ and $x$. Then $$ f(x) = \left( \displaystyle \sum_{k=0}^n \frac{f^{(k)}(x_0)}{k!}(x-x_0)^k \right) + \frac{f^{(n+1)}(c)}{(n+1)!}(x-x_0)^{n+1}$$ where $c$ is an (unknown) number between $x_0$ and $x$.
+More formally, suppose $f$ is $n+1$ times continuously differentiably on the interval between $x_0$ and $x$. Then
 
-For example, suppose $f(x)=\sin(x)$ and $x_0=0$. We can pre-compute some derivatives, $f(0)=\sin(0)=0$, $f^{(1)}(0)=\cos(0)=1$, $f^{(2)}(0)=-\sin(0)=0$, $f^{(3)}(0)=-\cos(0)=-1$, $f^{(4)}(0)=\sin(0)=0$, and so on. Then the Taylor polynomial to 4th order and the error term are are $$ 0 + x + 0x^2 - \frac{x^3}{6} + 0*x^4 + \frac{x^5}{120}\cos c.$$ Here is a plot of the function and the subsequent Taylor approximations.
+$$
+f(x) = \left( \displaystyle \sum_{k=0}^n \frac{f^{(k)}(x_0)}{k!}(x-x_0)^k \right) + \frac{f^{(n+1)}(c)}{(n+1)!}(x-x_0)^{n+1}
+$$
+
+where $c$ is an (unknown) number between $x_0$ and $x$.
+
+For example, suppose $f(x)=\sin(x)$ and $x_0=0$. We can pre-compute some derivatives, $f(0)=\sin(0)=0$, $f^{(1)}(0)=\cos(0)=1$, $f^{(2)}(0)=-\sin(0)=0$, $f^{(3)}(0)=-\cos(0)=-1$, $f^{(4)}(0)=\sin(0)=0$, and so on. Then the Taylor polynomial to 4th order and the error term are are
+
+$$
+0 + x + 0x^2 - \frac{x^3}{6} + 0*x^4 + \frac{x^5}{120}\cos c.
+$$
+
+Here is a plot of the function and the subsequent Taylor approximations.
 
 ```{r cache = TRUE}
 P1 <- function(x) {x}
