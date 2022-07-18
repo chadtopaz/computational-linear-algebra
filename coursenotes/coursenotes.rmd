@@ -283,9 +283,9 @@ Let's interpret this system two ways.
 **Intersecting hyperplanes.** Carrying out the matrix multiplication, we write the equations
 
 $$
-\begin{eqnarray} 2x_1 + 4x_2 -2x_3 & = & 8\\
-x_1 + 4x_2 -3x_3 & = & 8\\
--2x_1 -6x_2 + 7x_3 & = & -3 \end{eqnarray}
+\begin{align} 2x_1 + 4x_2 -2x_3 & = 8\\
+x_1 + 4x_2 -3x_3 & = 8\\
+-2x_1 -6x_2 + 7x_3 & = -3 \end{align}
 $$
 
 This form suggests thinking of the set of points that are at the intersection of these three planes, which could be the empty set, or a point, or a line, or a plane.

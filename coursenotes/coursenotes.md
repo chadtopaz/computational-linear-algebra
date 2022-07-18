@@ -684,11 +684,11 @@ Let’s interpret this system two ways.
 **Intersecting hyperplanes.** Carrying out the matrix multiplication, we
 write the equations
 
-![\begin{eqnarray} 2x_1 + 4x_2 -2x_3 & = & 8\\\\
-x_1 + 4x_2 -3x_3 & = & 8\\\\
--2x_1 -6x_2 + 7x_3 & = & -3 \end{eqnarray}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbegin%7Beqnarray%7D%202x_1%20%2B%204x_2%20-2x_3%20%26%20%3D%20%26%208%5C%5C%0Ax_1%20%2B%204x_2%20-3x_3%20%26%20%3D%20%26%208%5C%5C%0A-2x_1%20-6x_2%20%2B%207x_3%20%26%20%3D%20%26%20-3%20%5Cend%7Beqnarray%7D "\begin{eqnarray} 2x_1 + 4x_2 -2x_3 & = & 8\\
-x_1 + 4x_2 -3x_3 & = & 8\\
--2x_1 -6x_2 + 7x_3 & = & -3 \end{eqnarray}")
+![\begin{align} 2x_1 + 4x_2 -2x_3 & = 8\\\\
+x_1 + 4x_2 -3x_3 & = 8\\\\
+-2x_1 -6x_2 + 7x_3 & = -3 \end{align}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbegin%7Balign%7D%202x_1%20%2B%204x_2%20-2x_3%20%26%20%3D%208%5C%5C%0Ax_1%20%2B%204x_2%20-3x_3%20%26%20%3D%208%5C%5C%0A-2x_1%20-6x_2%20%2B%207x_3%20%26%20%3D%20-3%20%5Cend%7Balign%7D "\begin{align} 2x_1 + 4x_2 -2x_3 & = 8\\
+x_1 + 4x_2 -3x_3 & = 8\\
+-2x_1 -6x_2 + 7x_3 & = -3 \end{align}")
 
 This form suggests thinking of the set of points that are at the
 intersection of these three planes, which could be the empty set, or a
