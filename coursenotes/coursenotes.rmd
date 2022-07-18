@@ -11,13 +11,11 @@ output:
    - \usepackage{bm}
 ---
 
-```{= latex}
 \renewcommand{\vec}[1]{\bm{#1}}
 \renewcommand{\mat}[1]{\bm{#1}}
 \newcommand{\exp}[1]{\mathrm{e}^{#1}}
 \DeclareMathOperator*{\argmin}{arg\,min}
 \DeclareMathOperator*{\float}{fl}
-```
 
 ```{r, message=FALSE, warning=FALSE, include=FALSE}
 library(knitr)
