@@ -99,8 +99,8 @@ There are several different ways to “multiply” vectors **x** and **y**:
 3.  Outer product. To compute, calculate
     **x** ⊗ **y** ≡ **x****y**<sup>*T*</sup>. Note that **x** and **y**
     do not need to have the same number of elements, and the result is a
-    matrix. If **x** is *m* × 1 and **y** is *n* × 1 then *x* ⊗ *y* is
-    *m* × *n*.
+    matrix. If **x** is *m* × 1 and **y** is *n* × 1 then
+    \]**x** ⊗ **y** is *m* × *n*.
 
 4.  Cross product. We are not going to worry about this one for now.
 
