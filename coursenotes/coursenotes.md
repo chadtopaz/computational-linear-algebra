@@ -92,57 +92,57 @@ t1/t2
 ## Inner and Outer Products
 
 There are several different ways to “multiply” vectors
-![\bm{x}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7Bx%7D "\bm{x}")
+![\textbf{x}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7Bx%7D "\textbf{x}")
 and
-![\bm{y}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7By%7D "\bm{y}"):
+![\textbf{y}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7By%7D "\textbf{y}"):
 
 1.  Element-wise. Just multiply each element of
-    ![\bm{x}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7Bx%7D "\bm{x}")
+    ![\textbf{x}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7Bx%7D "\textbf{x}")
     with the element in the corresponding poisiotn in
-    ![\bm{y}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7By%7D "\bm{y}").
+    ![\textbf{y}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7By%7D "\textbf{y}").
     Note that
-    ![\bm{x}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7Bx%7D "\bm{x}")
+    ![\textbf{x}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7Bx%7D "\textbf{x}")
     and
-    ![\bm{y}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7By%7D "\bm{y}")
+    ![\textbf{y}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7By%7D "\textbf{y}")
     must have the same number of elements, and the result is a vector
     with the same number of elements.
 
 2.  Dot product, also known as the inner product. To compute, calculate
-    ![\bm{x} \cdot \bm{y} \equiv \bm{x}^T \bm{y}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7Bx%7D%20%5Ccdot%20%5Cbm%7By%7D%20%5Cequiv%20%5Cbm%7Bx%7D%5ET%20%5Cbm%7By%7D "\bm{x} \cdot \bm{y} \equiv \bm{x}^T \bm{y}")
+    ![\textbf{x} \cdot \textbf{y} \equiv \textbf{x}^T \textbf{y}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7Bx%7D%20%5Ccdot%20%5Ctextbf%7By%7D%20%5Cequiv%20%5Ctextbf%7Bx%7D%5ET%20%5Ctextbf%7By%7D "\textbf{x} \cdot \textbf{y} \equiv \textbf{x}^T \textbf{y}")
     where the superscript
     ![T](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;T "T")
     indicates transpose. Dot product is related to the angle
     ![\theta](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctheta "\theta")
     between the two vectors as
-    ![\bm{x} \cdot \bm{y} = \|\bm{x}\|\|\bm{y}\| \cos \theta](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7Bx%7D%20%5Ccdot%20%5Cbm%7By%7D%20%3D%20%7C%5Cbm%7Bx%7D%7C%7C%5Cbm%7By%7D%7C%20%5Ccos%20%5Ctheta "\bm{x} \cdot \bm{y} = |\bm{x}||\bm{y}| \cos \theta").
+    ![\textbf{x} \cdot \textbf{y} = \|\textbf{x}\|\|\textbf{y}\| \cos \theta](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7Bx%7D%20%5Ccdot%20%5Ctextbf%7By%7D%20%3D%20%7C%5Ctextbf%7Bx%7D%7C%7C%5Ctextbf%7By%7D%7C%20%5Ccos%20%5Ctheta "\textbf{x} \cdot \textbf{y} = |\textbf{x}||\textbf{y}| \cos \theta").
     Rearranging this as
-    ![\bm{x} \cdot \bm{y}/\|\bm{y}\| = \|\bm{x}\| \cos \theta](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7Bx%7D%20%5Ccdot%20%5Cbm%7By%7D%2F%7C%5Cbm%7By%7D%7C%20%3D%20%7C%5Cbm%7Bx%7D%7C%20%5Ccos%20%5Ctheta "\bm{x} \cdot \bm{y}/|\bm{y}| = |\bm{x}| \cos \theta")
+    ![\textbf{x} \cdot \textbf{y}/\|\textbf{y}\| = \|\textbf{x}\| \cos \theta](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7Bx%7D%20%5Ccdot%20%5Ctextbf%7By%7D%2F%7C%5Ctextbf%7By%7D%7C%20%3D%20%7C%5Ctextbf%7Bx%7D%7C%20%5Ccos%20%5Ctheta "\textbf{x} \cdot \textbf{y}/|\textbf{y}| = |\textbf{x}| \cos \theta")
     suggests the intuition of the dot product. It calculates a
     *projection* of one vector onto the other, or restated, it tells us
     how much of one vector is pointing in the direction of the other
     vector. Note that
-    ![\bm{x}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7Bx%7D "\bm{x}")
+    ![\textbf{x}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7Bx%7D "\textbf{x}")
     and
-    ![\bm{y}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7By%7D "\bm{y}")
+    ![\textbf{y}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7By%7D "\textbf{y}")
     must have the same number of elements, and the result is a scalar.
 
 3.  Outer product. To compute, calculate
-    ![\bm{x} \otimes \bm{y} \equiv \bm{x}\bm{y}^T](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7Bx%7D%20%5Cotimes%20%5Cbm%7By%7D%20%5Cequiv%20%5Cbm%7Bx%7D%5Cbm%7By%7D%5ET "\bm{x} \otimes \bm{y} \equiv \bm{x}\bm{y}^T").
+    ![\textbf{x} \otimes \textbf{y} \equiv \textbf{x}\textbf{y}^T](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7Bx%7D%20%5Cotimes%20%5Ctextbf%7By%7D%20%5Cequiv%20%5Ctextbf%7Bx%7D%5Ctextbf%7By%7D%5ET "\textbf{x} \otimes \textbf{y} \equiv \textbf{x}\textbf{y}^T").
     Note that
-    ![\bm{x}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7Bx%7D "\bm{x}")
+    ![\textbf{x}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7Bx%7D "\textbf{x}")
     and
-    ![\bm{y}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7By%7D "\bm{y}")
+    ![\textbf{y}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7By%7D "\textbf{y}")
     do not need to have the same number of elements, and the result is a
     matrix. If
-    ![\bm{x}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7Bx%7D "\bm{x}")
+    ![\textbf{x}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7Bx%7D "\textbf{x}")
     is
     ![m \times 1](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;m%20%5Ctimes%201 "m \times 1")
     and
-    ![\bm{y}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7By%7D "\bm{y}")
+    ![\textbf{y}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7By%7D "\textbf{y}")
     is
     ![n \times 1](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;n%20%5Ctimes%201 "n \times 1")
     then
-    ![\bm{x} \otimes \bm{y}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7Bx%7D%20%5Cotimes%20%5Cbm%7By%7D "\bm{x} \otimes \bm{y}")
+    ![\textbf{x} \otimes \textbf{y}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7Bx%7D%20%5Cotimes%20%5Ctextbf%7By%7D "\textbf{x} \otimes \textbf{y}")
     is
     ![m \times n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;m%20%5Ctimes%20n "m \times n").
 
@@ -632,7 +632,7 @@ as we did with the second option above.
 ## Big Picture
 
 We begin considering the solution of systems of linear equations,
-![\bm{A}\bm{x}=\bm{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%5Cbm%7Bx%7D%3D%5Cbm%7Bb%7D "\bm{A}\bm{x}=\bm{b}").
+![\textbf{A}\textbf{x}=\textbf{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%5Ctextbf%7Bx%7D%3D%5Ctextbf%7Bb%7D "\textbf{A}\textbf{x}=\textbf{b}").
 Linear systems arise in analysis of different equations (modeling
 macromolecules, electromagnetics, heat flow, wave motion, structural
 engineering, a million other examples), in curve fitting, in
@@ -656,7 +656,7 @@ norms.
 -   Define vector norms
 -   Define matrix norms
 -   Define condition number for solution of
-    ![\bm{A}\bm{x}=\bm{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%5Cbm%7Bx%7D%3D%5Cbm%7Bb%7D "\bm{A}\bm{x}=\bm{b}")
+    ![\textbf{A}\textbf{x}=\textbf{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%5Ctextbf%7Bx%7D%3D%5Ctextbf%7Bb%7D "\textbf{A}\textbf{x}=\textbf{b}")
 
 ## Linear Systems
 
@@ -705,14 +705,14 @@ vectors necessary to reach a particular target vector. There could be 0,
 Let’s consider an
 ![n \times n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;n%20%5Ctimes%20n "n \times n")
 matrix
-![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}").
+![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}").
 
 1.  **Invertible** means that the inverse
-    ![\bm{A}^{-1}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%5E%7B-1%7D "\bm{A}^{-1}")
+    ![\textbf{A}^{-1}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%5E%7B-1%7D "\textbf{A}^{-1}")
     exists. This matrix satisfies
-    ![\bm{A}\bm{A}^{-1} = \bm{I}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%5Cbm%7BA%7D%5E%7B-1%7D%20%3D%20%5Cbm%7BI%7D "\bm{A}\bm{A}^{-1} = \bm{I}"),
+    ![\textbf{A}\textbf{A}^{-1} = \textbf{I}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%5Ctextbf%7BA%7D%5E%7B-1%7D%20%3D%20%5Ctextbf%7BI%7D "\textbf{A}\textbf{A}^{-1} = \textbf{I}"),
     where
-    ![\bm{I}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BI%7D "\bm{I}")
+    ![\textbf{I}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BI%7D "\textbf{I}")
     is the
     ![n \times n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;n%20%5Ctimes%20n "n \times n")
     identity matrix.
@@ -721,56 +721,56 @@ matrix
     ![\det](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cdet "\det")
     means **determinant**. Think of it as a scaling factor for the
     transformation defined by a matrix. That is, multiplication by
-    ![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}")
+    ![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}")
     can cause a region to contract
-    (![\|\det \bm{A}\| \< 1](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7C%5Cdet%20%5Cbm%7BA%7D%7C%20%3C%201 "|\det \bm{A}| < 1"))
+    (![\|\det \textbf{A}\| \< 1](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7C%5Cdet%20%5Ctextbf%7BA%7D%7C%20%3C%201 "|\det \textbf{A}| < 1"))
     or expand
-    (![\|\det \bm{A}\| \> 1](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7C%5Cdet%20%5Cbm%7BA%7D%7C%20%3E%201 "|\det \bm{A}| > 1"))
+    (![\|\det \textbf{A}\| \> 1](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7C%5Cdet%20%5Ctextbf%7BA%7D%7C%20%3E%201 "|\det \textbf{A}| > 1"))
     and/or reflect
-    (![\det \bm{A} \< 0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cdet%20%5Cbm%7BA%7D%20%3C%200 "\det \bm{A} < 0")).
+    (![\det \textbf{A} \< 0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cdet%20%5Ctextbf%7BA%7D%20%3C%200 "\det \textbf{A} < 0")).
     As an example, let
 
-![\bm{A}=\begin{pmatrix}a & b\\\c & d\end{pmatrix}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%3D%5Cbegin%7Bpmatrix%7Da%20%26%20b%5C%5Cc%20%26%20d%5Cend%7Bpmatrix%7D. "\bm{A}=\begin{pmatrix}a & b\\c & d\end{pmatrix}.")
+![\textbf{A}=\begin{pmatrix}a & b\\\c & d\end{pmatrix}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%3D%5Cbegin%7Bpmatrix%7Da%20%26%20b%5C%5Cc%20%26%20d%5Cend%7Bpmatrix%7D. "\textbf{A}=\begin{pmatrix}a & b\\c & d\end{pmatrix}.")
 
 For this example,
 
-![\bm{A}^{-1} = \frac{1}{ad-bc}\begin{pmatrix}d & -b\\\\-c & a\end{pmatrix}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%5E%7B-1%7D%20%3D%20%5Cfrac%7B1%7D%7Bad-bc%7D%5Cbegin%7Bpmatrix%7Dd%20%26%20-b%5C%5C-c%20%26%20a%5Cend%7Bpmatrix%7D. "\bm{A}^{-1} = \frac{1}{ad-bc}\begin{pmatrix}d & -b\\-c & a\end{pmatrix}.")
+![\textbf{A}^{-1} = \frac{1}{ad-bc}\begin{pmatrix}d & -b\\\\-c & a\end{pmatrix}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%5E%7B-1%7D%20%3D%20%5Cfrac%7B1%7D%7Bad-bc%7D%5Cbegin%7Bpmatrix%7Dd%20%26%20-b%5C%5C-c%20%26%20a%5Cend%7Bpmatrix%7D. "\textbf{A}^{-1} = \frac{1}{ad-bc}\begin{pmatrix}d & -b\\-c & a\end{pmatrix}.")
 
 So
-![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}")
+![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}")
 invertible
-![\iff \det \bm{A} \neq 0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ciff%20%5Cdet%20%5Cbm%7BA%7D%20%5Cneq%200 "\iff \det \bm{A} \neq 0").
+![\iff \det \textbf{A} \neq 0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ciff%20%5Cdet%20%5Ctextbf%7BA%7D%20%5Cneq%200 "\iff \det \textbf{A} \neq 0").
 
 3.  The **eigenvalues**
     ![\lambda_i](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Clambda_i "\lambda_i")
     of
-    ![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}")
+    ![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}")
     satisfy
 
-![\bm{A}\mathbf{v_i}=\lambda_i \mathbf{v_i},](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%5Cmathbf%7Bv_i%7D%3D%5Clambda_i%20%5Cmathbf%7Bv_i%7D%2C "\bm{A}\mathbf{v_i}=\lambda_i \mathbf{v_i},")
+![\textbf{A}\mathbf{v_i}=\lambda_i \mathbf{v_i},](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%5Cmathbf%7Bv_i%7D%3D%5Clambda_i%20%5Cmathbf%7Bv_i%7D%2C "\textbf{A}\mathbf{v_i}=\lambda_i \mathbf{v_i},")
 
 where
 ![\mathbf{v_i}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7Bv_i%7D "\mathbf{v_i}")
 are the **eigenvectors**. You can prove that
 
-![\prod_i \lambda_i = \det \bm{A},](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cprod_i%20%5Clambda_i%20%3D%20%5Cdet%20%5Cbm%7BA%7D%2C "\prod_i \lambda_i = \det \bm{A},")
+![\prod_i \lambda_i = \det \textbf{A},](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cprod_i%20%5Clambda_i%20%3D%20%5Cdet%20%5Ctextbf%7BA%7D%2C "\prod_i \lambda_i = \det \textbf{A},")
 
 so no
-![\lambda_i = 0 \iff \det \bm{A} \neq 0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Clambda_i%20%3D%200%20%5Ciff%20%5Cdet%20%5Cbm%7BA%7D%20%5Cneq%200 "\lambda_i = 0 \iff \det \bm{A} \neq 0").
+![\lambda_i = 0 \iff \det \textbf{A} \neq 0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Clambda_i%20%3D%200%20%5Ciff%20%5Cdet%20%5Ctextbf%7BA%7D%20%5Cneq%200 "\lambda_i = 0 \iff \det \textbf{A} \neq 0").
 
-4.  ![\bm{A} \mathbf{z} \neq 0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%20%5Cmathbf%7Bz%7D%20%5Cneq%200 "\bm{A} \mathbf{z} \neq 0")
+4.  ![\textbf{A} \mathbf{z} \neq 0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%20%5Cmathbf%7Bz%7D%20%5Cneq%200 "\textbf{A} \mathbf{z} \neq 0")
     for all
     ![\mathbf{z} \in \mathbb{R}^n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7Bz%7D%20%5Cin%20%5Cmathbb%7BR%7D%5En "\mathbf{z} \in \mathbb{R}^n")
     except
-    ![\mathbf{z}=0 \iff \bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7Bz%7D%3D0%20%5Ciff%20%5Cbm%7BA%7D "\mathbf{z}=0 \iff \bm{A}")
+    ![\mathbf{z}=0 \iff \textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7Bz%7D%3D0%20%5Ciff%20%5Ctextbf%7BA%7D "\mathbf{z}=0 \iff \textbf{A}")
     is invertible. Why? If
-    ![\bm{A} \mathbf{z} = 0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%20%5Cmathbf%7Bz%7D%20%3D%200 "\bm{A} \mathbf{z} = 0")
+    ![\textbf{A} \mathbf{z} = 0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%20%5Cmathbf%7Bz%7D%20%3D%200 "\textbf{A} \mathbf{z} = 0")
     for
     ![\mathbf{z} \neq 0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7Bz%7D%20%5Cneq%200 "\mathbf{z} \neq 0"),
     then
-    ![\bm{A} \mathbf{z} = 0 \mathbf{z}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%20%5Cmathbf%7Bz%7D%20%3D%200%20%5Cmathbf%7Bz%7D "\bm{A} \mathbf{z} = 0 \mathbf{z}"),
+    ![\textbf{A} \mathbf{z} = 0 \mathbf{z}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%20%5Cmathbf%7Bz%7D%20%3D%200%20%5Cmathbf%7Bz%7D "\textbf{A} \mathbf{z} = 0 \mathbf{z}"),
     so 0 is an eigenvalue. But for
-    ![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}")
+    ![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}")
     to be invertible, we know
     ![0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;0 "0")
     can’t be an eigenvalue. (If you are proof oriented you might notice
@@ -782,14 +782,14 @@ so no
     that gets mapped to
     ![\mathbf{0}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7B0%7D "\mathbf{0}")
     by
-    ![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}").
+    ![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}").
     Another name for nullspace is **kernel**. Mathematically, the
     nullspace is all the vectors
     ![\mathbf{v}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7Bv%7D "\mathbf{v}")
     for which
-    ![\bm{A} \mathbf{v}=0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%20%5Cmathbf%7Bv%7D%3D0 "\bm{A} \mathbf{v}=0").
+    ![\textbf{A} \mathbf{v}=0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%20%5Cmathbf%7Bv%7D%3D0 "\textbf{A} \mathbf{v}=0").
     So for an invertible matrix
-    ![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}"),
+    ![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}"),
     the nullspace is
     ![\mathbf{0}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7B0%7D "\mathbf{0}").
     This is basically assigning a definition to the previous point
@@ -797,7 +797,7 @@ so no
 
 6.  If vectors are **linearly independent**, it means that none of the
     vectors can be written as a linear combination of the others. If
-    ![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}")
+    ![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}")
     is invertible, then its columns are linearly independent. Why? If
     the columns were linearly dependent, you could take a linear
     combination of them to reach
@@ -822,29 +822,29 @@ being
     is just the dimension of the space spanned by the column vectors.
 
 8.  The **image** of
-    ![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}")
+    ![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}")
     means all the points that
-    ![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}")
+    ![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}")
     can map to. This is synonymous with the point above: it’s the span
     of the columns of
-    ![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}").
+    ![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}").
     If the rank of
-    ![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}")
+    ![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}")
     is
     ![n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;n "n"),
     then the column vectors are linearly independent so they span
     ![\mathbb{R}^n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbb%7BR%7D%5En "\mathbb{R}^n"),
     so the image of
-    ![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}")
+    ![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}")
     is
     ![\mathbb{R}^n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbb%7BR%7D%5En "\mathbb{R}^n").
 
-9.  ![\bm{A}\bm{x}=\bm{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%5Cbm%7Bx%7D%3D%5Cbm%7Bb%7D "\bm{A}\bm{x}=\bm{b}")
+9.  ![\textbf{A}\textbf{x}=\textbf{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%5Ctextbf%7Bx%7D%3D%5Ctextbf%7Bb%7D "\textbf{A}\textbf{x}=\textbf{b}")
     has a unique solution for all
-    ![\bm{b} \iff](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7Bb%7D%20%5Ciff "\bm{b} \iff")
-    ![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}")
+    ![\textbf{b} \iff](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7Bb%7D%20%5Ciff "\textbf{b} \iff")
+    ![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}")
     is invertible, since you can left multiply by
-    ![\bm{A}^{-1}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%5E%7B-1%7D "\bm{A}^{-1}").
+    ![\textbf{A}^{-1}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%5E%7B-1%7D "\textbf{A}^{-1}").
 
 ## Gaussian Elimination
 
@@ -865,27 +865,27 @@ set:
 -   Add one row to a scalar multiple of another
 
 To solve a linear system
-![\bm{A}\bm{x}=\bm{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%5Cbm%7Bx%7D%3D%5Cbm%7Bb%7D "\bm{A}\bm{x}=\bm{b}"),
+![\textbf{A}\textbf{x}=\textbf{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%5Ctextbf%7Bx%7D%3D%5Ctextbf%7Bb%7D "\textbf{A}\textbf{x}=\textbf{b}"),
 write it as an augmented matrix, reduce it to row echelon form, and then
 use back substitution to solve.
 
 For example, take
 
-![\bm{A} = 
+![\textbf{A} = 
 \begin{pmatrix}
 1 & 3 & 1\\\\
 1 & 1 & -1 \\\\
 3 & 11 & 5
 \end{pmatrix}, \quad
-\bm{b} = \begin{pmatrix}
+\textbf{b} = \begin{pmatrix}
 9 \\\\ 1 \\\\ 35
-\end{pmatrix}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%20%3D%20%0A%5Cbegin%7Bpmatrix%7D%0A1%20%26%203%20%26%201%5C%5C%0A1%20%26%201%20%26%20-1%20%5C%5C%0A3%20%26%2011%20%26%205%0A%5Cend%7Bpmatrix%7D%2C%20%5Cquad%0A%5Cbm%7Bb%7D%20%3D%20%5Cbegin%7Bpmatrix%7D%0A9%20%5C%5C%201%20%5C%5C%2035%0A%5Cend%7Bpmatrix%7D. "\bm{A} = 
+\end{pmatrix}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%20%3D%20%0A%5Cbegin%7Bpmatrix%7D%0A1%20%26%203%20%26%201%5C%5C%0A1%20%26%201%20%26%20-1%20%5C%5C%0A3%20%26%2011%20%26%205%0A%5Cend%7Bpmatrix%7D%2C%20%5Cquad%0A%5Ctextbf%7Bb%7D%20%3D%20%5Cbegin%7Bpmatrix%7D%0A9%20%5C%5C%201%20%5C%5C%2035%0A%5Cend%7Bpmatrix%7D. "\textbf{A} = 
 \begin{pmatrix}
 1 & 3 & 1\\
 1 & 1 & -1 \\
 3 & 11 & 5
 \end{pmatrix}, \quad
-\bm{b} = \begin{pmatrix}
+\textbf{b} = \begin{pmatrix}
 9 \\ 1 \\ 35
 \end{pmatrix}.")
 
@@ -943,7 +943,7 @@ top row, from which we find
 ![x_1 = 9 - x_3 - 3 x_2 = 9 - x_3 - 3(4 - x_3) = -3 + 2x_3](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_1%20%3D%209%20-%20x_3%20-%203%20x_2%20%3D%209%20-%20x_3%20-%203%284%20-%20x_3%29%20%3D%20-3%20%2B%202x_3 "x_1 = 9 - x_3 - 3 x_2 = 9 - x_3 - 3(4 - x_3) = -3 + 2x_3").
 Therefore, the solution is
 
-![\bm{x} = \begin{pmatrix}  -3 + 2x_3 \\\\ 4 - x_3 \\\\ x_3 \end{pmatrix} = \begin{pmatrix}  -3 \\\\ 4\\\\ 0 \end{pmatrix} + x_3 \begin{pmatrix}  2 \\\\ -1 \\\\ 1 \end{pmatrix}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7Bx%7D%20%3D%20%5Cbegin%7Bpmatrix%7D%20%20-3%20%2B%202x_3%20%5C%5C%204%20-%20x_3%20%5C%5C%20x_3%20%5Cend%7Bpmatrix%7D%20%3D%20%5Cbegin%7Bpmatrix%7D%20%20-3%20%5C%5C%204%5C%5C%200%20%5Cend%7Bpmatrix%7D%20%2B%20x_3%20%5Cbegin%7Bpmatrix%7D%20%202%20%5C%5C%20-1%20%5C%5C%201%20%5Cend%7Bpmatrix%7D. "\bm{x} = \begin{pmatrix}  -3 + 2x_3 \\ 4 - x_3 \\ x_3 \end{pmatrix} = \begin{pmatrix}  -3 \\ 4\\ 0 \end{pmatrix} + x_3 \begin{pmatrix}  2 \\ -1 \\ 1 \end{pmatrix}.")
+![\textbf{x} = \begin{pmatrix}  -3 + 2x_3 \\\\ 4 - x_3 \\\\ x_3 \end{pmatrix} = \begin{pmatrix}  -3 \\\\ 4\\\\ 0 \end{pmatrix} + x_3 \begin{pmatrix}  2 \\\\ -1 \\\\ 1 \end{pmatrix}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7Bx%7D%20%3D%20%5Cbegin%7Bpmatrix%7D%20%20-3%20%2B%202x_3%20%5C%5C%204%20-%20x_3%20%5C%5C%20x_3%20%5Cend%7Bpmatrix%7D%20%3D%20%5Cbegin%7Bpmatrix%7D%20%20-3%20%5C%5C%204%5C%5C%200%20%5Cend%7Bpmatrix%7D%20%2B%20x_3%20%5Cbegin%7Bpmatrix%7D%20%202%20%5C%5C%20-1%20%5C%5C%201%20%5Cend%7Bpmatrix%7D. "\textbf{x} = \begin{pmatrix}  -3 + 2x_3 \\ 4 - x_3 \\ x_3 \end{pmatrix} = \begin{pmatrix}  -3 \\ 4\\ 0 \end{pmatrix} + x_3 \begin{pmatrix}  2 \\ -1 \\ 1 \end{pmatrix}.")
 
 By the way, we can go ahead and use a routine I’ve written to perform
 the elimination.
@@ -964,9 +964,9 @@ Because we are solving problems on computers, we should care about how
 long solution takes, which in turn depends on the number of
 computational operations carried out. This is called the *complexity* of
 the method. For solving
-![\bm{A}\bm{x}=\bm{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%5Cbm%7Bx%7D%3D%5Cbm%7Bb%7D "\bm{A}\bm{x}=\bm{b}"),
+![\textbf{A}\textbf{x}=\textbf{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%5Ctextbf%7Bx%7D%3D%5Ctextbf%7Bb%7D "\textbf{A}\textbf{x}=\textbf{b}"),
 with
-![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}")
+![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}")
 an
 ![n \times n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;n%20%5Ctimes%20n "n \times n")
 matrix, we write the complexity in terms of
@@ -1045,16 +1045,16 @@ sounds abstract, so let’s make it concrete in the cases of a
 root-finding problem and a linear algebra problem.
 
 Suppose we want to solve
-![\bm{A}\bm{x}=\bm{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%5Cbm%7Bx%7D%3D%5Cbm%7Bb%7D "\bm{A}\bm{x}=\bm{b}").
+![\textbf{A}\textbf{x}=\textbf{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%5Ctextbf%7Bx%7D%3D%5Ctextbf%7Bb%7D "\textbf{A}\textbf{x}=\textbf{b}").
 The true solution is
-![\bm{x}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7Bx%7D "\bm{x}")
+![\textbf{x}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7Bx%7D "\textbf{x}")
 but our computational method finds an approximate solution
-![\bm{x}\_a](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7Bx%7D_a "\bm{x}_a").
+![\textbf{x}\_a](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7Bx%7D_a "\textbf{x}_a").
 The forward error is the distance between the two solutions, that is,
-![\|\|\bm{x}-\mathbf{x_a}\|\|](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7C%7C%5Cbm%7Bx%7D-%5Cmathbf%7Bx_a%7D%7C%7C "||\bm{x}-\mathbf{x_a}||").
+![\|\|\textbf{x}-\mathbf{x_a}\|\|](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7C%7C%5Ctextbf%7Bx%7D-%5Cmathbf%7Bx_a%7D%7C%7C "||\textbf{x}-\mathbf{x_a}||").
 The backward error is the distance between what the matrix outputs when
 applied to those solutions, that is,
-![\|\|\bm{A}\bm{x}-\bm{A}\bm{x}\_a\|\|=\|\|\bm{b}-\bm{A}\bm{x}\_a\|\|](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7C%7C%5Cbm%7BA%7D%5Cbm%7Bx%7D-%5Cbm%7BA%7D%5Cbm%7Bx%7D_a%7C%7C%3D%7C%7C%5Cbm%7Bb%7D-%5Cbm%7BA%7D%5Cbm%7Bx%7D_a%7C%7C "||\bm{A}\bm{x}-\bm{A}\bm{x}_a||=||\bm{b}-\bm{A}\bm{x}_a||").
+![\|\|\textbf{A}\textbf{x}-\textbf{A}\textbf{x}\_a\|\|=\|\|\textbf{b}-\textbf{A}\textbf{x}\_a\|\|](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7C%7C%5Ctextbf%7BA%7D%5Ctextbf%7Bx%7D-%5Ctextbf%7BA%7D%5Ctextbf%7Bx%7D_a%7C%7C%3D%7C%7C%5Ctextbf%7Bb%7D-%5Ctextbf%7BA%7D%5Ctextbf%7Bx%7D_a%7C%7C "||\textbf{A}\textbf{x}-\textbf{A}\textbf{x}_a||=||\textbf{b}-\textbf{A}\textbf{x}_a||").
 Distance here is the length of the difference between two quantities.
 
 Notice that we haven’t specified what distance means! This is why we
@@ -1075,7 +1075,7 @@ for
 ![1 \le p \le \infty](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;1%20%5Cle%20p%20%5Cle%20%5Cinfty "1 \le p \le \infty")
 is defined as
 
-![\|\| \bm{x} \|\|\_p = \left({\|x_1\|^p + \|x_2\|^p + \cdots + \|x_n\|^p} \right)^{1/p}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7C%7C%20%5Cbm%7Bx%7D%20%7C%7C_p%20%3D%20%5Cleft%28%7B%7Cx_1%7C%5Ep%20%2B%20%7Cx_2%7C%5Ep%20%2B%20%5Ccdots%20%2B%20%7Cx_n%7C%5Ep%7D%20%5Cright%29%5E%7B1%2Fp%7D. "|| \bm{x} ||_p = \left({|x_1|^p + |x_2|^p + \cdots + |x_n|^p} \right)^{1/p}.")
+![\|\| \textbf{x} \|\|\_p = \left({\|x_1\|^p + \|x_2\|^p + \cdots + \|x_n\|^p} \right)^{1/p}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7C%7C%20%5Ctextbf%7Bx%7D%20%7C%7C_p%20%3D%20%5Cleft%28%7B%7Cx_1%7C%5Ep%20%2B%20%7Cx_2%7C%5Ep%20%2B%20%5Ccdots%20%2B%20%7Cx_n%7C%5Ep%7D%20%5Cright%29%5E%7B1%2Fp%7D. "|| \textbf{x} ||_p = \left({|x_1|^p + |x_2|^p + \cdots + |x_n|^p} \right)^{1/p}.")
 
 The three most common
 ![p](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;p "p")-norms
@@ -1094,7 +1094,7 @@ most natural:
 
 -   ![p=\infty](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;p%3D%5Cinfty "p=\infty")
 
-![\|\| \bm{x} \|\|\_\infty = \max{\left(\| x_1\|, \| x_2\|,  \ldots, \|x_n\|\right)}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7C%7C%20%5Cbm%7Bx%7D%20%7C%7C_%5Cinfty%20%3D%20%5Cmax%7B%5Cleft%28%7C%20x_1%7C%2C%20%7C%20x_2%7C%2C%20%20%5Cldots%2C%20%7Cx_n%7C%5Cright%29%7D "|| \bm{x} ||_\infty = \max{\left(| x_1|, | x_2|,  \ldots, |x_n|\right)}")
+![\|\| \textbf{x} \|\|\_\infty = \max{\left(\| x_1\|, \| x_2\|,  \ldots, \|x_n\|\right)}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7C%7C%20%5Ctextbf%7Bx%7D%20%7C%7C_%5Cinfty%20%3D%20%5Cmax%7B%5Cleft%28%7C%20x_1%7C%2C%20%7C%20x_2%7C%2C%20%20%5Cldots%2C%20%7Cx_n%7C%5Cright%29%7D "|| \textbf{x} ||_\infty = \max{\left(| x_1|, | x_2|,  \ldots, |x_n|\right)}")
 
 For
 ![p = \infty](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;p%20%3D%20%5Cinfty "p = \infty")
@@ -1223,14 +1223,14 @@ is closely related to the vector
 ![p](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;p "p")-norm,
 and is given by
 
-![\|\|\bm{A}\|\|\_p = \max\_{\bm{x} \not = \mathbf{ 0}} \frac{ \|\| \bm{A} \bm{x}\|\|\_p} { \|\|\bm{x}\|\|\_p} = \max\_{\|\|\bm{x}\|\|\_p  = 1}  \|\| \bm{A} \bm{x}\|\|\_p](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7C%7C%5Cbm%7BA%7D%7C%7C_p%20%3D%20%5Cmax_%7B%5Cbm%7Bx%7D%20%5Cnot%20%3D%20%5Cmathbf%7B%200%7D%7D%20%5Cfrac%7B%20%7C%7C%20%5Cbm%7BA%7D%20%5Cbm%7Bx%7D%7C%7C_p%7D%20%7B%20%7C%7C%5Cbm%7Bx%7D%7C%7C_p%7D%20%3D%20%5Cmax_%7B%7C%7C%5Cbm%7Bx%7D%7C%7C_p%20%20%3D%201%7D%20%20%7C%7C%20%5Cbm%7BA%7D%20%5Cbm%7Bx%7D%7C%7C_p "||\bm{A}||_p = \max_{\bm{x} \not = \mathbf{ 0}} \frac{ || \bm{A} \bm{x}||_p} { ||\bm{x}||_p} = \max_{||\bm{x}||_p  = 1}  || \bm{A} \bm{x}||_p")
+![\|\|\textbf{A}\|\|\_p = \max\_{\textbf{x} \not = \mathbf{ 0}} \frac{ \|\| \textbf{A} \textbf{x}\|\|\_p} { \|\|\textbf{x}\|\|\_p} = \max\_{\|\|\textbf{x}\|\|\_p  = 1}  \|\| \textbf{A} \textbf{x}\|\|\_p](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7C%7C%5Ctextbf%7BA%7D%7C%7C_p%20%3D%20%5Cmax_%7B%5Ctextbf%7Bx%7D%20%5Cnot%20%3D%20%5Cmathbf%7B%200%7D%7D%20%5Cfrac%7B%20%7C%7C%20%5Ctextbf%7BA%7D%20%5Ctextbf%7Bx%7D%7C%7C_p%7D%20%7B%20%7C%7C%5Ctextbf%7Bx%7D%7C%7C_p%7D%20%3D%20%5Cmax_%7B%7C%7C%5Ctextbf%7Bx%7D%7C%7C_p%20%20%3D%201%7D%20%20%7C%7C%20%5Ctextbf%7BA%7D%20%5Ctextbf%7Bx%7D%7C%7C_p "||\textbf{A}||_p = \max_{\textbf{x} \not = \mathbf{ 0}} \frac{ || \textbf{A} \textbf{x}||_p} { ||\textbf{x}||_p} = \max_{||\textbf{x}||_p  = 1}  || \textbf{A} \textbf{x}||_p")
 
 The matrix
 ![p](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;p "p")-norm
 says: apply
 ![A](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;A "A")
 to the unit sphere, and
-![\|\|\bm{A}\|\|\_p](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7C%7C%5Cbm%7BA%7D%7C%7C_p "||\bm{A}||_p")
+![\|\|\textbf{A}\|\|\_p](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7C%7C%5Ctextbf%7BA%7D%7C%7C_p "||\textbf{A}||_p")
 is the length of the vector that is farthest from the origin. This is
 not trivial to calculate! You have an infinite number of vectors to
 consider.
@@ -1243,15 +1243,15 @@ for which it is easy to compute. We have:
 
 -   ![p=1](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;p%3D1 "p=1")
 
-![\|\|\bm{A} \|\|\_1 = \displaystyle{\max\_{1 \le j \le n} \sum\_{i=1}^n \|a\_{ij}\|} = \text{maximum absolute column sum}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7C%7C%5Cbm%7BA%7D%20%7C%7C_1%20%3D%20%5Cdisplaystyle%7B%5Cmax_%7B1%20%5Cle%20j%20%5Cle%20n%7D%20%5Csum_%7Bi%3D1%7D%5En%20%7Ca_%7Bij%7D%7C%7D%20%3D%20%5Ctext%7Bmaximum%20absolute%20column%20sum%7D "||\bm{A} ||_1 = \displaystyle{\max_{1 \le j \le n} \sum_{i=1}^n |a_{ij}|} = \text{maximum absolute column sum}")
+![\|\|\textbf{A} \|\|\_1 = \displaystyle{\max\_{1 \le j \le n} \sum\_{i=1}^n \|a\_{ij}\|} = \text{maximum absolute column sum}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7C%7C%5Ctextbf%7BA%7D%20%7C%7C_1%20%3D%20%5Cdisplaystyle%7B%5Cmax_%7B1%20%5Cle%20j%20%5Cle%20n%7D%20%5Csum_%7Bi%3D1%7D%5En%20%7Ca_%7Bij%7D%7C%7D%20%3D%20%5Ctext%7Bmaximum%20absolute%20column%20sum%7D "||\textbf{A} ||_1 = \displaystyle{\max_{1 \le j \le n} \sum_{i=1}^n |a_{ij}|} = \text{maximum absolute column sum}")
 
 -   ![p=2](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;p%3D2 "p=2")
 
-![\|\| \bm{A} \|\|\_2 = \sqrt{\max\\{ \text{eigenvalue}(A^TA) \\} }](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7C%7C%20%5Cbm%7BA%7D%20%7C%7C_2%20%3D%20%5Csqrt%7B%5Cmax%5C%7B%20%5Ctext%7Beigenvalue%7D%28A%5ETA%29%20%5C%7D%20%7D "|| \bm{A} ||_2 = \sqrt{\max\{ \text{eigenvalue}(A^TA) \} }")
+![\|\| \textbf{A} \|\|\_2 = \sqrt{\max\\{ \text{eigenvalue}(A^TA) \\} }](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7C%7C%20%5Ctextbf%7BA%7D%20%7C%7C_2%20%3D%20%5Csqrt%7B%5Cmax%5C%7B%20%5Ctext%7Beigenvalue%7D%28A%5ETA%29%20%5C%7D%20%7D "|| \textbf{A} ||_2 = \sqrt{\max\{ \text{eigenvalue}(A^TA) \} }")
 
 -   ![p=\infty](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;p%3D%5Cinfty "p=\infty")
 
-![\|\| \bm{A} \|\|\_\infty = \displaystyle{\max\_{1 \le i \le n} \sum\_{j=1}^n \|a\_{ij}\|} = \text{maximum absolute row sum}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7C%7C%20%5Cbm%7BA%7D%20%7C%7C_%5Cinfty%20%3D%20%5Cdisplaystyle%7B%5Cmax_%7B1%20%5Cle%20i%20%5Cle%20n%7D%20%5Csum_%7Bj%3D1%7D%5En%20%7Ca_%7Bij%7D%7C%7D%20%3D%20%5Ctext%7Bmaximum%20absolute%20row%20sum%7D "|| \bm{A} ||_\infty = \displaystyle{\max_{1 \le i \le n} \sum_{j=1}^n |a_{ij}|} = \text{maximum absolute row sum}")
+![\|\| \textbf{A} \|\|\_\infty = \displaystyle{\max\_{1 \le i \le n} \sum\_{j=1}^n \|a\_{ij}\|} = \text{maximum absolute row sum}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7C%7C%20%5Ctextbf%7BA%7D%20%7C%7C_%5Cinfty%20%3D%20%5Cdisplaystyle%7B%5Cmax_%7B1%20%5Cle%20i%20%5Cle%20n%7D%20%5Csum_%7Bj%3D1%7D%5En%20%7Ca_%7Bij%7D%7C%7D%20%3D%20%5Ctext%7Bmaximum%20absolute%20row%20sum%7D "|| \textbf{A} ||_\infty = \displaystyle{\max_{1 \le i \le n} \sum_{j=1}^n |a_{ij}|} = \text{maximum absolute row sum}")
 
 To see why these definitions are true requires some analysis. If you are
 interested, I am happy to point you to proofs.
@@ -1284,34 +1284,34 @@ norm(A, "I")
 
 There is one really useful identity you should know about matrix norms:
 
-![\|\|\bm{A}\bm{x}\|\|\_p \leq \|\|\bm{A}\|\|\_p \|\|\bm{x}\|\|\_p.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7C%7C%5Cbm%7BA%7D%5Cbm%7Bx%7D%7C%7C_p%20%5Cleq%20%7C%7C%5Cbm%7BA%7D%7C%7C_p%20%7C%7C%5Cbm%7Bx%7D%7C%7C_p. "||\bm{A}\bm{x}||_p \leq ||\bm{A}||_p ||\bm{x}||_p.")
+![\|\|\textbf{A}\textbf{x}\|\|\_p \leq \|\|\textbf{A}\|\|\_p \|\|\textbf{x}\|\|\_p.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7C%7C%5Ctextbf%7BA%7D%5Ctextbf%7Bx%7D%7C%7C_p%20%5Cleq%20%7C%7C%5Ctextbf%7BA%7D%7C%7C_p%20%7C%7C%5Ctextbf%7Bx%7D%7C%7C_p. "||\textbf{A}\textbf{x}||_p \leq ||\textbf{A}||_p ||\textbf{x}||_p.")
 
 To see this, we start with the right hand side and note
 
-![\|\|\bm{A}\|\|\_p \|\|\bm{x}\|\|\_p = \left( \max\_{\mathbf{y} \not = \mathbf{ 0}} \frac{ \|\| \bm{A} \mathbf{y}\|\|\_p} { \|\|\mathbf{y}\|\|\_p} \right) \|\|\bm{x}\|\|\_p \geq \frac{ \|\| \bm{A} \bm{x}\|\|\_p} { \|\|\bm{x}\|\|\_p} \|\|\bm{x}\|\|\_p = \|\| \bm{A} \bm{x}\|\|\_p.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7C%7C%5Cbm%7BA%7D%7C%7C_p%20%7C%7C%5Cbm%7Bx%7D%7C%7C_p%20%3D%20%5Cleft%28%20%5Cmax_%7B%5Cmathbf%7By%7D%20%5Cnot%20%3D%20%5Cmathbf%7B%200%7D%7D%20%5Cfrac%7B%20%7C%7C%20%5Cbm%7BA%7D%20%5Cmathbf%7By%7D%7C%7C_p%7D%20%7B%20%7C%7C%5Cmathbf%7By%7D%7C%7C_p%7D%20%5Cright%29%20%7C%7C%5Cbm%7Bx%7D%7C%7C_p%20%5Cgeq%20%5Cfrac%7B%20%7C%7C%20%5Cbm%7BA%7D%20%5Cbm%7Bx%7D%7C%7C_p%7D%20%7B%20%7C%7C%5Cbm%7Bx%7D%7C%7C_p%7D%20%7C%7C%5Cbm%7Bx%7D%7C%7C_p%20%3D%20%7C%7C%20%5Cbm%7BA%7D%20%5Cbm%7Bx%7D%7C%7C_p. "||\bm{A}||_p ||\bm{x}||_p = \left( \max_{\mathbf{y} \not = \mathbf{ 0}} \frac{ || \bm{A} \mathbf{y}||_p} { ||\mathbf{y}||_p} \right) ||\bm{x}||_p \geq \frac{ || \bm{A} \bm{x}||_p} { ||\bm{x}||_p} ||\bm{x}||_p = || \bm{A} \bm{x}||_p.")
+![\|\|\textbf{A}\|\|\_p \|\|\textbf{x}\|\|\_p = \left( \max\_{\mathbf{y} \not = \mathbf{ 0}} \frac{ \|\| \textbf{A} \mathbf{y}\|\|\_p} { \|\|\mathbf{y}\|\|\_p} \right) \|\|\textbf{x}\|\|\_p \geq \frac{ \|\| \textbf{A} \textbf{x}\|\|\_p} { \|\|\textbf{x}\|\|\_p} \|\|\textbf{x}\|\|\_p = \|\| \textbf{A} \textbf{x}\|\|\_p.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7C%7C%5Ctextbf%7BA%7D%7C%7C_p%20%7C%7C%5Ctextbf%7Bx%7D%7C%7C_p%20%3D%20%5Cleft%28%20%5Cmax_%7B%5Cmathbf%7By%7D%20%5Cnot%20%3D%20%5Cmathbf%7B%200%7D%7D%20%5Cfrac%7B%20%7C%7C%20%5Ctextbf%7BA%7D%20%5Cmathbf%7By%7D%7C%7C_p%7D%20%7B%20%7C%7C%5Cmathbf%7By%7D%7C%7C_p%7D%20%5Cright%29%20%7C%7C%5Ctextbf%7Bx%7D%7C%7C_p%20%5Cgeq%20%5Cfrac%7B%20%7C%7C%20%5Ctextbf%7BA%7D%20%5Ctextbf%7Bx%7D%7C%7C_p%7D%20%7B%20%7C%7C%5Ctextbf%7Bx%7D%7C%7C_p%7D%20%7C%7C%5Ctextbf%7Bx%7D%7C%7C_p%20%3D%20%7C%7C%20%5Ctextbf%7BA%7D%20%5Ctextbf%7Bx%7D%7C%7C_p. "||\textbf{A}||_p ||\textbf{x}||_p = \left( \max_{\mathbf{y} \not = \mathbf{ 0}} \frac{ || \textbf{A} \mathbf{y}||_p} { ||\mathbf{y}||_p} \right) ||\textbf{x}||_p \geq \frac{ || \textbf{A} \textbf{x}||_p} { ||\textbf{x}||_p} ||\textbf{x}||_p = || \textbf{A} \textbf{x}||_p.")
 
-## Condition Number for ![\bm{A}\bm{x} = \bm{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%5Cbm%7Bx%7D%20%3D%20%5Cbm%7Bb%7D "\bm{A}\bm{x} = \bm{b}")
+## Condition Number for ![\textbf{A}\textbf{x} = \textbf{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%5Ctextbf%7Bx%7D%20%3D%20%5Ctextbf%7Bb%7D "\textbf{A}\textbf{x} = \textbf{b}")
 
 Let us consider solving
-![\bm{A}\bm{x}=\bm{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%5Cbm%7Bx%7D%3D%5Cbm%7Bb%7D "\bm{A}\bm{x}=\bm{b}").
+![\textbf{A}\textbf{x}=\textbf{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%5Ctextbf%7Bx%7D%3D%5Ctextbf%7Bb%7D "\textbf{A}\textbf{x}=\textbf{b}").
 Suppose we find approximate solution
-![\bm{x}\_a](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7Bx%7D_a "\bm{x}_a").
+![\textbf{x}\_a](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7Bx%7D_a "\textbf{x}_a").
 The **relative forward error** is
 
-![\frac{\|\|\bm{x}-\bm{x}\_a\|\|}{\|\|\bm{x}\|\|}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cfrac%7B%7C%7C%5Cbm%7Bx%7D-%5Cbm%7Bx%7D_a%7C%7C%7D%7B%7C%7C%5Cbm%7Bx%7D%7C%7C%7D "\frac{||\bm{x}-\bm{x}_a||}{||\bm{x}||}")
+![\frac{\|\|\textbf{x}-\textbf{x}\_a\|\|}{\|\|\textbf{x}\|\|}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cfrac%7B%7C%7C%5Ctextbf%7Bx%7D-%5Ctextbf%7Bx%7D_a%7C%7C%7D%7B%7C%7C%5Ctextbf%7Bx%7D%7C%7C%7D "\frac{||\textbf{x}-\textbf{x}_a||}{||\textbf{x}||}")
 
 and the **relative backward error** is
 
-![\frac{\|\|\bm{A}\bm{x}-\bm{A}\bm{x}\_a\|\|}{\|\|\bm{A}\bm{x}\|\|}=\frac{\|\|\bm{b}-\bm{A}\bm{x}\_a\|\|}{\|\|\bm{b}\|\|}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cfrac%7B%7C%7C%5Cbm%7BA%7D%5Cbm%7Bx%7D-%5Cbm%7BA%7D%5Cbm%7Bx%7D_a%7C%7C%7D%7B%7C%7C%5Cbm%7BA%7D%5Cbm%7Bx%7D%7C%7C%7D%3D%5Cfrac%7B%7C%7C%5Cbm%7Bb%7D-%5Cbm%7BA%7D%5Cbm%7Bx%7D_a%7C%7C%7D%7B%7C%7C%5Cbm%7Bb%7D%7C%7C%7D. "\frac{||\bm{A}\bm{x}-\bm{A}\bm{x}_a||}{||\bm{A}\bm{x}||}=\frac{||\bm{b}-\bm{A}\bm{x}_a||}{||\bm{b}||}.")
+![\frac{\|\|\textbf{A}\textbf{x}-\textbf{A}\textbf{x}\_a\|\|}{\|\|\textbf{A}\textbf{x}\|\|}=\frac{\|\|\textbf{b}-\textbf{A}\textbf{x}\_a\|\|}{\|\|\textbf{b}\|\|}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cfrac%7B%7C%7C%5Ctextbf%7BA%7D%5Ctextbf%7Bx%7D-%5Ctextbf%7BA%7D%5Ctextbf%7Bx%7D_a%7C%7C%7D%7B%7C%7C%5Ctextbf%7BA%7D%5Ctextbf%7Bx%7D%7C%7C%7D%3D%5Cfrac%7B%7C%7C%5Ctextbf%7Bb%7D-%5Ctextbf%7BA%7D%5Ctextbf%7Bx%7D_a%7C%7C%7D%7B%7C%7C%5Ctextbf%7Bb%7D%7C%7C%7D. "\frac{||\textbf{A}\textbf{x}-\textbf{A}\textbf{x}_a||}{||\textbf{A}\textbf{x}||}=\frac{||\textbf{b}-\textbf{A}\textbf{x}_a||}{||\textbf{b}||}.")
 
 We define **error magnification** as the ratio
 
-![\frac{\text{relative forward error}}{\text{relative backward error}}=\frac{\frac{\|\|\bm{x}-\bm{x}\_a\|\|}{\|\|\bm{x}\|\|}}{\frac{\|\|\bm{b}-\bm{A}\bm{x}\_a\|\|}{\|\|\bm{b}\|\|}}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cfrac%7B%5Ctext%7Brelative%20forward%20error%7D%7D%7B%5Ctext%7Brelative%20backward%20error%7D%7D%3D%5Cfrac%7B%5Cfrac%7B%7C%7C%5Cbm%7Bx%7D-%5Cbm%7Bx%7D_a%7C%7C%7D%7B%7C%7C%5Cbm%7Bx%7D%7C%7C%7D%7D%7B%5Cfrac%7B%7C%7C%5Cbm%7Bb%7D-%5Cbm%7BA%7D%5Cbm%7Bx%7D_a%7C%7C%7D%7B%7C%7C%5Cbm%7Bb%7D%7C%7C%7D%7D. "\frac{\text{relative forward error}}{\text{relative backward error}}=\frac{\frac{||\bm{x}-\bm{x}_a||}{||\bm{x}||}}{\frac{||\bm{b}-\bm{A}\bm{x}_a||}{||\bm{b}||}}.")
+![\frac{\text{relative forward error}}{\text{relative backward error}}=\frac{\frac{\|\|\textbf{x}-\textbf{x}\_a\|\|}{\|\|\textbf{x}\|\|}}{\frac{\|\|\textbf{b}-\textbf{A}\textbf{x}\_a\|\|}{\|\|\textbf{b}\|\|}}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cfrac%7B%5Ctext%7Brelative%20forward%20error%7D%7D%7B%5Ctext%7Brelative%20backward%20error%7D%7D%3D%5Cfrac%7B%5Cfrac%7B%7C%7C%5Ctextbf%7Bx%7D-%5Ctextbf%7Bx%7D_a%7C%7C%7D%7B%7C%7C%5Ctextbf%7Bx%7D%7C%7C%7D%7D%7B%5Cfrac%7B%7C%7C%5Ctextbf%7Bb%7D-%5Ctextbf%7BA%7D%5Ctextbf%7Bx%7D_a%7C%7C%7D%7B%7C%7C%5Ctextbf%7Bb%7D%7C%7C%7D%7D. "\frac{\text{relative forward error}}{\text{relative backward error}}=\frac{\frac{||\textbf{x}-\textbf{x}_a||}{||\textbf{x}||}}{\frac{||\textbf{b}-\textbf{A}\textbf{x}_a||}{||\textbf{b}||}}.")
 
 The **condition number**
-![\kappa(\bm{A})](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ckappa%28%5Cbm%7BA%7D%29 "\kappa(\bm{A})")
+![\kappa(\textbf{A})](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ckappa%28%5Ctextbf%7BA%7D%29 "\kappa(\textbf{A})")
 is the largest possible error magnification (over all possible
-![\bm{x}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7Bx%7D "\bm{x}")).
+![\textbf{x}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7Bx%7D "\textbf{x}")).
 Or restated, it’s the worst possible ratio of relative forward error to
 relative backward error.
 
@@ -1322,35 +1322,35 @@ concrete with an example.
 Consider:
 
 -   Let
-    ![\bm{A} = \begin{pmatrix}0.913 & 0.659 \\\\ 0.457 & 0.330 \end{pmatrix}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%20%3D%20%5Cbegin%7Bpmatrix%7D0.913%20%26%200.659%20%5C%5C%200.457%20%26%200.330%20%5Cend%7Bpmatrix%7D "\bm{A} = \begin{pmatrix}0.913 & 0.659 \\ 0.457 & 0.330 \end{pmatrix}")
+    ![\textbf{A} = \begin{pmatrix}0.913 & 0.659 \\\\ 0.457 & 0.330 \end{pmatrix}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%20%3D%20%5Cbegin%7Bpmatrix%7D0.913%20%26%200.659%20%5C%5C%200.457%20%26%200.330%20%5Cend%7Bpmatrix%7D "\textbf{A} = \begin{pmatrix}0.913 & 0.659 \\ 0.457 & 0.330 \end{pmatrix}")
 -   Then
     ![\kappa_2(A) = 1.25\times10^4](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ckappa_2%28A%29%20%3D%201.25%5Ctimes10%5E4 "\kappa_2(A) = 1.25\times10^4")
 -   Let
-    ![\bm{b} = \begin{pmatrix} 0.254 \\\\ 0.127 \end{pmatrix}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7Bb%7D%20%3D%20%5Cbegin%7Bpmatrix%7D%200.254%20%5C%5C%200.127%20%5Cend%7Bpmatrix%7D "\bm{b} = \begin{pmatrix} 0.254 \\ 0.127 \end{pmatrix}")
+    ![\textbf{b} = \begin{pmatrix} 0.254 \\\\ 0.127 \end{pmatrix}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7Bb%7D%20%3D%20%5Cbegin%7Bpmatrix%7D%200.254%20%5C%5C%200.127%20%5Cend%7Bpmatrix%7D "\textbf{b} = \begin{pmatrix} 0.254 \\ 0.127 \end{pmatrix}")
 -   Then
-    ![\bm{x} =(1,-1)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7Bx%7D%20%3D%281%2C-1%29 "\bm{x} =(1,-1)").
+    ![\textbf{x} =(1,-1)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7Bx%7D%20%3D%281%2C-1%29 "\textbf{x} =(1,-1)").
 -   Consider two approximate solutions
-    ![\bm{x}\_{1,2}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7Bx%7D_%7B1%2C2%7D "\bm{x}_{1,2}")
+    ![\textbf{x}\_{1,2}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7Bx%7D_%7B1%2C2%7D "\textbf{x}_{1,2}")
 
 ![\begin{array}{lcl}
-\bm{x}\_1 = (-0.0827,0.5) && \bm{x}\_2 = (0.999,-1.001) \\\\
-\triangle \bm{x}\_1 = (1.0827, -1.5) && \triangle \bm{x}\_2 = (0.001,0.001) \\\\
-\|\|\triangle \bm{x}\_1 \|\| = 1.85&& \|\|\triangle \bm{x}\_2\|\| = .0014\\\\
-\|\|\triangle \bm{x}\_1 \|\|/\|\|\bm{x}\|\| = 1.308&& \|\|\triangle \bm{x}\_2\|\|/\|\|\bm{x}\|\| = .001\\\\
-\bm{b}\_1 = (0.2539949, 0.1272061) &&  \bm{b}\_2 = (0.252428, 0.126213) \\\\
-\triangle\bm{b}\_1 = (0.0000051,- 0.0002061) &&  \triangle\bm{b}\_2 = (0.001572, 0.000787) \\\\
-\|\|\triangle \bm{b}\_1 \|\| = 0.000206&& \|\|\triangle \bm{b}\_2\|\| = .00176\\\\
-\|\|\triangle \bm{b}\_1 \|\|/\|\|\bm{b}\|\| = 0.000726&& \|\|\triangle \bm{b}\_2\|\|/\|\|\bm{b}\|\| = .0062\\\\
+\textbf{x}\_1 = (-0.0827,0.5) && \textbf{x}\_2 = (0.999,-1.001) \\\\
+\triangle \textbf{x}\_1 = (1.0827, -1.5) && \triangle \textbf{x}\_2 = (0.001,0.001) \\\\
+\|\|\triangle \textbf{x}\_1 \|\| = 1.85&& \|\|\triangle \textbf{x}\_2\|\| = .0014\\\\
+\|\|\triangle \textbf{x}\_1 \|\|/\|\|\textbf{x}\|\| = 1.308&& \|\|\triangle \textbf{x}\_2\|\|/\|\|\textbf{x}\|\| = .001\\\\
+\textbf{b}\_1 = (0.2539949, 0.1272061) &&  \textbf{b}\_2 = (0.252428, 0.126213) \\\\
+\triangle\textbf{b}\_1 = (0.0000051,- 0.0002061) &&  \triangle\textbf{b}\_2 = (0.001572, 0.000787) \\\\
+\|\|\triangle \textbf{b}\_1 \|\| = 0.000206&& \|\|\triangle \textbf{b}\_2\|\| = .00176\\\\
+\|\|\triangle \textbf{b}\_1 \|\|/\|\|\textbf{b}\|\| = 0.000726&& \|\|\triangle \textbf{b}\_2\|\|/\|\|\textbf{b}\|\| = .0062\\\\
 mag = 1.8 \times 10^3 && mag = 1.6 \times 10^1
-\end{array}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbegin%7Barray%7D%7Blcl%7D%0A%5Cbm%7Bx%7D_1%20%3D%20%28-0.0827%2C0.5%29%20%26%26%20%5Cbm%7Bx%7D_2%20%3D%20%280.999%2C-1.001%29%20%5C%5C%0A%5Ctriangle%20%5Cbm%7Bx%7D_1%20%3D%20%281.0827%2C%20-1.5%29%20%26%26%20%5Ctriangle%20%5Cbm%7Bx%7D_2%20%3D%20%280.001%2C0.001%29%20%5C%5C%0A%7C%7C%5Ctriangle%20%5Cbm%7Bx%7D_1%20%7C%7C%20%3D%201.85%26%26%20%7C%7C%5Ctriangle%20%5Cbm%7Bx%7D_2%7C%7C%20%3D%20.0014%5C%5C%0A%7C%7C%5Ctriangle%20%5Cbm%7Bx%7D_1%20%7C%7C%2F%7C%7C%5Cbm%7Bx%7D%7C%7C%20%3D%201.308%26%26%20%7C%7C%5Ctriangle%20%5Cbm%7Bx%7D_2%7C%7C%2F%7C%7C%5Cbm%7Bx%7D%7C%7C%20%3D%20.001%5C%5C%0A%5Cbm%7Bb%7D_1%20%3D%20%280.2539949%2C%200.1272061%29%20%26%26%20%20%5Cbm%7Bb%7D_2%20%3D%20%280.252428%2C%200.126213%29%20%5C%5C%0A%5Ctriangle%5Cbm%7Bb%7D_1%20%3D%20%280.0000051%2C-%200.0002061%29%20%26%26%20%20%5Ctriangle%5Cbm%7Bb%7D_2%20%3D%20%280.001572%2C%200.000787%29%20%5C%5C%0A%7C%7C%5Ctriangle%20%5Cbm%7Bb%7D_1%20%7C%7C%20%3D%200.000206%26%26%20%7C%7C%5Ctriangle%20%5Cbm%7Bb%7D_2%7C%7C%20%3D%20.00176%5C%5C%0A%7C%7C%5Ctriangle%20%5Cbm%7Bb%7D_1%20%7C%7C%2F%7C%7C%5Cbm%7Bb%7D%7C%7C%20%3D%200.000726%26%26%20%7C%7C%5Ctriangle%20%5Cbm%7Bb%7D_2%7C%7C%2F%7C%7C%5Cbm%7Bb%7D%7C%7C%20%3D%20.0062%5C%5C%0Amag%20%3D%201.8%20%5Ctimes%2010%5E3%20%26%26%20mag%20%3D%201.6%20%5Ctimes%2010%5E1%0A%5Cend%7Barray%7D "\begin{array}{lcl}
-\bm{x}_1 = (-0.0827,0.5) && \bm{x}_2 = (0.999,-1.001) \\
-\triangle \bm{x}_1 = (1.0827, -1.5) && \triangle \bm{x}_2 = (0.001,0.001) \\
-||\triangle \bm{x}_1 || = 1.85&& ||\triangle \bm{x}_2|| = .0014\\
-||\triangle \bm{x}_1 ||/||\bm{x}|| = 1.308&& ||\triangle \bm{x}_2||/||\bm{x}|| = .001\\
-\bm{b}_1 = (0.2539949, 0.1272061) &&  \bm{b}_2 = (0.252428, 0.126213) \\
-\triangle\bm{b}_1 = (0.0000051,- 0.0002061) &&  \triangle\bm{b}_2 = (0.001572, 0.000787) \\
-||\triangle \bm{b}_1 || = 0.000206&& ||\triangle \bm{b}_2|| = .00176\\
-||\triangle \bm{b}_1 ||/||\bm{b}|| = 0.000726&& ||\triangle \bm{b}_2||/||\bm{b}|| = .0062\\
+\end{array}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbegin%7Barray%7D%7Blcl%7D%0A%5Ctextbf%7Bx%7D_1%20%3D%20%28-0.0827%2C0.5%29%20%26%26%20%5Ctextbf%7Bx%7D_2%20%3D%20%280.999%2C-1.001%29%20%5C%5C%0A%5Ctriangle%20%5Ctextbf%7Bx%7D_1%20%3D%20%281.0827%2C%20-1.5%29%20%26%26%20%5Ctriangle%20%5Ctextbf%7Bx%7D_2%20%3D%20%280.001%2C0.001%29%20%5C%5C%0A%7C%7C%5Ctriangle%20%5Ctextbf%7Bx%7D_1%20%7C%7C%20%3D%201.85%26%26%20%7C%7C%5Ctriangle%20%5Ctextbf%7Bx%7D_2%7C%7C%20%3D%20.0014%5C%5C%0A%7C%7C%5Ctriangle%20%5Ctextbf%7Bx%7D_1%20%7C%7C%2F%7C%7C%5Ctextbf%7Bx%7D%7C%7C%20%3D%201.308%26%26%20%7C%7C%5Ctriangle%20%5Ctextbf%7Bx%7D_2%7C%7C%2F%7C%7C%5Ctextbf%7Bx%7D%7C%7C%20%3D%20.001%5C%5C%0A%5Ctextbf%7Bb%7D_1%20%3D%20%280.2539949%2C%200.1272061%29%20%26%26%20%20%5Ctextbf%7Bb%7D_2%20%3D%20%280.252428%2C%200.126213%29%20%5C%5C%0A%5Ctriangle%5Ctextbf%7Bb%7D_1%20%3D%20%280.0000051%2C-%200.0002061%29%20%26%26%20%20%5Ctriangle%5Ctextbf%7Bb%7D_2%20%3D%20%280.001572%2C%200.000787%29%20%5C%5C%0A%7C%7C%5Ctriangle%20%5Ctextbf%7Bb%7D_1%20%7C%7C%20%3D%200.000206%26%26%20%7C%7C%5Ctriangle%20%5Ctextbf%7Bb%7D_2%7C%7C%20%3D%20.00176%5C%5C%0A%7C%7C%5Ctriangle%20%5Ctextbf%7Bb%7D_1%20%7C%7C%2F%7C%7C%5Ctextbf%7Bb%7D%7C%7C%20%3D%200.000726%26%26%20%7C%7C%5Ctriangle%20%5Ctextbf%7Bb%7D_2%7C%7C%2F%7C%7C%5Ctextbf%7Bb%7D%7C%7C%20%3D%20.0062%5C%5C%0Amag%20%3D%201.8%20%5Ctimes%2010%5E3%20%26%26%20mag%20%3D%201.6%20%5Ctimes%2010%5E1%0A%5Cend%7Barray%7D "\begin{array}{lcl}
+\textbf{x}_1 = (-0.0827,0.5) && \textbf{x}_2 = (0.999,-1.001) \\
+\triangle \textbf{x}_1 = (1.0827, -1.5) && \triangle \textbf{x}_2 = (0.001,0.001) \\
+||\triangle \textbf{x}_1 || = 1.85&& ||\triangle \textbf{x}_2|| = .0014\\
+||\triangle \textbf{x}_1 ||/||\textbf{x}|| = 1.308&& ||\triangle \textbf{x}_2||/||\textbf{x}|| = .001\\
+\textbf{b}_1 = (0.2539949, 0.1272061) &&  \textbf{b}_2 = (0.252428, 0.126213) \\
+\triangle\textbf{b}_1 = (0.0000051,- 0.0002061) &&  \triangle\textbf{b}_2 = (0.001572, 0.000787) \\
+||\triangle \textbf{b}_1 || = 0.000206&& ||\triangle \textbf{b}_2|| = .00176\\
+||\triangle \textbf{b}_1 ||/||\textbf{b}|| = 0.000726&& ||\triangle \textbf{b}_2||/||\textbf{b}|| = .0062\\
 mag = 1.8 \times 10^3 && mag = 1.6 \times 10^1
 \end{array}")
 
@@ -1378,12 +1378,12 @@ it’s the maximum possible error magnification. Computing
 ![\kappa](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ckappa "\kappa")
 exactly using this definition is impossible because there are an
 infinite number vectors one must consider
-![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}")
+![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}")
 acting on.
 
 Fortunately, there’s another way to calculate condition number:
 
-![\kappa_p(\bm{A})=\|\|\bm{A}\|\|\_p\|\|\bm{A}^{-1}\|\|\_p](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ckappa_p%28%5Cbm%7BA%7D%29%3D%7C%7C%5Cbm%7BA%7D%7C%7C_p%7C%7C%5Cbm%7BA%7D%5E%7B-1%7D%7C%7C_p "\kappa_p(\bm{A})=||\bm{A}||_p||\bm{A}^{-1}||_p")
+![\kappa_p(\textbf{A})=\|\|\textbf{A}\|\|\_p\|\|\textbf{A}^{-1}\|\|\_p](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ckappa_p%28%5Ctextbf%7BA%7D%29%3D%7C%7C%5Ctextbf%7BA%7D%7C%7C_p%7C%7C%5Ctextbf%7BA%7D%5E%7B-1%7D%7C%7C_p "\kappa_p(\textbf{A})=||\textbf{A}||_p||\textbf{A}^{-1}||_p")
 
 The derivation of this identity is about 10 to 20 lines of linear
 algebra that I am happy to show you if you are interested. We can check
@@ -1417,32 +1417,32 @@ LU decomposision.
 Recall that when solving an
 ![n \times n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;n%20%5Ctimes%20n "n \times n")
 system
-![\bm{A}\bm{x} = \bm{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%5Cbm%7Bx%7D%20%3D%20%5Cbm%7Bb%7D "\bm{A}\bm{x} = \bm{b}")
+![\textbf{A}\textbf{x} = \textbf{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%5Ctextbf%7Bx%7D%20%3D%20%5Ctextbf%7Bb%7D "\textbf{A}\textbf{x} = \textbf{b}")
 with Gaussian elimination, the elimination step is
 ![\mathcal{O}(n^3)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathcal%7BO%7D%28n%5E3%29 "\mathcal{O}(n^3)")
 and back substitution is
 ![\mathcal{O}(n^2)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathcal%7BO%7D%28n%5E2%29 "\mathcal{O}(n^2)").
 In some applications, it is necessary to solve
 
-![\bm{A}\bm{x} = \bm{b}\_1, \quad \bm{A}\bm{x} = \bm{b}\_2, \quad \bm{A}\bm{x} = \bm{b}\_3, \quad \ldots, \quad \bm{A}\bm{x} = \bm{b}\_M](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%5Cbm%7Bx%7D%20%3D%20%5Cbm%7Bb%7D_1%2C%20%5Cquad%20%5Cbm%7BA%7D%5Cbm%7Bx%7D%20%3D%20%5Cbm%7Bb%7D_2%2C%20%5Cquad%20%5Cbm%7BA%7D%5Cbm%7Bx%7D%20%3D%20%5Cbm%7Bb%7D_3%2C%20%5Cquad%20%5Cldots%2C%20%5Cquad%20%5Cbm%7BA%7D%5Cbm%7Bx%7D%20%3D%20%5Cbm%7Bb%7D_M "\bm{A}\bm{x} = \bm{b}_1, \quad \bm{A}\bm{x} = \bm{b}_2, \quad \bm{A}\bm{x} = \bm{b}_3, \quad \ldots, \quad \bm{A}\bm{x} = \bm{b}_M")
+![\textbf{A}\textbf{x} = \textbf{b}\_1, \quad \textbf{A}\textbf{x} = \textbf{b}\_2, \quad \textbf{A}\textbf{x} = \textbf{b}\_3, \quad \ldots, \quad \textbf{A}\textbf{x} = \textbf{b}\_M](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%5Ctextbf%7Bx%7D%20%3D%20%5Ctextbf%7Bb%7D_1%2C%20%5Cquad%20%5Ctextbf%7BA%7D%5Ctextbf%7Bx%7D%20%3D%20%5Ctextbf%7Bb%7D_2%2C%20%5Cquad%20%5Ctextbf%7BA%7D%5Ctextbf%7Bx%7D%20%3D%20%5Ctextbf%7Bb%7D_3%2C%20%5Cquad%20%5Cldots%2C%20%5Cquad%20%5Ctextbf%7BA%7D%5Ctextbf%7Bx%7D%20%3D%20%5Ctextbf%7Bb%7D_M "\textbf{A}\textbf{x} = \textbf{b}_1, \quad \textbf{A}\textbf{x} = \textbf{b}_2, \quad \textbf{A}\textbf{x} = \textbf{b}_3, \quad \ldots, \quad \textbf{A}\textbf{x} = \textbf{b}_M")
 
 where
-![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}")
+![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}")
 is the same each time and
 ![M](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;M "M")
 is large.
-![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}")
+![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}")
 itself needs the same row reductions each time. Only the augmented part
-![\bm{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7Bb%7D "\bm{b}")
+![\textbf{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7Bb%7D "\textbf{b}")
 changes. It would be a waste of computation to run Gaussian elimination
 ![M](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;M "M")
 times.
 
 LU decomposition is a way of storing the Gaussian elimination steps in
 matrix form so that they can be applied to many
-![\bm{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7Bb%7D "\bm{b}").
+![\textbf{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7Bb%7D "\textbf{b}").
 We take
-![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}")
+![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}")
 and decompose (or factorize) it as the product
 
 ![A  = 
@@ -1491,24 +1491,24 @@ matrix encodes the multipliers used to eliminate elements during
 Gaussian elimination and the
 ![\mathbf{U}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7BU%7D "\mathbf{U}")
 matrix is the result of the elimination process. Therefore, putting
-![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}")
+![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}")
 into its LU factorization takes one application of Gaussian elimination,
 or approximately
 ![\frac{2}{3} n^3](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cfrac%7B2%7D%7B3%7D%20n%5E3 "\frac{2}{3} n^3")
 operations. Solving
-![\mathbf{LU}\bm{x} = \bm{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7BLU%7D%5Cbm%7Bx%7D%20%3D%20%5Cbm%7Bb%7D "\mathbf{LU}\bm{x} = \bm{b}")
+![\mathbf{LU}\textbf{x} = \textbf{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7BLU%7D%5Ctextbf%7Bx%7D%20%3D%20%5Ctextbf%7Bb%7D "\mathbf{LU}\textbf{x} = \textbf{b}")
 requires 2 back substitutions, namely one to solve
-![\mathbf{L}\mathbf{y} = \bm{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7BL%7D%5Cmathbf%7By%7D%20%3D%20%5Cbm%7Bb%7D "\mathbf{L}\mathbf{y} = \bm{b}")
+![\mathbf{L}\mathbf{y} = \textbf{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7BL%7D%5Cmathbf%7By%7D%20%3D%20%5Ctextbf%7Bb%7D "\mathbf{L}\mathbf{y} = \textbf{b}")
 for
 ![\mathbf{y}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7By%7D "\mathbf{y}")
 and one to solve
-![\mathbf{U}\bm{x}=\mathbf{y}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7BU%7D%5Cbm%7Bx%7D%3D%5Cmathbf%7By%7D "\mathbf{U}\bm{x}=\mathbf{y}")
+![\mathbf{U}\textbf{x}=\mathbf{y}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7BU%7D%5Ctextbf%7Bx%7D%3D%5Cmathbf%7By%7D "\mathbf{U}\textbf{x}=\mathbf{y}")
 for
-![\bm{x}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7Bx%7D "\bm{x}").
+![\textbf{x}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7Bx%7D "\textbf{x}").
 This takes
 ![2n^2](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;2n%5E2 "2n^2")
 operations. So, to solve
-![\bm{A}\bm{x} = \bm{b}\_1, \ldots, \bm{A}\bm{x} = \bm{b}\_M](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%5Cbm%7Bx%7D%20%3D%20%5Cbm%7Bb%7D_1%2C%20%5Cldots%2C%20%5Cbm%7BA%7D%5Cbm%7Bx%7D%20%3D%20%5Cbm%7Bb%7D_M "\bm{A}\bm{x} = \bm{b}_1, \ldots, \bm{A}\bm{x} = \bm{b}_M")
+![\textbf{A}\textbf{x} = \textbf{b}\_1, \ldots, \textbf{A}\textbf{x} = \textbf{b}\_M](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%5Ctextbf%7Bx%7D%20%3D%20%5Ctextbf%7Bb%7D_1%2C%20%5Cldots%2C%20%5Ctextbf%7BA%7D%5Ctextbf%7Bx%7D%20%3D%20%5Ctextbf%7Bb%7D_M "\textbf{A}\textbf{x} = \textbf{b}_1, \ldots, \textbf{A}\textbf{x} = \textbf{b}_M")
 takes approximately
 ![\frac{2}{3}n^3 + 2 M n^2](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cfrac%7B2%7D%7B3%7Dn%5E3%20%2B%202%20M%20n%5E2 "\frac{2}{3}n^3 + 2 M n^2")
 operations, in contrast to
@@ -1516,19 +1516,19 @@ operations, in contrast to
 for Gaussian elimination.
 
 The LU decomposition exists if and only if the upper-left sub-blocks
-![\bm{A}\_{1:k,1:k}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D_%7B1%3Ak%2C1%3Ak%7D "\bm{A}_{1:k,1:k}")
+![\textbf{A}\_{1:k,1:k}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D_%7B1%3Ak%2C1%3Ak%7D "\textbf{A}_{1:k,1:k}")
 are non-singular for all
 ![1\leq k \leq n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;1%5Cleq%20k%20%5Cleq%20n "1\leq k \leq n")
 (not proven here). If the decomposition exists, it is unique.
 
 Let’s do an example of how LU decomposition works. Take
 
-![\bm{A} = 
+![\textbf{A} = 
 \begin{pmatrix}
 1 & 3 & 1\\\\
 1 & 1 & -1 \\\\
 3 & 11 & 5
-\end{pmatrix}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%20%3D%20%0A%5Cbegin%7Bpmatrix%7D%0A1%20%26%203%20%26%201%5C%5C%0A1%20%26%201%20%26%20-1%20%5C%5C%0A3%20%26%2011%20%26%205%0A%5Cend%7Bpmatrix%7D. "\bm{A} = 
+\end{pmatrix}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%20%3D%20%0A%5Cbegin%7Bpmatrix%7D%0A1%20%26%203%20%26%201%5C%5C%0A1%20%26%201%20%26%20-1%20%5C%5C%0A3%20%26%2011%20%26%205%0A%5Cend%7Bpmatrix%7D. "\textbf{A} = 
 \begin{pmatrix}
 1 & 3 & 1\\
 1 & 1 & -1 \\
@@ -1536,7 +1536,7 @@ Let’s do an example of how LU decomposition works. Take
 \end{pmatrix}.")
 
 Start by defining
-![\mathbf{U} = \bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7BU%7D%20%3D%20%5Cbm%7BA%7D "\mathbf{U} = \bm{A}")
+![\mathbf{U} = \textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7BU%7D%20%3D%20%5Ctextbf%7BA%7D "\mathbf{U} = \textbf{A}")
 (it’s not upper triangluar yet, but I am still calling it
 ![\mathbf{U}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7BU%7D "\mathbf{U}"))
 and
@@ -1746,34 +1746,34 @@ repeatedly.
 ## Jacobi iteration
 
 Let’s take this idea and apply it to solving
-![\bm{A}\bm{x}=\bm{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%5Cbm%7Bx%7D%3D%5Cbm%7Bb%7D "\bm{A}\bm{x}=\bm{b}").
+![\textbf{A}\textbf{x}=\textbf{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%5Ctextbf%7Bx%7D%3D%5Ctextbf%7Bb%7D "\textbf{A}\textbf{x}=\textbf{b}").
 Let
-![\bm{A} = \mathbf{D} + \mathbf{R}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%20%3D%20%5Cmathbf%7BD%7D%20%2B%20%5Cmathbf%7BR%7D "\bm{A} = \mathbf{D} + \mathbf{R}")
+![\textbf{A} = \mathbf{D} + \mathbf{R}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%20%3D%20%5Cmathbf%7BD%7D%20%2B%20%5Cmathbf%7BR%7D "\textbf{A} = \mathbf{D} + \mathbf{R}")
 where
 ![\mathbf{D}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7BD%7D "\mathbf{D}")
 contains the diagonal elements of
-![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}")
+![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}")
 and
 ![\mathbf{R}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7BR%7D "\mathbf{R}")
 contains everything else. Then we can write
 
 ![\begin{align}
-\bm{A}\bm{x} &= \bm{b} \\\\
-(\mathbf{D}+\mathbf{R})\bm{x} &= \bm{b} \\\\
-\mathbf{D}\bm{x} + \mathbf{R} \bm{x} &= \bm{b}\\\\
-\mathbf{D} \bm{x} &= \bm{b} - \mathbf{R} \bm{x}\\\\
-\bm{x} &= \mathbf{D}^{-1} (\bm{b}-\mathbf{R}\bm{x})
-\end{align}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbegin%7Balign%7D%0A%5Cbm%7BA%7D%5Cbm%7Bx%7D%20%26%3D%20%5Cbm%7Bb%7D%20%5C%5C%0A%28%5Cmathbf%7BD%7D%2B%5Cmathbf%7BR%7D%29%5Cbm%7Bx%7D%20%26%3D%20%5Cbm%7Bb%7D%20%5C%5C%0A%5Cmathbf%7BD%7D%5Cbm%7Bx%7D%20%2B%20%5Cmathbf%7BR%7D%20%5Cbm%7Bx%7D%20%26%3D%20%5Cbm%7Bb%7D%5C%5C%0A%5Cmathbf%7BD%7D%20%5Cbm%7Bx%7D%20%26%3D%20%5Cbm%7Bb%7D%20-%20%5Cmathbf%7BR%7D%20%5Cbm%7Bx%7D%5C%5C%0A%5Cbm%7Bx%7D%20%26%3D%20%5Cmathbf%7BD%7D%5E%7B-1%7D%20%28%5Cbm%7Bb%7D-%5Cmathbf%7BR%7D%5Cbm%7Bx%7D%29%0A%5Cend%7Balign%7D "\begin{align}
-\bm{A}\bm{x} &= \bm{b} \\
-(\mathbf{D}+\mathbf{R})\bm{x} &= \bm{b} \\
-\mathbf{D}\bm{x} + \mathbf{R} \bm{x} &= \bm{b}\\
-\mathbf{D} \bm{x} &= \bm{b} - \mathbf{R} \bm{x}\\
-\bm{x} &= \mathbf{D}^{-1} (\bm{b}-\mathbf{R}\bm{x})
+\textbf{A}\textbf{x} &= \textbf{b} \\\\
+(\mathbf{D}+\mathbf{R})\textbf{x} &= \textbf{b} \\\\
+\mathbf{D}\textbf{x} + \mathbf{R} \textbf{x} &= \textbf{b}\\\\
+\mathbf{D} \textbf{x} &= \textbf{b} - \mathbf{R} \textbf{x}\\\\
+\textbf{x} &= \mathbf{D}^{-1} (\textbf{b}-\mathbf{R}\textbf{x})
+\end{align}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbegin%7Balign%7D%0A%5Ctextbf%7BA%7D%5Ctextbf%7Bx%7D%20%26%3D%20%5Ctextbf%7Bb%7D%20%5C%5C%0A%28%5Cmathbf%7BD%7D%2B%5Cmathbf%7BR%7D%29%5Ctextbf%7Bx%7D%20%26%3D%20%5Ctextbf%7Bb%7D%20%5C%5C%0A%5Cmathbf%7BD%7D%5Ctextbf%7Bx%7D%20%2B%20%5Cmathbf%7BR%7D%20%5Ctextbf%7Bx%7D%20%26%3D%20%5Ctextbf%7Bb%7D%5C%5C%0A%5Cmathbf%7BD%7D%20%5Ctextbf%7Bx%7D%20%26%3D%20%5Ctextbf%7Bb%7D%20-%20%5Cmathbf%7BR%7D%20%5Ctextbf%7Bx%7D%5C%5C%0A%5Ctextbf%7Bx%7D%20%26%3D%20%5Cmathbf%7BD%7D%5E%7B-1%7D%20%28%5Ctextbf%7Bb%7D-%5Cmathbf%7BR%7D%5Ctextbf%7Bx%7D%29%0A%5Cend%7Balign%7D "\begin{align}
+\textbf{A}\textbf{x} &= \textbf{b} \\
+(\mathbf{D}+\mathbf{R})\textbf{x} &= \textbf{b} \\
+\mathbf{D}\textbf{x} + \mathbf{R} \textbf{x} &= \textbf{b}\\
+\mathbf{D} \textbf{x} &= \textbf{b} - \mathbf{R} \textbf{x}\\
+\textbf{x} &= \mathbf{D}^{-1} (\textbf{b}-\mathbf{R}\textbf{x})
 \end{align}")
 
 We can consider this a fixed point iteration,
 
-![\bm{x}\_{i+1} = \mathbf{D}^{-1} (\bm{b}-\mathbf{R}\bm{x}\_i).](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7Bx%7D_%7Bi%2B1%7D%20%3D%20%5Cmathbf%7BD%7D%5E%7B-1%7D%20%28%5Cbm%7Bb%7D-%5Cmathbf%7BR%7D%5Cbm%7Bx%7D_i%29. "\bm{x}_{i+1} = \mathbf{D}^{-1} (\bm{b}-\mathbf{R}\bm{x}_i).")
+![\textbf{x}\_{i+1} = \mathbf{D}^{-1} (\textbf{b}-\mathbf{R}\textbf{x}\_i).](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7Bx%7D_%7Bi%2B1%7D%20%3D%20%5Cmathbf%7BD%7D%5E%7B-1%7D%20%28%5Ctextbf%7Bb%7D-%5Cmathbf%7BR%7D%5Ctextbf%7Bx%7D_i%29. "\textbf{x}_{i+1} = \mathbf{D}^{-1} (\textbf{b}-\mathbf{R}\textbf{x}_i).")
 
 Here are some computational advantages of this method.
 
@@ -1837,7 +1837,7 @@ exercise to understand, so feel free to ask me for the proof.
 However, calculating the eigenvalues of that matrix could be really hard
 and costly! There’s a sufficient condition for convergence that is much
 easier to check computationally, namely that
-![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}")
+![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}")
 is **strictly diagonally dominant**. This means
 
 ![\|a\_{ii}\| \> \sum\_{j \not=i} \|a\_{ij}\| \quad\text{in each row $i$.}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7Ca_%7Bii%7D%7C%20%3E%20%5Csum_%7Bj%20%5Cnot%3Di%7D%20%7Ca_%7Bij%7D%7C%20%5Cquad%5Ctext%7Bin%20each%20row%20%24i%24.%7D "|a_{ii}| > \sum_{j \not=i} |a_{ij}| \quad\text{in each row $i$.}")
@@ -3034,26 +3034,26 @@ to find a good model, so what should we do?
 
 To examine the details, let’s start with an even more fundamental
 example: a single vector in the plane. Suppose I hand you the vector
-![\bm{A} = (2,1)^T](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%20%3D%20%282%2C1%29%5ET "\bm{A} = (2,1)^T")
+![\textbf{A} = (2,1)^T](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%20%3D%20%282%2C1%29%5ET "\textbf{A} = (2,1)^T")
 and tell you to use it to reach the target vector
-![\bm{b}=(6,8)^T](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7Bb%7D%3D%286%2C8%29%5ET "\bm{b}=(6,8)^T").
+![\textbf{b}=(6,8)^T](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7Bb%7D%3D%286%2C8%29%5ET "\textbf{b}=(6,8)^T").
 Well, you can’t do it exactly because there is no scalar
 ![x](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x "x")
 such that
-![x\bm{A} = \bm{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x%5Cbm%7BA%7D%20%3D%20%5Cbm%7Bb%7D "x\bm{A} = \bm{b}").
+![x\textbf{A} = \textbf{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x%5Ctextbf%7BA%7D%20%3D%20%5Ctextbf%7Bb%7D "x\textbf{A} = \textbf{b}").
 So let us do the next best thing: let’s find the value of
 ![x](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x "x")
 such that
-![x\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x%5Cbm%7BA%7D "x\bm{A}")
+![x\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x%5Ctextbf%7BA%7D "x\textbf{A}")
 is as close as possible to
-![\bm{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7Bb%7D "\bm{b}").
+![\textbf{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7Bb%7D "\textbf{b}").
 We can draw a picture to solve this problem.
 
 ![](coursenotes_files/figure-gfm/unnamed-chunk-44-1.png)<!-- -->
 
 Where should we stop on the dotted line? When we are perpendicular to
 the end of
-![\bm{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7Bb%7D "\bm{b}").
+![\textbf{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7Bb%7D "\textbf{b}").
 This results in the following picture.
 
 ![](coursenotes_files/figure-gfm/unnamed-chunk-45-1.png)<!-- -->
@@ -3061,44 +3061,44 @@ This results in the following picture.
 From this picture, two relationships arise:
 
 ![\begin{align}
-x\bm{A} + \mathbf{r}&=\bm{b}\\\\
-\bm{A} \cdot \mathbf{r} &=0.
-\end{align}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbegin%7Balign%7D%0Ax%5Cbm%7BA%7D%20%2B%20%5Cmathbf%7Br%7D%26%3D%5Cbm%7Bb%7D%5C%5C%0A%5Cbm%7BA%7D%20%5Ccdot%20%5Cmathbf%7Br%7D%20%26%3D0.%0A%5Cend%7Balign%7D "\begin{align}
-x\bm{A} + \mathbf{r}&=\bm{b}\\
-\bm{A} \cdot \mathbf{r} &=0.
+x\textbf{A} + \mathbf{r}&=\textbf{b}\\\\
+\textbf{A} \cdot \mathbf{r} &=0.
+\end{align}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbegin%7Balign%7D%0Ax%5Ctextbf%7BA%7D%20%2B%20%5Cmathbf%7Br%7D%26%3D%5Ctextbf%7Bb%7D%5C%5C%0A%5Ctextbf%7BA%7D%20%5Ccdot%20%5Cmathbf%7Br%7D%20%26%3D0.%0A%5Cend%7Balign%7D "\begin{align}
+x\textbf{A} + \mathbf{r}&=\textbf{b}\\
+\textbf{A} \cdot \mathbf{r} &=0.
 \end{align}")
 
 Let us dot the first equation with the vector
-![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}").
+![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}").
 Then we have
 
-![\bm{A} \cdot \bm{A}x + \bm{A} \cdot \mathbf{r} = \bm{A} \cdot \bm{b}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%20%5Ccdot%20%5Cbm%7BA%7Dx%20%2B%20%5Cbm%7BA%7D%20%5Ccdot%20%5Cmathbf%7Br%7D%20%3D%20%5Cbm%7BA%7D%20%5Ccdot%20%5Cbm%7Bb%7D. "\bm{A} \cdot \bm{A}x + \bm{A} \cdot \mathbf{r} = \bm{A} \cdot \bm{b}.")
+![\textbf{A} \cdot \textbf{A}x + \textbf{A} \cdot \mathbf{r} = \textbf{A} \cdot \textbf{b}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%20%5Ccdot%20%5Ctextbf%7BA%7Dx%20%2B%20%5Ctextbf%7BA%7D%20%5Ccdot%20%5Cmathbf%7Br%7D%20%3D%20%5Ctextbf%7BA%7D%20%5Ccdot%20%5Ctextbf%7Bb%7D. "\textbf{A} \cdot \textbf{A}x + \textbf{A} \cdot \mathbf{r} = \textbf{A} \cdot \textbf{b}.")
 
 From the second equation above, we can eliminate the second term on the
 left hand side to write
 
-![\bm{A}^T \bm{A} x = \bm{A}^T \bm{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%5ET%20%5Cbm%7BA%7D%20x%20%3D%20%5Cbm%7BA%7D%5ET%20%5Cbm%7Bb%7D "\bm{A}^T \bm{A} x = \bm{A}^T \bm{b}")
+![\textbf{A}^T \textbf{A} x = \textbf{A}^T \textbf{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%5ET%20%5Ctextbf%7BA%7D%20x%20%3D%20%5Ctextbf%7BA%7D%5ET%20%5Ctextbf%7Bb%7D "\textbf{A}^T \textbf{A} x = \textbf{A}^T \textbf{b}")
 
 where we have used the fact that
 ![\mathbf{y}\cdot\mathbf{z}=\mathbf{y}^T\mathbf{z}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7By%7D%5Ccdot%5Cmathbf%7Bz%7D%3D%5Cmathbf%7By%7D%5ET%5Cmathbf%7Bz%7D "\mathbf{y}\cdot\mathbf{z}=\mathbf{y}^T\mathbf{z}").
 We can solve for
-![\bm{x}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7Bx%7D "\bm{x}")
+![\textbf{x}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7Bx%7D "\textbf{x}")
 by writing
-![x = \left(\bm{A}^T \bm{A}\right)^{-1}\bm{A}^T \bm{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x%20%3D%20%5Cleft%28%5Cbm%7BA%7D%5ET%20%5Cbm%7BA%7D%5Cright%29%5E%7B-1%7D%5Cbm%7BA%7D%5ET%20%5Cbm%7Bb%7D "x = \left(\bm{A}^T \bm{A}\right)^{-1}\bm{A}^T \bm{b}").
+![x = \left(\textbf{A}^T \textbf{A}\right)^{-1}\textbf{A}^T \textbf{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x%20%3D%20%5Cleft%28%5Ctextbf%7BA%7D%5ET%20%5Ctextbf%7BA%7D%5Cright%29%5E%7B-1%7D%5Ctextbf%7BA%7D%5ET%20%5Ctextbf%7Bb%7D "x = \left(\textbf{A}^T \textbf{A}\right)^{-1}\textbf{A}^T \textbf{b}").
 We can also calculate the vector that was as close as possible to
-![\bm{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7Bb%7D "\bm{b}").
+![\textbf{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7Bb%7D "\textbf{b}").
 We will call it
-![\widehat{\bm{b}}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cwidehat%7B%5Cbm%7Bb%7D%7D "\widehat{\bm{b}}")
+![\widehat{\textbf{b}}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cwidehat%7B%5Ctextbf%7Bb%7D%7D "\widehat{\textbf{b}}")
 and it is
 
 ![\begin{align}
-\widehat{\bm{b}} &= \bm{A}x \\\\
-&=\bm{A}\left(\bm{A}^T \bm{A}\right)^{-1}\bm{A}^T \bm{b}\\\\
-& = \mathbf{P} \bm{b}.
-\end{align}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbegin%7Balign%7D%0A%5Cwidehat%7B%5Cbm%7Bb%7D%7D%20%26%3D%20%5Cbm%7BA%7Dx%20%5C%5C%0A%26%3D%5Cbm%7BA%7D%5Cleft%28%5Cbm%7BA%7D%5ET%20%5Cbm%7BA%7D%5Cright%29%5E%7B-1%7D%5Cbm%7BA%7D%5ET%20%5Cbm%7Bb%7D%5C%5C%0A%26%20%3D%20%5Cmathbf%7BP%7D%20%5Cbm%7Bb%7D.%0A%5Cend%7Balign%7D "\begin{align}
-\widehat{\bm{b}} &= \bm{A}x \\
-&=\bm{A}\left(\bm{A}^T \bm{A}\right)^{-1}\bm{A}^T \bm{b}\\
-& = \mathbf{P} \bm{b}.
+\widehat{\textbf{b}} &= \textbf{A}x \\\\
+&=\textbf{A}\left(\textbf{A}^T \textbf{A}\right)^{-1}\textbf{A}^T \textbf{b}\\\\
+& = \mathbf{P} \textbf{b}.
+\end{align}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbegin%7Balign%7D%0A%5Cwidehat%7B%5Ctextbf%7Bb%7D%7D%20%26%3D%20%5Ctextbf%7BA%7Dx%20%5C%5C%0A%26%3D%5Ctextbf%7BA%7D%5Cleft%28%5Ctextbf%7BA%7D%5ET%20%5Ctextbf%7BA%7D%5Cright%29%5E%7B-1%7D%5Ctextbf%7BA%7D%5ET%20%5Ctextbf%7Bb%7D%5C%5C%0A%26%20%3D%20%5Cmathbf%7BP%7D%20%5Ctextbf%7Bb%7D.%0A%5Cend%7Balign%7D "\begin{align}
+\widehat{\textbf{b}} &= \textbf{A}x \\
+&=\textbf{A}\left(\textbf{A}^T \textbf{A}\right)^{-1}\textbf{A}^T \textbf{b}\\
+& = \mathbf{P} \textbf{b}.
 \end{align}")
 
 where thre last equation defines a new quantity that we call
@@ -3106,43 +3106,43 @@ where thre last equation defines a new quantity that we call
 
 Let us know revisit what we have done and emphasize/introduce some
 vocabulary. We started with a vector
-![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}")
+![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}")
 that we used as a **basis** to try to reach the **target**
-![\bm{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7Bb%7D "\bm{b}").
+![\textbf{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7Bb%7D "\textbf{b}").
 We couldn’t do it exactly, so we calcualted the closest we could come to
-![\bm{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7Bb%7D "\bm{b}"),
+![\textbf{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7Bb%7D "\textbf{b}"),
 which turned out to be
-![\widehat{\bm{b}}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cwidehat%7B%5Cbm%7Bb%7D%7D "\widehat{\bm{b}}").
+![\widehat{\textbf{b}}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cwidehat%7B%5Ctextbf%7Bb%7D%7D "\widehat{\textbf{b}}").
 This is called the **projection** of
-![\bm{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7Bb%7D "\bm{b}")
+![\textbf{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7Bb%7D "\textbf{b}")
 into the subspace spanned by
-![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}").
+![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}").
 We found
-![\widehat{\bm{b}} = \bm{A}x](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cwidehat%7B%5Cbm%7Bb%7D%7D%20%3D%20%5Cbm%7BA%7Dx "\widehat{\bm{b}} = \bm{A}x"),
+![\widehat{\textbf{b}} = \textbf{A}x](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cwidehat%7B%5Ctextbf%7Bb%7D%7D%20%3D%20%5Ctextbf%7BA%7Dx "\widehat{\textbf{b}} = \textbf{A}x"),
 where
 ![x](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x "x")
 is called the **least squares solution**, which solved the **normal
 equations**
-![\bm{A}^T \bm{A} x = \bm{A}^T \bm{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%5ET%20%5Cbm%7BA%7D%20x%20%3D%20%5Cbm%7BA%7D%5ET%20%5Cbm%7Bb%7D "\bm{A}^T \bm{A} x = \bm{A}^T \bm{b}").
+![\textbf{A}^T \textbf{A} x = \textbf{A}^T \textbf{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%5ET%20%5Ctextbf%7BA%7D%20x%20%3D%20%5Ctextbf%7BA%7D%5ET%20%5Ctextbf%7Bb%7D "\textbf{A}^T \textbf{A} x = \textbf{A}^T \textbf{b}").
 We can summarize the calculation of
 ![x](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x "x")
 by remembering
-![x = \left(\bm{A}^T \bm{A}\right)^{-1}\bm{A}^T \bm{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x%20%3D%20%5Cleft%28%5Cbm%7BA%7D%5ET%20%5Cbm%7BA%7D%5Cright%29%5E%7B-1%7D%5Cbm%7BA%7D%5ET%20%5Cbm%7Bb%7D "x = \left(\bm{A}^T \bm{A}\right)^{-1}\bm{A}^T \bm{b}")
+![x = \left(\textbf{A}^T \textbf{A}\right)^{-1}\textbf{A}^T \textbf{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x%20%3D%20%5Cleft%28%5Ctextbf%7BA%7D%5ET%20%5Ctextbf%7BA%7D%5Cright%29%5E%7B-1%7D%5Ctextbf%7BA%7D%5ET%20%5Ctextbf%7Bb%7D "x = \left(\textbf{A}^T \textbf{A}\right)^{-1}\textbf{A}^T \textbf{b}")
 where
-![\left(\bm{A}^T \bm{A}\right)^{-1}\bm{A}^T](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cleft%28%5Cbm%7BA%7D%5ET%20%5Cbm%7BA%7D%5Cright%29%5E%7B-1%7D%5Cbm%7BA%7D%5ET "\left(\bm{A}^T \bm{A}\right)^{-1}\bm{A}^T")
+![\left(\textbf{A}^T \textbf{A}\right)^{-1}\textbf{A}^T](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cleft%28%5Ctextbf%7BA%7D%5ET%20%5Ctextbf%7BA%7D%5Cright%29%5E%7B-1%7D%5Ctextbf%7BA%7D%5ET "\left(\textbf{A}^T \textbf{A}\right)^{-1}\textbf{A}^T")
 is called the **pseudoinverse** of
-![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}").
+![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}").
 Also, we can summarize the calculation of
-![\widehat{\bm{b}}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cwidehat%7B%5Cbm%7Bb%7D%7D "\widehat{\bm{b}}")
+![\widehat{\textbf{b}}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cwidehat%7B%5Ctextbf%7Bb%7D%7D "\widehat{\textbf{b}}")
 as
-![\widehat{\bm{b}} = \mathbf{P} \bm{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cwidehat%7B%5Cbm%7Bb%7D%7D%20%3D%20%5Cmathbf%7BP%7D%20%5Cbm%7Bb%7D "\widehat{\bm{b}} = \mathbf{P} \bm{b}")
+![\widehat{\textbf{b}} = \mathbf{P} \textbf{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cwidehat%7B%5Ctextbf%7Bb%7D%7D%20%3D%20%5Cmathbf%7BP%7D%20%5Ctextbf%7Bb%7D "\widehat{\textbf{b}} = \mathbf{P} \textbf{b}")
 where
-![\mathbf{P} = \bm{A} (\bm{A}^T\bm{A})^{-1} \bm{A}^T](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7BP%7D%20%3D%20%5Cbm%7BA%7D%20%28%5Cbm%7BA%7D%5ET%5Cbm%7BA%7D%29%5E%7B-1%7D%20%5Cbm%7BA%7D%5ET "\mathbf{P} = \bm{A} (\bm{A}^T\bm{A})^{-1} \bm{A}^T")
+![\mathbf{P} = \textbf{A} (\textbf{A}^T\textbf{A})^{-1} \textbf{A}^T](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7BP%7D%20%3D%20%5Ctextbf%7BA%7D%20%28%5Ctextbf%7BA%7D%5ET%5Ctextbf%7BA%7D%29%5E%7B-1%7D%20%5Ctextbf%7BA%7D%5ET "\mathbf{P} = \textbf{A} (\textbf{A}^T\textbf{A})^{-1} \textbf{A}^T")
 is what we call a **projection operator** or a **projection matrix**.
 Since we didn’t succeed in reaching
-![\bm{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7Bb%7D "\bm{b}"),
+![\textbf{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7Bb%7D "\textbf{b}"),
 there is some error, and we call this the **residual**,
-![\mathbf{r} = \bm{b}-\widehat{\bm{b}}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7Br%7D%20%3D%20%5Cbm%7Bb%7D-%5Cwidehat%7B%5Cbm%7Bb%7D%7D "\mathbf{r} = \bm{b}-\widehat{\bm{b}}").
+![\mathbf{r} = \textbf{b}-\widehat{\textbf{b}}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7Br%7D%20%3D%20%5Ctextbf%7Bb%7D-%5Cwidehat%7B%5Ctextbf%7Bb%7D%7D "\mathbf{r} = \textbf{b}-\widehat{\textbf{b}}").
 
 What are the words/ideas you should make sure you understand in the
 narrative above?
@@ -3195,12 +3195,12 @@ sales from advertising. We had
 
 which we’ll write symbolically as
 
-![x_0 \bm{A}\_0 + x_1 \bm{A}\_1 = \bm{b}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_0%20%5Cbm%7BA%7D_0%20%2B%20x_1%20%5Cbm%7BA%7D_1%20%3D%20%5Cbm%7Bb%7D. "x_0 \bm{A}_0 + x_1 \bm{A}_1 = \bm{b}.")
+![x_0 \textbf{A}\_0 + x_1 \textbf{A}\_1 = \textbf{b}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_0%20%5Ctextbf%7BA%7D_0%20%2B%20x_1%20%5Ctextbf%7BA%7D_1%20%3D%20%5Ctextbf%7Bb%7D. "x_0 \textbf{A}_0 + x_1 \textbf{A}_1 = \textbf{b}.")
 
 We’d like to reach
-![\bm{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7Bb%7D "\bm{b}")
+![\textbf{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7Bb%7D "\textbf{b}")
 using the basis vectors
-![\bm{A}\_{0,1}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D_%7B0%2C1%7D "\bm{A}_{0,1}"),
+![\textbf{A}\_{0,1}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D_%7B0%2C1%7D "\textbf{A}_{0,1}"),
 but we can’t, so let’s consider getting as close as possible. The
 picture looks something like this.
 
@@ -3209,11 +3209,11 @@ picture looks something like this.
 This picture gives rise to the equation
 
 ![\begin{align}
-x_0 \bm{A}\_0 + x_1 \mathbf{a_1} + \mathbf{r} &= \bm{b} \\\\
+x_0 \textbf{A}\_0 + x_1 \mathbf{a_1} + \mathbf{r} &= \textbf{b} \\\\
 a_0 \cdot \mathbf{r} &= 0 \\\\
 a_1 \cdot \mathbf{r} &= 0.
-\end{align}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbegin%7Balign%7D%0Ax_0%20%5Cbm%7BA%7D_0%20%2B%20x_1%20%5Cmathbf%7Ba_1%7D%20%2B%20%5Cmathbf%7Br%7D%20%26%3D%20%5Cbm%7Bb%7D%20%5C%5C%0Aa_0%20%5Ccdot%20%5Cmathbf%7Br%7D%20%26%3D%200%20%5C%5C%0Aa_1%20%5Ccdot%20%5Cmathbf%7Br%7D%20%26%3D%200.%0A%5Cend%7Balign%7D "\begin{align}
-x_0 \bm{A}_0 + x_1 \mathbf{a_1} + \mathbf{r} &= \bm{b} \\
+\end{align}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbegin%7Balign%7D%0Ax_0%20%5Ctextbf%7BA%7D_0%20%2B%20x_1%20%5Cmathbf%7Ba_1%7D%20%2B%20%5Cmathbf%7Br%7D%20%26%3D%20%5Ctextbf%7Bb%7D%20%5C%5C%0Aa_0%20%5Ccdot%20%5Cmathbf%7Br%7D%20%26%3D%200%20%5C%5C%0Aa_1%20%5Ccdot%20%5Cmathbf%7Br%7D%20%26%3D%200.%0A%5Cend%7Balign%7D "\begin{align}
+x_0 \textbf{A}_0 + x_1 \mathbf{a_1} + \mathbf{r} &= \textbf{b} \\
 a_0 \cdot \mathbf{r} &= 0 \\
 a_1 \cdot \mathbf{r} &= 0.
 \end{align}")
@@ -3222,28 +3222,28 @@ Let’s take the dot product of the first equaton with each basis vector.
 We find
 
 ![\begin{align}
-x_0 \bm{A}\_0\cdot\bm{A}\_0 + x_1 \bm{A}\_0\cdot\bm{A}\_1 &= \bm{A}\_0 \cdot \bm{b}\\\\
-x_0 \bm{A}\_1\cdot\bm{A}\_0 + x_1 \bm{A}\_1\cdot\bm{A}\_1 &= \bm{A}\_1 \cdot \bm{b}
-\end{align}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbegin%7Balign%7D%0Ax_0%20%5Cbm%7BA%7D_0%5Ccdot%5Cbm%7BA%7D_0%20%2B%20x_1%20%5Cbm%7BA%7D_0%5Ccdot%5Cbm%7BA%7D_1%20%26%3D%20%5Cbm%7BA%7D_0%20%5Ccdot%20%5Cbm%7Bb%7D%5C%5C%0Ax_0%20%5Cbm%7BA%7D_1%5Ccdot%5Cbm%7BA%7D_0%20%2B%20x_1%20%5Cbm%7BA%7D_1%5Ccdot%5Cbm%7BA%7D_1%20%26%3D%20%5Cbm%7BA%7D_1%20%5Ccdot%20%5Cbm%7Bb%7D%0A%5Cend%7Balign%7D "\begin{align}
-x_0 \bm{A}_0\cdot\bm{A}_0 + x_1 \bm{A}_0\cdot\bm{A}_1 &= \bm{A}_0 \cdot \bm{b}\\
-x_0 \bm{A}_1\cdot\bm{A}_0 + x_1 \bm{A}_1\cdot\bm{A}_1 &= \bm{A}_1 \cdot \bm{b}
+x_0 \textbf{A}\_0\cdot\textbf{A}\_0 + x_1 \textbf{A}\_0\cdot\textbf{A}\_1 &= \textbf{A}\_0 \cdot \textbf{b}\\\\
+x_0 \textbf{A}\_1\cdot\textbf{A}\_0 + x_1 \textbf{A}\_1\cdot\textbf{A}\_1 &= \textbf{A}\_1 \cdot \textbf{b}
+\end{align}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbegin%7Balign%7D%0Ax_0%20%5Ctextbf%7BA%7D_0%5Ccdot%5Ctextbf%7BA%7D_0%20%2B%20x_1%20%5Ctextbf%7BA%7D_0%5Ccdot%5Ctextbf%7BA%7D_1%20%26%3D%20%5Ctextbf%7BA%7D_0%20%5Ccdot%20%5Ctextbf%7Bb%7D%5C%5C%0Ax_0%20%5Ctextbf%7BA%7D_1%5Ccdot%5Ctextbf%7BA%7D_0%20%2B%20x_1%20%5Ctextbf%7BA%7D_1%5Ccdot%5Ctextbf%7BA%7D_1%20%26%3D%20%5Ctextbf%7BA%7D_1%20%5Ccdot%20%5Ctextbf%7Bb%7D%0A%5Cend%7Balign%7D "\begin{align}
+x_0 \textbf{A}_0\cdot\textbf{A}_0 + x_1 \textbf{A}_0\cdot\textbf{A}_1 &= \textbf{A}_0 \cdot \textbf{b}\\
+x_0 \textbf{A}_1\cdot\textbf{A}_0 + x_1 \textbf{A}_1\cdot\textbf{A}_1 &= \textbf{A}_1 \cdot \textbf{b}
 \end{align}")
 
 where we have elminated terms that turn out to be zero thanks to the
 second and third equations previously. Note that there is a matrix way
 to write this. we can write
 
-![\begin{pmatrix} \bm{A}\_0^T \\\\ \bm{A}\_1^T \end{pmatrix} \begin{pmatrix} \bm{A}\_0 & \bm{A}\_1 \end{pmatrix} \begin{pmatrix} x_0 \\\\ x_1 \end{pmatrix} = \begin{pmatrix} \bm{A}\_0^T \\\\ \bm{A}\_1^T \end{pmatrix} \bm{b}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbegin%7Bpmatrix%7D%20%5Cbm%7BA%7D_0%5ET%20%5C%5C%20%5Cbm%7BA%7D_1%5ET%20%5Cend%7Bpmatrix%7D%20%5Cbegin%7Bpmatrix%7D%20%5Cbm%7BA%7D_0%20%26%20%5Cbm%7BA%7D_1%20%5Cend%7Bpmatrix%7D%20%5Cbegin%7Bpmatrix%7D%20x_0%20%5C%5C%20x_1%20%5Cend%7Bpmatrix%7D%20%3D%20%5Cbegin%7Bpmatrix%7D%20%5Cbm%7BA%7D_0%5ET%20%5C%5C%20%5Cbm%7BA%7D_1%5ET%20%5Cend%7Bpmatrix%7D%20%5Cbm%7Bb%7D. "\begin{pmatrix} \bm{A}_0^T \\ \bm{A}_1^T \end{pmatrix} \begin{pmatrix} \bm{A}_0 & \bm{A}_1 \end{pmatrix} \begin{pmatrix} x_0 \\ x_1 \end{pmatrix} = \begin{pmatrix} \bm{A}_0^T \\ \bm{A}_1^T \end{pmatrix} \bm{b}.")
+![\begin{pmatrix} \textbf{A}\_0^T \\\\ \textbf{A}\_1^T \end{pmatrix} \begin{pmatrix} \textbf{A}\_0 & \textbf{A}\_1 \end{pmatrix} \begin{pmatrix} x_0 \\\\ x_1 \end{pmatrix} = \begin{pmatrix} \textbf{A}\_0^T \\\\ \textbf{A}\_1^T \end{pmatrix} \textbf{b}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbegin%7Bpmatrix%7D%20%5Ctextbf%7BA%7D_0%5ET%20%5C%5C%20%5Ctextbf%7BA%7D_1%5ET%20%5Cend%7Bpmatrix%7D%20%5Cbegin%7Bpmatrix%7D%20%5Ctextbf%7BA%7D_0%20%26%20%5Ctextbf%7BA%7D_1%20%5Cend%7Bpmatrix%7D%20%5Cbegin%7Bpmatrix%7D%20x_0%20%5C%5C%20x_1%20%5Cend%7Bpmatrix%7D%20%3D%20%5Cbegin%7Bpmatrix%7D%20%5Ctextbf%7BA%7D_0%5ET%20%5C%5C%20%5Ctextbf%7BA%7D_1%5ET%20%5Cend%7Bpmatrix%7D%20%5Ctextbf%7Bb%7D. "\begin{pmatrix} \textbf{A}_0^T \\ \textbf{A}_1^T \end{pmatrix} \begin{pmatrix} \textbf{A}_0 & \textbf{A}_1 \end{pmatrix} \begin{pmatrix} x_0 \\ x_1 \end{pmatrix} = \begin{pmatrix} \textbf{A}_0^T \\ \textbf{A}_1^T \end{pmatrix} \textbf{b}.")
 
 If we let
-![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}")
+![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}")
 represent the matrix with columns
-![\bm{A}\_{0,1}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D_%7B0%2C1%7D "\bm{A}_{0,1}")
+![\textbf{A}\_{0,1}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D_%7B0%2C1%7D "\textbf{A}_{0,1}")
 and if we let
-![\bm{x}=(x_0,x_1)^T](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7Bx%7D%3D%28x_0%2Cx_1%29%5ET "\bm{x}=(x_0,x_1)^T")
+![\textbf{x}=(x_0,x_1)^T](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7Bx%7D%3D%28x_0%2Cx_1%29%5ET "\textbf{x}=(x_0,x_1)^T")
 then we can write the last equation as
 
-![\bm{A}^T \bm{A} \bm{x} = \bm{A}^T \bm{b}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%5ET%20%5Cbm%7BA%7D%20%5Cbm%7Bx%7D%20%3D%20%5Cbm%7BA%7D%5ET%20%5Cbm%7Bb%7D. "\bm{A}^T \bm{A} \bm{x} = \bm{A}^T \bm{b}.")
+![\textbf{A}^T \textbf{A} \textbf{x} = \textbf{A}^T \textbf{b}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%5ET%20%5Ctextbf%7BA%7D%20%5Ctextbf%7Bx%7D%20%3D%20%5Ctextbf%7BA%7D%5ET%20%5Ctextbf%7Bb%7D. "\textbf{A}^T \textbf{A} \textbf{x} = \textbf{A}^T \textbf{b}.")
 
 These are the normal equations. For us, concretely, it looks like
 
@@ -3308,13 +3308,13 @@ lines(xx,horner(as.numeric(x),xx)$y)
 ![](coursenotes_files/figure-gfm/unnamed-chunk-47-1.png)<!-- -->
 
 Symbolically, we calculated the least squares solution
-![\bm{x} = \left(\bm{A}^T \bm{A}\right)^{-1}\bm{A}^T \bm{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7Bx%7D%20%3D%20%5Cleft%28%5Cbm%7BA%7D%5ET%20%5Cbm%7BA%7D%5Cright%29%5E%7B-1%7D%5Cbm%7BA%7D%5ET%20%5Cbm%7Bb%7D "\bm{x} = \left(\bm{A}^T \bm{A}\right)^{-1}\bm{A}^T \bm{b}")
+![\textbf{x} = \left(\textbf{A}^T \textbf{A}\right)^{-1}\textbf{A}^T \textbf{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7Bx%7D%20%3D%20%5Cleft%28%5Ctextbf%7BA%7D%5ET%20%5Ctextbf%7BA%7D%5Cright%29%5E%7B-1%7D%5Ctextbf%7BA%7D%5ET%20%5Ctextbf%7Bb%7D "\textbf{x} = \left(\textbf{A}^T \textbf{A}\right)^{-1}\textbf{A}^T \textbf{b}")
 where
-![\left(\bm{A}^T \bm{A}\right)^{-1}\bm{A}^T](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cleft%28%5Cbm%7BA%7D%5ET%20%5Cbm%7BA%7D%5Cright%29%5E%7B-1%7D%5Cbm%7BA%7D%5ET "\left(\bm{A}^T \bm{A}\right)^{-1}\bm{A}^T")
+![\left(\textbf{A}^T \textbf{A}\right)^{-1}\textbf{A}^T](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cleft%28%5Ctextbf%7BA%7D%5ET%20%5Ctextbf%7BA%7D%5Cright%29%5E%7B-1%7D%5Ctextbf%7BA%7D%5ET "\left(\textbf{A}^T \textbf{A}\right)^{-1}\textbf{A}^T")
 is the pseudoinverse. The projection is
-![\widehat{\bm{b}} = \bm{A} \bm{x} = \bm{A} \left(\bm{A}^T \bm{A}\right)^{-1}\bm{A}^T \bm{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cwidehat%7B%5Cbm%7Bb%7D%7D%20%3D%20%5Cbm%7BA%7D%20%5Cbm%7Bx%7D%20%3D%20%5Cbm%7BA%7D%20%5Cleft%28%5Cbm%7BA%7D%5ET%20%5Cbm%7BA%7D%5Cright%29%5E%7B-1%7D%5Cbm%7BA%7D%5ET%20%5Cbm%7Bb%7D "\widehat{\bm{b}} = \bm{A} \bm{x} = \bm{A} \left(\bm{A}^T \bm{A}\right)^{-1}\bm{A}^T \bm{b}")
+![\widehat{\textbf{b}} = \textbf{A} \textbf{x} = \textbf{A} \left(\textbf{A}^T \textbf{A}\right)^{-1}\textbf{A}^T \textbf{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cwidehat%7B%5Ctextbf%7Bb%7D%7D%20%3D%20%5Ctextbf%7BA%7D%20%5Ctextbf%7Bx%7D%20%3D%20%5Ctextbf%7BA%7D%20%5Cleft%28%5Ctextbf%7BA%7D%5ET%20%5Ctextbf%7BA%7D%5Cright%29%5E%7B-1%7D%5Ctextbf%7BA%7D%5ET%20%5Ctextbf%7Bb%7D "\widehat{\textbf{b}} = \textbf{A} \textbf{x} = \textbf{A} \left(\textbf{A}^T \textbf{A}\right)^{-1}\textbf{A}^T \textbf{b}")
 where
-![\bm{A} \left(\bm{A}^T \bm{A}\right)^{-1}\bm{A}^T](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%20%5Cleft%28%5Cbm%7BA%7D%5ET%20%5Cbm%7BA%7D%5Cright%29%5E%7B-1%7D%5Cbm%7BA%7D%5ET "\bm{A} \left(\bm{A}^T \bm{A}\right)^{-1}\bm{A}^T")
+![\textbf{A} \left(\textbf{A}^T \textbf{A}\right)^{-1}\textbf{A}^T](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%20%5Cleft%28%5Ctextbf%7BA%7D%5ET%20%5Ctextbf%7BA%7D%5Cright%29%5E%7B-1%7D%5Ctextbf%7BA%7D%5ET "\textbf{A} \left(\textbf{A}^T \textbf{A}\right)^{-1}\textbf{A}^T")
 is the projection matrix.
 
 Though our example here has used merely two basis vectors, the ideas
@@ -3325,7 +3325,7 @@ extend to any number.
 The technique we have developed here of solving a least squares problem
 by vector projection works in a model fitting context whenever the
 unknowns
-![\bm{x}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7Bx%7D "\bm{x}")
+![\textbf{x}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7Bx%7D "\textbf{x}")
 appear linearly. It doesn’t require that other quantities appear
 linearly.
 
@@ -3413,9 +3413,9 @@ where the model parameters appear in a lienar fashion.
 1.  Look at data.
 2.  Propose a model.
 3.  Force the model, resulting in
-    ![\bm{A}\bm{x}=\bm{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%5Cbm%7Bx%7D%3D%5Cbm%7Bb%7D "\bm{A}\bm{x}=\bm{b}").
+    ![\textbf{A}\textbf{x}=\textbf{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%5Ctextbf%7Bx%7D%3D%5Ctextbf%7Bb%7D "\textbf{A}\textbf{x}=\textbf{b}").
 4.  Solve the normal equations
-    ![\bm{A}^T\bm{A}\bm{x}=\bm{A}^T \bm{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%5ET%5Cbm%7BA%7D%5Cbm%7Bx%7D%3D%5Cbm%7BA%7D%5ET%20%5Cbm%7Bb%7D "\bm{A}^T\bm{A}\bm{x}=\bm{A}^T \bm{b}").
+    ![\textbf{A}^T\textbf{A}\textbf{x}=\textbf{A}^T \textbf{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%5ET%5Ctextbf%7BA%7D%5Ctextbf%7Bx%7D%3D%5Ctextbf%7BA%7D%5ET%20%5Ctextbf%7Bb%7D "\textbf{A}^T\textbf{A}\textbf{x}=\textbf{A}^T \textbf{b}").
 5.  Assess the fit of the model visually and/or using the residual
     vector.
 
@@ -3447,19 +3447,19 @@ We can start directly with the square of the norm of the residual vector
 (a factor of 1/2 is included for algebraic convenience, but it doesn’t
 change the result)
 
-![\frac{1}{2}\|\|\mathbf{r}\|\|^2 = \frac{1}{2}\|\|\bm{A}\bm{x}-\bm{b}\|\|^2.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cfrac%7B1%7D%7B2%7D%7C%7C%5Cmathbf%7Br%7D%7C%7C%5E2%20%3D%20%5Cfrac%7B1%7D%7B2%7D%7C%7C%5Cbm%7BA%7D%5Cbm%7Bx%7D-%5Cbm%7Bb%7D%7C%7C%5E2. "\frac{1}{2}||\mathbf{r}||^2 = \frac{1}{2}||\bm{A}\bm{x}-\bm{b}||^2.")
+![\frac{1}{2}\|\|\mathbf{r}\|\|^2 = \frac{1}{2}\|\|\textbf{A}\textbf{x}-\textbf{b}\|\|^2.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cfrac%7B1%7D%7B2%7D%7C%7C%5Cmathbf%7Br%7D%7C%7C%5E2%20%3D%20%5Cfrac%7B1%7D%7B2%7D%7C%7C%5Ctextbf%7BA%7D%5Ctextbf%7Bx%7D-%5Ctextbf%7Bb%7D%7C%7C%5E2. "\frac{1}{2}||\mathbf{r}||^2 = \frac{1}{2}||\textbf{A}\textbf{x}-\textbf{b}||^2.")
 
 More formally, we can define the scalar **objective function**
 
-![f(\bm{x}) = \frac{1}{2} \|\|\bm{A}\bm{x}-\bm{b}\|\|^2](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;f%28%5Cbm%7Bx%7D%29%20%3D%20%5Cfrac%7B1%7D%7B2%7D%20%7C%7C%5Cbm%7BA%7D%5Cbm%7Bx%7D-%5Cbm%7Bb%7D%7C%7C%5E2 "f(\bm{x}) = \frac{1}{2} ||\bm{A}\bm{x}-\bm{b}||^2")
+![f(\textbf{x}) = \frac{1}{2} \|\|\textbf{A}\textbf{x}-\textbf{b}\|\|^2](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;f%28%5Ctextbf%7Bx%7D%29%20%3D%20%5Cfrac%7B1%7D%7B2%7D%20%7C%7C%5Ctextbf%7BA%7D%5Ctextbf%7Bx%7D-%5Ctextbf%7Bb%7D%7C%7C%5E2 "f(\textbf{x}) = \frac{1}{2} ||\textbf{A}\textbf{x}-\textbf{b}||^2")
 
 and define our least squares solution
-![\bm{x}\_{LS}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7Bx%7D_%7BLS%7D "\bm{x}_{LS}")as
+![\textbf{x}\_{LS}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7Bx%7D_%7BLS%7D "\textbf{x}_{LS}")as
 the value of
-![\bm{x}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7Bx%7D "\bm{x}")
+![\textbf{x}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7Bx%7D "\textbf{x}")
 that minimizes this objective function, that is,
 
-![\bm{x}\_{LS} = \mathop{\mathrm{arg\\,min}}\_{\bm{x}} f(\bm{x}).](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7Bx%7D_%7BLS%7D%20%3D%20%5Cmathop%7B%5Cmathrm%7Barg%5C%2Cmin%7D%7D_%7B%5Cbm%7Bx%7D%7D%20f%28%5Cbm%7Bx%7D%29. "\bm{x}_{LS} = \mathop{\mathrm{arg\,min}}_{\bm{x}} f(\bm{x}).")
+![\textbf{x}\_{LS} = \mathop{\mathrm{arg\\,min}}\_{\textbf{x}} f(\textbf{x}).](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7Bx%7D_%7BLS%7D%20%3D%20%5Cmathop%7B%5Cmathrm%7Barg%5C%2Cmin%7D%7D_%7B%5Ctextbf%7Bx%7D%7D%20f%28%5Ctextbf%7Bx%7D%29. "\textbf{x}_{LS} = \mathop{\mathrm{arg\,min}}_{\textbf{x}} f(\textbf{x}).")
 
 Now you know where the terminology least squares comes from! We can
 apply calculus to minimize this expression and the normal equations will
@@ -3488,10 +3488,10 @@ problem.
 The eventual goal of this lesson is to show you how to solve the least
 squares problem
 
-![\bm{x}\_{LS} = \mathop{\mathrm{arg\\,min}}\_x \frac{1}{2}\|\|\bm{A}\bm{x}-\bm{b}\|\|^2](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7Bx%7D_%7BLS%7D%20%3D%20%5Cmathop%7B%5Cmathrm%7Barg%5C%2Cmin%7D%7D_x%20%5Cfrac%7B1%7D%7B2%7D%7C%7C%5Cbm%7BA%7D%5Cbm%7Bx%7D-%5Cbm%7Bb%7D%7C%7C%5E2 "\bm{x}_{LS} = \mathop{\mathrm{arg\,min}}_x \frac{1}{2}||\bm{A}\bm{x}-\bm{b}||^2")
+![\textbf{x}\_{LS} = \mathop{\mathrm{arg\\,min}}\_x \frac{1}{2}\|\|\textbf{A}\textbf{x}-\textbf{b}\|\|^2](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7Bx%7D_%7BLS%7D%20%3D%20%5Cmathop%7B%5Cmathrm%7Barg%5C%2Cmin%7D%7D_x%20%5Cfrac%7B1%7D%7B2%7D%7C%7C%5Ctextbf%7BA%7D%5Ctextbf%7Bx%7D-%5Ctextbf%7Bb%7D%7C%7C%5E2 "\textbf{x}_{LS} = \mathop{\mathrm{arg\,min}}_x \frac{1}{2}||\textbf{A}\textbf{x}-\textbf{b}||^2")
 
 by writing the matrix
-![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}")
+![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}")
 in a convenient way. But to build up to that, we need to introduce a
 number of ideas. First off: orthogonality.
 
@@ -3511,18 +3511,18 @@ vectors. A cool property arises from this. Suppose these orthonormal
 columns are
 ![\mathbf{v}\_1,\ldots,\mathbf{v}\_n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7Bv%7D_1%2C%5Cldots%2C%5Cmathbf%7Bv%7D_n "\mathbf{v}_1,\ldots,\mathbf{v}_n").
 Then we can consider the quantity
-![\bm{A}^T \bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%5ET%20%5Cbm%7BA%7D "\bm{A}^T \bm{A}"):
+![\textbf{A}^T \textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%5ET%20%5Ctextbf%7BA%7D "\textbf{A}^T \textbf{A}"):
 
 ![\begin{align}
-\bm{A}^T \bm{A} &= \begin{pmatrix} \mathbf{v}\_1^T\\\\ \mathbf{v}\_2^T \\\\ \vdots \\\\ \mathbf{v}\_n^T \end{pmatrix} \begin{pmatrix} \mathbf{v}\_1 & \mathbf{v}\_2 & \cdots & \mathbf{v}\_n \end{pmatrix} \\\\
+\textbf{A}^T \textbf{A} &= \begin{pmatrix} \mathbf{v}\_1^T\\\\ \mathbf{v}\_2^T \\\\ \vdots \\\\ \mathbf{v}\_n^T \end{pmatrix} \begin{pmatrix} \mathbf{v}\_1 & \mathbf{v}\_2 & \cdots & \mathbf{v}\_n \end{pmatrix} \\\\
 &= \begin{pmatrix} \mathbf{v}\_1^T \mathbf{v}\_1 & \mathbf{v}\_1^T \mathbf{v}\_2 & \cdots & \mathbf{v}\_1^T \mathbf{v}\_n \\\\ \mathbf{v}\_2^T \mathbf{v}\_1 & \mathbf{v}\_2^T \mathbf{v}\_2 & \cdots &  \mathbf{v}\_2^T \mathbf{v}\_n \\\\
 \vdots & \vdots & \cdots & \vdots \\\\
 \mathbf{v}\_n^T \mathbf{v}\_1 & \mathbf{v}\_n^T \mathbf{v}\_2 & \cdots & \mathbf{v}\_n^T \mathbf{v}\_n
 \end{pmatrix}\\\\
 &= \begin{pmatrix} 1 & 0 & \cdots & 0 \\\\ 0 & 1 & \cdots & 0\\\\ \vdots & \vdots & \cdots & \vdots \\\\ 0 & 0 & \cdots & 1\end{pmatrix}\\\\
 &= \mathbf{I}\_n.
-\end{align}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbegin%7Balign%7D%0A%5Cbm%7BA%7D%5ET%20%5Cbm%7BA%7D%20%26%3D%20%5Cbegin%7Bpmatrix%7D%20%5Cmathbf%7Bv%7D_1%5ET%5C%5C%20%5Cmathbf%7Bv%7D_2%5ET%20%5C%5C%20%5Cvdots%20%5C%5C%20%5Cmathbf%7Bv%7D_n%5ET%20%5Cend%7Bpmatrix%7D%20%5Cbegin%7Bpmatrix%7D%20%5Cmathbf%7Bv%7D_1%20%26%20%5Cmathbf%7Bv%7D_2%20%26%20%5Ccdots%20%26%20%5Cmathbf%7Bv%7D_n%20%5Cend%7Bpmatrix%7D%20%5C%5C%0A%26%3D%20%5Cbegin%7Bpmatrix%7D%20%5Cmathbf%7Bv%7D_1%5ET%20%5Cmathbf%7Bv%7D_1%20%26%20%5Cmathbf%7Bv%7D_1%5ET%20%5Cmathbf%7Bv%7D_2%20%26%20%5Ccdots%20%26%20%5Cmathbf%7Bv%7D_1%5ET%20%5Cmathbf%7Bv%7D_n%20%5C%5C%20%5Cmathbf%7Bv%7D_2%5ET%20%5Cmathbf%7Bv%7D_1%20%26%20%5Cmathbf%7Bv%7D_2%5ET%20%5Cmathbf%7Bv%7D_2%20%26%20%5Ccdots%20%26%20%20%5Cmathbf%7Bv%7D_2%5ET%20%5Cmathbf%7Bv%7D_n%20%5C%5C%0A%5Cvdots%20%26%20%5Cvdots%20%26%20%5Ccdots%20%26%20%5Cvdots%20%5C%5C%0A%5Cmathbf%7Bv%7D_n%5ET%20%5Cmathbf%7Bv%7D_1%20%26%20%5Cmathbf%7Bv%7D_n%5ET%20%5Cmathbf%7Bv%7D_2%20%26%20%5Ccdots%20%26%20%5Cmathbf%7Bv%7D_n%5ET%20%5Cmathbf%7Bv%7D_n%0A%5Cend%7Bpmatrix%7D%5C%5C%0A%26%3D%20%5Cbegin%7Bpmatrix%7D%201%20%26%200%20%26%20%5Ccdots%20%26%200%20%5C%5C%200%20%26%201%20%26%20%5Ccdots%20%26%200%5C%5C%20%5Cvdots%20%26%20%5Cvdots%20%26%20%5Ccdots%20%26%20%5Cvdots%20%5C%5C%200%20%26%200%20%26%20%5Ccdots%20%26%201%5Cend%7Bpmatrix%7D%5C%5C%0A%26%3D%20%5Cmathbf%7BI%7D_n.%0A%5Cend%7Balign%7D "\begin{align}
-\bm{A}^T \bm{A} &= \begin{pmatrix} \mathbf{v}_1^T\\ \mathbf{v}_2^T \\ \vdots \\ \mathbf{v}_n^T \end{pmatrix} \begin{pmatrix} \mathbf{v}_1 & \mathbf{v}_2 & \cdots & \mathbf{v}_n \end{pmatrix} \\
+\end{align}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbegin%7Balign%7D%0A%5Ctextbf%7BA%7D%5ET%20%5Ctextbf%7BA%7D%20%26%3D%20%5Cbegin%7Bpmatrix%7D%20%5Cmathbf%7Bv%7D_1%5ET%5C%5C%20%5Cmathbf%7Bv%7D_2%5ET%20%5C%5C%20%5Cvdots%20%5C%5C%20%5Cmathbf%7Bv%7D_n%5ET%20%5Cend%7Bpmatrix%7D%20%5Cbegin%7Bpmatrix%7D%20%5Cmathbf%7Bv%7D_1%20%26%20%5Cmathbf%7Bv%7D_2%20%26%20%5Ccdots%20%26%20%5Cmathbf%7Bv%7D_n%20%5Cend%7Bpmatrix%7D%20%5C%5C%0A%26%3D%20%5Cbegin%7Bpmatrix%7D%20%5Cmathbf%7Bv%7D_1%5ET%20%5Cmathbf%7Bv%7D_1%20%26%20%5Cmathbf%7Bv%7D_1%5ET%20%5Cmathbf%7Bv%7D_2%20%26%20%5Ccdots%20%26%20%5Cmathbf%7Bv%7D_1%5ET%20%5Cmathbf%7Bv%7D_n%20%5C%5C%20%5Cmathbf%7Bv%7D_2%5ET%20%5Cmathbf%7Bv%7D_1%20%26%20%5Cmathbf%7Bv%7D_2%5ET%20%5Cmathbf%7Bv%7D_2%20%26%20%5Ccdots%20%26%20%20%5Cmathbf%7Bv%7D_2%5ET%20%5Cmathbf%7Bv%7D_n%20%5C%5C%0A%5Cvdots%20%26%20%5Cvdots%20%26%20%5Ccdots%20%26%20%5Cvdots%20%5C%5C%0A%5Cmathbf%7Bv%7D_n%5ET%20%5Cmathbf%7Bv%7D_1%20%26%20%5Cmathbf%7Bv%7D_n%5ET%20%5Cmathbf%7Bv%7D_2%20%26%20%5Ccdots%20%26%20%5Cmathbf%7Bv%7D_n%5ET%20%5Cmathbf%7Bv%7D_n%0A%5Cend%7Bpmatrix%7D%5C%5C%0A%26%3D%20%5Cbegin%7Bpmatrix%7D%201%20%26%200%20%26%20%5Ccdots%20%26%200%20%5C%5C%200%20%26%201%20%26%20%5Ccdots%20%26%200%5C%5C%20%5Cvdots%20%26%20%5Cvdots%20%26%20%5Ccdots%20%26%20%5Cvdots%20%5C%5C%200%20%26%200%20%26%20%5Ccdots%20%26%201%5Cend%7Bpmatrix%7D%5C%5C%0A%26%3D%20%5Cmathbf%7BI%7D_n.%0A%5Cend%7Balign%7D "\begin{align}
+\textbf{A}^T \textbf{A} &= \begin{pmatrix} \mathbf{v}_1^T\\ \mathbf{v}_2^T \\ \vdots \\ \mathbf{v}_n^T \end{pmatrix} \begin{pmatrix} \mathbf{v}_1 & \mathbf{v}_2 & \cdots & \mathbf{v}_n \end{pmatrix} \\
 &= \begin{pmatrix} \mathbf{v}_1^T \mathbf{v}_1 & \mathbf{v}_1^T \mathbf{v}_2 & \cdots & \mathbf{v}_1^T \mathbf{v}_n \\ \mathbf{v}_2^T \mathbf{v}_1 & \mathbf{v}_2^T \mathbf{v}_2 & \cdots &  \mathbf{v}_2^T \mathbf{v}_n \\
 \vdots & \vdots & \cdots & \vdots \\
 \mathbf{v}_n^T \mathbf{v}_1 & \mathbf{v}_n^T \mathbf{v}_2 & \cdots & \mathbf{v}_n^T \mathbf{v}_n
@@ -3532,14 +3532,14 @@ Then we can consider the quantity
 \end{align}")
 
 If
-![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}")
+![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}")
 is square and orthonormal, since
-![\bm{A}^T\bm{A} = \mathbf{I}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%5ET%5Cbm%7BA%7D%20%3D%20%5Cmathbf%7BI%7D "\bm{A}^T\bm{A} = \mathbf{I}"),
+![\textbf{A}^T\textbf{A} = \mathbf{I}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%5ET%5Ctextbf%7BA%7D%20%3D%20%5Cmathbf%7BI%7D "\textbf{A}^T\textbf{A} = \mathbf{I}"),
 then by definition of inverse,
-![\bm{A}^T = \bm{A}^{-1}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%5ET%20%3D%20%5Cbm%7BA%7D%5E%7B-1%7D "\bm{A}^T = \bm{A}^{-1}").
+![\textbf{A}^T = \textbf{A}^{-1}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%5ET%20%3D%20%5Ctextbf%7BA%7D%5E%7B-1%7D "\textbf{A}^T = \textbf{A}^{-1}").
 This is a pretty great way to calculate an inverse! Remember, though,
 that in our least squares context
-,![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}")
+,![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}")
 is generally *not* a square matrix.
 
 Another helpful property of orthogonal matrices is that they preserve
@@ -3580,28 +3580,28 @@ orthonormal vectors
 ![\mathbf{q}\_i](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7Bq%7D_i "\mathbf{q}_i"),
 ![i=1,\ldots,n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;i%3D1%2C%5Cldots%2Cn "i=1,\ldots,n").
 Define
-![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}")
+![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}")
 as
 
-![\bm{A} = \begin{pmatrix} \| & \| &  & \| \\\\ \mathbf{q}\_1 & \mathbf{q}\_2 & \cdots & \\  \mathbf{q}\_n \\\\\| & \| &  & \| \\\\ \end{pmatrix}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%20%3D%20%5Cbegin%7Bpmatrix%7D%20%7C%20%26%20%7C%20%26%20%20%26%20%7C%20%5C%5C%20%5Cmathbf%7Bq%7D_1%20%26%20%5Cmathbf%7Bq%7D_2%20%26%20%5Ccdots%20%26%20%5C%20%20%5Cmathbf%7Bq%7D_n%20%5C%5C%7C%20%26%20%7C%20%26%20%20%26%20%7C%20%5C%5C%20%5Cend%7Bpmatrix%7D. "\bm{A} = \begin{pmatrix} | & | &  & | \\ \mathbf{q}_1 & \mathbf{q}_2 & \cdots & \  \mathbf{q}_n \\| & | &  & | \\ \end{pmatrix}.")
+![\textbf{A} = \begin{pmatrix} \| & \| &  & \| \\\\ \mathbf{q}\_1 & \mathbf{q}\_2 & \cdots & \\  \mathbf{q}\_n \\\\\| & \| &  & \| \\\\ \end{pmatrix}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%20%3D%20%5Cbegin%7Bpmatrix%7D%20%7C%20%26%20%7C%20%26%20%20%26%20%7C%20%5C%5C%20%5Cmathbf%7Bq%7D_1%20%26%20%5Cmathbf%7Bq%7D_2%20%26%20%5Ccdots%20%26%20%5C%20%20%5Cmathbf%7Bq%7D_n%20%5C%5C%7C%20%26%20%7C%20%26%20%20%26%20%7C%20%5C%5C%20%5Cend%7Bpmatrix%7D. "\textbf{A} = \begin{pmatrix} | & | &  & | \\ \mathbf{q}_1 & \mathbf{q}_2 & \cdots & \  \mathbf{q}_n \\| & | &  & | \\ \end{pmatrix}.")
 
 Let’s project a vector
 ![\mathbf{w}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7Bw%7D "\mathbf{w}")
 onto the subspace spanned by the columns of
-![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}").
+![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}").
 By definition of the projection operator, and using the fact that
-![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}")
+![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}")
 is orthogonal,
 
 ![\begin{align}
-\mathbf{P}\mathbf{w} &= \bm{A} (\bm{A}^T \bm{A})^{-1} \bm{A}^T \mathbf{w}\\\\
-&= \bm{A} \bm{A}^{-1} \bm{A} \bm{A}^T \mathbf{w} \\\\
-&= \bm{A} \bm{A}^T \mathbf{w} \\\\
+\mathbf{P}\mathbf{w} &= \textbf{A} (\textbf{A}^T \textbf{A})^{-1} \textbf{A}^T \mathbf{w}\\\\
+&= \textbf{A} \textbf{A}^{-1} \textbf{A} \textbf{A}^T \mathbf{w} \\\\
+&= \textbf{A} \textbf{A}^T \mathbf{w} \\\\
 &= \mathbf{q}\_1 \mathbf{q}\_1^T \mathbf{w} + \mathbf{q}\_2 \mathbf{q}\_2^T \mathbf{w} + \cdots + \mathbf{q}\_n \mathbf{q}\_n^T \mathbf{w}.
-\end{align}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbegin%7Balign%7D%0A%5Cmathbf%7BP%7D%5Cmathbf%7Bw%7D%20%26%3D%20%5Cbm%7BA%7D%20%28%5Cbm%7BA%7D%5ET%20%5Cbm%7BA%7D%29%5E%7B-1%7D%20%5Cbm%7BA%7D%5ET%20%5Cmathbf%7Bw%7D%5C%5C%0A%26%3D%20%5Cbm%7BA%7D%20%5Cbm%7BA%7D%5E%7B-1%7D%20%5Cbm%7BA%7D%20%5Cbm%7BA%7D%5ET%20%5Cmathbf%7Bw%7D%20%5C%5C%0A%26%3D%20%5Cbm%7BA%7D%20%5Cbm%7BA%7D%5ET%20%5Cmathbf%7Bw%7D%20%5C%5C%0A%26%3D%20%5Cmathbf%7Bq%7D_1%20%5Cmathbf%7Bq%7D_1%5ET%20%5Cmathbf%7Bw%7D%20%2B%20%5Cmathbf%7Bq%7D_2%20%5Cmathbf%7Bq%7D_2%5ET%20%5Cmathbf%7Bw%7D%20%2B%20%5Ccdots%20%2B%20%5Cmathbf%7Bq%7D_n%20%5Cmathbf%7Bq%7D_n%5ET%20%5Cmathbf%7Bw%7D.%0A%5Cend%7Balign%7D "\begin{align}
-\mathbf{P}\mathbf{w} &= \bm{A} (\bm{A}^T \bm{A})^{-1} \bm{A}^T \mathbf{w}\\
-&= \bm{A} \bm{A}^{-1} \bm{A} \bm{A}^T \mathbf{w} \\
-&= \bm{A} \bm{A}^T \mathbf{w} \\
+\end{align}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbegin%7Balign%7D%0A%5Cmathbf%7BP%7D%5Cmathbf%7Bw%7D%20%26%3D%20%5Ctextbf%7BA%7D%20%28%5Ctextbf%7BA%7D%5ET%20%5Ctextbf%7BA%7D%29%5E%7B-1%7D%20%5Ctextbf%7BA%7D%5ET%20%5Cmathbf%7Bw%7D%5C%5C%0A%26%3D%20%5Ctextbf%7BA%7D%20%5Ctextbf%7BA%7D%5E%7B-1%7D%20%5Ctextbf%7BA%7D%20%5Ctextbf%7BA%7D%5ET%20%5Cmathbf%7Bw%7D%20%5C%5C%0A%26%3D%20%5Ctextbf%7BA%7D%20%5Ctextbf%7BA%7D%5ET%20%5Cmathbf%7Bw%7D%20%5C%5C%0A%26%3D%20%5Cmathbf%7Bq%7D_1%20%5Cmathbf%7Bq%7D_1%5ET%20%5Cmathbf%7Bw%7D%20%2B%20%5Cmathbf%7Bq%7D_2%20%5Cmathbf%7Bq%7D_2%5ET%20%5Cmathbf%7Bw%7D%20%2B%20%5Ccdots%20%2B%20%5Cmathbf%7Bq%7D_n%20%5Cmathbf%7Bq%7D_n%5ET%20%5Cmathbf%7Bw%7D.%0A%5Cend%7Balign%7D "\begin{align}
+\mathbf{P}\mathbf{w} &= \textbf{A} (\textbf{A}^T \textbf{A})^{-1} \textbf{A}^T \mathbf{w}\\
+&= \textbf{A} \textbf{A}^{-1} \textbf{A} \textbf{A}^T \mathbf{w} \\
+&= \textbf{A} \textbf{A}^T \mathbf{w} \\
 &= \mathbf{q}_1 \mathbf{q}_1^T \mathbf{w} + \mathbf{q}_2 \mathbf{q}_2^T \mathbf{w} + \cdots + \mathbf{q}_n \mathbf{q}_n^T \mathbf{w}.
 \end{align}")
 
@@ -3617,12 +3617,12 @@ As an example, take
 
 so that
 
-![\bm{A} = \begin{pmatrix} \frac{1}{3} & \frac{2}{15} \\\\ \frac{2}{3} & \frac{2}{3} \\\\ \frac{2}{3} & -\frac{11}{15} \end{pmatrix}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%20%3D%20%5Cbegin%7Bpmatrix%7D%20%5Cfrac%7B1%7D%7B3%7D%20%26%20%5Cfrac%7B2%7D%7B15%7D%20%5C%5C%20%5Cfrac%7B2%7D%7B3%7D%20%26%20%5Cfrac%7B2%7D%7B3%7D%20%5C%5C%20%5Cfrac%7B2%7D%7B3%7D%20%26%20-%5Cfrac%7B11%7D%7B15%7D%20%5Cend%7Bpmatrix%7D. "\bm{A} = \begin{pmatrix} \frac{1}{3} & \frac{2}{15} \\ \frac{2}{3} & \frac{2}{3} \\ \frac{2}{3} & -\frac{11}{15} \end{pmatrix}.")
+![\textbf{A} = \begin{pmatrix} \frac{1}{3} & \frac{2}{15} \\\\ \frac{2}{3} & \frac{2}{3} \\\\ \frac{2}{3} & -\frac{11}{15} \end{pmatrix}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%20%3D%20%5Cbegin%7Bpmatrix%7D%20%5Cfrac%7B1%7D%7B3%7D%20%26%20%5Cfrac%7B2%7D%7B15%7D%20%5C%5C%20%5Cfrac%7B2%7D%7B3%7D%20%26%20%5Cfrac%7B2%7D%7B3%7D%20%5C%5C%20%5Cfrac%7B2%7D%7B3%7D%20%26%20-%5Cfrac%7B11%7D%7B15%7D%20%5Cend%7Bpmatrix%7D. "\textbf{A} = \begin{pmatrix} \frac{1}{3} & \frac{2}{15} \\ \frac{2}{3} & \frac{2}{3} \\ \frac{2}{3} & -\frac{11}{15} \end{pmatrix}.")
 
 Then
 
 ![\begin{align}
-\bm{A} \bm{A}^T &= \begin{pmatrix} \frac{1}{3} & \frac{2}{15} \\\\ \frac{2}{3} & \frac{2}{3} \\\\ \frac{2}{3} & -\frac{11}{15} \end{pmatrix}
+\textbf{A} \textbf{A}^T &= \begin{pmatrix} \frac{1}{3} & \frac{2}{15} \\\\ \frac{2}{3} & \frac{2}{3} \\\\ \frac{2}{3} & -\frac{11}{15} \end{pmatrix}
 \begin{pmatrix} \frac{1}{3} &  \frac{2}{3} & \frac{2}{3} \\\\ \frac{2}{15} & \frac{2}{3} & -\frac{11}{15} \end{pmatrix} \\\\
 &= \frac{1}{225}
 \begin{pmatrix}
@@ -3641,8 +3641,8 @@ Then
 \frac{4}{45} & \frac{4}{9} & -\frac{22}{45} \\\\
 -\frac{22}{225} & -\frac{22}{45} & \frac{121}{225}
 \end{pmatrix}}\_{\mathbf{q}\_2 \mathbf{q}\_2^T}.
-\end{align}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbegin%7Balign%7D%0A%5Cbm%7BA%7D%20%5Cbm%7BA%7D%5ET%20%26%3D%20%5Cbegin%7Bpmatrix%7D%20%5Cfrac%7B1%7D%7B3%7D%20%26%20%5Cfrac%7B2%7D%7B15%7D%20%5C%5C%20%5Cfrac%7B2%7D%7B3%7D%20%26%20%5Cfrac%7B2%7D%7B3%7D%20%5C%5C%20%5Cfrac%7B2%7D%7B3%7D%20%26%20-%5Cfrac%7B11%7D%7B15%7D%20%5Cend%7Bpmatrix%7D%0A%5Cbegin%7Bpmatrix%7D%20%5Cfrac%7B1%7D%7B3%7D%20%26%20%20%5Cfrac%7B2%7D%7B3%7D%20%26%20%5Cfrac%7B2%7D%7B3%7D%20%5C%5C%20%5Cfrac%7B2%7D%7B15%7D%20%26%20%5Cfrac%7B2%7D%7B3%7D%20%26%20-%5Cfrac%7B11%7D%7B15%7D%20%5Cend%7Bpmatrix%7D%20%5C%5C%0A%26%3D%20%5Cfrac%7B1%7D%7B225%7D%0A%5Cbegin%7Bpmatrix%7D%0A29%20%26%2070%20%26%2028%20%5C%5C%0A70%20%26%20200%20%26%20-10%20%5C%5C%0A28%20%26%20-10%20%26%20221%0A%5Cend%7Bpmatrix%7D%5C%5C%0A%26%20%3D%20%5Cunderbrace%7B%0A%5Cbegin%7Bpmatrix%7D%0A%5Cfrac%7B1%7D%7B9%7D%20%26%20%5Cfrac%7B2%7D%7B9%7D%20%26%20%5Cfrac%7B2%7D%7B9%7D%20%5C%5C%0A%5Cfrac%7B2%7D%7B9%7D%20%26%20%5Cfrac%7B4%7D%7B9%7D%20%26%20%5Cfrac%7B4%7D%7B9%7D%20%5C%5C%0A%5Cfrac%7B2%7D%7B9%7D%20%26%20%5Cfrac%7B4%7D%7B9%7D%20%26%20%5Cfrac%7B4%7D%7B9%7D%0A%5Cend%7Bpmatrix%7D%7D_%7B%5Cmathbf%7Bq%7D_1%20%5Cmathbf%7Bq%7D_1%5ET%7D%20%20%2B%20%20%5Cunderbrace%7B%0A%5Cbegin%7Bpmatrix%7D%0A%5Cfrac%7B4%7D%7B225%7D%20%26%20%5Cfrac%7B4%7D%7B45%7D%20%26%20-%5Cfrac%7B22%7D%7B225%7D%20%5C%5C%0A%5Cfrac%7B4%7D%7B45%7D%20%26%20%5Cfrac%7B4%7D%7B9%7D%20%26%20-%5Cfrac%7B22%7D%7B45%7D%20%5C%5C%0A-%5Cfrac%7B22%7D%7B225%7D%20%26%20-%5Cfrac%7B22%7D%7B45%7D%20%26%20%5Cfrac%7B121%7D%7B225%7D%0A%5Cend%7Bpmatrix%7D%7D_%7B%5Cmathbf%7Bq%7D_2%20%5Cmathbf%7Bq%7D_2%5ET%7D.%0A%5Cend%7Balign%7D "\begin{align}
-\bm{A} \bm{A}^T &= \begin{pmatrix} \frac{1}{3} & \frac{2}{15} \\ \frac{2}{3} & \frac{2}{3} \\ \frac{2}{3} & -\frac{11}{15} \end{pmatrix}
+\end{align}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbegin%7Balign%7D%0A%5Ctextbf%7BA%7D%20%5Ctextbf%7BA%7D%5ET%20%26%3D%20%5Cbegin%7Bpmatrix%7D%20%5Cfrac%7B1%7D%7B3%7D%20%26%20%5Cfrac%7B2%7D%7B15%7D%20%5C%5C%20%5Cfrac%7B2%7D%7B3%7D%20%26%20%5Cfrac%7B2%7D%7B3%7D%20%5C%5C%20%5Cfrac%7B2%7D%7B3%7D%20%26%20-%5Cfrac%7B11%7D%7B15%7D%20%5Cend%7Bpmatrix%7D%0A%5Cbegin%7Bpmatrix%7D%20%5Cfrac%7B1%7D%7B3%7D%20%26%20%20%5Cfrac%7B2%7D%7B3%7D%20%26%20%5Cfrac%7B2%7D%7B3%7D%20%5C%5C%20%5Cfrac%7B2%7D%7B15%7D%20%26%20%5Cfrac%7B2%7D%7B3%7D%20%26%20-%5Cfrac%7B11%7D%7B15%7D%20%5Cend%7Bpmatrix%7D%20%5C%5C%0A%26%3D%20%5Cfrac%7B1%7D%7B225%7D%0A%5Cbegin%7Bpmatrix%7D%0A29%20%26%2070%20%26%2028%20%5C%5C%0A70%20%26%20200%20%26%20-10%20%5C%5C%0A28%20%26%20-10%20%26%20221%0A%5Cend%7Bpmatrix%7D%5C%5C%0A%26%20%3D%20%5Cunderbrace%7B%0A%5Cbegin%7Bpmatrix%7D%0A%5Cfrac%7B1%7D%7B9%7D%20%26%20%5Cfrac%7B2%7D%7B9%7D%20%26%20%5Cfrac%7B2%7D%7B9%7D%20%5C%5C%0A%5Cfrac%7B2%7D%7B9%7D%20%26%20%5Cfrac%7B4%7D%7B9%7D%20%26%20%5Cfrac%7B4%7D%7B9%7D%20%5C%5C%0A%5Cfrac%7B2%7D%7B9%7D%20%26%20%5Cfrac%7B4%7D%7B9%7D%20%26%20%5Cfrac%7B4%7D%7B9%7D%0A%5Cend%7Bpmatrix%7D%7D_%7B%5Cmathbf%7Bq%7D_1%20%5Cmathbf%7Bq%7D_1%5ET%7D%20%20%2B%20%20%5Cunderbrace%7B%0A%5Cbegin%7Bpmatrix%7D%0A%5Cfrac%7B4%7D%7B225%7D%20%26%20%5Cfrac%7B4%7D%7B45%7D%20%26%20-%5Cfrac%7B22%7D%7B225%7D%20%5C%5C%0A%5Cfrac%7B4%7D%7B45%7D%20%26%20%5Cfrac%7B4%7D%7B9%7D%20%26%20-%5Cfrac%7B22%7D%7B45%7D%20%5C%5C%0A-%5Cfrac%7B22%7D%7B225%7D%20%26%20-%5Cfrac%7B22%7D%7B45%7D%20%26%20%5Cfrac%7B121%7D%7B225%7D%0A%5Cend%7Bpmatrix%7D%7D_%7B%5Cmathbf%7Bq%7D_2%20%5Cmathbf%7Bq%7D_2%5ET%7D.%0A%5Cend%7Balign%7D "\begin{align}
+\textbf{A} \textbf{A}^T &= \begin{pmatrix} \frac{1}{3} & \frac{2}{15} \\ \frac{2}{3} & \frac{2}{3} \\ \frac{2}{3} & -\frac{11}{15} \end{pmatrix}
 \begin{pmatrix} \frac{1}{3} &  \frac{2}{3} & \frac{2}{3} \\ \frac{2}{15} & \frac{2}{3} & -\frac{11}{15} \end{pmatrix} \\
 &= \frac{1}{225}
 \begin{pmatrix}
@@ -3803,9 +3803,9 @@ with
 The QR decomposition is a matrix decomposition that writes a
 ![m \times n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;m%20%5Ctimes%20n "m \times n")
 matrix
-![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}")
+![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}")
 as a product
-![\bm{A} = \mathbf{Q} \mathbf{R}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%20%3D%20%5Cmathbf%7BQ%7D%20%5Cmathbf%7BR%7D "\bm{A} = \mathbf{Q} \mathbf{R}")
+![\textbf{A} = \mathbf{Q} \mathbf{R}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%20%3D%20%5Cmathbf%7BQ%7D%20%5Cmathbf%7BR%7D "\textbf{A} = \mathbf{Q} \mathbf{R}")
 where:
 
 -   ![\mathbf{Q}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7BQ%7D "\mathbf{Q}")
@@ -3814,7 +3814,7 @@ where:
     matrix with orthonormal columns, where
     ![r](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;r "r")
     is the number of linearly independent columns of
-    ![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}").
+    ![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}").
 -   ![\mathbf{R}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7BR%7D "\mathbf{R}")
     is an
     ![r \times n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;r%20%5Ctimes%20n "r \times n")
@@ -3825,25 +3825,25 @@ where:
 -   The columns of
     ![\mathbf{Q}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7BQ%7D "\mathbf{Q}")
     span the same space as the columns of
-    ![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}").
+    ![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}").
 -   The matrix
     ![\mathbf{R}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7BR%7D "\mathbf{R}")
     gives the change of basis between the vectors in
     ![\mathbf{Q}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7BQ%7D "\mathbf{Q}")
     and the vectors in
-    ![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}").
+    ![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}").
 -   The decompisition is unique up to some sign changes, so if we
     require
     ![R\_{ii}\geq 0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;R_%7Bii%7D%5Cgeq%200 "R_{ii}\geq 0"),
     it is unique.
 -   If the columns of
-    ![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}")
+    ![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}")
     are independent, then
     ![R\_{ii}\neq 0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;R_%7Bii%7D%5Cneq%200 "R_{ii}\neq 0").
 -   On the other hand, if column
     ![j](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;j "j")
     of
-    ![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}")
+    ![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}")
     can be written as a linear combination of columns to the left, then
     ![R\_{jj}=0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;R_%7Bjj%7D%3D0 "R_{jj}=0").
 
@@ -3851,7 +3851,7 @@ The QR decomposition we’ve done so far is actually called the partial QR
 decomposition We distinguish this from the **full** or **complete** QR
 decomposition. In the latter, we include vectors than span parts of the
 space not spanned by
-![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}")
+![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}")
 itself. Of course, these contribute nothing to the matrix
 ![\mathbf{Q}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7BQ%7D "\mathbf{Q}"),
 so it results in a bunch of 0’s in
@@ -3923,7 +3923,7 @@ Rbar
 In this example, notice that
 ![\overline{\mathbf{Q}}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Coverline%7B%5Cmathbf%7BQ%7D%7D "\overline{\mathbf{Q}}")
 has three columns. This reflects the fact that the columns of
-![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}")
+![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}")
 are linearly independent. Hence, it spans all of
 ![\mathbb{R}^3](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbb%7BR%7D%5E3 "\mathbb{R}^3")
 and the QR and full QR decompositions are the same.
@@ -4051,7 +4051,7 @@ Rbar
 To reiterate, we ended up with a row of zeros at the bottom of
 ![\overline{\mathbf{R}}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Coverline%7B%5Cmathbf%7BR%7D%7D "\overline{\mathbf{R}}").
 That’s because the columns of
-![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}")
+![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}")
 are linearly dependent and don’t span
 ![\mathbb{R}^3](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbb%7BR%7D%5E3 "\mathbb{R}^3").
 At any rate, let’s go ahead and check our result.
@@ -4139,7 +4139,7 @@ and we only have three vectors to far,
 ![\mathbf{q}\_{1,2,3}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7Bq%7D_%7B1%2C2%2C3%7D "\mathbf{q}_{1,2,3}").
 If we want the full decomposition, we have to find a basis for the
 orthogonal complement of
-![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}").
+![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}").
 
 ``` r
 # Choose a vector not in the span of q1, q2, q3
@@ -4216,21 +4216,21 @@ really convenient for least squares, and turns out to have very nice
 numerical properties because of small condition numbers. You’ll work
 with the numerical issue on your activities and/or homework, but for
 now, here’s how least squares works when you use QR decomposition on
-![\bm{A}\bm{x}=\bm{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%5Cbm%7Bx%7D%3D%5Cbm%7Bb%7D "\bm{A}\bm{x}=\bm{b}").
+![\textbf{A}\textbf{x}=\textbf{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%5Ctextbf%7Bx%7D%3D%5Ctextbf%7Bb%7D "\textbf{A}\textbf{x}=\textbf{b}").
 Note
 
 ![\begin{align}
-\|\|\bm{A}\bm{x}-\bm{b}\|\|^2 &= \|\|\bar{\mathbf{Q}}\bar{\mathbf{R}} \bm{x} - \bm{b}\|\|^2 \\\\
-&= \|\|\bar{\mathbf{Q}}^T(\bar{\mathbf{Q}}\bar{\mathbf{R}} \bm{x} - \bm{b})\|\|^2 \\\\
-&= \|\|\bar{\mathbf{Q}}^T \bar{\mathbf{Q}}\bar{\mathbf{R}} \bm{x} - \bar{\mathbf{Q}}^T \bm{b}\|\|^2 \\\\
-&= \|\|\bar{\mathbf{R}} \bm{x} - \bar{\mathbf{Q}}^T \bm{b}\|\|^2 \\\\
-& = \|\|\mathbf{R} \bm{x}-\mathbf{Q}^T \bm{b}\|\|^2+ \|\|\widehat{\mathbf{Q}}^T \bm{b}\|\|^2. 
-\end{align}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbegin%7Balign%7D%0A%7C%7C%5Cbm%7BA%7D%5Cbm%7Bx%7D-%5Cbm%7Bb%7D%7C%7C%5E2%20%26%3D%20%7C%7C%5Cbar%7B%5Cmathbf%7BQ%7D%7D%5Cbar%7B%5Cmathbf%7BR%7D%7D%20%5Cbm%7Bx%7D%20-%20%5Cbm%7Bb%7D%7C%7C%5E2%20%5C%5C%0A%26%3D%20%7C%7C%5Cbar%7B%5Cmathbf%7BQ%7D%7D%5ET%28%5Cbar%7B%5Cmathbf%7BQ%7D%7D%5Cbar%7B%5Cmathbf%7BR%7D%7D%20%5Cbm%7Bx%7D%20-%20%5Cbm%7Bb%7D%29%7C%7C%5E2%20%5C%5C%0A%26%3D%20%7C%7C%5Cbar%7B%5Cmathbf%7BQ%7D%7D%5ET%20%5Cbar%7B%5Cmathbf%7BQ%7D%7D%5Cbar%7B%5Cmathbf%7BR%7D%7D%20%5Cbm%7Bx%7D%20-%20%5Cbar%7B%5Cmathbf%7BQ%7D%7D%5ET%20%5Cbm%7Bb%7D%7C%7C%5E2%20%5C%5C%0A%26%3D%20%7C%7C%5Cbar%7B%5Cmathbf%7BR%7D%7D%20%5Cbm%7Bx%7D%20-%20%5Cbar%7B%5Cmathbf%7BQ%7D%7D%5ET%20%5Cbm%7Bb%7D%7C%7C%5E2%20%5C%5C%0A%26%20%3D%20%7C%7C%5Cmathbf%7BR%7D%20%5Cbm%7Bx%7D-%5Cmathbf%7BQ%7D%5ET%20%5Cbm%7Bb%7D%7C%7C%5E2%2B%20%7C%7C%5Cwidehat%7B%5Cmathbf%7BQ%7D%7D%5ET%20%5Cbm%7Bb%7D%7C%7C%5E2.%20%0A%5Cend%7Balign%7D "\begin{align}
-||\bm{A}\bm{x}-\bm{b}||^2 &= ||\bar{\mathbf{Q}}\bar{\mathbf{R}} \bm{x} - \bm{b}||^2 \\
-&= ||\bar{\mathbf{Q}}^T(\bar{\mathbf{Q}}\bar{\mathbf{R}} \bm{x} - \bm{b})||^2 \\
-&= ||\bar{\mathbf{Q}}^T \bar{\mathbf{Q}}\bar{\mathbf{R}} \bm{x} - \bar{\mathbf{Q}}^T \bm{b}||^2 \\
-&= ||\bar{\mathbf{R}} \bm{x} - \bar{\mathbf{Q}}^T \bm{b}||^2 \\
-& = ||\mathbf{R} \bm{x}-\mathbf{Q}^T \bm{b}||^2+ ||\widehat{\mathbf{Q}}^T \bm{b}||^2. 
+\|\|\textbf{A}\textbf{x}-\textbf{b}\|\|^2 &= \|\|\bar{\mathbf{Q}}\bar{\mathbf{R}} \textbf{x} - \textbf{b}\|\|^2 \\\\
+&= \|\|\bar{\mathbf{Q}}^T(\bar{\mathbf{Q}}\bar{\mathbf{R}} \textbf{x} - \textbf{b})\|\|^2 \\\\
+&= \|\|\bar{\mathbf{Q}}^T \bar{\mathbf{Q}}\bar{\mathbf{R}} \textbf{x} - \bar{\mathbf{Q}}^T \textbf{b}\|\|^2 \\\\
+&= \|\|\bar{\mathbf{R}} \textbf{x} - \bar{\mathbf{Q}}^T \textbf{b}\|\|^2 \\\\
+& = \|\|\mathbf{R} \textbf{x}-\mathbf{Q}^T \textbf{b}\|\|^2+ \|\|\widehat{\mathbf{Q}}^T \textbf{b}\|\|^2. 
+\end{align}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbegin%7Balign%7D%0A%7C%7C%5Ctextbf%7BA%7D%5Ctextbf%7Bx%7D-%5Ctextbf%7Bb%7D%7C%7C%5E2%20%26%3D%20%7C%7C%5Cbar%7B%5Cmathbf%7BQ%7D%7D%5Cbar%7B%5Cmathbf%7BR%7D%7D%20%5Ctextbf%7Bx%7D%20-%20%5Ctextbf%7Bb%7D%7C%7C%5E2%20%5C%5C%0A%26%3D%20%7C%7C%5Cbar%7B%5Cmathbf%7BQ%7D%7D%5ET%28%5Cbar%7B%5Cmathbf%7BQ%7D%7D%5Cbar%7B%5Cmathbf%7BR%7D%7D%20%5Ctextbf%7Bx%7D%20-%20%5Ctextbf%7Bb%7D%29%7C%7C%5E2%20%5C%5C%0A%26%3D%20%7C%7C%5Cbar%7B%5Cmathbf%7BQ%7D%7D%5ET%20%5Cbar%7B%5Cmathbf%7BQ%7D%7D%5Cbar%7B%5Cmathbf%7BR%7D%7D%20%5Ctextbf%7Bx%7D%20-%20%5Cbar%7B%5Cmathbf%7BQ%7D%7D%5ET%20%5Ctextbf%7Bb%7D%7C%7C%5E2%20%5C%5C%0A%26%3D%20%7C%7C%5Cbar%7B%5Cmathbf%7BR%7D%7D%20%5Ctextbf%7Bx%7D%20-%20%5Cbar%7B%5Cmathbf%7BQ%7D%7D%5ET%20%5Ctextbf%7Bb%7D%7C%7C%5E2%20%5C%5C%0A%26%20%3D%20%7C%7C%5Cmathbf%7BR%7D%20%5Ctextbf%7Bx%7D-%5Cmathbf%7BQ%7D%5ET%20%5Ctextbf%7Bb%7D%7C%7C%5E2%2B%20%7C%7C%5Cwidehat%7B%5Cmathbf%7BQ%7D%7D%5ET%20%5Ctextbf%7Bb%7D%7C%7C%5E2.%20%0A%5Cend%7Balign%7D "\begin{align}
+||\textbf{A}\textbf{x}-\textbf{b}||^2 &= ||\bar{\mathbf{Q}}\bar{\mathbf{R}} \textbf{x} - \textbf{b}||^2 \\
+&= ||\bar{\mathbf{Q}}^T(\bar{\mathbf{Q}}\bar{\mathbf{R}} \textbf{x} - \textbf{b})||^2 \\
+&= ||\bar{\mathbf{Q}}^T \bar{\mathbf{Q}}\bar{\mathbf{R}} \textbf{x} - \bar{\mathbf{Q}}^T \textbf{b}||^2 \\
+&= ||\bar{\mathbf{R}} \textbf{x} - \bar{\mathbf{Q}}^T \textbf{b}||^2 \\
+& = ||\mathbf{R} \textbf{x}-\mathbf{Q}^T \textbf{b}||^2+ ||\widehat{\mathbf{Q}}^T \textbf{b}||^2. 
 \end{align}")
 
 Proceeding from the second to last line to the very last line is not
@@ -4239,7 +4239,7 @@ explicitly. This is a good exercise for you to try.
 
 In any case, to minimize this, note that the second term doesn’t even
 include
-![\bm{x}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7Bx%7D "\bm{x}")
+![\textbf{x}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7Bx%7D "\textbf{x}")
 so there’s nothing we can do about it (in fact, it is the norm of the
 residual). To minimize the quantity, we can then just force the first
 term to be zero. This is fine because it is a square system! There’s a
@@ -4250,9 +4250,9 @@ command that does this all automatically for you called `qr.solve`.
 ## Big picture
 
 Along with solving the linear system
-![\bm{A}\bm{x}=\bm{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%5Cbm%7Bx%7D%3D%5Cbm%7Bb%7D "\bm{A}\bm{x}=\bm{b}"),
+![\textbf{A}\textbf{x}=\textbf{b}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%5Ctextbf%7Bx%7D%3D%5Ctextbf%7Bb%7D "\textbf{A}\textbf{x}=\textbf{b}"),
 finding the eigenvalues and eigenvectors of a matrix
-![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}")
+![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}")
 is one of the most important problems in linear algebra. Knowing the
 eigenpairs can help simplify a problem and reveal important information
 about systems modeled with linear algebra.
@@ -4270,7 +4270,7 @@ about systems modeled with linear algebra.
 For an
 ![n \times n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;n%20%5Ctimes%20n "n \times n")
 matrix
-![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}"),
+![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}"),
 a scalar
 ![\lambda \in \mathbb{C}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Clambda%20%5Cin%20%5Cmathbb%7BC%7D "\lambda \in \mathbb{C}"),
 and vector
@@ -4279,13 +4279,13 @@ and vector
 then we say
 ![\lambda](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Clambda "\lambda")
 is an **eigenvalue** of
-![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}")
+![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}")
 and
 ![\mathbf{v}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7Bv%7D "\mathbf{v}")
 is an **eigenvector** of
-![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}")
+![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}")
 if
-![\bm{A}\mathbf{v}=\lambda \mathbf{v}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%5Cmathbf%7Bv%7D%3D%5Clambda%20%5Cmathbf%7Bv%7D "\bm{A}\mathbf{v}=\lambda \mathbf{v}").
+![\textbf{A}\mathbf{v}=\lambda \mathbf{v}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%5Cmathbf%7Bv%7D%3D%5Clambda%20%5Cmathbf%7Bv%7D "\textbf{A}\mathbf{v}=\lambda \mathbf{v}").
 
 Stated in words: an eigenvector and eigenvalue are the magical vector
 ![\mathbf{v}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7Bv%7D "\mathbf{v}")
@@ -4294,58 +4294,58 @@ and scalar
 such that if you hit
 ![\mathbf{v}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7Bv%7D "\mathbf{v}")
 with
-![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}"),
+![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}"),
 you get back the same vector
 ![\mathbf{v}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7Bv%7D "\mathbf{v}")
 but multiplied by a constant
 ![\lambda](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Clambda "\lambda").
 
 How do we calculate them? Let’s take the definition
-![\bm{A} \mathbf{v} = \lambda \mathbf{v}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%20%5Cmathbf%7Bv%7D%20%3D%20%5Clambda%20%5Cmathbf%7Bv%7D "\bm{A} \mathbf{v} = \lambda \mathbf{v}")
+![\textbf{A} \mathbf{v} = \lambda \mathbf{v}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%20%5Cmathbf%7Bv%7D%20%3D%20%5Clambda%20%5Cmathbf%7Bv%7D "\textbf{A} \mathbf{v} = \lambda \mathbf{v}")
 and rearrange it to write
-![(\bm{A} - \mathbf{I} \lambda) \mathbf{v} = \mathbf{0}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%28%5Cbm%7BA%7D%20-%20%5Cmathbf%7BI%7D%20%5Clambda%29%20%5Cmathbf%7Bv%7D%20%3D%20%5Cmathbf%7B0%7D "(\bm{A} - \mathbf{I} \lambda) \mathbf{v} = \mathbf{0}").
+![(\textbf{A} - \mathbf{I} \lambda) \mathbf{v} = \mathbf{0}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%28%5Ctextbf%7BA%7D%20-%20%5Cmathbf%7BI%7D%20%5Clambda%29%20%5Cmathbf%7Bv%7D%20%3D%20%5Cmathbf%7B0%7D "(\textbf{A} - \mathbf{I} \lambda) \mathbf{v} = \mathbf{0}").
 There are only two ways this can happen. One choice is
 ![\mathbf{v}=0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7Bv%7D%3D0 "\mathbf{v}=0"),
 but that’s trivial because it works for any
-![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}").
+![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}").
 The other choice, by the Invertible Matrix Theorem, is that the matrix
 on the left is singular. Also from the Invertible Matrix Theorem, if it
 is singular, then it has determinant zero, that is
-![\det (\bm{A}- \mathbf{I} \lambda) = 0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cdet%20%28%5Cbm%7BA%7D-%20%5Cmathbf%7BI%7D%20%5Clambda%29%20%3D%200 "\det (\bm{A}- \mathbf{I} \lambda) = 0").
+![\det (\textbf{A}- \mathbf{I} \lambda) = 0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cdet%20%28%5Ctextbf%7BA%7D-%20%5Cmathbf%7BI%7D%20%5Clambda%29%20%3D%200 "\det (\textbf{A}- \mathbf{I} \lambda) = 0").
 This equation is a polynomial in
 ![\lambda](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Clambda "\lambda")
 and is called the **characteristic polynomial**. When calculating by
 hand, we find the characteristic polynomial first and then solve it to
 find the eigenvalues. To find eigenvectors, we remember that
-![\bm{A}\mathbf{v} = \lambda \mathbf{v} \rightarrow (\bm{A}-\mathbf{I}\lambda)\mathbf{v}=\mathbf{0}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%5Cmathbf%7Bv%7D%20%3D%20%5Clambda%20%5Cmathbf%7Bv%7D%20%5Crightarrow%20%28%5Cbm%7BA%7D-%5Cmathbf%7BI%7D%5Clambda%29%5Cmathbf%7Bv%7D%3D%5Cmathbf%7B0%7D "\bm{A}\mathbf{v} = \lambda \mathbf{v} \rightarrow (\bm{A}-\mathbf{I}\lambda)\mathbf{v}=\mathbf{0}")
+![\textbf{A}\mathbf{v} = \lambda \mathbf{v} \rightarrow (\textbf{A}-\mathbf{I}\lambda)\mathbf{v}=\mathbf{0}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%5Cmathbf%7Bv%7D%20%3D%20%5Clambda%20%5Cmathbf%7Bv%7D%20%5Crightarrow%20%28%5Ctextbf%7BA%7D-%5Cmathbf%7BI%7D%5Clambda%29%5Cmathbf%7Bv%7D%3D%5Cmathbf%7B0%7D "\textbf{A}\mathbf{v} = \lambda \mathbf{v} \rightarrow (\textbf{A}-\mathbf{I}\lambda)\mathbf{v}=\mathbf{0}")
 and solve for
 ![\mathbf{v}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7Bv%7D "\mathbf{v}").
 
 To recap:
 
 1.  Solve the characteristic equation
-    ![\det (\bm{A}- \mathbf{I} \lambda) = 0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cdet%20%28%5Cbm%7BA%7D-%20%5Cmathbf%7BI%7D%20%5Clambda%29%20%3D%200 "\det (\bm{A}- \mathbf{I} \lambda) = 0")
+    ![\det (\textbf{A}- \mathbf{I} \lambda) = 0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cdet%20%28%5Ctextbf%7BA%7D-%20%5Cmathbf%7BI%7D%20%5Clambda%29%20%3D%200 "\det (\textbf{A}- \mathbf{I} \lambda) = 0")
     to find the
     ![\lambda_i](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Clambda_i "\lambda_i").
 2.  Solve
-    ![(\bm{A}-\mathbf{I}\lambda_i)\mathbf{v_i}=\mathbf{0}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%28%5Cbm%7BA%7D-%5Cmathbf%7BI%7D%5Clambda_i%29%5Cmathbf%7Bv_i%7D%3D%5Cmathbf%7B0%7D "(\bm{A}-\mathbf{I}\lambda_i)\mathbf{v_i}=\mathbf{0}")
+    ![(\textbf{A}-\mathbf{I}\lambda_i)\mathbf{v_i}=\mathbf{0}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%28%5Ctextbf%7BA%7D-%5Cmathbf%7BI%7D%5Clambda_i%29%5Cmathbf%7Bv_i%7D%3D%5Cmathbf%7B0%7D "(\textbf{A}-\mathbf{I}\lambda_i)\mathbf{v_i}=\mathbf{0}")
     to find the
     ![\mathbf{v}\_i](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7Bv%7D_i "\mathbf{v}_i").
 
 For example, let’s find the eigenvalues and eigenvectors of
 
-![\bm{A} = \begin{pmatrix} -3 & 2 \\\\ 2 & -3 \end{pmatrix}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%20%3D%20%5Cbegin%7Bpmatrix%7D%20-3%20%26%202%20%5C%5C%202%20%26%20-3%20%5Cend%7Bpmatrix%7D. "\bm{A} = \begin{pmatrix} -3 & 2 \\ 2 & -3 \end{pmatrix}.")
+![\textbf{A} = \begin{pmatrix} -3 & 2 \\\\ 2 & -3 \end{pmatrix}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%20%3D%20%5Cbegin%7Bpmatrix%7D%20-3%20%26%202%20%5C%5C%202%20%26%20-3%20%5Cend%7Bpmatrix%7D. "\textbf{A} = \begin{pmatrix} -3 & 2 \\ 2 & -3 \end{pmatrix}.")
 
 Using the result above, we can write the characteristic polynomial:
 
 ![\begin{align}
-\det (\bm{A} - \mathbf{I} \lambda) &= 0\\\\
+\det (\textbf{A} - \mathbf{I} \lambda) &= 0\\\\
 \det \begin{pmatrix} -3 - \lambda & 2 \\\\ 2 & -3 - \lambda \end{pmatrix} &= 0\\\\
 (\lambda+3)^2-4 &= 0\\\\
 \lambda^2 + 6\lambda + 5 &= 0\\\\
 (\lambda+5)(\lambda+1) &= 0
-\end{align}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbegin%7Balign%7D%0A%5Cdet%20%28%5Cbm%7BA%7D%20-%20%5Cmathbf%7BI%7D%20%5Clambda%29%20%26%3D%200%5C%5C%0A%5Cdet%20%5Cbegin%7Bpmatrix%7D%20-3%20-%20%5Clambda%20%26%202%20%5C%5C%202%20%26%20-3%20-%20%5Clambda%20%5Cend%7Bpmatrix%7D%20%26%3D%200%5C%5C%0A%28%5Clambda%2B3%29%5E2-4%20%26%3D%200%5C%5C%0A%5Clambda%5E2%20%2B%206%5Clambda%20%2B%205%20%26%3D%200%5C%5C%0A%28%5Clambda%2B5%29%28%5Clambda%2B1%29%20%26%3D%200%0A%5Cend%7Balign%7D "\begin{align}
-\det (\bm{A} - \mathbf{I} \lambda) &= 0\\
+\end{align}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbegin%7Balign%7D%0A%5Cdet%20%28%5Ctextbf%7BA%7D%20-%20%5Cmathbf%7BI%7D%20%5Clambda%29%20%26%3D%200%5C%5C%0A%5Cdet%20%5Cbegin%7Bpmatrix%7D%20-3%20-%20%5Clambda%20%26%202%20%5C%5C%202%20%26%20-3%20-%20%5Clambda%20%5Cend%7Bpmatrix%7D%20%26%3D%200%5C%5C%0A%28%5Clambda%2B3%29%5E2-4%20%26%3D%200%5C%5C%0A%5Clambda%5E2%20%2B%206%5Clambda%20%2B%205%20%26%3D%200%5C%5C%0A%28%5Clambda%2B5%29%28%5Clambda%2B1%29%20%26%3D%200%0A%5Cend%7Balign%7D "\begin{align}
+\det (\textbf{A} - \mathbf{I} \lambda) &= 0\\
 \det \begin{pmatrix} -3 - \lambda & 2 \\ 2 & -3 - \lambda \end{pmatrix} &= 0\\
 (\lambda+3)^2-4 &= 0\\
 \lambda^2 + 6\lambda + 5 &= 0\\
@@ -4359,11 +4359,11 @@ To find
 we solve:
 
 ![\begin{align}
-(\bm{A}-\mathbf{I}\lambda_1)\mathbf{v}\_1&=\mathbf{0}\\\\
+(\textbf{A}-\mathbf{I}\lambda_1)\mathbf{v}\_1&=\mathbf{0}\\\\
 \begin{pmatrix} -2 & 2 \\\\ 2 & -2 \end{pmatrix}\mathbf{v}\_1 &= \mathbf{0} \\\\
 \mathbf{v}\_1 &= \begin{pmatrix} 1 \\\\ 1 \end{pmatrix}
-\end{align}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbegin%7Balign%7D%0A%28%5Cbm%7BA%7D-%5Cmathbf%7BI%7D%5Clambda_1%29%5Cmathbf%7Bv%7D_1%26%3D%5Cmathbf%7B0%7D%5C%5C%0A%5Cbegin%7Bpmatrix%7D%20-2%20%26%202%20%5C%5C%202%20%26%20-2%20%5Cend%7Bpmatrix%7D%5Cmathbf%7Bv%7D_1%20%26%3D%20%5Cmathbf%7B0%7D%20%5C%5C%0A%5Cmathbf%7Bv%7D_1%20%26%3D%20%5Cbegin%7Bpmatrix%7D%201%20%5C%5C%201%20%5Cend%7Bpmatrix%7D%0A%5Cend%7Balign%7D "\begin{align}
-(\bm{A}-\mathbf{I}\lambda_1)\mathbf{v}_1&=\mathbf{0}\\
+\end{align}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbegin%7Balign%7D%0A%28%5Ctextbf%7BA%7D-%5Cmathbf%7BI%7D%5Clambda_1%29%5Cmathbf%7Bv%7D_1%26%3D%5Cmathbf%7B0%7D%5C%5C%0A%5Cbegin%7Bpmatrix%7D%20-2%20%26%202%20%5C%5C%202%20%26%20-2%20%5Cend%7Bpmatrix%7D%5Cmathbf%7Bv%7D_1%20%26%3D%20%5Cmathbf%7B0%7D%20%5C%5C%0A%5Cmathbf%7Bv%7D_1%20%26%3D%20%5Cbegin%7Bpmatrix%7D%201%20%5C%5C%201%20%5Cend%7Bpmatrix%7D%0A%5Cend%7Balign%7D "\begin{align}
+(\textbf{A}-\mathbf{I}\lambda_1)\mathbf{v}_1&=\mathbf{0}\\
 \begin{pmatrix} -2 & 2 \\ 2 & -2 \end{pmatrix}\mathbf{v}_1 &= \mathbf{0} \\
 \mathbf{v}_1 &= \begin{pmatrix} 1 \\ 1 \end{pmatrix}
 \end{align}")
@@ -4376,18 +4376,18 @@ or any scalar multiple of this vector. Similarly, we find
 
 Many applications of eigenvalues are intimiately tied up with the idea
 of **diagonalization** of matrices. Suppose
-![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}")
+![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}")
 has eigenpairs
 ![\lambda_i](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Clambda_i "\lambda_i"),
 ![\mathbf{v}\_i](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7Bv%7D_i "\mathbf{v}_i"),
 ![i = 1,\ldots,n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;i%20%3D%201%2C%5Cldots%2Cn "i = 1,\ldots,n").
 Then we can write down the definition of eigenpair for all pairs
 simultaneously:
-![\bm{A} \mathbf{v}\_i = \lambda_i \mathbf{v}\_i](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%20%5Cmathbf%7Bv%7D_i%20%3D%20%5Clambda_i%20%5Cmathbf%7Bv%7D_i "\bm{A} \mathbf{v}_i = \lambda_i \mathbf{v}_i")
+![\textbf{A} \mathbf{v}\_i = \lambda_i \mathbf{v}\_i](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%20%5Cmathbf%7Bv%7D_i%20%3D%20%5Clambda_i%20%5Cmathbf%7Bv%7D_i "\textbf{A} \mathbf{v}_i = \lambda_i \mathbf{v}_i")
 implies
 
 ![\begin{align}
-\bm{A} \underbrace{\begin{pmatrix}
+\textbf{A} \underbrace{\begin{pmatrix}
 \vert & \vert & \cdots & \vert \\\\
 \mathbf{v}\_1 & \mathbf{v}\_2 & \cdots & \mathbf{v}\_n \\\\
 \vert & \vert & \cdots & \vert 
@@ -4401,8 +4401,8 @@ implies
 \vert & \vert & \cdots & \vert 
 \end{pmatrix}}\_\mathbf{S}
 \underbrace{\begin{pmatrix} \lambda_1 &&& \\\\ & \lambda_2 & & \\\\ && \ddots & \\\\ &&& \lambda_n   \end{pmatrix}}\_\mathbf{\Lambda}.
-\end{align}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbegin%7Balign%7D%0A%5Cbm%7BA%7D%20%5Cunderbrace%7B%5Cbegin%7Bpmatrix%7D%0A%5Cvert%20%26%20%5Cvert%20%26%20%5Ccdots%20%26%20%5Cvert%20%5C%5C%0A%5Cmathbf%7Bv%7D_1%20%26%20%5Cmathbf%7Bv%7D_2%20%26%20%5Ccdots%20%26%20%5Cmathbf%7Bv%7D_n%20%5C%5C%0A%5Cvert%20%26%20%5Cvert%20%26%20%5Ccdots%20%26%20%5Cvert%20%0A%5Cend%7Bpmatrix%7D%7D_%5Cmathbf%7BS%7D%20%26%3D%20%0A%7B%5Cbegin%7Bpmatrix%7D%20%5Cvert%20%26%20%5Cvert%20%26%20%5Ccdots%20%26%20%5Cvert%20%5C%5C%0A%5Clambda_1%20%5Cmathbf%7Bv%7D_1%20%26%20%5Clambda_2%20%5Cmathbf%7Bv%7D_2%20%26%20%5Ccdots%20%26%20%5Clambda_n%20%5Cmathbf%7Bv%7D_n%20%5C%5C%0A%5Cvert%20%26%20%5Cvert%20%26%20%5Ccdots%20%26%20%5Cvert%20%0A%5Cend%7Bpmatrix%7D%7D%20%5C%5C%0A%26%3D%5Cunderbrace%7B%5Cbegin%7Bpmatrix%7D%20%5Cvert%20%26%20%5Cvert%20%26%20%5Ccdots%20%26%20%5Cvert%20%5C%5C%0A%5Cmathbf%7Bv%7D_1%20%26%20%5Cmathbf%7Bv%7D_2%20%26%20%5Ccdots%20%26%20%5Cmathbf%7Bv%7D_n%20%5C%5C%0A%5Cvert%20%26%20%5Cvert%20%26%20%5Ccdots%20%26%20%5Cvert%20%0A%5Cend%7Bpmatrix%7D%7D_%5Cmathbf%7BS%7D%0A%5Cunderbrace%7B%5Cbegin%7Bpmatrix%7D%20%5Clambda_1%20%26%26%26%20%5C%5C%20%26%20%5Clambda_2%20%26%20%26%20%5C%5C%20%26%26%20%5Cddots%20%26%20%5C%5C%20%26%26%26%20%5Clambda_n%20%20%20%5Cend%7Bpmatrix%7D%7D_%5Cmathbf%7B%5CLambda%7D.%0A%5Cend%7Balign%7D "\begin{align}
-\bm{A} \underbrace{\begin{pmatrix}
+\end{align}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbegin%7Balign%7D%0A%5Ctextbf%7BA%7D%20%5Cunderbrace%7B%5Cbegin%7Bpmatrix%7D%0A%5Cvert%20%26%20%5Cvert%20%26%20%5Ccdots%20%26%20%5Cvert%20%5C%5C%0A%5Cmathbf%7Bv%7D_1%20%26%20%5Cmathbf%7Bv%7D_2%20%26%20%5Ccdots%20%26%20%5Cmathbf%7Bv%7D_n%20%5C%5C%0A%5Cvert%20%26%20%5Cvert%20%26%20%5Ccdots%20%26%20%5Cvert%20%0A%5Cend%7Bpmatrix%7D%7D_%5Cmathbf%7BS%7D%20%26%3D%20%0A%7B%5Cbegin%7Bpmatrix%7D%20%5Cvert%20%26%20%5Cvert%20%26%20%5Ccdots%20%26%20%5Cvert%20%5C%5C%0A%5Clambda_1%20%5Cmathbf%7Bv%7D_1%20%26%20%5Clambda_2%20%5Cmathbf%7Bv%7D_2%20%26%20%5Ccdots%20%26%20%5Clambda_n%20%5Cmathbf%7Bv%7D_n%20%5C%5C%0A%5Cvert%20%26%20%5Cvert%20%26%20%5Ccdots%20%26%20%5Cvert%20%0A%5Cend%7Bpmatrix%7D%7D%20%5C%5C%0A%26%3D%5Cunderbrace%7B%5Cbegin%7Bpmatrix%7D%20%5Cvert%20%26%20%5Cvert%20%26%20%5Ccdots%20%26%20%5Cvert%20%5C%5C%0A%5Cmathbf%7Bv%7D_1%20%26%20%5Cmathbf%7Bv%7D_2%20%26%20%5Ccdots%20%26%20%5Cmathbf%7Bv%7D_n%20%5C%5C%0A%5Cvert%20%26%20%5Cvert%20%26%20%5Ccdots%20%26%20%5Cvert%20%0A%5Cend%7Bpmatrix%7D%7D_%5Cmathbf%7BS%7D%0A%5Cunderbrace%7B%5Cbegin%7Bpmatrix%7D%20%5Clambda_1%20%26%26%26%20%5C%5C%20%26%20%5Clambda_2%20%26%20%26%20%5C%5C%20%26%26%20%5Cddots%20%26%20%5C%5C%20%26%26%26%20%5Clambda_n%20%20%20%5Cend%7Bpmatrix%7D%7D_%5Cmathbf%7B%5CLambda%7D.%0A%5Cend%7Balign%7D "\begin{align}
+\textbf{A} \underbrace{\begin{pmatrix}
 \vert & \vert & \cdots & \vert \\
 \mathbf{v}_1 & \mathbf{v}_2 & \cdots & \mathbf{v}_n \\
 \vert & \vert & \cdots & \vert 
@@ -4419,21 +4419,21 @@ implies
 \end{align}")
 
 Since
-![\bm{A}\mathbf{S} = \mathbf{S} \mathbf{\Lambda}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%5Cmathbf%7BS%7D%20%3D%20%5Cmathbf%7BS%7D%20%5Cmathbf%7B%5CLambda%7D "\bm{A}\mathbf{S} = \mathbf{S} \mathbf{\Lambda}"),
+![\textbf{A}\mathbf{S} = \mathbf{S} \mathbf{\Lambda}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%5Cmathbf%7BS%7D%20%3D%20%5Cmathbf%7BS%7D%20%5Cmathbf%7B%5CLambda%7D "\textbf{A}\mathbf{S} = \mathbf{S} \mathbf{\Lambda}"),
 we can write
-![\bm{A} = \mathbf{S} \mathbf{\Lambda} \mathbf{S}^{-1}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%20%3D%20%5Cmathbf%7BS%7D%20%5Cmathbf%7B%5CLambda%7D%20%5Cmathbf%7BS%7D%5E%7B-1%7D "\bm{A} = \mathbf{S} \mathbf{\Lambda} \mathbf{S}^{-1}").
+![\textbf{A} = \mathbf{S} \mathbf{\Lambda} \mathbf{S}^{-1}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%20%3D%20%5Cmathbf%7BS%7D%20%5Cmathbf%7B%5CLambda%7D%20%5Cmathbf%7BS%7D%5E%7B-1%7D "\textbf{A} = \mathbf{S} \mathbf{\Lambda} \mathbf{S}^{-1}").
 If we think of
 ![\mathbf{S}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7BS%7D "\mathbf{S}")
 as describing a change of basis, this equation says that the action of
-![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}")
+![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}")
 is like going into another basis, multiplying by a diagonal matrix, and
 then changing back to the original basis.
 
 Let’s show that we can do this with our example matrix
-![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}")
+![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}")
 from before,
 
-![\bm{A} = \begin{pmatrix} -3 & 2 \\\\ 2 & -3 \end{pmatrix}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D%20%3D%20%5Cbegin%7Bpmatrix%7D%20-3%20%26%202%20%5C%5C%202%20%26%20-3%20%5Cend%7Bpmatrix%7D. "\bm{A} = \begin{pmatrix} -3 & 2 \\ 2 & -3 \end{pmatrix}.")
+![\textbf{A} = \begin{pmatrix} -3 & 2 \\\\ 2 & -3 \end{pmatrix}.](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D%20%3D%20%5Cbegin%7Bpmatrix%7D%20-3%20%26%202%20%5C%5C%202%20%26%20-3%20%5Cend%7Bpmatrix%7D. "\textbf{A} = \begin{pmatrix} -3 & 2 \\ 2 & -3 \end{pmatrix}.")
 
 ``` r
 A <- matrix(c(-3,2,2,-3),byrow=TRUE,nrow=2)
@@ -4512,16 +4512,16 @@ Putting it all together,
 F_n &= F\_{n-1} + G\_{n-1} \\\\
 G_n &= F\_{n-1} \\\\
 \begin{pmatrix} F_n \\\\ G_n \end{pmatrix} &= \begin{pmatrix} 1 & 1 \\\\ 1 & 0 \end{pmatrix} \begin{pmatrix} F\_{n-1} \\\\ G\_{n-1} \end{pmatrix} \\\\
-\mathbf{F}\_n &= \bm{A} \mathbf{F}\_{n-1}.
-\end{align}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbegin%7Balign%7D%0AF_n%20%26%3D%20F_%7Bn-1%7D%20%2B%20G_%7Bn-1%7D%20%5C%5C%0AG_n%20%26%3D%20F_%7Bn-1%7D%20%5C%5C%0A%5Cbegin%7Bpmatrix%7D%20F_n%20%5C%5C%20G_n%20%5Cend%7Bpmatrix%7D%20%26%3D%20%5Cbegin%7Bpmatrix%7D%201%20%26%201%20%5C%5C%201%20%26%200%20%5Cend%7Bpmatrix%7D%20%5Cbegin%7Bpmatrix%7D%20F_%7Bn-1%7D%20%5C%5C%20G_%7Bn-1%7D%20%5Cend%7Bpmatrix%7D%20%5C%5C%0A%5Cmathbf%7BF%7D_n%20%26%3D%20%5Cbm%7BA%7D%20%5Cmathbf%7BF%7D_%7Bn-1%7D.%0A%5Cend%7Balign%7D "\begin{align}
+\mathbf{F}\_n &= \textbf{A} \mathbf{F}\_{n-1}.
+\end{align}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbegin%7Balign%7D%0AF_n%20%26%3D%20F_%7Bn-1%7D%20%2B%20G_%7Bn-1%7D%20%5C%5C%0AG_n%20%26%3D%20F_%7Bn-1%7D%20%5C%5C%0A%5Cbegin%7Bpmatrix%7D%20F_n%20%5C%5C%20G_n%20%5Cend%7Bpmatrix%7D%20%26%3D%20%5Cbegin%7Bpmatrix%7D%201%20%26%201%20%5C%5C%201%20%26%200%20%5Cend%7Bpmatrix%7D%20%5Cbegin%7Bpmatrix%7D%20F_%7Bn-1%7D%20%5C%5C%20G_%7Bn-1%7D%20%5Cend%7Bpmatrix%7D%20%5C%5C%0A%5Cmathbf%7BF%7D_n%20%26%3D%20%5Ctextbf%7BA%7D%20%5Cmathbf%7BF%7D_%7Bn-1%7D.%0A%5Cend%7Balign%7D "\begin{align}
 F_n &= F_{n-1} + G_{n-1} \\
 G_n &= F_{n-1} \\
 \begin{pmatrix} F_n \\ G_n \end{pmatrix} &= \begin{pmatrix} 1 & 1 \\ 1 & 0 \end{pmatrix} \begin{pmatrix} F_{n-1} \\ G_{n-1} \end{pmatrix} \\
-\mathbf{F}_n &= \bm{A} \mathbf{F}_{n-1}.
+\mathbf{F}_n &= \textbf{A} \mathbf{F}_{n-1}.
 \end{align}")
 
 Let’s diagonalize
-![\bm{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbm%7BA%7D "\bm{A}"),
+![\textbf{A}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctextbf%7BA%7D "\textbf{A}"),
 and momentarily, you’ll see why.
 
 ``` r
@@ -4583,11 +4583,11 @@ Why would we do this? Let’s use the diagonalization to re-write our
 problem:
 
 ![\begin{align}
-\mathbf{F}\_n &= \bm{A} \mathbf{F}\_{n-1}\\\\
+\mathbf{F}\_n &= \textbf{A} \mathbf{F}\_{n-1}\\\\
 \mathbf{F}\_n &= \mathbf{S} \mathbf{\Lambda} \mathbf{S}^{-1} \mathbf{F}\_{n-1}\\\\
 \mathbf{S}^{-1} \mathbf{F} &= \mathbf{\Lambda} \mathbf{S}^{-1} \mathbf{F}\_{n-1}.
-\end{align}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbegin%7Balign%7D%0A%5Cmathbf%7BF%7D_n%20%26%3D%20%5Cbm%7BA%7D%20%5Cmathbf%7BF%7D_%7Bn-1%7D%5C%5C%0A%5Cmathbf%7BF%7D_n%20%26%3D%20%5Cmathbf%7BS%7D%20%5Cmathbf%7B%5CLambda%7D%20%5Cmathbf%7BS%7D%5E%7B-1%7D%20%5Cmathbf%7BF%7D_%7Bn-1%7D%5C%5C%0A%5Cmathbf%7BS%7D%5E%7B-1%7D%20%5Cmathbf%7BF%7D%20%26%3D%20%5Cmathbf%7B%5CLambda%7D%20%5Cmathbf%7BS%7D%5E%7B-1%7D%20%5Cmathbf%7BF%7D_%7Bn-1%7D.%0A%5Cend%7Balign%7D "\begin{align}
-\mathbf{F}_n &= \bm{A} \mathbf{F}_{n-1}\\
+\end{align}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cbegin%7Balign%7D%0A%5Cmathbf%7BF%7D_n%20%26%3D%20%5Ctextbf%7BA%7D%20%5Cmathbf%7BF%7D_%7Bn-1%7D%5C%5C%0A%5Cmathbf%7BF%7D_n%20%26%3D%20%5Cmathbf%7BS%7D%20%5Cmathbf%7B%5CLambda%7D%20%5Cmathbf%7BS%7D%5E%7B-1%7D%20%5Cmathbf%7BF%7D_%7Bn-1%7D%5C%5C%0A%5Cmathbf%7BS%7D%5E%7B-1%7D%20%5Cmathbf%7BF%7D%20%26%3D%20%5Cmathbf%7B%5CLambda%7D%20%5Cmathbf%7BS%7D%5E%7B-1%7D%20%5Cmathbf%7BF%7D_%7Bn-1%7D.%0A%5Cend%7Balign%7D "\begin{align}
+\mathbf{F}_n &= \textbf{A} \mathbf{F}_{n-1}\\
 \mathbf{F}_n &= \mathbf{S} \mathbf{\Lambda} \mathbf{S}^{-1} \mathbf{F}_{n-1}\\
 \mathbf{S}^{-1} \mathbf{F} &= \mathbf{\Lambda} \mathbf{S}^{-1} \mathbf{F}_{n-1}.
 \end{align}")
