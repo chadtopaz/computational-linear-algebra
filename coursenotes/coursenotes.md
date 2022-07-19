@@ -775,12 +775,11 @@ ignore the coefficient in front that leading term.
 For Gaussian elimination, we have to compute the complexity of the two
 stages.
 
-1.  Reduce to echelon form. This takes
+1.  Reduce to echelon form. The number of operations is
 
 $$
-\frac{2}{3}n^3 + \frac{1}{2}n^2-\frac{7}{6}n = \mathcal{O}(n^3)
+\frac{2}{3}n^3 + \frac{1}{2}n^2-\frac{7}{6}n = \mathcal{O}(n^3).
 $$
-operations.
 
 1.  Back substitute. This takes *n*<sup>2</sup> = 𝒪(*n*<sup>2</sup>)
     operations. Back substitution is comptutationally cheap compared to
