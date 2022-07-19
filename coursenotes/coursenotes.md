@@ -626,7 +626,7 @@ So **A** invertible  ⇔ det **A** ≠ 0.
 
 3\. The **eigenvalues** *λ*<sub>*i*</sub> of **A** satisfy
 
-**A** **v**<sub>*i*</sub> = *λ*<sub>*i*</sub>**v**<sub>*i*</sub>,
+\\\[ ,\_i=\_i \_i, \\\]
 
 where **v**<sub>*i*</sub> are the **eigenvectors**. You can prove that
 

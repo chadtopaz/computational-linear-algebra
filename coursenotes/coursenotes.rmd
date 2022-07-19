@@ -327,14 +327,14 @@ So $\mat{A}$ invertible $\iff \det \mat{A} \neq 0$.
 
 3\. The **eigenvalues** $\lambda_i$ of $\mat{A}$ satisfy
 
-$$
+\\[
 \mat{A}\,\vec{v}_i=\lambda_i \vec{v}_i,
-$$
+\\]
 
 where $\vec{v}_i$ are the **eigenvectors**. You can prove that
 
 $$
-\prod_i \lambda_i = \det \mat{A},
+\displaystyle \prod_i \lambda_i = \det \mat{A},
 $$
 
 so no $\lambda_i = 0 \iff \det \mat{A} \neq 0$.
