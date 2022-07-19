@@ -625,14 +625,10 @@ $$
 So **A** invertible  ⇔ det **A** ≠ 0.
 
 3\. The **eigenvalues** *λ*<sub>*i*</sub> of **A** satisfy
-
-\\\[ ,\_i=\_i \_i, \\\]
-
-where **v**<sub>*i*</sub> are the **eigenvectors**. You can prove that
-
-∏<sub>*i*</sub>*λ*<sub>*i*</sub> = det **A**,
-
-so no *λ*<sub>*i*</sub> = 0 ⇔ det **A** ≠ 0.
+**A** **v**<sub>*i*</sub> = *λ*<sub>*i*</sub>**v**<sub>*i*</sub>, where
+**v**<sub>*i*</sub> are the **eigenvectors**. There is a nice property
+of eigenvalues, namely ∏<sub>*i*</sub>*λ*<sub>*i*</sub> = det **A**,
+from which it follows that no *λ*<sub>*i*</sub> = 0 ⇔ det **A** ≠ 0.
 
 4\. **A** **z** ≠ 0 for all **z** ∈ ℝ<sup>*n*</sup> except
 **z** = 0 ⇔ **A** is invertible. Why? If **A** *v**e**c**z* = 0 for
