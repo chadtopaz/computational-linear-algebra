@@ -521,7 +521,7 @@ norm(A, "I")
 
 There is one really useful identity you should know about matrix norms:
 
-$$||\mat{A}\vec{x}||_p \leq ||\mat{A}||_p ||\vec{x}||_p.$$
+$$||\mat{A}\,\vec{x}||_p \leq ||\mat{A}||_p ||\vec{x}||_p.$$
 
 To see this, we start with the right hand side and note
 

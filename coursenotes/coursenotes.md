@@ -1020,7 +1020,7 @@ You can calculate the 1, 2, and ∞ matrix norms using the R command
 
 There is one really useful identity you should know about matrix norms:
 
-||**A****x**||<sub>*p*</sub> ≤ ||**A**||<sub>*p*</sub>||**x**||<sub>*p*</sub>.
+||**A** **x**||<sub>*p*</sub> ≤ ||**A**||<sub>*p*</sub>||**x**||<sub>*p*</sub>.
 
 To see this, we start with the right hand side and note
 
