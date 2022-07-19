@@ -422,11 +422,7 @@ Because we are solving problems on computers, we should care about how long solu
 
 For Gaussian elimination, we have to compute the complexity of the two stages.
 
-1.  Reduce to echelon form. The number of operations is
-
-$$
-\frac{2}{3}n^3 + \frac{1}{2}n^2-\frac{7}{6}n = \mathcal{O}(n^3).
-$$
+1.  Reduce to echelon form. The number of operations is $\frac{2}{3}n^3 + \frac{1}{2}n^2-\frac{7}{6}n = \mathcal{O}(n^3)$.
 
 2.  Back substitute. This takes $n^2 = \mathcal{O}(n^2)$ operations. Back substitution is comptutationally cheap compared to row reduction. For large enough $n$, the back substitution step is negligible since $n^3 \gg n^2$. We can use these operation counts to make estimates of how long calculations should take.
 
