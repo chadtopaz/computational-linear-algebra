@@ -631,12 +631,12 @@ of eigenvalues, namely ∏<sub>*i*</sub>*λ*<sub>*i*</sub> = det **A**,
 from which it follows that no *λ*<sub>*i*</sub> = 0 ⇔ det **A** ≠ 0.
 
 4\. **A** **z** ≠ 0 for all **z** ∈ ℝ<sup>*n*</sup> except
-**z** = 0 ⇔ **A** is invertible. Why? If **A** *v**e**c**z* = 0 for
-**z** ≠ 0, then **A** **z** = 0 **z**, so 0 is an eigenvalue. But for
-**A** to be invertible, we know 0 can’t be an eigenvalue. (If you are
-proof oriented you might notice that the implication needs to be shown
-both ways, but I am trying purposely not to prove here – just to give
-you some intuition.)
+**z** = 0 ⇔ **A** is invertible. Why? If **A** **z** = 0 for **z** ≠ 0,
+then **A** **z** = 0 **z**, so 0 is an eigenvalue. But for **A** to be
+invertible, we know 0 can’t be an eigenvalue. (If you are proof oriented
+you might notice that the implication needs to be shown both ways, but I
+am trying purposely not to prove here – just to give you some
+intuition.)
 
 5\. **Null space** just means the parts of ℝ<sup>*n*</sup> that gets
 mapped to **0** by **A**. Another name for nullspace is **kernel**.
@@ -718,7 +718,7 @@ $$
 \end{pmatrix}.
 $$
 
-Apply *I**I* ← *I**I* − *I* and *I**I**I* ← *I**I**I* − 3*I* to obtain:
+Apply II ← II − I and III ← III − 3I to obtain:
 
 $$
 \mathbf{A\_a} = \begin{pmatrix}
@@ -728,7 +728,7 @@ $$
 \end{pmatrix}.
 $$
 
-Apply *I**I**I* ← *I**I**I* + *I**I* to obtain:
+Apply III ← III + II to obtain:
 
 $$
 \mathbf{A\_a} = \begin{pmatrix}
