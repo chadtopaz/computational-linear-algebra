@@ -1032,14 +1032,19 @@ $$
 
 Let us consider solving **A** **x** = **b**. Suppose we find approximate
 solution **x**<sub>*a*</sub>. The **relative forward error** is
+
 $$
 \frac{||\mathbf{x}-\mathbf{x}\_a||}{||\mathbf{x}||}
 $$
+
 and the **relative backward error** is
+
 $$
 \frac{||\mathbf{A}\mathbf{x}-\mathbf{A}\mathbf{x}\_a||}{||\mathbf{A}\mathbf{x}||}=\frac{||\mathbf{b}-\mathbf{A}\mathbf{x}\_a||}{||\mathbf{b}||}.
 $$
+
 We define **error magnification** as the ratio
+
 $$
 \frac{\text{relative forward error}}{\text{relative backward error}}=\frac{\frac{||\mathbf{x}-\mathbf{x}\_a||}{||\mathbf{x}||}}{\frac{||\mathbf{b}-\mathbf{A}\mathbf{x}\_a||}{||\mathbf{b}||}}.
 $$
@@ -1106,8 +1111,13 @@ it numerically for now.
     set.seed(123)
     N <- 10
     A <- matrix(runif(N^2), nrow = N)
-    ans1 <- norm(A, "2") * norm(solve(A), "2")
-    ans2 <- kappa(A, norm = "2", exact = TRUE)
+    norm(A, "2") * norm(solve(A), "2")
+
+    ## [1] 47.29397
+
+    kappa(A, norm = "2", exact = TRUE)
+
+    ## [1] 47.29397
 
 # LU decomposition
 

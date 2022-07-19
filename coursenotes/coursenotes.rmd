@@ -531,15 +531,20 @@ $$
 
 ## Condition Number for $\mat{A}\,\vec{x} = \vec{b}$
 
-Let us consider solving $\mat{A}\,\vec{x}=\vec{b}$. Suppose we find approximate solution $\vec{x}_a$. The **relative forward error** is 
+Let us consider solving $\mat{A}\,\vec{x}=\vec{b}$. Suppose we find approximate solution $\vec{x}_a$. The **relative forward error** is
+
 $$
 \frac{||\vec{x}-\vec{x}_a||}{||\vec{x}||}
 $$
+
 and the **relative backward error** is
+
 $$
 \frac{||\mat{A}\vec{x}-\mat{A}\vec{x}_a||}{||\mat{A}\vec{x}||}=\frac{||\vec{b}-\mat{A}\vec{x}_a||}{||\vec{b}||}.
 $$
+
 We define **error magnification** as the ratio
+
 $$
 \frac{\text{relative forward error}}{\text{relative backward error}}=\frac{\frac{||\vec{x}-\vec{x}_a||}{||\vec{x}||}}{\frac{||\vec{b}-\mat{A}\vec{x}_a||}{||\vec{b}||}}.
 $$
@@ -589,12 +594,13 @@ $$
 $$
 
 The derivation of this identity is about 10 to 20 lines of linear algebra that I am happy to show you if you are interested. We can check it numerically for now.
+
 ```{r cache = TRUE}
 set.seed(123)
 N <- 10
 A <- matrix(runif(N^2), nrow = N)
-ans1 <- norm(A, "2") * norm(solve(A), "2")
-ans2 <- kappa(A, norm = "2", exact = TRUE)
+norm(A, "2") * norm(solve(A), "2")
+kappa(A, norm = "2", exact = TRUE)
 ```
 
 # LU decomposition
