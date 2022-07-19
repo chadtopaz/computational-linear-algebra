@@ -595,7 +595,7 @@ vectors necessary to reach a particular target vector. There could be 0,
 
 Let’s consider an *n* × *n* matrix **A**.
 
-$\\(1$) **Invertible** means that the inverse **A**<sup>−1</sup> exists.
+1\. **Invertible** means that the inverse **A**<sup>−1</sup> exists.
 This matrix satisfies **A** **A**<sup>−1</sup> = **I**, where **I** is
 the *n* × *n* identity matrix.
 
