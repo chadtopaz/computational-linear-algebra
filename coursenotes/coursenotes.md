@@ -160,7 +160,7 @@ can pre-compute some derivatives, *f*(0) = sin (0) = 0,
 *f*<sup>(2)</sup>(0) =  − sin (0) = 0,
 *f*<sup>(3)</sup>(0) =  − cos (0) =  − 1,
 *f*<sup>(4)</sup>(0) = sin (0) = 0, and so on. Then the Taylor
-polynomial to 4th order and the error term are are
+polynomial to 4th order and the error term are:
 
 $$
 0 + x + 0x^2 - \frac{x^3}{6} + 0x^4 + \frac{x^5}{120}\cos c.
@@ -595,9 +595,9 @@ vectors necessary to reach a particular target vector. There could be 0,
 
 Let’s consider an *n* × *n* matrix **A**.
 
-1 **Invertible** means that the inverse **A**<sup>−1</sup> exists. This
-matrix satisfies **A** **A**<sup>−1</sup> = **I**, where **I** is the
-*n* × *n* identity matrix.
+$\\(1$) **Invertible** means that the inverse **A**<sup>−1</sup> exists.
+This matrix satisfies **A** **A**<sup>−1</sup> = **I**, where **I** is
+the *n* × *n* identity matrix.
 
 2 The notation det  means **determinant**. Think of it as a scaling
 factor for the transformation defined by a matrix. That is,
