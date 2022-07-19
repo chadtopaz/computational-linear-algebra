@@ -328,10 +328,10 @@ So $\mat{A}$ invertible $\iff \det \mat{A} \neq 0$.
 3\. The **eigenvalues** $\lambda_i$ of $\mat{A}$ satisfy
 
 $$
-\mat{A}\mathbf{v_i}=\lambda_i \mathbf{v_i},
+\mat{A}\,\vec{v}_i=\lambda_i \vec{v}_i,
 $$
 
-where $\mathbf{v_i}$ are the **eigenvectors**. You can prove that
+where $\vec{v}_i$ are the **eigenvectors**. You can prove that
 
 $$
 \prod_i \lambda_i = \det \mat{A},
@@ -339,23 +339,23 @@ $$
 
 so no $\lambda_i = 0 \iff \det \mat{A} \neq 0$.
 
-4\. $\mat{A} \mathbf{z} \neq 0$ for all $\mathbf{z} \in \mathbb{R}^n$ except $\mathbf{z}=0 \iff \mat{A}$ is invertible. Why? If $\mat{A} \mathbf{z} = 0$ for $\mathbf{z} \neq 0$, then $\mat{A} \mathbf{z} = 0 \mathbf{z}$, so 0 is an eigenvalue. But for $\mat{A}$ to be invertible, we know $0$ can't be an eigenvalue. (If you are proof oriented you might notice that the implication needs to be shown both ways, but I am trying purposely not to prove here -- just to give you some intuition.)
+4\. $\mat{A}\,\vec{z} \neq 0$ for all $\vec{z} \in \mathbb{R}^n$ except $\vec{z}=0 \iff \mat{A}$ is invertible. Why? If $\mat{A}\,vec{z} = 0$ for $\vec{z} \neq 0$, then $\mat{A}\,\vec{z} = 0\,\vec{z}$, so 0 is an eigenvalue. But for $\mat{A}$ to be invertible, we know $0$ can't be an eigenvalue. (If you are proof oriented you might notice that the implication needs to be shown both ways, but I am trying purposely not to prove here -- just to give you some intuition.)
 
-5\. **Null space** just means the parts of $\mathbb{R}^n$ that gets mapped to $\mathbf{0}$ by $\mat{A}$. Another name for nullspace is **kernel**. Mathematically, the nullspace is all the vectors $\mathbf{v}$ for which $\mat{A} \mathbf{v}=0$. So for an invertible matrix $\mat{A}$, the nullspace is $\mathbf{0}$. This is basically assigning a definition to the previous point (above).
+5\. **Null space** just means the parts of $\mathbb{R}^n$ that gets mapped to $\vec{0}$ by $\mat{A}$. Another name for nullspace is **kernel**. Mathematically, the nullspace is all the vectors $\vec{v}$ for which $\mat{A},\vec{v}=0$. So for an invertible matrix $\mat{A}$, the nullspace is $\vec{0}$. This is basically assigning a definition to the previous point (above).
 
-6\. If vectors are **linearly independent**, it means that none of the vectors can be written as a linear combination of the others. If $\mat{A}$ is invertible, then its columns are linearly independent. Why? If the columns were linearly dependent, you could take a linear combination of them to reach $\mathbf{0}$ nontrivially, for instance,
+6\. If vectors are **linearly independent**, it means that none of the vectors can be written as a linear combination of the others. If $\mat{A}$ is invertible, then its columns are linearly independent. Why? If the columns were linearly dependent, you could take a linear combination of them to reach $\vec{0}$ nontrivially, for instance,
 
 $$
 \begin{pmatrix}1 & -2\\2 & -4\end{pmatrix}\begin{pmatrix}x_1 \\ x_2 \end{pmatrix}=\begin{pmatrix}0 \\ 0\end{pmatrix}.
 $$
 
-This violates our previous condition (above) about the nullspace only being $\mathbf{0}$.
+This violates our previous condition (above) about the nullspace only being $\vec{0}$.
 
-7\. **Span** means the set of points reachable by taking linear combinations of a set of vectors. If you have $n$ linearly independent vectors in $\mathbb{R}^n$, they span $\mathbb{R}^n$. The **rank** of $\mathbb{A}$ is just the dimension of the space spanned by the column vectors.
+7\. **Span** means the set of points reachable by taking linear combinations of a set of vectors. If you have $n$ linearly independent vectors in $\mathbb{R}^n$, they span $\mathbb{R}^n$. The **rank** of $\vec{A}$ is just the dimension of the space spanned by the column vectors.
 
 8\. The **image** of $\mat{A}$ means all the points that $\mat{A}$ can map to. This is synonymous with the point above: it's the span of the columns of $\mat{A}$. If the rank of $\mat{A}$ is $n$, then the column vectors are linearly independent so they span $\mathbb{R}^n$, so the image of $\mat{A}$ is $\mathbb{R}^n$.
 
-9\. $\mat{A}\vec{x}=\vec{b}$ has a unique solution for all $\vec{b} \iff$ $\mat{A}$ is invertible, since you can left multiply by $\mat{A}^{-1}$.
+9\. $\mat{A}\,\vec{x}=\vec{b}$ has a unique solution for all $\vec{b} \iff \mat{A}$ is invertible, since you can left multiply by $\mat{A}^{-1}$.
 
 ## Gaussian Elimination
 
@@ -370,7 +370,7 @@ Gaussian elimination refers to transforming a matrix to row echelon form by appl
 -   multiply a row by a nonzero scalar
 -   Add one row to a scalar multiple of another
 
-To solve a linear system $\mat{A}\vec{x}=\vec{b}$, write it as an augmented matrix, reduce it to row echelon form, and then use back substitution to solve.
+To solve a linear system $\mat{A}\,\vec{x}=\vec{b}$, write it as an augmented matrix, reduce it to row echelon form, and then use back substitution to solve.
 
 For example, take
 
@@ -430,7 +430,7 @@ eliminate(A)
 
 ## Operation Counts and Complexity
 
-Because we are solving problems on computers, we should care about how long solution takes, which in turn depends on the number of computational operations carried out. This is called the *complexity* of the method. For solving $\mat{A}\vec{x}=\vec{b}$, with $\mat{A}$ an $n \times n$ matrix, we write the complexity in terms of $n$. Then, we are usually concerned with the behavior of the operation count for $n$ large, so we might retain just the leading term in $n$ as an approximation, or even ignore the coefficient in front that leading term.
+Because we are solving problems on computers, we should care about how long solution takes, which in turn depends on the number of computational operations carried out. This is called the *complexity* of the method. For solving $\mat{A}\,\vec{x}=\vec{b}$, with $\mat{A}$ an $n \times n$ matrix, we write the complexity in terms of $n$. Then, we are usually concerned with the behavior of the operation count for $n$ large, so we might retain just the leading term in $n$ as an approximation, or even ignore the coefficient in front that leading term.
 
 For Gaussian elimination, we have to compute the complexity of the two stages.
 
@@ -444,7 +444,7 @@ operations.
 
 For example, suppose row reduction on a $500 \times 500$ matrix takes 1 second. How long does back substitution take? Well, we just use leading terms in the complexity. Since $n=500$, we have $(2/3)*500^3 t =1$ where $t$ is time per operation. Solving, $t = 1.2 \times 10^{-8}$. Back substitution takes $n^2=500^2$ operations, so the total time is $n^2t=500^2\times 1.2 \times 10^{-8}=0.003$ seconds.
 
-Let's test scaling of the reduction step on Chad's machine for a random matrix.
+Let's test scaling of the reduction step for a random matrix.
 ```{r cache = TRUE}
 set.seed(123)
 n1 <- 200
@@ -460,7 +460,7 @@ t2/t1
 
 In the solution of a computational problem, **forward error** is the difference between the exact and computed solution, and **backwards error** is the difference between the original problem and the so-called modified problem that the approximate solution satisfies. This probably sounds abstract, so let's make it concrete in the cases of a root-finding problem and a linear algebra problem.
 
-Suppose we want to solve $\mat{A}\vec{x}=\vec{b}$. The true solution is $\vec{x}$ but our computational method finds an approximate solution $\vec{x}_a$. The forward error is the distance between the two solutions, that is, $||\vec{x}-\mathbf{x_a}||$. The backward error is the distance between what the matrix outputs when applied to those solutions, that is, $||\mat{A}\vec{x}-\mat{A}\vec{x}_a||=||\vec{b}-\mat{A}\vec{x}_a||$. Distance here is the length of the difference between two quantities.
+Suppose we want to solve $\mat{A}\,\vec{x}=\vec{b}$. The true solution is $\vec{x}$ but our computational method finds an approximate solution $\vec{x}_a$. The forward error is the distance between the two solutions, that is, $||\vec{x}-\mathbf{x_a}||$. The backward error is the distance between what the matrix outputs when applied to those solutions, that is, $||\mat{A}\,\vec{x}-\mat{A}\,\vec{x}_a||=||\vec{b}-\mat{A}\,\vec{x}_a||$. Distance here is the length of the difference between two quantities.
 
 Notice that we haven't specified what distance means! This is why we need to define vector and matrix norms.
 
@@ -503,7 +503,7 @@ $$
 ||\mat{A}||_p = \max_{\vec{x} \not = \mathbf{ 0}} \frac{ || \mat{A} \vec{x}||_p} { ||\vec{x}||_p} = \max_{||\vec{x}||_p  = 1}  || \mat{A} \vec{x}||_p
 $$
 
-The matrix $p$-norm says: apply $A$ to the unit sphere, and $||\mat{A}||_p$ is the length of the vector that is farthest from the origin. This is not trivial to calculate! You have an infinite number of vectors to consider.
+The matrix $p$-norm says: apply $\mat{A}$ to the unit sphere, and $||\mat{A}||_p$ is the length of the vector that is farthest from the origin. This is not trivial to calculate! You have an infinite number of vectors to consider.
 
 Fortunately, just like for the vector case, the matrix $p$-norm has a few special values of $p$ for which it is easy to compute. We have:
 
@@ -528,7 +528,6 @@ $$
 To see why these definitions are true requires some analysis. If you are interested, I am happy to point you to proofs.
 
 You can calculate the $1$, $2$, and $\infty$ matrix norms using the R command `norm`.
-
 ```{r cache = TRUE}
 A <- matrix(c(2,-1,1,1,0,1,3,-1,4), byrow = TRUE, nrow = 3)
 norm(A, "1")
@@ -543,12 +542,12 @@ $$||\mat{A}\vec{x}||_p \leq ||\mat{A}||_p ||\vec{x}||_p.$$
 To see this, we start with the right hand side and note
 
 $$
-||\mat{A}||_p ||\vec{x}||_p = \left( \max_{\mathbf{y} \not = \mathbf{ 0}} \frac{ || \mat{A} \mathbf{y}||_p} { ||\mathbf{y}||_p} \right) ||\vec{x}||_p \geq \frac{ || \mat{A} \vec{x}||_p} { ||\vec{x}||_p} ||\vec{x}||_p = || \mat{A} \vec{x}||_p.
+||\mat{A}||_p ||\vec{x}||_p = \left( \max_{\vec{y} \not = \vec{ 0}} \frac{ || \mat{A} \vec{y}||_p} { ||\vec{y}||_p} \right) ||\vec{x}||_p \geq \frac{ || \mat{A} \vec{x}||_p} { ||\vec{x}||_p} ||\vec{x}||_p = || \mat{A} \vec{x}||_p.
 $$
 
-## Condition Number for $\mat{A}\vec{x} = \vec{b}$
+## Condition Number for $\mat{A}\,\vec{x} = \vec{b}$
 
-Let us consider solving $\mat{A}\vec{x}=\vec{b}$. Suppose we find approximate solution $\vec{x}_a$. The **relative forward error** is 
+Let us consider solving $\mat{A}\,\vec{x}=\vec{b}$. Suppose we find approximate solution $\vec{x}_a$. The **relative forward error** is 
 $$
 \frac{||\vec{x}-\vec{x}_a||}{||\vec{x}||}
 $$
@@ -606,7 +605,6 @@ $$
 $$
 
 The derivation of this identity is about 10 to 20 lines of linear algebra that I am happy to show you if you are interested. We can check it numerically for now.
-
 ```{r cache = TRUE}
 set.seed(123)
 N <- 10
@@ -1517,7 +1515,7 @@ $$
 \mat{A}^T \mat{A} x = \mat{A}^T \vec{b}
 $$
 
-where we have used the fact that $\mathbf{y}\cdot\mathbf{z}=\mathbf{y}^T\mathbf{z}$. We can solve for $\vec{x}$ by writing $x = \left(\mat{A}^T \mat{A}\right)^{-1}\mat{A}^T \vec{b}$. We can also calculate the vector that was as close as possible to $\vec{b}$. We will call it $\widehat{\vec{b}}$ and it is
+where we have used the fact that $\mathbf{y}\cdot\vec{z}=\mathbf{y}^T\vec{z}$. We can solve for $\vec{x}$ by writing $x = \left(\mat{A}^T \mat{A}\right)^{-1}\mat{A}^T \vec{b}$. We can also calculate the vector that was as close as possible to $\vec{b}$. We will call it $\widehat{\vec{b}}$ and it is
 
 $$
 \begin{align}

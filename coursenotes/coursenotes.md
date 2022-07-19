@@ -626,26 +626,26 @@ So **A** invertible  ⇔ det **A** ≠ 0.
 
 3\. The **eigenvalues** *λ*<sub>*i*</sub> of **A** satisfy
 
-**A****v**<sub>**i**</sub> = *λ*<sub>*i*</sub>**v**<sub>**i**</sub>,
+**A** **v**<sub>*i*</sub> = *λ*<sub>*i*</sub>**v**<sub>*i*</sub>,
 
-where **v**<sub>**i**</sub> are the **eigenvectors**. You can prove that
+where **v**<sub>*i*</sub> are the **eigenvectors**. You can prove that
 
 ∏<sub>*i*</sub>*λ*<sub>*i*</sub> = det **A**,
 
 so no *λ*<sub>*i*</sub> = 0 ⇔ det **A** ≠ 0.
 
-4\. **A****z** ≠ 0 for all **z** ∈ ℝ<sup>*n*</sup> except
-**z** = 0 ⇔ **A** is invertible. Why? If **A****z** = 0 for **z** ≠ 0,
-then **A****z** = 0**z**, so 0 is an eigenvalue. But for **A** to be
-invertible, we know 0 can’t be an eigenvalue. (If you are proof oriented
-you might notice that the implication needs to be shown both ways, but I
-am trying purposely not to prove here – just to give you some
-intuition.)
+4\. **A** **z** ≠ 0 for all **z** ∈ ℝ<sup>*n*</sup> except
+**z** = 0 ⇔ **A** is invertible. Why? If **A** *v**e**c**z* = 0 for
+**z** ≠ 0, then **A** **z** = 0 **z**, so 0 is an eigenvalue. But for
+**A** to be invertible, we know 0 can’t be an eigenvalue. (If you are
+proof oriented you might notice that the implication needs to be shown
+both ways, but I am trying purposely not to prove here – just to give
+you some intuition.)
 
 5\. **Null space** just means the parts of ℝ<sup>*n*</sup> that gets
 mapped to **0** by **A**. Another name for nullspace is **kernel**.
 Mathematically, the nullspace is all the vectors **v** for which
-**A****v** = 0. So for an invertible matrix **A**, the nullspace is
+**A**, **v** = 0. So for an invertible matrix **A**, the nullspace is
 **0**. This is basically assigning a definition to the previous point
 (above).
 
@@ -664,8 +664,8 @@ being **0**.
 
 7\. **Span** means the set of points reachable by taking linear
 combinations of a set of vectors. If you have *n* linearly independent
-vectors in ℝ<sup>*n*</sup>, they span ℝ<sup>*n*</sup>. The **rank** of 𝔸
-is just the dimension of the space spanned by the column vectors.
+vectors in ℝ<sup>*n*</sup>, they span ℝ<sup>*n*</sup>. The **rank** of
+**A** is just the dimension of the space spanned by the column vectors.
 
 8\. The **image** of **A** means all the points that **A** can map to.
 This is synonymous with the point above: it’s the span of the columns of
@@ -673,7 +673,7 @@ This is synonymous with the point above: it’s the span of the columns of
 independent so they span ℝ<sup>*n*</sup>, so the image of **A** is
 ℝ<sup>*n*</sup>.
 
-9\. **A****x** = **b** has a unique solution for all **b**⇔ **A** is
+9\. **A** **x** = **b** has a unique solution for all **b** ⇔ **A** is
 invertible, since you can left multiply by **A**<sup>−1</sup>.
 
 ## Gaussian Elimination
@@ -694,7 +694,7 @@ set:
 -   multiply a row by a nonzero scalar
 -   Add one row to a scalar multiple of another
 
-To solve a linear system **A****x** = **b**, write it as an augmented
+To solve a linear system **A** **x** = **b**, write it as an augmented
 matrix, reduce it to row echelon form, and then use back substitution to
 solve.
 
@@ -770,7 +770,7 @@ the elimination.
 Because we are solving problems on computers, we should care about how
 long solution takes, which in turn depends on the number of
 computational operations carried out. This is called the *complexity* of
-the method. For solving **A****x** = **b**, with **A** an *n* × *n*
+the method. For solving **A** **x** = **b**, with **A** an *n* × *n*
 matrix, we write the complexity in terms of *n*. Then, we are usually
 concerned with the behavior of the operation count for *n* large, so we
 might retain just the leading term in *n* as an approximation, or even
@@ -801,8 +801,7 @@ the total time is
 *n*<sup>2</sup>*t* = 500<sup>2</sup> × 1.2 × 10<sup>−8</sup> = 0.003
 seconds.
 
-Let’s test scaling of the reduction step on Chad’s machine for a random
-matrix.
+Let’s test scaling of the reduction step for a random matrix.
 
     set.seed(123)
     n1 <- 200
@@ -825,13 +824,13 @@ modified problem that the approximate solution satisfies. This probably
 sounds abstract, so let’s make it concrete in the cases of a
 root-finding problem and a linear algebra problem.
 
-Suppose we want to solve **A****x** = **b**. The true solution is **x**
+Suppose we want to solve **A** **x** = **b**. The true solution is **x**
 but our computational method finds an approximate solution
 **x**<sub>*a*</sub>. The forward error is the distance between the two
 solutions, that is, ||**x** − **x**<sub>**a**</sub>||. The backward
 error is the distance between what the matrix outputs when applied to
 those solutions, that is,
-||**A****x** − **A****x**<sub>*a*</sub>|| = ||**b** − **A****x**<sub>*a*</sub>||.
+||**A** **x** − **A** **x**<sub>*a*</sub>|| = ||**b** − **A** **x**<sub>*a*</sub>||.
 Distance here is the length of the difference between two quantities.
 
 Notice that we haven’t specified what distance means! This is why we
@@ -981,7 +980,7 @@ $$
 ||\mathbf{A}||\_p = \max\_{\mathbf{x} \not = \mathbf{ 0}} \frac{ || \mathbf{A} \mathbf{x}||\_p} { ||\mathbf{x}||\_p} = \max\_{||\mathbf{x}||\_p  = 1}  || \mathbf{A} \mathbf{x}||\_p
 $$
 
-The matrix *p*-norm says: apply *A* to the unit sphere, and
+The matrix *p*-norm says: apply **A** to the unit sphere, and
 ||**A**||<sub>*p*</sub> is the length of the vector that is farthest
 from the origin. This is not trivial to calculate! You have an infinite
 number of vectors to consider.
@@ -1036,9 +1035,9 @@ $$
 ||\mathbf{A}||\_p ||\mathbf{x}||\_p = \left( \max\_{\mathbf{y} \not = \mathbf{ 0}} \frac{ || \mathbf{A} \mathbf{y}||\_p} { ||\mathbf{y}||\_p} \right) ||\mathbf{x}||\_p \geq \frac{ || \mathbf{A} \mathbf{x}||\_p} { ||\mathbf{x}||\_p} ||\mathbf{x}||\_p = || \mathbf{A} \mathbf{x}||\_p.
 $$
 
-## Condition Number for **A****x** = **b**
+## Condition Number for **A** **x** = **b**
 
-Let us consider solving **A****x** = **b**. Suppose we find approximate
+Let us consider solving **A** **x** = **b**. Suppose we find approximate
 solution **x**<sub>*a*</sub>. The **relative forward error** is
 $$
 \frac{||\mathbf{x}-\mathbf{x}\_a||}{||\mathbf{x}||}
