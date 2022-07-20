@@ -1164,8 +1164,7 @@ decompose (or factorize) it as the product
 $$
 A  = 
 \underbrace{\begin{array}{|cccccc|}
-\hline
-1 &&&&&\\\\
+\hline 1 &&&&&\\\\
 \ast & 1 &&&&\\\\
 \ast & \ast  & 1 &&&\\\\
 \ast & \ast & \ast & 1 &&\\\\
@@ -1173,14 +1172,12 @@ A  =
 \ast & \ast & \ast & \ast & \ast & 1 \\\\ \hline
 \end{array}}\_{\mathbf{L}=\text{Lower unit triangular}} \\
 \underbrace{\begin{array}{|cccccc|}
-\hline
-\ast & \ast & \ast & \ast & \ast & \ast \\\\ 
+\hline \ast & \ast & \ast & \ast & \ast & \ast \\\\ 
 &\ast & \ast & \ast & \ast & \ast  \\\\
 &&\ast & \ast & \ast & \ast \\\\
 &&&\ast & \ast  & \ast \\\\
 &&&&\ast & \ast \\\\
-&&&&&\ast \\\\
-\hline
+&&&&&\ast \\\\ \hline
 \end{array}}\_{\mathbf{U}=\text{Upper triangular}}
 $$
 
