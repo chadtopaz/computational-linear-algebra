@@ -21,7 +21,20 @@ therefore the 2-norm condition number of any orthonormal matrix **Q** is
 
 ### Problem 1 Solution
 
-Your solution goes here.
+For all **Q** ∈ ℝ<sup>*n*</sup>, we have
+
+||**Q****x**||<sub>2</sub><sup>2</sup> = **x**<sup>*T*</sup>**Q**<sup>*T*</sup>**Q****x** = **x**<sup>*T*</sup>**x** = ||**x**||<sub>2</sub><sup>2</sup>,
+
+and therefore ||**Q****x**||<sub>2</sub> = ||**x**||<sub>2</sub>. So
+
+$$
+||\mathbf{Q}||\_2 = \max\_{\mathbf{x}~s.t. ||\mathbf{x}||\_2 \neq 0} \frac{||\mathbf{Q}\mathbf{x}||\_2}{||\mathbf{x}||\_2} = 1.
+$$
+
+The same line of reasoning applies to **Q**<sup>−1</sup>, since for all
+**Q**, we have
+
+||**Q**<sup>−1</sup>**x**||<sub>2</sub><sup>2</sup> = **x**<sup>*T*</sup>(**Q**<sup>−1</sup>)<sup>*T*</sup>**Q**<sup>−1</sup>**x** = **x**<sup>*T*</sup>**Q****Q**<sup>*T*</sup>**x** = **x**<sup>*T*</sup>**x** = ||**x**||<sub>2</sub><sup>2</sup>.
 
 ### Problem 2
 
@@ -60,7 +73,52 @@ magnitude of the difference between the first coordinate of
 
 ### Problem 2 Solution
 
-Your solution goes here.
+a\.
+
+    makeA <- function(n) {
+      A <- matrix(-1,n,n)
+      A <- A*upper.tri(A) + diag(n)
+      return(A)
+    }
+
+b\.
+
+    n <- 1:30
+    cond <- NULL
+    for (i in n){
+      A <- makeA(i)
+      cond[i] <- kappa(A,norm="2")
+    }
+    plot(n,log10(cond))
+    model <- lm(log10(cond)~n)
+    abline(model)
+
+![](Pset-Fundamentals-of-Linear-Systems-Solutions_files/figure-markdown_strict/unnamed-chunk-3-1.png)
+
+The model has a decent linear fit, which means the condition number
+grows exponentially, and hence the matrix is very poorly conditioned as
+*n* grows.
+
+c\.
+
+    n <- 30
+    A <- makeA(n)
+    b <- runif(n)
+    b1 <- b
+    x1 <- solve(A,b1)
+    b2 <- b + c(rep(0,n-1),0.001)
+    x2 <- solve(A,b2)
+    Norm(x1-x2)
+
+    ## [1] 309962.6
+
+    abs(x1[1] - x2[1])
+
+    ## [1] 268435.5
+
+Changing one element of the right hand side by 10<sup>−3</sup> results
+in a change in the solution that is of order 10<sup>5</sup>, reflecting
+the poor conditioning of the matrix.
 
 ### Problem 3
 
@@ -91,7 +149,38 @@ temperatures.
 
 ### Problem 3 Solution
 
-Your solution goes here.
+a\.
+
+$$
+A=\begin{pmatrix}
+~~4 & -1 & -1 & ~~0 & ~~0 & ~~0 & ~~0 & ~~0 \\\\
+-1 & ~~4 & ~~0 & -1 & ~~0 & ~~0 & ~~0 & ~~0 \\\\
+-1 & ~~0 & ~~4 & -1 & -1 & ~~0 & ~~0 & ~~0 \\\\
+~~0 & -1 & -1 & ~~4 & ~~0 & -1 & ~~0 & ~~0 \\\\
+~~0 & ~~0 & -1 & ~~0 & ~~4 & -1 & -1 & ~~0 \\\\
+~~0 & ~~0 & ~~0 & -1 & -1 & ~~4 & ~~0 & -1 \\\\
+~~0 & ~~0 & ~~0 & ~~0 & -1 & ~~0 & ~~4 & -1 \\\\
+~~0 & ~~0 & ~~0 & ~~0 & ~~0 & -1 & -1 & ~~4 
+\end{pmatrix}, \qquad b=\begin{pmatrix} 5 \\\\ 15 \\\0 \\\10 \\\0 \\\10 \\\20 \\\30 \end{pmatrix}
+$$
+
+b\.
+
+    A <- matrix(c(4,-1,-1,0,0,0,0,0,
+                -1,4,0,-1,0,0,0,0,
+                -1,0,4,-1,-1,0,0,0,
+                0,-1,-1,4,0,-1,0,0,
+                0,0,-1,0,4,-1,-1,0,
+                0,0,0,-1,-1,4,0,-1,
+                0,0,0,0,-1,0,4,-1,
+                0,0,0,0,0,-1,-1,4),
+                nrow = 8, byrow = TRUE)
+    b <- c(5,15,0,10,0,10,20,30)
+    x <- solve(A,b)
+    print(x)
+
+    ## [1]  3.956938  6.588517  4.239234  7.397129  5.602871  8.760766  9.411483
+    ## [8] 12.043062
 
 ### Problem 4
 
@@ -114,7 +203,7 @@ because the graph is really large!
     myLayout <- layout_nicely(g)
     plot(simplify(g), layout=myLayout, vertex.color=V(g)$color, vertex.size=V(g)$size, vertex.label="")
 
-<img src="Pset-Fundamentals-of-Linear-Systems_files/figure-markdown_strict/unnamed-chunk-3-1.png" width="70%" />
+<img src="Pset-Fundamentals-of-Linear-Systems-Solutions_files/figure-markdown_strict/unnamed-chunk-7-1.png" width="70%" />
 
 a\. In the analysis of networks, one is often concerned with finding the
 most important (most central, in some sense) component. One measure of
@@ -135,6 +224,22 @@ on your plot.
 
 ### Problem 4 Solution
 
-a\. Your solution goes here.
+a\.
 
-b\. Your solution goes here.
+    n <- dim(M)[1]
+    A <- diag(n) - 0.001*t(M) 
+    ones <- rep(1,n)
+    x <- solve(A, ones) - ones
+    paste0("Maximum value of x is ",round(max(x),digits=8))
+
+    ## [1] "Maximum value of x is 0.01406844"
+
+b\.
+
+    knitr::knit_hooks$set(crop = knitr::hook_pdfcrop)
+    impt <- which(x==max(x))
+    V(g)$color[impt] <- "red"
+    V(g)$size[impt] <- 5
+    plot(simplify(g),layout=myLayout,vertex.label="")
+
+<img src="Pset-Fundamentals-of-Linear-Systems-Solutions_files/figure-markdown_strict/unnamed-chunk-9-1.png" width="70%" />

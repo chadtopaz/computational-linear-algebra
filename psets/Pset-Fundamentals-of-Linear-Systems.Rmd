@@ -12,6 +12,7 @@ output:
 Load necessary packages:
 
 ```{r,message=FALSE}
+library("magick")
 library("Matrix")
 library("igraph")
 library("pracma")
@@ -22,7 +23,7 @@ library("pracma")
 A real $n \times n$ matrix $\mat{Q}$ is *orthonormal* if 
 
 $$
-\mat{Q}^{T}\mat{Q}=\mat{Q}\mat{Q}^T=\mat{I};~i.e., \mat{Q}^{-1}=\mat{Q}^T.
+\mat{Q}^{T}\,\mat{Q}=\mat{Q}\mat{Q}^T=\mat{I};~i.e., \mat{Q}^{-1}=\mat{Q}^T.
 $$
 
 Note: sometimes you will see these matrices just called *orthogonal matrices*. 
@@ -45,7 +46,7 @@ a\. Write a function that takes a value of $n$ as input and outputs the matrix A
 
 b\. Use your function and the R command `kappa` to calculate the approximate condition number $\kappa(\mat{A})$ for $n=1,\ldots,30$. Plot $\log_{10}[\kappa(\mat{A})]$ as a function of $n$ and use the commands `lm` and `abline` to plot a best fit line. How would you describe the conditioning of the matrix as $n$ increases?
 
-c\. Now choose $n=30$. Generate the matrix $\mat{A}$ and let $\vec{b_1}$ be an $n \times 1$ vector of random numbers chosen uniformly from 0 to 1. Solve $\mat{A} \vec{x}_1 = \vec{b}_1$ using any appropriate method that you want (including R's built-in capabilities). Now let $\vec{b}_2 = \vec{b}_1 + (0,\ldots,0,0.001)^T$, that is, you leave the first 29 elements the same as in $\vec{b}_1$ but add 0.001 to the last element. Solve $\mat{A} \vec{x}_2 = \vec{b}_2$. Use the command `Norm` to find the (approximate)2-norm of $\vec{x_1}-\vec{x_2}$ and discuss vis-a-vis your result from part b. Also, to help build your intuition, find the magnitude of the difference between the first coordinate of $\vec{x}_1$ and that of $\vec{x}_2$.
+c\. Now choose $n=30$. Generate the matrix $\mat{A}$ and let $\vec{b_1}$ be an $n \times 1$ vector of random numbers chosen uniformly from 0 to 1. Solve $\mat{A}\,\vec{x}_1 = \vec{b}_1$ using any appropriate method that you want (including R's built-in capabilities). Now let $\vec{b}_2 = \vec{b}_1 + (0,\ldots,0,0.001)^T$, that is, you leave the first 29 elements the same as in $\vec{b}_1$ but add 0.001 to the last element. Solve $\mat{A}\,\vec{x}_2 = \vec{b}_2$. Use the command `Norm` to find the (approximate)2-norm of $\vec{x_1}-\vec{x_2}$ and discuss vis-a-vis your result from part b. Also, to help build your intuition, find the magnitude of the difference between the first coordinate of $\vec{x}_1$ and that of $\vec{x}_2$.
 
 ### Problem 2 Solution
 
@@ -59,7 +60,7 @@ Note: This problem is taken from Linear Algebra and its Applications, by Lay et 
 
 An important concern in the study of heat transfer is to determine the steady-state temperature distribution of a thin plate when the temperature around the boundary is known. Assume the plate shown in the figure above represents a cross section of a metal beam, with negligible heat flow in the direction perpendicular to the plate. Let the variables $x_1, x_2, \ldots, x_8$ denote the temperatures at nodes 1 through 8 in the picture. In steady state, the temperature at a node is approximately equal to the average of the four nearest nodes (to the left, above, right, below).
 
-a\. The solution to the approximate steady-state heat flow problem for this plate can be written as a system of linear equations $Ax=b$, where $x=[x_1, x_2, \ldots, x_8]$ is the vector of temperatures at nodes 1 through 8. Find the $8 \times 8$ matrix $A$ and the vector $b$.
+a\. The solution to the approximate steady-state heat flow problem for this plate can be written as a system of linear equations $\mat{A}\,\vec{x}=\vec{b}$, where $x=[x_1, x_2, \ldots, x_8]$ is the vector of temperatures at nodes 1 through 8. Find the $8 \times 8$ matrix $A$ and the vector $b$.
 
 b\. Solve the system any way you want (using R) to find the unknown temperatures.
 
@@ -86,7 +87,7 @@ plot(simplify(g), layout=myLayout, vertex.color=V(g)$color, vertex.size=V(g)$siz
 a\. In the analysis of networks, one is often concerned with finding the most important (most central, in some sense) component. One measure of importance is called Katz centrality. The Katz centrality of the nodes, $\vec{x}$, satisfies
 
 $$
-\bigl(\mat{I} - \alpha M^T)(\vec{x} + \vec{1}) = \mat{I}
+\bigl(\mat{I} - \alpha\,\mat{M}^T)(\vec{x} + \vec{1}) = \vec{1}
 $$
 
 where $\mat{I}$ is the identity matrix, $\alpha$ is a small number, and $\vec{1}$ is a vector of all ones. Take $\alpha = 0.05$ and solve for $\vec{x}$ using any method you want. Print out the largest element of $\vec{x}$ so that I can verify your answer.
@@ -95,4 +96,6 @@ b\. Re-plot the network using your same graph layout as before, color the most i
 
 ### Problem 4 Solution
 
-Your solution goes here.
+a\. Your solution goes here.
+
+b\. Your solution goes here.
