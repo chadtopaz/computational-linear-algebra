@@ -91,7 +91,7 @@ sequence, that is, the value of *a*<sub>*n*</sub> as *n* → ∞. Sometimes
 you might see this expression rearranged and written more compactly as
 as
 
-*e*<sub>*n* + 1</sub> = *C**e*<sub>*n*</sub><sup>*q*</sup>
+*e*<sub>*n* + 1</sub> = *C* *e*<sub>*n*</sub><sup>*q*</sup>
 
 as *n* → ∞, where *e*<sub>*n*</sub> ≡ |*a*<sub>*n*</sub>−*a*|.
 
@@ -103,9 +103,9 @@ the backward error on the nth iteration *e*<sub>*n*</sub>. We can
 estimate the convergence of the algorithm by making a log-log plot of
 error data. Taking the log of each side of the equation above, we have
 
-log *e*<sub>*n* + 1</sub> = log *C* + *q*log *e*<sub>*n*</sub>.
+log *e*<sub>*n* + 1</sub> = log *C* + *q* log *e*<sub>*n*</sub>.
 
-If we plot (log*e*<sub>*n*</sub>,log*e*<sub>*n* + 1</sub>) and observe
+If we plot (log *e*<sub>*n*</sub>,log *e*<sub>*n* + 1</sub>) and observe
 linear behavior for large enough *n*, then the slope is the convergence
 rate *q*.
 
@@ -244,9 +244,9 @@ there are very long lists of numbers.
 
 a\. Your solution goes here.
 
-b\]. Your solution goes here.
+b\. Your solution goes here.
 
-c\]. Your solution goes here.
+c\. Your solution goes here.
 
 ### Problem 3
 
@@ -266,7 +266,7 @@ The code below creates the network’s adjacency matrix for you.
 
 One measure of the importance of a node is the Katz centrality. The
 vector of Katz centralities **x** satisfies
-**x** = ((**I**−*α**A*<sup>*T*</sup>)<sup>−1</sup> − **I**)**1**.
+**x** = ((**I**−*α* *A*<sup>*T*</sup>)<sup>−1</sup> − **I**)**1**.
 where **1** is a vector of ones.
 
 You are going to compute the Katz centrality without inverting a matrix.
