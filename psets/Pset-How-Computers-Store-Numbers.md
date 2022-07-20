@@ -28,7 +28,7 @@ Convert the following base-10 numbers to binary.
     make your argument.
 
 2.  Does (4/3 − 1/3) − 1 also give
-    ![\\epsilon\_{mach}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cepsilon_%7Bmach%7D "\epsilon_{mach}")?
+    ![\epsilon\_{mach}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cepsilon_%7Bmach%7D "\epsilon_{mach}")?
     Explain by converting to floating point numbers and carrying out the
     machine arithmetic.
 
@@ -55,7 +55,7 @@ such that
 ![i](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;i "i")
 is not exactly representable using the IEEE standard in double
 precision; i.e.,
-![\\hbox{fl}(i)\\neq i](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Chbox%7Bfl%7D%28i%29%5Cneq%20i "\hbox{fl}(i)\neq i").
+![\hbox{fl}(i)\neq i](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Chbox%7Bfl%7D%28i%29%5Cneq%20i "\hbox{fl}(i)\neq i").
 
 ### Problem 4 Solution
 
