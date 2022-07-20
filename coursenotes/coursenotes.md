@@ -4,11 +4,8 @@
 -   <a href="#fundamentals-of-linear-systems"
     id="toc-fundamentals-of-linear-systems">Fundamentals of Linear
     Systems</a>
--   <a href="#lu-decomposition" id="toc-lu-decomposition">LU
-    decomposition</a>
--   <a href="#iterative-methods-for-linear-systems"
-    id="toc-iterative-methods-for-linear-systems">Iterative methods for
-    linear systems</a>
+-   <a href="#solving-linear-systems"
+    id="toc-solving-linear-systems">Solving Linear Systems</a>
 -   <a href="#polynomial-interpolation"
     id="toc-polynomial-interpolation">Polynomial interpolation</a>
 -   <a href="#interpolation-error-and-chebyshev-interpolation"
@@ -1104,9 +1101,9 @@ Fortunately, there’s another way to calculate condition number:
 
 *κ*<sub>*p*</sub>(**A**) = ||**A**||<sub>*p*</sub>||**A**<sup>−1</sup>||<sub>*p*</sub>
 
-The derivation of this identity is about 10 to 20 lines of linear
-algebra that I am happy to show you if you are interested. We can check
-it numerically for now.
+The derivation of this identity is a few lines of linear algebra that I
+am happy to show you if you are interested. We can check it numerically
+for now.
 
     set.seed(123)
     N <- 10
@@ -1119,28 +1116,42 @@ it numerically for now.
 
     ## [1] 47.29397
 
-# LU decomposition
+# Solving Linear Systems
 
-## Big picture
+## Big Picture
 
-When solving systems of linear equations, depending on the context,
-solution by Gaussian elimination can be computationally costly.
-Sometimes it is better to decompose (factor) the matrix. There are a
-number of useful ways to do this but the one we will focus on is called
-LU decomposision.
+We will learn two methods of solving systems of linear equations. First,
+depending on the context, solution by Gaussian elimination can be
+computationally costly. Sometimes it is better to decompose (factor) the
+matrix. There are a number of useful ways to do this but the one we will
+focus on is called **LU** decomposition. Second, every method you have
+seen thus far for solving linear systems provides exact solutions
+(excluding numerical error). These are called direct methods. While we
+like exact solutions, a disadvantage is that these methods involve at
+least one step that is 𝒪(*n*<sup>3</sup>). If this computational cost is
+prohibitive, we can consider a potentially faster iterative method at
+the expense of giving up having an exact solution. The one we will learn
+is called Jacobi’s method.
 
 ## Goals
 
 -   Define and implement LU decomposition and state the potential
     advantages
+-   Explain how fixed point iteration relates to solution of an equation
+-   Derive and implement Jacobi’s method, and explain advantages and
+    limitations
+-   Use convergence criteria for Jacobi’s method
+-   State other iterative solution methods
 
-## LU decomposition
+## LU Decomposition
 
-Recall that when solving an *n* × *n* system **A****x** = **b** with
+Recall that when solving an *n* × *n* system **A** **x** = **b** with
 Gaussian elimination, the elimination step is 𝒪(*n*<sup>3</sup>) and
 back substitution is 𝒪(*n*<sup>2</sup>). In some applications, it is
 necessary to solve
-**A****x** = **b**<sub>1</sub>,  **A****x** = **b**<sub>2</sub>,  **A****x** = **b**<sub>3</sub>,  …,  **A****x** = **b**<sub>*M*</sub>
+
+**A** **x** = **b**<sub>1</sub>,  **A** **x** = **b**<sub>2</sub>,  **A** **x** = **b**<sub>3</sub>,  …,  **A** **x** = **b**<sub>*M*</sub>
+
 where **A** is the same each time and *M* is large. **A** itself needs
 the same row reductions each time. Only the augmented part **b**
 changes. It would be a waste of computation to run Gaussian elimination
@@ -1177,11 +1188,11 @@ The **L** matrix encodes the multipliers used to eliminate elements
 during Gaussian elimination and the **U** matrix is the result of the
 elimination process. Therefore, putting **A** into its LU factorization
 takes one application of Gaussian elimination, or approximately
-$\frac{2}{3} n^3$ operations. Solving **L****U****x** = **b** requires 2
-back substitutions, namely one to solve **L****y** = **b** for **y** and
-one to solve **U****x** = **y** for **x**. This takes 2*n*<sup>2</sup>
-operations. So, to solve
-**A****x** = **b**<sub>1</sub>, …, **A****x** = **b**<sub>*M*</sub>
+$\frac{2}{3} n^3$ operations. Solving **L****U** **x** = **b** requires
+two back substitutions, namely one to solve **L** **y** = **b** for
+**y** and one to solve **U** **x** = **y** for **x**. This takes
+2*n*<sup>2</sup> operations. So, to solve
+**A** **x** = **b**<sub>1</sub>, …, **A** **x** = **b**<sub>*M*</sub>
 takes approximately $\frac{2}{3}n^3 + 2 M n^2$ operations, in contrast
 to $\frac{2}{3}Mn^3 + Mn^2$ for Gaussian elimination.
 
@@ -1212,8 +1223,7 @@ $$
 \end{pmatrix}.
 $$
 
-Apply *I**I* ← *I**I* − 1 ⋅ *I* and *I**I**I* ← *I**I**I* − 3 ⋅ *I* to
-**U**, so
+Apply II ← II − 1 ⋅ I and III ← III − 3 ⋅ I to **U**, so
 
 $$
 \mathbf{U} = \begin{pmatrix}
@@ -1235,7 +1245,7 @@ $$
 \end{pmatrix}.
 $$
 
-Now apply *I**I**I* ← *I**I**I* + *I**I*, which yields
+Now apply III ← III + II, which yields
 
 $$
 \mathbf{U} = \begin{pmatrix}
@@ -1311,30 +1321,12 @@ system for 100 different right hand sides.
 
     ## [1] 6.66666666667
 
-# Iterative methods for linear systems
+## Fixed Point Iteration
 
-## Big picture
-
-So far, all of the methods you have seen for solving linear systems
-provide exact solutions (excluding numerical error). They are called
-direct methods. However, they all involve at least one step that is
-𝒪(*n*<sup>3</sup>). If this computational cost is prohibitive, consider
-a potentially faster iterative method at the expense of giving up having
-an exact solution.
-
-## Goals
-
--   Explain how fixed point iteration relates to solution of an equation
--   Derive and implement Jacobi’s method, and explain advantages and
-    limitations
--   Use convergence criteria for Jacobi’s method
--   State other iterative solution methods
-
-## Fixed point iteration
-
-Sometimes you can solve a problem by a method called **fixed point
-iteration** whereby you just keep plugging into an expression until the
-output equals the input. For example, suppose you want to solve
+Now we turn to iterative methods. Sometimes you can solve a problem by a
+method called **fixed point iteration** whereby you just keep plugging
+into an expression until the output equals the input. For example,
+suppose you want to solve
 (*x*−3)(*x*+1) = *x*<sup>2</sup> − 2*x* − 3 = 0. Pretend you don’t know
 where the roots are but you think there is one near x = -2, so you start
 out with that guess. You also notice you can write
@@ -1361,15 +1353,15 @@ But if it converges, it’s pretty nifty. It’s computationally cheap – all
 we have to do is evaluate the right hand side of our iteration
 repeatedly.
 
-## Jacobi iteration
+## Jacobi Iteration
 
-Let’s take this idea and apply it to solving **A****x** = **b**. Let
+Let’s take this idea and apply it to solving **A** **x** = **b**. Let
 **A** = **D** + **R** where **D** contains the diagonal elements of
 **A** and **R** contains everything else. Then we can write
 
 $$
 \begin{align}
-\mathbf{A}\mathbf{x} &= \mathbf{b} \\\\
+\mathbf{A}\\,\mathbf{x} &= \mathbf{b} \\\\
 (\mathbf{D}+\mathbf{R})\mathbf{x} &= \mathbf{b} \\\\
 \mathbf{D}\mathbf{x} + \mathbf{R} \mathbf{x} &= \mathbf{b}\\\\
 \mathbf{D} \mathbf{x} &= \mathbf{b} - \mathbf{R} \mathbf{x}\\\\
@@ -1422,7 +1414,7 @@ Here’s an example.
     ##       elapsed 
     ## 2.25316455696
 
-## Convergence of Jacobi’s method
+## Convergence of Jacobi’s Method
 
 There’s no reason at all to expect that Jacobi’s method converges.
 There’s a really useful theorem that says it it will converge if and
@@ -1439,12 +1431,12 @@ diagonally dominant**. This means
 
 |*a*<sub>*i**i*</sub>| &gt; ∑<sub>*j* ≠ *i*</sub>|*a*<sub>*i**j*</sub>|  in each row *i*.
 
-## Other iterative methods
+## Other Iterative Methods
 
 There are other iterative solution methods for linear systems that all
 are inspired by Jacobi’s method. Some of these include Gauss-Seidel
-iteration and Successive Over-Relaxation. Details of these appear in
-book and you are welcome to discuss them with me.
+iteration and Successive Over-Relaxation. DYou are welcome to ask me
+about these.
 
 # Polynomial interpolation
 

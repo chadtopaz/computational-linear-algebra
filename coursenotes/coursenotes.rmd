@@ -603,21 +603,29 @@ norm(A, "2") * norm(solve(A), "2")
 kappa(A, norm = "2", exact = TRUE)
 ```
 
-# LU decomposition
+# Solving Linear Systems
 
-## Big picture
+## Big Picture
 
-When solving systems of linear equations, depending on the context, solution by Gaussian elimination can be computationally costly. Sometimes it is better to decompose (factor) the matrix. There are a number of useful ways to do this but the one we will focus on is called LU decomposision.
+We will learn two methods of solving systems of linear equations. First, depending on the context, solution by Gaussian elimination can be computationally costly. Sometimes it is better to decompose (factor) the matrix. There are a number of useful ways to do this but the one we will focus on is called **LU** decomposition. Second, every method you have seen thus far for solving linear systems provides exact solutions (excluding numerical error). These are called direct methods. While we like exact solutions, a disadvantage is that these methods involve at least one step that is $\mathcal{O}(n^3)$. If this computational cost is prohibitive, we can consider a potentially faster iterative method at the expense of giving up having an exact solution. The one we will learn is called Jacobi's method.
 
 ## Goals
 
--   Define and implement LU decomposition and state the potential advantages 
+-   Define and implement LU decomposition and state the potential advantages
+-   Explain how fixed point iteration relates to solution of an equation
+-   Derive and implement Jacobi's method, and explain advantages and limitations
+-   Use convergence criteria for Jacobi's method
+-   State other iterative solution methods
+ 
+## LU Decomposition
 
-## LU decomposition
+Recall that when solving an $n \times n$ system $\mat{A}\,\vec{x} = \vec{b}$ with Gaussian elimination, the elimination step is $\mathcal{O}(n^3)$ and back substitution is $\mathcal{O}(n^2)$. In some applications, it is necessary to solve
 
-Recall that when solving an $n \times n$ system $\mat{A}\vec{x} = \vec{b}$ with Gaussian elimination, the elimination step is $\mathcal{O}(n^3)$ and back substitution is $\mathcal{O}(n^2)$. In some applications, it is necessary to solve $$
-\mat{A}\vec{x} = \vec{b}_1, \quad \mat{A}\vec{x} = \vec{b}_2, \quad \mat{A}\vec{x} = \vec{b}_3, \quad \ldots, \quad \mat{A}\vec{x} = \vec{b}_M
-$$ where $\mat{A}$ is the same each time and $M$ is large. $\mat{A}$ itself needs the same row reductions each time. Only the augmented part $\vec{b}$ changes. It would be a waste of computation to run Gaussian elimination $M$ times.
+$$
+\mat{A}\,\vec{x} = \vec{b}_1, \quad \mat{A}\,\vec{x} = \vec{b}_2, \quad \mat{A}\,\vec{x} = \vec{b}_3, \quad \ldots, \quad \mat{A}\,\vec{x} = \vec{b}_M
+$$
+
+where $\mat{A}$ is the same each time and $M$ is large. $\mat{A}$ itself needs the same row reductions each time. Only the augmented part $\vec{b}$ changes. It would be a waste of computation to run Gaussian elimination $M$ times.
 
 LU decomposition is a way of storing the Gaussian elimination steps in matrix form so that they can be applied to many $\vec{b}$. We take $\mat{A}$ and decompose (or factorize) it as the product
 
@@ -631,7 +639,7 @@ A  =
 \ast & \ast & \ast & 1 &&\\
 \ast & \ast & \ast & \ast & 1  &\\
 \ast & \ast & \ast & \ast & \ast & 1 \\ \hline
-\end{array}}_{\mathbf{L}=\text{Lower unit triangular}} \
+\end{array}}_{\mat{L}=\text{Lower unit triangular}} \
 \underbrace{\begin{array}{|cccccc|}
 \hline
 \ast & \ast & \ast & \ast & \ast & \ast \\ 
@@ -644,7 +652,7 @@ A  =
 \end{array}}_{\mathbf{U}=\text{Upper triangular}}
 $$
 
-The $\mathbf{L}$ matrix encodes the multipliers used to eliminate elements during Gaussian elimination and the $\mathbf{U}$ matrix is the result of the elimination process. Therefore, putting $\mat{A}$ into its LU factorization takes one application of Gaussian elimination, or approximately $\frac{2}{3} n^3$ operations. Solving $\mathbf{LU}\vec{x} = \vec{b}$ requires 2 back substitutions, namely one to solve $\mathbf{L}\mathbf{y} = \vec{b}$ for $\mathbf{y}$ and one to solve $\mathbf{U}\vec{x}=\mathbf{y}$ for $\vec{x}$. This takes $2n^2$ operations. So, to solve $\mat{A}\vec{x} = \vec{b}_1, \ldots, \mat{A}\vec{x} = \vec{b}_M$ takes approximately $\frac{2}{3}n^3 + 2 M n^2$ operations, in contrast to $\frac{2}{3}Mn^3 + Mn^2$ for Gaussian elimination.
+The $\mat{L}$ matrix encodes the multipliers used to eliminate elements during Gaussian elimination and the $\mat{U}$ matrix is the result of the elimination process. Therefore, putting $\mat{A}$ into its LU factorization takes one application of Gaussian elimination, or approximately $\frac{2}{3} n^3$ operations. Solving $\mathbf{LU}\,\vec{x} = \vec{b}$ requires two back substitutions, namely one to solve $\mat{L}\,\vec{y} = \vec{b}$ for $\vec{y}$ and one to solve $\mat{U}\,\vec{x}=\vec{y}$ for $\vec{x}$. This takes $2n^2$ operations. So, to solve $\mat{A}\,\vec{x} = \vec{b}_1, \ldots, \mat{A}\,\vec{x} = \vec{b}_M$ takes approximately $\frac{2}{3}n^3 + 2 M n^2$ operations, in contrast to $\frac{2}{3}Mn^3 + Mn^2$ for Gaussian elimination.
 
 The LU decomposition exists if and only if the upper-left sub-blocks $\mat{A}_{1:k,1:k}$ are non-singular for all $1\leq k \leq n$ (not proven here). If the decomposition exists, it is unique.
 
@@ -659,10 +667,10 @@ $$
 \end{pmatrix}.
 $$
 
-Start by defining $\mathbf{U} = \mat{A}$ (it's not upper triangluar yet, but I am still calling it $\mathbf{U}$) and
+Start by defining $\mat{U} = \mat{A}$ (it's not upper triangluar yet, but I am still calling it $\mat{U}$) and
 
 $$
-\mathbf{L} = \mathbf{I}_3 = 
+\mat{L} = \mathbf{I}_3 = 
 \begin{pmatrix}
 1 & 0 & 0\\
 0 & 1 & 0 \\
@@ -670,20 +678,20 @@ $$
 \end{pmatrix}.
 $$
 
-Apply $II \leftarrow II - 1\cdot I$ and $III \leftarrow III - 3\cdot I$ to $\mathbf{U}$, so
+Apply $\mathrm{II} \leftarrow \mathrm{II} - 1\cdot \mathrm{I}$ and $\mathrm{III} \leftarrow \mathrm{III} - 3\cdot \mathrm{I}$ to $\mat{U}$, so
 
 $$
-\mathbf{U} = \begin{pmatrix}
+\mat{U} = \begin{pmatrix}
 1 & 3 & 1  \\
 0 & -2 & -2\\
 0 & 2 & 2
 \end{pmatrix}.
 $$
 
-Also, store the multupliers $1$ and $3$ in their corresponding rows in the first column of $\mathbf{L}$, so that
+Also, store the multupliers $1$ and $3$ in their corresponding rows in the first column of $\mat{L}$, so that
 
 $$
-\mathbf{L} =
+\mat{L} =
 \begin{pmatrix}
 1 & 0 & 0\\
 1 & 1 & 0 \\
@@ -691,10 +699,10 @@ $$
 \end{pmatrix}.
 $$
 
-Now apply $III \leftarrow III + II$, which yields
+Now apply $\mathrm{III} \leftarrow \mathrm{III} + \mathrm{II}$, which yields
 
 $$
-\mathbf{U} = \begin{pmatrix}
+\mat{U} = \begin{pmatrix}
 1 & 3 & 1  \\
 0 & -2 & -2\\
 0 & 0 & 0
@@ -704,7 +712,7 @@ $$
 and
 
 $$
-\mathbf{L} =
+\mat{L} =
 \begin{pmatrix}
 1 & 0 & 0\\
 1 & 1 & 0 \\
@@ -712,7 +720,7 @@ $$
 \end{pmatrix}.
 $$
 
-Since $\mathbf{U}$ is in echelon form, we are done! We can check that our decomposition worked.
+Since $\mat{U}$ is in echelon form, we are done! We can check that our decomposition worked.
 
 ```{r cache = TRUE}
 A <- matrix(c(1,3,1,1,1,-1,3,11,5),nrow=3,byrow=TRUE)
@@ -758,22 +766,9 @@ t3 <- system.time(
 as.numeric(t1/(t2 + t3))
 ```
 
-# Iterative methods for linear systems
+## Fixed Point Iteration
 
-## Big picture
-
-So far, all of the methods you have seen for solving linear systems provide exact solutions (excluding numerical error). They are called direct methods. However, they all involve at least one step that is $\mathcal{O}(n^3)$. If this computational cost is prohibitive, consider a potentially faster iterative method at the expense of giving up having an exact solution.
-
-## Goals
-
--   Explain how fixed point iteration relates to solution of an equation
--   Derive and implement Jacobi's method, and explain advantages and limitations
--   Use convergence criteria for Jacobi's method
--   State other iterative solution methods
-
-## Fixed point iteration
-
-Sometimes you can solve a problem by a method called **fixed point iteration** whereby you just keep plugging into an expression until the output equals the input. For example, suppose you want to solve $(x-3)(x+1)=x^2-2x-3=0$. Pretend you don't know where the roots are but you think there is one near x = -2, so you start out with that guess. You also notice you can write $x^2 - 2x - 3 =0$ as $x = 3/(x-2)$. So you define an iteration $x_{i+1} = 3/(x_i-2)$.
+Now we turn to iterative methods. Sometimes you can solve a problem by a method called **fixed point iteration** whereby you just keep plugging into an expression until the output equals the input. For example, suppose you want to solve $(x-3)(x+1)=x^2-2x-3=0$. Pretend you don't know where the roots are but you think there is one near x = -2, so you start out with that guess. You also notice you can write $x^2 - 2x - 3 =0$ as $x = 3/(x-2)$. So you define an iteration $x_{i+1} = 3/(x_i-2)$.
 
 ```{r cache = TRUE}
 x <- -2
@@ -795,29 +790,29 @@ The iteration does not have to converge to the solution we want, and in fact, it
 
 But if it converges, it's pretty nifty. It's computationally cheap -- all we have to do is evaluate the right hand side of our iteration repeatedly.
 
-## Jacobi iteration
+## Jacobi Iteration
 
-Let's take this idea and apply it to solving $\mat{A}\vec{x}=\vec{b}$. Let $\mat{A} = \mathbf{D} + \mathbf{R}$ where $\mathbf{D}$ contains the diagonal elements of $\mat{A}$ and $\mathbf{R}$ contains everything else. Then we can write
+Let's take this idea and apply it to solving $\mat{A}\,\vec{x}=\vec{b}$. Let $\mat{A} = \mat{D} + \mat{R}$ where $\mat{D}$ contains the diagonal elements of $\mat{A}$ and $\mat{R}$ contains everything else. Then we can write
 
 $$
 \begin{align}
-\mat{A}\vec{x} &= \vec{b} \\
-(\mathbf{D}+\mathbf{R})\vec{x} &= \vec{b} \\
-\mathbf{D}\vec{x} + \mathbf{R} \vec{x} &= \vec{b}\\
-\mathbf{D} \vec{x} &= \vec{b} - \mathbf{R} \vec{x}\\
-\vec{x} &= \mathbf{D}^{-1} (\vec{b}-\mathbf{R}\vec{x})
+\mat{A}\,\vec{x} &= \vec{b} \\
+(\mat{D}+\mathbf{R})\vec{x} &= \vec{b} \\
+\mat{D}\vec{x} + \mat{R} \vec{x} &= \vec{b}\\
+\mat{D} \vec{x} &= \vec{b} - \mat{R} \vec{x}\\
+\vec{x} &= \mat{D}^{-1} (\vec{b}-\mat{R}\vec{x})
 \end{align}
 $$
 
 We can consider this a fixed point iteration,
 
 $$
-\vec{x}_{i+1} = \mathbf{D}^{-1} (\vec{b}-\mathbf{R}\vec{x}_i).
+\vec{x}_{i+1} = \mat{D}^{-1} (\vec{b}-\mat{R}\vec{x}_i).
 $$
 
 Here are some computational advantages of this method.
 
-1.  The matrix $\mathbf{D}$ is very cheap to invert, because it is a diagonal matrix. The inverse is simply the diagonal matrix with the reciprocals of the original elements.
+1.  The matrix $\mat{D}$ is very cheap to invert, because it is a diagonal matrix. The inverse is simply the diagonal matrix with the reciprocals of the original elements.
 2.  Each iteration is only $\mathcal{O}(n^2)$, and if the matrix is sparse, it is even cheaper.
 
 The usual way we stop iterating is that we choose in advance a threshold for the relative backwards error and stop when we fall below it.
@@ -848,9 +843,9 @@ Norm(xapprox-xexact,Inf)
 t1/t2
 ```
 
-## Convergence of Jacobi's method
+## Convergence of Jacobi's Method
 
-There's no reason at all to expect that Jacobi's method converges. There's a really useful theorem that says it it will converge if and only if the eigenvalues of $-\mathbf{D}^{-1}\mathbf{R}$ are all less than one in magnitude. If this criterion is met, then the closer to one the eigenvalues are in magnitude, the slower convergence will be. This takes about half a page to prove and is a worthwhile exercise to understand, so feel free to ask me for the proof.
+There's no reason at all to expect that Jacobi's method converges. There's a really useful theorem that says it it will converge if and only if the eigenvalues of $-\mat{D}^{-1}\mat{R}$ are all less than one in magnitude. If this criterion is met, then the closer to one the eigenvalues are in magnitude, the slower convergence will be. This takes about half a page to prove and is a worthwhile exercise to understand, so feel free to ask me for the proof.
 
 However, calculating the eigenvalues of that matrix could be really hard and costly! There's a sufficient condition for convergence that is much easier to check computationally, namely that $\mat{A}$ is **strictly diagonally dominant**. This means
 
@@ -858,9 +853,9 @@ $$
 |a_{ii}| > \sum_{j \not=i} |a_{ij}| \quad\text{in each row $i$.}
 $$
 
-## Other iterative methods
+## Other Iterative Methods
 
-There are other iterative solution methods for linear systems that all are inspired by Jacobi's method. Some of these include Gauss-Seidel iteration and Successive Over-Relaxation. Details of these appear in book and you are welcome to discuss them with me.
+There are other iterative solution methods for linear systems that all are inspired by Jacobi's method. Some of these include Gauss-Seidel iteration and Successive Over-Relaxation. DYou are welcome to ask me about these.
 
 # Polynomial interpolation
 
