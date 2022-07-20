@@ -1185,10 +1185,10 @@ The **L** matrix encodes the multipliers used to eliminate elements
 during Gaussian elimination and the **U** matrix is the result of the
 elimination process. Therefore, putting **A** into its LU factorization
 takes one application of Gaussian elimination, or approximately
-$\frac{2}{3} n^3$ operations. Solving **L****U** **x** = **b** requires
-two back substitutions, namely one to solve **L** **y** = **b** for
-**y** and one to solve **U** **x** = **y** for **x**. This takes
-2*n*<sup>2</sup> operations. So, to solve
+$\frac{2}{3} n^3$ operations. Solving **LUx = b** requires two back
+substitutions, namely one to solve **L** **y** = **b** for **y** and one
+to solve **U** **x** = **y** for **x**. This takes 2*n*<sup>2</sup>
+operations. So, to solve
 **A** **x** = **b**<sub>1</sub>, …, **A** **x** = **b**<sub>*M*</sub>
 takes approximately $\frac{2}{3}n^3 + 2 M n^2$ operations, in contrast
 to $\frac{2}{3}Mn^3 + Mn^2$ for Gaussian elimination.
