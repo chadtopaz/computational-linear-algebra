@@ -11,8 +11,7 @@ output:
 
 Load necessary packages:
 
-```{r,message=FALSE}
-library("magick")
+```{r,message = FALSE}
 library("Matrix")
 library("igraph")
 library("pracma")
@@ -23,7 +22,7 @@ library("pracma")
 A real $n \times n$ matrix $\mat{Q}$ is *orthonormal* if 
 
 $$
-\mat{Q}^{T}\,\mat{Q}=\mat{Q}\mat{Q}^T=\mat{I};~i.e., \mat{Q}^{-1}=\mat{Q}^T.
+\mat{Q}^{T}\,\mat{Q}=\mat{Q}\,\mat{Q}^T=\mat{I};~i.e., \mat{Q}^{-1}=\mat{Q}^T.
 $$
 
 Note: sometimes you will see these matrices just called *orthogonal matrices*. 
@@ -75,8 +74,7 @@ The following command loads a matrix $\mat{M}$ describing the western power netw
 M <- as.matrix(readMM(gzcon(url("https://math.nist.gov/pub/MatrixMarket2/Harwell-Boeing/bcspwr/bcspwr10.mtx.gz")))+0)
 ```
 These commands visualize the network for you using a package called `igraph`. It may take a little bit of time (several minutes) to run because the graph is really large!
-```{r cache = TRUE, out.width='70%', crop=TRUE}
-knitr::knit_hooks$set(crop = knitr::hook_pdfcrop)
+```{r cache = TRUE, out.width = '70%'}
 g <- graph_from_adjacency_matrix(M, mode="undirected")
 V(g)$color <- "grey"
 V(g)$size <- 2

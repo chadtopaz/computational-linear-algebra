@@ -1,6 +1,5 @@
 Load necessary packages:
 
-    library("magick")
     library("Matrix")
     library("igraph")
     library("pracma")
@@ -9,7 +8,7 @@ Load necessary packages:
 
 A real *n* × *n* matrix **Q** is *orthonormal* if
 
-**Q**<sup>*T*</sup> **Q** = **Q****Q**<sup>*T*</sup> = **I**; *i*.*e*., **Q**<sup>−1</sup> = **Q**<sup>*T*</sup>.
+**Q**<sup>*T*</sup> **Q** = **Q** **Q**<sup>*T*</sup> = **I**; *i*.*e*., **Q**<sup>−1</sup> = **Q**<sup>*T*</sup>.
 
 Note: sometimes you will see these matrices just called *orthogonal
 matrices*.
@@ -107,7 +106,6 @@ These commands visualize the network for you using a package called
 `igraph`. It may take a little bit of time (several minutes) to run
 because the graph is really large!
 
-    knitr::knit_hooks$set(crop = knitr::hook_pdfcrop)
     g <- graph_from_adjacency_matrix(M, mode="undirected")
     V(g)$color <- "grey"
     V(g)$size <- 2
