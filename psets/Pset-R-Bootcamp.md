@@ -1,11 +1,6 @@
-Pset - R Bootcamp
-================
-
 Load necessary packages.
 
-``` r
-library(tictoc)
-```
+    library(tictoc)
 
 ### Problem 1
 
@@ -47,10 +42,8 @@ Here is some R help.
 
 The following code generates the initial accounts:
 
-``` r
-accounts <- runif(10000,100,100000)
-accounts <- floor(accounts*100)/100
-```
+    accounts <- runif(10000,100,100000)
+    accounts <- floor(accounts*100)/100
 
 The first line sets up 10,000 accounts with values uniformly between 100
 and 100,000. The second line removes the fractions of cents (look at the
@@ -59,11 +52,9 @@ data before and after that line is applied).
 For the main part of your code, I strongly recommend a `while` loop,
 which would look something like:
 
-``` r
-while (illegal < 1000000) {
-  do stuff here
-}
-```
+    while (illegal < 1000000) {
+      do stuff here
+    }
 
 ### Problem 1 Solution
 
@@ -74,43 +65,27 @@ Your solution goes here.
 The purpose of this problem is to practice some R skills and review a
 critical topic in applied mathematics: Taylor series.
 
-1.  Find the degree 5 Taylor polynomial
-    ![P(x)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;P%28x%29 "P(x)")
-    centered at
-    ![x = 0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x%20%3D%200 "x = 0")
-    for
-    ![f(x) = \\cos x](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;f%28x%29%20%3D%20%5Ccos%20x "f(x) = \cos x").
-    This is a paper-and-pencil calculation, but you should write up the
-    solution here in your markdown document.
-2.  Find an upper bound for the error in approximating
-    ![f(x)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;f%28x%29 "f(x)")
-    by
-    ![P(x)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;P%28x%29 "P(x)")
-    on the interval
-    ![\[-\\pi/4,\\pi/4\]](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5B-%5Cpi%2F4%2C%5Cpi%2F4%5D "[-\pi/4,\pi/4]").
-    This is also a paper-and-pencil calculation that you should write up
-    here.
-3.  Make a single plot with 3 different curves:
-    ![cos(x)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;cos%28x%29 "cos(x)")
-    and the 2nd and 4th degree Taylor approximations of
-    ![f(x)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;f%28x%29 "f(x)")
-    around
-    ![x=0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x%3D0 "x=0").
-    Plot these on the interval
-    ![\[-\\pi/2,\\pi/2\]](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5B-%5Cpi%2F2%2C%5Cpi%2F2%5D "[-\pi/2,\pi/2]").
+a\. Find the degree 5 Taylor polynomial *P*(*x*) centered at *x* = 0 for
+*f*(*x*) = cos *x*. This is a paper-and-pencil calculation, but you
+should write up the solution here in your markdown document. b. Find an
+upper bound for the error in approximating *f*(*x*) by *P*(*x*) on the
+interval \[−*π*/4,*π*/4\]. This is also a paper-and-pencil calculation
+that you should write up here. c. Make a single plot with 3 different
+curves: *c**o**s*(*x*) and the 2nd and 4th degree Taylor approximations
+of *f*(*x*) around *x* = 0. Plot these on the interval \[−*π*/2,*π*/2\].
 
 ### Problem 2 Solution
 
-1.  Your solution goes here.
+a\. Your solution goes here.
 
-2.  Your solution goes here.
+b\. Your solution goes here.
 
-3.  Your solution goes here.
+c\. Your solution goes here.
 
 ### Problem 3
 
 Consider the polynomial
-![f(x) = x^5 + x^4 - 2x^3 + 4x^2 - 8x + 5](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;f%28x%29%20%3D%20x%5E5%20%2B%20x%5E4%20-%202x%5E3%20%2B%204x%5E2%20-%208x%20%2B%205 "f(x) = x^5 + x^4 - 2x^3 + 4x^2 - 8x + 5").
+*f*(*x*) = *x*<sup>5</sup> + *x*<sup>4</sup> − 2*x*<sup>3</sup> + 4*x*<sup>2</sup> − 8*x* + 5.
 For a vector of 5 million equally spaced values going from x = -100 to x
 = 100, evaluate the polynomial four different ways, time each one using
 commands from the `tictoc` package, and compare. You should make your

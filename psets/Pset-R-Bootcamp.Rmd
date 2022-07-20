@@ -1,8 +1,7 @@
 ---
 title: "Pset - R Bootcamp"
 output:
-  rmarkdown::github_document:
-    html_preview: false
+  rmarkdown::md_document:
   header-includes:
    - \usepackage{amsmath}
 ---
@@ -61,17 +60,17 @@ Your solution goes here.
 
 The purpose of this problem is to practice some R skills and review a critical topic in applied mathematics: Taylor series.
 
-a. Find the degree 5 Taylor polynomial $P(x)$ centered at $x = 0$ for $f(x) = \cos x$. This is a paper-and-pencil calculation, but you should write up the solution here in your markdown document.
-b. Find an upper bound for the error in approximating $f(x)$ by $P(x)$ on the interval $[-\pi/4,\pi/4]$. This is also a paper-and-pencil calculation that you should write up here.
-c. Make a single plot with 3 different curves: $cos(x)$ and the 2nd and 4th degree Taylor approximations of $f(x)$ around $x=0$. Plot these on the interval $[-\pi/2,\pi/2]$.
+a\. Find the degree 5 Taylor polynomial $P(x)$ centered at $x = 0$ for $f(x) = \cos x$. This is a paper-and-pencil calculation, but you should write up the solution here in your markdown document.
+b\. Find an upper bound for the error in approximating $f(x)$ by $P(x)$ on the interval $[-\pi/4,\pi/4]$. This is also a paper-and-pencil calculation that you should write up here.
+c\. Make a single plot with 3 different curves: $cos(x)$ and the 2nd and 4th degree Taylor approximations of $f(x)$ around $x=0$. Plot these on the interval $[-\pi/2,\pi/2]$.
 
 ### Problem 2 Solution
 
-a. Your solution goes here.
+a\. Your solution goes here.
 
-b. Your solution goes here.
+b\. Your solution goes here.
 
-c. Your solution goes here.
+c\. Your solution goes here.
 
 ### Problem 3
 
