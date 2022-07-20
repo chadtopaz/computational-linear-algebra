@@ -230,9 +230,9 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
     -   [Course Notes: Solving Linear Systems](/coursenotes/coursenotes.md#solving-linear-systems)
 
--   Activity - Fundamentals of Linear Systems [[.md for viewing](activities/Activity-Fundamentals-of-Linear-Systems.md)] [[.Rmd for editing](activities/Activity-Fundamentals-of-Linear-Systems.Rmd)]
+-   Activity - Solving Linear Systems [[.md for viewing](activities/Activity-Solving-Linear-Systems.md)] [[.Rmd for editing](activities/Activity-Solving-Linear-Systems.Rmd)]
 
--   Pset - Fundamentals of Linear Systems [[.md for viewing](psets/Pset-Fundamentals-of-Linear-Systems.md)] [[.Rmd for editing](psets/Pset-Fundamentals-of-Linear-Systems.Rmd)]
+-   Pset - Solving Linear Systems [[.md for viewing](psets/Pset-Solving-Linear-Systems.md)] [[.Rmd for editing](psets/Pset-Solving-Linear-Systems.Rmd)]
 
 - Other Resources
 
