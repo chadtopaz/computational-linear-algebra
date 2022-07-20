@@ -220,6 +220,28 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
 ## Solving Linear Systems
 
+-   Videos
+
+    -   [LU Factorization (8:03)](https://youtu.be/a9S6MMcqxr4)
+    
+    -   [Iterative Methods for **Ax** = **b** \[first 9:09 only\] (9:09)](https://youtu.be/nJO6BWswrkE)
+    
+-   Reading
+
+    -   [Course Notes: Solving Linear Systems](/coursenotes/coursenotes.md#solving-linear-systems)
+
+-   Activity - Fundamentals of Linear Systems [[.md for viewing](activities/Activity-Fundamentals-of-Linear-Systems.md)] [[.Rmd for editing](activities/Activity-Fundamentals-of-Linear-Systems.Rmd)]
+
+-   Pset - Fundamentals of Linear Systems [[.md for viewing](psets/Pset-Fundamentals-of-Linear-Systems.md)] [[.Rmd for editing](psets/Pset-Fundamentals-of-Linear-Systems.Rmd)]
+
+- Other Resources
+
+   -   [In-class code examples](https://github.com/chadtopaz/computationallineaaralgebra/blob/main/demos/Demo-Solving-Linear-Systems.R)
+
+- Challenge problems
+
+   -   Learn about the secant method for root finding and calculate (analytically) the order of convergence. Check your result with a numerical example.
+
 [Back to Course Units](#course-units)
 
 ## Recap Exercise I
