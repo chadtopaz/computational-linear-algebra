@@ -593,7 +593,7 @@ $$
 \kappa_p(\mat{A})=||\mat{A}||_p||\mat{A}^{-1}||_p
 $$
 
-The derivation of this identity is about 10 to 20 lines of linear algebra that I am happy to show you if you are interested. We can check it numerically for now.
+The derivation of this identity is a few lines of linear algebra that I am happy to show you if you are interested. We can check it numerically for now.
 
 ```{r cache = TRUE}
 set.seed(123)

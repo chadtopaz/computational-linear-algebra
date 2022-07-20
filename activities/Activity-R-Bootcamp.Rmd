@@ -1,8 +1,7 @@
 ---
 title: "Activity - R Bootcamp"
 output:
-  rmarkdown::github_document:
-    html_preview: false
+  rmarkdown::md_document:
   header-includes:
    - \usepackage{amsmath}
 ---
@@ -15,7 +14,8 @@ Generate the following matrices with as little code as possible.
 
 a. 
 
-$$\begin{bmatrix}
+$$
+\begin{pmatrix}
 1 & 1 & 1 & 1 & 1 & 1 & 1 \\
 1 & 1 & 1 & 1 & 1 & 1 & 1 \\
 1 & 1 & 1 & 1 & 1 & 1 & 1 \\
@@ -24,28 +24,31 @@ $$\begin{bmatrix}
 1 & 1 & 1 & 5 & 5 & 5 & 1 \\
 1 & 1 & 1 & 5 & 5 & 5 & 1 \\
 1 & 1 & 1 & 1 & 1 & 1 & 1 
-\end{bmatrix}$$
+\end{pmatrix}
+$$
 
 b.
 
-$$\begin{bmatrix}
+$$
+\begin{pmatrix}
 1 & 2 & 3 & \cdots & 10 \\
 2 & 4 & 6 & \cdots & 20 \\
 3 & 6 & 9 & \cdots & 30 \\
 \vdots & \vdots & \vdots & \ddots & \vdots \\
 8 & 16 & 24 & \cdots & 80
-\end{bmatrix}
+\end{pmatrix}
 $$
 
 c.
 
-$$\begin{bmatrix}
+$$
+\begin{pmatrix}
 1 & 1 & 1 & 1 & 1 \\
 4 & 4 & 4 & 4 & 4 \\
 9 & 9 & 9 & 9 & 9 \\
 \vdots & \vdots & \vdots & \vdots & \vdots \\
 121 & 121 & 121 & 121 & 121
-\end{bmatrix}
+\end{pmatrix}
 $$
 
 # Problem 1 Solution
