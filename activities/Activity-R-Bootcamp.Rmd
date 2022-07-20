@@ -12,7 +12,7 @@ Remember to show your work / give your reasoning, as applicable.
 
 Generate the following matrices with as little code as possible.
 
-a. 
+a\. 
 
 $$
 \begin{pmatrix}
@@ -27,7 +27,7 @@ $$
 \end{pmatrix}
 $$
 
-b.
+b\.
 
 $$
 \begin{pmatrix}
@@ -39,7 +39,7 @@ $$
 \end{pmatrix}
 $$
 
-c.
+c\.
 
 $$
 \begin{pmatrix}
@@ -53,11 +53,11 @@ $$
 
 # Problem 1 Solution
 
-a. Your solution goes here.
+a\. Your solution goes here.
 
-b. Your solution goes here.
+b\. Your solution goes here.
 
-c. Your solution goes here.
+c\. Your solution goes here.
 
 # Problem 2 
 
@@ -78,7 +78,7 @@ xx <- 3:7
 P(xx)
 ```
 
-a. Write a function to evaluate the same polynomial, $P(x)=2x^5-3x^4+x^3-10x^2+1$, but this time, let the inputs to the function be a vector containing the coefficients of $P$ and then a vector of values of $x$ at which you want to evaluate the polynomial. It should look like
+Write a function to evaluate the same polynomial, $P(x)=2x^5-3x^4+x^3-10x^2+1$, but this time, let the inputs to the function be a vector containing the coefficients of $P$ and then a vector of values of $x$ at which you want to evaluate the polynomial. It should look like
 ```{r eval = FALSE}
 P <- function(a,x) {
   

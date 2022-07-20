@@ -4,7 +4,7 @@ Remember to show your work / give your reasoning, as applicable.
 
 Generate the following matrices with as little code as possible.
 
-1.  
+a\.
 
 $$
 \begin{pmatrix}
@@ -19,7 +19,7 @@ $$
 \end{pmatrix}
 $$
 
-1.  
+b\.
 
 $$
 \begin{pmatrix}
@@ -31,7 +31,7 @@ $$
 \end{pmatrix}
 $$
 
-1.  
+c\.
 
 $$
 \begin{pmatrix}
@@ -45,11 +45,11 @@ $$
 
 # Problem 1 Solution
 
-1.  Your solution goes here.
+a\. Your solution goes here.
 
-2.  Your solution goes here.
+b\. Your solution goes here.
 
-3.  Your solution goes here.
+c\. Your solution goes here.
 
 # Problem 2
 
@@ -73,13 +73,11 @@ or at multiple values of *x*:
 
     ## [1]   181  1185  4251 11521 26265
 
-1.  Write a function to evaluate the same polynomial,
-    *P*(*x*) = 2*x*<sup>5</sup> − 3*x*<sup>4</sup> + *x*<sup>3</sup> − 10*x*<sup>2</sup> + 1,
-    but this time, let the inputs to the function be a vector containing
-    the coefficients of *P* and then a vector of values of *x* at which
-    you want to evaluate the polynomial. It should look like
-
-<!-- -->
+Write a function to evaluate the same polynomial,
+*P*(*x*) = 2*x*<sup>5</sup> − 3*x*<sup>4</sup> + *x*<sup>3</sup> − 10*x*<sup>2</sup> + 1,
+but this time, let the inputs to the function be a vector containing the
+coefficients of *P* and then a vector of values of *x* at which you want
+to evaluate the polynomial. It should look like
 
     P <- function(a,x) {
       
