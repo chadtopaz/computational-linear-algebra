@@ -1,11 +1,15 @@
 ---
 title: "Pset - Solving Linear Systems"
-author: "Insert your full name here"
-output: html_document
+output:
+  rmarkdown::md_document:
+  header-includes:
+   - \usepackage{amsmath}
 ---
 
 \renewcommand{\vec}[1]{\mathbf{#1}}
 \renewcommand{\mat}[1]{\mathbf{#1}}
+
+Load necessary packages:
 
 ```{r, message = FALSE}
 library(Matrix)
@@ -16,14 +20,6 @@ library(data.table)
 library(R.utils)
 library(igraph)
 ```
-
-### Problem 0
-
-Please disclose any issues relating to academic integrity, including (but not limited to) collaborations, unusual resources used, and so forth.
-
-### Problem 0 Solution
-
-Your solution goes here.
 
 ### Problem 1
 
@@ -40,30 +36,37 @@ bn <- (0.5)^(2^n-1)
 kable(cbind(n,an,bn))
 ```
 
-The *order of convergence* of a sequence ${a_n}$ is defined as the number $q \geq 1$ satisfying 
+The *order of convergence* of a sequence ${a_n}$ is defined as the number $q \geq 1$ satisfying
+
 $$
 \lim_{n \to \infty} \frac{|a_{n+1}-a|}{|a_n - a|^q} = C
 $$
+
 such that $C$ is a finite, nonzero number. Here, $a$ is the limit of the sequence, that is, the value of $a_n$ as $n \to \infty$. Sometimes you might see this expression rearranged and written more compactly as as
+
 $$
 e_{n+1} = Ce_n^q
 $$
+
 as $n \to \infty$, where $e_n \equiv |a_n - a|$.
 
 To bring it back to computational linear algebra... when solving a problem with an iterative algorithm, the relevant sequence is the sequence of errors produced. If we don't know the true solution, we can't calculate the forward error, but we can calculate the backward error. Let's call the backward error on the nth iteration $e_n$. We can estimate the convergence of the algorithm by making a log-log plot of error data. Taking the log of each side of the equation above, we have
+
 $$
 \log e_{n+1} = \log C + q \log e_n.
 $$
+
 If we plot $(\log e_n,\log e_{n+1})$ and observe linear behavior for large enough $n$, then the slope is the convergence rate $q$.
 
-a. Calculate (analytically) the order of convergence of the sequence defined by
+a\. Calculate (analytically) the order of convergence of the sequence defined by
+
 $$
 a_n = 3 + (1/2)^{2^n - 1}, \quad n \geq 1.
 $$
 
-b. Numerically measure the order of convergence of the sequence from (a) by making a base-10 log-log plot with ten points, fitting a line to it, and extracting the slope.
+b\. Numerically measure the order of convergence of the sequence from (a) by making a base-10 log-log plot with ten points, fitting a line to it, and extracting the slope.
 
-c. Now let's investigate numerical convergence of Jacobi's method for solving **Ax**=**b**. Let **b** be a 1000 x 1 column vector with every entry equal to one. Let **A** be a 1000 x 1000 matrix that I have created for you below.
+c\. Now let's investigate numerical convergence of Jacobi's method for solving **Ax**=**b**. Let **b** be a 1000 x 1 column vector with every entry equal to one. Let **A** be a 1000 x 1000 matrix that I have created for you below.
 
 ```{r cache = TRUE}
 n <- 1000
@@ -77,11 +80,11 @@ Use Jacobi's method to solve the system. Run 35 iterations of Jacobi's method ta
 
 ### Problem 1 Solution
 
-a. Your solution goes here.
+a\. Your solution goes here.
 
-b. Your solution goes here.
+b\. Your solution goes here.
 
-c. Your solution goes here.
+c\. Your solution goes here.
 
 ### Problem 2
 
@@ -93,7 +96,7 @@ texttomatrix <- function(text,N){
   key <- c(LETTERS," ",",",".")
   text <- toupper(text)
   newlength <- ceiling(nchar(text)/N)*N
-  text <- str_pad(text,newlength,"right")
+  text <- str_pad(text, newlength, "right")
   tmp <- unlist(strsplit(text, split = ""))
   result <- matrix(match(tmp, key), nrow = N)
   return(result)
@@ -118,19 +121,19 @@ For example,
 matrixtotext(M)
 ```
 
-a. Experiment with each line of code in the `texttomatrix` and `matrixtotext` functions I wrote for you. Explain what the built-in R functions `LETTER`, `toupper`, `ceiling`, `nchar`, `str_pad`, `strsplit`, `unlist`, `match` `as.numeric` (applied to something that is already a numerical matrix), `paste` (with `collapse = ""`), and `trimws` do in their contexts above.
+a\. Experiment with each line of code in the `texttomatrix` and `matrixtotext` functions I wrote for you. Explain what the built-in R functions `LETTER`, `toupper`, `ceiling`, `nchar`, `str_pad`, `strsplit`, `unlist`, `match` `as.numeric` (applied to something that is already a numerical matrix), `paste` (with `collapse = ""`), and `trimws` do in their contexts above.
 
-b. In the example usage of `texttomatrix` above, why are there repeated values of `27` at the end?
+b\. In the example usage of `texttomatrix` above, why are there repeated values of `27` at the end?
 
-c. Suppose you are receiving continuous transmissions of ciphertext (as numbers, stored in a vector) one sentence at a time, and you want to decipher them real time as they come in. I've created a 20 x 20 cipher matrix for you below.
+c\. Suppose you are receiving continuous transmissions of ciphertext (as numbers, stored in a vector) one sentence at a time, and you want to decipher them real time as they come in. I've created a 20 x 20 cipher matrix for you below.
 ```{r}
 set.seed(123)
 N <- 20
 c <- sample(-300:300, N*N, replace = TRUE)
 C <- matrix(c, nrow = N)
 ```
-What is a computationally efficient way to decode the incoming text? (Hint: in this context, "computationally efficient" means that you should do as few Gaussian eliminations / matrix inversions as possible.) Implement your method on the four ciphered sentences below.
-```{r}
+What is a computationally efficient way to decode the incoming text? (Hint: in this context, "computationally efficient" means that you should do as few Gaussian eliminations / matrix inversions as possible.) Implement your method on the four ciphered sentences stored in the variables `s1`, `s2`, `s3`, `s4`. These sentences are defined in a code block below but I have suppressed printing of that code block since there are very long lists of numbers.
+```{r echo = FALSE}
 s1 <- c(9450, 5309, 3621, 7196, -2988, -6711, -3540, -12496, -5157, 
 3091, 11463, -6858, -5570, -12771, 1393, 2917, 11056, -20835, 
 -483, -6306, 19831, -2548, 3807, 2942, 14025, -17369, 8327, -18494, 
@@ -204,11 +207,11 @@ s4 <- c(18390, -9213, 10878, 3440, 14930, -14154, 1349, -16994, 5298,
 
 ### Problem 2 Solution
 
-a. Your solution goes here.
+a\. Your solution goes here.
 
-b. Your solution goes here.
+b]. Your solution goes here.
 
-c. Your solution goes here.
+c]. Your solution goes here.
 
 
 ### Problem 3
@@ -235,12 +238,12 @@ You are going to compute the Katz centrality without inverting a matrix. Some hi
 * Write the system in the form **Mx**=**b**.
 * At some point, you will need to create the identity matrix that appears in the definition of Katz centrality. Do this using the command `Diagonal` (as opposed to the usal `diag`, which is not optimal for large matrices).
 
-a. State what method you should use (remember, no matrix inversion or Gaussian elimination allowed) and justify mathematically/numerically why it should work.
+a\. State what method you should use (remember, no matrix inversion or Gaussian elimination allowed) and justify mathematically/numerically why it should work.
 
-b. For $\alpha = 0.0005$, find the biggest Katz centrality. Solve such that the backwards error is less than $10^{-10}$ in the infinity norm. Report the largest Katz centrality, along with the index of the node that has it. By the way, though the indices of the nodes are not identified with a persons's name in the data set, you can at least go [browse the actual Enron emails](http://www.enron-mail.com/email/) if you are interested.
+b\. For $\alpha = 0.0005$, find the biggest Katz centrality. Solve such that the backwards error is less than $10^{-10}$ in the infinity norm. Report the largest Katz centrality, along with the index of the node that has it. By the way, though the indices of the nodes are not identified with a persons's name in the data set, you can at least go [browse the actual Enron emails](http://www.enron-mail.com/email/) if you are interested.
 
 ### Problem 3 Solution
 
-a. Your solution goes here.
+a\. Your solution goes here.
 
-b. Your solution goes here.
+b\. Your solution goes here.
