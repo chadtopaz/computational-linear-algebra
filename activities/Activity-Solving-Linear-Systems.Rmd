@@ -34,11 +34,11 @@ c\. Use the built in command `lu` with option `scheme = "ijk"` to obtain the sam
 
 ### Problem 1 Solution
 
-a. Your solution goes here.
+a\. Your solution goes here.
 
-b. Your solution goes here.
+b\. Your solution goes here.
 
-c. Your solution goes here.
+c\. Your solution goes here.
 
 
 ### Problem 2

@@ -24,11 +24,11 @@ the same result as you did by hand.
 
 ### Problem 1 Solution
 
-1.  Your solution goes here.
+a\. Your solution goes here.
 
-2.  Your solution goes here.
+b\. Your solution goes here.
 
-3.  Your solution goes here.
+c\. Your solution goes here.
 
 ### Problem 2
 
