@@ -1269,7 +1269,7 @@ decomposition worked.
     A <- matrix(c(1,3,1,1,1,-1,3,11,5),nrow=3,byrow=TRUE)
     L <- matrix(c(1,0,0,1,1,0,3,-1,1),nrow=3,byrow=TRUE)
     U <- matrix(c(1,3,1,0,-2,-2,0,0,0),nrow=3,byrow=TRUE)
-    A - L%*%U
+    A - L %*% U
 
     ##      [,1] [,2] [,3]
     ## [1,]    0    0    0
@@ -1368,7 +1368,7 @@ $$
 
 We can consider this a fixed point iteration,
 
-**x**<sub>*i* + 1</sub> = **D**<sup>−1</sup>(**b**−**R****x**<sub>*i*</sub>).
+**x**<sub>*i* + 1</sub> = **D**<sup>−1</sup>(**b**−**R** **x**<sub>*i*</sub>).
 
 Here are some computational advantages of this method.
 
@@ -1426,7 +1426,7 @@ and costly! There’s a sufficient condition for convergence that is much
 easier to check computationally, namely that **A** is **strictly
 diagonally dominant**. This means
 
-|*a*<sub>*i**i*</sub>| &gt; ∑<sub>*j* ≠ *i*</sub>|*a*<sub>*i**j*</sub>|  in each row *i*.
+|*a*<sub>*i*, *i*</sub>| &gt; ∑<sub>*j* ≠ *i*</sub>|*a*<sub>*i*, *j*</sub>|  in each row *i*.
 
 ## Other Iterative Methods
 
