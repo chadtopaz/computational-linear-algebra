@@ -1,0 +1,17 @@
+Matrix
+knitr
+tidyverse
+ggplot2
+tibble
+tidyr
+readr
+purrr
+dplyr
+stringr
+forcats
+pracma
+data.table
+R.methodsS3
+R.oo
+R.utils
+igraph
