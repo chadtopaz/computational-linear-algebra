@@ -34,12 +34,17 @@ b\. Your solution goes here.
 
 a\. Which number is closest to the largest exactly representable number on the hPhone? (Make sure to show/explain your work.)
 
-   A. $10^6$
-   B. $10^{10}$
-   C. $10^{19}$
-   D. $10^{31}$
-   E. $10^{63}$
-   F. $10^{308}$
+   A\. $10^6$
+   
+   B\. $10^{10}$
+   
+   C\. $10^{19}$
+   
+   D\. $10^{31}$
+   
+   E\. $10^{63}$
+   
+   F\. $10^{308}$
 
 b\. On the hPhone, what number is the base-10 number 5901.546875 actually stored as? Give your answer in base-10.)
 

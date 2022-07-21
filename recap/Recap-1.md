@@ -38,8 +38,17 @@ hPhone was reserved to represent infinity.
 a\. Which number is closest to the largest exactly representable number
 on the hPhone? (Make sure to show/explain your work.)
 
-A. 10<sup>6</sup> B. 10<sup>10</sup> C. 10<sup>19</sup> D.
-10<sup>31</sup> E. 10<sup>63</sup> F. 10<sup>308</sup>
+A. 10<sup>6</sup>
+
+B. 10<sup>10</sup>
+
+C. 10<sup>19</sup>
+
+D. 10<sup>31</sup>
+
+E. 10<sup>63</sup>
+
+F. 10<sup>308</sup>
 
 b\. On the hPhone, what number is the base-10 number 5901.546875
 actually stored as? Give your answer in base-10.)
