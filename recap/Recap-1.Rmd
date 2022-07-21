@@ -62,7 +62,7 @@ The table below shows $||\vec{x}^i||_{\infty}$ and $||\mat{A}\,\vec{x}^i||_{\inf
 
 ### Problem 3 Solution
 
-To think about $||\mat{A}||_\infty$, we think about the maximum expansion achieved on a vector when multiplied by $\mat{A}$, which here is $10^5$ for $i = 4$. Similarly, for $||\mat{A}^-1||_\infty$, the maximum expansion is $10^2$ for $i=3$. Therefore, the condition number is at least $10^5 \cdot 10^2 = 10^7$.
+Your solution goes here.
 
 ### Problem 4
 

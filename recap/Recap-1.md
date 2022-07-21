@@ -111,12 +111,7 @@ class="math inline">10<sup>2</sup></span></td>
 
 ### Problem 3 Solution
 
-To think about ||**A**||<sub>∞</sub>, we think about the maximum
-expansion achieved on a vector when multiplied by **A**, which here is
-10<sup>5</sup> for *i* = 4. Similarly, for
-||**A**<sup>−</sup>1||<sub>∞</sub>, the maximum expansion is
-10<sup>2</sup> for *i* = 3. Therefore, the condition number is at least
-10<sup>5</sup> ⋅ 10<sup>2</sup> = 10<sup>7</sup>.
+Your solution goes here.
 
 ### Problem 4
 
