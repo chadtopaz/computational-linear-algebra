@@ -102,12 +102,13 @@ A few characteristics of my on-the-ground course include:
 -   Organization around weekly blocks of material
 -   Substantial in-class small-group discussion
 
-To enable you to make easy and flexible use of the resources here, I have eliminated most of these elements from this public facing version of the course. Essentially, what I am providing here is a core dump of materials I use. The materials are linked throughout the various course units. Additionally, you can access the raw mateerials in this respository's subdirectories:
+To enable you to make easy and flexible use of the resources here, I have eliminated most of these elements from this public facing version of the course. Essentially, what I am providing here is a core dump of materials I use. The materials are linked throughout the various course units. Additionally, you can access the raw materials in this respository's subdirectories:
 
 -   [/coursenotes](/coursenotes)
 -   [/demos](/demos)
 -   [/activities](/activities)
 -   [/psets](psets)
+-   [/recap](recap)
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -245,6 +246,8 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 [Back to Course Units](#course-units)
 
 ## Recap Exercise I
+
+-  Recap #1 [[.md for viewing](recap/Recap-1.md)] [[.Rmd for editing](recap/Recap-1.Rmd]
 
 [Back to Course Units](#course-units)
 
