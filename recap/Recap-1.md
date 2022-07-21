@@ -150,7 +150,7 @@ For each team *i*, the algorithm uses the following information:
     number of games played by team *i*
 
 The goal is to determine **r**, a vector of ratings, with the
-*i<sup>th&lt;&gt;* element *r*<sub>*i*</sub> representing the rating for
+*i<sup>th</sup>* element *r*<sub>*i*</sub> representing the rating for
 team *i*. Rankings are just the order of the ratings (the highest
 *r*<sub>*i*</sub> is given the \#1 ranking spot, etc.).
 

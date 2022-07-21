@@ -88,7 +88,7 @@ For each team $i$, the algorithm uses the following information:
 * $l_i=$ the number of losses for team $i$
 * $t_i=w_i+l_i=$ the total number of games played by team $i$
 
-The goal is to determine $\vec{r}$, a vector of ratings, with the *i<sup>th<\sup>* element $r_i$ representing the rating for team $i$. Rankings are just the order of the ratings (the highest $r_i$ is given the #1 ranking spot, etc.).
+The goal is to determine $\vec{r}$, a vector of ratings, with the *i<sup>th</sup>* element $r_i$ representing the rating for team $i$. Rankings are just the order of the ratings (the highest $r_i$ is given the #1 ranking spot, etc.).
 
 The ratings are computed as follows:
 
