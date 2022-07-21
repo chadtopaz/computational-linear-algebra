@@ -247,4 +247,4 @@ b\. For $\alpha = 0.0005$, find the biggest Katz centrality. Solve such that the
 
 a\. Your solution goes here.
 
-b\. Your solution goes here. Funkytown
+b\. Your solution goes here.
