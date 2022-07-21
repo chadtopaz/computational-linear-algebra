@@ -247,7 +247,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
 ## Recap Exercise I
 
--  Recap #1 [[.md for viewing](recap/Recap-1.md)] [[.Rmd for editing](recap/Recap-1.Rmd]
+-  Recap #1 [[.md for viewing](recap/Recap-1.md)] [[.Rmd for editing](recap/Recap-1.Rmd)]
 
 [Back to Course Units](#course-units)
 
