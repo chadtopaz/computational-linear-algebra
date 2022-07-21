@@ -46,7 +46,7 @@ E. 10<sup>63</sup>
 F. 10<sup>308</sup>
 
 b\. On the hPhone, what number is the base-10 number 5901.546875
-actually stored as? Give your answer in base-10.)
+actually stored as? Give your answer in base-10.
 
 ### Problem 2 Solution
 
