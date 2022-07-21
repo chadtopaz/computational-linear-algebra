@@ -266,6 +266,7 @@ The code below creates the network’s adjacency matrix for you.
 
 One measure of the importance of a node is the Katz centrality. The
 vector of Katz centralities **x** satisfies
+
 **x** = ((**I**−*α* *A*<sup>*T*</sup>)<sup>−1</sup> − **I**)**1**.
 where **1** is a vector of ones.
 

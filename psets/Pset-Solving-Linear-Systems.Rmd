@@ -228,6 +228,7 @@ A <- as_adjacency_matrix(G)
 ```
 
 One measure of the importance of a node is the Katz centrality. The vector of Katz centralities **x** satisfies
+
 $$
 \vec{x} = \bigl((\mat{I} - \alpha\,A^T)^{-1} - \mat{I} \bigr) \vec{1}.
 $$
