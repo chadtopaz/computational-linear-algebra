@@ -295,4 +295,4 @@ you are interested.
 
 a\. Your solution goes here.
 
-b\. Your solution goes here.
+b\. Your solution goes here. Funkytown
