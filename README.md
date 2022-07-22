@@ -255,7 +255,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
 -   Videos
 
-    -   [Introduction to Polynomial Interpolation (13:46)](https://youtu.be/OmPW3ho7yiY)
+    -   [Introduction to Polynomial Interpolation (13:46)](https://youtu.be/193npV0cSQE)
     
     -   [Lagrange Interpolating Polynomial (8:10)](https://youtu.be/WCGKqJrf4N4)
 
