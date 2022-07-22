@@ -279,7 +279,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
    -   Learn how to implement interpolation via Newton divided differences and implement the technique in R.
 
--   Prove the formula for Chebyshev interpolation nodes.
+   -   Prove the formula for Chebyshev interpolation nodes.
 
 [Back to Course Units](#course-units)
 
