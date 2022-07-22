@@ -253,6 +253,34 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
 ## Interpolation
 
+-   Videos
+
+    -   [Introduction to Polynomial Interpolation (13:46)](https://youtu.be/OmPW3ho7yiY)
+    
+    -   [Lagrange Interpolating Polynomial (8:10)](https://youtu.be/WCGKqJrf4N4)
+
+    -   [Chebyshev Polynomials (up to 9:27)](https://youtu.be/kwSAKAc6Vck)
+
+    -   [Polynomial Fitting and Splines (6:51)](https://youtu.be/BqZXS3n75l0)
+
+-   Reading
+
+    -   [Course Notes: Interpolation](/coursenotes/coursenotes.md#interpolation)
+    
+-   Activity - Interpolation [[.md for viewing](activities/Activity-Interpolation.md)] [[.Rmd for editing](activities/Activity-Interpolation.Rmd)]
+
+-   Pset - Inteprolation [[.md for viewing](psets/Pset-Interpolation.md)] [[.Rmd for editing](psets/Pset-Interpolation.Rmd)]
+
+- Other Resources
+
+   -   [In-class code examples](https://github.com/chadtopaz/computationallineaaralgebra/blob/main/demos/Demo-Interpolation.R)
+
+- Challenge problems
+
+   -   Learn how to implement interpolation via Newton divided differences and implement the technique in R.
+
+-   Prove the formula for Chebyshev interpolation nodes.
+
 [Back to Course Units](#course-units)
 
 ## Least Squares I
