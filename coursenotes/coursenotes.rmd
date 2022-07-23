@@ -1407,7 +1407,7 @@ sampledprice <- price[seq(from = 1, to = length(price), by = 5)]
 # Fit interpolating polynomial
 interpolatedprice <- lagrangeInterp(sampledday, sampledprice, day[1:max(sampledday)])
 plot(day[1:max(sampledday)], interpolatedprice, col = "red", type = "l", ylim = c(800,1200))
-points(day, price, col="blue")
+points(day, price, col = "blue")
 # Fit splines
 TSLAspline <- splinefun(sampledday, sampledprice, method = "natural")
 plot(day, TSLAspline(day), col = "blue", type = "l", ylim = c(800,1200))

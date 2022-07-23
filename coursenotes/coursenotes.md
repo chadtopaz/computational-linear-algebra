@@ -2296,7 +2296,7 @@ markets were closed, including weekends).
     # Fit interpolating polynomial
     interpolatedprice <- lagrangeInterp(sampledday, sampledprice, day[1:max(sampledday)])
     plot(day[1:max(sampledday)], interpolatedprice, col = "red", type = "l", ylim = c(800,1200))
-    points(day, price, col="blue")
+    points(day, price, col = "blue")
 
 ![](coursenotes_files/figure-markdown_strict/unnamed-chunk-42-1.png)
 
