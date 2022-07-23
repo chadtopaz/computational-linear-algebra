@@ -1000,11 +1000,11 @@ If we expand out our Lagrange polynomial we find $p(x) = x^3 - 5 x^2 + 4 x+10$. 
 ```{r cache = TRUE}
 x <- c(1,2,3,4)
 y <- c(10,6,4,10)
-c <- solve(Vandermonde(x),y)
+c <- solve(Vandermonde(x), y)
 c
 ```
 
-Following the pattern we established above, the Langrange polynomial for points $(x_1,y_1),\ldots,(x_n,y_n)$ is
+Following the pattern we established above, the Lagrange polynomial for points $(x_1,y_1),\ldots,(x_n,y_n)$ is
 
 $$
 p(x) = \sum_{i = 1}^n y_i \prod_{j \not = i} \frac{(x - x_j)}{(x_i - x_j)}.
@@ -1086,8 +1086,10 @@ This means that we can represent the sine function with $10^{-13}$ error using o
 
 We have been thinking about data and talking about polynomial interpolation as a way of estimating it, compressing it, and representing it conveniently to do other mathematical operations on it. So far, we have only examined error numerically. Now it is time to look at the error in more detail, including finding out when it is potentially large and thinking about how we can reduce it.
 
-Before thinking about error in polynomial interpolation, let's start out with an example that is about Taylor polynomials. We'll construct Taylor polynomials of increasing degree to estimate the function $f(x) = \\cos(x)$ around the point $x_0=0$ on $[0,2\\pi]$. The $n$th degree taylor polynomial is $$
-\\sum\_{i=1}^n (-1)^{i/2} \\frac{x^i}{i!}.
+Before thinking about error in polynomial interpolation, let's start out with an example that is about Taylor polynomials. We'll construct Taylor polynomials of increasing degree to estimate the function $f(x) = \cos(x)$ around the point $x_0=0$ on $[0,2\pi]$. The $n$th degree taylor polynomial is
+
+$$
+\sum_{i=1}^n (-1)^{i/2} \frac{x^i}{i!}.
 $$
 
 ```{r cache = TRUE}
@@ -1105,8 +1107,10 @@ for (n in seq(from=0,to=14,by=2)){
 }
 ```
 
-So more terms are better, right? Let's try again with the function $f(x) = 1/x$ around the point $x_0=1$. The $n$th degree Taylor polynomial is $$
-\\sum\_{i=1}^n (-1)^i (x-1)^i.
+So more terms are better, right? Let's try again with the function $f(x) = 1/x$ around the point $x_0=1$. The $n$th degree Taylor polynomial is
+
+$$
+\sum_{i=1}^n (-1)^i (x-1)^i.
 $$
 
 ```{r cache = TRUE}
@@ -1126,7 +1130,7 @@ for (n in seq(from=0,to=40,by=4)){
 
 Oh! I guess that more isn't always better.
 
-Now let's think now about interpolating polynomials. Let's consider $\\cos(x)$ with $n$ equally sampled points across $[0,2\\pi]$ for different values of $n$.
+Now let's think now about interpolating polynomials. Let's consider $\cos(x)$ with $n$ equally sampled points across $[0,2\pi]$ for different values of $n$.
 
 ```{r cache = TRUE}
 x <- seq(from=0,to=2*pi,length=1000)
@@ -1162,22 +1166,39 @@ for (n in nvec){
 plot(nvec,log10(error),xlab="n",ylab="log10 of error")
 ```
 
-Not good! The error goes up as we take more and more points. Equally-spaced nodes are very natural in many applications (scientific measurements, audio/video signals, etc.). But sadly, it turns out that in some circumstances, inteprolating with polynomials through equally-spaced nodes leads to very undesirable oscillations like those above, called \*\*Runge's phenomenon\*\*.
+Not good! The error goes up as we take more and more points. Equally-spaced nodes are very natural in many applications (scientific measurements, audio/video signals, etc.). But sadly, it turns out that in some circumstances, inteprolating with polynomials through equally-spaced nodes leads to very undesirable oscillations like those above, called **Runge's phenomenon**.
 
 ## Interpolation Error
 
-You might remember that for an $n-1$st degree Taylor series (that is, $n$ coefficients) of $f(x)$ centered around $x=x_0$, the magnitude of the error term is $$
-\\left\|\\frac{f^{(n)}(c)}{n!}(x-x_0)^{n}\\right\|
-$$ where $c$ is a number between $x$ and $x_0$. For an interpolating polynomial constructed from $n$ points on an interval $[x_1,x_n]$, the interpolation error is $$
-\\left\|\\frac{f^{(n)}(c)}{n!}(x-x_1)(x-x_2)\\cdots (x-x_n)\\right\|
-$$ for some $c \\in [x_1,x_n]$. If you are interested in the proof, it appears in your textbook and/or I am happy to go over it with you in office hours. Honestly, though, I find the proof to be totally nonintuitive and unenlightening.
+You might remember that for an $n-1$st degree Taylor series (that is, $n$ coefficients) of $f(x)$ centered around $x=x_0$, the magnitude of the error term is
 
-Let's use the error term to do an example, where we again ask the question HOW DO WE EVEN KNOW ANYTHING? For instance, suppose you want to calculate the value of an exponential function. [This turns out to be hard](https://math.stackexchange.com/questions/1239352/how-do-pocket-calculators-calculate-exponents)! Let's restrict the problem a bit. Suppose we want to calculate $\\mathrm{e}^{x}$ on $[0,1]$ with 5 digits of accuracy. One way to do this would be to choose equally-spaced points on $[0,1]$ and make a table of $\\mathrm{e}^{x}$ for those values using some very accurate method. Then, we let the user choose a value of $x$. We find the two values that surround it in our table, construct the linear interpolating polynomial between them, and use it to estimate our answer. For instance, if we chose $x$ values of $0.1, 0.2, \\ldots, 1$ and the user input $x=0.3268$, we would construct the inteprolating polynomial through $(0.3,\\mathrm{e}^{0.3})$ and $(0.4,\\mathrm{e}^{0.4})$ and then plug in our $x$. Let's ask the question: to achieve 5-digit accuracy with this method, how many points must we take on $[0,1]$? (Note: crucially, this is not at all the same as creating a single interpolating polynomial that goes through all the points.) We have $$
-\\begin{align\*}
-\|f(x) - P_1(x)\| &= \\left\|\\frac{f^{(n)}(c)}{n!}(x-x_1)(x-x_2)\\cdots (x-x_n)\\right\|\
-&= \\left\|\\frac{\\left(\\mathrm{e}^{x}\\right)^{''}\|\_c}{2!}(x-x_1)(x-x_2)\\right\| \
-& = \\left\|\\frac{\\mathrm{e}^{c}}{2} (x-x_1)(x-x_1-h)\\right\|
-\\end{align\*} $$ Here, I've called the spacing between the two points $h$, that is $x_2 = x_1 + h$. Now, we can ask what is the worst (biggest) that the term $\left|(x-x_1)(x-x_1-h)\right|$ can be, and via calculus, we can show it is $h^2/4$. Also, on our interval of interest, we know that $\mathrm{e}^{c} \leq \mathrm{e}^{1}$. Therefore, we can write $$ \|f(x) - P_1(x)\| \leq \\frac{\\mathrm{e}h^2}{8}. $$ For our desired level of accuracy, we need $$ \frac{\mathrm{e}h^2}{8} \leq 0.5 \times 10^{-5}. $$ Solving for $h$, we find $h \lessapprox 3.8 \times 10^{-3}$. That is the space between points, so on $[0,1]$ this corresponds to just over 260 points.
+$$
+\left|\frac{f^{(n)}(c)}{n!}(x-x_0)^{n}\right|
+$$
+
+where $c$ is a number between $x$ and $x_0$. For an interpolating polynomial constructed from $n$ points on an interval $[x_1,x_n]$, the interpolation error is
+
+$$
+\left|\frac{f^{(n)}(c)}{n!}(x-x_1)(x-x_2)\cdots (x-x_n)\right|
+$$
+
+for some $c \in [x_1,x_n]$. If you are interested in the proof, I am happy to go over it with you. Honestly, though, I find the proof to be rather nonintuitive and unenlightening.
+
+Let's use the error term to do an example, where we again ask the question HOW DO WE EVEN KNOW ANYTHING? For instance, suppose you want to calculate the value of an exponential function. [This turns out to be hard](https://math.stackexchange.com/questions/1239352/how-do-pocket-calculators-calculate-exponents)! Let's restrict the problem a bit. Suppose we want to calculate $\mathrm{e}^{x}$ on $[0,1]$ with 5 digits of accuracy. One way to do this would be to choose equally-spaced points on $[0,1]$ and make a table of $\mathrm{e}^{x}$ for those values using some very accurate method. Then, we let the user choose a value of $x$. We find the two values that surround it in our table, construct the linear interpolating polynomial between them, and use it to estimate our answer. For instance, if we chose $x$ values of $0.1, 0.2, \ldots, 1$ and the user input $x=0.3268$, we would construct the inteprolating polynomial through $(0.3,\mathrm{e}^{0.3})$ and $(0.4,\mathrm{e}^{0.4})$ and then plug in our $x$. Let's ask the question: to achieve 5-digit accuracy with this method, how many points must we take on $[0,1]$? (Note: crucially, this is not at all the same as creating a single interpolating polynomial that goes through all the points.) We have
+
+$$\begin{align\*}
+|f(x) - P_1(x)| &= \left|\frac{f^{(n)}(c)}{n!}(x-x_1)(x-x_2)\cdots (x-x_n)\right|\
+&= \left|\frac{\left(\mathrm{e}^{x}\right)^{''}|\_c}{2!}(x-x_1)(x-x_2)\right| \
+& = \left|\frac{\mathrm{e}^{c}}{2} (x-x_1)(x-x_1-h)\right|
+\end{align\*}$$
+
+Here, I've called the spacing between the two points $h$, that is $x_2 = x_1 + h$. Now, we can ask what is the worst (biggest) that the term $\left|(x-x_1)(x-x_1-h)\right|$ can be, and via calculus, we can show it is $h^2/4$. Also, on our interval of interest, we know that $\mathrm{e}^{c} \leq \mathrm{e}^{1}$. Therefore, we can write
+
+$$
+|f(x) - P_1(x)| \leq \frac{\mathrm{e}h^2}{8}.
+$$
+
+For our desired level of accuracy, we need $$ \frac{\mathrm{e}h^2}{8} \leq 0.5 \times 10^{-5}. $$ Solving for $h$, we find $h \lessapprox 3.8 \times 10^{-3}$. That is the space between points, so on $[0,1]$ this corresponds to just over 260 points.
 
 ## Chebyshev Nodes
 

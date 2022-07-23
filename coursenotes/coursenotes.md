@@ -1705,12 +1705,12 @@ If we expand out our Lagrange polynomial we find
 
     x <- c(1,2,3,4)
     y <- c(10,6,4,10)
-    c <- solve(Vandermonde(x),y)
+    c <- solve(Vandermonde(x), y)
     c
 
     ## [1] 10  4 -5  1
 
-Following the pattern we established above, the Langrange polynomial for
+Following the pattern we established above, the Lagrange polynomial for
 points
 (*x*<sub>1</sub>,*y*<sub>1</sub>), …, (*x*<sub>*n*</sub>,*y*<sub>*n*</sub>)
 is
@@ -1830,10 +1830,11 @@ potentially large and thinking about how we can reduce it.
 Before thinking about error in polynomial interpolation, let’s start out
 with an example that is about Taylor polynomials. We’ll construct Taylor
 polynomials of increasing degree to estimate the function
-$f(x) = \\\cos(x)$ around the point *x*<sub>0</sub> = 0 on
-$\[0,2\\\pi\]$. The *n*th degree taylor polynomial is
+*f*(*x*) = cos (*x*) around the point *x*<sub>0</sub> = 0 on \[0,2*π*\].
+The *n*th degree taylor polynomial is
+
 $$
-\\\sum\\\_{i=1}^n (-1)^{i/2} \\\frac{x^i}{i!}.
+\sum\_{i=1}^n (-1)^{i/2} \frac{x^i}{i!}.
 $$
 
     mytaylor1 <- function(x,n){
@@ -1854,8 +1855,9 @@ $$
 So more terms are better, right? Let’s try again with the function
 *f*(*x*) = 1/*x* around the point *x*<sub>0</sub> = 1. The *n*th degree
 Taylor polynomial is
+
 $$
-\\\sum\\\_{i=1}^n (-1)^i (x-1)^i.
+\sum\_{i=1}^n (-1)^i (x-1)^i.
 $$
 
     mytaylor2 <- function(x,n){
@@ -1876,7 +1878,7 @@ $$
 Oh! I guess that more isn’t always better.
 
 Now let’s think now about interpolating polynomials. Let’s consider
-$\\\cos(x)$ with *n* equally sampled points across $\[0,2\\\pi\]$ for
+cos (*x*) with *n* equally sampled points across \[0,2*π*\] for
 different values of *n*.
 
     x <- seq(from=0,to=2*pi,length=1000)
@@ -1925,51 +1927,55 @@ Equally-spaced nodes are very natural in many applications (scientific
 measurements, audio/video signals, etc.). But sadly, it turns out that
 in some circumstances, inteprolating with polynomials through
 equally-spaced nodes leads to very undesirable oscillations like those
-above, called \*\*Runge’s phenomenon\*\*.
+above, called **Runge’s phenomenon**.
 
 ## Interpolation Error
 
 You might remember that for an *n* − 1st degree Taylor series (that is,
 *n* coefficients) of *f*(*x*) centered around *x* = *x*<sub>0</sub>, the
 magnitude of the error term is
+
 $$
-\\\left\\|\\\frac{f^{(n)}(c)}{n!}(x-x\_0)^{n}\\\right\\|
+\left|\frac{f^{(n)}(c)}{n!}(x-x\_0)^{n}\right|
 $$
+
 where *c* is a number between *x* and *x*<sub>0</sub>. For an
 interpolating polynomial constructed from *n* points on an interval
 \[*x*<sub>1</sub>,*x*<sub>*n*</sub>\], the interpolation error is
+
 $$
-\\\left\\|\\\frac{f^{(n)}(c)}{n!}(x-x\_1)(x-x\_2)\\\cdots (x-x\_n)\\\right\\|
+\left|\frac{f^{(n)}(c)}{n!}(x-x\_1)(x-x\_2)\cdots (x-x\_n)\right|
 $$
-for some $c \\\in \[x\_1,x\_n\]$. If you are interested in the proof, it
-appears in your textbook and/or I am happy to go over it with you in
-office hours. Honestly, though, I find the proof to be totally
-nonintuitive and unenlightening.
+
+for some *c* ∈ \[*x*<sub>1</sub>,*x*<sub>*n*</sub>\]. If you are
+interested in the proof, I am happy to go over it with you. Honestly,
+though, I find the proof to be rather nonintuitive and unenlightening.
 
 Let’s use the error term to do an example, where we again ask the
 question HOW DO WE EVEN KNOW ANYTHING? For instance, suppose you want to
 calculate the value of an exponential function. [This turns out to be
 hard](https://math.stackexchange.com/questions/1239352/how-do-pocket-calculators-calculate-exponents)!
 Let’s restrict the problem a bit. Suppose we want to calculate
-$\\\mathrm{e}^{x}$ on \[0,1\] with 5 digits of accuracy. One way to do
-this would be to choose equally-spaced points on \[0,1\] and make a
-table of $\\\mathrm{e}^{x}$ for those values using some very accurate
-method. Then, we let the user choose a value of *x*. We find the two
-values that surround it in our table, construct the linear interpolating
-polynomial between them, and use it to estimate our answer. For
-instance, if we chose *x* values of $0.1, 0.2, \\\ldots, 1$ and the user
-input *x* = 0.3268, we would construct the inteprolating polynomial
-through $(0.3,\\\mathrm{e}^{0.3})$ and $(0.4,\\\mathrm{e}^{0.4})$ and
-then plug in our *x*. Let’s ask the question: to achieve 5-digit
-accuracy with this method, how many points must we take on \[0,1\]?
-(Note: crucially, this is not at all the same as creating a single
-interpolating polynomial that goes through all the points.) We have
-$$
-\\\begin{align\\\*}
-\\|f(x) - P\_1(x)\\| &= \\\left\\|\\\frac{f^{(n)}(c)}{n!}(x-x\_1)(x-x\_2)\\\cdots (x-x\_n)\\\right\\|\\
-&= \\\left\\|\\\frac{\\\left(\\\mathrm{e}^{x}\\\right)^{''}\\|\\\_c}{2!}(x-x\_1)(x-x\_2)\\\right\\| \\
-& = \\\left\\|\\\frac{\\\mathrm{e}^{c}}{2} (x-x\_1)(x-x\_1-h)\\\right\\|
-\\\end{align\\\*} $$
+e<sup>*x*</sup> on \[0,1\] with 5 digits of accuracy. One way to do this
+would be to choose equally-spaced points on \[0,1\] and make a table of
+e<sup>*x*</sup> for those values using some very accurate method. Then,
+we let the user choose a value of *x*. We find the two values that
+surround it in our table, construct the linear interpolating polynomial
+between them, and use it to estimate our answer. For instance, if we
+chose *x* values of 0.1, 0.2, …, 1 and the user input *x* = 0.3268, we
+would construct the inteprolating polynomial through
+(0.3,e<sup>0.3</sup>) and (0.4,e<sup>0.4</sup>) and then plug in our
+*x*. Let’s ask the question: to achieve 5-digit accuracy with this
+method, how many points must we take on \[0,1\]? (Note: crucially, this
+is not at all the same as creating a single interpolating polynomial
+that goes through all the points.) We have
+
+$$\begin{align\\\*}
+|f(x) - P\_1(x)| &= \left|\frac{f^{(n)}(c)}{n!}(x-x\_1)(x-x\_2)\cdots (x-x\_n)\right|\\
+&= \left|\frac{\left(\mathrm{e}^{x}\right)^{''}|\\\_c}{2!}(x-x\_1)(x-x\_2)\right| \\
+& = \left|\frac{\mathrm{e}^{c}}{2} (x-x\_1)(x-x\_1-h)\right|
+\end{align\\\*}$$
+
 Here, I’ve called the spacing between the two points *h*, that is
 *x*<sub>2</sub> = *x*<sub>1</sub> + *h*. Now, we can ask what is the
 worst (biggest) that the term
@@ -1977,7 +1983,11 @@ worst (biggest) that the term
 calculus, we can show it is *h*<sup>2</sup>/4. Also, on our interval of
 interest, we know that e<sup>*c*</sup> ≤ e<sup>1</sup>. Therefore, we
 can write
-$$ \\|f(x) - P\_1(x)\\| \leq \\\frac{\\\mathrm{e}h^2}{8}. $$
+
+$$
+|f(x) - P\_1(x)| \leq \frac{\mathrm{e}h^2}{8}.
+$$
+
 For our desired level of accuracy, we need
 $$ \frac{\mathrm{e}h^2}{8} \leq 0.5 \times 10^{-5}. $$
 Solving for *h*, we find *h* ⪅ 3.8 × 10<sup>−3</sup>. That is the space
