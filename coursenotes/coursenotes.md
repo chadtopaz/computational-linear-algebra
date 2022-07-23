@@ -1567,9 +1567,7 @@ $$
 1 & x\_3 & x\_3^2 &  & x\_3^{n-1} \\\\ 
 &  \vdots &  &  & \vdots \\\\ 
 1 & x\_n & x\_n^2 & \cdots & x\_n^{n-1} \\\\ 
-\end{pmatrix}
-\begin{pmatrix} c\_0 \\\\ c\_1 \\\\ c\_2 \\\\ \vdots \\\\ c\_{n-1} \end{pmatrix}
-= 
+\end{pmatrix} \begin{pmatrix} c\_0 \\\\ c\_1 \\\\ c\_2 \\\\ \vdots \\\\ c\_{n-1} \end{pmatrix} = 
 \begin{pmatrix} y\_1 \\\\ y\_2 \\\\ y\_3 \\\\ \vdots \\\\ y\_n \end{pmatrix}.
 $$
 

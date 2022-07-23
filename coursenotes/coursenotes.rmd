@@ -956,9 +956,7 @@ $$
 1 & x_3 & x_3^2 &  & x_3^{n-1} \\ 
 &  \vdots &  &  & \vdots \\ 
 1 & x_n & x_n^2 & \cdots & x_n^{n-1} \\ 
-\end{pmatrix}
-\begin{pmatrix} c_0 \\ c_1 \\ c_2 \\ \vdots \\ c_{n-1} \end{pmatrix}
-= 
+\end{pmatrix} \begin{pmatrix} c_0 \\ c_1 \\ c_2 \\ \vdots \\ c_{n-1} \end{pmatrix} = 
 \begin{pmatrix} y_1 \\ y_2 \\ y_3 \\ \vdots \\ y_n \end{pmatrix}.
 $$
 
