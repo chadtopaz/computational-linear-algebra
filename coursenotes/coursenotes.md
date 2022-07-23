@@ -1584,16 +1584,11 @@ ill-conditioned. Let’s see what happens if we sample more and more
 points from our function and construct the interpolating polynomial.
 We’ll look at *κ* for the Vandermonde matrix.
 
-    Vandermonde <- function(x){
-      n <- length(x)
-      V <- outer(x, 0:(n-1), "^")
-      return(V)
-    }
     nvals <- 2^(1:8)
     kappavals <- NULL
     for (n in nvals){
       x <- seq(from = 1, to = 3, length = n)
-      kappavals <- c(kappavals, kappa(Vandermonde(x)))
+      kappavals <- c(kappavals, kappa(vander(x)))
     }
     kable(cbind(nvals, kappavals))
 
@@ -1614,7 +1609,7 @@ kappavals
 2
 </td>
 <td style="text-align:right;">
-7.500000e+00
+6.250000e+00
 </td>
 </tr>
 <tr>
@@ -1622,7 +1617,7 @@ kappavals
 4
 </td>
 <td style="text-align:right;">
-2.491869e+03
+1.678547e+03
 </td>
 </tr>
 <tr>
@@ -1630,7 +1625,7 @@ kappavals
 8
 </td>
 <td style="text-align:right;">
-5.753630e+08
+3.218991e+08
 </td>
 </tr>
 <tr>
@@ -1638,7 +1633,7 @@ kappavals
 16
 </td>
 <td style="text-align:right;">
-4.555646e+19
+2.082142e+19
 </td>
 </tr>
 <tr>
@@ -1646,7 +1641,7 @@ kappavals
 32
 </td>
 <td style="text-align:right;">
-4.913265e+28
+2.008808e+29
 </td>
 </tr>
 <tr>
@@ -1654,7 +1649,7 @@ kappavals
 64
 </td>
 <td style="text-align:right;">
-5.173402e+44
+5.350795e+45
 </td>
 </tr>
 <tr>
@@ -1662,7 +1657,7 @@ kappavals
 128
 </td>
 <td style="text-align:right;">
-3.078066e+76
+2.740993e+76
 </td>
 </tr>
 <tr>
@@ -1670,7 +1665,7 @@ kappavals
 256
 </td>
 <td style="text-align:right;">
-5.916265e+136
+2.557774e+137
 </td>
 </tr>
 </tbody>
@@ -1705,10 +1700,10 @@ If we expand out our Lagrange polynomial we find
 
     x <- c(1,2,3,4)
     y <- c(10,6,4,10)
-    c <- solve(Vandermonde(x), y)
+    c <- solve(vander(x), y)
     c
 
-    ## [1] 10  4 -5  1
+    ## [1]  1 -5  4 10
 
 Following the pattern we established above, the Lagrange polynomial for
 points
@@ -2574,17 +2569,19 @@ Let’s calculuate this in `R`.
     ## [3,] 137.0
     ## [4,] 153.5
 
-    dot(r,a0)
+    t(r) %*% a0
 
-    ## [1] 1.84741111298e-13
+    ##              [,1]
+    ## [1,] 1.847411e-13
 
-    dot(r,a1)
+    t(r) %*% a1
 
-    ## [1] 8.81072992343e-13
+    ##             [,1]
+    ## [1,] 8.81073e-13
 
-    plot(a1,b,xlab="advertising",ylab="sales")
-    xx <- seq(from=0,to=6,length=200)
-    lines(xx,horner(as.numeric(x),xx)$y)
+    plot(a1, b, xlab = "advertising", ylab = "sales")
+    xx <- seq(from = 0, to = 6, length = 200)
+    lines(xx, horner(as.numeric(x), xx)$y)
 
 ![](coursenotes_files/figure-markdown_strict/unnamed-chunk-47-1.png)
 
@@ -2614,6 +2611,7 @@ where our unknown is the vector
 Though *x* appears nonlinearly, the coefficients *c*<sub>0, 1, 2</sub>
 don’t, so we are fine! Let’s solve this problem using linear algebra. We
 want to solve
+
 $$
 \begin{align}
 c\_0 + c\_1 \cdot 0 + c\_2 \cdot 0^2 &= 6 \\\\
@@ -2622,10 +2620,11 @@ c\_0 + c\_1 \cdot 2 + c\_2 \cdot 2^2 &= 2 \\\\
 c\_0 + c\_1 \cdot 3 + c\_2 \cdot 3^2 &= 2
 \end{align}
 $$
+
 So, we calculuate in `R`:
 
     x <- c(0,1,2,3)
-    A <- matrix(cbind(x^0,x^1,x^2),nrow=4)
+    A <- vander(x)[,2:4]
     b <- c(6,5,2,12)
     pseudoinv <- solve(t(A) %*% A) %*% t(A)
     c <- pseudoinv %*% b
@@ -2634,13 +2633,13 @@ So, we calculuate in `R`:
     print(c)
 
     ##       [,1]
-    ## [1,]  6.75
+    ## [1,]  2.75
     ## [2,] -6.75
-    ## [3,]  2.75
+    ## [3,]  6.75
 
     plot(x,b)
-    xx <- seq(from=0,to=3,length=200)
-    lines(xx,horner(c,xx)$y)
+    xx <- seq(from = 0, to = 3, length = 200)
+    lines(xx, horner(c,xx)$y)
 
 ![](coursenotes_files/figure-markdown_strict/unnamed-chunk-48-1.png)
 
@@ -2678,9 +2677,9 @@ analyzing the error.
 Adopting a least squares approach allows, potentially, massive
 compression of data. Suppose we had 100 points that looked like this
 
-    x <- seq(from=0,to=1,length=100)
-    y <- 3*x + 0.4*(2*runif(100)-1)
-    plot(x,y)
+    x <- seq(from = 0, to = 1, length = 100)
+    y <- 3*x + 0.4*(2*runif(100) - 1)
+    plot(x, y)
 
 ![](coursenotes_files/figure-markdown_strict/unnamed-chunk-49-1.png)
 
@@ -2695,16 +2694,21 @@ problems, but there’s another way to get the same result: optimization.
 We can start directly with the square of the norm of the residual vector
 (a factor of 1/2 is included for algebraic convenience, but it doesn’t
 change the result):
+
 $$
 \frac{1}{2}||\mathbf{r}||^2 = \frac{1}{2}||\mathbf{A}\mathbf{x}-\mathbf{b}||^2.
 $$
+
 More formally, we can define the scalar **objective function**
 $$
 f(\mathbf{x}) = \frac{1}{2} ||\mathbf{A}\mathbf{x}-\mathbf{b}||^2
 $$
+
 and define our least squares solution **x**<sub>*L**S*</sub>as the value
 of **x** that minimizes this objective function, that is,
+
 **x**<sub>*L**S*</sub> = arg min<sub>**x**</sub>*f*(**x**).
+
 Now you know where the terminology least squares comes from! We can
 apply calculus to minimize this expression and the normal equations will
 result. This is a problem on your in-class exercise and your homework,

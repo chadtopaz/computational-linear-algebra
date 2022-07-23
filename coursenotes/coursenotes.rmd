@@ -965,16 +965,11 @@ It can be proven that if the $x_i$ are distinct, the matrix has nonzero determin
 In solving problems using the Vandermonde matrix, we are using a basis for the interpolating polynomial that is $\{1,x,x^2,\ldots\}$. This seems very natural since this is how we usually think of polynomials! The problems is that to find the coefficients in this basis, we have to solve a linear problem whose matrix is very ill-conditioned. Let's see what happens if we sample more and more points from our function and construct the interpolating polynomial. We'll look at $\kappa$ for the Vandermonde matrix.
 
 ```{r cache = TRUE}
-Vandermonde <- function(x){
-  n <- length(x)
-  V <- outer(x, 0:(n-1), "^")
-  return(V)
-}
 nvals <- 2^(1:8)
 kappavals <- NULL
 for (n in nvals){
   x <- seq(from = 1, to = 3, length = n)
-  kappavals <- c(kappavals, kappa(Vandermonde(x)))
+  kappavals <- c(kappavals, kappa(vander(x)))
 }
 kable(cbind(nvals, kappavals))
 ```
@@ -1000,7 +995,7 @@ If we expand out our Lagrange polynomial we find $p(x) = x^3 - 5 x^2 + 4 x+10$. 
 ```{r cache = TRUE}
 x <- c(1,2,3,4)
 y <- c(10,6,4,10)
-c <- solve(Vandermonde(x), y)
+c <- solve(vander(x), y)
 c
 ```
 
@@ -1621,11 +1616,11 @@ bhat <- A %*% x
 r <- b - bhat
 print(x)
 print(bhat)
-dot(r,a0)
-dot(r,a1)
-plot(a1,b,xlab="advertising",ylab="sales")
-xx <- seq(from=0,to=6,length=200)
-lines(xx,horner(as.numeric(x),xx)$y)
+t(r) %*% a0
+t(r) %*% a1
+plot(a1, b, xlab = "advertising", ylab = "sales")
+xx <- seq(from = 0, to = 6, length = 200)
+lines(xx, horner(as.numeric(x), xx)$y)
 ```
 
 Symbolically, we calculated the least squares solution $\vec{x} = \left(\mat{A}^T \mat{A}\right)^{-1}\mat{A}^T \vec{b}$ where $\left(\mat{A}^T \mat{A}\right)^{-1}\mat{A}^T$ is the pseudoinverse. The projection is $\widehat{\vec{b}} = \mat{A} \vec{x} = \mat{A} \left(\mat{A}^T \mat{A}\right)^{-1}\mat{A}^T \vec{b}$ where $\mat{A} \left(\mat{A}^T \mat{A}\right)^{-1}\mat{A}^T$ is the projection matrix.
@@ -1636,18 +1631,21 @@ Though our example here has used merely two basis vectors, the ideas extend to a
 
 The technique we have developed here of solving a least squares problem by vector projection works in a model fitting context whenever the unknowns $\vec{x}$ appear linearly. It doesn't require that other quantities appear linearly.
 
-For instance, suppose that we wanted to fit a parabola to the data $(0,6)$, $(1,5)$, $(2,2)$, and $(3,2)$. We choose the model $y = c_0 + c_1 x + c_2 x^2$ where our unknown is the vector $\mathbf{c}=(c_0,c_1,c_2)^T$. Though $x$ appears nonlinearly, the coefficients $c_{0,1,2}$ don't, so we are fine! Let's solve this problem using linear algebra. We want to solve $$
+For instance, suppose that we wanted to fit a parabola to the data $(0,6)$, $(1,5)$, $(2,2)$, and $(3,2)$. We choose the model $y = c_0 + c_1 x + c_2 x^2$ where our unknown is the vector $\mathbf{c}=(c_0,c_1,c_2)^T$. Though $x$ appears nonlinearly, the coefficients $c_{0,1,2}$ don't, so we are fine! Let's solve this problem using linear algebra. We want to solve
+
+$$
 \begin{align}
 c_0 + c_1 \cdot 0 + c_2 \cdot 0^2 &= 6 \\
 c_0 + c_1 \cdot 1 + c_2 \cdot 1^2 &= 5 \\
 c_0 + c_1 \cdot 2 + c_2 \cdot 2^2 &= 2 \\
 c_0 + c_1 \cdot 3 + c_2 \cdot 3^2 &= 2
 \end{align}
-$$ So, we calculuate in `R`:
+$$
 
+So, we calculuate in `R`:
 ```{r cache = TRUE}
 x <- c(0,1,2,3)
-A <- matrix(cbind(x^0,x^1,x^2),nrow=4)
+A <- vander(x)[,2:4]
 b <- c(6,5,2,12)
 pseudoinv <- solve(t(A) %*% A) %*% t(A)
 c <- pseudoinv %*% b
@@ -1655,8 +1653,8 @@ bhat <- A %*% c
 r <- b - bhat
 print(c)
 plot(x,b)
-xx <- seq(from=0,to=3,length=200)
-lines(xx,horner(c,xx)$y)
+xx <- seq(from = 0, to = 3, length = 200)
+lines(xx, horner(c,xx)$y)
 print(r)
 ```
 
@@ -1677,9 +1675,9 @@ A statistics class would provide much more sophisticated ways of analyzing the e
 Adopting a least squares approach allows, potentially, massive compression of data. Suppose we had 100 points that looked like this
 
 ```{r}
-x <- seq(from=0,to=1,length=100)
-y <- 3*x + 0.4*(2*runif(100)-1)
-plot(x,y)
+x <- seq(from = 0, to = 1, length = 100)
+y <- 3*x + 0.4*(2*runif(100) - 1)
+plot(x, y)
 ```
 
 If we decided to represent this data with a line, we'd go down from having 100 pieces of information (the original data points) to merely 2 (a slope and an intercept).
@@ -1687,14 +1685,23 @@ If we decided to represent this data with a line, we'd go down from having 100 p
 ## An Optimization Viewpoint on Least Squares
 
 So far, we've taken a geometric approach to solving least-squares problems, but there's another way to get the same result: optimization. We can start directly with the square of the norm of the residual vector (a factor of 1/2 is included for algebraic convenience, but it doesn't change the result):
+
 $$
 \frac{1}{2}||\mathbf{r}||^2 = \frac{1}{2}||\mat{A}\vec{x}-\vec{b}||^2.
 $$
+
 More formally, we can define the scalar **objective function**
 $$
 f(\vec{x}) = \frac{1}{2} ||\mat{A}\vec{x}-\vec{b}||^2
 $$
-and define our least squares solution $\vec{x}_{LS}$as the value of $\vec{x}$ that minimizes this objective function, that is, $$\vec{x}_{LS} = \mathop{\mathrm{arg\,min}}_{\vec{x}} f(\vec{x}).$$ Now you know where the terminology least squares comes from! We can apply calculus to minimize this expression and the normal equations will result. This is a problem on your in-class exercise and your homework, and it is critical that you work through the details.
+
+and define our least squares solution $\vec{x}_{LS}$as the value of $\vec{x}$ that minimizes this objective function, that is,
+
+$$
+\vec{x}_{LS} = \argmin_{\vec{x}} f(\vec{x}).
+$$
+
+Now you know where the terminology least squares comes from! We can apply calculus to minimize this expression and the normal equations will result. This is a problem on your in-class exercise and your homework, and it is critical that you work through the details.
 
 # QR Factorization
 
