@@ -1592,10 +1592,10 @@ We’ll look at *κ* for the Vandermonde matrix.
     nvals <- 2^(1:8)
     kappavals <- NULL
     for (n in nvals){
-      x <- seq(from=1,to=3,length=n)
-      kappavals <- c(kappavals,kappa(Vandermonde(x)))
+      x <- seq(from = 1, to = 3, length = n)
+      kappavals <- c(kappavals, kappa(Vandermonde(x)))
     }
-    kable(cbind(nvals,kappavals))
+    kable(cbind(nvals, kappavals))
 
 <table>
 <thead>
@@ -1614,7 +1614,7 @@ kappavals
 2
 </td>
 <td style="text-align:right;">
-7.50000000000e+00
+7.500000e+00
 </td>
 </tr>
 <tr>
@@ -1622,7 +1622,7 @@ kappavals
 4
 </td>
 <td style="text-align:right;">
-2.49186893872e+03
+2.491869e+03
 </td>
 </tr>
 <tr>
@@ -1630,7 +1630,7 @@ kappavals
 8
 </td>
 <td style="text-align:right;">
-5.75363020789e+08
+5.753630e+08
 </td>
 </tr>
 <tr>
@@ -1638,7 +1638,7 @@ kappavals
 16
 </td>
 <td style="text-align:right;">
-4.55564575643e+19
+4.555646e+19
 </td>
 </tr>
 <tr>
@@ -1646,7 +1646,7 @@ kappavals
 32
 </td>
 <td style="text-align:right;">
-4.91326454030e+28
+4.913265e+28
 </td>
 </tr>
 <tr>
@@ -1654,7 +1654,7 @@ kappavals
 64
 </td>
 <td style="text-align:right;">
-5.17340173411e+44
+5.173402e+44
 </td>
 </tr>
 <tr>
@@ -1662,7 +1662,7 @@ kappavals
 128
 </td>
 <td style="text-align:right;">
-3.07806605038e+76
+3.078066e+76
 </td>
 </tr>
 <tr>
@@ -1670,7 +1670,7 @@ kappavals
 256
 </td>
 <td style="text-align:right;">
-5.91626505144e+136
+5.916265e+136
 </td>
 </tr>
 </tbody>
@@ -1687,8 +1687,7 @@ For points (1,10), (2,6), (3,4), (4,10), consider the polynomial
 $$
 \begin{align\*}
 p(x) &= 10 \frac{(x-2)(x-3)(x-4)}{(1-2)(1-3)(1-4)}
-+ 6 \frac{(x-1)(x-3)(x-4)}{(2-1)(2-3)(2-4)} \\\\
-&+ 4 \frac{(x-1)(x-2)(x-4)}{(3-1)(3-2)(3-4)} + 10 \frac{(x-1)(x-2)(x-3)}{(4-1)(4-2)(4-3)}
++ 6 \frac{(x-1)(x-3)(x-4)}{(2-1)(2-3)(2-4)} \\\\ &+ 4 \frac{(x-1)(x-2)(x-4)}{(3-1)(3-2)(3-4)} + 10 \frac{(x-1)(x-2)(x-3)}{(4-1)(4-2)(4-3)}
 \end{align\*}
 $$
 
