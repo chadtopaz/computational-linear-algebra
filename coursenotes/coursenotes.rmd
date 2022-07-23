@@ -1392,7 +1392,7 @@ lines(xx, cubicspline(xx), col = "blue", lwd = 3)
 
 Now let's work with some real data, let's say, Tesla stock price for the last 100 days (we won't actually get 100 days because of days when the markets were closed, including weekends).
 
-```{r cache = TRUE}
+```{r}
 # Set dates and stock symbol
 first.date <- Sys.Date() - 100
 last.date <- Sys.Date()
