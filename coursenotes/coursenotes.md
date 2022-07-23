@@ -2145,7 +2145,7 @@ spline.
 
     x <- c(-2,-1.5,-1,0.25,1,2,3.75,4,5)
     y <- c(4,4.2,3,5,0,-2,2,1,1)
-    xplot <- seq(from=-2,to=5,length=200)
+    xplot <- seq(from = -2, to = 5, length = 200)
     linearspline <- approxfun(x, y)
     plot(x, y, ylim = c(-2.5,5.5))
     lines(xplot, linearspline(xplot), col = "red", lwd = 2)
