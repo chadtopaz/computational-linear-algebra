@@ -1691,14 +1691,15 @@ $$
 $$
 
 More formally, we can define the scalar **objective function**
-$$
-f(\vec{x}) = \frac{1}{2} ||\mat{A}\vec{x}-\vec{b}||^2
-$$
-
-and define our least squares solution $\vec{x}_{LS}$as the value of $\vec{x}$ that minimizes this objective function, that is,
 
 $$
-\vec{x}_{LS} = \argmin_{\vec{x}} f(\vec{x}).
+f(\vec{x}) = \frac{1}{2} ||\mat{A}\,\vec{x}-\vec{b}||^2
+$$
+
+and define our least squares solution $\vec{x}_{L\,S}$as the value of $\vec{x}$ that minimizes this objective function, that is,
+
+$$
+\vec{x}_{L\,S} = \argmin_{\vec{x}} f(\vec{x}).
 $$
 
 Now you know where the terminology least squares comes from! We can apply calculus to minimize this expression and the normal equations will result. This is a problem on your in-class exercise and your homework, and it is critical that you work through the details.

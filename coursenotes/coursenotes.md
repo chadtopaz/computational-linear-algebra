@@ -2700,14 +2700,15 @@ $$
 $$
 
 More formally, we can define the scalar **objective function**
+
 $$
-f(\mathbf{x}) = \frac{1}{2} ||\mathbf{A}\mathbf{x}-\mathbf{b}||^2
+f(\mathbf{x}) = \frac{1}{2} ||\mathbf{A}\\,\mathbf{x}-\mathbf{b}||^2
 $$
 
-and define our least squares solution **x**<sub>*L**S*</sub>as the value
-of **x** that minimizes this objective function, that is,
+and define our least squares solution **x**<sub>*L* *S*</sub>as the
+value of **x** that minimizes this objective function, that is,
 
-**x**<sub>*L**S*</sub> = arg min<sub>**x**</sub>*f*(**x**).
+**x**<sub>*L* *S*</sub> = arg min<sub>**x**</sub>*f*(**x**).
 
 Now you know where the terminology least squares comes from! We can
 apply calculus to minimize this expression and the normal equations will
