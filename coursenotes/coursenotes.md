@@ -2352,14 +2352,9 @@ no reason to expect a complicated relationship, so let’s try modeling
 the data with a line, *s* = *x*<sub>0</sub> + *x*<sub>1</sub>*a* where
 *x*<sub>0, 1</sub> are unknown coefficients. Plugging in to the model,
 we find
-$$
-\begin{align}
-x\_0 + 3x\_1 &= 105\\\\
-x\_0 + 4x\_1 &= 117\\\\
-x\_0 + 5x\_1 &= 141\\\\
-x\_0 + 6x\_1 &= 152
-\end{align}
-$$
+$$ \begin{aligned}
+x\_0 + 3x\_1 &= 105\\\\ x\_0 + 4x\_1 &= 117\\\\ x\_0 + 5x\_1 &= 141\\\\ x\_0 + 6x\_1 &= 152
+\end{aligned} $$
 
 which we can write in vector form as
 
