@@ -2419,11 +2419,11 @@ $$
 \begin{align}
 \widehat{\mathbf{b}} &= \mathbf{A}x \\\\
 &=\mathbf{A}\left(\mathbf{A}^T \mathbf{A}\right)^{-1}\mathbf{A}^T \mathbf{b}\\\\
-& = \mathbf{P} \mathbf{b}.
+& = \mathbf{P} \mathbf{b}
 \end{align}
 $$
 
-where thre last equation defines a new quantity that we call **P**.
+where the last equation defines a new quantity that we call **P**.
 
 Let us know revisit what we have done and emphasize/introduce some
 vocabulary. We started with a vector **A** that we used as a **basis**
@@ -2477,10 +2477,10 @@ Let’s calculate this concretely in `R`.
     ## [1,]    8
     ## [2,]    4
 
-    dot <- function(v1,v2){sum(v1*v2)}
-    dot(a,r)
+    t(a) %*% r # Dot product
 
-    ## [1] 0
+    ##      [,1]
+    ## [1,]    0
 
 ## Projection onto a Plane
 

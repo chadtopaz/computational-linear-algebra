@@ -1511,11 +1511,11 @@ $$
 \begin{align}
 \widehat{\vec{b}} &= \mat{A}x \\
 &=\mat{A}\left(\mat{A}^T \mat{A}\right)^{-1}\mat{A}^T \vec{b}\\
-& = \mathbf{P} \vec{b}.
+& = \mathbf{P} \vec{b}
 \end{align}
 $$
 
-where thre last equation defines a new quantity that we call $\mathbf{P}$.
+where the last equation defines a new quantity that we call $\mathbf{P}$.
 
 Let us know revisit what we have done and emphasize/introduce some vocabulary. We started with a vector $\mat{A}$ that we used as a **basis** to try to reach the **target** $\vec{b}$. We couldn't do it exactly, so we calcualted the closest we could come to $\vec{b}$, which turned out to be $\widehat{\vec{b}}$. This is called the **projection** of $\vec{b}$ into the subspace spanned by $\mat{A}$. We found $\widehat{\vec{b}} = \mat{A}x$, where $x$ is called the **least squares solution**, which solved the **normal equations** $\mat{A}^T \mat{A} x = \mat{A}^T \vec{b}$. We can summarize the calculation of $x$ by remembering $x = \left(\mat{A}^T \mat{A}\right)^{-1}\mat{A}^T \vec{b}$ where $\left(\mat{A}^T \mat{A}\right)^{-1}\mat{A}^T$ is called the **pseudoinverse** of $\mat{A}$. Also, we can summarize the calculation of $\widehat{\vec{b}}$ as $\widehat{\vec{b}} = \mathbf{P} \vec{b}$ where $\mathbf{P} = \mat{A} (\mat{A}^T\mat{A})^{-1} \mat{A}^T$ is what we call a **projection operator** or a **projection matrix**. Since we didn't succeed in reaching $\vec{b}$, there is some error, and we call this the **residual**, $\mathbf{r} = \vec{b}-\widehat{\vec{b}}$.
 
@@ -1541,8 +1541,7 @@ bhat <- a %*% x
 r <- b - bhat
 print(x)
 print(bhat)
-dot <- function(v1,v2){sum(v1*v2)}
-dot(a,r)
+t(a) %*% r # Dot product
 ```
 
 ## Projection onto a Plane
