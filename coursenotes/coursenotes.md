@@ -2295,14 +2295,16 @@ markets were closed, including weekends).
     sampledprice <- price[seq(from = 1, to = length(price), by = 5)]
     # Fit interpolating polynomial
     interpolatedprice <- lagrangeInterp(sampledday, sampledprice, day[1:max(sampledday)])
-    plot(day[1:max(sampledday)], interpolatedprice, col = "red", type = "l", ylim = c(800,1200))
+    ymin <- min(price) - 0.1*(max(price) - min(price))
+    ymax <- max(price) + 0.1*(max(price) - min(price))
+    plot(day[1:max(sampledday)], interpolatedprice, col = "red", type = "l", ylim = c(ymin,ymax))
     points(day, price, col = "blue")
 
 ![](coursenotes_files/figure-markdown_strict/unnamed-chunk-42-1.png)
 
     # Fit splines
     TSLAspline <- splinefun(sampledday, sampledprice, method = "natural")
-    plot(day, TSLAspline(day), col = "blue", type = "l", ylim = c(800,1200))
+    plot(day, TSLAspline(day), col = "blue", type = "l", ylim = c(ymin,ymax))
     points(day, price, col = "blue")
 
 ![](coursenotes_files/figure-markdown_strict/unnamed-chunk-42-2.png)
