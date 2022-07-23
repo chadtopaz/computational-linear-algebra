@@ -1010,7 +1010,7 @@ $$
 p(x) = \sum_{i = 1}^n y_i \prod_{j \not = i} \frac{(x - x_j)}{(x_i - x_j)}.
 $$
 
-The advantage of this method is that it doesn't require any numerical solution... just evaluation. Let's try a comparison: Vandermonde vs. Lagrange. Here, I'll use R's `baryalg` function. This function has some strengths and some weaknesses.
+The advantage of this method is that it doesn't require any numerical solution... just evaluation. Let's try a comparison: Vandermonde vs. Lagrange. Here, I'll use R's `lagrangeInterp` function.
 
 ```{r error = TRUE, cache = TRUE}
 set.seed(123)
@@ -1019,8 +1019,8 @@ x <- 1:n
 y <- runif(n)
 x0 <- 1.5
 c <- solve(vander(x),y)
-horner(c, x0)
-barylag(x,y,x0)
+horner(c, x0)$y
+lagrangeInterp(x,y,x0)
 ```
 
 We can also do a speed comparison test.
@@ -1040,7 +1040,7 @@ t1 <- system.time(
 t2 <- system.time(
   for (i in 1:numTrials){
     y <- runif(n)
-    barylag(x,y,x0)
+    lagrangeInterp(x,y,x0)
   }
 )[3]
 as.numeric(t1/t2)
@@ -1056,7 +1056,7 @@ interperror <- function(n,plotflag=FALSE){
   y <- sin(x)
   xexact <- seq(from=0,to=2*pi,length=1000)
   yexact <- sin(xexact)
-  yinterp <- barylag(x,y,xexact)
+  yinterp <- lagrangeInterp(x,y,xexact)
   if (plotflag==TRUE){
     plot(xexact,yexact,type="l")
     points(x,y)
@@ -1136,12 +1136,12 @@ Now let's think now about interpolating polynomials. Let's consider $\cos(x)$ wi
 x <- seq(from=0,to=2*pi,length=1000)
 y <- cos(x)
 plot(x,y,type="l",col="red",lwd=5,xlim=c(0,2*pi),ylim=c(-1.1,1.1))
-nvec <- 2:20
+nvec <- 3:20
 error <- NULL
 for (n in nvec){
   xdata <- seq(from=0,to=2*pi,length=n)
   ydata <- cos(xdata)
-  yinterp <- barylag(xdata,ydata,x)
+  yinterp <- lagrangeInterp(xdata,ydata,x)
   lines(x,yinterp)
   error <- c(error,max(abs(y-yinterp)))
 }
@@ -1154,12 +1154,12 @@ Looks good! Let's try again with a different function, $f(x) = (1+x^2)^{-1}$ on 
 x <- seq(from=-5,to=5,length=1000)
 y <- 1/(1+x^2)
 plot(x,y,type="l",col="red",lwd=5,xlim=c(-5,5),ylim=c(-3,3))
-nvec <- seq(from=2,to=32,by=6)
+nvec <- seq(from=3,to=33,by=6)
 error <- NULL
 for (n in nvec){
   xdata <- seq(from=-5,to=5,length=n)
   ydata <- 1/(1+xdata^2)
-  yinterp <- barylag(xdata,ydata,x)
+  yinterp <- lagrangeInterp(xdata,ydata,x)
   lines(x,yinterp)
   error <- c(error,max(abs(y-yinterp)))
 }
@@ -1198,7 +1198,13 @@ $$
 |f(x) - P_1(x)| \leq \frac{\mathrm{e}h^2}{8}.
 $$
 
-For our desired level of accuracy, we need $$ \frac{\mathrm{e}h^2}{8} \leq 0.5 \times 10^{-5}. $$ Solving for $h$, we find $h \lessapprox 3.8 \times 10^{-3}$. That is the space between points, so on $[0,1]$ this corresponds to just over 260 points.
+For our desired level of accuracy, we need
+
+$$
+\frac{\mathrm{e}h^2}{8} \leq 0.5 \times 10^{-5}.
+$$
+
+Solving for $h$, we find $h \lessapprox 3.8 \times 10^{-3}$. That is the space between points, so on $[0,1]$ this corresponds to just over 260 points.
 
 ## Chebyshev Nodes
 
@@ -1274,7 +1280,7 @@ yexact <- f(xexact)
 plot(xexact,yexact,type="l",lwd=3,xlim=c(a,b),ylim=c(-0.2,0.5))
 n <- 30
 xequal <- seq(from=a,to=b,length=n)
-yequal <- lagrange(xequal,f(xequal),xexact)
+yequal <- lagrangeInterp(xequal,f(xequal),xexact)
 lines(xexact,yequal,col="red",lwd=2)
 ```
 
@@ -1302,7 +1308,7 @@ while (error > 0.5e-4){
   n <- n+1
   odds <- seq(from=1,to=2*n-1,by=2)
   xcheb <- sort((b+a)/2 + (b-a)/2*cos(odds*pi/2/n))
-  ycheb <- lagrange(xcheb, f(xcheb), xexact)
+  ycheb <- lagrangeInterp(xcheb, f(xcheb), xexact)
   error <- max(abs(yexact-ycheb))
 }
 ncheb <- n
@@ -1311,7 +1317,7 @@ print(ncheb)
 
 This is an improvement in compression by a factor of `r nlookup`/`r ncheb` = `r nlookup/ncheb`.
 
-## Why Cubic Splines?
+## Cubic Splines
 
 I've tried to convince you that it can be problematic to construct interpolating polynomials of high degree. When dealing with a lot of data, an alternative approach can be to construct low degree interpolating polynomials through successive sets of points. Typically we use cubics, and these are called cubic splines.
 
@@ -1378,7 +1384,7 @@ x <- sort(runif(n))
 y <- cumsum(abs(rnorm(n)))
 plot(x,y,pch=19,ylim=c(-2,35),cex=1.5)
 xx = seq(from=min(x),to=max(x),length=1000)
-yy = barylag(x,y,xx)
+yy = lagrangeInterp(x,y,xx)
 lines(xx,yy,col="red",lwd=3)
 cubicspline <- splinefun(x,y,method='natural')
 lines(xx,cubicspline(xx),col="blue",lwd=3)
@@ -1399,7 +1405,7 @@ day <- 1:length(price)
 sampledday <- day[seq(from=1,to=length(price),by=5)]
 sampledprice <- price[seq(from=1,to=length(price),by=5)]
 # Fit interpolating polynomial
-interpolatedprice <- barylag(sampledday,sampledprice,day[1:max(sampledday)])
+interpolatedprice <- lagrangeInterp(sampledday,sampledprice,day[1:max(sampledday)])
 plot(day[1:max(sampledday)],interpolatedprice,col="red",type="l",ylim=c(800,1200))
 points(day,price,col="blue")
 # Fit splines

@@ -1721,8 +1721,7 @@ $$
 
 The advantage of this method is that it doesn’t require any numerical
 solution… just evaluation. Let’s try a comparison: Vandermonde
-vs. Lagrange. Here, I’ll use R’s `baryalg` function. This function has
-some strengths and some weaknesses.
+vs. Lagrange. Here, I’ll use R’s `lagrangeInterp` function.
 
     set.seed(123)
     n <- 10
@@ -1730,17 +1729,13 @@ some strengths and some weaknesses.
     y <- runif(n)
     x0 <- 1.5
     c <- solve(vander(x),y)
-    horner(c, x0)
+    horner(c, x0)$y
 
-    ## $y
-    ## [1] -0.157060132098
-    ## 
-    ## $dy
-    ## [1] 2.41438899384
+    ## [1] -0.1570601
 
-    barylag(x,y,x0)
+    lagrangeInterp(x,y,x0)
 
-    ## [1] -0.157060132133
+    ## [1] -0.1570601
 
 We can also do a speed comparison test.
 
@@ -1758,12 +1753,12 @@ We can also do a speed comparison test.
     t2 <- system.time(
       for (i in 1:numTrials){
         y <- runif(n)
-        barylag(x,y,x0)
+        lagrangeInterp(x,y,x0)
       }
     )[3]
     as.numeric(t1/t2)
 
-    ## [1] 24.1125
+    ## [1] 79.5
 
 ## Data Compression
 
@@ -1786,7 +1781,7 @@ values at which you’d like interpolated values.
       y <- sin(x)
       xexact <- seq(from=0,to=2*pi,length=1000)
       yexact <- sin(xexact)
-      yinterp <- barylag(x,y,xexact)
+      yinterp <- lagrangeInterp(x,y,xexact)
       if (plotflag==TRUE){
         plot(xexact,yexact,type="l")
         points(x,y)
@@ -1799,7 +1794,7 @@ values at which you’d like interpolated values.
 
 ![](coursenotes_files/figure-markdown_strict/unnamed-chunk-28-1.png)
 
-    ## [1] 0.180757796555
+    ## [1] 0.1807578
 
 Not bad for just 5 points. Let’s examine how the error changes as a
 function of *n*.
@@ -1884,12 +1879,12 @@ different values of *n*.
     x <- seq(from=0,to=2*pi,length=1000)
     y <- cos(x)
     plot(x,y,type="l",col="red",lwd=5,xlim=c(0,2*pi),ylim=c(-1.1,1.1))
-    nvec <- 2:20
+    nvec <- 3:20
     error <- NULL
     for (n in nvec){
       xdata <- seq(from=0,to=2*pi,length=n)
       ydata <- cos(xdata)
-      yinterp <- barylag(xdata,ydata,x)
+      yinterp <- lagrangeInterp(xdata,ydata,x)
       lines(x,yinterp)
       error <- c(error,max(abs(y-yinterp)))
     }
@@ -1906,12 +1901,12 @@ Looks good! Let’s try again with a different function,
     x <- seq(from=-5,to=5,length=1000)
     y <- 1/(1+x^2)
     plot(x,y,type="l",col="red",lwd=5,xlim=c(-5,5),ylim=c(-3,3))
-    nvec <- seq(from=2,to=32,by=6)
+    nvec <- seq(from=3,to=33,by=6)
     error <- NULL
     for (n in nvec){
       xdata <- seq(from=-5,to=5,length=n)
       ydata <- 1/(1+xdata^2)
-      yinterp <- barylag(xdata,ydata,x)
+      yinterp <- lagrangeInterp(xdata,ydata,x)
       lines(x,yinterp)
       error <- c(error,max(abs(y-yinterp)))
     }
@@ -1989,7 +1984,11 @@ $$
 $$
 
 For our desired level of accuracy, we need
-$$ \frac{\mathrm{e}h^2}{8} \leq 0.5 \times 10^{-5}. $$
+
+$$
+\frac{\mathrm{e}h^2}{8} \leq 0.5 \times 10^{-5}.
+$$
+
 Solving for *h*, we find *h* ⪅ 3.8 × 10<sup>−3</sup>. That is the space
 between points, so on \[0,1\] this corresponds to just over 260 points.
 
@@ -2081,7 +2080,7 @@ anyway, say, on \[−10,10\] with 30 data points to start with.
     plot(xexact,yexact,type="l",lwd=3,xlim=c(a,b),ylim=c(-0.2,0.5))
     n <- 30
     xequal <- seq(from=a,to=b,length=n)
-    yequal <- lagrange(xequal,f(xequal),xexact)
+    yequal <- lagrangeInterp(xequal,f(xequal),xexact)
     lines(xexact,yequal,col="red",lwd=2)
 
 ![](coursenotes_files/figure-markdown_strict/unnamed-chunk-36-1.png)
@@ -2112,7 +2111,7 @@ Now we can go back to polynomial interpolation with Chebyshev nodes.
       n <- n+1
       odds <- seq(from=1,to=2*n-1,by=2)
       xcheb <- sort((b+a)/2 + (b-a)/2*cos(odds*pi/2/n))
-      ycheb <- lagrange(xcheb, f(xcheb), xexact)
+      ycheb <- lagrangeInterp(xcheb, f(xcheb), xexact)
       error <- max(abs(yexact-ycheb))
     }
     ncheb <- n
@@ -2123,7 +2122,7 @@ Now we can go back to polynomial interpolation with Chebyshev nodes.
 This is an improvement in compression by a factor of 632/41 =
 15.4146341.
 
-## Why Cubic Splines?
+## Cubic Splines
 
 I’ve tried to convince you that it can be problematic to construct
 interpolating polynomials of high degree. When dealing with a lot of
@@ -2249,7 +2248,7 @@ polynomial interpolation, let’s do a cooked example.
     y <- cumsum(abs(rnorm(n)))
     plot(x,y,pch=19,ylim=c(-2,35),cex=1.5)
     xx = seq(from=min(x),to=max(x),length=1000)
-    yy = barylag(x,y,xx)
+    yy = lagrangeInterp(x,y,xx)
     lines(xx,yy,col="red",lwd=3)
     cubicspline <- splinefun(x,y,method='natural')
     lines(xx,cubicspline(xx),col="blue",lwd=3)
@@ -2288,7 +2287,7 @@ markets were closed, including weekends).
     sampledday <- day[seq(from=1,to=length(price),by=5)]
     sampledprice <- price[seq(from=1,to=length(price),by=5)]
     # Fit interpolating polynomial
-    interpolatedprice <- barylag(sampledday,sampledprice,day[1:max(sampledday)])
+    interpolatedprice <- lagrangeInterp(sampledday,sampledprice,day[1:max(sampledday)])
     plot(day[1:max(sampledday)],interpolatedprice,col="red",type="l",ylim=c(800,1200))
     points(day,price,col="blue")
 
