@@ -1972,11 +1972,11 @@ method, how many points must we take on \[0,1\]? (Note: crucially, this
 is not at all the same as creating a single interpolating polynomial
 that goes through all the points.) We have
 
-$$\begin{align\\\*}
-|f(x) - P\_1(x)| &= \left|\frac{f^{(n)}(c)}{n!}(x-x\_1)(x-x\_2)\cdots (x-x\_n)\right|\\
-&= \left|\frac{\left(\mathrm{e}^{x}\right)^{''}|\\\_c}{2!}(x-x\_1)(x-x\_2)\right| \\
+$$\begin{align\*}
+|f(x) - P\_1(x)| &= \left|\frac{f^{(n)}(c)}{n!}(x-x\_1)(x-x\_2)\cdots (x-x\_n)\right|\\ \\\\
+&= \left|\frac{\left(\mathrm{e}^{x}\right)^{''}|\_c}{2!}(x-x\_1)(x-x\_2)\right| \\\\ \\ 
 & = \left|\frac{\mathrm{e}^{c}}{2} (x-x\_1)(x-x\_1-h)\right|
-\end{align\\\*}$$
+\end{align\*}$$
 
 Here, I’ve called the spacing between the two points *h*, that is
 *x*<sub>2</sub> = *x*<sub>1</sub> + *h*. Now, we can ask what is the

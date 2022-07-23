@@ -1186,11 +1186,11 @@ for some $c \in [x_1,x_n]$. If you are interested in the proof, I am happy to go
 
 Let's use the error term to do an example, where we again ask the question HOW DO WE EVEN KNOW ANYTHING? For instance, suppose you want to calculate the value of an exponential function. [This turns out to be hard](https://math.stackexchange.com/questions/1239352/how-do-pocket-calculators-calculate-exponents)! Let's restrict the problem a bit. Suppose we want to calculate $\mathrm{e}^{x}$ on $[0,1]$ with 5 digits of accuracy. One way to do this would be to choose equally-spaced points on $[0,1]$ and make a table of $\mathrm{e}^{x}$ for those values using some very accurate method. Then, we let the user choose a value of $x$. We find the two values that surround it in our table, construct the linear interpolating polynomial between them, and use it to estimate our answer. For instance, if we chose $x$ values of $0.1, 0.2, \ldots, 1$ and the user input $x=0.3268$, we would construct the inteprolating polynomial through $(0.3,\mathrm{e}^{0.3})$ and $(0.4,\mathrm{e}^{0.4})$ and then plug in our $x$. Let's ask the question: to achieve 5-digit accuracy with this method, how many points must we take on $[0,1]$? (Note: crucially, this is not at all the same as creating a single interpolating polynomial that goes through all the points.) We have
 
-$$\begin{align\*}
-|f(x) - P_1(x)| &= \left|\frac{f^{(n)}(c)}{n!}(x-x_1)(x-x_2)\cdots (x-x_n)\right|\
-&= \left|\frac{\left(\mathrm{e}^{x}\right)^{''}|\_c}{2!}(x-x_1)(x-x_2)\right| \
+$$\begin{align*}
+|f(x) - P_1(x)| &= \left|\frac{f^{(n)}(c)}{n!}(x-x_1)(x-x_2)\cdots (x-x_n)\right|\ \\
+&= \left|\frac{\left(\mathrm{e}^{x}\right)^{''}|_c}{2!}(x-x_1)(x-x_2)\right| \\ \ 
 & = \left|\frac{\mathrm{e}^{c}}{2} (x-x_1)(x-x_1-h)\right|
-\end{align\*}$$
+\end{align*}$$
 
 Here, I've called the spacing between the two points $h$, that is $x_2 = x_1 + h$. Now, we can ask what is the worst (biggest) that the term $\left|(x-x_1)(x-x_1-h)\right|$ can be, and via calculus, we can show it is $h^2/4$. Also, on our interval of interest, we know that $\mathrm{e}^{c} \leq \mathrm{e}^{1}$. Therefore, we can write
 
