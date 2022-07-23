@@ -877,7 +877,7 @@ Now we enter into the part of this course that is about data. As scientists, oft
 
 ```{r echo = FALSE, cache = TRUE}
 f <- function(x){1/x}
-x <- seq(from=1,to=3,length=8)
+x <- seq(from = 1, to = 3, length = 8)
 y <- f(x)
 ```
 
@@ -902,14 +902,14 @@ Even though I haven't yet told you how to find an interpolating polynomial, let'
 
 ```{r cache = TRUE}
 f <- function(x){1/x}
-tee <- function(x){3-3*x+x^2}
+tee <- function(x){3 - 3*x + x^2}
 p <- function(x){11/6 - x + 1/6*x^2}
-xdata <- seq(from=1,to=3,length=3)
-x <- seq(from=1,to=3,length=200)
-plot(x,f(x),type="l",lwd=2)
-lines(x,tee(x),col="red",lwd=2)
-points(xdata,f(xdata),cex=2)
-lines(x,p(x),col="green",lwd=2)
+xdata <- seq(from = 1, to = 3, length = 3)
+x <- seq(from = 1, to = 3,length = 200)
+plot(x, f(x), type="l", lwd = 2)
+lines(x, tee(x), col = "red", lwd = 2)
+points(xdata, f(xdata), cex = 2)
+lines(x, p(x), col = "green", lwd = 2)
 ```
 
 A few important points to know about the interpolating polynomial through $n$ points with distinct $x$ coordinates include:
@@ -939,11 +939,9 @@ $$
 1 & x_1 & x_1^2 \\
 1 & x_2 & x_2^2 \\
 1 & x_3 & x_3^2
-\end{pmatrix}
-\begin{pmatrix}
+\end{pmatrix} \begin{pmatrix}
 c_0 \\ c_1 \\ c_2
-\end{pmatrix}
-=
+\end{pmatrix} =
 \begin{pmatrix}
 y_1 \\ y_2 \\ y_3
 \end{pmatrix}

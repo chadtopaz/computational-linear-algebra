@@ -1503,14 +1503,14 @@ using three points from sampled equally across the interval, namely
 (1,1), (2,1/2), (3,1/3), is 11/6 − *x* + (1/6)*x*<sup>2</sup>.
 
     f <- function(x){1/x}
-    tee <- function(x){3-3*x+x^2}
+    tee <- function(x){3 - 3*x + x^2}
     p <- function(x){11/6 - x + 1/6*x^2}
-    xdata <- seq(from=1,to=3,length=3)
-    x <- seq(from=1,to=3,length=200)
-    plot(x,f(x),type="l",lwd=2)
-    lines(x,tee(x),col="red",lwd=2)
-    points(xdata,f(xdata),cex=2)
-    lines(x,p(x),col="green",lwd=2)
+    xdata <- seq(from = 1, to = 3, length = 3)
+    x <- seq(from = 1, to = 3,length = 200)
+    plot(x, f(x), type="l", lwd = 2)
+    lines(x, tee(x), col = "red", lwd = 2)
+    points(xdata, f(xdata), cex = 2)
+    lines(x, p(x), col = "green", lwd = 2)
 
 ![](coursenotes_files/figure-markdown_strict/unnamed-chunk-23-1.png)
 
@@ -1549,11 +1549,9 @@ $$
 1 & x\_1 & x\_1^2 \\\\
 1 & x\_2 & x\_2^2 \\\\
 1 & x\_3 & x\_3^2
-\end{pmatrix}
-\begin{pmatrix}
+\end{pmatrix} \begin{pmatrix}
 c\_0 \\\\ c\_1 \\\\ c\_2
-\end{pmatrix}
-=
+\end{pmatrix} =
 \begin{pmatrix}
 y\_1 \\\\ y\_2 \\\\ y\_3
 \end{pmatrix}
