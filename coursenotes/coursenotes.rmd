@@ -1620,7 +1620,7 @@ t(r) %*% a0
 t(r) %*% a1
 plot(a1, b, xlab = "advertising", ylab = "sales")
 xx <- seq(from = 0, to = 6, length = 200)
-lines(xx, horner(as.numeric(x), xx)$y)
+lines(xx, horner(rev(x), xx)$y) # Note we need to reverse order of coefficients
 ```
 
 Symbolically, we calculated the least squares solution $\vec{x} = \left(\mat{A}^T \mat{A}\right)^{-1}\mat{A}^T \vec{b}$ where $\left(\mat{A}^T \mat{A}\right)^{-1}\mat{A}^T$ is the pseudoinverse. The projection is $\widehat{\vec{b}} = \mat{A} \vec{x} = \mat{A} \left(\mat{A}^T \mat{A}\right)^{-1}\mat{A}^T \vec{b}$ where $\mat{A} \left(\mat{A}^T \mat{A}\right)^{-1}\mat{A}^T$ is the projection matrix.

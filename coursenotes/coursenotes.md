@@ -2581,7 +2581,7 @@ Let’s calculuate this in `R`.
 
     plot(a1, b, xlab = "advertising", ylab = "sales")
     xx <- seq(from = 0, to = 6, length = 200)
-    lines(xx, horner(as.numeric(x), xx)$y)
+    lines(xx, horner(rev(x), xx)$y) # Note we need to reverse order of coefficients
 
 ![](coursenotes_files/figure-markdown_strict/unnamed-chunk-47-1.png)
 
