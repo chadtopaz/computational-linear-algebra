@@ -2639,7 +2639,7 @@ So, we calculuate in `R`:
 
     plot(x,b)
     xx <- seq(from = 0, to = 3, length = 200)
-    lines(xx, horner(c,xx)$y)
+    lines(xx, horner(c, xx)$y)
 
 ![](coursenotes_files/figure-markdown_strict/unnamed-chunk-48-1.png)
 
@@ -2653,8 +2653,8 @@ So, we calculuate in `R`:
 
 If model parameters don’t appear in a linear fashion, sometimes you can
 transform the equation so that they do. For example, if you wanted to
-fit data to *y* = *C*e<sup>*k**x*</sup>, you could take the log of both
-sides to obtain ln *y* = ln *C* + *k**x*. By considering the data
+fit data to *y* = *C*e<sup>*k* *x*</sup>, you could take the log of both
+sides to obtain ln *y* = ln *C* + *k* *x*. By considering the data
 (*x*,ln*y*) you could take a least squares approach to find ln *C* and
 *k*.
 
