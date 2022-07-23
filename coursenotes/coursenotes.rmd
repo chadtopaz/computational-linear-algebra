@@ -985,12 +985,10 @@ Let's seek an alternative method that gets around these issues. There's actually
 
 For points $(1,10), (2, 6), (3,4), (4,10)$, consider the polynomial
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 p(x) &= 10 \frac{(x-2)(x-3)(x-4)}{(1-2)(1-3)(1-4)}
 + 6 \frac{(x-1)(x-3)(x-4)}{(2-1)(2-3)(2-4)} \\ &+ 4 \frac{(x-1)(x-2)(x-4)}{(3-1)(3-2)(3-4)} + 10 \frac{(x-1)(x-2)(x-3)}{(4-1)(4-2)(4-3)}
-\end{aligned}
-$$
+\end{aligned}$$
 
 First, notice the pattern of how each term is constructed: there's a coefficient times a polynomial. The coefficient is the $y$-value of an interpolation point. The polynomial is one that is equal to $1$ at that the $x$-coordinate of that point, and $0$ at the $x$-coordinate of every other point. So now we ask...
 
