@@ -2655,7 +2655,7 @@ If model parameters don’t appear in a linear fashion, sometimes you can
 transform the equation so that they do. For example, if you wanted to
 fit data to *y* = *C*e<sup>*k* *x*</sup>, you could take the log of both
 sides to obtain ln *y* = ln *C* + *k* *x*. By considering the data
-(*x*,ln*y*) you could take a least squares approach to find ln *C* and
+(*x*, ln*y*) you could take a least squares approach to find ln *C* and
 *k*.
 
 Overall, here’s the process one would follow for model fitting in cases
@@ -2663,9 +2663,9 @@ where the model parameters appear in a lienar fashion.
 
 1.  Look at data.
 2.  Propose a model.
-3.  Force the model, resulting in **A****x** = **b**.
+3.  Force the model, resulting in **A** **x** = **b**.
 4.  Solve the normal equations
-    **A**<sup>*T*</sup>**A****x** = **A**<sup>*T*</sup>**b**.
+    **A**<sup>*T*</sup> **A** **x** = **A**<sup>*T*</sup> **b**.
 5.  Assess the fit of the model visually and/or using the residual
     vector.
 

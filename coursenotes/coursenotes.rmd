@@ -1658,14 +1658,14 @@ lines(xx, horner(c, xx)$y)
 print(r)
 ```
 
-If model parameters don't appear in a linear fashion, sometimes you can transform the equation so that they do. For example, if you wanted to fit data to $y = C \mathrm{e}^{k\,x}$, you could take the log of both sides to obtain $\ln y = \ln C + k\,x$. By considering the data $(x,\ln y)$ you could take a least squares approach to find $\ln C$ and $k$.
+If model parameters don't appear in a linear fashion, sometimes you can transform the equation so that they do. For example, if you wanted to fit data to $y = C \mathrm{e}^{k\,x}$, you could take the log of both sides to obtain $\ln y = \ln C + k\,x$. By considering the data $(x,\,\ln y)$ you could take a least squares approach to find $\ln C$ and $k$.
 
 Overall, here's the process one would follow for model fitting in cases where the model parameters appear in a lienar fashion.
 
 1.  Look at data.
 2.  Propose a model.
-3.  Force the model, resulting in $\mat{A}\vec{x}=\vec{b}$.
-4.  Solve the normal equations $\mat{A}^T\mat{A}\vec{x}=\mat{A}^T \vec{b}$.
+3.  Force the model, resulting in $\mat{A}\,\vec{x}=\vec{b}$.
+4.  Solve the normal equations $\mat{A}^T\,\mat{A}\,\vec{x}=\mat{A}^T\,\vec{b}$.
 5.  Assess the fit of the model visually and/or using the residual vector.
 
 A statistics class would provide much more sophisticated ways of analyzing the error.
