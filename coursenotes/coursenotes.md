@@ -1499,7 +1499,7 @@ polynomial, let’s compare the Taylor and interpolating approaches.
 Consider *f*(*x*) = 1/*x* on the interval \[1,3\]. The second degree
 Taylor polynomal through *x* = 1 (as an example) is
 *T*(*x*) = 3 − 3*x* + *x*<sup>2</sup>. The interpolating polynomial
-using three points from sampled equally across the interval, namely
+using three points sampled equally across the interval, namely
 (1,1), (2,1/2), (3,1/3), is 11/6 − *x* + (1/6)*x*<sup>2</sup>.
 
     f <- function(x){1/x}
@@ -1507,7 +1507,7 @@ using three points from sampled equally across the interval, namely
     p <- function(x){11/6 - x + 1/6*x^2}
     xdata <- seq(from = 1, to = 3, length = 3)
     x <- seq(from = 1, to = 3,length = 200)
-    plot(x, f(x), type="l", lwd = 2)
+    plot(x, f(x), type = "l", lwd = 2)
     lines(x, tee(x), col = "red", lwd = 2)
     points(xdata, f(xdata), cex = 2)
     lines(x, p(x), col = "green", lwd = 2)
@@ -1539,7 +1539,7 @@ $$
 c\_0 + c\_1 x\_1 + c\_2 x\_1^2 &= y\_1 \\\\
 c\_0 + c\_1 x\_2 + c\_2 x\_2^2 &= y\_2 \\\\
 c\_0 + c\_1 x\_3 + c\_2 x\_3^2 &= y\_3
-\end{align\*}
+\end{align\*}.
 $$
 
 We can write this in matrix form as
@@ -1554,7 +1554,7 @@ c\_0 \\\\ c\_1 \\\\ c\_2
 \end{pmatrix} =
 \begin{pmatrix}
 y\_1 \\\\ y\_2 \\\\ y\_3
-\end{pmatrix}
+\end{pmatrix}.
 $$
 
 and solve the linear system to find the coefficients *c*<sub>*i*</sub>.
@@ -1746,19 +1746,19 @@ We can also do a speed comparison test.
     t1 <- system.time(
       for (i in 1:numTrials){
         y <- runif(n)
-        c <- echelon(vander(x),y)[, n+1]
-        horner(c,x0)
+        c <- echelon(vander(x), y)[, n+1]
+        horner(c, x0)
       }
     )[3]
     t2 <- system.time(
       for (i in 1:numTrials){
         y <- runif(n)
-        lagrangeInterp(x,y,x0)
+        lagrangeInterp(x, y, x0)
       }
     )[3]
     as.numeric(t1/t2)
 
-    ## [1] 79.5
+    ## [1] 79.375
 
 ## Data Compression
 
@@ -1776,21 +1776,21 @@ polynomial, plots the function and the polynomial, and calculates the
 maximum error. The inputs are your *x* data, your *y* data, and the *x*
 values at which you’d like interpolated values.
 
-    interperror <- function(n,plotflag=FALSE){
-      x <- seq(from=0,to=2*pi,length=n)
+    interperror <- function(n, plotflag = FALSE){
+      x <- seq(from = 0, to = 2*pi, length = n)
       y <- sin(x)
-      xexact <- seq(from=0,to=2*pi,length=1000)
+      xexact <- seq(from = 0, to = 2*pi, length = 1000)
       yexact <- sin(xexact)
-      yinterp <- lagrangeInterp(x,y,xexact)
-      if (plotflag==TRUE){
-        plot(xexact,yexact,type="l")
-        points(x,y)
-        lines(xexact,yinterp,col="blue")
+      yinterp <- lagrangeInterp(x, y, xexact)
+      if (plotflag == TRUE){
+        plot(xexact, yexact, type = "l")
+        points(x, y)
+        lines(xexact, yinterp, col = "blue")
       }
-      error <- max(abs(yexact-yinterp))
+      error <- max(abs(yexact - yinterp))
       return(error)
     }
-    interperror(5,plotflag=TRUE)
+    interperror(5, plotflag = TRUE)
 
 ![](coursenotes_files/figure-markdown_strict/unnamed-chunk-28-1.png)
 
@@ -1802,10 +1802,17 @@ function of *n*.
     nvec <- 2:20
     errorvec <- NULL
     for (n in nvec){
-      errorvec <- c(errorvec,interperror(n))
+      errorvec <- c(errorvec, interperror(n))
     }
+
+    ## Warning in max(abs(yexact - yinterp)): no non-missing arguments to max;
+    ## returning -Inf
+
     orderofmag <- round(log10(errorvec))
-    plot(nvec,orderofmag)
+
+    ## Warning: NaNs produced
+
+    plot(nvec, orderofmag)
 
 ![](coursenotes_files/figure-markdown_strict/unnamed-chunk-29-1.png)
 
@@ -1834,15 +1841,15 @@ $$
 
     mytaylor1 <- function(x,n){
       ans <- 0
-      for (i in seq(from=0,to=n,by=2)){
+      for (i in seq(from = 0, to = n, by = 2)){
         ans <- ans + (-1)^(i/2)*x^i/factorial(i)
       }
       return(ans)
     }
-    x <- seq(from=0,to=2*pi,length=1000)
-    plot(x,cos(x),type="l",col="red",lwd=5,xlim=c(0,2*pi),ylim=c(-1.5,1.5),xlab="x",ylab="y")
-    for (n in seq(from=0,to=14,by=2)){
-      lines(x,mytaylor1(x,n))
+    x <- seq(from = 0, to = 2*pi, length = 1000)
+    plot(x, cos(x), type = "l", col = "red", lwd = 5, xlim = c(0,2*pi), ylim = c(-1.5,1.5), xlab = "x", ylab = "y")
+    for (n in seq(from = 0,to = 14,by = 2)){
+      lines(x, mytaylor1(x, n))
     }
 
 ![](coursenotes_files/figure-markdown_strict/unnamed-chunk-30-1.png)
@@ -1857,15 +1864,15 @@ $$
 
     mytaylor2 <- function(x,n){
       ans <- 0
-      for (i in seq(from=0,to=n,by=1)){
+      for (i in seq(from = 0, to = n, by = 1)){
         ans <- ans + (-1)^(i)*(x-1)^(i)
       }
       return(ans)
     }
-    x <- seq(from=1,to=2.5,length=1000)
-    plot(x,1/x,type="l",col="red",lwd=5,xlim=c(1,2.5),ylim=c(0,1.5),xlab="x",ylab="y")
-    for (n in seq(from=0,to=40,by=4)){
-      lines(x,mytaylor2(x,n))
+    x <- seq(from = 1, to = 2.5, length = 1000)
+    plot(x,1/x, type = "l", col = "red", lwd = 5, xlim = c(1,2.5), ylim = c(0,1.5), xlab = "x", ylab = "y")
+    for (n in seq(from = 0, to = 40, by = 4)){
+      lines(x, mytaylor2(x, n))
     }
 
 ![](coursenotes_files/figure-markdown_strict/unnamed-chunk-31-1.png)
@@ -1876,44 +1883,44 @@ Now let’s think now about interpolating polynomials. Let’s consider
 cos (*x*) with *n* equally sampled points across \[0,2*π*\] for
 different values of *n*.
 
-    x <- seq(from=0,to=2*pi,length=1000)
+    x <- seq(from = 0, to = 2*pi, length = 1000)
     y <- cos(x)
-    plot(x,y,type="l",col="red",lwd=5,xlim=c(0,2*pi),ylim=c(-1.1,1.1))
+    plot(x, y, type = "l", col = "red", lwd = 5, xlim = c(0,2*pi), ylim = c(-1.1,1.1))
     nvec <- 3:20
     error <- NULL
     for (n in nvec){
-      xdata <- seq(from=0,to=2*pi,length=n)
+      xdata <- seq(from = 0, to = 2*pi, length = n)
       ydata <- cos(xdata)
-      yinterp <- lagrangeInterp(xdata,ydata,x)
-      lines(x,yinterp)
-      error <- c(error,max(abs(y-yinterp)))
+      yinterp <- lagrangeInterp(xdata, ydata, x)
+      lines(x, yinterp)
+      error <- c(error, max(abs(y - yinterp)))
     }
 
 ![](coursenotes_files/figure-markdown_strict/unnamed-chunk-32-1.png)
 
-    plot(nvec,log10(error),xlab="n",ylab="log10 of error")
+    plot(nvec, log10(error), xlab = "n", ylab = "log10 of error")
 
 ![](coursenotes_files/figure-markdown_strict/unnamed-chunk-32-2.png)
 
 Looks good! Let’s try again with a different function,
 *f*(*x*) = (1+*x*<sup>2</sup>)<sup>−1</sup> on \[−1,1\].
 
-    x <- seq(from=-5,to=5,length=1000)
+    x <- seq(from = -5, to = 5, length = 1000)
     y <- 1/(1+x^2)
-    plot(x,y,type="l",col="red",lwd=5,xlim=c(-5,5),ylim=c(-3,3))
-    nvec <- seq(from=3,to=33,by=6)
+    plot(x, y, type = "l", col = "red", lwd = 5, xlim = c(-5,5), ylim = c(-3,3))
+    nvec <- seq(from = 3, to = 33, by = 6)
     error <- NULL
     for (n in nvec){
-      xdata <- seq(from=-5,to=5,length=n)
-      ydata <- 1/(1+xdata^2)
-      yinterp <- lagrangeInterp(xdata,ydata,x)
-      lines(x,yinterp)
-      error <- c(error,max(abs(y-yinterp)))
+      xdata <- seq(from = -5, to = 5, length = n)
+      ydata <- 1/(1 + xdata^2)
+      yinterp <- lagrangeInterp(xdata, ydata, x)
+      lines(x, yinterp)
+      error <- c(error, max(abs(y - yinterp)))
     }
 
 ![](coursenotes_files/figure-markdown_strict/unnamed-chunk-33-1.png)
 
-    plot(nvec,log10(error),xlab="n",ylab="log10 of error")
+    plot(nvec, log10(error), xlab = "n", ylab = "log10 of error")
 
 ![](coursenotes_files/figure-markdown_strict/unnamed-chunk-33-2.png)
 
@@ -2010,19 +2017,19 @@ Now let’s summarize the comparison of equally-spaced nodes vs. Chebyshev
 nodes.
 
     nvec <- 1:30
-    x <- seq(from=-1,to=1,length=5000)
+    x <- seq(from = -1, to = 1, length = 5000)
     equallyspaced <- NULL
     for (n in nvec){
-      nodes <- seq(from=-1,to=1,length=n)
+      nodes <- seq(from = -1, to = 1, length = n)
       prod <- 1
       for (i in 1:n){
-        prod <- prod*(x-nodes[i])
+        prod <- prod*(x - nodes[i])
       }
-      equallyspaced <- c(equallyspaced,unique(max(abs(prod))))
+      equallyspaced <- c(equallyspaced, unique(max(abs(prod))))
     }
     chebyshev <- 1/2^(nvec-1)
-    plot(nvec,log10(chebyshev),col="green",pch=16,ylim=c(-10,0),xlab="points",ylab="bound on portion of error")
-    points(nvec,log10(equallyspaced),col="red",pch=16)
+    plot(nvec, log10(chebyshev), col = "green", pch = 16, ylim = c(-10,0), xlab = "points", ylab = "bound on portion of error")
+    points(nvec, log10(equallyspaced), col = "red", pch = 16)
 
 ![](coursenotes_files/figure-markdown_strict/unnamed-chunk-34-1.png)
 
@@ -2065,7 +2072,7 @@ One thing to know is that the derivatives of this function grow with
 
     n <- 0:10
     maxderiv <- c(0.398942,0.241971,0.178032, 0.550588,1.19683,2.30711,4.24061,14.178,41.8889,115.091,302.425) # Computed in Mathematica
-    plot(n,log(maxderiv))
+    plot(n, log(maxderiv))
 
 ![](coursenotes_files/figure-markdown_strict/unnamed-chunk-35-1.png)
 
@@ -2074,14 +2081,14 @@ anyway, say, on \[−10,10\] with 30 data points to start with.
 
     a <- -10
     b <- 10
-    xexact <- seq(from=a,to=b,length=10000)
+    xexact <- seq(from = a, to = b, length = 10000)
     f <- function(x){exp(-x^2/2)/sqrt(2*pi)}
     yexact <- f(xexact)
-    plot(xexact,yexact,type="l",lwd=3,xlim=c(a,b),ylim=c(-0.2,0.5))
+    plot(xexact, yexact, type = "l", lwd = 3, xlim = c(a,b), ylim = c(-0.2,0.5))
     n <- 30
-    xequal <- seq(from=a,to=b,length=n)
-    yequal <- lagrangeInterp(xequal,f(xequal),xexact)
-    lines(xexact,yequal,col="red",lwd=2)
+    xequal <- seq(from = a, to = b, length = n)
+    yequal <- lagrangeInterp(xequal, f(xequal), xexact)
+    lines(xexact, yequal, col = "red", lwd = 2)
 
 ![](coursenotes_files/figure-markdown_strict/unnamed-chunk-36-1.png)
 
@@ -2093,10 +2100,10 @@ lookup table with linear interpolation. Let’s suppose we wish to achieve
     error <- Inf
     while (error > 0.5e-4){
       n <- n+1
-      xlookup <- seq(from=a,to=b,length=n)
+      xlookup <- seq(from = a, to = b, length = n)
       ylookup <- f(xlookup)
-      ytable <- approx(xlookup,ylookup,xexact)$y
-      error <- max(abs(yexact-ytable))
+      ytable <- approx(xlookup, ylookup, xexact)$y
+      error <- max(abs(yexact - ytable))
     }
     nlookup <- n
     print(nlookup)
@@ -2109,10 +2116,10 @@ Now we can go back to polynomial interpolation with Chebyshev nodes.
     error <- Inf
     while (error > 0.5e-4){
       n <- n+1
-      odds <- seq(from=1,to=2*n-1,by=2)
-      xcheb <- sort((b+a)/2 + (b-a)/2*cos(odds*pi/2/n))
+      odds <- seq(from = 1, to = 2*n-1, by = 2)
+      xcheb <- sort((b + a)/2 + (b - a)/2 * cos(odds*pi/2/n))
       ycheb <- lagrangeInterp(xcheb, f(xcheb), xexact)
-      error <- max(abs(yexact-ycheb))
+      error <- max(abs(yexact - ycheb))
     }
     ncheb <- n
     print(ncheb)
@@ -2139,9 +2146,9 @@ spline.
     x <- c(-2,-1.5,-1,0.25,1,2,3.75,4,5)
     y <- c(4,4.2,3,5,0,-2,2,1,1)
     xplot <- seq(from=-2,to=5,length=200)
-    linearspline <- approxfun(x,y)
-    plot(x,y,ylim=c(-2.5,5.5))
-    lines(xplot,linearspline(xplot),col="red",lwd=2)
+    linearspline <- approxfun(x, y)
+    plot(x, y, ylim = c(-2.5,5.5))
+    lines(xplot, linearspline(xplot), col = "red", lwd = 2)
 
 ![](coursenotes_files/figure-markdown_strict/unnamed-chunk-39-1.png)
 
@@ -2150,10 +2157,10 @@ things in nature and society are not this jagged, so it might feel
 desirable to represent the data with smoother functions. Let me show you
 what this looks like.
 
-    cubicspline <- splinefun(x,y)
-    plot(x,y,ylim=c(-2.5,5.5))
-    lines(xplot,linearspline(xplot),col="red",lwd=2)
-    lines(xplot,cubicspline(xplot),col="green",lwd=2)
+    cubicspline <- splinefun(x, y)
+    plot(x, y, ylim = c(-2.5,5.5))
+    lines(xplot, linearspline(xplot), col = "red", lwd = 2)
+    lines(xplot, cubicspline(xplot), col = "green", lwd = 2)
 
 ![](coursenotes_files/figure-markdown_strict/unnamed-chunk-40-1.png)
 
@@ -2246,12 +2253,12 @@ polynomial interpolation, let’s do a cooked example.
     n <- 30
     x <- sort(runif(n))
     y <- cumsum(abs(rnorm(n)))
-    plot(x,y,pch=19,ylim=c(-2,35),cex=1.5)
-    xx = seq(from=min(x),to=max(x),length=1000)
-    yy = lagrangeInterp(x,y,xx)
-    lines(xx,yy,col="red",lwd=3)
-    cubicspline <- splinefun(x,y,method='natural')
-    lines(xx,cubicspline(xx),col="blue",lwd=3)
+    plot(x, y, pch = 19, ylim = c(-2,35), cex = 1.5)
+    xx <- seq(from = min(x), to = max(x), length = 1000)
+    yy <- lagrangeInterp(x, y, xx)
+    lines(xx, yy, col = "red", lwd = 3)
+    cubicspline <- splinefun(x, y, method = "natural")
+    lines(xx, cubicspline(xx), col = "blue", lwd = 3)
 
 ![](coursenotes_files/figure-markdown_strict/unnamed-chunk-41-1.png)
 
@@ -2260,7 +2267,7 @@ last 100 days (we won’t actually get 100 days because of days when the
 markets were closed, including weekends).
 
     # Set dates and stock symbol
-    first.date <- Sys.Date()-100
+    first.date <- Sys.Date() - 100
     last.date <- Sys.Date()
     tickers <- c('TSLA')
     # Acquire data
@@ -2284,19 +2291,19 @@ markets were closed, including weekends).
     price <- l.out[[2]]$price.close
     day <- 1:length(price)
     # Sample every 5th day
-    sampledday <- day[seq(from=1,to=length(price),by=5)]
-    sampledprice <- price[seq(from=1,to=length(price),by=5)]
+    sampledday <- day[seq(from = 1, to = length(price), by = 5)]
+    sampledprice <- price[seq(from = 1, to = length(price), by = 5)]
     # Fit interpolating polynomial
-    interpolatedprice <- lagrangeInterp(sampledday,sampledprice,day[1:max(sampledday)])
-    plot(day[1:max(sampledday)],interpolatedprice,col="red",type="l",ylim=c(800,1200))
-    points(day,price,col="blue")
+    interpolatedprice <- lagrangeInterp(sampledday, sampledprice, day[1:max(sampledday)])
+    plot(day[1:max(sampledday)], interpolatedprice, col = "red", type = "l", ylim = c(800,1200))
+    points(day, price, col="blue")
 
 ![](coursenotes_files/figure-markdown_strict/unnamed-chunk-42-1.png)
 
     # Fit splines
-    TSLAspline <- splinefun(sampledday,sampledprice,method='natural')
-    plot(day,TSLAspline(day),col="blue",type="l",ylim=c(800,1200))
-    points(day,price,col="blue")
+    TSLAspline <- splinefun(sampledday, sampledprice, method = "natural")
+    plot(day, TSLAspline(day), col = "blue", type = "l", ylim = c(800,1200))
+    points(day, price, col = "blue")
 
 ![](coursenotes_files/figure-markdown_strict/unnamed-chunk-42-2.png)
 
