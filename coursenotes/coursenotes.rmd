@@ -1442,6 +1442,7 @@ plot(a, s, xlab = "advertising", ylab = "sales")
 ```
 
 The company would like to model this data so they can predict sales for other levels of advertising. The data looks roughly linear, and we have no reason to expect a complicated relationship, so let's try modeling the data with a line, $s = x_0 + x_1 a$ where $x_{0,1}$ are unknown coefficients. Plugging in to the model, we find
+
 $$ \begin{aligned}
 x_0 + 3x_1 &= 105\\ x_0 + 4x_1 &= 117\\ x_0 + 5x_1 &= 141\\ x_0 + 6x_1 &= 152
 \end{aligned} $$
