@@ -2522,8 +2522,8 @@ x\_0 \mathbf{A}\_1\cdot\mathbf{A}\_0 + x\_1 \mathbf{A}\_1\cdot\mathbf{A}\_1 &= \
 $$
 
 where we have elminated terms that turn out to be zero thanks to the
-second and third equations previously. Note that there is a matrix way
-to write this. we can write
+second and third equations previously. Note that aa matrix way to write
+this. We can write
 
 $$
 \begin{pmatrix} \mathbf{A}\_0^T \\\\ \mathbf{A}\_1^T \end{pmatrix} \begin{pmatrix} \mathbf{A}\_0 & \mathbf{A}\_1 \end{pmatrix} \begin{pmatrix} x\_0 \\\\ x\_1 \end{pmatrix} = \begin{pmatrix} \mathbf{A}\_0^T \\\\ \mathbf{A}\_1^T \end{pmatrix} \mathbf{b}.
@@ -2533,7 +2533,7 @@ If we let **A** represent the matrix with columns **A**<sub>0, 1</sub>
 and if we let **x** = (*x*<sub>0</sub>,*x*<sub>1</sub>)<sup>*T*</sup>
 then we can write the last equation as
 
-**A**<sup>*T*</sup>**A****x** = **A**<sup>*T*</sup>**b**.
+**A**<sup>*T*</sup> **A** **x** = **A**<sup>*T*</sup> **b**.
 
 These are the normal equations. For us, concretely, it looks like
 

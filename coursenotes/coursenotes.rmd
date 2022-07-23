@@ -1581,7 +1581,7 @@ x_0 \mat{A}_1\cdot\mat{A}_0 + x_1 \mat{A}_1\cdot\mat{A}_1 &= \mat{A}_1 \cdot \ve
 \end{align}
 $$
 
-where we have elminated terms that turn out to be zero thanks to the second and third equations previously. Note that there is a matrix way to write this. we can write
+where we have elminated terms that turn out to be zero thanks to the second and third equations previously. Note that aa matrix way to write this. We can write
 
 $$
 \begin{pmatrix} \mat{A}_0^T \\ \mat{A}_1^T \end{pmatrix} \begin{pmatrix} \mat{A}_0 & \mat{A}_1 \end{pmatrix} \begin{pmatrix} x_0 \\ x_1 \end{pmatrix} = \begin{pmatrix} \mat{A}_0^T \\ \mat{A}_1^T \end{pmatrix} \vec{b}.
@@ -1590,7 +1590,7 @@ $$
 If we let $\mat{A}$ represent the matrix with columns $\mat{A}_{0,1}$ and if we let $\vec{x}=(x_0,x_1)^T$ then we can write the last equation as
 
 $$
-\mat{A}^T \mat{A} \vec{x} = \mat{A}^T \vec{b}.
+\mat{A}^T\,\mat{A}\,\vec{x} = \mat{A}^T\,\vec{b}.
 $$
 
 These are the normal equations. For us, concretely, it looks like
