@@ -1433,24 +1433,31 @@ All of our study of interpolation has been based on the idea that the model (a p
 
 ## Model Fitting
 
-By way of motivation, let's examine a pedagogical data set. Suppose $a$ represents the amount of money (in $1,000's) a company spent on advertising during different quarters, and $s$ represents money the company earned on sales that quarter. We can plot the data to explore it.
+By way of motivation, let's examine a pedagogical data set. Suppose $a$ represents the amount of money (in \$1,000's) a company spent on advertising during different quarters, and $s$ represents money the company earned on sales that quarter. We can plot the data to explore it.
 
 ```{r cache = TRUE}
 a <- c(3,4,5,6)
 s <- c(105,117,141,152)
-plot(a,s,xlab="advertising",ylab="sales")
+plot(a, s, xlab = "advertising", ylab = "sales")
 ```
 
-The company would like to model this data so they can predict sales for other levels of advertising. The data looks roughly linear, and we have no reason to expect a complicated relationship, so let's try modeling the data with a line, $s = x_0 + x_1 a$ where $x_{0,1}$ are unknown coefficients. Plugging in to the model, we find $$
+The company would like to model this data so they can predict sales for other levels of advertising. The data looks roughly linear, and we have no reason to expect a complicated relationship, so let's try modeling the data with a line, $s = x_0 + x_1 a$ where $x_{0,1}$ are unknown coefficients. Plugging in to the model, we find
+$$
 \begin{align}
 x_0 + 3x_1 &= 105\\
 x_0 + 4x_1 &= 117\\
 x_0 + 5x_1 &= 141\\
 x_0 + 6x_1 &= 152
 \end{align}
-$$ which we can write in vector form as $$
+$$
+
+which we can write in vector form as
+
+$$
 x_0 \begin{pmatrix} 1 \\ 1 \\ 1 \\ 1 \end{pmatrix} + x_1 \begin{pmatrix} 3 \\ 4 \\ 5 \\ 6 \end{pmatrix} = \begin{pmatrix} 105 \\ 117 \\ 141 \\ 152 \end{pmatrix}.
-$$ By writing it this way, we can remember one interpretation of linear systems. In this case we should imagine a four-dimensional space in which we are trying to reach a particular target (the right hand side vector) by taking linear combinations of the two vecors on the left. Unfortunately, those two vectors only span a two dimensional subspace, so the chance that we can make it to our target vector are pretty slim. Stated differently: the sysem is overdetermined. But we would still like to find a good model, so what should we do?
+$$
+
+By writing it this way, we can remember one interpretation of linear systems. In this case we should imagine a four-dimensional space in which we are trying to reach a particular target (the right hand side vector) by taking linear combinations of the two vecors on the left. Unfortunately, those two vectors only span a two dimensional subspace, so the chance that we can make it to our target vector are pretty slim. Stated differently: the sysem is overdetermined. But we would still like to find a good model, so what should we do?
 
 ## Projection onto a Vector
 

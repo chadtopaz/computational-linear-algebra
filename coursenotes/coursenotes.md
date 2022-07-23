@@ -2342,7 +2342,7 @@ it.
 
     a <- c(3,4,5,6)
     s <- c(105,117,141,152)
-    plot(a,s,xlab="advertising",ylab="sales")
+    plot(a, s, xlab = "advertising", ylab = "sales")
 
 ![](coursenotes_files/figure-markdown_strict/unnamed-chunk-43-1.png)
 
@@ -2360,10 +2360,13 @@ x\_0 + 5x\_1 &= 141\\\\
 x\_0 + 6x\_1 &= 152
 \end{align}
 $$
+
 which we can write in vector form as
+
 $$
 x\_0 \begin{pmatrix} 1 \\\\ 1 \\\\ 1 \\\\ 1 \end{pmatrix} + x\_1 \begin{pmatrix} 3 \\\\ 4 \\\\ 5 \\\\ 6 \end{pmatrix} = \begin{pmatrix} 105 \\\\ 117 \\\\ 141 \\\\ 152 \end{pmatrix}.
 $$
+
 By writing it this way, we can remember one interpretation of linear
 systems. In this case we should imagine a four-dimensional space in
 which we are trying to reach a particular target (the right hand side
