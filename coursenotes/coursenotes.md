@@ -6,13 +6,8 @@
     Systems</a>
 -   <a href="#solving-linear-systems"
     id="toc-solving-linear-systems">Solving Linear Systems</a>
--   <a href="#polynomial-interpolation"
-    id="toc-polynomial-interpolation">Polynomial interpolation</a>
--   <a href="#interpolation-error-and-chebyshev-interpolation"
-    id="toc-interpolation-error-and-chebyshev-interpolation">Interpolation
-    error and Chebyshev interpolation</a>
--   <a href="#splines" id="toc-splines">Splines</a>
--   <a href="#least-squares" id="toc-least-squares">Least squares</a>
+-   <a href="#interpolation" id="toc-interpolation">Interpolation</a>
+-   <a href="#least-squares-i" id="toc-least-squares-i">Least Squares I</a>
 -   <a href="#qr-factorization" id="toc-qr-factorization">QR
     Factorization</a>
 -   <a href="#eigenvalues" id="toc-eigenvalues">Eigenvalues</a>
@@ -1435,9 +1430,9 @@ are inspired by Jacobi’s method. Some of these include Gauss-Seidel
 iteration and Successive Over-Relaxation. DYou are welcome to ask me
 about these.
 
-# Polynomial interpolation
+# Interpolation
 
-## Big picture
+## Big Picture
 
 Now we enter into the part of this course that is about data. As
 scientists, often we will have access only to noisy or partial data such
@@ -1457,8 +1452,15 @@ this case, is polynomials.
 -   Implement Vandermonde interpolation and explain its pros/cons
 -   Implement Lagrange inteprolation and explain its pros/cons
 -   Explain and implement data compression via interpolation
+-   Describe and recognize Runge’s phenomenon
+-   State the error term for polynomial interpolation and bound it
+-   Explain the advantages of Chebyshev integration and implement the
+    technique
+-   Compare approaches to interpolation
+-   Explain advantages of interpolating data with cubic splines
+-   Implement cubic spline interpolation
 
-## Why polynomials?
+## Why Polynomials?
 
 Suppose we have incomplete data and we’d like to estimate a piece of
 information that we don’t have.
@@ -1522,7 +1524,7 @@ through *n* points with distinct *x* coordinates include:
 Let’s examine some different ways to compute the interpolating
 polynomial.
 
-## Vandermonde matrix
+## Vandermonde Matrix
 
 I also call this method of interpolation “brute force.” Let’s start with
 an example. Suppose we have three data points
@@ -1678,7 +1680,7 @@ kappavals
 </tbody>
 </table>
 
-## Lagrange interpolating polynomial
+## Lagrange Interpolating Polynomial
 
 Let’s seek an alternative method that gets around these issues. There’s
 actually a way to simply write down the interpolating polynomial without
@@ -1773,7 +1775,7 @@ We can also do a speed comparison test.
 
     ## [1] 24.1125
 
-## Data compression
+## Data Compression
 
 One of the powerful things interpolation can do is compress data. Let’s
 do an example. Suppose that we need to know values for the function
@@ -1826,9 +1828,7 @@ This means that we can represent the sine function with 10<sup>−13</sup>
 error using only 20 pieces of information, instead of storing a huge
 lookup table.
 
-# Interpolation error and Chebyshev interpolation
-
-## Big picture
+## Runge’s Phenomenon
 
 We have been thinking about data and talking about polynomial
 interpolation as a way of estimating it, compressing it, and
@@ -1837,21 +1837,11 @@ So far, we have only examined error numerically. Now it is time to look
 at the error in more detail, including finding out when it is
 potentially large and thinking about how we can reduce it.
 
-## Goals
-
--   Describe and recognize Runge’s phenomenon
--   State the error term for polynomial interpolation and bound it
--   Explain the advantages of Chebyshev integration and implement the
-    technique
--   Compare approaches to interpolation
-
-## Runge’s phenomenon
-
-Before doing polynomial interpolation, let’s start out with an example
-that is about Taylor polynomials. We’ll construct Taylor polynomials of
-increasing degree to estimate the function $f(x) = \\\cos(x)$ around the
-point *x*<sub>0</sub> = 0 on $\[0,2\\\pi\]$. The *n*th degree taylor
-polynomial is
+Before thinking about error in polynomial interpolation, let’s start out
+with an example that is about Taylor polynomials. We’ll construct Taylor
+polynomials of increasing degree to estimate the function
+$f(x) = \\\cos(x)$ around the point *x*<sub>0</sub> = 0 on
+$\[0,2\\\pi\]$. The *n*th degree taylor polynomial is
 $$
 \\\sum\\\_{i=1}^n (-1)^{i/2} \\\frac{x^i}{i!}.
 $$
@@ -1947,7 +1937,7 @@ in some circumstances, inteprolating with polynomials through
 equally-spaced nodes leads to very undesirable oscillations like those
 above, called \*\*Runge’s phenomenon\*\*.
 
-## Interpolation error
+## Interpolation Error
 
 You might remember that for an *n* − 1st degree Taylor series (that is,
 *n* coefficients) of *f*(*x*) centered around *x* = *x*<sub>0</sub>, the
@@ -2003,7 +1993,7 @@ $$ \frac{\mathrm{e}h^2}{8} \leq 0.5 \times 10^{-5}. $$
 Solving for *h*, we find *h* ⪅ 3.8 × 10<sup>−3</sup>. That is the space
 between points, so on \[0,1\] this corresponds to just over 260 points.
 
-## Chebyshev nodes
+## Chebyshev Nodes
 
 Look at the error expression again. There are three parts of it.
 Factorial is the same for every function. If the derivative gets smaller
@@ -2065,7 +2055,7 @@ $$
 
 The proof is not direct, which is why I have eliminated it here.
 
-## Comparing interpolation methods
+## Comparing Interpolation Methods
 
 Let’s do an example comparing interpolation approaches. Consider
 $f(x)=(1/\sqrt{2\pi})\mathrm{e}^{-x^2/2}$. This is the standard normal
@@ -2133,22 +2123,13 @@ Now we can go back to polynomial interpolation with Chebyshev nodes.
 This is an improvement in compression by a factor of 632/41 =
 15.4146341.
 
-# Splines
-
-## Big picture
+## Why Cubic Splines?
 
 I’ve tried to convince you that it can be problematic to construct
 interpolating polynomials of high degree. When dealing with a lot of
 data, an alternative approach can be to construct low degree
 interpolating polynomials through successive sets of points. Typically
 we use cubics, and these are called cubic splines.
-
-## Goals
-
--   Explain advantages of interpolating data with cubic splines
--   Implement cubic spline interpolation
-
-## Why cubic splines?
 
 Before progressing to real data later on, let’s do an illustrative
 example with a small amount of fake data. We make some data points and
@@ -2183,7 +2164,7 @@ splines gives us more coefficients, and using these coefficients we can
 make the derivatives of successive splines match up. How exactly does
 this work though?
 
-## Mathematical conditions for cubic splines
+## Mathematical Conditions for Cubic Splines
 
 Suppose we have data points
 (*x*<sub>1</sub>,*y*<sub>1</sub>), …, (*x*<sub>*n*</sub>,*y*<sub>*n*</sub>).
@@ -2248,7 +2229,7 @@ You don’t need to memorize the details of these different types of
 splines. My main goals for you are to understand what they mean and to
 be able to implement them in R.
 
-## Splines and linear algebra
+## Splines and Linear Algebra
 
 As we have been discussing, to find spline coefficients, we have to
 solve a linear system. I won’t write down the whole system here because
@@ -2257,7 +2238,7 @@ mathematical literacy to know that by writing down the system of
 equations, you can see that it is tridiagonal and strictly diagonally
 dominant, which are nice numerical properties.
 
-## Implementing cubic spline interpolation
+## Implementing Cubic Spline Interpolation
 
 Just to emphasize how splines avoid the problem of high-degree
 polynomial interpolation, let’s do a cooked example.
@@ -2320,9 +2301,9 @@ markets were closed, including weekends).
 
 ![](coursenotes_files/figure-markdown_strict/unnamed-chunk-42-2.png)
 
-# Least squares
+# Least Squares I
 
-## Big picture
+## Big Picture
 
 All of our study of interpolation has been based on the idea that the
 model (a polynomial or polynomnial spline) should precisely pass through
@@ -2343,7 +2324,7 @@ enough?
 -   Recognize when a least squares approach is appropriate
 -   Explain how least squares allows data compression
 
-## Model fitting
+## Model Fitting
 
 By way of motivation, let’s examine a pedagogical data set. Suppose *a*
 represents the amount of money (in $1,000’s) a company spent on
@@ -2384,7 +2365,7 @@ so the chance that we can make it to our target vector are pretty slim.
 Stated differently: the sysem is overdetermined. But we would still like
 to find a good model, so what should we do?
 
-## Projection onto a vector
+## Projection onto a Vector
 
 To examine the details, let’s start with an even more fundamental
 example: a single vector in the plane. Suppose I hand you the vector
@@ -2494,7 +2475,7 @@ Let’s calculate this concretely in `R`.
 
     ## [1] 0
 
-## Projection onto a plane
+## Projection onto a Plane
 
 Let’s apply these same conceps to our original problem of predicting
 sales from advertising. We had
@@ -2611,7 +2592,7 @@ the projection matrix.
 Though our example here has used merely two basis vectors, the ideas
 extend to any number.
 
-## Model fitting
+## Model Fitting
 
 The technique we have developed here of solving a least squares problem
 by vector projection works in a model fitting context whenever the
@@ -2685,7 +2666,7 @@ where the model parameters appear in a lienar fashion.
 A statistics class would provide much more sophisticated ways of
 analyzing the error.
 
-## Least squares and data compression
+## Least Squares and Data Compression
 
 Adopting a least squares approach allows, potentially, massive
 compression of data. Suppose we had 100 points that looked like this
@@ -2700,7 +2681,7 @@ If we decided to represent this data with a line, we’d go down from
 having 100 pieces of information (the original data points) to merely 2
 (a slope and an intercept).
 
-## An optimization viewpoint on least squares
+## An Optimization Viewpoint on Least Squares
 
 So far, we’ve taken a geometric approach to solving least-squares
 problems, but there’s another way to get the same result: optimization.

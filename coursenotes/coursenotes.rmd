@@ -854,9 +854,9 @@ $$
 
 There are other iterative solution methods for linear systems that all are inspired by Jacobi's method. Some of these include Gauss-Seidel iteration and Successive Over-Relaxation. DYou are welcome to ask me about these.
 
-# Polynomial interpolation
+# Interpolation
 
-## Big picture
+## Big Picture
 
 Now we enter into the part of this course that is about data. As scientists, often we will have access only to noisy or partial data such as a sound signal, a visual image, geograhpic data, network data, and so forth. We may wish to fill in the missing data, make predictions, smooth the data, compress it, differentiate or integrate it, visualize it, and more. These are data processing tasks. The first approach we present is polynomial interpolation and approximation. Interpolation refers to constructing new data points within the range of a discrete set of known points. Approximation refers to finding an approximation to given function by choosing a function from a predetermined class, which in this case, is polynomials.
 
@@ -866,8 +866,14 @@ Now we enter into the part of this course that is about data. As scientists, oft
 -   Implement Vandermonde interpolation and explain its pros/cons
 -   Implement Lagrange inteprolation and explain its pros/cons
 -   Explain and implement data compression via interpolation
+-   Describe and recognize Runge's phenomenon
+-   State the error term for polynomial interpolation and bound it
+-   Explain the advantages of Chebyshev integration and implement the technique
+-   Compare approaches to interpolation
+-   Explain advantages of interpolating data with cubic splines
+-   Implement cubic spline interpolation
 
-## Why polynomials?
+## Why Polynomials?
 
 ```{r echo = FALSE, cache = TRUE}
 f <- function(x){1/x}
@@ -914,7 +920,7 @@ A few important points to know about the interpolating polynomial through $n$ po
 
 Let's examine some different ways to compute the interpolating polynomial.
 
-## Vandermonde matrix
+## Vandermonde Matrix
 
 I also call this method of interpolation "brute force." Let's start with an example. Suppose we have three data points $(x_1,y_1)$, $(x_2,y_2)$, $(x_3,y_3)$. The interpolating polynomial is $P(x) = c_0 + c_1 x + c_2 x^2$, where we need to determine the coefficients. Let's determine them simply by plugging in. We have the equations
 
@@ -977,7 +983,7 @@ for (n in nvals){
 kable(cbind(nvals,kappavals))
 ```
 
-## Lagrange interpolating polynomial
+## Lagrange Interpolating Polynomial
 
 Let's seek an alternative method that gets around these issues. There's actually a way to simply write down the interpolating polynomial without doing any calculation of coefficients at all. Let's do an example.
 
@@ -1050,7 +1056,7 @@ t2 <- system.time(
 as.numeric(t1/t2)
 ```
 
-## Data compression
+## Data Compression
 
 One of the powerful things interpolation can do is compress data. Let's do an example. Suppose that we need to know values for the function $\sin x$. A computer doesn't magically know this function, so it has to have some way to compute/evaluate it. One option would be to store a giant look-up table. There are an infinite number of numbers to store, though, even for the interval $[0,2\pi)$. Another option is to fit a polynomial based on a finite number of points, store the coefficients, and evaluate the polynomial as needed. Let's do this using 5 points to begin with. We'll write a function that takes a specified number of points, samples them from the function, constructs the interpolating polynomial, plots the function and the polynomial, and calculates the maximum error. The inputs are your $x$ data, your $y$ data, and the $x$ values at which you'd like interpolated values.
 
@@ -1086,22 +1092,11 @@ plot(nvec,orderofmag)
 
 This means that we can represent the sine function with $10^{-13}$ error using only 20 pieces of information, instead of storing a huge lookup table.
 
-# Interpolation error and Chebyshev interpolation
-
-## Big picture
+## Runge's Phenomenon
 
 We have been thinking about data and talking about polynomial interpolation as a way of estimating it, compressing it, and representing it conveniently to do other mathematical operations on it. So far, we have only examined error numerically. Now it is time to look at the error in more detail, including finding out when it is potentially large and thinking about how we can reduce it.
 
-## Goals
-
-- Describe and recognize Runge's phenomenon
-- State the error term for polynomial interpolation and bound it
-- Explain the advantages of Chebyshev integration and implement the technique
-- Compare approaches to interpolation
-
-## Runge's phenomenon
-
-Before doing polynomial interpolation, let's start out with an example that is about Taylor polynomials. We'll construct Taylor polynomials of increasing degree to estimate the function $f(x) = \\cos(x)$ around the point $x_0=0$ on $[0,2\\pi]$. The $n$th degree taylor polynomial is $$
+Before thinking about error in polynomial interpolation, let's start out with an example that is about Taylor polynomials. We'll construct Taylor polynomials of increasing degree to estimate the function $f(x) = \\cos(x)$ around the point $x_0=0$ on $[0,2\\pi]$. The $n$th degree taylor polynomial is $$
 \\sum\_{i=1}^n (-1)^{i/2} \\frac{x^i}{i!}.
 $$
 
@@ -1179,7 +1174,7 @@ plot(nvec,log10(error),xlab="n",ylab="log10 of error")
 
 Not good! The error goes up as we take more and more points. Equally-spaced nodes are very natural in many applications (scientific measurements, audio/video signals, etc.). But sadly, it turns out that in some circumstances, inteprolating with polynomials through equally-spaced nodes leads to very undesirable oscillations like those above, called \*\*Runge's phenomenon\*\*.
 
-## Interpolation error
+## Interpolation Error
 
 You might remember that for an $n-1$st degree Taylor series (that is, $n$ coefficients) of $f(x)$ centered around $x=x_0$, the magnitude of the error term is $$
 \\left\|\\frac{f^{(n)}(c)}{n!}(x-x_0)^{n}\\right\|
@@ -1194,7 +1189,7 @@ Let's use the error term to do an example, where we again ask the question HOW D
 & = \\left\|\\frac{\\mathrm{e}^{c}}{2} (x-x_1)(x-x_1-h)\\right\|
 \\end{align\*} $$ Here, I've called the spacing between the two points $h$, that is $x_2 = x_1 + h$. Now, we can ask what is the worst (biggest) that the term $\left|(x-x_1)(x-x_1-h)\right|$ can be, and via calculus, we can show it is $h^2/4$. Also, on our interval of interest, we know that $\mathrm{e}^{c} \leq \mathrm{e}^{1}$. Therefore, we can write $$ \|f(x) - P_1(x)\| \leq \\frac{\\mathrm{e}h^2}{8}. $$ For our desired level of accuracy, we need $$ \frac{\mathrm{e}h^2}{8} \leq 0.5 \times 10^{-5}. $$ Solving for $h$, we find $h \lessapprox 3.8 \times 10^{-3}$. That is the space between points, so on $[0,1]$ this corresponds to just over 260 points.
 
-## Chebyshev nodes
+## Chebyshev Nodes
 
 Look at the error expression again. There are three parts of it. Factorial is the same for every function. If the derivative gets smaller with more $n$ then we're good. If it gets bigger, the error term could potentially grow overall with $n$. Since there's nothing we can do about the derivative (we can't choose it!) we should try to do what we can to minimize what we can control, namely the remaining part of the error term.
 
@@ -1245,7 +1240,7 @@ $$
 
 The proof is not direct, which is why I have eliminated it here.
 
-## Comparing interpolation methods
+## Comparing Interpolation Methods
 
 Let's do an example comparing interpolation approaches. Consider $f(x)=(1/\sqrt{2\pi})\mathrm{e}^{-x^2/2}$. This is the standard normal distribution which plays a key role in probability and statistics.
 
@@ -1305,18 +1300,9 @@ print(ncheb)
 
 This is an improvement in compression by a factor of `r nlookup`/`r ncheb` = `r nlookup/ncheb`.
 
-# Splines
-
-## Big picture
+## Why Cubic Splines?
 
 I've tried to convince you that it can be problematic to construct interpolating polynomials of high degree. When dealing with a lot of data, an alternative approach can be to construct low degree interpolating polynomials through successive sets of points. Typically we use cubics, and these are called cubic splines.
-
-## Goals
-
--   Explain advantages of interpolating data with cubic splines
--   Implement cubic spline interpolation
-
-## Why cubic splines?
 
 Before progressing to real data later on, let's do an illustrative example with a small amount of fake data. We make some data points and connect them with linear splines. We can do this using the built-in `approxfun` command which returns a function representing the linear spline.
 
@@ -1340,7 +1326,7 @@ lines(xplot,cubicspline(xplot),col="green",lwd=2)
 
 This is smoother. What smoothness means here is continuity of derivatives from one spline to the next. Using cubic rather than linear splines gives us more coefficients, and using these coefficients we can make the derivatives of successive splines match up. How exactly does this work though?
 
-## Mathematical conditions for cubic splines
+## Mathematical Conditions for Cubic Splines
 
 Suppose we have data points $(x_1,y_1),\ldots,(x_n,y_n)$. We will connect successive points with cubic curves. With $n$ points, there are $n-1$ curves. Each curve is cubic, having the form
 
@@ -1366,11 +1352,11 @@ Crucially, since we find the coefficients by solving an square linear system of 
 
 You don't need to memorize the details of these different types of splines. My main goals for you are to understand what they mean and to be able to implement them in R.
 
-## Splines and linear algebra
+## Splines and Linear Algebra
 
 As we have been discussing, to find spline coefficients, we have to solve a linear system. I won't write down the whole system here because we are going to use built-in tools to solve it. However, it's good mathematical literacy to know that by writing down the system of equations, you can see that it is tridiagonal and strictly diagonally dominant, which are nice numerical properties.
 
-## Implementing cubic spline interpolation
+## Implementing Cubic Spline Interpolation
 
 Just to emphasize how splines avoid the problem of high-degree polynomial interpolation, let's do a cooked example.
 
@@ -1411,9 +1397,9 @@ plot(day,TSLAspline(day),col="blue",type="l",ylim=c(800,1200))
 points(day,price,col="blue")
 ```
 
-# Least squares
+# Least Squares I
 
-## Big picture
+## Big Picture
 
 All of our study of interpolation has been based on the idea that the model (a polynomial or polynomnial spline) should precisely pass through every data point. But what if we loosen this restriction? What if the data is thought to have error or noise that we don't want to represent in our model? Or what if we just don't care about precise interpolation, and decide approximation even at the data points themselves is good enough?
 
@@ -1426,7 +1412,7 @@ All of our study of interpolation has been based on the idea that the model (a p
 -   Recognize when a least squares approach is appropriate
 -   Explain how least squares allows data compression
 
-## Model fitting
+## Model Fitting
 
 By way of motivation, let's examine a pedagogical data set. Suppose $a$ represents the amount of money (in $1,000's) a company spent on advertising during different quarters, and $s$ represents money the company earned on sales that quarter. We can plot the data to explore it.
 
@@ -1447,7 +1433,7 @@ $$ which we can write in vector form as $$
 x_0 \begin{pmatrix} 1 \\ 1 \\ 1 \\ 1 \end{pmatrix} + x_1 \begin{pmatrix} 3 \\ 4 \\ 5 \\ 6 \end{pmatrix} = \begin{pmatrix} 105 \\ 117 \\ 141 \\ 152 \end{pmatrix}.
 $$ By writing it this way, we can remember one interpretation of linear systems. In this case we should imagine a four-dimensional space in which we are trying to reach a particular target (the right hand side vector) by taking linear combinations of the two vecors on the left. Unfortunately, those two vectors only span a two dimensional subspace, so the chance that we can make it to our target vector are pretty slim. Stated differently: the sysem is overdetermined. But we would still like to find a good model, so what should we do?
 
-## Projection onto a vector
+## Projection onto a Vector
 
 To examine the details, let's start with an even more fundamental example: a single vector in the plane. Suppose I hand you the vector $\mat{A} = (2,1)^T$ and tell you to use it to reach the target vector $\vec{b}=(6,8)^T$. Well, you can't do it exactly because there is no scalar $x$ such that $x\mat{A} = \vec{b}$. So let us do the next best thing: let's find the value of $x$ such that $x\mat{A}$ is as close as possible to $\vec{b}$. We can draw a picture to solve this problem.
 
@@ -1537,7 +1523,7 @@ dot <- function(v1,v2){sum(v1*v2)}
 dot(a,r)
 ```
 
-## Projection onto a plane
+## Projection onto a Plane
 
 Let's apply these same conceps to our original problem of predicting sales from advertising. We had
 
@@ -1625,7 +1611,7 @@ Symbolically, we calculated the least squares solution $\vec{x} = \left(\mat{A}^
 
 Though our example here has used merely two basis vectors, the ideas extend to any number.
 
-## Model fitting
+## Model Fitting
 
 The technique we have developed here of solving a least squares problem by vector projection works in a model fitting context whenever the unknowns $\vec{x}$ appear linearly. It doesn't require that other quantities appear linearly.
 
@@ -1665,7 +1651,7 @@ Overall, here's the process one would follow for model fitting in cases where th
 
 A statistics class would provide much more sophisticated ways of analyzing the error.
 
-## Least squares and data compression
+## Least Squares and Data Compression
 
 Adopting a least squares approach allows, potentially, massive compression of data. Suppose we had 100 points that looked like this
 
@@ -1677,7 +1663,7 @@ plot(x,y)
 
 If we decided to represent this data with a line, we'd go down from having 100 pieces of information (the original data points) to merely 2 (a slope and an intercept).
 
-## An optimization viewpoint on least squares
+## An Optimization Viewpoint on Least Squares
 
 So far, we've taken a geometric approach to solving least-squares problems, but there's another way to get the same result: optimization. We can start directly with the square of the norm of the residual vector (a factor of 1/2 is included for algebraic convenience, but it doesn't change the result):
 $$
