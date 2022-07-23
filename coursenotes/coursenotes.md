@@ -1684,13 +1684,6 @@ doing any calculation of coefficients at all. Let’s do an example.
 
 For points (1,10), (2,6), (3,4), (4,10), consider the polynomial
 
-$$
-\begin{align\*}
-p(x) &= 10 \frac{(x-2)(x-3)(x-4)}{(1-2)(1-3)(1-4)}
-+ 6 \frac{(x-1)(x-3)(x-4)}{(2-1)(2-3)(2-4)} \\\\ &+ 4 \frac{(x-1)(x-2)(x-4)}{(3-1)(3-2)(3-4)} + 10 \frac{(x-1)(x-2)(x-3)}{(4-1)(4-2)(4-3)}
-\end{align\*}
-$$
-
 First, notice the pattern of how each term is constructed: there’s a
 coefficient times a polynomial. The coefficient is the *y*-value of an
 interpolation point. The polynomial is one that is equal to 1 at that
