@@ -4,7 +4,7 @@ author: "Chad M. Topaz"
 output:
   rmarkdown::md_document:
       toc: true
-      toc_depth: 1
+      toc_depth: 2
 ---
 
 # Course Information
