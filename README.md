@@ -139,7 +139,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
 -   Reading
 
-    -   [Course Notes: R Bootcamp](/coursenotes/coursenotes.md#r-bootcamp)
+    -   [Course Notes: R Bootcamp](/coursenotes/coursenotes.md)
     -   [Machine Learning Has Been Used to Automatically Translate Long-Lost Languages](https://www.technologyreview.com/2019/07/01/65601/machine-learning-has-been-used-to-automatically-translate-long-lost-languages/)
     -   [The Best Bits](https://www.americanscientist.org/article/the-best-bits)
 
@@ -175,7 +175,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
 -   Reading
 
-    -   [Course Notes: How Computers Store Numbers](/coursenotes/coursenotes.md#how-computers-store-numbers)
+    -   [Course Notes: How Computers Store Numbers](/coursenotes/coursenotes.md)
     -   [Bits and Bugs](https://epubs.siam.org/doi/book/10.1137/1.9781611975567) 2.1 - 2.4
 
 -   DataCamp Coding Practice
@@ -206,7 +206,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
     -   [An Ill-Advised Linear Algebra Tutorial](https://chadtopaz.com/download/an-ill-advised-linear-algebra-tutorial/)
 
-    -   [Course Notes: Fundamentals of Linear Systems](/coursenotes/coursenotes.md#fundamentals-of-linear-systems)
+    -   [Course Notes: Fundamentals of Linear Systems](/coursenotes/coursenotes.md)
     
 -   Activity - Fundamentals of Linear Systems [[.md for viewing](activities/Activity-Fundamentals-of-Linear-Systems.md)] [[.Rmd for editing](activities/Activity-Fundamentals-of-Linear-Systems.Rmd)]
 
@@ -230,7 +230,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
     
 -   Reading
 
-    -   [Course Notes: Solving Linear Systems](/coursenotes/coursenotes.md#solving-linear-systems)
+    -   [Course Notes: Solving Linear Systems](/coursenotes/coursenotes.md)
 
 -   Activity - Solving Linear Systems [[.md for viewing](activities/Activity-Solving-Linear-Systems.md)] [[.Rmd for editing](activities/Activity-Solving-Linear-Systems.Rmd)]
 
@@ -266,7 +266,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
 -   Reading
 
-    -   [Course Notes: Interpolation](/coursenotes/coursenotes.md#interpolation)
+    -   [Course Notes: Interpolation](/coursenotes/coursenotes.md)
     
 -   Activity - Interpolation [[.md for viewing](activities/Activity-Interpolation.md)] [[.Rmd for editing](activities/Activity-Interpolation.Rmd)]
 
@@ -292,7 +292,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
 -   Reading
 
-    -   [Course Notes: Least Squares I](/coursenotes/coursenotes.md#least-squares-I)
+    -   [Course Notes: Least Squares I](/coursenotes/coursenotes.md)
     
 -   Activity - Least Squares I [[.md for viewing](activities/Activity-Least-Squares-I.md)] [[.Rmd for editing](activities/Activity-Least Squares-I.Rmd)]
 
