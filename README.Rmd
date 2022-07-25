@@ -278,13 +278,13 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
     -   [Course Notes: Least Squares I](/coursenotes/coursenotes.md)
     
--   Activity - Least Squares I [[.md for viewing](activities/Activity-Least-Squares-I.md)] [[.Rmd for editing](activities/Activity-Least Squares-I.Rmd)]
+-   Activity - Least Squares I [[.md for viewing](activities/Activity-Least-Squares-I.md)] [[.Rmd for editing](activities/Activity-Least-Squares-I.Rmd)]
 
 -   Pset - Least Squares I [[.md for viewing](psets/Pset-Least-Squares-I.md)] [[.Rmd for editing](psets/Pset-Least-Squares-I.Rmd)]
 
 - Other Resources
 
-   -   [In-class code examples](https://github.com/chadtopaz/computationallineaaralgebra/blob/main/demos/Demo-Least-Squares-1.R)
+   -   [In-class code examples](demos/Demo-Least-Squares-1.R)
 
 - Challenge problems
 

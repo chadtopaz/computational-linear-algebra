@@ -429,7 +429,7 @@ respository’s subdirectories:
 
 -   Activity - Least Squares I \[[.md for
     viewing](activities/Activity-Least-Squares-I.md)\] \[[.Rmd for
-    editing](activities/Activity-Least%20Squares-I.Rmd)\]
+    editing](activities/Activity-Least-Squares-I.Rmd)\]
 
 -   Pset - Least Squares I \[[.md for
     viewing](psets/Pset-Least-Squares-I.md)\] \[[.Rmd for
@@ -437,8 +437,7 @@ respository’s subdirectories:
 
 -   Other Resources
 
-    -   [In-class code
-        examples](https://github.com/chadtopaz/computationallineaaralgebra/blob/main/demos/Demo-Least-Squares-1.R)
+    -   [In-class code examples](demos/Demo-Least-Squares-1.R)
 
 -   Challenge problems
 
