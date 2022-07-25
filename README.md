@@ -1,37 +1,6 @@
 -   <a href="#course-information" id="toc-course-information">Course
     Information</a>
-    -   <a href="#introduction" id="toc-introduction">Introduction</a>
-    -   <a href="#citation" id="toc-citation">Citation</a>
-    -   <a href="#in-development" id="toc-in-development">In Development</a>
-    -   <a href="#errata" id="toc-errata">Errata</a>
-    -   <a href="#consultingspeaking"
-        id="toc-consultingspeaking">Consulting/Speaking</a>
-    -   <a href="#course-syllabus" id="toc-course-syllabus">Course Syllabus</a>
-    -   <a href="#r-resources" id="toc-r-resources">R Resources</a>
-    -   <a href="#course-details" id="toc-course-details">Course Details</a>
 -   <a href="#course-units" id="toc-course-units">Course Units</a>
-    -   <a href="#getting-started" id="toc-getting-started">Getting Started</a>
-    -   <a href="#r-bootcamp" id="toc-r-bootcamp">R Bootcamp</a>
-    -   <a href="#how-computers-store-numbers"
-        id="toc-how-computers-store-numbers">How Computers Store Numbers</a>
-    -   <a href="#fundamentals-of-linear-systems"
-        id="toc-fundamentals-of-linear-systems">Fundamentals of Linear
-        Systems</a>
-    -   <a href="#solving-linear-systems"
-        id="toc-solving-linear-systems">Solving Linear Systems</a>
-    -   <a href="#recap-exercise-i" id="toc-recap-exercise-i">Recap Exercise
-        I</a>
-    -   <a href="#interpolation" id="toc-interpolation">Interpolation</a>
-    -   <a href="#least-squares-i" id="toc-least-squares-i">Least Squares I</a>
-    -   <a href="#least-squares-ii" id="toc-least-squares-ii">Least Squares
-        II</a>
-    -   <a href="#eigenvalues" id="toc-eigenvalues">Eigenvalues</a>
-    -   <a href="#principal-component-analysis"
-        id="toc-principal-component-analysis">Principal Component Analysis</a>
-    -   <a href="#topological-data-analysis"
-        id="toc-topological-data-analysis">Topological Data Analysis</a>
-    -   <a href="#recap-exercise-ii" id="toc-recap-exercise-ii">Recap Exercise
-        II</a>
 
 # Course Information
 
@@ -49,7 +18,7 @@ and Lori Ziegelmeier. Their versions of a Computational Linear Algebra
 course have influenced my own course, and I’m grateful to them for
 sharing wisdom and materials.
 
-[Back to Table of Contents](#table-of-contents)
+[Back to Table of Contents](#header)
 
 ## Citation
 
@@ -59,14 +28,14 @@ instructor (for teaching your own course) I would appreciate you
 track impact of the work I have done to create it. If you do adopt
 materials from this site, please make sure to credit me.
 
-[Back to Table of Contents](#table-of-contents)
+[Back to Table of Contents](#header)
 
 ## In Development
 
 This course site is perpetually in development. I regularly revisit my
 course materials in order to improve them.
 
-[Back to Table of Contents](#table-of-contents)
+[Back to Table of Contents](#header)
 
 ## Errata
 
@@ -74,7 +43,7 @@ If you find any problems with course materials (a typo, code that
 doesn’t work, a broken link – anything at all) please let me know by
 [contacting me here](mailto:chad.topaz+errata@gmail.com).
 
-[Back to Table of Contents](#table-of-contents)
+[Back to Table of Contents](#header)
 
 ## Consulting/Speaking
 
@@ -87,7 +56,7 @@ and/or pedagogy (of this course, or of anything else) then please see my
 [Speaking](http://www.chadtopaz.com/speaking) page and contact me
 [here](mailto:chad.topaz+speaking@gmail.com).
 
-[Back to Table of Contents](#table-of-contents)
+[Back to Table of Contents](#header)
 
 ## Course Syllabus
 
@@ -101,7 +70,7 @@ the course and the philosophy I bring to it.
 ![Computational Linear Algebra Course
 Syllabus](https://github.com/chadtopaz/computationallineaaralgebra/raw/main/syllabus/Computational%20Linear%20Algebra%20Syllabus.jpg)
 
-[Back to Table of Contents](#table-of-contents)
+[Back to Table of Contents](#header)
 
 ## R Resources
 
@@ -137,7 +106,7 @@ Here are some help resources for R.
     -   [My Favorite
         Choice](https://letmegooglethat.com/?q=for+loop+in+R)
 
-[Back to Table of Contents](#table-of-contents)
+[Back to Table of Contents](#header)
 
 ## Course Details
 
@@ -162,7 +131,7 @@ respository’s subdirectories:
 -   [/psets](psets)
 -   [/recap](recap)
 
-[Back to Table of Contents](#table-of-contents)
+[Back to Table of Contents](#header)
 
 # Course Units
 
