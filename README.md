@@ -285,6 +285,28 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
 ## Least Squares I
 
+-   Videos
+
+    -   [Least Squares I: Matrix Problems (up to 8:32)](https://youtu.be/Z0wELiinNVQ)
+
+-   Reading
+
+    -   [Course Notes: Least Squares I](/coursenotes/coursenotes.md#least-squares-i)
+    
+-   Activity - Least Squares I [[.md for viewing](activities/Activity-Least-Squares-1.md)] [[.Rmd for editing](activities/Activity-Least Squares-1.Rmd)]
+
+-   Pset - Least Squares I [[.md for viewing](psets/Pset-Least-Squares-1.md)] [[.Rmd for editing](psets/Pset-Least-Squares-1.Rmd)]
+
+- Other Resources
+
+   -   [In-class code examples](https://github.com/chadtopaz/computationallineaaralgebra/blob/main/demos/Demo-Least-Squares-1.R)
+
+- Challenge problems
+
+   -   Learn how to implement interpolation via Newton divided differences and implement the technique in R.
+
+   -   Prove the formula for Chebyshev interpolation nodes.
+
 [Back to Course Units](#course-units)
 
 ## Least Squares II
