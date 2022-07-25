@@ -1,5 +1,5 @@
 ---
-title: "Activity - Least Squaresa I"
+title: "Activity - Least Squares I"
 output:
   rmarkdown::md_document:
   header-includes:

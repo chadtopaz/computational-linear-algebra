@@ -437,7 +437,7 @@ respository’s subdirectories:
 
 -   Other Resources
 
-    -   [In-class code examples](demos/Demo-Least-Squares-1.R)
+    -   [In-class code examples](demos/Demo-Least-Squares-I.R)
 
 -   Challenge problems
 
