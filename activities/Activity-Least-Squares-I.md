@@ -99,7 +99,7 @@ b\. Setup and solve the normal equations in order to find the least
 squares parabola fit (i.e., polynomial of degree 2) for this data. Plot
 your best fit curve on the same plot with the points.
 
-c\. Do you expect ||**A****x** − **b**||<sub>2</sub><sup>2</sup> (which
+c\. Do you expect ||**A** **x** − **b**||<sub>2</sub><sup>2</sup> (which
 we call “the sum of squared residuals”) to be lower for part (a) or part
 (b)? Why? Explain in plain English and using linear algebra vocabulary.
 Does your answer depend on the set of data given to you? Compute the sum
@@ -142,7 +142,7 @@ semidefinite. Feel free to look up what positive semidefinite means!
 
 c\. Here’s a fact: if the **P** matrix in the quadratic function form
 above is symmetric positive semidefinite, then
-∇*f*(**x**) = **P****x** + **q**, and the critical point **x**
+∇*f*(**x**) = **P** **x** + **q**, and the critical point **x**
 satisfying ∇*f*(**x**) = **0** is a global minimum. Conclude that the
 value of **x** that satisfies the normal equations gives the optimal
 least squares coefficients.

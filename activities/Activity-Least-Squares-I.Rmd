@@ -93,7 +93,7 @@ a\. Setup the normal equations and solve them with R's `solve` function in order
 
 b\. Setup and solve the normal equations in order to find the least squares parabola fit (i.e., polynomial of degree 2) for this data. Plot your best fit curve on the same plot with the points.
 
-c\. Do you expect $||\mat{A}\vec{x}-\vec{b}||_2^2$ (which we call "the sum of squared residuals") to be lower for part (a) or part (b)? Why? Explain in plain English and using linear algebra vocabulary. Does your answer depend on the set of data given to you? Compute the sum of squared residuals for part (a) and part (b) to see if it matches your intuition.
+c\. Do you expect $||\mat{A}\,\vec{x}-\vec{b}||_2^2$ (which we call "the sum of squared residuals") to be lower for part (a) or part (b)? Why? Explain in plain English and using linear algebra vocabulary. Does your answer depend on the set of data given to you? Compute the sum of squared residuals for part (a) and part (b) to see if it matches your intuition.
 
 ### Problem 2 Solution
 
@@ -123,7 +123,7 @@ Put the error term in this form, that is, find the matrix $\mat{P}$, vector $\ve
 
 b\. Show that the $\mat{P}$ matrix from part (a) is symmetric and positive semidefinite. Feel free to look up what positive semidefinite means!
 
-c\. Here's a fact: if the $\mat{P}$ matrix in the quadratic function form above is symmetric positive semidefinite, then $\nabla f(\vec{x})=\mat{P}\vec{x}+\vec{q}$, and the critical point $\vec{x}$ satisfying $\nabla f (\vec{x})=\vec{0}$ is a global minimum. Conclude that the value of $\vec{x}$ that satisfies the normal equations gives the optimal least squares coefficients.
+c\. Here's a fact: if the $\mat{P}$ matrix in the quadratic function form above is symmetric positive semidefinite, then $\nabla f(\vec{x})=\mat{P}\,\vec{x}+\vec{q}$, and the critical point $\vec{x}$ satisfying $\nabla f (\vec{x})=\vec{0}$ is a global minimum. Conclude that the value of $\vec{x}$ that satisfies the normal equations gives the optimal least squares coefficients.
 
 ### Problem 3 Solution
 
