@@ -1,6 +1,37 @@
 -   <a href="#course-information" id="toc-course-information">Course
     Information</a>
+    -   <a href="#introduction" id="toc-introduction">Introduction</a>
+    -   <a href="#citation" id="toc-citation">Citation</a>
+    -   <a href="#in-development" id="toc-in-development">In Development</a>
+    -   <a href="#errata" id="toc-errata">Errata</a>
+    -   <a href="#consultingspeaking"
+        id="toc-consultingspeaking">Consulting/Speaking</a>
+    -   <a href="#course-syllabus" id="toc-course-syllabus">Course Syllabus</a>
+    -   <a href="#r-resources" id="toc-r-resources">R Resources</a>
+    -   <a href="#course-details" id="toc-course-details">Course Details</a>
 -   <a href="#course-units" id="toc-course-units">Course Units</a>
+    -   <a href="#getting-started" id="toc-getting-started">Getting Started</a>
+    -   <a href="#r-bootcamp" id="toc-r-bootcamp">R Bootcamp</a>
+    -   <a href="#how-computers-store-numbers"
+        id="toc-how-computers-store-numbers">How Computers Store Numbers</a>
+    -   <a href="#fundamentals-of-linear-systems"
+        id="toc-fundamentals-of-linear-systems">Fundamentals of Linear
+        Systems</a>
+    -   <a href="#solving-linear-systems"
+        id="toc-solving-linear-systems">Solving Linear Systems</a>
+    -   <a href="#recap-exercise-i" id="toc-recap-exercise-i">Recap Exercise
+        I</a>
+    -   <a href="#interpolation" id="toc-interpolation">Interpolation</a>
+    -   <a href="#least-squares-i" id="toc-least-squares-i">Least Squares I</a>
+    -   <a href="#least-squares-ii" id="toc-least-squares-ii">Least Squares
+        II</a>
+    -   <a href="#eigenvalues" id="toc-eigenvalues">Eigenvalues</a>
+    -   <a href="#principal-component-analysis"
+        id="toc-principal-component-analysis">Principal Component Analysis</a>
+    -   <a href="#topological-data-analysis"
+        id="toc-topological-data-analysis">Topological Data Analysis</a>
+    -   <a href="#recap-exercise-ii" id="toc-recap-exercise-ii">Recap Exercise
+        II</a>
 
 # Course Information
 
@@ -221,7 +252,7 @@ respository’s subdirectories:
     -   8.2 - 7.2 - 1 = ?
     -   10<sup>18</sup> + 100 − 10<sup>18</sup> = ?
 
-[Back to Course Units](#course-units)
+[Back to Table of Contents](#header)
 
 ## How Computers Store Numbers
 
@@ -253,7 +284,7 @@ respository’s subdirectories:
     viewing](psets/Pset-How-Computers-Store-Numbers.md)\] \[[.Rmd for
     editing](psets/Pset-How-Computers-Store-Numbers.Rmd)\]
 
-[Back to Course Units](#course-units)
+[Back to Table of Contents](#header)
 
 ## Fundamentals of Linear Systems
 
@@ -298,7 +329,7 @@ respository’s subdirectories:
         Euler-Bernoulli beam in section 2.4 of [Sauer’s Numerical
         Analysis](https://www.amazon.com/Numerical-Analysis-3rd-Timothy-Sauer/dp/013469645X).
 
-[Back to Course Units](#course-units)
+[Back to Table of Contents](#header)
 
 ## Solving Linear Systems
 
@@ -334,14 +365,14 @@ respository’s subdirectories:
         (analytically) the order of convergence. Check your result with
         a numerical example.
 
-[Back to Course Units](#course-units)
+[Back to Table of Contents](#header)
 
 ## Recap Exercise I
 
 -   Recap \#1 \[[.md for viewing](recap/Recap-1.md)\] \[[.Rmd for
     editing](recap/Recap-1.Rmd)\]
 
-[Back to Course Units](#course-units)
+[Back to Table of Contents](#header)
 
 ## Interpolation
 
@@ -383,7 +414,7 @@ respository’s subdirectories:
 
     -   Prove the formula for Chebyshev interpolation nodes.
 
-[Back to Course Units](#course-units)
+[Back to Table of Contents](#header)
 
 ## Least Squares I
 
@@ -416,24 +447,24 @@ respository’s subdirectories:
 
     -   Prove the formula for Chebyshev interpolation nodes.
 
-[Back to Course Units](#course-units)
+[Back to Table of Contents](#header)
 
 ## Least Squares II
 
-[Back to Course Units](#course-units)
+[Back to Table of Contents](#header)
 
 ## Eigenvalues
 
-[Back to Course Units](#course-units)
+[Back to Table of Contents](#header)
 
 ## Principal Component Analysis
 
-[Back to Course Units](#course-units)
+[Back to Table of Contents](#header)
 
 ## Topological Data Analysis
 
-[Back to Course Units](#course-units)
+[Back to Table of Contents](#header)
 
 ## Recap Exercise II
 
-[Back to Course Units](#course-units)
+[Back to Table of Contents](#header)

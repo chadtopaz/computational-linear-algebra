@@ -4,7 +4,7 @@ author: "Chad M. Topaz"
 output:
   rmarkdown::md_document:
       toc: true
-      toc_depth: 1
+      toc_depth: 2
 ---
 
 # Course Information
@@ -148,7 +148,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
     -   8.2 - 7.2 - 1 = ?
     -   $10^{18} + 100 - 10^{18} = ?$
 
-[Back to Course Units](#course-units)
+[Back to Table of Contents](#header)
 
 ## How Computers Store Numbers
 
@@ -170,7 +170,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
 -   Pset - How Computers Store Numbers [[.md for viewing](psets/Pset-How-Computers-Store-Numbers.md)] [[.Rmd for editing](psets/Pset-How-Computers-Store-Numbers.Rmd)]
 
-[Back to Course Units](#course-units)
+[Back to Table of Contents](#header)
 
 ## Fundamentals of Linear Systems
 
@@ -202,7 +202,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
     -  An applied problem: do the "reality check" on the Euler-Bernoulli beam in section 2.4 of [Sauer's Numerical Analysis](https://www.amazon.com/Numerical-Analysis-3rd-Timothy-Sauer/dp/013469645X).
     
-[Back to Course Units](#course-units)
+[Back to Table of Contents](#header)
 
 ## Solving Linear Systems
 
@@ -228,13 +228,13 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
    -   Learn about the secant method for root finding and calculate (analytically) the order of convergence. Check your result with a numerical example.
 
-[Back to Course Units](#course-units)
+[Back to Table of Contents](#header)
 
 ## Recap Exercise I
 
 -  Recap #1 [[.md for viewing](recap/Recap-1.md)] [[.Rmd for editing](recap/Recap-1.Rmd)]
 
-[Back to Course Units](#course-units)
+[Back to Table of Contents](#header)
 
 ## Interpolation
 
@@ -266,7 +266,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
    -   Prove the formula for Chebyshev interpolation nodes.
 
-[Back to Course Units](#course-units)
+[Back to Table of Contents](#header)
 
 ## Least Squares I
 
@@ -292,24 +292,24 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
    -   Prove the formula for Chebyshev interpolation nodes.
 
-[Back to Course Units](#course-units)
+[Back to Table of Contents](#header)
 
 ## Least Squares II
 
-[Back to Course Units](#course-units)
+[Back to Table of Contents](#header)
 
 ## Eigenvalues
 
-[Back to Course Units](#course-units)
+[Back to Table of Contents](#header)
 
 ## Principal Component Analysis
 
-[Back to Course Units](#course-units)
+[Back to Table of Contents](#header)
 
 ## Topological Data Analysis
 
-[Back to Course Units](#course-units)
+[Back to Table of Contents](#header)
 
 ## Recap Exercise II
 
-[Back to Course Units](#course-units)
+[Back to Table of Contents](#header)
