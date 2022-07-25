@@ -20,7 +20,8 @@
 -   [Solving Linear Systems](#solving-linear-systems)
 -   [Recap Exercise I](#recap-exercise-I)
 -   [Interpolation](#interpolation)
--   [Least Squares](#least-squares)
+-   [Least Squares I](#least-squares-I)
+-   [Least Squares II](#least-squares-II)
 -   [Eigenvalues](#eigenvalues)
 -   [Principal Component Analysis](#principal-component-analysis)
 -   [Topological Data Analysis](#topological-data-analysis)
@@ -291,11 +292,11 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
 -   Reading
 
-    -   [Course Notes: Least Squares I](/coursenotes/coursenotes.md#least-squares-i)
+    -   [Course Notes: Least Squares I](/coursenotes/coursenotes.md#least-squares-I)
     
--   Activity - Least Squares I [[.md for viewing](activities/Activity-Least-Squares-1.md)] [[.Rmd for editing](activities/Activity-Least Squares-1.Rmd)]
+-   Activity - Least Squares I [[.md for viewing](activities/Activity-Least-Squares-I.md)] [[.Rmd for editing](activities/Activity-Least Squares-I.Rmd)]
 
--   Pset - Least Squares I [[.md for viewing](psets/Pset-Least-Squares-1.md)] [[.Rmd for editing](psets/Pset-Least-Squares-1.Rmd)]
+-   Pset - Least Squares I [[.md for viewing](psets/Pset-Least-Squares-I.md)] [[.Rmd for editing](psets/Pset-Least-Squares-I.Rmd)]
 
 - Other Resources
 
