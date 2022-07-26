@@ -52,7 +52,7 @@ If we do a change of variable
 *w* = *u*<sub>*c*</sub><sup>2</sup> + *v*<sub>*c*</sub><sup>2</sup> − *R*<sup>2</sup>,
 then the problem becomes finding the **x** that minimizes
 
-||**A****x** − **b**||<sup>2</sup>,
+||**A** **x** − **b**||<sup>2</sup>,
 
 where
 
