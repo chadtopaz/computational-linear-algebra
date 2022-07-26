@@ -441,10 +441,7 @@ respository’s subdirectories:
 
 -   Challenge problems
 
-    -   Learn how to implement interpolation via Newton divided
-        differences and implement the technique in R.
-
-    -   Prove the formula for Chebyshev interpolation nodes.
+    -   TBD,
 
 [Back to Table of Contents](#header)
 
