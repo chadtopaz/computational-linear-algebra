@@ -286,7 +286,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
    -   [In-class code examples](demos/Demo-Least-Squares-I.R)
 
-- Challenge problemsdfg
+- Challenge problems
 
    -   TBD
 

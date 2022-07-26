@@ -441,11 +441,41 @@ respository’s subdirectories:
 
 -   Challenge problems
 
-    -   TBD,
+    -   TBD
 
 [Back to Table of Contents](#header)
 
 ## Least Squares II
+
+-   Videos
+
+    -   [Graham-Schmidt Orthogonalization
+        (6:37)](https://youtu.be/KOkuTXrv5Gg)
+
+    -   [QR Factorization (8:31)](https://youtu.be/qmRC8mTPGI8)
+
+    -   [An Example of QR Decomposition
+        (12:24)](https://youtu.be/DxbAyJ6ZhRg)
+
+-   Reading
+
+    -   [Course Notes: Least Squares I](/coursenotes/coursenotes.md)
+
+-   Activity - Least Squares I \[[.md for
+    viewing](activities/Activity-Least-Squares-I.md)\] \[[.Rmd for
+    editing](activities/Activity-Least-Squares-I.Rmd)\]
+
+-   Pset - Least Squares I \[[.md for
+    viewing](psets/Pset-Least-Squares-I.md)\] \[[.Rmd for
+    editing](psets/Pset-Least-Squares-I.Rmd)\]
+
+-   Other Resources
+
+    -   [In-class code examples](demos/Demo-Least-Squares-I.R)
+
+-   Challenge problems
+
+    -   TBD
 
 [Back to Table of Contents](#header)
 
