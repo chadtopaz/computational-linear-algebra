@@ -1130,7 +1130,7 @@ is called Jacobi’s method.
 
 ## Goals
 
--   Define and implement LU decomposition and state the potential
+-   Define and implement **LU** decomposition and state the potential
     advantages
 -   Explain how fixed point iteration relates to solution of an equation
 -   Derive and implement Jacobi’s method, and explain advantages and
@@ -1152,9 +1152,9 @@ the same row reductions each time. Only the augmented part **b**
 changes. It would be a waste of computation to run Gaussian elimination
 *M* times.
 
-LU decomposition is a way of storing the Gaussian elimination steps in
-matrix form so that they can be applied to many **b**. We take **A** and
-decompose (or factorize) it as the product
+**LU** decomposition is a way of storing the Gaussian elimination steps
+in matrix form so that they can be applied to many **b**. We take **A**
+and decompose (or factorize) it as the product
 
 $$
 A  = 
@@ -1178,21 +1178,21 @@ $$
 
 The **L** matrix encodes the multipliers used to eliminate elements
 during Gaussian elimination and the **U** matrix is the result of the
-elimination process. Therefore, putting **A** into its LU factorization
-takes one application of Gaussian elimination, or approximately
-$\frac{2}{3} n^3$ operations. Solving **LUx = b** requires two back
-substitutions, namely one to solve **L** **y** = **b** for **y** and one
-to solve **U** **x** = **y** for **x**. This takes 2*n*<sup>2</sup>
-operations. So, to solve
+elimination process. Therefore, putting **A** into its **LU**
+factorization takes one application of Gaussian elimination, or
+approximately $\frac{2}{3} n^3$ operations. Solving **LUx** = **b**
+requires two back substitutions, namely one to solve **L** **y** = **b**
+for **y** and one to solve **U** **x** = **y** for **x**. This takes
+2*n*<sup>2</sup> operations. So, to solve
 **A** **x** = **b**<sub>1</sub>, …, **A** **x** = **b**<sub>*M*</sub>
 takes approximately $\frac{2}{3}n^3 + 2 M n^2$ operations, in contrast
 to $\frac{2}{3}Mn^3 + Mn^2$ for Gaussian elimination.
 
-The LU decomposition exists if and only if the upper-left sub-blocks
+The **LU** decomposition exists if and only if the upper-left sub-blocks
 **A**<sub>1 : *k*, 1 : *k*</sub> are non-singular for all 1 ≤ *k* ≤ *n*
 (not proven here). If the decomposition exists, it is unique.
 
-Let’s do an example of how LU decomposition works. Take
+Let’s do an example of how **LU** decomposition works. Take
 
 $$
 \mathbf{A} = 
@@ -1283,7 +1283,7 @@ We can also use the `lu` command.
     ## [2,]    0    0    0
     ## [3,]    0    0    0
 
-Let’s use Gaussian elimination with the `echelon` command and LU
+Let’s use Gaussian elimination with the `echelon` command and **LU**
 decomposition with the to compare the time for solving a 100 × 100
 system for 100 different right hand sides.
 
@@ -2722,7 +2722,7 @@ and it is critical that you work through the details.
 We’ve talked about how to fit a model to data using least squares, and
 we’ve examined the theoretical aspect of this process, but thus far
 we’ve ignored computational issues. It turns out that solving the normal
-equations can be difficult on a computer, and a technique called QR
+equations can be difficult on a computer, and a technique called **QR**
 factorization provides a potentially better way to solve a least squares
 problem.
 
@@ -2788,8 +2788,8 @@ $$
 \end{align}
 $$
 
-Since ||**Q****v**||<sup>2</sup> = ||**v**||<sup>2</sup>, we know
-||**Q****v**|| = ||**v**|| and therefore ||**Q**|| = 1. A similar
+Since ||**Q** **v**||<sup>2</sup> = ||**v**||<sup>2</sup>, we know
+||**Q** **v**|| = ||**v**|| and therefore ||**Q**|| = 1. A similar
 calculuation shows that ||**Q**<sup>−1</sup>|| = 1. And then, by
 definition of condition number, *κ*(**Q**) = 1. This means that
 orthogonal matrices are incredibly well-conditioned.
@@ -2872,33 +2872,26 @@ Let’s see how it works via an example. Suppose we have
     v2 <- c(2,1,-2)
     v3 <- c(1,1,0)
 
-1.  Take the first vector and turn it into a unit vector.
-
-<!-- -->
+Step 1. Take the first vector and turn it into a unit vector.
 
     y1 <- v1
     r11 <- Norm(y1,2)
     q1 <- y1/r11
 
-1.  Think of **v**<sub>2</sub> as made up of stuff in the subspace
-    spanned by **q**<sub>1</sub> and stuff orthogonal to it. Through
-    away stuff in the span of **q**<sub>1</sub> since we have it covered
-    already. Take what’s left of **v**<sub>2</sub> and turn it unto a
-    unit vector.
-
-<!-- -->
+Step 2. Think of **v**<sub>2</sub> as made up of stuff in the subspace
+spanned by **q**<sub>1</sub> and stuff orthogonal to it. Through away
+stuff in the span of **q**<sub>1</sub> since we have it covered already.
+Take what’s left of **v**<sub>2</sub> and turn it unto a unit vector.
 
     y2 <- v2 - q1%*%t(q1)%*%v2
     r22 <- Norm(y2,2)
     q2 <- y2/r22
 
-1.  Think of **v**<sub>3</sub> as made up of stuff in the subspace
-    spanned by **q**<sub>1, 2</sub> and stuff orthogonal to it. Through
-    away stuff in the span of **q**<sub>1, 2</sub> since we have it
-    covered already. Take what’s left of **v**<sub>3</sub> and turn it
-    unto a unit vector.
-
-<!-- -->
+Step 3. Think of **v**<sub>3</sub> as made up of stuff in the subspace
+spanned by **q**<sub>1, 2</sub> and stuff orthogonal to it. Through away
+stuff in the span of **q**<sub>1, 2</sub> since we have it covered
+already. Take what’s left of **v**<sub>3</sub> and turn it unto a unit
+vector.
 
     y3 <- v3 - q1%*%t(q1)%*%v3 - q2%*%t(q2)%*%v3
     r33 <- Norm(y3,2)
@@ -2930,8 +2923,8 @@ Let’s check the result and see if the procedure worked.
 
 ## QR decomposition
 
-Just like LU decomposition is a way of using matrices to encode the
-process of Gaussian elimination, QR decomposition is a way of using
+Just like **LU** decomposition is a way of using matrices to encode the
+process of Gaussian elimination, **QR** decomposition is a way of using
 matrices to encode the process of Gram-Schmidt orthogonalization. Let’s
 take the equations we implemented above:
 
@@ -2967,8 +2960,8 @@ with
 
 *r*<sub>*i*, *i*</sub> = ||**y**<sub>*i*</sub>||,   *r*<sub>*i*, *j*</sub> = **q**<sub>*i*</sub> ⋅ **v**<sub>*j*</sub>.
 
-The QR decomposition is a matrix decomposition that writes a *m* × *n*
-matrix **A** as a product **A** = **Q****R** where:
+The **QR** decomposition is a matrix decomposition that writes a
+*m* × *n* matrix **A** as a product **A** = **Q****R** where:
 
 -   **Q** is an *m* × *r* matrix with orthonormal columns, where *r* is
     the number of linearly independent columns of **A**.
@@ -2984,21 +2977,21 @@ matrix **A** as a product **A** = **Q****R** where:
 -   On the other hand, if column *j* of **A** can be written as a linear
     combination of columns to the left, then *R*<sub>*j**j*</sub> = 0.
 
-The QR decomposition we’ve done so far is actually called the partial QR
-decomposition We distinguish this from the **full** or **complete** QR
-decomposition. In the latter, we include vectors than span parts of the
-space not spanned by **A** itself. Of course, these contribute nothing
-to the matrix **Q**, so it results in a bunch of 0’s in **R**. Below is
-the key picture to understand. Here, **Q** and **R** are the (partial)
-QR decomposition and $\overline{Q}$ and $\overline{R}$ are the full
-version.
+The **QR** decomposition we’ve done so far is actually called the
+partial **QR** decomposition We distinguish this from the **full** or
+**complete** **QR** decomposition. In the latter, we include vectors
+than span parts of the space not spanned by **A** itself. Of course,
+these contribute nothing to the matrix **Q**, so it results in a bunch
+of 0’s in **R**. Below is the key picture to understand. Here, **Q** and
+**R** are the (partial) **QR** decomposition and $\overline{Q}$ and
+$\overline{R}$ are the full version.
 
 ![](fullQR.png)
 
 Let’s make this clear with numerous examples!
 
 First example. Let’s start with a 3 × 3 matrix and perform Gram-Schmidt
-orthogonalization to obtain the QR decomposition.
+orthogonalization to obtain the **QR** decomposition.
 
     # Define matrix
     v1 <- c(2,3,6)
@@ -3043,8 +3036,8 @@ orthogonalization to obtain the QR decomposition.
 
 In this example, notice that $\overline{\mathbf{Q}}$ has three columns.
 This reflects the fact that the columns of **A** are linearly
-independent. Hence, it spans all of ℝ<sup>3</sup> and the QR and full QR
-decompositions are the same.
+independent. Hence, it spans all of ℝ<sup>3</sup> and the **QR** and
+full **QR** decompositions are the same.
 
 Let’s check our answer by hand and also check it against `R`’s built-in
 capabilities.
@@ -3161,8 +3154,8 @@ ahead and check our result.
     ## [2,]  0  0  0
     ## [3,]  0  0  0
 
-In this case, the full and reduced QR are not the same. Let’s see how
-this works.
+In this case, the full and reduced **QR** are not the same. Let’s see
+how this works.
 
     Q <- Qbar[1:3,1:2]
     R <- Rbar[1:2,1:3]
@@ -3272,14 +3265,15 @@ have to find a basis for the orthogonal complement of **A**.
 
 ## Computational considerations
 
-So far, we have calculated the QR decomposition using a methodology that
-is based on Gram-Schmidt orthogonalization. This is because Gram-Schmidt
-is the most conceptually straightforward method. For an *m* × *n*
-matrix, it turns out that the computational cost of factorization is
-𝒪)(2*m**n*<sup>2</sup>) multiplications and additions. An alternative
-choice for factorization uses objects called Householder reflections. I
-won’t go in to these here, but the method requires fewer operations and
-is the one actually implemented in many software packages.
+So far, we have calculated the **QR** decomposition using a methodology
+that is based on Gram-Schmidt orthogonalization. This is because
+Gram-Schmidt is the most conceptually straightforward method. For an
+*m* × *n* matrix, it turns out that the computational cost of
+factorization is 𝒪)(2*m**n*<sup>2</sup>) multiplications and additions.
+An alternative choice for factorization uses objects called Householder
+reflections. I won’t go in to these here, but the method requires fewer
+operations and is the one actually implemented in many software
+packages.
 
 ## What is the point of QR factorization
 
@@ -3287,7 +3281,7 @@ Finally, we ask: why have we bothered to do all of this? It is really,
 really convenient for least squares, and turns out to have very nice
 numerical properties because of small condition numbers. You’ll work
 with the numerical issue on your activities and/or homework, but for
-now, here’s how least squares works when you use QR decomposition on
+now, here’s how least squares works when you use **QR** decomposition on
 **A****x** = **b**. Note
 
 $$

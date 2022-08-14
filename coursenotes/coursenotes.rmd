@@ -611,7 +611,7 @@ We will learn two methods of solving systems of linear equations. First, dependi
 
 ## Goals
 
--   Define and implement LU decomposition and state the potential advantages
+-   Define and implement **LU** decomposition and state the potential advantages
 -   Explain how fixed point iteration relates to solution of an equation
 -   Derive and implement Jacobi's method, and explain advantages and limitations
 -   Use convergence criteria for Jacobi's method
@@ -627,7 +627,7 @@ $$
 
 where $\mat{A}$ is the same each time and $M$ is large. $\mat{A}$ itself needs the same row reductions each time. Only the augmented part $\vec{b}$ changes. It would be a waste of computation to run Gaussian elimination $M$ times.
 
-LU decomposition is a way of storing the Gaussian elimination steps in matrix form so that they can be applied to many $\vec{b}$. We take $\mat{A}$ and decompose (or factorize) it as the product
+**LU** decomposition is a way of storing the Gaussian elimination steps in matrix form so that they can be applied to many $\vec{b}$. We take $\mat{A}$ and decompose (or factorize) it as the product
 
 $$
 A  = 
@@ -649,11 +649,11 @@ A  =
 \end{array}}_{\mathbf{U}=\text{Upper triangular}}
 $$
 
-The $\mat{L}$ matrix encodes the multipliers used to eliminate elements during Gaussian elimination and the $\mat{U}$ matrix is the result of the elimination process. Therefore, putting $\mat{A}$ into its LU factorization takes one application of Gaussian elimination, or approximately $\frac{2}{3} n^3$ operations. Solving **LUx = b** requires two back substitutions, namely one to solve $\mat{L}\,\vec{y} = \vec{b}$ for $\vec{y}$ and one to solve $\mat{U}\,\vec{x}=\vec{y}$ for $\vec{x}$. This takes $2n^2$ operations. So, to solve $\mat{A}\,\vec{x} = \vec{b}_1, \ldots, \mat{A}\,\vec{x} = \vec{b}_M$ takes approximately $\frac{2}{3}n^3 + 2 M n^2$ operations, in contrast to $\frac{2}{3}Mn^3 + Mn^2$ for Gaussian elimination.
+The $\mat{L}$ matrix encodes the multipliers used to eliminate elements during Gaussian elimination and the $\mat{U}$ matrix is the result of the elimination process. Therefore, putting $\mat{A}$ into its **LU** factorization takes one application of Gaussian elimination, or approximately $\frac{2}{3} n^3$ operations. Solving **LUx** = **b** requires two back substitutions, namely one to solve $\mat{L}\,\vec{y} = \vec{b}$ for $\vec{y}$ and one to solve $\mat{U}\,\vec{x}=\vec{y}$ for $\vec{x}$. This takes $2n^2$ operations. So, to solve $\mat{A}\,\vec{x} = \vec{b}_1, \ldots, \mat{A}\,\vec{x} = \vec{b}_M$ takes approximately $\frac{2}{3}n^3 + 2 M n^2$ operations, in contrast to $\frac{2}{3}Mn^3 + Mn^2$ for Gaussian elimination.
 
-The LU decomposition exists if and only if the upper-left sub-blocks $\mat{A}_{1:k,1:k}$ are non-singular for all $1\leq k \leq n$ (not proven here). If the decomposition exists, it is unique.
+The **LU** decomposition exists if and only if the upper-left sub-blocks $\mat{A}_{1:k,1:k}$ are non-singular for all $1\leq k \leq n$ (not proven here). If the decomposition exists, it is unique.
 
-Let's do an example of how LU decomposition works. Take
+Let's do an example of how **LU** decomposition works. Take
 
 $$
 \mat{A} = 
@@ -735,7 +735,7 @@ U <- sol$U
 A - L%*%U
 ```
 
-Let's use Gaussian elimination with the `echelon` command and LU decomposition with the to compare the time for solving a $100 \times 100$ system for $100$ different right hand sides.
+Let's use Gaussian elimination with the `echelon` command and **LU** decomposition with the to compare the time for solving a $100 \times 100$ system for $100$ different right hand sides.
 
 ```{r cache = TRUE}
 n <- 10
@@ -1708,7 +1708,7 @@ Now you know where the terminology least squares comes from! We can apply calcul
 
 ## Big picture
 
-We've talked about how to fit a model to data using least squares, and we've examined the theoretical aspect of this process, but thus far we've ignored computational issues. It turns out that solving the normal equations can be difficult on a computer, and a technique called QR factorization provides a potentially better way to solve a least squares problem.
+We've talked about how to fit a model to data using least squares, and we've examined the theoretical aspect of this process, but thus far we've ignored computational issues. It turns out that solving the normal equations can be difficult on a computer, and a technique called **QR** factorization provides a potentially better way to solve a least squares problem.
 
 ## Goals
 
@@ -1757,7 +1757,7 @@ $$
 \end{align}
 $$
 
-Since $||\mathbf{Q}\mathbf{v}||^2 = ||\mathbf{v}||^2$, we know $||\mathbf{Q}\mathbf{v}|| = ||\mathbf{v}||$ and therefore $||\mathbf{Q}||=1$. A similar calculuation shows that $||\mathbf{Q}^{-1}||=1$. And then, by definition of condition number, $\kappa(\mathbf{Q}) = 1$. This means that orthogonal matrices are incredibly well-conditioned.
+Since $||\mathbf{Q}\,\mathbf{v}||^2 = ||\mathbf{v}||^2$, we know $||\mathbf{Q}\,\mathbf{v}|| = ||\mathbf{v}||$ and therefore $||\mathbf{Q}||=1$. A similar calculuation shows that $||\mathbf{Q}^{-1}||=1$. And then, by definition of condition number, $\kappa(\mathbf{Q}) = 1$. This means that orthogonal matrices are incredibly well-conditioned.
 
 Finally, let's consider projecting a vector into a subspace spanned by orthonormal vectors $\mathbf{q}_i$, $i=1,\ldots,n$. Define $\mat{A}$ as
 
@@ -1828,7 +1828,7 @@ v2 <- c(2,1,-2)
 v3 <- c(1,1,0)
 ```
 
-1.  Take the first vector and turn it into a unit vector.
+Step 1.  Take the first vector and turn it into a unit vector.
 
 ```{r cache = TRUE}
 y1 <- v1
@@ -1836,7 +1836,7 @@ r11 <- Norm(y1,2)
 q1 <- y1/r11
 ```
 
-2.  Think of $\mathbf{v}_2$ as made up of stuff in the subspace spanned by $\mathbf{q}_1$ and stuff orthogonal to it. Through away stuff in the span of $\mathbf{q}_1$ since we have it covered already. Take what's left of $\mathbf{v}_2$ and turn it unto a unit vector.
+Step 2.  Think of $\mathbf{v}_2$ as made up of stuff in the subspace spanned by $\mathbf{q}_1$ and stuff orthogonal to it. Through away stuff in the span of $\mathbf{q}_1$ since we have it covered already. Take what's left of $\mathbf{v}_2$ and turn it unto a unit vector.
 
 ```{r}
 y2 <- v2 - q1%*%t(q1)%*%v2
@@ -1844,7 +1844,7 @@ r22 <- Norm(y2,2)
 q2 <- y2/r22
 ```
 
-3.  Think of $\mathbf{v}_3$ as made up of stuff in the subspace spanned by $\mathbf{q}_{1,2}$ and stuff orthogonal to it. Through away stuff in the span of $\mathbf{q}_{1,2}$ since we have it covered already. Take what's left of $\mathbf{v}_3$ and turn it unto a unit vector.
+Step 3.  Think of $\mathbf{v}_3$ as made up of stuff in the subspace spanned by $\mathbf{q}_{1,2}$ and stuff orthogonal to it. Through away stuff in the span of $\mathbf{q}_{1,2}$ since we have it covered already. Take what's left of $\mathbf{v}_3$ and turn it unto a unit vector.
 
 ```{r}
 y3 <- v3 - q1%*%t(q1)%*%v3 - q2%*%t(q2)%*%v3
@@ -1863,7 +1863,7 @@ dot(q1,q2)
 
 ## QR decomposition
 
-Just like LU decomposition is a way of using matrices to encode the process of Gaussian elimination, QR decomposition is a way of using matrices to encode the process of Gram-Schmidt orthogonalization. Let's take the equations we implemented above:
+Just like **LU** decomposition is a way of using matrices to encode the process of Gaussian elimination, **QR** decomposition is a way of using matrices to encode the process of Gram-Schmidt orthogonalization. Let's take the equations we implemented above:
 
 $$
 \begin{align}
@@ -1899,7 +1899,7 @@ $$
 r_{i,i} = ||\mathbf{y}_i||, \qquad r_{i,j} = \mathbf{q}_i \cdot \mathbf{v}_j.
 $$
 
-The QR decomposition is a matrix decomposition that writes a $m \times n$ matrix $\mat{A}$ as a product $\mat{A} = \mathbf{Q} \mathbf{R}$ where:
+The **QR** decomposition is a matrix decomposition that writes a $m \times n$ matrix $\mat{A}$ as a product $\mat{A} = \mathbf{Q} \mathbf{R}$ where:
 
 -   $\mathbf{Q}$ is an $m \times r$ matrix with orthonormal columns, where $r$ is the number of linearly independent columns of $\mat{A}$.
 -   $\mathbf{R}$ is an $r \times n$ matrix which is upper triangular if $r=n$, or the top portion of an upper triangular matrix if $r<n$.
@@ -1909,13 +1909,13 @@ The QR decomposition is a matrix decomposition that writes a $m \times n$ matrix
 -   If the columns of $\mat{A}$ are independent, then $R_{ii}\neq 0$.
 -   On the other hand, if column $j$ of $\mat{A}$ can be written as a linear combination of columns to the left, then $R_{jj}=0$.
 
-The QR decomposition we've done so far is actually called the partial QR decomposition We distinguish this from the **full** or **complete** QR decomposition. In the latter, we include vectors than span parts of the space not spanned by $\mat{A}$ itself. Of course, these contribute nothing to the matrix $\mathbf{Q}$, so it results in a bunch of 0's in $\mathbf{R}$. Below is the key picture to understand. Here, $\mathbf{Q}$ and $\mathbf{R}$ are the (partial) QR decomposition and $\overline{Q}$ and $\overline{R}$ are the full version.
+The **QR** decomposition we've done so far is actually called the partial **QR** decomposition We distinguish this from the **full** or **complete** **QR** decomposition. In the latter, we include vectors than span parts of the space not spanned by $\mat{A}$ itself. Of course, these contribute nothing to the matrix $\mathbf{Q}$, so it results in a bunch of 0's in $\mathbf{R}$. Below is the key picture to understand. Here, $\mathbf{Q}$ and $\mathbf{R}$ are the (partial) **QR** decomposition and $\overline{Q}$ and $\overline{R}$ are the full version.
 
 ![](fullQR.png)
 
 Let's make this clear with numerous examples!
 
-First example. Let's start with a $3 \times 3$ matrix and perform Gram-Schmidt orthogonalization to obtain the QR decomposition.
+First example. Let's start with a $3 \times 3$ matrix and perform Gram-Schmidt orthogonalization to obtain the **QR** decomposition.
 
 ```{r cache = TRUE}
 # Define matrix
@@ -1949,7 +1949,7 @@ Qbar
 Rbar
 ```
 
-In this example, notice that $\overline{\mathbf{Q}}$ has three columns. This reflects the fact that the columns of $\mat{A}$ are linearly independent. Hence, it spans all of $\mathbb{R}^3$ and the QR and full QR decompositions are the same.
+In this example, notice that $\overline{\mathbf{Q}}$ has three columns. This reflects the fact that the columns of $\mat{A}$ are linearly independent. Hence, it spans all of $\mathbb{R}^3$ and the **QR** and full **QR** decompositions are the same.
 
 Let's check our answer by hand and also check it against `R`'s built-in capabilities.
 
@@ -2015,7 +2015,7 @@ To reiterate, we ended up with a row of zeros at the bottom of $\overline{\mathb
 Qbar%*%Rbar - A
 ```
 
-In this case, the full and reduced QR are not the same. Let's see how this works.
+In this case, the full and reduced **QR** are not the same. Let's see how this works.
 
 ```{r cache = TRUE}
 Q <- Qbar[1:3,1:2]
@@ -2081,11 +2081,11 @@ Q%*%R - A
 
 ## Computational considerations
 
-So far, we have calculated the QR decomposition using a methodology that is based on Gram-Schmidt orthogonalization. This is because Gram-Schmidt is the most conceptually straightforward method. For an $m \times n$ matrix, it turns out that the computational cost of factorization is $\mathcal{O})(2mn^2)$ multiplications and additions. An alternative choice for factorization uses objects called Householder reflections. I won't go in to these here, but the method requires fewer operations and is the one actually implemented in many software packages.
+So far, we have calculated the **QR** decomposition using a methodology that is based on Gram-Schmidt orthogonalization. This is because Gram-Schmidt is the most conceptually straightforward method. For an $m \times n$ matrix, it turns out that the computational cost of factorization is $\mathcal{O})(2mn^2)$ multiplications and additions. An alternative choice for factorization uses objects called Householder reflections. I won't go in to these here, but the method requires fewer operations and is the one actually implemented in many software packages.
 
 ## What is the point of QR factorization
 
-Finally, we ask: why have we bothered to do all of this? It is really, really convenient for least squares, and turns out to have very nice numerical properties because of small condition numbers. You'll work with the numerical issue on your activities and/or homework, but for now, here's how least squares works when you use QR decomposition on $\mat{A}\vec{x}=\vec{b}$. Note
+Finally, we ask: why have we bothered to do all of this? It is really, really convenient for least squares, and turns out to have very nice numerical properties because of small condition numbers. You'll work with the numerical issue on your activities and/or homework, but for now, here's how least squares works when you use **QR** decomposition on $\mat{A}\vec{x}=\vec{b}$. Note
 
 $$
 \begin{align}
