@@ -10,7 +10,7 @@
 -   <a href="#least-squares-i" id="toc-least-squares-i">Least Squares I</a>
 -   <a href="#least-squares-ii" id="toc-least-squares-ii">Least Squares
     II</a>
--   <a href="#eigenvalues" id="toc-eigenvalues">Eigenvalues</a>
+-   <a href="#eigenvalues-i" id="toc-eigenvalues-i">Eigenvalues I</a>
 
 # R Bootcamp
 
@@ -2879,7 +2879,7 @@ Step 1. Take the first vector and turn it into a unit vector.
     q1 <- y1/r11
 
 Step 2. Think of **v**<sub>2</sub> as made up of stuff in the subspace
-spanned by **q**<sub>1</sub> and stuff orthogonal to it. Through away
+spanned by **q**<sub>1</sub> and stuff orthogonal to it. Throw away
 stuff in the span of **q**<sub>1</sub> since we have it covered already.
 Take what’s left of **v**<sub>2</sub> and turn it unto a unit vector.
 
@@ -2961,7 +2961,7 @@ with
 *r*<sub>*i*, *i*</sub> = ||**y**<sub>*i*</sub>||,   *r*<sub>*i*, *j*</sub> = **q**<sub>*i*</sub> ⋅ **v**<sub>*j*</sub>.
 
 The **QR** decomposition is a matrix decomposition that writes a
-*m* × *n* matrix **A** as a product **A** = **Q****R** where:
+*m* × *n* matrix **A** as a product **A** = **Q** **R** where:
 
 -   **Q** is an *m* × *r* matrix with orthonormal columns, where *r* is
     the number of linearly independent columns of **A**.
@@ -3269,7 +3269,7 @@ So far, we have calculated the **QR** decomposition using a methodology
 that is based on Gram-Schmidt orthogonalization. This is because
 Gram-Schmidt is the most conceptually straightforward method. For an
 *m* × *n* matrix, it turns out that the computational cost of
-factorization is 𝒪)(2*m**n*<sup>2</sup>) multiplications and additions.
+factorization is 𝒪(2*m**n*<sup>2</sup>) multiplications and additions.
 An alternative choice for factorization uses objects called Householder
 reflections. I won’t go in to these here, but the method requires fewer
 operations and is the one actually implemented in many software
@@ -3282,7 +3282,7 @@ really convenient for least squares, and turns out to have very nice
 numerical properties because of small condition numbers. You’ll work
 with the numerical issue on your activities and/or homework, but for
 now, here’s how least squares works when you use **QR** decomposition on
-**A****x** = **b**. Note
+**A** **x** = **b**. Note
 
 $$
 \begin{align}
@@ -3293,6 +3293,7 @@ $$
 & = ||\mathbf{R} \mathbf{x}-\mathbf{Q}^T \mathbf{b}||^2+ ||\widehat{\mathbf{Q}}^T \mathbf{b}||^2. 
 \end{align}
 $$
+
 Proceeding from the second to last line to the very last line is not
 obvious, and takes you a little bit of writing out expressions more
 explicitly. This is a good exercise for you to try.
@@ -3304,7 +3305,7 @@ the first term to be zero. This is fine because it is a square system!
 There’s a command that does this all automatically for you called
 `qr.solve`.
 
-# Eigenvalues
+# Eigenvalues I
 
 ## Big picture
 

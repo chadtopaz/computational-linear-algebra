@@ -1836,7 +1836,7 @@ r11 <- Norm(y1,2)
 q1 <- y1/r11
 ```
 
-Step 2.  Think of $\mathbf{v}_2$ as made up of stuff in the subspace spanned by $\mathbf{q}_1$ and stuff orthogonal to it. Through away stuff in the span of $\mathbf{q}_1$ since we have it covered already. Take what's left of $\mathbf{v}_2$ and turn it unto a unit vector.
+Step 2.  Think of $\mathbf{v}_2$ as made up of stuff in the subspace spanned by $\mathbf{q}_1$ and stuff orthogonal to it. Throw away stuff in the span of $\mathbf{q}_1$ since we have it covered already. Take what's left of $\mathbf{v}_2$ and turn it unto a unit vector.
 
 ```{r}
 y2 <- v2 - q1%*%t(q1)%*%v2
@@ -1899,7 +1899,7 @@ $$
 r_{i,i} = ||\mathbf{y}_i||, \qquad r_{i,j} = \mathbf{q}_i \cdot \mathbf{v}_j.
 $$
 
-The **QR** decomposition is a matrix decomposition that writes a $m \times n$ matrix $\mat{A}$ as a product $\mat{A} = \mathbf{Q} \mathbf{R}$ where:
+The **QR** decomposition is a matrix decomposition that writes a $m \times n$ matrix $\mat{A}$ as a product $\mat{A} = \mathbf{Q}\,\mathbf{R}$ where:
 
 -   $\mathbf{Q}$ is an $m \times r$ matrix with orthonormal columns, where $r$ is the number of linearly independent columns of $\mat{A}$.
 -   $\mathbf{R}$ is an $r \times n$ matrix which is upper triangular if $r=n$, or the top portion of an upper triangular matrix if $r<n$.
@@ -2081,11 +2081,11 @@ Q%*%R - A
 
 ## Computational considerations
 
-So far, we have calculated the **QR** decomposition using a methodology that is based on Gram-Schmidt orthogonalization. This is because Gram-Schmidt is the most conceptually straightforward method. For an $m \times n$ matrix, it turns out that the computational cost of factorization is $\mathcal{O})(2mn^2)$ multiplications and additions. An alternative choice for factorization uses objects called Householder reflections. I won't go in to these here, but the method requires fewer operations and is the one actually implemented in many software packages.
+So far, we have calculated the **QR** decomposition using a methodology that is based on Gram-Schmidt orthogonalization. This is because Gram-Schmidt is the most conceptually straightforward method. For an $m \times n$ matrix, it turns out that the computational cost of factorization is $\mathcal{O}(2mn^2)$ multiplications and additions. An alternative choice for factorization uses objects called Householder reflections. I won't go in to these here, but the method requires fewer operations and is the one actually implemented in many software packages.
 
 ## What is the point of QR factorization
 
-Finally, we ask: why have we bothered to do all of this? It is really, really convenient for least squares, and turns out to have very nice numerical properties because of small condition numbers. You'll work with the numerical issue on your activities and/or homework, but for now, here's how least squares works when you use **QR** decomposition on $\mat{A}\vec{x}=\vec{b}$. Note
+Finally, we ask: why have we bothered to do all of this? It is really, really convenient for least squares, and turns out to have very nice numerical properties because of small condition numbers. You'll work with the numerical issue on your activities and/or homework, but for now, here's how least squares works when you use **QR** decomposition on $\mat{A}\,\vec{x}=\vec{b}$. Note
 
 $$
 \begin{align}
@@ -2095,11 +2095,13 @@ $$
 &= ||\bar{\mathbf{R}} \vec{x} - \bar{\mathbf{Q}}^T \vec{b}||^2 \\
 & = ||\mathbf{R} \vec{x}-\mathbf{Q}^T \vec{b}||^2+ ||\widehat{\mathbf{Q}}^T \vec{b}||^2. 
 \end{align}
-$$ Proceeding from the second to last line to the very last line is not obvious, and takes you a little bit of writing out expressions more explicitly. This is a good exercise for you to try.
+$$
+
+Proceeding from the second to last line to the very last line is not obvious, and takes you a little bit of writing out expressions more explicitly. This is a good exercise for you to try.
 
 In any case, to minimize this, note that the second term doesn't even include $\vec{x}$ so there's nothing we can do about it (in fact, it is the norm of the residual). To minimize the quantity, we can then just force the first term to be zero. This is fine because it is a square system! There's a command that does this all automatically for you called `qr.solve`.
 
-# Eigenvalues
+# Eigenvalues I
 
 ## Big picture
 
