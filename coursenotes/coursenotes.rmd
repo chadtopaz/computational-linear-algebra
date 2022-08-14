@@ -2295,7 +2295,9 @@ $$
 \begin{pmatrix} A_n \\ B_n \end{pmatrix} = \begin{pmatrix}  A_0 \lambda_+^n \\ B_0 \lambda_-^n \end{pmatrix}.
 $$
 
-But we didn't want to know $A_n$ and $B_n$. We wanted to know $F_n$ and $G_n$. So we have to undo the transformation we did before. We have $$
+But we didn't want to know $A_n$ and $B_n$. We wanted to know $F_n$ and $G_n$. So we have to undo the transformation we did before. We have
+
+$$
 \begin{align}
 \mathbf{S}^{-1} \mathbf{F} &= \begin{pmatrix} A_n \\ B_n \end{pmatrix} \\
 \mathbf{S}^{-1} \mathbf{F} &= \begin{pmatrix}  A_0 \lambda_1^n \\ B_0 \lambda_2^n \end{pmatrix} \\

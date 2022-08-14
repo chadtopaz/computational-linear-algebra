@@ -3581,6 +3581,7 @@ $$
 But we didn’t want to know *A*<sub>*n*</sub> and *B*<sub>*n*</sub>. We
 wanted to know *F*<sub>*n*</sub> and *G*<sub>*n*</sub>. So we have to
 undo the transformation we did before. We have
+
 $$
 \begin{align}
 \mathbf{S}^{-1} \mathbf{F} &= \begin{pmatrix} A\_n \\\\ B\_n \end{pmatrix} \\\\
