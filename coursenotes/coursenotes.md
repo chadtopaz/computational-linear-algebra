@@ -10,7 +10,7 @@
 -   <a href="#least-squares-i" id="toc-least-squares-i">Least Squares I</a>
 -   <a href="#least-squares-ii" id="toc-least-squares-ii">Least Squares
     II</a>
--   <a href="#eigenvalues-i" id="toc-eigenvalues-i">Eigenvalues I</a>
+-   <a href="#eigenvalues" id="toc-eigenvalues">Eigenvalues</a>
 
 # R Bootcamp
 
@@ -3305,11 +3305,11 @@ the first term to be zero. This is fine because it is a square system!
 There’s a command that does this all automatically for you called
 `qr.solve`.
 
-# Eigenvalues I
+# Eigenvalues
 
 ## Big picture
 
-Along with solving the linear system **A****x** = **b**, finding the
+Along with solving the linear system **A** **x** = **b**, finding the
 eigenvalues and eigenvectors of a matrix **A** is one of the most
 important problems in linear algebra. Knowing the eigenpairs can help
 simplify a problem and reveal important information about systems
@@ -3328,14 +3328,14 @@ modeled with linear algebra.
 For an *n* × *n* matrix **A**, a scalar *λ* ∈ ℂ, and vector
 **v** ∈ ℝ<sup>*n*</sup>, **v** ≠ **0**, then we say *λ* is an
 **eigenvalue** of **A** and **v** is an **eigenvector** of **A** if
-**A****v** = *λ***v**.
+**A** **v** = *λ***v**.
 
 Stated in words: an eigenvector and eigenvalue are the magical vector
 **v** and scalar *λ* such that if you hit **v** with **A**, you get back
 the same vector **v** but multiplied by a constant *λ*.
 
 How do we calculate them? Let’s take the definition
-**A****v** = *λ***v** and rearrange it to write
+**A** **v** = *λ***v** and rearrange it to write
 (**A**−**I***λ*)**v** = **0**. There are only two ways this can happen.
 One choice is **v** = 0, but that’s trivial because it works for any
 **A**. The other choice, by the Invertible Matrix Theorem, is that the
@@ -3345,7 +3345,7 @@ det (**A**−**I***λ*) = 0. This equation is a polynomial in *λ* and is
 called the **characteristic polynomial**. When calculating by hand, we
 find the characteristic polynomial first and then solve it to find the
 eigenvalues. To find eigenvectors, we remember that
-**A****v** = *λ***v** → (**A**−**I***λ*)**v** = **0** and solve for
+**A** **v** = *λ***v** → (**A**−**I***λ*)**v** = **0** and solve for
 **v**.
 
 To recap:
@@ -3356,10 +3356,13 @@ To recap:
     find the **v**<sub>*i*</sub>.
 
 For example, let’s find the eigenvalues and eigenvectors of
+
 $$
 \mathbf{A} = \begin{pmatrix} -3 & 2 \\\\ 2 & -3 \end{pmatrix}.
 $$
+
 Using the result above, we can write the characteristic polynomial:
+
 $$
 \begin{align}
 \det (\mathbf{A} - \mathbf{I} \lambda) &= 0\\\\
@@ -3369,8 +3372,10 @@ $$
 (\lambda+5)(\lambda+1) &= 0
 \end{align}
 $$
+
 and therefore *λ*<sub>1, 2</sub> =  − 1,  − 5. To find
 **v**<sub>1</sub>, we solve:
+
 $$
 \begin{align}
 (\mathbf{A}-\mathbf{I}\lambda\_1)\mathbf{v}\_1&=\mathbf{0}\\\\
@@ -3378,7 +3383,9 @@ $$
 \mathbf{v}\_1 &= \begin{pmatrix} 1 \\\\ 1 \end{pmatrix}
 \end{align}
 $$
+
 or any scalar multiple of this vector. Similarly, we find
+
 $$
 \mathbf{v}\_2 = \begin{pmatrix} 1 \\\\ -1 \end{pmatrix}.
 $$
@@ -3390,6 +3397,7 @@ of **diagonalization** of matrices. Suppose **A** has eigenpairs
 *λ*<sub>*i*</sub>, **v**<sub>*i*</sub>, *i* = 1, …, *n*. Then we can
 write down the definition of eigenpair for all pairs simultaneously:
 **A****v**<sub>*i*</sub> = *λ*<sub>*i*</sub>**v**<sub>*i*</sub> implies
+
 $$
 \begin{align}
 \mathbf{A} \underbrace{\begin{pmatrix}
@@ -3408,6 +3416,7 @@ $$
 \underbrace{\begin{pmatrix} \lambda\_1 &&& \\\\ & \lambda\_2 & & \\\\ && \ddots & \\\\ &&& \lambda\_n   \end{pmatrix}}\_\mathbf{\Lambda}.
 \end{align}
 $$
+
 Since **A****S** = **S****Λ**, we can write
 **A** = **S****Λ****S**<sup>−1</sup>. If we think of **S** as describing
 a change of basis, this equation says that the action of **A** is like
@@ -3449,8 +3458,11 @@ of eigenvalues and eigenvectors.
 
 We’ll do one classic example: the Fibonacci sequence. First though,
 let’s do a quick warm-up problem. Suppose we have a sequence defined as
+
 *A*<sub>0</sub> = 2,  *A*<sub>*n*</sub> = 5*A*<sub>*n* − 1</sub>.
+
 What is a formula for *A*<sub>*n*</sub>? Well, notice that
+
 $$
 \begin{align}
 A\_1 &= 2 \cdot 5\\\\
@@ -3459,8 +3471,11 @@ A\_2 &= 2 \cdot 5 \cdot 5\\\\
 A\_n &= 2 \cdot 5^n.
 \end{align}
 $$
+
 We’ll need this result! Now recall the Fibonacci sequence,
+
 *F*<sub>0</sub> = 1,  *F*<sub>1</sub> = 1,  *F*<sub>*n*</sub> = *F*<sub>*n* − 1</sub> + *F*<sub>*n* − 2</sub>,  *n* ≥ 2.
+
 If I asked you for *F*<sub>1000</sub>, then using the recursive
 definition above, you’d need to compute the 999 terms that come before
 it. But is there a way to avoid doing this? That is, is there a way to
@@ -3472,6 +3487,7 @@ problem involving a matrix. Define
 definition of *F*<sub>*n*</sub>, we can write
 *F*<sub>*n*</sub> = *F*<sub>*n* − 1</sub> + *G*<sub>*n* − 1</sub>.
 Putting it all together,
+
 $$
 \begin{align}
 F\_n &= F\_{n-1} + G\_{n-1} \\\\
@@ -3480,6 +3496,7 @@ G\_n &= F\_{n-1} \\\\
 \mathbf{F}\_n &= \mathbf{A} \mathbf{F}\_{n-1}.
 \end{align}
 $$
+
 Let’s diagonalize **A**, and momentarily, you’ll see why.
 
     A <- matrix(c(1,1,1,0),byrow=TRUE,nrow=2)
@@ -3522,11 +3539,14 @@ Let’s diagonalize **A**, and momentarily, you’ll see why.
     ## [2,]    1 -1.11022302463e-16
 
 So to recap, we have
+
 $$
 \mathbf{\Lambda} = \begin{pmatrix} \lambda\_+ & 0 \\\\ 0 & \lambda\_- \end{pmatrix}, \quad \mathbf{S} = \begin{pmatrix} \lambda\_+ & \lambda\_- \\\\ 1 & 1 \end{pmatrix}.
 $$
+
 Why would we do this? Let’s use the diagonalization to re-write our
 problem:
+
 $$
 \begin{align}
 \mathbf{F}\_n &= \mathbf{A} \mathbf{F}\_{n-1}\\\\
@@ -3534,23 +3554,30 @@ $$
 \mathbf{S}^{-1} \mathbf{F} &= \mathbf{\Lambda} \mathbf{S}^{-1} \mathbf{F}\_{n-1}.
 \end{align}
 $$
+
 Now define
+
 $$
 \mathbf{S}^{-1} \mathbf{F} = \mathbf{S}^{-1} \begin{pmatrix} F\_n \\\\ G\_n \end{pmatrix} \equiv  \begin{pmatrix} A\_n \\\\ B\_n \end{pmatrix}.
 $$
+
 Then our problem becomes
+
 $$
 \begin{align}
 \begin{pmatrix} A\_n \\\\ B\_n \end{pmatrix} &= \mathbf{\Lambda} \begin{pmatrix} A\_{n-1} \\\\ B\_{n-1} \end{pmatrix} \\\\
 \begin{pmatrix} A\_n \\\\ B\_n \end{pmatrix} &= \begin{pmatrix} \lambda\_+ &  0 \\\\ 0 & \lambda\_- \end{pmatrix} \begin{pmatrix} A\_{n-1} \\\\ B\_{n-1}. \end{pmatrix}
 \end{align}
 $$
+
 Because this problem is diagonal, the top and bottom equations are
 uncoupled, which makes them much easier to solve. In fact, they are
 geometrtic, just like the warm-up problem we did. We can write
+
 $$
 \begin{pmatrix} A\_n \\\\ B\_n \end{pmatrix} = \begin{pmatrix}  A\_0 \lambda\_+^n \\\\ B\_0 \lambda\_-^n \end{pmatrix}.
 $$
+
 But we didn’t want to know *A*<sub>*n*</sub> and *B*<sub>*n*</sub>. We
 wanted to know *F*<sub>*n*</sub> and *G*<sub>*n*</sub>. So we have to
 undo the transformation we did before. We have
@@ -3563,20 +3590,27 @@ $$
 \mathbf{F} &= \begin{pmatrix} \lambda\_1 A\_0 \lambda\_1^n + \lambda\_2 B\_0 \lambda^2n \\\\ \mathrm{doesn't\\ matter}\end{pmatrix}.
 \end{align}
 $$
+
 Therefore,
+
 *F*<sub>*n*</sub> = *A*<sub>0</sub>*λ*<sub>+</sub><sup>*n* + 1</sup> + *B*<sub>0</sub>*λ*<sub>−</sub><sup>*n* + 1</sup>.
+
 To find the unknown constants, we plug in the initial conditions.
+
 $$
 \begin{align}
 F\_0 &= A\_0 \lambda\_+ + B\_0 \lambda\_- = 1\\\\
 F\_1 &= A\_0 \lambda\_+^2 + B\_0 \lambda\_-^2 = 1.
 \end{align}
 $$
+
 Solving, we find $A\_0 = 1/\sqrt{5}$, $B\_0 = -1/\sqrt{5}$. The final
 answer, then, is
+
 $$
 F\_n = \frac{1}{\sqrt{5}}\lambda\_+^{n+1} - \frac{1}{\sqrt{5}}\lambda\_-^{n+1},\quad \lambda\_\pm = \frac{1 \pm \sqrt{5}}{2}.
 $$
+
 Let’s test this out.
 
     fib <- function(n){
@@ -3597,9 +3631,11 @@ One cool thing about this is that it lets us understand the behavior of
 *F*<sub>*n*</sub> for large *n* in a simpler way. Since
 |*λ*<sub>−</sub>| &lt; 1, after many repeated iterations, the term
 involving *λ*<sub>−</sub> will die out and we can write, for large *n*,
+
 $$
 F\_n \approx \frac{1}{\sqrt{5}}\lambda\_+^{n+1}.
 $$
+
 Let’s test this out!
 
     fibapprox <- function(n){
