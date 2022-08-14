@@ -1832,23 +1832,23 @@ Step 1.  Take the first vector and turn it into a unit vector.
 
 ```{r cache = TRUE}
 y1 <- v1
-r11 <- Norm(y1,2)
-q1 <- y1/r11
+r11 <- Norm(y1, 2)
+q1 <- y1 / r11
 ```
 
 Step 2.  Think of $\mathbf{v}_2$ as made up of stuff in the subspace spanned by $\mathbf{q}_1$ and stuff orthogonal to it. Throw away stuff in the span of $\mathbf{q}_1$ since we have it covered already. Take what's left of $\mathbf{v}_2$ and turn it unto a unit vector.
 
 ```{r}
-y2 <- v2 - q1%*%t(q1)%*%v2
-r22 <- Norm(y2,2)
-q2 <- y2/r22
+y2 <- v2 - q1 %*% t(q1) %*% v2
+r22 <- Norm(y2, 2)
+q2 <- y2 / r22
 ```
 
 Step 3.  Think of $\mathbf{v}_3$ as made up of stuff in the subspace spanned by $\mathbf{q}_{1,2}$ and stuff orthogonal to it. Through away stuff in the span of $\mathbf{q}_{1,2}$ since we have it covered already. Take what's left of $\mathbf{v}_3$ and turn it unto a unit vector.
 
 ```{r}
-y3 <- v3 - q1%*%t(q1)%*%v3 - q2%*%t(q2)%*%v3
-r33 <- Norm(y3,2)
+y3 <- v3 - q1 %*% t(q1) %*% v3 - q2 %*% t(q2) %*% v3
+r33 <- Norm(y3, 2)
 ```
 
 Let's check the result and see if the procedure worked.
@@ -1856,9 +1856,9 @@ Let's check the result and see if the procedure worked.
 ```{r cache = TRUE}
 q1
 q2
-Norm(q1,2)
-Norm(q2,2)
-dot(q1,q2)
+Norm(q1, 2)
+Norm(q2, 2)
+t(q1) %*% q2
 ```
 
 ## QR decomposition
@@ -1933,18 +1933,18 @@ q1 <- y1/r11
 y2 <- v2 - (q1%*%t(q1))%*%v2
 r22 <- Norm(y2, 2)
 q2 <- y2/r22
-r12 <- dot(q1,v2)
+r12 <- t(q1) %*% v2
 
 # Step 3
 y3 <- v3 - (q1%*%t(q1))%*%v3 - (q2%*%t(q2))%*%v3
 r33 <- Norm(y3,2)
 q3 <- y3/r33
-r13 <- dot(q1,v3)
-r23 <- dot(q2,v3)
+r13 <- t(q1) %*% v3
+r23 <- t(q2) %*% v3
 
 # Assemble into Qbar and Rbar
 Qbar <- cbind(q1,q2,q3)
-Rbar <- rbind(c(r11,r12,r13),c(0,r22,r23),c(0,0,r33))
+Rbar <- rbind(c(r11,r12,r13), c(0,r22,r23), c(0,0,r33))
 Qbar
 Rbar
 ```
@@ -1978,33 +1978,33 @@ A <- cbind(v1,v2,v3)
 
 # Step 1
 y1 <- v1
-r11 <- Norm(y1,2)
-q1 <- y1/r11
+r11 <- Norm(y1, 2)
+q1 <- y1 / r11
 
 # Step2
-y2 <- v2 - (q1%*%t(q1))%*%v2
-r22 <- Norm(y2,2)
-q2 <- y2/r22
-r12 <- dot(q1,v2)
+y2 <- v2 - (q1 %*% t(q1)) %*% v2
+r22 <- Norm(y2, 2)
+q2 <- y2 / r22
+r12 <- t(q1) %*% v2
 
 # Step 3
-y3 <- v3 - (q1%*%t(q1))%*%v3 - (q2%*%t(q2))%*%v3
+y3 <- v3 - (q1 %*% t(q1)) %*% v3 - (q2 %*% t(q2)) %*% v3
 y3
 ```
 
 Oh! it turns out there's nothing left. If we want to compute the full QR decomposition, we need to find something orthogonal to the span of $q_{1,2}$. An easy way to do that is to pick a vector outside of their span and continue the orthogonalization procedure. You can algorithmically use your linear algebra skills to do this, but for little cases like ours, you can eyeball it.
 
 ```{r}
-V3 <- c(1,1,1)
-y3 <- V3 - (q1%*%t(q1))%*%V3 - (q2%*%t(q2))%*%V3
-q3 <- y3/Norm(y3,2)
+v3 <- c(1,1,1)
+y3 <- v3 - (q1 %*% t(q1)) %*% v3 - (q2 %*% t(q2)) %*% v3
+q3 <- y3 / Norm(y3, 2)
 r13 <- dot(q1,v3)
 r23 <- dot(q2,v3)
 r33 <- 0
 
 # Assemble into Qbar and Rbar
 Qbar <- cbind(q1,q2,q3)
-Rbar <- rbind(c(r11,r12,r13),c(0,r22,r23),c(0,0,r33))
+Rbar <- rbind(c(r11,r12,r13), c(0,r22,r23), c(0,0,r33))
 Qbar
 Rbar
 ```
@@ -2012,7 +2012,7 @@ Rbar
 To reiterate, we ended up with a row of zeros at the bottom of $\overline{\mathbf{R}}$. That's because the columns of $\mat{A}$ are linearly dependent and don't span $\mathbb{R}^3$. At any rate, let's go ahead and check our result.
 
 ```{r cache = TRUE}
-Qbar%*%Rbar - A
+Qbar %*% Rbar - A
 ```
 
 In this case, the full and reduced **QR** are not the same. Let's see how this works.
@@ -2022,7 +2022,7 @@ Q <- Qbar[1:3,1:2]
 R <- Rbar[1:2,1:3]
 Q
 R
-Q%*%R - A
+Q %*% R - A
 ```
 
 Ok, and let's do one last example.
@@ -2037,21 +2037,21 @@ A
 
 # Step 1
 y1 <- v1
-r11 <- Norm(y1,2)
-q1 <- y1/r11
+r11 <- Norm(y1, 2)
+q1 <- y1 / r11
 
 # Step 2
-y2 <- v2 - (q1%*%t(q1))%*%v2
-r22 <- Norm(y2,2)
-q2 <- y2/r22
-r12 <- dot(q1,v2)
+y2 <- v2 - (q1 %*% t(q1)) %*% v2
+r22 <- Norm(y2, 2)
+q2 <- y2 / r22
+r12 <- t(q1) %*% v2
 
 # Step 3
-y3 <- v3 - (q1%*%t(q1))%*%v3 - (q2%*%t(q2))%*%v3
-r33 <- Norm(y3,2)
-q3 <- y3/(r33)
-r13 <- dot(q1,v3)
-r23 <- dot(q2,v3)
+y3 <- v3 - (q1 %*% t(q1)) %*% v3 - (q2 %*% t(q2)) %*% v3
+r33 <- Norm(y3, 2)
+q3 <- y3 / (r33)
+r13 <- t(q1) %*% v3
+r23 <- t(q2) %*% v3
 ```
 
 But wait! We are living in $\mathbb{R}^4$ and we only have three vectors to far, $\mathbf{q}_{1,2,3}$. If we want the full decomposition, we have to find a basis for the orthogonal complement of $\mat{A}$.
@@ -2059,24 +2059,24 @@ But wait! We are living in $\mathbb{R}^4$ and we only have three vectors to far,
 ```{r cache = TRUE}
 # Choose a vector not in the span of q1, q2, q3
 v4 <- c(1,2,3,4)
-y4 <- v4 - (q1%*%t(q1))%*%v4 - (q2%*%t(q2))%*%v4  - (q3%*%t(q3))%*%v4
-r44 <- Norm(y4,2) 
-q4 <- y4/(r44)
-r14 <- dot(q1,v4)
-r24 <- dot(q2,v4)
-r34 <- dot(q3,v4)
+y4 <- v4 - (q1 %*% t(q1)) %*% v4 - (q2 %*% t(q2)) %*% v4  - (q3 %*% t(q3)) %*% v4
+r44 <- Norm(y4, 2) 
+q4 <- y4 / (r44)
+r14 <- t(q1) %*% v4
+r24 <- t(q2) %*% v4
+r34 <- t(q3) %*% v4
 
 # Assemble into Qbar and Rbar, check answer
 Qbar <- cbind(q1,q2,q3,q4)
-Rbar <- rbind(c(r11,r12,r13),c(0,r22,r23),c(0,0,r33),c(0,0,0))
+Rbar <- rbind(c(r11,r12,r13), c(0,r22,r23), c(0,0,r33), c(0,0,0))
 Qbar
 Rbar
-Qbar%*%Rbar - A
+Qbar %*% Rbar - A
 
 # Make reduced QR and check
 Q <- Qbar[1:4,1:3]
 R <- Rbar[1:3,1:3]
-Q%*%R - A
+Q %*% R - A
 ```
 
 ## Computational considerations
@@ -2192,12 +2192,12 @@ $$
 $$
 
 ```{r}
-A <- matrix(c(-3,2,2,-3),byrow=TRUE,nrow=2)
+A <- matrix(c(-3,2,2,-3), byrow = TRUE, nrow = 2)
 e <- eigen(A)
 e
 Lambda <- diag(e$values)
 S <- e$vectors
-S%*%Lambda%*%solve(S)
+S %*% Lambda %*% solve(S)
 ```
 
 Why would you ever need/want to diagonalize a matrix? There are many reasons related to data analysis, differential equations, graph theory, and more. During the next class you will see some of these applications of eigenvalues and eigenvectors.
@@ -2241,21 +2241,21 @@ $$
 Let's diagonalize $\mat{A}$, and momentarily, you'll see why.
 
 ```{r}
-A <- matrix(c(1,1,1,0),byrow=TRUE,nrow=2)
-lambdap <- (1+sqrt(5))/2
+A <- matrix(c(1,1,1,0), byrow = TRUE, nrow = 2)
+lambdap <- (1+sqrt(5)) / 2
 lambdap
-lambdam <- (1-sqrt(5))/2
+lambdam <- (1-sqrt(5)) / 2
 lambdam
 e <- eigen(A)
 e$values
 Lambda <- diag(e$values)
 Lambda
 S <- e$vectors
-v1 <- S[,1]/S[2,1]
-v2 <- S[,2]/S[2,2]
-S <- cbind(v1,v2)
+v1 <- S[,1] / S[2,1]
+v2 <- S[,2] / S[2,2]
+S <- cbind(v1, v2)
 S
-S%*%Lambda%*%solve(S)
+S %*% Lambda %*% solve(S)
 ```
 
 So to recap, we have
@@ -2331,9 +2331,9 @@ $$
 Let's test this out.
 ```{r}
 fib <- function(n){
-  lambdap <- (1+sqrt(5))/2
-  lambdam <- (1-sqrt(5))/2
-  Fn <- 1/sqrt(5)*lambdap^(n+1) - 1/sqrt(5)*lambdam^(n+1)
+  lambdap <- (1 + sqrt(5)) / 2
+  lambdam <- (1 - sqrt(5)) / 2
+  Fn <- 1/sqrt(5) * lambdap^(n+1) - 1/sqrt(5) * lambdam^(n+1)
   return(Fn)
 }
 fib(1:10)
@@ -2350,22 +2350,22 @@ Let's test this out!
 
 ```{r}
 fibapprox <- function(n){
-  lambdap <- (1+sqrt(5))/2
-  Fn <- 1/sqrt(5)*lambdap^(n+1)
+  lambdap <- (1 + sqrt(5)) / 2
+  Fn <- 1/sqrt(5) * lambdap^(n+1)
   return(Fn)
 }
 n <- 1:10
 fib(n)
 fibapprox(n)
 n <- 1:20
-error <- abs(fib(n)-fibapprox(n))
-plot(n,log10(error))
+error <- abs(fib(n) - fibapprox(n))
+plot(n, log10(error))
 ```
 
 It's important to remember from linear algebra that not every matrix can be diagonalized. For a matrix to be diagonalizable, you need for the multiplicity of each eigenvalue to be the same as the dimension of the eigenspace. Here are a couple of examples.
 
 ```{r}
-A <- matrix(c(5,-4,4,12,-11,12,4,-4,5),byrow=TRUE,nrow=3)
+A <- matrix(c(5,-4,4,12,-11,12,4,-4,5), byrow = TRUE, nrow = 3)
 e <- eigen(A)
 e$values
 e$vectors
@@ -2376,7 +2376,7 @@ Here, the **algebraic multiplicity** of $-3$ is 1 because it is only an eigenval
 By way of counterexample, consider this problem.
 
 ```{r}
-A <- matrix(c(1,-1,0,1),byrow=TRUE,nrow=2)
+A <- matrix(c(1,-1,0,1), byrow = TRUE, nrow = 2)
 A
 e <- eigen(A)
 e$values
@@ -2391,7 +2391,7 @@ Please find the eigenvalues of this matrix:
 
 ```{r}
 set.seed(123)
-A <- matrix(sample(-100:100,64),nrow=8)
+A <- matrix(sample(-100:100,64), nrow = 8)
 print(A)
 ```
 
@@ -2400,21 +2400,21 @@ Haha, you (probably) can't! That's because writing down the characteristic polyn
 Instead, we will develop numerical methods that can find an eigenvalue more directly. Let's do a numerical experiment.
 
 ```{r}
-A <- matrix(c(-13,170,240,19,-224,-320,-14,166,237),byrow=TRUE,nrow=3)
+A <- matrix(c(-13,170,240,19,-224,-320,-14,166,237), byrow = TRUE, nrow = 3)
 A
 v <- c(1,1,1)
-v <- A%*%v
+v <- A %*% v
 v
-v <- v/Norm(v,2)
+v <- v / Norm(v, 2)
 v
-v <- A%*%v
+v <- A %*% v
 v
-v <- v/Norm(v,2)
+v <- v / Norm(v, 2)
 for (i in 1:100){
-  v <- A%*%v
-  v <- v/Norm(v,2)
+  v <- A %*% v
+  v <- v / Norm(v, 2)
 }
-(A%*%v)/v
+(A %*%v )/ v
 e <- eigen(A)
 e$values
 ```
@@ -2424,13 +2424,13 @@ Interesting. Using this iteration, we found the eigenvalue $-3$. Any guesses why
 Let's try another example.
 
 ```{r}
-A <- matrix(c(2,-520,8,-90,468,-360,40,-698,160),byrow=TRUE,nrow=3)
+A <- matrix(c(2,-520,8,-90,468,-360,40,-698,160), byrow = TRUE, nrow = 3)
 v <- c(1,1,1)
 for (i in 1:100){
-  v <- A%*%v
-  v <- v/Norm(v,2)
+  v <- A %*% v
+  v <- v / Norm(v, 2)
 }
-(A%*%v)/v
+(A %*% v)/v
 e <- eigen(A)
 e$values
 ```

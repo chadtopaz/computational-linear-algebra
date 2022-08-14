@@ -2875,17 +2875,17 @@ Let’s see how it works via an example. Suppose we have
 Step 1. Take the first vector and turn it into a unit vector.
 
     y1 <- v1
-    r11 <- Norm(y1,2)
-    q1 <- y1/r11
+    r11 <- Norm(y1, 2)
+    q1 <- y1 / r11
 
 Step 2. Think of **v**<sub>2</sub> as made up of stuff in the subspace
 spanned by **q**<sub>1</sub> and stuff orthogonal to it. Throw away
 stuff in the span of **q**<sub>1</sub> since we have it covered already.
 Take what’s left of **v**<sub>2</sub> and turn it unto a unit vector.
 
-    y2 <- v2 - q1%*%t(q1)%*%v2
-    r22 <- Norm(y2,2)
-    q2 <- y2/r22
+    y2 <- v2 - q1 %*% t(q1) %*% v2
+    r22 <- Norm(y2, 2)
+    q2 <- y2 / r22
 
 Step 3. Think of **v**<sub>3</sub> as made up of stuff in the subspace
 spanned by **q**<sub>1, 2</sub> and stuff orthogonal to it. Through away
@@ -2893,33 +2893,34 @@ stuff in the span of **q**<sub>1, 2</sub> since we have it covered
 already. Take what’s left of **v**<sub>3</sub> and turn it unto a unit
 vector.
 
-    y3 <- v3 - q1%*%t(q1)%*%v3 - q2%*%t(q2)%*%v3
-    r33 <- Norm(y3,2)
+    y3 <- v3 - q1 %*% t(q1) %*% v3 - q2 %*% t(q2) %*% v3
+    r33 <- Norm(y3, 2)
 
 Let’s check the result and see if the procedure worked.
 
     q1
 
-    ## [1] 0.333333333333 0.666666666667 0.666666666667
+    ## [1] 0.3333333 0.6666667 0.6666667
 
     q2
 
-    ##                 [,1]
-    ## [1,]  0.666666666667
-    ## [2,]  0.333333333333
-    ## [3,] -0.666666666667
+    ##            [,1]
+    ## [1,]  0.6666667
+    ## [2,]  0.3333333
+    ## [3,] -0.6666667
 
-    Norm(q1,2)
-
-    ## [1] 1
-
-    Norm(q2,2)
+    Norm(q1, 2)
 
     ## [1] 1
 
-    dot(q1,q2)
+    Norm(q2, 2)
 
-    ## [1] 0
+    ## [1] 1
+
+    t(q1) %*% q2
+
+    ##      [,1]
+    ## [1,]    0
 
 ## QR decomposition
 
@@ -3008,24 +3009,24 @@ orthogonalization to obtain the **QR** decomposition.
     y2 <- v2 - (q1%*%t(q1))%*%v2
     r22 <- Norm(y2, 2)
     q2 <- y2/r22
-    r12 <- dot(q1,v2)
+    r12 <- t(q1) %*% v2
 
     # Step 3
     y3 <- v3 - (q1%*%t(q1))%*%v3 - (q2%*%t(q2))%*%v3
     r33 <- Norm(y3,2)
     q3 <- y3/r33
-    r13 <- dot(q1,v3)
-    r23 <- dot(q2,v3)
+    r13 <- t(q1) %*% v3
+    r23 <- t(q2) %*% v3
 
     # Assemble into Qbar and Rbar
     Qbar <- cbind(q1,q2,q3)
-    Rbar <- rbind(c(r11,r12,r13),c(0,r22,r23),c(0,0,r33))
+    Rbar <- rbind(c(r11,r12,r13), c(0,r22,r23), c(0,0,r33))
     Qbar
 
-    ##                  q1                                
-    ## [1,] 0.285714285714  0.857142857143  0.428571428571
-    ## [2,] 0.428571428571  0.285714285714 -0.857142857143
-    ## [3,] 0.857142857143 -0.428571428571  0.285714285714
+    ##             q1                      
+    ## [1,] 0.2857143  0.8571429  0.4285714
+    ## [2,] 0.4285714  0.2857143 -0.8571429
+    ## [3,] 0.8571429 -0.4285714  0.2857143
 
     Rbar
 
@@ -3093,23 +3094,23 @@ Let’s try an example we looked at earlier.
 
     # Step 1
     y1 <- v1
-    r11 <- Norm(y1,2)
-    q1 <- y1/r11
+    r11 <- Norm(y1, 2)
+    q1 <- y1 / r11
 
     # Step2
-    y2 <- v2 - (q1%*%t(q1))%*%v2
-    r22 <- Norm(y2,2)
-    q2 <- y2/r22
-    r12 <- dot(q1,v2)
+    y2 <- v2 - (q1 %*% t(q1)) %*% v2
+    r22 <- Norm(y2, 2)
+    q2 <- y2 / r22
+    r12 <- t(q1) %*% v2
 
     # Step 3
-    y3 <- v3 - (q1%*%t(q1))%*%v3 - (q2%*%t(q2))%*%v3
+    y3 <- v3 - (q1 %*% t(q1)) %*% v3 - (q2 %*% t(q2)) %*% v3
     y3
 
-    ##                   [,1]
-    ## [1,] 1.11022302463e-16
-    ## [2,] 5.55111512313e-17
-    ## [3,] 0.00000000000e+00
+    ##              [,1]
+    ## [1,] 1.110223e-16
+    ## [2,] 5.551115e-17
+    ## [3,] 0.000000e+00
 
 Oh! it turns out there’s nothing left. If we want to compute the full QR
 decomposition, we need to find something orthogonal to the span of
@@ -3118,41 +3119,41 @@ of their span and continue the orthogonalization procedure. You can
 algorithmically use your linear algebra skills to do this, but for
 little cases like ours, you can eyeball it.
 
-    V3 <- c(1,1,1)
-    y3 <- V3 - (q1%*%t(q1))%*%V3 - (q2%*%t(q2))%*%V3
-    q3 <- y3/Norm(y3,2)
+    v3 <- c(1,1,1)
+    y3 <- v3 - (q1 %*% t(q1)) %*% v3 - (q2 %*% t(q2)) %*% v3
+    q3 <- y3 / Norm(y3, 2)
     r13 <- dot(q1,v3)
     r23 <- dot(q2,v3)
     r33 <- 0
 
     # Assemble into Qbar and Rbar
     Qbar <- cbind(q1,q2,q3)
-    Rbar <- rbind(c(r11,r12,r13),c(0,r22,r23),c(0,0,r33))
+    Rbar <- rbind(c(r11,r12,r13), c(0,r22,r23), c(0,0,r33))
     Qbar
 
-    ##                  q1                                
-    ## [1,] 0.333333333333  0.666666666667  0.666666666667
-    ## [2,] 0.666666666667  0.333333333333 -0.666666666667
-    ## [3,] 0.666666666667 -0.666666666667  0.333333333333
+    ##             q1                      
+    ## [1,] 0.3333333  0.6666667  0.6666667
+    ## [2,] 0.6666667  0.3333333 -0.6666667
+    ## [3,] 0.6666667 -0.6666667  0.3333333
 
     Rbar
 
-    ##      [,1] [,2] [,3]
-    ## [1,]    3    0    1
-    ## [2,]    0    3    1
-    ## [3,]    0    0    0
+    ##      [,1] [,2]      [,3]
+    ## [1,]    3    0 1.6666667
+    ## [2,]    0    3 0.3333333
+    ## [3,]    0    0 0.0000000
 
 To reiterate, we ended up with a row of zeros at the bottom of
 $\overline{\mathbf{R}}$. That’s because the columns of **A** are
 linearly dependent and don’t span ℝ<sup>3</sup>. At any rate, let’s go
 ahead and check our result.
 
-    Qbar%*%Rbar - A
+    Qbar %*% Rbar - A
 
-    ##      v1 v2 v3
-    ## [1,]  0  0  0
-    ## [2,]  0  0  0
-    ## [3,]  0  0  0
+    ##      v1 v2         v3
+    ## [1,]  0  0 -0.2222222
+    ## [2,]  0  0  0.2222222
+    ## [3,]  0  0  0.8888889
 
 In this case, the full and reduced **QR** are not the same. Let’s see
 how this works.
@@ -3161,23 +3162,23 @@ how this works.
     R <- Rbar[1:2,1:3]
     Q
 
-    ##                  q1                
-    ## [1,] 0.333333333333  0.666666666667
-    ## [2,] 0.666666666667  0.333333333333
-    ## [3,] 0.666666666667 -0.666666666667
+    ##             q1           
+    ## [1,] 0.3333333  0.6666667
+    ## [2,] 0.6666667  0.3333333
+    ## [3,] 0.6666667 -0.6666667
 
     R
 
-    ##      [,1] [,2] [,3]
-    ## [1,]    3    0    1
-    ## [2,]    0    3    1
+    ##      [,1] [,2]      [,3]
+    ## [1,]    3    0 1.6666667
+    ## [2,]    0    3 0.3333333
 
-    Q%*%R - A
+    Q %*% R - A
 
-    ##      v1 v2 v3
-    ## [1,]  0  0  0
-    ## [2,]  0  0  0
-    ## [3,]  0  0  0
+    ##      v1 v2         v3
+    ## [1,]  0  0 -0.2222222
+    ## [2,]  0  0  0.2222222
+    ## [3,]  0  0  0.8888889
 
 Ok, and let’s do one last example.
 
@@ -3196,21 +3197,21 @@ Ok, and let’s do one last example.
 
     # Step 1
     y1 <- v1
-    r11 <- Norm(y1,2)
-    q1 <- y1/r11
+    r11 <- Norm(y1, 2)
+    q1 <- y1 / r11
 
     # Step 2
-    y2 <- v2 - (q1%*%t(q1))%*%v2
-    r22 <- Norm(y2,2)
-    q2 <- y2/r22
-    r12 <- dot(q1,v2)
+    y2 <- v2 - (q1 %*% t(q1)) %*% v2
+    r22 <- Norm(y2, 2)
+    q2 <- y2 / r22
+    r12 <- t(q1) %*% v2
 
     # Step 3
-    y3 <- v3 - (q1%*%t(q1))%*%v3 - (q2%*%t(q2))%*%v3
-    r33 <- Norm(y3,2)
-    q3 <- y3/(r33)
-    r13 <- dot(q1,v3)
-    r23 <- dot(q2,v3)
+    y3 <- v3 - (q1 %*% t(q1)) %*% v3 - (q2 %*% t(q2)) %*% v3
+    r33 <- Norm(y3, 2)
+    q3 <- y3 / (r33)
+    r13 <- t(q1) %*% v3
+    r23 <- t(q2) %*% v3
 
 But wait! We are living in ℝ<sup>4</sup> and we only have three vectors
 to far, **q**<sub>1, 2, 3</sub>. If we want the full decomposition, we
@@ -3218,50 +3219,50 @@ have to find a basis for the orthogonal complement of **A**.
 
     # Choose a vector not in the span of q1, q2, q3
     v4 <- c(1,2,3,4)
-    y4 <- v4 - (q1%*%t(q1))%*%v4 - (q2%*%t(q2))%*%v4  - (q3%*%t(q3))%*%v4
-    r44 <- Norm(y4,2) 
-    q4 <- y4/(r44)
-    r14 <- dot(q1,v4)
-    r24 <- dot(q2,v4)
-    r34 <- dot(q3,v4)
+    y4 <- v4 - (q1 %*% t(q1)) %*% v4 - (q2 %*% t(q2)) %*% v4  - (q3 %*% t(q3)) %*% v4
+    r44 <- Norm(y4, 2) 
+    q4 <- y4 / (r44)
+    r14 <- t(q1) %*% v4
+    r24 <- t(q2) %*% v4
+    r34 <- t(q3) %*% v4
 
     # Assemble into Qbar and Rbar, check answer
     Qbar <- cbind(q1,q2,q3,q4)
-    Rbar <- rbind(c(r11,r12,r13),c(0,r22,r23),c(0,0,r33),c(0,0,0))
+    Rbar <- rbind(c(r11,r12,r13), c(0,r22,r23), c(0,0,r33), c(0,0,0))
     Qbar
 
-    ##       q1                                                      
-    ## [1,] 0.5 -0.866025403784  1.35973995551e-16  3.92523114671e-16
-    ## [2,] 0.5  0.288675134595 -8.16496580928e-01 -3.14018491737e-16
-    ## [3,] 0.5  0.288675134595  4.08248290464e-01 -7.07106781187e-01
-    ## [4,] 0.5  0.288675134595  4.08248290464e-01  7.07106781187e-01
+    ##       q1                                       
+    ## [1,] 0.5 -0.8660254  1.359740e-16  3.925231e-16
+    ## [2,] 0.5  0.2886751 -8.164966e-01 -3.140185e-16
+    ## [3,] 0.5  0.2886751  4.082483e-01 -7.071068e-01
+    ## [4,] 0.5  0.2886751  4.082483e-01  7.071068e-01
 
     Rbar
 
-    ##      [,1]           [,2]           [,3]
-    ## [1,]    2 1.500000000000 1.000000000000
-    ## [2,]    0 0.866025403784 0.577350269190
-    ## [3,]    0 0.000000000000 0.816496580928
-    ## [4,]    0 0.000000000000 0.000000000000
+    ##      [,1]      [,2]      [,3]
+    ## [1,]    2 1.5000000 1.0000000
+    ## [2,]    0 0.8660254 0.5773503
+    ## [3,]    0 0.0000000 0.8164966
+    ## [4,]    0 0.0000000 0.0000000
 
-    Qbar%*%Rbar - A
+    Qbar %*% Rbar - A
 
-    ##      v1 v2                 v3
-    ## [1,]  0  0 -1.23259516441e-32
-    ## [2,]  0  0  0.00000000000e+00
-    ## [3,]  0  0  0.00000000000e+00
-    ## [4,]  0  0  0.00000000000e+00
+    ##      v1 v2            v3
+    ## [1,]  0  0 -1.232595e-32
+    ## [2,]  0  0  0.000000e+00
+    ## [3,]  0  0  0.000000e+00
+    ## [4,]  0  0  0.000000e+00
 
     # Make reduced QR and check
     Q <- Qbar[1:4,1:3]
     R <- Rbar[1:3,1:3]
-    Q%*%R - A
+    Q %*% R - A
 
-    ##      v1 v2                 v3
-    ## [1,]  0  0 -1.23259516441e-32
-    ## [2,]  0  0  0.00000000000e+00
-    ## [3,]  0  0  0.00000000000e+00
-    ## [4,]  0  0  0.00000000000e+00
+    ##      v1 v2            v3
+    ## [1,]  0  0 -1.232595e-32
+    ## [2,]  0  0  0.000000e+00
+    ## [3,]  0  0  0.000000e+00
+    ## [4,]  0  0  0.000000e+00
 
 ## Computational considerations
 
@@ -3430,7 +3431,7 @@ $$
 \mathbf{A} = \begin{pmatrix} -3 & 2 \\\\ 2 & -3 \end{pmatrix}.
 $$
 
-    A <- matrix(c(-3,2,2,-3),byrow=TRUE,nrow=2)
+    A <- matrix(c(-3,2,2,-3), byrow = TRUE, nrow = 2)
     e <- eigen(A)
     e
 
@@ -3439,13 +3440,13 @@ $$
     ## [1] -1 -5
     ## 
     ## $vectors
-    ##                [,1]            [,2]
-    ## [1,] 0.707106781187  0.707106781187
-    ## [2,] 0.707106781187 -0.707106781187
+    ##           [,1]       [,2]
+    ## [1,] 0.7071068  0.7071068
+    ## [2,] 0.7071068 -0.7071068
 
     Lambda <- diag(e$values)
     S <- e$vectors
-    S%*%Lambda%*%solve(S)
+    S %*% Lambda %*% solve(S)
 
     ##      [,1] [,2]
     ## [1,]   -3    2
@@ -3499,44 +3500,44 @@ $$
 
 Let’s diagonalize **A**, and momentarily, you’ll see why.
 
-    A <- matrix(c(1,1,1,0),byrow=TRUE,nrow=2)
-    lambdap <- (1+sqrt(5))/2
+    A <- matrix(c(1,1,1,0), byrow = TRUE, nrow = 2)
+    lambdap <- (1+sqrt(5)) / 2
     lambdap
 
-    ## [1] 1.61803398875
+    ## [1] 1.618034
 
-    lambdam <- (1-sqrt(5))/2
+    lambdam <- (1-sqrt(5)) / 2
     lambdam
 
-    ## [1] -0.61803398875
+    ## [1] -0.618034
 
     e <- eigen(A)
     e$values
 
-    ## [1]  1.61803398875 -0.61803398875
+    ## [1]  1.618034 -0.618034
 
     Lambda <- diag(e$values)
     Lambda
 
-    ##               [,1]           [,2]
-    ## [1,] 1.61803398875  0.00000000000
-    ## [2,] 0.00000000000 -0.61803398875
+    ##          [,1]      [,2]
+    ## [1,] 1.618034  0.000000
+    ## [2,] 0.000000 -0.618034
 
     S <- e$vectors
-    v1 <- S[,1]/S[2,1]
-    v2 <- S[,2]/S[2,2]
-    S <- cbind(v1,v2)
+    v1 <- S[,1] / S[2,1]
+    v2 <- S[,2] / S[2,2]
+    S <- cbind(v1, v2)
     S
 
-    ##                 v1             v2
-    ## [1,] 1.61803398875 -0.61803398875
-    ## [2,] 1.00000000000  1.00000000000
+    ##            v1        v2
+    ## [1,] 1.618034 -0.618034
+    ## [2,] 1.000000  1.000000
 
-    S%*%Lambda%*%solve(S)
+    S %*% Lambda %*% solve(S)
 
-    ##      [,1]               [,2]
-    ## [1,]    1  1.00000000000e+00
-    ## [2,]    1 -1.11022302463e-16
+    ##      [,1]          [,2]
+    ## [1,]    1  1.000000e+00
+    ## [2,]    1 -1.110223e-16
 
 So to recap, we have
 
@@ -3615,9 +3616,9 @@ $$
 Let’s test this out.
 
     fib <- function(n){
-      lambdap <- (1+sqrt(5))/2
-      lambdam <- (1-sqrt(5))/2
-      Fn <- 1/sqrt(5)*lambdap^(n+1) - 1/sqrt(5)*lambdam^(n+1)
+      lambdap <- (1 + sqrt(5)) / 2
+      lambdam <- (1 - sqrt(5)) / 2
+      Fn <- 1/sqrt(5) * lambdap^(n+1) - 1/sqrt(5) * lambdam^(n+1)
       return(Fn)
     }
     fib(1:10)
@@ -3626,7 +3627,7 @@ Let’s test this out.
 
     fib(1000)
 
-    ## [1] 7.03303677114e+208
+    ## [1] 7.033037e+208
 
 One cool thing about this is that it lets us understand the behavior of
 *F*<sub>*n*</sub> for large *n* in a simpler way. Since
@@ -3640,8 +3641,8 @@ $$
 Let’s test this out!
 
     fibapprox <- function(n){
-      lambdap <- (1+sqrt(5))/2
-      Fn <- 1/sqrt(5)*lambdap^(n+1)
+      lambdap <- (1 + sqrt(5)) / 2
+      Fn <- 1/sqrt(5) * lambdap^(n+1)
       return(Fn)
     }
     n <- 1:10
@@ -3651,12 +3652,12 @@ Let’s test this out!
 
     fibapprox(n)
 
-    ##  [1]  1.17082039325  1.89442719100  3.06524758425  4.95967477525  8.02492235950
-    ##  [6] 12.98459713475 21.00951949425 33.99411662900 55.00363612325 88.99775275225
+    ##  [1]  1.170820  1.894427  3.065248  4.959675  8.024922 12.984597 21.009519
+    ##  [8] 33.994117 55.003636 88.997753
 
     n <- 1:20
-    error <- abs(fib(n)-fibapprox(n))
-    plot(n,log10(error))
+    error <- abs(fib(n) - fibapprox(n))
+    plot(n, log10(error))
 
 ![](coursenotes_files/figure-markdown_strict/unnamed-chunk-66-1.png)
 
@@ -3665,7 +3666,7 @@ be diagonalized. For a matrix to be diagonalizable, you need for the
 multiplicity of each eigenvalue to be the same as the dimension of the
 eigenspace. Here are a couple of examples.
 
-    A <- matrix(c(5,-4,4,12,-11,12,4,-4,5),byrow=TRUE,nrow=3)
+    A <- matrix(c(5,-4,4,12,-11,12,4,-4,5), byrow = TRUE, nrow = 3)
     e <- eigen(A)
     e$values
 
@@ -3673,10 +3674,10 @@ eigenspace. Here are a couple of examples.
 
     e$vectors
 
-    ##                 [,1]           [,2]            [,3]
-    ## [1,] -0.301511344578 0.534522483825 -0.588533689677
-    ## [2,] -0.904534033733 0.801783725737 -0.784390372213
-    ## [3,] -0.301511344578 0.267261241912 -0.195856682537
+    ##            [,1]      [,2]       [,3]
+    ## [1,] -0.3015113 0.5345225 -0.5885337
+    ## [2,] -0.9045340 0.8017837 -0.7843904
+    ## [3,] -0.3015113 0.2672612 -0.1958567
 
 Here, the **algebraic multiplicity** of  − 3 is 1 because it is only an
 eigenvalue once, and the **geometric multiplicity** is 1 because it only
@@ -3688,7 +3689,7 @@ eigenvectors to form the **S** matrix.
 
 By way of counterexample, consider this problem.
 
-    A <- matrix(c(1,-1,0,1),byrow=TRUE,nrow=2)
+    A <- matrix(c(1,-1,0,1), byrow = TRUE, nrow = 2)
     A
 
     ##      [,1] [,2]
@@ -3702,9 +3703,9 @@ By way of counterexample, consider this problem.
 
     e$vectors
 
-    ##      [,1]              [,2]
-    ## [1,]    1 1.00000000000e+00
-    ## [2,]    0 2.22044604925e-16
+    ##      [,1]         [,2]
+    ## [1,]    1 1.000000e+00
+    ## [2,]    0 2.220446e-16
 
 The eigenvalue 1 has algebraic multiplicity 2, but there is only one
 eigenvector (the trivial eigenvector doesn’t count) so it has geometric
@@ -3716,7 +3717,7 @@ matrix is not diagonalizable.
 Please find the eigenvalues of this matrix:
 
     set.seed(123)
-    A <- matrix(sample(-100:100,64),nrow=8)
+    A <- matrix(sample(-100:100,64), nrow = 8)
     print(A)
 
     ##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8]
@@ -3737,7 +3738,7 @@ you’d have to resort to numerical methods to find the roots.
 Instead, we will develop numerical methods that can find an eigenvalue
 more directly. Let’s do a numerical experiment.
 
-    A <- matrix(c(-13,170,240,19,-224,-320,-14,166,237),byrow=TRUE,nrow=3)
+    A <- matrix(c(-13,170,240,19,-224,-320,-14,166,237), byrow = TRUE, nrow = 3)
     A
 
     ##      [,1] [,2] [,3]
@@ -3746,7 +3747,7 @@ more directly. Let’s do a numerical experiment.
     ## [3,]  -14  166  237
 
     v <- c(1,1,1)
-    v <- A%*%v
+    v <- A %*% v
     v
 
     ##      [,1]
@@ -3754,28 +3755,28 @@ more directly. Let’s do a numerical experiment.
     ## [2,] -525
     ## [3,]  389
 
-    v <- v/Norm(v,2)
+    v <- v / Norm(v, 2)
     v
 
-    ##                 [,1]
-    ## [1,]  0.519251568355
-    ## [2,] -0.686667691150
-    ## [3,]  0.508788060681
+    ##            [,1]
+    ## [1,]  0.5192516
+    ## [2,] -0.6866677
+    ## [3,]  0.5087881
 
-    v <- A%*%v
+    v <- A %*% v
     v
 
-    ##                 [,1]
-    ## [1,] -1.374643320759
-    ## [2,]  0.867163198538
-    ## [3,] -0.673588306557
+    ##            [,1]
+    ## [1,] -1.3746433
+    ## [2,]  0.8671632
+    ## [3,] -0.6735883
 
-    v <- v/Norm(v,2)
+    v <- v / Norm(v, 2)
     for (i in 1:100){
-      v <- A%*%v
-      v <- v/Norm(v,2)
+      v <- A %*% v
+      v <- v / Norm(v, 2)
     }
-    (A%*%v)/v
+    (A %*%v )/ v
 
     ##      [,1]
     ## [1,]   -3
@@ -3792,13 +3793,13 @@ guesses why?
 
 Let’s try another example.
 
-    A <- matrix(c(2,-520,8,-90,468,-360,40,-698,160),byrow=TRUE,nrow=3)
+    A <- matrix(c(2,-520,8,-90,468,-360,40,-698,160), byrow = TRUE, nrow = 3)
     v <- c(1,1,1)
     for (i in 1:100){
-      v <- A%*%v
-      v <- v/Norm(v,2)
+      v <- A %*% v
+      v <- v / Norm(v, 2)
     }
-    (A%*%v)/v
+    (A %*% v)/v
 
     ##      [,1]
     ## [1,]  882
@@ -3808,7 +3809,7 @@ Let’s try another example.
     e <- eigen(A)
     e$values
 
-    ## [1]  8.82000000000e+02 -2.52000000000e+02 -4.63379334903e-14
+    ## [1]  8.820000e+02 -2.520000e+02 -4.633793e-14
 
 This method if called **power iteration**. How and why, exactly, does it
 work though? This is the subject of your activity for today.
