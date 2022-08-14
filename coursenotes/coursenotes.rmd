@@ -1704,7 +1704,7 @@ $$
 
 Now you know where the terminology least squares comes from! We can apply calculus to minimize this expression and the normal equations will result. This is a problem on your in-class exercise and your homework, and it is critical that you work through the details.
 
-# QR Factorization
+# Least Squares II
 
 ## Big picture
 
@@ -1718,13 +1718,19 @@ We've talked about how to fit a model to data using least squares, and we've exa
 
 ## Orthogonality is nice
 
-The eventual goal of this lesson is to show you how to solve the least squares problem $$\vec{x}_{LS} = \mathop{\mathrm{arg\,min}}_x \frac{1}{2}||\mat{A}\vec{x}-\vec{b}||^2$$
+The eventual goal of this lesson is to show you how to solve the least squares problem
+
+$$
+\vec{x}_{L\,S} = \mathop{\mathrm{arg\,min}}_x \frac{1}{2}||\mat{A}\,\vec{x}-\vec{b}||^2
+$$
 
 by writing the matrix $\mat{A}$ in a convenient way. But to build up to that, we need to introduce a number of ideas. First off: orthogonality.
 
 You might remember that two vectors $\mathbf{v}$ and $\mathbf{w}$ are **orthogonal** if $\mathbf{v} \cdot \mathbf{w} = \mathbf{v}^T \mathbf{w} = 0$. We say that two vectors are **orthonormal** if they are orthogonal and each have norm of one, that is $\mathbf{v} \cdot \mathbf{v} = \mathbf{w} \cdot \mathbf{w} = 1$.
 
-A matrix is called **orthogonal** or **orthonormal** (they are used interchangeably for matrices, sometimes) if its columns are orthonormal vectors. A cool property arises from this. Suppose these orthonormal columns are $\mathbf{v}_1,\ldots,\mathbf{v}_n$. Then we can consider the quantity $\mat{A}^T \mat{A}$: $$
+A matrix is called **orthogonal** or **orthonormal** (they are used interchangeably for matrices, sometimes) if its columns are orthonormal vectors. A cool property arises from this. Suppose these orthonormal columns are $\mathbf{v}_1,\ldots,\mathbf{v}_n$. Then we can consider the quantity $\mat{A}^T \mat{A}$:
+
+$$
 \begin{align}
 \mat{A}^T \mat{A} &= \begin{pmatrix} \mathbf{v}_1^T\\ \mathbf{v}_2^T \\ \vdots \\ \mathbf{v}_n^T \end{pmatrix} \begin{pmatrix} \mathbf{v}_1 & \mathbf{v}_2 & \cdots & \mathbf{v}_n \end{pmatrix} \\
 &= \begin{pmatrix} \mathbf{v}_1^T \mathbf{v}_1 & \mathbf{v}_1^T \mathbf{v}_2 & \cdots & \mathbf{v}_1^T \mathbf{v}_n \\ \mathbf{v}_2^T \mathbf{v}_1 & \mathbf{v}_2^T \mathbf{v}_2 & \cdots &  \mathbf{v}_2^T \mathbf{v}_n \\
@@ -1734,9 +1740,13 @@ A matrix is called **orthogonal** or **orthonormal** (they are used interchangea
 &= \begin{pmatrix} 1 & 0 & \cdots & 0 \\ 0 & 1 & \cdots & 0\\ \vdots & \vdots & \cdots & \vdots \\ 0 & 0 & \cdots & 1\end{pmatrix}\\
 &= \mathbf{I}_n.
 \end{align}
-$$ If $\mat{A}$ is square and orthonormal, since $\mat{A}^T\mat{A} = \mathbf{I}$, then by definition of inverse, $\mat{A}^T = \mat{A}^{-1}$. This is a pretty great way to calculate an inverse! Remember, though, that in our least squares context ,$\mat{A}$ is generally *not* a square matrix.
+$$
 
-Another helpful property of orthogonal matrices is that they preserve length, meaning that have norm of one. That is, suppose $\mathbf{Q}$ is orthogonal. Then $$
+If $\mat{A}$ is square and orthonormal, since $\mat{A}^T\mat{A} = \mathbf{I}$, then by definition of inverse, $\mat{A}^T = \mat{A}^{-1}$. This is a pretty great way to calculate an inverse! Remember, though, that in our least squares context , $\mat{A}$ is generally *not* a square matrix.
+
+Another helpful property of orthogonal matrices is that they preserve length, meaning that have norm of one. That is, suppose $\mathbf{Q}$ is orthogonal. Then 
+
+$$
 \begin{align}
 ||\mathbf{Q} \mathbf{v}||^2 &= \mathbf{Q} \mathbf{v} \cdot \mathbf{Q} \mathbf{v} \\
 & = (\mathbf{Q}\mathbf{v})^T (\mathbf{Q}\mathbf{v})\\
@@ -1745,24 +1755,44 @@ Another helpful property of orthogonal matrices is that they preserve length, me
 & = \mathbf{v}^T \mathbf{v}\\
 & = ||\mathbf{v}||^2.
 \end{align}
-$$ Since $||\mathbf{Q}\mathbf{v}||^2 = ||\mathbf{v}||^2$, we know $||\mathbf{Q}\mathbf{v}|| = ||\mathbf{v}||$ and therefore $||\mathbf{Q}||=1$. A similar calculuation shows that $||\mathbf{Q}^{-1}||=1$. And then, by definition of condition number, $\kappa(\mathbf{Q}) = 1$. This means that orthogonal matrices are incredibly well-conditioned.
+$$
 
-Finally, let's consider projecting a vector into a subspace spanned by orthonormal vectors $\mathbf{q}_i$, $i=1,\ldots,n$. Define $\mat{A}$ as $$
+Since $||\mathbf{Q}\mathbf{v}||^2 = ||\mathbf{v}||^2$, we know $||\mathbf{Q}\mathbf{v}|| = ||\mathbf{v}||$ and therefore $||\mathbf{Q}||=1$. A similar calculuation shows that $||\mathbf{Q}^{-1}||=1$. And then, by definition of condition number, $\kappa(\mathbf{Q}) = 1$. This means that orthogonal matrices are incredibly well-conditioned.
+
+Finally, let's consider projecting a vector into a subspace spanned by orthonormal vectors $\mathbf{q}_i$, $i=1,\ldots,n$. Define $\mat{A}$ as
+
+$$
 \mat{A} = \begin{pmatrix} | & | &  & | \\ \mathbf{q}_1 & \mathbf{q}_2 & \cdots & \  \mathbf{q}_n \\| & | &  & | \\ \end{pmatrix}.
-$$ Let's project a vector $\mathbf{w}$ onto the subspace spanned by the columns of $\mat{A}$. By definition of the projection operator, and using the fact that $\mat{A}$ is orthogonal, $$
+$$
+
+Let's project a vector $\mathbf{w}$ onto the subspace spanned by the columns of $\mat{A}$. By definition of the projection operator, and using the fact that $\mat{A}$ is orthogonal,
+
+$$
 \begin{align}
 \mathbf{P}\mathbf{w} &= \mat{A} (\mat{A}^T \mat{A})^{-1} \mat{A}^T \mathbf{w}\\
 &= \mat{A} \mat{A}^{-1} \mat{A} \mat{A}^T \mathbf{w} \\
 &= \mat{A} \mat{A}^T \mathbf{w} \\
 &= \mathbf{q}_1 \mathbf{q}_1^T \mathbf{w} + \mathbf{q}_2 \mathbf{q}_2^T \mathbf{w} + \cdots + \mathbf{q}_n \mathbf{q}_n^T \mathbf{w}.
 \end{align}
-$$ So, when projecting onto the space spanned by orthonormal vectors, you can just project onto each vector separately and add up the results. In the calculation above, remember that $\mathbf{q}_i \mathbf{q}_i^T$ is a matrix.
+$$
 
-As an example, take $$
+So, when projecting onto the space spanned by orthonormal vectors, you can just project onto each vector separately and add up the results. In the calculation above, remember that $\mathbf{q}_i \mathbf{q}_i^T$ is a matrix.
+
+As an example, take
+
+$$
 \mathbf{q}_1 = \left(\frac{1}{3},\frac{2}{3},\frac{2}{3}\right)^T, \quad \mathbf{q}_2 = \left(\frac{2}{15},\frac{2}{3},-\frac{11}{15}\right)^T
-$$ so that $$
+$$
+
+so that
+
+$$
 \mat{A} = \begin{pmatrix} \frac{1}{3} & \frac{2}{15} \\ \frac{2}{3} & \frac{2}{3} \\ \frac{2}{3} & -\frac{11}{15} \end{pmatrix}.
-$$ Then $$
+$$
+
+Then
+
+$$
 \begin{align}
 \mat{A} \mat{A}^T &= \begin{pmatrix} \frac{1}{3} & \frac{2}{15} \\ \frac{2}{3} & \frac{2}{3} \\ \frac{2}{3} & -\frac{11}{15} \end{pmatrix}
 \begin{pmatrix} \frac{1}{3} &  \frac{2}{3} & \frac{2}{3} \\ \frac{2}{15} & \frac{2}{3} & -\frac{11}{15} \end{pmatrix} \\
@@ -1833,7 +1863,9 @@ dot(q1,q2)
 
 ## QR decomposition
 
-Just like LU decomposition is a way of using matrices to encode the process of Gaussian elimination, QR decomposition is a way of using matrices to encode the process of Gram-Schmidt orthogonalization. Let's take the equations we implemented above: $$
+Just like LU decomposition is a way of using matrices to encode the process of Gaussian elimination, QR decomposition is a way of using matrices to encode the process of Gram-Schmidt orthogonalization. Let's take the equations we implemented above:
+
+$$
 \begin{align}
 \mathbf{y}_1 &= \mathbf{v}_1\\
 \mathbf{q}_1 &= \frac{1}{||\mathbf{y}_1||} \mathbf{y}_1 \\
@@ -1842,16 +1874,29 @@ Just like LU decomposition is a way of using matrices to encode the process of G
 \mathbf{y}_3 &= \mathbf{v}_3 - ( \mathbf{q}_1 \mathbf{q}_1^T \mathbf{v}_3 + \mathbf{q}_2 \mathbf{q}_2^T \mathbf{v}_3)\\
 \mathbf{q}_3 &= \frac{1}{||\mathbf{y}_3||} \mathbf{y}_3.
 \end{align}
-$$ Let's rewrite these equations, solving for the $\mathbf{v}_i$: $$
+$$
+
+Let's rewrite these equations, solving for the $\mathbf{v}_i$:
+
+$$
 \begin{align}
 \mathbf{v}_1 &= ||\mathbf{y}_1|| \mathbf{q}_1 \\
 \mathbf{v}_2 &= (\mathbf{q}_1\cdot \mathbf{v}_2) \mathbf{q}_1 + ||\mathbf{y}_2|| \mathbf{q}_2 \\
 \mathbf{v}_3 &= (\mathbf{q}_1\cdot \mathbf{v}_3) \mathbf{q}_1 + (\mathbf{q}_2\cdot \mathbf{v}_3) \mathbf{q}_2  + ||\mathbf{y}_3|| \mathbf{q}_3 
 \end{align}
-$$ or, as matrices, $$
+$$
+
+or, as matrices,
+
+$$
 \begin{pmatrix} | & | &   | \\ \mathbf{v}_1 & \mathbf{v}_2  & \mathbf{v}_3 \\| & | &   | \\ \end{pmatrix} = 
 \underbrace{ \begin{pmatrix} | & | &   | \\ \mathbf{q}_1 & \mathbf{q}_2  & \mathbf{q}_3 \\| & | &   | \\ \end{pmatrix}}_Q   \underbrace{\begin{pmatrix} r_{1,1} & r_{1,2} &   r_{1,3} \\ 0 &r_{2,2}  & r_{2,3} \\0 & 0 &   r_{3,3} \\ \end{pmatrix} }_R
-$$ with $$r_{i,i} = ||\mathbf{y}_i||, \qquad r_{i,j} = \mathbf{q}_i \cdot \mathbf{v}_j.
+$$
+
+with
+
+$$
+r_{i,i} = ||\mathbf{y}_i||, \qquad r_{i,j} = \mathbf{q}_i \cdot \mathbf{v}_j.
 $$
 
 The QR decomposition is a matrix decomposition that writes a $m \times n$ matrix $\mat{A}$ as a product $\mat{A} = \mathbf{Q} \mathbf{R}$ where:
@@ -2040,7 +2085,9 @@ So far, we have calculated the QR decomposition using a methodology that is base
 
 ## What is the point of QR factorization
 
-Finally, we ask: why have we bothered to do all of this? It is really, really convenient for least squares, and turns out to have very nice numerical properties because of small condition numbers. You'll work with the numerical issue on your activities and/or homework, but for now, here's how least squares works when you use QR decomposition on $\mat{A}\vec{x}=\vec{b}$. Note $$
+Finally, we ask: why have we bothered to do all of this? It is really, really convenient for least squares, and turns out to have very nice numerical properties because of small condition numbers. You'll work with the numerical issue on your activities and/or homework, but for now, here's how least squares works when you use QR decomposition on $\mat{A}\vec{x}=\vec{b}$. Note
+
+$$
 \begin{align}
 ||\mat{A}\vec{x}-\vec{b}||^2 &= ||\bar{\mathbf{Q}}\bar{\mathbf{R}} \vec{x} - \vec{b}||^2 \\
 &= ||\bar{\mathbf{Q}}^T(\bar{\mathbf{Q}}\bar{\mathbf{R}} \vec{x} - \vec{b})||^2 \\
