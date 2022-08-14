@@ -8,8 +8,8 @@
     id="toc-solving-linear-systems">Solving Linear Systems</a>
 -   <a href="#interpolation" id="toc-interpolation">Interpolation</a>
 -   <a href="#least-squares-i" id="toc-least-squares-i">Least Squares I</a>
--   <a href="#qr-factorization" id="toc-qr-factorization">QR
-    Factorization</a>
+-   <a href="#least-squares-ii" id="toc-least-squares-ii">Least Squares
+    II</a>
 -   <a href="#eigenvalues" id="toc-eigenvalues">Eigenvalues</a>
 
 # R Bootcamp
@@ -2715,7 +2715,7 @@ apply calculus to minimize this expression and the normal equations will
 result. This is a problem on your in-class exercise and your homework,
 and it is critical that you work through the details.
 
-# QR Factorization
+# Least Squares II
 
 ## Big picture
 
@@ -2736,7 +2736,10 @@ problem.
 
 The eventual goal of this lesson is to show you how to solve the least
 squares problem
-$$\mathbf{x}\_{LS} = \mathop{\mathrm{arg\\,min}}\_x \frac{1}{2}||\mathbf{A}\mathbf{x}-\mathbf{b}||^2$$
+
+$$
+\mathbf{x}\_{L\\,S} = \mathop{\mathrm{arg\\,min}}\_x \frac{1}{2}||\mathbf{A}\\,\mathbf{x}-\mathbf{b}||^2
+$$
 
 by writing the matrix **A** in a convenient way. But to build up to
 that, we need to introduce a number of ideas. First off: orthogonality.
@@ -2751,6 +2754,7 @@ interchangeably for matrices, sometimes) if its columns are orthonormal
 vectors. A cool property arises from this. Suppose these orthonormal
 columns are **v**<sub>1</sub>, …, **v**<sub>*n*</sub>. Then we can
 consider the quantity **A**<sup>*T*</sup>**A**:
+
 $$
 \begin{align}
 \mathbf{A}^T \mathbf{A} &= \begin{pmatrix} \mathbf{v}\_1^T\\\\ \mathbf{v}\_2^T \\\\ \vdots \\\\ \mathbf{v}\_n^T \end{pmatrix} \begin{pmatrix} \mathbf{v}\_1 & \mathbf{v}\_2 & \cdots & \mathbf{v}\_n \end{pmatrix} \\\\
@@ -2762,15 +2766,17 @@ $$
 &= \mathbf{I}\_n.
 \end{align}
 $$
+
 If **A** is square and orthonormal, since
 **A**<sup>*T*</sup>**A** = **I**, then by definition of inverse,
 **A**<sup>*T*</sup> = **A**<sup>−1</sup>. This is a pretty great way to
 calculate an inverse! Remember, though, that in our least squares
-context ,**A** is generally *not* a square matrix.
+context , **A** is generally *not* a square matrix.
 
 Another helpful property of orthogonal matrices is that they preserve
 length, meaning that have norm of one. That is, suppose **Q** is
 orthogonal. Then
+
 $$
 \begin{align}
 ||\mathbf{Q} \mathbf{v}||^2 &= \mathbf{Q} \mathbf{v} \cdot \mathbf{Q} \mathbf{v} \\\\
@@ -2781,6 +2787,7 @@ $$
 & = ||\mathbf{v}||^2.
 \end{align}
 $$
+
 Since ||**Q****v**||<sup>2</sup> = ||**v**||<sup>2</sup>, we know
 ||**Q****v**|| = ||**v**|| and therefore ||**Q**|| = 1. A similar
 calculuation shows that ||**Q**<sup>−1</sup>|| = 1. And then, by
@@ -2790,12 +2797,15 @@ orthogonal matrices are incredibly well-conditioned.
 Finally, let’s consider projecting a vector into a subspace spanned by
 orthonormal vectors **q**<sub>*i*</sub>, *i* = 1, …, *n*. Define **A**
 as
+
 $$
 \mathbf{A} = \begin{pmatrix} | & | &  & | \\\\ \mathbf{q}\_1 & \mathbf{q}\_2 & \cdots & \\  \mathbf{q}\_n \\\\| & | &  & | \\\\ \end{pmatrix}.
 $$
+
 Let’s project a vector **w** onto the subspace spanned by the columns of
 **A**. By definition of the projection operator, and using the fact that
 **A** is orthogonal,
+
 $$
 \begin{align}
 \mathbf{P}\mathbf{w} &= \mathbf{A} (\mathbf{A}^T \mathbf{A})^{-1} \mathbf{A}^T \mathbf{w}\\\\
@@ -2804,20 +2814,26 @@ $$
 &= \mathbf{q}\_1 \mathbf{q}\_1^T \mathbf{w} + \mathbf{q}\_2 \mathbf{q}\_2^T \mathbf{w} + \cdots + \mathbf{q}\_n \mathbf{q}\_n^T \mathbf{w}.
 \end{align}
 $$
+
 So, when projecting onto the space spanned by orthonormal vectors, you
 can just project onto each vector separately and add up the results. In
 the calculation above, remember that
 **q**<sub>*i*</sub>**q**<sub>*i*</sub><sup>*T*</sup> is a matrix.
 
 As an example, take
+
 $$
 \mathbf{q}\_1 = \left(\frac{1}{3},\frac{2}{3},\frac{2}{3}\right)^T, \quad \mathbf{q}\_2 = \left(\frac{2}{15},\frac{2}{3},-\frac{11}{15}\right)^T
 $$
+
 so that
+
 $$
 \mathbf{A} = \begin{pmatrix} \frac{1}{3} & \frac{2}{15} \\\\ \frac{2}{3} & \frac{2}{3} \\\\ \frac{2}{3} & -\frac{11}{15} \end{pmatrix}.
 $$
+
 Then
+
 $$
 \begin{align}
 \mathbf{A} \mathbf{A}^T &= \begin{pmatrix} \frac{1}{3} & \frac{2}{15} \\\\ \frac{2}{3} & \frac{2}{3} \\\\ \frac{2}{3} & -\frac{11}{15} \end{pmatrix}
@@ -2918,6 +2934,7 @@ Just like LU decomposition is a way of using matrices to encode the
 process of Gaussian elimination, QR decomposition is a way of using
 matrices to encode the process of Gram-Schmidt orthogonalization. Let’s
 take the equations we implemented above:
+
 $$
 \begin{align}
 \mathbf{y}\_1 &= \mathbf{v}\_1\\\\
@@ -2928,7 +2945,9 @@ $$
 \mathbf{q}\_3 &= \frac{1}{||\mathbf{y}\_3||} \mathbf{y}\_3.
 \end{align}
 $$
+
 Let’s rewrite these equations, solving for the **v**<sub>*i*</sub>:
+
 $$
 \begin{align}
 \mathbf{v}\_1 &= ||\mathbf{y}\_1|| \mathbf{q}\_1 \\\\
@@ -2936,12 +2955,16 @@ $$
 \mathbf{v}\_3 &= (\mathbf{q}\_1\cdot \mathbf{v}\_3) \mathbf{q}\_1 + (\mathbf{q}\_2\cdot \mathbf{v}\_3) \mathbf{q}\_2  + ||\mathbf{y}\_3|| \mathbf{q}\_3 
 \end{align}
 $$
+
 or, as matrices,
+
 $$
 \begin{pmatrix} | & | &   | \\\\ \mathbf{v}\_1 & \mathbf{v}\_2  & \mathbf{v}\_3 \\\\| & | &   | \\\\ \end{pmatrix} = 
 \underbrace{ \begin{pmatrix} | & | &   | \\\\ \mathbf{q}\_1 & \mathbf{q}\_2  & \mathbf{q}\_3 \\\\| & | &   | \\\\ \end{pmatrix}}\_Q   \underbrace{\begin{pmatrix} r\_{1,1} & r\_{1,2} &   r\_{1,3} \\\\ 0 &r\_{2,2}  & r\_{2,3} \\\0 & 0 &   r\_{3,3} \\\\ \end{pmatrix} }\_R
 $$
+
 with
+
 *r*<sub>*i*, *i*</sub> = ||**y**<sub>*i*</sub>||,   *r*<sub>*i*, *j*</sub> = **q**<sub>*i*</sub> ⋅ **v**<sub>*j*</sub>.
 
 The QR decomposition is a matrix decomposition that writes a *m* × *n*
@@ -3266,6 +3289,7 @@ numerical properties because of small condition numbers. You’ll work
 with the numerical issue on your activities and/or homework, but for
 now, here’s how least squares works when you use QR decomposition on
 **A****x** = **b**. Note
+
 $$
 \begin{align}
 ||\mathbf{A}\mathbf{x}-\mathbf{b}||^2 &= ||\bar{\mathbf{Q}}\bar{\mathbf{R}} \mathbf{x} - \mathbf{b}||^2 \\\\
