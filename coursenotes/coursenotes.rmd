@@ -2435,6 +2435,6 @@ e <- eigen(A)
 e$values
 ```
 
-This method if called **power iteration**. How and why, exactly, does it work though? This is the subject of your activity for today.
+This method is called **power iteration**. How and why, exactly, does it work though? This is the subject of your activity for this unit.
 
 You might not realize it, but you use power iteration nearly every day. Google searches are based on an algorithm called PageRank, which is applies power iteration to a matrix that encodes links between web pages. We may investigate this in class at some point. But as you can imagine, the matrix in question is gigantic, which is why numerical methods are necessary.

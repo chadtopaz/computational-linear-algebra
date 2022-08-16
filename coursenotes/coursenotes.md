@@ -3811,8 +3811,8 @@ Let’s try another example.
 
     ## [1]  8.820000e+02 -2.520000e+02 -4.633793e-14
 
-This method if called **power iteration**. How and why, exactly, does it
-work though? This is the subject of your activity for today.
+This method is called **power iteration**. How and why, exactly, does it
+work though? This is the subject of your activity for this unit.
 
 You might not realize it, but you use power iteration nearly every day.
 Google searches are based on an algorithm called PageRank, which is

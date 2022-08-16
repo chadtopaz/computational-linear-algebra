@@ -320,15 +320,15 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
 [Back to Table of Contents](#header)
 
-## Eigenvalues
+## Eigenvalues I
+
+[Back to Table of Contents](#header)
+
+## Eigenvalues II
 
 [Back to Table of Contents](#header)
 
 ## Principal Component Analysis
-
-[Back to Table of Contents](#header)
-
-## Topological Data Analysis
 
 [Back to Table of Contents](#header)
 
