@@ -458,19 +458,17 @@ respository’s subdirectories:
 
 -   Reading
 
-    -   [Course Notes: Least Squares I](/coursenotes/coursenotes.md)
+    -   [Course Notes: Least Squares II](/coursenotes/coursenotes.md)
 
--   Activity - Least Squares I \[[.md for
-    viewing](activities/Activity-Least-Squares-I.md)\] \[[.Rmd for
-    editing](activities/Activity-Least-Squares-I.Rmd)\]
+-   Activity - Least Squares II \[[.md for viewing]()\] \[[.Rmd for
+    editing]()\]
 
--   Pset - Least Squares I \[[.md for
-    viewing](psets/Pset-Least-Squares-I.md)\] \[[.Rmd for
-    editing](psets/Pset-Least-Squares-I.Rmd)\]
+-   Pset - Least Squares II \[[.md for viewing]()\] \[[.Rmd for
+    editing]()\]
 
 -   Other Resources
 
-    -   [In-class code examples](demos/Demo-Least-Squares-I.R)
+    -   [In-class code examples]()
 
 -   Challenge problems
 
