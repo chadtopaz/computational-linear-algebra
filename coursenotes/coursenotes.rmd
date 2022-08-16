@@ -2162,7 +2162,7 @@ $$
 
 ## Algebraic multiplicity, geometric multiplicity, and diagonalization
 
-Many applications of eigenvalues are intimiately tied up with the idea of **diagonalization** of matrices. Suppose $\mat{A}$ has eigenpairs $\lambda_i$, $\mathbf{v}_i$, $i = 1,\ldots,n$. Then we can write down the definition of eigenpair for all pairs simultaneously: $\mat{A} \mathbf{v}_i = \lambda_i \mathbf{v}_i$ implies
+Many applications of eigenvalues are intimiately tied up with the idea of **diagonalization** of matrices. Suppose $\mat{A}$ has eigenpairs $\lambda_i$, $\mathbf{v}_i$, $i = 1,\ldots,n$. Then we can write down the definition of eigenpair for all pairs simultaneously: $\mat{A}\,\mathbf{v}_i = \lambda_i \mathbf{v}_i$ implies
 
 $$
 \begin{align}
@@ -2183,7 +2183,7 @@ $$
 \end{align}
 $$
 
-Since $\mat{A}\mathbf{S} = \mathbf{S} \mathbf{\Lambda}$, we can write $\mat{A} = \mathbf{S} \mathbf{\Lambda} \mathbf{S}^{-1}$. If we think of $\mathbf{S}$ as describing a change of basis, this equation says that the action of $\mat{A}$ is like going into another basis, multiplying by a diagonal matrix, and then changing back to the original basis.
+Since $\mat{A}\,\mathbf{S} = \mathbf{S}\, \mathbf{\Lambda}$, we can write $\mat{A} = \mathbf{S} \mathbf{\Lambda} \mathbf{S}^{-1}$. If we think of $\mathbf{S}$ as describing a change of basis, this equation says that the action of $\mat{A}$ is like going into another basis, multiplying by a diagonal matrix, and then changing back to the original basis.
 
 Let's show that we can do this with our example matrix $\mat{A}$ from before, 
 

@@ -3397,7 +3397,7 @@ Many applications of eigenvalues are intimiately tied up with the idea
 of **diagonalization** of matrices. Suppose **A** has eigenpairs
 *λ*<sub>*i*</sub>, **v**<sub>*i*</sub>, *i* = 1, …, *n*. Then we can
 write down the definition of eigenpair for all pairs simultaneously:
-**A****v**<sub>*i*</sub> = *λ*<sub>*i*</sub>**v**<sub>*i*</sub> implies
+**A** **v**<sub>*i*</sub> = *λ*<sub>*i*</sub>**v**<sub>*i*</sub> implies
 
 $$
 \begin{align}
@@ -3418,7 +3418,7 @@ $$
 \end{align}
 $$
 
-Since **A****S** = **S****Λ**, we can write
+Since **A** **S** = **S** **Λ**, we can write
 **A** = **S****Λ****S**<sup>−1</sup>. If we think of **S** as describing
 a change of basis, this equation says that the action of **A** is like
 going into another basis, multiplying by a diagonal matrix, and then
