@@ -25,11 +25,10 @@
     -   <a href="#least-squares-i" id="toc-least-squares-i">Least Squares I</a>
     -   <a href="#least-squares-ii" id="toc-least-squares-ii">Least Squares
         II</a>
-    -   <a href="#eigenvalues" id="toc-eigenvalues">Eigenvalues</a>
+    -   <a href="#eigenvalues-i" id="toc-eigenvalues-i">Eigenvalues I</a>
+    -   <a href="#eigenvalues-ii" id="toc-eigenvalues-ii">Eigenvalues II</a>
     -   <a href="#principal-component-analysis"
         id="toc-principal-component-analysis">Principal Component Analysis</a>
-    -   <a href="#topological-data-analysis"
-        id="toc-topological-data-analysis">Topological Data Analysis</a>
     -   <a href="#recap-exercise-ii" id="toc-recap-exercise-ii">Recap Exercise
         II</a>
 
@@ -479,15 +478,15 @@ respository’s subdirectories:
 
 [Back to Table of Contents](#header)
 
-## Eigenvalues
+## Eigenvalues I
+
+[Back to Table of Contents](#header)
+
+## Eigenvalues II
 
 [Back to Table of Contents](#header)
 
 ## Principal Component Analysis
-
-[Back to Table of Contents](#header)
-
-## Topological Data Analysis
 
 [Back to Table of Contents](#header)
 
