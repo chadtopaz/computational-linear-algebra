@@ -98,7 +98,7 @@ but I include the full syllabus nonetheless in order to give a flavor of
 the course and the philosophy I bring to it.
 
 ![Computational Linear Algebra Course
-Syllabus](https://github.com/chadtopaz/computationallineaaralgebra/raw/main/syllabus/Computational%20Linear%20Algebra%20Syllabus.jpg)
+Syllabus](https://github.com/chadtopaz/computational-linear-algebra/raw/9dee5434ace706df0483ce6c7bba23eb60dbe3b1/syllabus/Computational%20Linear%20Algebra%20Syllabus.jpg)
 
 [Back to Table of Contents](#header)
 
