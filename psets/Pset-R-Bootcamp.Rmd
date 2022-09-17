@@ -1,7 +1,7 @@
 ---
 title: "Pset - R Bootcamp"
 output:
-  rmarkdown::html_document:
+  rmarkdown::md_document:
   header-includes:
    - \usepackage{amsmath}
 ---
@@ -26,7 +26,7 @@ Assume the following details:
 
 * Interest is compounded each day and added to the accounts, except that fractions of a cent are truncated.
 
-* The daily interest rate is thus .05/365.
+* The daily interest rate is thus $.05/365$.
 
 * The truncated fractions are deposited into an illegal account that initially has a balance of $0.
 
@@ -61,7 +61,9 @@ Your solution goes here.
 The purpose of this problem is to practice some R skills and review a critical topic in applied mathematics: Taylor series.
 
 a\. Find the degree 5 Taylor polynomial $P(x)$ centered at $x = 0$ for $f(x) = \cos x$. This is a paper-and-pencil calculation, but you should write up the solution here in your markdown document.
+
 b\. Find an upper bound for the error in approximating $f(x)$ by $P(x)$ on the interval $[-\pi/4,\pi/4]$. This is also a paper-and-pencil calculation that you should write up here.
+
 c\. Make a single plot with 3 different curves: $cos(x)$ and the 2nd and 4th degree Taylor approximations of $f(x)$ around $x=0$. Plot these on the interval $[-\pi/2,\pi/2]$.
 
 ### Problem 2 Solution

@@ -16,14 +16,18 @@ Assume the following details:
 -   You have access to 10,000 bank accounts.
 
 -   Initially, the bank accounts have balances that are uniformly
-    distributed between $100 and $100,000.
+    distributed between
+ $100 and $
+    100,000.
 
 -   The annual interest rate on the accounts is 5%.
 
 -   Interest is compounded each day and added to the accounts, except
     that fractions of a cent are truncated.
 
--   The daily interest rate is thus .05/365.
+-   The daily interest rate is thus
+ $.05/365$
+.
 
 -   The truncated fractions are deposited into an illegal account that
     initially has a balance of $0.
@@ -65,14 +69,16 @@ Your solution goes here.
 The purpose of this problem is to practice some R skills and review a
 critical topic in applied mathematics: Taylor series.
 
-a\. Find the degree 5 Taylor polynomial *P*(*x*) centered at *x* = 0 for
-*f*(*x*) = cos *x*. This is a paper-and-pencil calculation, but you
-should write up the solution here in your markdown document. b. Find an
-upper bound for the error in approximating *f*(*x*) by *P*(*x*) on the
-interval \[−*π*/4,*π*/4\]. This is also a paper-and-pencil calculation
-that you should write up here. c. Make a single plot with 3 different
-curves: *c**o**s*(*x*) and the 2nd and 4th degree Taylor approximations
-of *f*(*x*) around *x* = 0. Plot these on the interval \[−*π*/2,*π*/2\].
+a\. Find the degree 5 Taylor polynomial $P(x)$ centered at $x = 0$ for $f(x) =\cos x$
+. This is a paper-and-pencil calculation, but you should write up the
+solution here in your markdown document.
+
+b\. Find an upper bound for the error in approximating $f(x)$ by $P(x)$ on the interval $[-\pi/4,\pi/4]$
+. This is also a paper-and-pencil calculation that you should write up
+here.
+
+c\. Make a single plot with 3 different curves: $cos(x)$ and the 2nd and 4th degree Taylor approximations of $f(x)$ around $x=0$. Plot these on the interval $[-\pi/2,\pi/2]$
+.
 
 ### Problem 2 Solution
 
@@ -84,12 +90,11 @@ c\. Your solution goes here.
 
 ### Problem 3
 
-Consider the polynomial
-*f*(*x*) = *x*<sup>5</sup> + *x*<sup>4</sup> − 2*x*<sup>3</sup> + 4*x*<sup>2</sup> − 8*x* + 5.
-For a vector of 5 million equally spaced values going from x = -100 to x
-= 100, evaluate the polynomial four different ways, time each one using
-commands from the `tictoc` package, and compare. You should make your
-vector of x values using the `seq` command.
+Consider the polynomial $f(x) = x^5 + x^4 - 2x^3 + 4x^2 - 8x + 5$
+. For a vector of 5 million equally spaced values going from x = -100 to
+x = 100, evaluate the polynomial four different ways, time each one
+using commands from the `tictoc` package, and compare. You should make
+your vector of x values using the `seq` command.
 
 -   Regular polynomial evaluation using a loop to iterate over each
     value in the vector.
