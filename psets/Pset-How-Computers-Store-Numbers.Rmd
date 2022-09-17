@@ -46,7 +46,7 @@ Your solution goes here.
 
 ### Problem 4
 
-Find the smallest positive integer $i$ such that $i$ is not exactly representable using the IEEE standard in double precision; i.e., $\hbox{fl}(i)\neq i$.
+Find the smallest positive integer $i$ such that $i$ is not exactly representable using the IEEE standard in double precision; i.e., $fl(i)\neq i$.
 
 ### Problem 4 Solution
 
