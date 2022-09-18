@@ -1,7 +1,7 @@
 ---
 title: "Pset - Fundamentals of Linear Systems"
 output:
-  rmarkdown::md_document:
+  rmarkdown::html_document:
   header-includes:
    - \usepackage{amsmath}
 ---
@@ -45,7 +45,7 @@ a\. Write a function that takes a value of $n$ as input and outputs the matrix A
 
 b\. Use your function and the R command `kappa` to calculate the approximate condition number $\kappa(\mat{A})$ for $n=1,\ldots,30$. Plot $\log_{10}[\kappa(\mat{A})]$ as a function of $n$ and use the commands `lm` and `abline` to plot a best fit line. How would you describe the conditioning of the matrix as $n$ increases?
 
-c\. Now choose $n=30$. Generate the matrix $\mat{A}$ and let $\vec{b_1}$ be an $n \times 1$ vector of random numbers chosen uniformly from 0 to 1. Solve $\mat{A}\,\vec{x}_1 = \vec{b}_1$ using any appropriate method that you want (including R's built-in capabilities). Now let $\vec{b}_2 = \vec{b}_1 + (0,\ldots,0,0.001)^T$, that is, you leave the first 29 elements the same as in $\vec{b}_1$ but add 0.001 to the last element. Solve $\mat{A}\,\vec{x}_2 = \vec{b}_2$. Use the command `Norm` to find the (approximate)2-norm of $\vec{x_1}-\vec{x_2}$ and discuss vis-a-vis your result from part b. Also, to help build your intuition, find the magnitude of the difference between the first coordinate of $\vec{x}_1$ and that of $\vec{x}_2$.
+c\. Now choose $n=30$. Generate the matrix $\mat{A}$ and let $\vec{b_1}$ be an $n \times 1$ vector of random numbers chosen uniformly from 0 to 1. Solve $\mat{A}\,\vec{x}_1 = \vec{b}_1$ using any appropriate method that you want (including R's built-in capabilities). Now let $\vec{b}_2 = \vec{b}_1 + (0,\ldots,0,0.001)^T$, that is, you leave the first 29 elements the same as in $\vec{b}_1$ but add 0.001 to the last element. Solve $\mat{A}\,\vec{x}_2 = \vec{b}_2$. Use the command `Norm` to find the (approximate) 2-norm of $\vec{x_1}-\vec{x_2}$ and discuss vis-a-vis your result from part b. Also, to help build your intuition, find the magnitude of the difference between the first coordinate of $\vec{x}_1$ and that of $\vec{x}_2$.
 
 ### Problem 2 Solution
 

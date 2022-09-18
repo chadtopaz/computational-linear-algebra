@@ -51,7 +51,7 @@ capabilities). Now let
 that is, you leave the first 29 elements the same as in
 **b**<sub>1</sub> but add 0.001 to the last element. Solve
 **A** **x**<sub>2</sub> = **b**<sub>2</sub>. Use the command `Norm` to
-find the (approximate)2-norm of
+find the (approximate) 2-norm of
 **x**<sub>**1**</sub> − **x**<sub>**2**</sub> and discuss vis-a-vis your
 result from part b. Also, to help build your intuition, find the
 magnitude of the difference between the first coordinate of
