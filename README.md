@@ -1,3 +1,37 @@
+-   <a href="#course-information" id="toc-course-information">Course
+    Information</a>
+    -   <a href="#introduction" id="toc-introduction">Introduction</a>
+    -   <a href="#citation" id="toc-citation">Citation</a>
+    -   <a href="#in-development" id="toc-in-development">In Development</a>
+    -   <a href="#errata" id="toc-errata">Errata</a>
+    -   <a href="#consultingspeaking"
+        id="toc-consultingspeaking">Consulting/Speaking</a>
+    -   <a href="#course-syllabus" id="toc-course-syllabus">Course Syllabus</a>
+    -   <a href="#r-resources" id="toc-r-resources">R Resources</a>
+    -   <a href="#course-details" id="toc-course-details">Course Details</a>
+-   <a href="#course-units" id="toc-course-units">Course Units</a>
+    -   <a href="#getting-started" id="toc-getting-started">Getting Started</a>
+    -   <a href="#r-bootcamp" id="toc-r-bootcamp">R Bootcamp</a>
+    -   <a href="#how-computers-store-numbers"
+        id="toc-how-computers-store-numbers">How Computers Store Numbers</a>
+    -   <a href="#fundamentals-of-linear-systems"
+        id="toc-fundamentals-of-linear-systems">Fundamentals of Linear
+        Systems</a>
+    -   <a href="#solving-linear-systems"
+        id="toc-solving-linear-systems">Solving Linear Systems</a>
+    -   <a href="#recap-exercise-i" id="toc-recap-exercise-i">Recap Exercise
+        I</a>
+    -   <a href="#interpolation" id="toc-interpolation">Interpolation</a>
+    -   <a href="#least-squares-i" id="toc-least-squares-i">Least Squares I</a>
+    -   <a href="#least-squares-ii" id="toc-least-squares-ii">Least Squares
+        II</a>
+    -   <a href="#eigenvalues-i" id="toc-eigenvalues-i">Eigenvalues I</a>
+    -   <a href="#eigenvalues-ii" id="toc-eigenvalues-ii">Eigenvalues II</a>
+    -   <a href="#principal-component-analysis"
+        id="toc-principal-component-analysis">Principal Component Analysis</a>
+    -   <a href="#recap-exercise-ii" id="toc-recap-exercise-ii">Recap Exercise
+        II</a>
+
 # Course Information
 
 ## Introduction
@@ -146,7 +180,7 @@ respository’s subdirectories:
         COVID-19](https://sinews.siam.org/Details-Page/the-mathematics-of-mass-testing-for-covid-19)
     -   [DataCamp Hid a Sexual Harassment Incident by its
         CEO](https://www.buzzfeednews.com/article/daveyalba/datacamp-sexual-harassment-metoo-tech-startup)
-\[CW/TW: Sexual Harassment\]. DataCamp is this course’s default
+        \[CW/TW: Sexual Harassment\]. DataCamp is this course’s default
         resource for learning R because it is the best-designed and most
         effective resource I know of. However, **DataCamp has a
         problematic past**, and I feel an ethical imperative to be
@@ -198,25 +232,25 @@ respository’s subdirectories:
     -   [Functions
         (chapter)](https://www.datacamp.com/courses/intermediate-r)
 
--   Activity - R Bootcamp\[[.md for
-    viewing](activities/Activity-R-Bootcamp.md)\]\[[.Rmd for
+-   Activity - R Bootcamp \[[.md for
+    viewing](activities/Activity-R-Bootcamp.md)\] \[[.Rmd for
     editing](activities/Activity-R-Bootcamp.Rmd)\]
 
--   Pset - R Bootcamp\[[.md for viewing](psets/Pset-R-Bootcamp.md)\]
-\[[.Rmd for editing](psets/Pset-R-Bootcamp.Rmd)\]
+-   Pset - R Bootcamp \[[.md for viewing](psets/Pset-R-Bootcamp.md)\]
+    \[[.Rmd for editing](psets/Pset-R-Bootcamp.Rmd)\]
 
 -   Challenge Problems
 
     -   Many students take the formula for Taylor series as a given, but
         it’s valuable to understand how it comes from calculus. Derive
-        the Taylor series formula\[hint: start with the Fundamental
+        the Taylor series formula \[hint: start with the Fundamental
         Theorem of Calculus\].
 
 -   Looking ahead
 
-    -   8.2 - 7.2 - 1 =?
+    -   8.2 - 7.2 - 1 = ?
+    -   10<sup>18</sup> + 100 − 10<sup>18</sup> = ?
 
-    -   <pre>$10^{18} + 100 - 10^{18} =?$
 [Back to Table of Contents](#header)
 
 ## How Computers Store Numbers
@@ -240,13 +274,13 @@ respository’s subdirectories:
     -   [Quick Introduction to Base R Graphics
         (chapter)](https://www.datacamp.com/courses/data-visualization-in-r)
 
--   Activity - How Computers Store Numbers\[[.md for
+-   Activity - How Computers Store Numbers \[[.md for
     viewing](activities/Activity-How-Computers-Store-Numbers.md)\]
-\[[.Rmd for
+    \[[.Rmd for
     editing](activities/Activity-How-Computers-Store-Numbers.Rmd)\]
 
--   Pset - How Computers Store Numbers\[[.md for
-    viewing](psets/Pset-How-Computers-Store-Numbers.md)\]\[[.Rmd for
+-   Pset - How Computers Store Numbers \[[.md for
+    viewing](psets/Pset-How-Computers-Store-Numbers.md)\] \[[.Rmd for
     editing](psets/Pset-How-Computers-Store-Numbers.Rmd)\]
 
 [Back to Table of Contents](#header)
@@ -264,7 +298,7 @@ respository’s subdirectories:
 
     -   [Matrix Norms (9:56)](https://youtu.be/DkyM93Wgh_0)
 
-    -   [Condition Number\[starting at 8:30\]
+    -   [Condition Number \[starting at 8:30\]
         (7:54)](https://youtu.be/BVM3NAt6QoM?t=510)
 
 -   Reading
@@ -275,13 +309,13 @@ respository’s subdirectories:
     -   [Course Notes: Fundamentals of Linear
         Systems](/coursenotes/coursenotes.md)
 
--   Activity - Fundamentals of Linear Systems\[[.md for
+-   Activity - Fundamentals of Linear Systems \[[.md for
     viewing](activities/Activity-Fundamentals-of-Linear-Systems.md)\]
-\[[.Rmd for
+    \[[.Rmd for
     editing](activities/Activity-Fundamentals-of-Linear-Systems.Rmd)\]
 
--   Pset - Fundamentals of Linear Systems\[[.md for
-    viewing](psets/Pset-Fundamentals-of-Linear-Systems.md)\]\[[.Rmd for
+-   Pset - Fundamentals of Linear Systems \[[.md for
+    viewing](psets/Pset-Fundamentals-of-Linear-Systems.md)\] \[[.Rmd for
     editing](psets/Pset-Fundamentals-of-Linear-Systems.Rmd)\]
 
 -   Challenge problems
@@ -303,7 +337,7 @@ respository’s subdirectories:
     -   [LU Factorization (8:03)](https://youtu.be/a9S6MMcqxr4)
 
     -   [Iterative Methods for **Ax** = **b**
-        *f**i**r**s**t*9: 09*o**n**l**y*
+        *f**i**r**s**t*9 : 09*o**n**l**y*
         (9:09)](https://youtu.be/nJO6BWswrkE)
 
 -   Reading
@@ -311,12 +345,12 @@ respository’s subdirectories:
     -   [Course Notes: Solving Linear
         Systems](/coursenotes/coursenotes.md)
 
--   Activity - Solving Linear Systems\[[.md for
-    viewing](activities/Activity-Solving-Linear-Systems.md)\]\[[.Rmd
+-   Activity - Solving Linear Systems \[[.md for
+    viewing](activities/Activity-Solving-Linear-Systems.md)\] \[[.Rmd
     for editing](activities/Activity-Solving-Linear-Systems.Rmd)\]
 
--   Pset - Solving Linear Systems\[[.md for
-    viewing](psets/Pset-Solving-Linear-Systems.md)\]\[[.Rmd for
+-   Pset - Solving Linear Systems \[[.md for
+    viewing](psets/Pset-Solving-Linear-Systems.md)\] \[[.Rmd for
     editing](psets/Pset-Solving-Linear-Systems.Rmd)\]
 
 -   Other Resources
@@ -334,7 +368,7 @@ respository’s subdirectories:
 
 ## Recap Exercise I
 
--   Recap\#1\[[.md for viewing](recap/Recap-1.md)\]\[[.Rmd for
+-   Recap \#1 \[[.md for viewing](recap/Recap-1.md)\] \[[.Rmd for
     editing](recap/Recap-1.Rmd)\]
 
 [Back to Table of Contents](#header)
@@ -359,12 +393,12 @@ respository’s subdirectories:
 
     -   [Course Notes: Interpolation](/coursenotes/coursenotes.md)
 
--   Activity - Interpolation\[[.md for
-    viewing](activities/Activity-Interpolation.md)\]\[[.Rmd for
+-   Activity - Interpolation \[[.md for
+    viewing](activities/Activity-Interpolation.md)\] \[[.Rmd for
     editing](activities/Activity-Interpolation.Rmd)\]
 
--   Pset - Inteprolation\[[.md for
-    viewing](psets/Pset-Interpolation.md)\]\[[.Rmd for
+-   Pset - Inteprolation \[[.md for
+    viewing](psets/Pset-Interpolation.md)\] \[[.Rmd for
     editing](psets/Pset-Interpolation.Rmd)\]
 
 -   Other Resources
@@ -392,12 +426,12 @@ respository’s subdirectories:
 
     -   [Course Notes: Least Squares I](/coursenotes/coursenotes.md)
 
--   Activity - Least Squares I\[[.md for
-    viewing](activities/Activity-Least-Squares-I.md)\]\[[.Rmd for
+-   Activity - Least Squares I \[[.md for
+    viewing](activities/Activity-Least-Squares-I.md)\] \[[.Rmd for
     editing](activities/Activity-Least-Squares-I.Rmd)\]
 
--   Pset - Least Squares I\[[.md for
-    viewing](psets/Pset-Least-Squares-I.md)\]\[[.Rmd for
+-   Pset - Least Squares I \[[.md for
+    viewing](psets/Pset-Least-Squares-I.md)\] \[[.Rmd for
     editing](psets/Pset-Least-Squares-I.Rmd)\]
 
 -   Other Resources
@@ -426,10 +460,10 @@ respository’s subdirectories:
 
     -   [Course Notes: Least Squares II](/coursenotes/coursenotes.md)
 
--   Activity - Least Squares II\[[.md for viewing]()\]\[[.Rmd for
+-   Activity - Least Squares II \[[.md for viewing]()\] \[[.Rmd for
     editing]()\]
 
--   Pset - Least Squares II\[[.md for viewing]()\]\[[.Rmd for
+-   Pset - Least Squares II \[[.md for viewing]()\] \[[.Rmd for
     editing]()\]
 
 -   Other Resources
