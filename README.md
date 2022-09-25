@@ -336,8 +336,7 @@ respository’s subdirectories:
 
     -   [LU Factorization (8:03)](https://youtu.be/a9S6MMcqxr4)
 
-    -   [Iterative Methods for **A,x** = **b**
-        *f**i**r**s**t*9 : 09*o**n**l**y*
+    -   [Iterative Methods for **Ax** = **b** \[first 9:09 only\]
         (9:09)](https://youtu.be/nJO6BWswrkE)
 
 -   Reading

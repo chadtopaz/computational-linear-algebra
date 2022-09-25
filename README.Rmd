@@ -210,7 +210,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
     -   [LU Factorization (8:03)](https://youtu.be/a9S6MMcqxr4)
     
-    -   [Iterative Methods for **A\,x** = **b** \[first 9:09 only\] (9:09)](https://youtu.be/nJO6BWswrkE)
+    -   [Iterative Methods for **Ax** = **b** [first 9:09 only] (9:09)](https://youtu.be/nJO6BWswrkE)
     
 -   Reading
 
