@@ -633,7 +633,7 @@ intuition.)
 5\. **Null space** just means the parts of ℝ<sup>*n*</sup> that gets
 mapped to **0** by **A**. Another name for nullspace is **kernel**.
 Mathematically, the nullspace is all the vectors **v** for which
-**A**, **v** = 0. So for an invertible matrix **A**, the nullspace is
+**A** **v** = 0. So for an invertible matrix **A**, the nullspace is
 **0**. This is basically assigning a definition to the previous point
 (above).
 
