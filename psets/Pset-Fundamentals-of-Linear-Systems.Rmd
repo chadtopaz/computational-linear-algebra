@@ -88,7 +88,7 @@ $$
 \bigl(\mat{I} - \alpha\,\mat{M}^T)(\vec{x} + \vec{1}) = \vec{1}
 $$
 
-where $\mat{I}$ is the identity matrix, $\alpha$ is a small number, and $\vec{1}$ is a vector of all ones. Take $\alpha = 0.05$ and solve for $\vec{x}$ using any method you want. Print out the largest element of $\vec{x}$ so that I can verify your answer.
+where $\mat{I}$ is the identity matrix, $\alpha$ is a small number, and $\vec{1}$ is a vector of all ones. Take $\alpha = 0.05$ and solve for $\vec{x}$ using any method you want. I used R's `solve` command.) Print out the largest element of $\vec{x}$ so that I can verify your answer.
 
 b\. Re-plot the network using your same graph layout as before, color the most important node red and plot it with size 5. This way, the most important node (at least, according to the Katz measure) will stand out on your plot.
 
