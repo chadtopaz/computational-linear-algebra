@@ -132,10 +132,16 @@ f^{\prime \prime}(x\_0) \approx \frac{f(x\_0-h)-2f(x\_0)+f(x\_0+h)}{h^2}
 $$
 
 Using this function, make a graph of the absolute error for
-*f*(*x*) = *e*<sup>*x*</sup> at *x*<sub>0</sub> = 0 and find the optimal
-size of *h*. Then, in a few sentences, explain why it is not optimal to
-take *h* as small as possible for the numerical computation you carried
-out above. Be specific.
+*f*(*x*) = *e*<sup>*x*</sup> at *x*<sub>0</sub> = 0 as a function of h,
+and find the optimal size of *h*. You’ll want to check many orders of
+magnitude for *h*, and so equally spaced values are not appropriate.
+Instead, use values whose logs are equally spaced by taking
+
+    h <- 10^seq(from = -8, to = -1, length = 501)
+
+Then, in a few sentences, explain why it is not optimal to take *h* as
+small as possible for the numerical computation you carried out above.
+Be specific.
 
 ### Problem 4 Solution
 
