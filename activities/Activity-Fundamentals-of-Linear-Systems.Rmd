@@ -9,6 +9,12 @@ output:
 \renewcommand{\vec}[1]{\mathbf{#1}}
 \renewcommand{\mat}[1]{\mathbf{#1}}
 
+Load necessary libraries:
+
+```{r}
+library(tictoc)
+```
+
 **Remember to show your work / give your reasoning, as applicable.**
 
 ### Problem 1
@@ -89,7 +95,6 @@ eliminate <- function(A, tol = 10^-8) {
 Demonstrate $\mathcal{O}(n^3)$ complexity by doing the following. Run the `eliminate` command on an $n \times n$ random matrix (generated using the `runif` command) for each of $n=270,\ 540,\ 810,\ 1080,\ 1350$, saving the run time for each value of $n$. To save the run time, you can use something like
 
 ```{r eval = FALSE}
-library(tictoc)
 tic()
 2+2 # Just as an example
 T1 <- toc()

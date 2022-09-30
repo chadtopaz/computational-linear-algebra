@@ -367,6 +367,8 @@ Systems</h1>
 </div>
 
 
+<p>Load necessary libraries:</p>
+<pre class="r"><code>library(tictoc)</code></pre>
 <p><strong>Remember to show your work / give your reasoning, as
 applicable.</strong></p>
 <div id="problem-1" class="section level3">
@@ -449,8 +451,7 @@ matrix (generated using the <code>runif</code> command) for each of
 <span class="math inline">\(n=270,\ 540,\ 810,\ 1080,\ 1350\)</span>,
 saving the run time for each value of <span class="math inline">\(n\)</span>. To save the run time, you can use
 something like</p>
-<pre class="r"><code>library(tictoc)
-tic()
+<pre class="r"><code>tic()
 2+2 # Just as an example
 T1 &lt;- toc()
 t1 &lt;- T1$toc - T1$tic</code></pre>
