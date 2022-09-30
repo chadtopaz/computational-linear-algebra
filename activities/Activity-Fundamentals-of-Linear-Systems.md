@@ -4,12 +4,12 @@ Remember to show your work / give your reasoning, as applicable.
 
 Which of the following sets of vectors are bases for ℝ<sup>2</sup>?
 
--   {(0, 1), (1, 1)}
--   {(1, 0), (0, 1), (1, 1)}
--   {(1, 0), ( − 1, 0)}
--   {(1, 1), (1,  − 1)}
--   {(1, 1), (2, 2)}
--   {(1, 2)}
+-   {(0,1), (1,1)}
+-   {(1,0), (0,1), (1,1)}
+-   {(1,0), (−1,0)}
+-   {(1,1), (1,−1)}
+-   {(1,1), (2,2)}
+-   {(1,2)}
 
 ### Problem 1 solution
 
@@ -31,7 +31,7 @@ Your solution goes here.
 Solve (by hand) the system below.
 
 $$
-\\begin{pmatrix}1 & 2 & 0 \\\\ 3 & 2 & 4 \\\\ -2 & 1 & -2 \\end{pmatrix} \\begin{pmatrix} x \\\\ y \\\\ z \\end{pmatrix} = \\begin{pmatrix} 1 \\\\ 7\\\\ -1 \\end{pmatrix}
+\begin{pmatrix}1 & 2 & 0 \\\\ 3 & 2 & 4 \\\\ -2 & 1 & -2 \end{pmatrix} \begin{pmatrix} x \\\\ y \\\\ z \end{pmatrix} = \begin{pmatrix} 1 \\\\ 7\\\\ -1 \end{pmatrix}
 $$
 
 ### Problem 3 Solution
@@ -43,11 +43,11 @@ Your solution goes here.
 Put the augmented coefficient matrix for the system of equations
 
 $$
-\\begin{aligned}
+\begin{aligned}
 x+y+z&=2\\\\
 x+3y+3z&=0\\\\
 x+3y+6z&=3
-\\end{aligned}
+\end{aligned}
 $$
 
 into row echelon form.
@@ -77,7 +77,7 @@ Demonstrate 𝒪(*n*<sup>3</sup>) complexity by doing the following. Run
 the `eliminate` command on an *n* × *n* random matrix for each of
 *n* = 270, 540, 810, 1080, 1350, saving the run time for each value of
 *n*. Then, use the `lm` command to fit a line to the points
-(log *n*, log *t*) and find the slope.
+(log*n*,log*t*) and find the slope.
 
 ### Problem 5 solution
 
@@ -88,13 +88,14 @@ Your solution goes here.
 Compute by hand the eigenvalues of the matrices
 
 $$
-\\mathbf{A}=\\begin{pmatrix} 1 & 1000 \\\\ 0 & 1\\end{pmatrix}, \\qquad \\widetilde{\\mathbf{A}}=\\begin{pmatrix} 1 & 1000 \\\\ 0.001 & 1\\end{pmatrix}.
+\mathbf{A}=\begin{pmatrix} 1 & 1000 \\\\ 0 & 1\end{pmatrix}, \qquad \widetilde{\mathbf{A}}=\begin{pmatrix} 1 & 1000 \\\\ 0.001 & 1\end{pmatrix}.
 $$
 
 Would you say that the problem of computing eigenvalues is
 well-conditioned or ill-conditioned? Check the condition number of **A**
-using the `kappa` command. For concreteness, use the 2-norm, though
-there is nothing special about that choice.
+using the `kappa` command with the option `exact = TRUE`. For
+concreteness, use the 2-norm, though there is nothing special about that
+choice.
 
 ### Problem 6 Solution
 
