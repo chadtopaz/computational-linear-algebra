@@ -123,8 +123,8 @@ importance is called Katz centrality. The Katz centrality of the nodes,
 
 where **I** is the identity matrix, *α* is a small number, and **1** is
 a vector of all ones. Take *α* = 0.05 and solve for **x** using any
-method you want. Print out the largest element of **x** so that I can
-verify your answer.
+method you want. I used R’s `solve` command.) Print out the largest
+element of **x** so that I can verify your answer.
 
 b\. Re-plot the network using your same graph layout as before, color
 the most important node red and plot it with size 5. This way, the most
