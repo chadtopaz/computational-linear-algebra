@@ -1,4 +1,4 @@
-Load necessary libraries:
+Load necessary packages:
 
     library(tictoc)
 
@@ -62,6 +62,8 @@ Your solution goes here.
 
 ### Problem 5
 
+### Problem 5
+
 I’ve written a function called `eliminate` that performs Gaussian
 elimination in order to transform a matrix to row echelon form.
 
@@ -88,8 +90,26 @@ something like
     T1 <- toc()
     t1 <- T1$toc - T1$tic
 
-Then, use the `lm` command to fit a line to the points (log*n*,log*t*)
-and find the slope.
+Note: the computations will not be instantaneous, and you may have to
+wait several minutes for them to finish. I urge you to use the
+`cache = TRUE` option in your code block, which will prevent R from
+re-running the block each time you knit, so long as the block hasn’t
+changed. Instead, R will execute the code on the first knit, but it will
+save the answer and just re-use that answer the next time the code is
+knit. Additionally, you should “seed” the random number generator. This
+means that you’ll produce the same random matrices every time, which
+will allow the result of the code block to remain the same, which will
+allow successful caching. The top of your code block will look like
+
+    set.seed(123) # The number 123 is arbitrary; use any number you like
+
+    # Your computations go here.
+
+You should keep this option in mind as a possibility for all future
+coding you do in R markdown.
+
+Finally, use the `lm` command to fit a line to the points
+(log*n*,log*t*) and find the slope.
 
 ### Problem 5 solution
 

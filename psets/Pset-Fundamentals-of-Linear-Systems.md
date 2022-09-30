@@ -34,7 +34,7 @@ a\. Write a function that takes a value of *n* as input and outputs the
 matrix A above. Challenge yourself to be efficient in your coding when
 you create the matrix. Looking at patterns and Googling how to create
 them helps. I managed to create the matrix with no loops, in two lines
-of code.
+of code. Hint: the commands `upper.tri` and `diag` will be helpful.
 
 b\. Use your function and the R command `kappa` to calculate the
 approximate condition number *κ*(**A**) for *n* = 1, …, 30. Plot

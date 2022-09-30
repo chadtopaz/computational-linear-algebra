@@ -367,7 +367,7 @@ Systems</h1>
 </div>
 
 
-<p>Load necessary libraries:</p>
+<p>Load necessary packages:</p>
 <pre class="r"><code>library(tictoc)</code></pre>
 <p><strong>Remember to show your work / give your reasoning, as
 applicable.</strong></p>
@@ -430,6 +430,9 @@ x+3y+6z&amp;=3
 </div>
 <div id="problem-5" class="section level3">
 <h3>Problem 5</h3>
+</div>
+<div id="problem-5-1" class="section level3">
+<h3>Problem 5</h3>
 <p>I’ve written a function called <code>eliminate</code> that performs
 Gaussian elimination in order to transform a matrix to row echelon
 form.</p>
@@ -455,7 +458,23 @@ something like</p>
 2+2 # Just as an example
 T1 &lt;- toc()
 t1 &lt;- T1$toc - T1$tic</code></pre>
-<p>Then, use the <code>lm</code> command to fit a line to the points
+<p>Note: the computations will not be instantaneous, and you may have to
+wait several minutes for them to finish. I urge you to use the
+<code>cache = TRUE</code> option in your code block, which will prevent
+R from re-running the block each time you knit, so long as the block
+hasn’t changed. Instead, R will execute the code on the first knit, but
+it will save the answer and just re-use that answer the next time the
+code is knit. Additionally, you should “seed” the random number
+generator. This means that you’ll produce the same random matrices every
+time, which will allow the result of the code block to remain the same,
+which will allow successful caching. The top of your code block will
+look like</p>
+<pre class="r"><code>set.seed(123) # The number 123 is arbitrary; use any number you like
+
+# Your computations go here.</code></pre>
+<p>You should keep this option in mind as a possibility for all future
+coding you do in R markdown.</p>
+<p>Finally, use the <code>lm</code> command to fit a line to the points
 <span class="math inline">\((\log n,\log t)\)</span> and find the
 slope.</p>
 </div>
