@@ -101,9 +101,13 @@ means that you’ll produce the same random matrices every time, which
 will allow the result of the code block to remain the same, which will
 allow successful caching. The top of your code block will look like
 
+    ```{r cache = TRUE}
+
     set.seed(123) # The number 123 is arbitrary; use any number you like
 
     # Your computations go here.
+
+    ```
 
 You should keep this option in mind as a possibility for all future
 coding you do in R markdown.
