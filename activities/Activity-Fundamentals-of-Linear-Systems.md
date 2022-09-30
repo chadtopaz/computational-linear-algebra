@@ -1,4 +1,4 @@
-Remember to show your work / give your reasoning, as applicable.
+**Remember to show your work / give your reasoning, as applicable.**
 
 ### Problem 1
 
@@ -74,10 +74,19 @@ elimination in order to transform a matrix to row echelon form.
     }
 
 Demonstrate 𝒪(*n*<sup>3</sup>) complexity by doing the following. Run
-the `eliminate` command on an *n* × *n* random matrix for each of
-*n* = 270, 540, 810, 1080, 1350, saving the run time for each value of
-*n*. Then, use the `lm` command to fit a line to the points
-(log*n*,log*t*) and find the slope.
+the `eliminate` command on an *n* × *n* random matrix (generated using
+the `runif` command) for each of *n* = 270, 540, 810, 1080, 1350, saving
+the run time for each value of *n*. To save the run time, you can use
+something like
+
+    library(tictoc)
+    tic()
+    2+2 # Just as an example
+    T1 <- toc()
+    t1 <- T1$toc - T1$tic
+
+Then, use the `lm` command to fit a line to the points (log*n*,log*t*)
+and find the slope.
 
 ### Problem 5 solution
 
