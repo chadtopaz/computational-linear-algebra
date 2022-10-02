@@ -1,7 +1,7 @@
 ---
 title: "Pset - R Bootcamp"
 output:
-  rmarkdown::html:
+  rmarkdown::html_document:
   header-includes:
    - \usepackage{amsmath}
 ---
