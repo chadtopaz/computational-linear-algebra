@@ -215,8 +215,8 @@ For example,
 a\. Experiment with each line of code in the `texttomatrix` and
 `matrixtotext` functions I wrote for you. Explain what the built-in R
 functions `LETTER`, `toupper`, `ceiling`, `nchar`, `str_pad`,
-`strsplit`, `unlist`, `match` `as.numeric` (applied to something that is
-already a numerical matrix), `paste` (with `collapse = ""`), and
+`strsplit`, `unlist`, `match`, `as.numeric` (applied to something that
+is already a numerical matrix), `paste` (with `collapse = ""`), and
 `trimws` do in their contexts above.
 
 b\. In the example usage of `texttomatrix` above, why are there repeated

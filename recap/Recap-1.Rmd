@@ -20,7 +20,7 @@ knitr::opts_chunk$set(options(digits=8))
 
 ### Problem 1
 
-Assume that for all parts of this problem, I am using the same computer and software. I have a $1000 \times 1000$ dense matrix $\mat{A}$ without special structure. My computer solves $\mat{A}\,\vec{x}=\vec{b}$ using Gaussian elimination and back substitution in 10 seconds. Show your work before the code block and please give final answers in the code block.
+Assume that for all parts of this problem, I am using the same computer and software. I have a $1000 \times 1000$ dense matrix $\mat{A}$ without special structure. My computer solves $\mat{A}\,\vec{x}=\vec{b}$ using Gaussian elimination and back substitution in 10 seconds.
 
 a\. I'd like to solve another problem $\mat{C}\,\vec{y}=\vec{g}$, where $\mat{C}$ is a dense $10^5 \times 10^5$ matrix without special structure. How many hours will it take to solve $\mat{C}\,\vec{y}=\vec{g}$ with the same method as before?
 

@@ -1,7 +1,7 @@
 ---
 title: "Pset - Solving Linear Systems"
 output:
-  rmarkdown::html_document:
+  rmarkdown::md_document:
   header-includes:
    - \usepackage{amsmath}
 ---
@@ -121,7 +121,7 @@ For example,
 matrixtotext(M)
 ```
 
-a\. Experiment with each line of code in the `texttomatrix` and `matrixtotext` functions I wrote for you. Explain what the built-in R functions `LETTER`, `toupper`, `ceiling`, `nchar`, `str_pad`, `strsplit`, `unlist`, `match` `as.numeric` (applied to something that is already a numerical matrix), `paste` (with `collapse = ""`), and `trimws` do in their contexts above.
+a\. Experiment with each line of code in the `texttomatrix` and `matrixtotext` functions I wrote for you. Explain what the built-in R functions `LETTER`, `toupper`, `ceiling`, `nchar`, `str_pad`, `strsplit`, `unlist`, `match`, `as.numeric` (applied to something that is already a numerical matrix), `paste` (with `collapse = ""`), and `trimws` do in their contexts above.
 
 b\. In the example usage of `texttomatrix` above, why are there repeated values of `27` at the end?
 

@@ -12,8 +12,7 @@ Load necessary packages:
 Assume that for all parts of this problem, I am using the same computer
 and software. I have a 1000 × 1000 dense matrix **A** without special
 structure. My computer solves **A** **x** = **b** using Gaussian
-elimination and back substitution in 10 seconds. Show your work before
-the code block and please give final answers in the code block.
+elimination and back substitution in 10 seconds.
 
 a\. I’d like to solve another problem **C** **y** = **g**, where **C**
 is a dense 10<sup>5</sup> × 10<sup>5</sup> matrix without special
