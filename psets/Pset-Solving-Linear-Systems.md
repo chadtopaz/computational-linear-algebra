@@ -115,7 +115,7 @@ defined by
 *a*<sub>*n*</sub> = 3 + (1/2)<sup>2<sup>*n*</sup> − 1</sup>,  *n* ≥ 1.
 
 b\. Numerically measure the order of convergence of the sequence from
-(a) by making a base-10 log-log plot with ten points, fitting a line to
+(a) by making a base-10 log-log plot with nine points, fitting a line to
 it, and extracting the slope.
 
 c\. Now let’s investigate numerical convergence of Jacobi’s method for
