@@ -48,15 +48,16 @@ x0 <- 1.5
 C <- solve(vander(x),y)
 lagrangeInterp(x,y,x0)
 
-# Vandermonde vs. Lagrange speed test for 10 pts
+# Vandermonde (regularized) vs. Lagrange speed test for 100 pts
 set.seed(123)
-numTrials <- 100000
+numTrials <- 1000
 n <- 10
 x <- 1:n
 y <- runif(n)
+x0 <- 1.5
 tic()
 for (i in 1:numTrials){
-  C <- solve(vander(x),y)
+  c <- echelon(vander(x), y)[, n+1]
   horner(C,x0)
 }
 T1 <- toc()
@@ -113,65 +114,3 @@ for (n in nvec){
 }
 orderofmag <- round(log10(errorvec))
 plot(nvec,orderofmag)
-
-# Comparison of polynomial portion of error for equal spacing and Chebyshev
-nvec <- 3:30
-x <- seq(from=-1,to=1,length=5000)
-equallyspaced <- NULL
-for (n in nvec){
-  nodes <- seq(from=-1,to=1,length=n)
-  prod <- 1
-  for (i in 1:n){
-    prod <- prod*(x-nodes[i])
-  }
-  equallyspaced <- c(equallyspaced,unique(max(abs(prod))))
-}
-chebyshev <- 1/2^(nvec-1)
-plot(nvec,log10(chebyshev),col="green",pch=16,ylim=c(-10,0),xlab="points",ylab="bound on portion of error")
-points(nvec,log10(equallyspaced),col="red",pch=16)
-
-# Maximum of derivative of function on interval
-n <- 0:10
-maxderiv <- c(0.398942,0.241971,0.178032, 0.550588,1.19683,2.30711,4.24061,14.178,41.8889,115.091,302.425) # Computed in Mathematica
-plot(n,log(maxderiv))
-
-# Interpolation with equal spacing
-a <- -10
-b <- 10
-xexact <- seq(from=a,to=b,length=10000)
-f <- function(x){exp(-x^2/2)/sqrt(2*pi)}
-yexact <- f(xexact)
-plot(xexact,yexact,type="l",lwd=3,xlim=c(a,b),ylim=c(-0.2,0.5))
-n <- 30
-xequal <- seq(from=a,to=b,length=n)
-yequal <- interp(xequal,f(xequal),xexact)
-lines(xexact,yequal,col="red",lwd=2)
-
-# Comparison: interpolation with linear lookup table for given tolerance
-n <- 1
-error <- Inf
-while (error > 0.5e-4){
-  n <- n+1
-  xlookup <- seq(from=a,to=b,length=n)
-  ylookup <- f(xlookup)
-  ytable <- approx(xlookup,ylookup,xexact)$y
-  error <- max(abs(yexact-ytable))
-}
-nlookup <- n
-print(nlookup)
-
-# Comparison: interpolation with Chebyshev for given tolerance
-n <- 1
-error <- Inf
-while (error > 0.5e-4){
-  n <- n+1
-  odds <- seq(from=1,to=2*n-1,by=2)
-  xcheb <- (b+a)/2 + (b-a)/2*cos(odds*pi/2/n)
-  ycheb <- interp(xcheb,f(xcheb),xexact)
-  error <- max(abs(yexact-ycheb))
-}
-ncheb <- n
-print(ncheb)
-
-# Compression factor
-nlookup/ncheb

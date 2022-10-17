@@ -4,35 +4,23 @@ Remember to show your work / give your reasoning, as applicable.
 
 ### Problem 1
 
+### Problem 1
+
 Consider the points (-2,0), (-1,14), (2,-4), (3,10).
 
 a\. Find the interpolating polynomial in R, using the Vandermonde
 method. Also, evaluate your polynomial at the point x = 1.5 by using the
-build-in `horner` command. Make sure you pay attention to what order
-your coefficients are in after solving the Vandermonde problem, and what
-order the `horner` function expects them it.
+built-in `horner` command.
 
 b\. Find the interpolating polynomial by hand, using the Lagrange
 method. Simplify your answer to show that it is the same polynomial you
 obtained in part a. You can use WolframAlpha or a similar tool to help
 you simplify it.
 
-c\. Write code to perform interpolation using the Lagrange method. Your
-code should take the following as inputs:
-
--   a vector `xsample` containing coordinates of the interpolation
-    points
--   a vector `ysample` containing the y coordinates of the interpolation
-    points
--   a vector `xgrid` containing the x coordinates of the points at which
-    you want to evaluate the interpolating polynomial
-
-The code should output a vector the values of the Lagrange interpolating
-polynomial at the points in `xgrid`.
-
-Plot the interpolating polynomial using 30 equally spaced points from x
-= -2 to x = 3. Make the polynomial appear as a curve and add the
-original four sampled values as points.
+c\. Perform interpolation using the Lagrange method with the command
+`lagrangeInterp`. Plot the interpolating polynomial using 30 equally
+spaced points from x = -2 to x = 3. Make the polynomial appear as a
+curve and add the original four sampled values as points.
 
 ### Problem 1 solution
 
@@ -52,7 +40,12 @@ on the same axes, setting the vertical range of the plot to be \[0,1\].
 State the (approximate) infinity norm of the error, that is,
 ||*f*(*x*) − *P*(*x*)||<sub>∞</sub>.
 
-b\. Repeat part (a) but using 100 Chebyshev nodes.
+b\. Repeat part (a) but using 100 Chebyshev nodes. Here, it’s preferable
+to use the interpolation command `barylag` and you will need to slightly
+modify your grid of *x* points for plotting so that they don’t extend
+past the range of the Chebyshev nodes. Try
+`x <- seq(from = min(xdata), to = max(xdata), length = 1000)` where
+`xdata` is your vector of x values for the chebyshev nodes.
 
 ### Problem 2 Solution
 

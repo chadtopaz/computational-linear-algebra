@@ -23,6 +23,7 @@ library(kableExtra)
 library(pracma)
 library(matlib)
 library(PolynomF)
+library(tictoc)
 ```
 
 ```{r, message=FALSE, warning=FALSE, include=FALSE}
@@ -1025,20 +1026,22 @@ set.seed(123)
 numTrials <- 1000
 n <- 10
 x <- 1:n
-t1 <- system.time(
-  for (i in 1:numTrials){
-    y <- runif(n)
-    c <- echelon(vander(x), y)[, n+1]
-    horner(c, x0)
-  }
-)[3]
-t2 <- system.time(
-  for (i in 1:numTrials){
-    y <- runif(n)
-    lagrangeInterp(x, y, x0)
-  }
-)[3]
-as.numeric(t1/t2)
+tic()
+for (i in 1:numTrials){
+  y <- runif(n)
+  c <- echelon(vander(x), y)[, n+1]
+  horner(c, x0)
+}
+T1 <- toc()
+t1 <- T1$toc - T1$tic
+tic()
+for (i in 1:numTrials){
+  y <- runif(n)
+  lagrangeInterp(x, y, x0)
+}
+T2 <- toc()
+t2 <- T2$toc - T2$tic
+as.numeric(t2/t1)
 ```
 
 ## Data Compression
@@ -1047,17 +1050,17 @@ One of the powerful things interpolation can do is compress data. Let's do an ex
 
 ```{r cache = TRUE}
 interperror <- function(n, plotflag = FALSE){
-  x <- seq(from = 0, to = 2*pi, length = n)
+  xdata <- seq(from = 0, to = 2*pi, length = n)
+  ydata<- sin(xdata)
+  x <- seq(from = 0, to = 2*pi, length = 1000)
   y <- sin(x)
-  xexact <- seq(from = 0, to = 2*pi, length = 1000)
-  yexact <- sin(xexact)
-  yinterp <- lagrangeInterp(x, y, xexact)
+  yinterp <- lagrangeInterp(xdata, ydata, x)
   if (plotflag == TRUE){
-    plot(xexact, yexact, type = "l")
-    points(x, y)
-    lines(xexact, yinterp, col = "blue")
+    plot(x, y, type = "l")
+    points(xdata, ydata)
+    lines(x, yinterp, col = "blue")
   }
-  error <- max(abs(yexact - yinterp))
+  error <- max(abs(y - yinterp))
   return(error)
 }
 interperror(5, plotflag = TRUE)
@@ -1203,30 +1206,7 @@ Solving for $h$, we find $h \lessapprox 3.8 \times 10^{-3}$. That is the space b
 
 ## Chebyshev Nodes
 
-Look at the error expression again. There are three parts of it. Factorial is the same for every function. If the derivative gets smaller with more $n$ then we're good. If it gets bigger, the error term could potentially grow overall with $n$. Since there's nothing we can do about the derivative (we can't choose it!) we should try to do what we can to minimize what we can control, namely the remaining part of the error term.
-
-Let's compare two approaches in Mathematica. Without loss of generality, we'll live on the interval $[-1,1]$. Please see the demos in [this notebook](https://drive.google.com/file/d/0B3Www1z6Tm8xNFlXOVhZZDFITlU/view?usp=sharing).
-
-Now let's summarize the comparison of equally-spaced nodes vs. Chebyshev nodes.
-
-```{r cache = TRUE}
-nvec <- 1:30
-x <- seq(from = -1, to = 1, length = 5000)
-equallyspaced <- NULL
-for (n in nvec){
-  nodes <- seq(from = -1, to = 1, length = n)
-  prod <- 1
-  for (i in 1:n){
-    prod <- prod*(x - nodes[i])
-  }
-  equallyspaced <- c(equallyspaced, unique(max(abs(prod))))
-}
-chebyshev <- 1/2^(nvec-1)
-plot(nvec, log10(chebyshev), col = "green", pch = 16, ylim = c(-10,0), xlab = "points", ylab = "bound on portion of error")
-points(nvec, log10(equallyspaced), col = "red", pch = 16)
-```
-
-Chebyshev is much better! We won't prove the result, but I hope my numerical experiment convinced you that for $n$ points on $[0,1]$, we should choose nodes 
+Look at the error expression again. There are three parts of it. Factorial is the same for every function. If the derivative gets smaller with more $n$ then we're good. If it gets bigger, the error term could potentially grow overall with $n$. Since there's nothing we can do about the derivative (we can't choose it!) we should try to do what we can to minimize what we can control, namely the remaining part of the error term. Chebyshev nodes have special x-values that do this! Much calculus leads us to the following result. For $n$ points on $[0,1]$, we should choose nodes 
 
 $$
 x_i = \cos \frac{(2i-1)\pi}{2n}, \quad i = 1,\ldots,n
@@ -1269,14 +1249,14 @@ Given this, using equally-spaced nodes seems reckless, but we can try it anyway,
 ```{r cache = TRUE}
 a <- -10
 b <- 10
-xexact <- seq(from = a, to = b, length = 10000)
+x <- seq(from = a, to = b, length = 10000)
 f <- function(x){exp(-x^2/2)/sqrt(2*pi)}
-yexact <- f(xexact)
-plot(xexact, yexact, type = "l", lwd = 3, xlim = c(a,b), ylim = c(-0.2,0.5))
+y <- f(x)
+plot(x, y, type = "l", lwd = 3, xlim = c(a,b), ylim = c(-0.2,0.5))
 n <- 30
-xequal <- seq(from = a, to = b, length = n)
-yequal <- lagrangeInterp(xequal, f(xequal), xexact)
-lines(xexact, yequal, col = "red", lwd = 2)
+xdataequal <- seq(from = a, to = b, length = n)
+ydataequal <- lagrangeInterp(xdataequal, f(xdataequal), x)
+lines(x, ydataequal, col = "red", lwd = 2)
 ```
 
 Ok, that approach is not going to work! Let's try the approach of a lookup table with linear interpolation. Let's suppose we wish to achieve 4 digit accuracy.
@@ -1288,8 +1268,8 @@ while (error > 0.5e-4){
   n <- n+1
   xlookup <- seq(from = a, to = b, length = n)
   ylookup <- f(xlookup)
-  ytable <- approx(xlookup, ylookup, xexact)$y
-  error <- max(abs(yexact - ytable))
+  ytable <- approx(xlookup, ylookup, x)$y
+  error <- max(abs(y - ytable))
 }
 nlookup <- n
 print(nlookup)
@@ -1302,9 +1282,9 @@ error <- Inf
 while (error > 0.5e-4){
   n <- n+1
   odds <- seq(from = 1, to = 2*n-1, by = 2)
-  xcheb <- sort((b + a)/2 + (b - a)/2 * cos(odds*pi/2/n))
-  ycheb <- lagrangeInterp(xcheb, f(xcheb), xexact)
-  error <- max(abs(yexact - ycheb))
+  xdatacheb <- sort((b + a)/2 + (b - a)/2 * cos(odds*pi/2/n))
+  ydatacheb <- lagrangeInterp(xdatacheb, f(xdatacheb), x)
+  error <- max(abs(y - ydatacheb))
 }
 ncheb <- n
 print(ncheb)

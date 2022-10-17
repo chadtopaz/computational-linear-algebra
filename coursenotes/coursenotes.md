@@ -1738,22 +1738,30 @@ We can also do a speed comparison test.
     numTrials <- 1000
     n <- 10
     x <- 1:n
-    t1 <- system.time(
-      for (i in 1:numTrials){
-        y <- runif(n)
-        c <- echelon(vander(x), y)[, n+1]
-        horner(c, x0)
-      }
-    )[3]
-    t2 <- system.time(
-      for (i in 1:numTrials){
-        y <- runif(n)
-        lagrangeInterp(x, y, x0)
-      }
-    )[3]
-    as.numeric(t1/t2)
+    tic()
+    for (i in 1:numTrials){
+      y <- runif(n)
+      c <- echelon(vander(x), y)[, n+1]
+      horner(c, x0)
+    }
+    T1 <- toc()
 
-    ## [1] 79.375
+    ## 1.991 sec elapsed
+
+    t1 <- T1$toc - T1$tic
+    tic()
+    for (i in 1:numTrials){
+      y <- runif(n)
+      lagrangeInterp(x, y, x0)
+    }
+    T2 <- toc()
+
+    ## 0.03 sec elapsed
+
+    t2 <- T2$toc - T2$tic
+    as.numeric(t2/t1)
+
+    ## [1] 0.01506781
 
 ## Data Compression
 
@@ -1772,17 +1780,17 @@ maximum error. The inputs are your *x* data, your *y* data, and the *x*
 values at which you’d like interpolated values.
 
     interperror <- function(n, plotflag = FALSE){
-      x <- seq(from = 0, to = 2*pi, length = n)
+      xdata <- seq(from = 0, to = 2*pi, length = n)
+      ydata<- sin(xdata)
+      x <- seq(from = 0, to = 2*pi, length = 1000)
       y <- sin(x)
-      xexact <- seq(from = 0, to = 2*pi, length = 1000)
-      yexact <- sin(xexact)
-      yinterp <- lagrangeInterp(x, y, xexact)
+      yinterp <- lagrangeInterp(xdata, ydata, x)
       if (plotflag == TRUE){
-        plot(xexact, yexact, type = "l")
-        points(x, y)
-        lines(xexact, yinterp, col = "blue")
+        plot(x, y, type = "l")
+        points(xdata, ydata)
+        lines(x, yinterp, col = "blue")
       }
-      error <- max(abs(yexact - yinterp))
+      error <- max(abs(y - yinterp))
       return(error)
     }
     interperror(5, plotflag = TRUE)
@@ -2002,35 +2010,9 @@ with more *n* then we’re good. If it gets bigger, the error term could
 potentially grow overall with *n*. Since there’s nothing we can do about
 the derivative (we can’t choose it!) we should try to do what we can to
 minimize what we can control, namely the remaining part of the error
-term.
-
-Let’s compare two approaches in Mathematica. Without loss of generality,
-we’ll live on the interval \[−1,1\]. Please see the demos in [this
-notebook](https://drive.google.com/file/d/0B3Www1z6Tm8xNFlXOVhZZDFITlU/view?usp=sharing).
-
-Now let’s summarize the comparison of equally-spaced nodes vs. Chebyshev
-nodes.
-
-    nvec <- 1:30
-    x <- seq(from = -1, to = 1, length = 5000)
-    equallyspaced <- NULL
-    for (n in nvec){
-      nodes <- seq(from = -1, to = 1, length = n)
-      prod <- 1
-      for (i in 1:n){
-        prod <- prod*(x - nodes[i])
-      }
-      equallyspaced <- c(equallyspaced, unique(max(abs(prod))))
-    }
-    chebyshev <- 1/2^(nvec-1)
-    plot(nvec, log10(chebyshev), col = "green", pch = 16, ylim = c(-10,0), xlab = "points", ylab = "bound on portion of error")
-    points(nvec, log10(equallyspaced), col = "red", pch = 16)
-
-![](coursenotes_files/figure-markdown_strict/unnamed-chunk-34-1.png)
-
-Chebyshev is much better! We won’t prove the result, but I hope my
-numerical experiment convinced you that for *n* points on \[0,1\], we
-should choose nodes
+term. Chebyshev nodes have special x-values that do this! Much calculus
+leads us to the following result. For *n* points on \[0,1\], we should
+choose nodes
 
 $$
 x\_i = \cos \frac{(2i-1)\pi}{2n}, \quad i = 1,\ldots,n
@@ -2069,23 +2051,23 @@ One thing to know is that the derivatives of this function grow with
     maxderiv <- c(0.398942,0.241971,0.178032, 0.550588,1.19683,2.30711,4.24061,14.178,41.8889,115.091,302.425) # Computed in Mathematica
     plot(n, log(maxderiv))
 
-![](coursenotes_files/figure-markdown_strict/unnamed-chunk-35-1.png)
+![](coursenotes_files/figure-markdown_strict/unnamed-chunk-34-1.png)
 
 Given this, using equally-spaced nodes seems reckless, but we can try it
 anyway, say, on \[−10,10\] with 30 data points to start with.
 
     a <- -10
     b <- 10
-    xexact <- seq(from = a, to = b, length = 10000)
+    x <- seq(from = a, to = b, length = 10000)
     f <- function(x){exp(-x^2/2)/sqrt(2*pi)}
-    yexact <- f(xexact)
-    plot(xexact, yexact, type = "l", lwd = 3, xlim = c(a,b), ylim = c(-0.2,0.5))
+    y <- f(x)
+    plot(x, y, type = "l", lwd = 3, xlim = c(a,b), ylim = c(-0.2,0.5))
     n <- 30
-    xequal <- seq(from = a, to = b, length = n)
-    yequal <- lagrangeInterp(xequal, f(xequal), xexact)
-    lines(xexact, yequal, col = "red", lwd = 2)
+    xdataequal <- seq(from = a, to = b, length = n)
+    ydataequal <- lagrangeInterp(xdataequal, f(xdataequal), x)
+    lines(x, ydataequal, col = "red", lwd = 2)
 
-![](coursenotes_files/figure-markdown_strict/unnamed-chunk-36-1.png)
+![](coursenotes_files/figure-markdown_strict/unnamed-chunk-35-1.png)
 
 Ok, that approach is not going to work! Let’s try the approach of a
 lookup table with linear interpolation. Let’s suppose we wish to achieve
@@ -2097,8 +2079,8 @@ lookup table with linear interpolation. Let’s suppose we wish to achieve
       n <- n+1
       xlookup <- seq(from = a, to = b, length = n)
       ylookup <- f(xlookup)
-      ytable <- approx(xlookup, ylookup, xexact)$y
-      error <- max(abs(yexact - ytable))
+      ytable <- approx(xlookup, ylookup, x)$y
+      error <- max(abs(y - ytable))
     }
     nlookup <- n
     print(nlookup)
@@ -2112,9 +2094,9 @@ Now we can go back to polynomial interpolation with Chebyshev nodes.
     while (error > 0.5e-4){
       n <- n+1
       odds <- seq(from = 1, to = 2*n-1, by = 2)
-      xcheb <- sort((b + a)/2 + (b - a)/2 * cos(odds*pi/2/n))
-      ycheb <- lagrangeInterp(xcheb, f(xcheb), xexact)
-      error <- max(abs(yexact - ycheb))
+      xdatacheb <- sort((b + a)/2 + (b - a)/2 * cos(odds*pi/2/n))
+      ydatacheb <- lagrangeInterp(xdatacheb, f(xdatacheb), x)
+      error <- max(abs(y - ydatacheb))
     }
     ncheb <- n
     print(ncheb)
@@ -2145,7 +2127,7 @@ spline.
     plot(x, y, ylim = c(-2.5,5.5))
     lines(xplot, linearspline(xplot), col = "red", lwd = 2)
 
-![](coursenotes_files/figure-markdown_strict/unnamed-chunk-39-1.png)
+![](coursenotes_files/figure-markdown_strict/unnamed-chunk-38-1.png)
 
 Your eyeball might be telling you that this is a very jagged graph. Most
 things in nature and society are not this jagged, so it might feel
@@ -2157,7 +2139,7 @@ what this looks like.
     lines(xplot, linearspline(xplot), col = "red", lwd = 2)
     lines(xplot, cubicspline(xplot), col = "green", lwd = 2)
 
-![](coursenotes_files/figure-markdown_strict/unnamed-chunk-40-1.png)
+![](coursenotes_files/figure-markdown_strict/unnamed-chunk-39-1.png)
 
 This is smoother. What smoothness means here is continuity of
 derivatives from one spline to the next. Using cubic rather than linear
@@ -2255,7 +2237,7 @@ polynomial interpolation, let’s do a cooked example.
     cubicspline <- splinefun(x, y, method = "natural")
     lines(xx, cubicspline(xx), col = "blue", lwd = 3)
 
-![](coursenotes_files/figure-markdown_strict/unnamed-chunk-41-1.png)
+![](coursenotes_files/figure-markdown_strict/unnamed-chunk-40-1.png)
 
 Now let’s work with some real data, let’s say, Tesla stock price for the
 last 100 days (we won’t actually get 100 days because of days when the
@@ -2269,10 +2251,10 @@ markets were closed, including weekends).
     l.out <- BatchGetSymbols(tickers = tickers, first.date = first.date, last.date = last.date)
 
     ## Warning: `BatchGetSymbols()` was deprecated in BatchGetSymbols 2.6.4.
-    ## Please use `yfR::yf_get()` instead.
-    ## 2022-05-01: Package BatchGetSymbols will soon be replaced by yfR. 
-    ## More details about the change is available at github <<www.github.com/msperlin/yfR>
-    ## You can install yfR by executing:
+    ## ℹ Please use `yfR::yf_get()` instead.
+    ## ℹ 2022-05-01: Package BatchGetSymbols will soon be replaced by yfR.  More
+    ##   details about the change is available at github
+    ##   <<www.github.com/msperlin/yfR> You can install yfR by executing:
     ## 
     ## remotes::install_github('msperlin/yfR')
 
@@ -2295,14 +2277,14 @@ markets were closed, including weekends).
     plot(day[1:max(sampledday)], interpolatedprice, col = "red", type = "l", ylim = c(ymin,ymax))
     points(day, price, col = "blue")
 
-![](coursenotes_files/figure-markdown_strict/unnamed-chunk-42-1.png)
+![](coursenotes_files/figure-markdown_strict/unnamed-chunk-41-1.png)
 
     # Fit splines
     TSLAspline <- splinefun(sampledday, sampledprice, method = "natural")
     plot(day, TSLAspline(day), col = "blue", type = "l", ylim = c(ymin,ymax))
     points(day, price, col = "blue")
 
-![](coursenotes_files/figure-markdown_strict/unnamed-chunk-42-2.png)
+![](coursenotes_files/figure-markdown_strict/unnamed-chunk-41-2.png)
 
 # Least Squares I
 
@@ -2339,7 +2321,7 @@ it.
     s <- c(105,117,141,152)
     plot(a, s, xlab = "advertising", ylab = "sales")
 
-![](coursenotes_files/figure-markdown_strict/unnamed-chunk-43-1.png)
+![](coursenotes_files/figure-markdown_strict/unnamed-chunk-42-1.png)
 
 The company would like to model this data so they can predict sales for
 other levels of advertising. The data looks roughly linear, and we have
@@ -2378,12 +2360,12 @@ the next best thing: let’s find the value of *x* such that *x***A** is
 as close as possible to **b**. We can draw a picture to solve this
 problem.
 
-![](coursenotes_files/figure-markdown_strict/unnamed-chunk-44-1.png)
+![](coursenotes_files/figure-markdown_strict/unnamed-chunk-43-1.png)
 
 Where should we stop on the dotted line? When we are perpendicular to
 the end of **b**. This results in the following picture.
 
-![](coursenotes_files/figure-markdown_strict/unnamed-chunk-45-1.png)
+![](coursenotes_files/figure-markdown_strict/unnamed-chunk-44-1.png)
 
 From this picture, two relationships arise:
 
@@ -2583,7 +2565,7 @@ Let’s calculuate this in `R`.
     xx <- seq(from = 0, to = 6, length = 200)
     lines(xx, horner(rev(x), xx)$y) # Note we need to reverse order of coefficients
 
-![](coursenotes_files/figure-markdown_strict/unnamed-chunk-47-1.png)
+![](coursenotes_files/figure-markdown_strict/unnamed-chunk-46-1.png)
 
 Symbolically, we calculated the least squares solution
 **x** = (**A**<sup>*T*</sup>**A**)<sup>−1</sup>**A**<sup>*T*</sup>**b**
@@ -2641,7 +2623,7 @@ So, we calculuate in `R`:
     xx <- seq(from = 0, to = 3, length = 200)
     lines(xx, horner(c, xx)$y)
 
-![](coursenotes_files/figure-markdown_strict/unnamed-chunk-48-1.png)
+![](coursenotes_files/figure-markdown_strict/unnamed-chunk-47-1.png)
 
     print(r)
 
@@ -2681,7 +2663,7 @@ compression of data. Suppose we had 100 points that looked like this
     y <- 3*x + 0.4*(2*runif(100) - 1)
     plot(x, y)
 
-![](coursenotes_files/figure-markdown_strict/unnamed-chunk-49-1.png)
+![](coursenotes_files/figure-markdown_strict/unnamed-chunk-48-1.png)
 
 If we decided to represent this data with a line, we’d go down from
 having 100 pieces of information (the original data points) to merely 2
@@ -3055,34 +3037,34 @@ capabilities.
     Rbarcheck <- qr.R(QRbarcheck, complete=TRUE)
     Qbar
 
-    ##                  q1                                
-    ## [1,] 0.285714285714  0.857142857143  0.428571428571
-    ## [2,] 0.428571428571  0.285714285714 -0.857142857143
-    ## [3,] 0.857142857143 -0.428571428571  0.285714285714
+    ##             q1                      
+    ## [1,] 0.2857143  0.8571429  0.4285714
+    ## [2,] 0.4285714  0.2857143 -0.8571429
+    ## [3,] 0.8571429 -0.4285714  0.2857143
 
     Qbarcheck
 
-    ##                 [,1]            [,2]            [,3]
-    ## [1,] -0.285714285714 -0.857142857143 -0.428571428571
-    ## [2,] -0.428571428571 -0.285714285714  0.857142857143
-    ## [3,] -0.857142857143  0.428571428571 -0.285714285714
+    ##            [,1]       [,2]       [,3]
+    ## [1,] -0.2857143 -0.8571429 -0.4285714
+    ## [2,] -0.4285714 -0.2857143  0.8571429
+    ## [3,] -0.8571429  0.4285714 -0.2857143
 
     S <- diag(c(-1,-1,-1))
     Qbarcheck <- Qbarcheck%*%S
     Rbarcheck <- S%*%Rbarcheck
     Qbarcheck - Qbar
 
-    ##                      q1                                     
-    ## [1,] -1.11022302463e-16  0.00000000000e+00 1.66533453694e-16
-    ## [2,]  0.00000000000e+00 -1.11022302463e-16 3.33066907388e-16
-    ## [3,]  0.00000000000e+00 -1.11022302463e-16 6.10622663544e-16
+    ##                 q1                           
+    ## [1,] -1.110223e-16  0.000000e+00 1.665335e-16
+    ## [2,]  0.000000e+00 -1.110223e-16 3.330669e-16
+    ## [3,]  0.000000e+00 -1.110223e-16 6.106227e-16
 
     Rbarcheck - Rbar
 
-    ##      v1               v2                v3
-    ## [1,]  0 1.7763568394e-15  0.0000000000e+00
-    ## [2,]  0 8.8817841970e-16  0.0000000000e+00
-    ## [3,]  0 0.0000000000e+00 -1.7763568394e-15
+    ##      v1           v2            v3
+    ## [1,]  0 1.776357e-15  0.000000e+00
+    ## [2,]  0 8.881784e-16  0.000000e+00
+    ## [3,]  0 0.000000e+00 -1.776357e-15
 
 Let’s try an example we looked at earlier.
 
@@ -3659,7 +3641,7 @@ Let’s test this out!
     error <- abs(fib(n) - fibapprox(n))
     plot(n, log10(error))
 
-![](coursenotes_files/figure-markdown_strict/unnamed-chunk-66-1.png)
+![](coursenotes_files/figure-markdown_strict/unnamed-chunk-65-1.png)
 
 It’s important to remember from linear algebra that not every matrix can
 be diagonalized. For a matrix to be diagonalizable, you need for the
