@@ -43,7 +43,7 @@ to use the interpolation command `barylag` and you will need to slightly
 modify your grid of *x* points for plotting so that they don’t extend
 past the range of the Chebyshev nodes. Try
 `x <- seq(from = min(xdata), to = max(xdata), length = 1000)` where
-`xdata` is your vector of x values for the chebyshev nodes.
+`xdata` is your vector of x values for the Chebyshev nodes.
 
 ### Problem 2 Solution
 

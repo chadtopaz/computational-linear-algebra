@@ -37,7 +37,7 @@ c\. Your solution goes here.
 
 a\. Construct the interpolating polynomial $P(x)$ for the function $f(x) \equiv 1/(1+x^2)$ on $[-2,2]$ using 100 equally spaced points. Make a plot of the original function in blue (using 1000 equally spaced points on the interval) and the interpolating polynomial in red on the same axes, setting the vertical range of the plot to be $[0,1]$. State the (approximate) infinity norm of the error, that is, $||f(x)-P(x)||_\infty$.
 
-b\. Repeat part (a) but using 100 Chebyshev nodes. Here, it's preferable to use the interpolation command `barylag` and you will need to slightly modify your grid of $x$ points for plotting so that they don't extend past the range of the Chebyshev nodes. Try `x <- seq(from = min(xdata), to = max(xdata), length = 1000)` where `xdata` is your vector of x values for the chebyshev nodes.
+b\. Repeat part (a) but using 100 Chebyshev nodes. Here, it's preferable to use the interpolation command `barylag` and you will need to slightly modify your grid of $x$ points for plotting so that they don't extend past the range of the Chebyshev nodes. Try `x <- seq(from = min(xdata), to = max(xdata), length = 1000)` where `xdata` is your vector of x values for the Chebyshev nodes.
 
 ### Problem 2 Solution
 
