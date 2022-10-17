@@ -4,8 +4,6 @@ Remember to show your work / give your reasoning, as applicable.
 
 ### Problem 1
 
-### Problem 1
-
 Consider the points (-2,0), (-1,14), (2,-4), (3,10).
 
 a\. Find the interpolating polynomial in R, using the Vandermonde

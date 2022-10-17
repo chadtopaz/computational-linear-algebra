@@ -17,8 +17,6 @@ library(pracma)
 
 ### Problem 1
 
-### Problem 1
-
 Consider the points (-2,0), (-1,14), (2,-4), (3,10).
 
 a\. Find the interpolating polynomial in R, using the Vandermonde method. Also, evaluate your polynomial at the point x = 1.5 by using the built-in `horner` command.
