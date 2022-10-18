@@ -1,6 +1,6 @@
 Load necessary packages:
 
-    library(Matrix)
+    library(pracma)
 
 ### Problem 1
 

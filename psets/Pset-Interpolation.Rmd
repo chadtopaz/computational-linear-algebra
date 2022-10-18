@@ -12,7 +12,7 @@ output:
 Load necessary packages:
 
 ```{r, message = FALSE}
-library(Matrix)
+library(pracma)
 ```
 
 ### Problem 1
