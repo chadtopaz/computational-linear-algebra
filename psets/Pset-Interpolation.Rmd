@@ -1,7 +1,7 @@
 ---
 title: "Pset - Interpolation"
 output:
-  rmarkdown::md_document:
+  rmarkdown::html_document:
   header-includes:
    - \usepackage{amsmath}
 ---
