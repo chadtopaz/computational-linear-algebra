@@ -418,6 +418,8 @@ respository’s subdirectories:
 
 -   Videos
 
+    -   [Vector Projections](https://youtu.be/X78tLBY3BMk)
+
     -   [Least Squares I: Matrix Problems (up to
         8:32)](https://youtu.be/Z0wELiinNVQ)
 

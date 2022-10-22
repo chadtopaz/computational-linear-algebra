@@ -272,6 +272,8 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
 -   Videos
 
+    -   [Vector Projections](https://youtu.be/X78tLBY3BMk)
+
     -   [Least Squares I: Matrix Problems (up to 8:32)](https://youtu.be/Z0wELiinNVQ)
 
 -   Reading
