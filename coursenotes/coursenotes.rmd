@@ -2081,7 +2081,7 @@ Proceeding from the second to last line to the very last line is not obvious, an
 
 In any case, to minimize this, note that the second term doesn't even include $\vec{x}$ so there's nothing we can do about it (in fact, it is the norm of the residual). To minimize the quantity, we can then just force the first term to be zero. This is fine because it is a square system! There's a command that does this all automatically for you called `qr.solve`.
 
-# Eigenvalues
+# Eigenvalues I
 
 ## Big picture
 

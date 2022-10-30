@@ -10,7 +10,7 @@
 -   <a href="#least-squares-i" id="toc-least-squares-i">Least Squares I</a>
 -   <a href="#least-squares-ii" id="toc-least-squares-ii">Least Squares
     II</a>
--   <a href="#eigenvalues" id="toc-eigenvalues">Eigenvalues</a>
+-   <a href="#eigenvalues-i" id="toc-eigenvalues-i">Eigenvalues I</a>
 
 # R Bootcamp
 
@@ -3288,7 +3288,7 @@ the first term to be zero. This is fine because it is a square system!
 There’s a command that does this all automatically for you called
 `qr.solve`.
 
-# Eigenvalues
+# Eigenvalues I
 
 ## Big picture
 
