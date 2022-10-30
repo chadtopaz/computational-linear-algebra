@@ -324,6 +324,46 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
 ## Eigenvalues I
 
+-   Videos
+
+    -   [What Eigenvalues and Eigenvectors Mean Geometrically (9:08)](https://youtu.be/4wTHFmZPhT0)
+    
+    -   [Using Determinants to Compute Eigenvalues and Eigenvectors (4:35)](https://youtu.be/LsZ-nNy0ZRs)
+    
+    -   [Example: Computing Eigenvalues and Eigenvectors (7:32)](https://youtu.be/4u55V_Yp-QI)
+    
+    -   [Diagonal Matrices are Freaking Awesome (6:27)](https://youtu.be/q48o3PXlg4Q)
+    
+    -   [How the Diagonalization Process Works (7:29)](https://youtu.be/nNwZA1X-C3c)
+    
+    -   [Compute Large Powers of a Matrix via Diagonalization (3:00)](https://youtu.be/Z8KBxf4C8kk)
+    
+    -   [Full Example: Diagonalizing a Matrix (10:07)](https://youtu.be/ieWyx2mlZyk)
+    
+    -   [Power Method for Eigenvalues (8:19)](https://youtu.be/TS32rBteHh4)
+    
+    -   [The Power Method (11:59)](https://youtu.be/OzeDqsVoTFc)
+    
+    -   [Introduction to PageRank (8:44)](https://youtu.be/urKLHNhUEQ0)
+    
+-   Reading  
+
+    -   [Course Notes: Eigenvalues I](https://github.com/chadtopaz/computational-linear-algebra/blob/main/coursenotes/coursenotes.md)
+    
+    -   [Link Analysis and Web Search](http://www.cs.cornell.edu/home/kleinber/networks-book/networks-book-ch14.pdf), pp. 397 - 417
+
+-   Activity - Eigenvalues I [[.md for viewing]()] [[.Rmd for editing]()]
+
+-   Pset - Least Squares II [[.md for viewing]()] [[.Rmd for editing]()]
+
+- Other Resources
+
+   -   [In-class code examples]()
+
+- Challenge problems
+
+   -   TBD
+
 [Back to Table of Contents](#header)
 
 ## Eigenvalues II
