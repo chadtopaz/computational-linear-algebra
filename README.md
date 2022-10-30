@@ -464,8 +464,10 @@ respository’s subdirectories:
 -   Activity - Least Squares II \[[.md for viewing]()\] \[[.Rmd for
     editing]()\]
 
--   Pset - Least Squares II \[[.md for viewing]()\] \[[.Rmd for
-    editing]()\]
+-   Pset - Least Squares II \[[.md for
+    viewing](https://github.com/chadtopaz/computational-linear-algebra/blob/main/psets/Pset-Least-Squares-II.md)\]
+    \[[.Rmd for
+    editing](https://github.com/chadtopaz/computational-linear-algebra/blob/main/psets/Pset-Least-Squares-II.Rmd)\]
 
 -   Other Resources
 
