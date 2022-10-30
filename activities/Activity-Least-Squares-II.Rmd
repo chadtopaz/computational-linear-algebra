@@ -1,7 +1,7 @@
 ---
 title: "Activity - Least Squares II"
 output:
-  rmarkdown::md_document
+  rmarkdown::html_document
 ---
 
 \usepackage{amsmath}
