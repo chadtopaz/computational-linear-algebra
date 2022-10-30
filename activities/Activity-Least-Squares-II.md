@@ -5,11 +5,11 @@ Remember to show your work / give your reasoning, as applicable.
 ### Problem 1
 
 a\. Use the classical Gram-Schmidt orthogonalization algorithm to find
-the reduced $\mat{QR}$ factorization and full $\mat{QR}$
+the reduced $\mathbf{QR}$ factorization and full $\mathbf{QR}$
 factorization of the matrix
 
 $$
-\mat{A} =\begin{pmatrix}
+\mathbf{A} =\begin{pmatrix}
 2 & 3\\
 -2 & -6\\
 1 & 0
@@ -20,16 +20,16 @@ $$
 Don’t use R’s built-in `qr` function. Do the calculation by hand.
 However, you can certainly use R to carry out the algebra if you want.
 
-b\. First check your answers by verifying that $\mat{A}=\mat{Q}\mat{R}$ and $\mat{A}=\overline{\mat{Q}}\overline{\mat{R}}$
+b\. First check your answers by verifying that $\mathbf{A}=\mathbf{Q}\mathbf{R}$ and $\mathbf{A}=\overline{\mathbf{Q}}\overline{\mathbf{R}}$
 . Then check whether you computed the same factorization as the `qr`
 function, which you can now use.
 
 Note that the `qr` algorithm does not ensure that all of the diagonal
-entries of $\mat{R}$ are nonnegative (in which case the factorization is not unique). If you
-want to force the $\mat{R}$ matrix to have positive diagonals, you can form a diagonal matrix $\mat{S}$ whose $i^{th}$ diagonal is equal to the sign of the $i^{th}$ diagonal of $\mat{R}$. Then let $\widetilde{\mat{Q}}=\mat{Q}\mat{S}$ and $\widetilde{\mat{R}}=\mat{S}\mat{R}$, so that $\widetilde{\mat{Q}}\widetilde{\mat{R}}=\mat{Q}\mat{S}^2\mat{R}=\mat{Q}\mat{R}=\mat{A}$ (since $\mat{S}^2=\mat{I}$
+entries of $\mathbf{R}$ are nonnegative (in which case the factorization is not unique). If you
+want to force the $\mathbf{R}$ matrix to have positive diagonals, you can form a diagonal matrix $\mathbf{S}$ whose $i^{th}$ diagonal is equal to the sign of the $i^{th}$ diagonal of $\mathbf{R}$. Then let $\widetilde{\mathbf{Q}}=\mathbf{Q}\mathbf{S}$ and $\widetilde{\mathbf{R}}=\mathbf{S}\mathbf{R}$, so that $\widetilde{\mathbf{Q}}\widetilde{\mathbf{R}}=\mathbf{Q}\mathbf{S}^2\mathbf{R}=\mathbf{Q}\mathbf{R}=\mathbf{A}$ (since $\mathbf{S}^2=\mathbf{I}$
 ).
 
-c\. Use the reduced $\mat{QR}$ factorization of $\mat{A}$
+c\. Use the reduced $\mathbf{QR}$ factorization of $\mathbf{A}$
 from part (a) to find the least squares solution to
 
 $$
@@ -41,9 +41,7 @@ $$
 \begin{pmatrix}
 x_1\\
 x_2
-\end{pmatrix}
-=
-\begin{pmatrix}
+\end{pmatrix} =\begin{pmatrix}
 3\\
 -3\\
 6
@@ -56,7 +54,7 @@ You’ll get the same answer as in part (c) above. The point of this
 question is just to show you a new, useful R command that shortcuts some
 steps for you.
 
-e\. If $\mat{A}$ is an $m\times n$ matrix, the null space of $\mat{A}^{\top}$ is the orthogonal complement of the column space of $\mat{A}$. Use the full $\mat{QR}$ factorization of $\mat{A}$ above to find a basis for the null space of $\mat{A}^{\top}$
+e\. If $\mathbf{A}$ is an $m\times n$ matrix, the null space of $\mathbf{A}^{\top}$ is the orthogonal complement of the column space of $\mathbf{A}$. Use the full $\mathbf{QR}$ factorization of $\mathbf{A}$ above to find a basis for the null space of $\mathbf{A}^{\top}$
 .
 
 ### Problem 1 Solution
