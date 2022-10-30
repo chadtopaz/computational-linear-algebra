@@ -525,7 +525,7 @@ respository’s subdirectories:
 -   Activity - Eigenvalues I \[[.md for viewing]()\] \[[.Rmd for
     editing]()\]
 
--   Pset - Least Squares II \[[.md for viewing]()\] \[[.Rmd for
+-   Pset - Eigenvalues I \[[.md for viewing]()\] \[[.Rmd for
     editing]()\]
 
 -   Other Resources

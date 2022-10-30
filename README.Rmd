@@ -354,7 +354,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
 -   Activity - Eigenvalues I [[.md for viewing]()] [[.Rmd for editing]()]
 
--   Pset - Least Squares II [[.md for viewing]()] [[.Rmd for editing]()]
+-   Pset - Eigenvalues I [[.md for viewing]()] [[.Rmd for editing]()]
 
 - Other Resources
 
