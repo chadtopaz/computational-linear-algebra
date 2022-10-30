@@ -3793,12 +3793,8 @@ Let’s try another example.
 
     ## [1]  8.820000e+02 -2.520000e+02 -4.633793e-14
 
-This method is called **power iteration**. How and why, exactly, does it
-work though? This is the subject of your activity for this unit.
-
-You might not realize it, but you use power iteration nearly every day.
-Google searches are based on an algorithm called PageRank, which is
-applies power iteration to a matrix that encodes links between web
-pages. We may investigate this in class at some point. But as you can
-imagine, the matrix in question is gigantic, which is why numerical
-methods are necessary.
+This method is called **power iteration**. You might not realize it, but
+you use power iteration nearly every day. Google searches are based on
+an algorithm called PageRank, which is applies power iteration to a
+matrix that encodes links between web pages. The matrix in question is
+gigantic, which is why numerical methods are necessary.
