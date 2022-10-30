@@ -5,6 +5,7 @@ Load necessary packages:
 ### Problem 1
 
 Define
+
 $$
 \mathbf{A} = \begin{pmatrix} 1 & 0 & 5\\\\ 2 & 1 & -5 \\\\ 3 & 3 & 1 \\\\ 4 & 0 & 0 \end{pmatrix}.
 $$
