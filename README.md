@@ -54,7 +54,7 @@ course, and I’m grateful to them for sharing wisdom and materials.
 If you use this site as a student (for your own learning) or as an
 instructor (for teaching your own course) I would appreciate you
 [letting me know](mailto:chad.topaz+impact@gmail.com) so that I can
-track impact of the work I have done to create it. If you do adopt
+track impact of the work I have done to create it. If you do adopt
 materials from this site, please make sure to credit me.
 
 [Back to Table of Contents](#header)
@@ -521,8 +521,10 @@ respository’s subdirectories:
         Search](http://www.cs.cornell.edu/home/kleinber/networks-book/networks-book-ch14.pdf),
         pp. 397 - 417
 
--   Activity - Eigenvalues I \[[.md for viewing]()\] \[[.Rmd for
-    editing]()\]
+-   Activity - Eigenvalues I \[[.md for
+    viewing](https://github.com/chadtopaz/computational-linear-algebra/blob/main/activities/Activity-Eigenvalues-I.md)\]
+    \[[.Rmd for
+    editing](https://github.com/chadtopaz/computational-linear-algebra/blob/main/activities/Activity-Eigenvalues-I.Rmd)\]
 
 -   Pset - Eigenvalues I \[[.md for viewing]()\] \[[.Rmd for
     editing]()\]
