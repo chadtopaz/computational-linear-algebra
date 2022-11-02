@@ -37,16 +37,15 @@
 ## Introduction
 
 I am [Prof. Chad Topaz](http://www.chadtopaz.com). Welcome to the public
-facing version of my Computational Linear Algebra course. This course is
-a minimalist recreation of the one I use on my own campus at Williams
-College. You can access most of the basic course materials here. Since
-this site is for public sharing, I have eliminated certain items related
-to surveying my students, performing course evaluation, student
-assessment, and so forth. I enthusiastically credit colleagues from my
-time at Macalester College: Tom Halverson, Danny Kaplan, David Shuman,
-and Lori Ziegelmeier. Their versions of a Computational Linear Algebra
-course have influenced my own course, and I’m grateful to them for
-sharing wisdom and materials.
+facing version of my Computational Linear Algebra course. Since this
+site is for public sharing, I have eliminated certain items related to
+surveying my students, performing course evaluation, student assessment,
+and so forth.
+
+I enthusiastically credit colleagues from my time at Macalester College:
+Tom Halverson, Danny Kaplan, David Shuman, and Lori Ziegelmeier. Their
+versions of a Computational Linear Algebra course have influenced my own
+course, and I’m grateful to them for sharing wisdom and materials.
 
 [Back to Table of Contents](#header)
 
@@ -530,7 +529,8 @@ respository’s subdirectories:
 
 -   Other Resources
 
-    -   [In-class code examples]()
+    -   [In-class code
+        examples](https://github.com/chadtopaz/computational-linear-algebra/blob/main/demos/Demo-Eigenvalues.R)
 
 -   Challenge problems
 
