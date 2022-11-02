@@ -354,7 +354,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
     
     -   [Link Analysis and Web Search](http://www.cs.cornell.edu/home/kleinber/networks-book/networks-book-ch14.pdf), pp. 397 - 417
 
--   Activity - Eigenvalues I [[.md for viewing]()] [[.Rmd for editing]()]
+-   Activity - Eigenvalues I [[.md for viewing](https://github.com/chadtopaz/computational-linear-algebra/blob/main/activities/Activity-Eigenvalues-I.md)] [[.Rmd for editing](https://github.com/chadtopaz/computational-linear-algebra/blob/main/activities/Activity-Eigenvalues-I.Rmd)]
 
 -   Pset - Eigenvalues I [[.md for viewing]()] [[.Rmd for editing]()]
 
