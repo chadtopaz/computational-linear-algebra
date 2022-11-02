@@ -14,7 +14,7 @@ library(pracma)
 
 ### Problem 1
 
-Let $\mathbf{A}$ be an $n \times n$ matrix. As a reminder, to perform power iteration, we select any vector $\mathbf{x}^{(0)}$ in $\mathbb{R}^n$; compute $\mathbf{x}^{(1)}=\frac{\mathbf{A}\mathbf{x}^{(0)}}{||\mathbf{A}\mathbf{x}^{(0)}||_2}$; then compute $\mathbf{x}^{(2)}=\frac{\mathbf{A}\mathbf{x}^{(1)}}{||\mathbf{A}\mathbf{x}^{(1)}||_2}$; and so forth. From direct (repeated) substitution into the definition of power iteration, one can find that the iterates satisfy $\mathbf{x}^{(k)}=c_k \mathbf{A}^k \mathbf{x}^{(0)}$, where the sequence of constants $\{c_k\}$, $k=0,1,\ldots$, is defined as $c_k=\prod_{i=0}^{k-1} \frac{1}{ ||\mathbf{A}\mathbf{x}^{(i)}||_2}$. (You can check this if you want.)
+Let $\mathbf{A}$ be an $n \times n$ matrix. As a reminder, to perform power iteration, we select any vector $\mathbf{x}^{(0)}$ in $\mathbb{R}^n$, then compute $\mathbf{x}^{(1)}=\frac{\mathbf{A}\mathbf{x}^{(0)}}{||\mathbf{A}\mathbf{x}^{(0)}||}$, then compute $\mathbf{x}^{(2)}=\frac{\mathbf{A}\mathbf{x}^{(1)}}{||\mathbf{A}\mathbf{x}^{(1)}||}$, and so forth. From direct (repeated) substitution into the definition of power iteration, one can find that the iterates satisfy $\mathbf{x}^{(k)}=c_k \mathbf{A}^k \mathbf{x}^{(0)}$, where the sequence of constants $\{c_k\}$, $k=0,1,\ldots$, is defined as $c_k=\prod_{i=0}^{k-1} \frac{1}{ ||\mathbf{A}\mathbf{x}^{(i)}||}$. (You can check this if you want.)
 
 a\. Let $\mathbf{A}\mathbf{v}=\lambda\mathbf{v}$. For $k \in \mathbb{Z}^+$, what is $\mathbf{A}^k\mathbf{v}$?
 
