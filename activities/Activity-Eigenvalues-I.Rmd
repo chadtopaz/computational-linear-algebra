@@ -1,7 +1,7 @@
 ---
 title: "Activity - Eigenvalues I"
 output:
-  rmarkdown::html_document:
+  rmarkdown::md_document:
   header-includes:
    - \usepackage{amsmath}
 ---
@@ -31,7 +31,7 @@ Consider a starting vector $\mathbf{x}^{(0)} = (-1, -2, -3)^T$. Find $a_1$, $a_2
 c\.  The orthonormal vectors $\mathbf{v}_1$, $\mathbf{v}_2$, and $\mathbf{v}_3$ are actually eigenvectors of
 
 $$
-\mathbf{A}=\frac{1}{9}\begin{pmatrix} ~~~83 & ~~~296 & -128 \\ ~~~296 & ~~~473 & -152 \\ -128 & -152 & ~~~335\end{pmatrix},
+\mathbf{A}=\frac{1}{9} \begin{pmatrix} 83 & 296 & -128 \\ 296 & 473 & -152 \\ -128 & -152 & 335\end{pmatrix},
 $$
 
 and they are ordered so that their associated eigenvalues are in order of decreasing magnitude: $|\lambda_1| > |\lambda_2| \geq |\lambda_3|$. Let's use this and put together with what we know from having worked through this problem this far:
