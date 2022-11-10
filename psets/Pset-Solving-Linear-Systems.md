@@ -272,7 +272,7 @@ One measure of the importance of a node is the Katz centrality. The
 vector of Katz centralities **x** satisfies
 
 $$
-\mathbf{x} =\bigl((\mathbf{I} -\alpha\,A^T)^{-1} -\mathbf{I}\bigr)\mathbf{1}.
+\mathbf{x} =\bigl((\mathbf{I} -\alpha\mathbf{A}^T)^{-1} -\mathbf{I}\bigr)\mathbf{1}.
 $$
 
 where $\mathbf{1}$
