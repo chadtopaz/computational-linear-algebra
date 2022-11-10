@@ -14,18 +14,13 @@ In solving linear systems, we will see algorithms that (hopefully)
 produce a sequence of approximations to a true solution. We want to know
 if that sequence converges, and if so, how fast.
 
-Let’s review some key concepts about convergence. We say a sequence
-*a*<sub>*n*</sub> *converges* if it has a finite limit as *n* → ∞. For
-instance, if *a*<sub>*n*</sub> = 4*n*<sup>2</sup>/(2*n*<sup>2</sup>+1)
-then the sequence converges to 2. On the other hand, if
-*a*<sub>*n*</sub> = (−1)<sup>*n*</sup> + 1, the limit does not exist so
-the sequence diverges.
+Let’s review some key concepts about convergence. We say a sequence ${a_n}$ *converges* if it has a finite limit as $n\to\infty$. For instance, if $a_n = 4n^2/(2n^2+1)$ then the sequence converges to $2$. On the other hand, if $a_n = (-1)^n + 1$
+, the limit does not exist so the sequence diverges.
 
 In addition to asking whether or not a sequence converges, for a
 convergent sequence, we can ask about how fast (in some sense) it
-converges. As a quick example, think of the sequences
-(1/2)<sup>*n*</sup> and (1/2)<sup>2<sup>*n*</sup></sup>. Both converge
-to 0 but look at how differently they do so.
+converges. As a quick example, think of the sequences ${(1/2)^n}$ and ${(1/2)^{2^n}}$
+. Both converge to 0 but look at how differently they do so.
 
     n <- 0:6
     an <- (0.5)^n
@@ -79,49 +74,55 @@ to 0 but look at how differently they do so.
 </tbody>
 </table>
 
-The *order of convergence* of a sequence *a*<sub>*n*</sub> is defined as
-the number *q* ≥ 1 satisfying
+The *order of convergence* of a sequence ${a_n}$ is defined as the number $q\geq 1$
+satisfying
 
 $$
-\lim\_{n \to \infty} \frac{|a\_{n+1}-a|}{|a\_n - a|^q} = C
+\lim_{n\to\infty}\frac{|a_{n+1}-a|}{|a_n - a|^q} = C
 $$
 
-such that *C* is a finite, nonzero number. Here, *a* is the limit of the
-sequence, that is, the value of *a*<sub>*n*</sub> as *n* → ∞. Sometimes
-you might see this expression rearranged and written more compactly as
-as
+such that $C$ is a finite, nonzero number. Here, $a$ is the limit of the sequence, that is, the value of $a_n$ as $n\to\infty$
+. Sometimes you might see this expression rearranged and written more
+compactly as as
 
-*e*<sub>*n* + 1</sub> = *C* *e*<sub>*n*</sub><sup>*q*</sup>
+$$
+e_{n+1} = C\,e_n^q
+$$
 
-as *n* → ∞, where *e*<sub>*n*</sub> ≡ |*a*<sub>*n*</sub>−*a*|.
+as $n\to\infty$, where $e_n\equiv |a_n - a|$
+.
 
 To bring it back to computational linear algebra… when solving a problem
 with an iterative algorithm, the relevant sequence is the sequence of
 errors produced. If we don’t know the true solution, we can’t calculate
 the forward error, but we can calculate the backward error. Let’s call
-the backward error on the nth iteration *e*<sub>*n*</sub>. We can
-estimate the convergence of the algorithm by making a log-log plot of
-error data. Taking the log of each side of the equation above, we have
+the backward error on the nth iteration $e_n$
+. We can estimate the convergence of the algorithm by making a log-log
+plot of error data. Taking the log of each side of the equation above,
+we have
 
-log *e*<sub>*n* + 1</sub> = log *C* + *q* log *e*<sub>*n*</sub>.
+$$
+\log e_{n+1} =\log C + q\,\log e_n.
+$$
 
-If we plot (log *e*<sub>*n*</sub>,log *e*<sub>*n* + 1</sub>) and observe
-linear behavior for large enough *n*, then the slope is the convergence
-rate *q*.
+If we plot $(\log\,e_n,\log\,e_{n+1})$ and observe linear behavior for large enough $n$, then the slope is the convergence rate $q$
+.
 
 a\. Calculate (analytically) the order of convergence of the sequence
 defined by
 
-*a*<sub>*n*</sub> = 3 + (1/2)<sup>2<sup>*n*</sup> − 1</sup>,  *n* ≥ 1.
+$$
+a_n = 3 + (1/2)^{2^n - 1},\quad n\geq 1.
+$$
+
 
 b\. Numerically measure the order of convergence of the sequence from
 (a) by making a base-10 log-log plot with nine points, fitting a line to
 it, and extracting the slope.
 
 c\. Now let’s investigate numerical convergence of Jacobi’s method for
-solving **Ax**=**b**. Let **b** be a 1000 x 1 column vector with every
-entry equal to one. Let **A** be a 1000 x 1000 matrix that I have
-created for you below.
+solving $\mathbf{A}\mathbf{x} =\mathbf{b}$ be a 1000 x 1 column vector with every entry equal to one. Let $\mathbf{A}$
+be a 1000 x 1000 matrix that I have created for you below.
 
     n <- 1000
     ThreeBanded <- function(n,offset){
@@ -130,9 +131,10 @@ created for you below.
     A <- as.matrix(ThreeBanded(n,100))
 
 Use Jacobi’s method to solve the system. Run 35 iterations of Jacobi’s
-method taking **x** as the zero vector for your initial guess and find
-the order of convergence of the backwards error in the 2-norm using the
-same idea you used in part (b).
+method taking $\mathbf{x}$
+as the zero vector for your initial guess and find the order of
+convergence of the backwards error in the 2-norm using the same idea you
+used in part (b).
 
 ### Problem 1 Solution
 
@@ -238,7 +240,9 @@ should do as few Gaussian eliminations / matrix inversions as possible.)
 Implement your method on the four ciphered sentences stored in the
 variables `s1`, `s2`, `s3`, `s4`. These sentences are defined in a code
 block below but I have suppressed printing of that code block since
-there are very long lists of numbers.
+there are very long lists of numbers. Note: before solving, do the
+command `options(digits = 10)` because it will help you see when
+something unexpected happens that you will need to correct.
 
 ### Problem 2 Solution
 
@@ -267,13 +271,17 @@ The code below creates the network’s adjacency matrix for you.
 One measure of the importance of a node is the Katz centrality. The
 vector of Katz centralities **x** satisfies
 
-**x** = ((**I**−*α* *A*<sup>*T*</sup>)<sup>−1</sup> − **I**)**1**.
-where **1** is a vector of ones.
+$$
+\mathbf{x} =\bigl((\mathbf{I} -\alpha\,A^T)^{-1} -\mathbf{I}\bigr)\mathbf{1}.
+$$
+
+where $\mathbf{1}$
+is a vector of ones.
 
 You are going to compute the Katz centrality without inverting a matrix.
 Some hints:
 
--   Write the system in the form **Mx**=**b**.
+-   Write the system in the form $\mathbf{M}\mathbf{x}=\mathbf{b}$.
 -   At some point, you will need to create the identity matrix that
     appears in the definition of Katz centrality. Do this using the
     command `Diagonal` (as opposed to the usal `diag`, which is not
@@ -283,13 +291,13 @@ a\. State what method you should use (remember, no matrix inversion or
 Gaussian elimination allowed) and justify mathematically/numerically why
 it should work.
 
-b\. For *α* = 0.0005, find the biggest Katz centrality. Solve such that
-the backwards error is less than 10<sup>−10</sup> in the infinity norm.
-Report the largest Katz centrality, along with the index of the node
-that has it. By the way, though the indices of the nodes are not
-identified with a persons’s name in the data set, you can at least go
-[browse the actual Enron emails](http://www.enron-mail.com/email/) if
-you are interested.
+b\. For $\alpha = 0.0005$, find the biggest Katz centrality. Solve such that the backwards error
+is less than $10^{-10}$
+in the infinity norm. Report the largest Katz centrality, along with the
+index of the node that has it. By the way, though the indices of the
+nodes are not identified with a persons’s name in the data set, you can
+at least go [browse the actual Enron
+emails](http://www.enron-mail.com/email/) if you are interested.
 
 ### Problem 3 Solution
 
