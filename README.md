@@ -568,7 +568,7 @@ respository’s subdirectories:
     \[[.Rmd for
     editing](https://github.com/chadtopaz/computational-linear-algebra/blob/main/activities/Activity-Eigenvalues-II.R)\]
 
--   Pset - Eigenvalues I \[[.md for viewing]()\] \[[.Rmd for
+-   Pset - Eigenvalues II \[[.md for viewing]()\] \[[.Rmd for
     editing]()\]
 
 -   Other Resources
