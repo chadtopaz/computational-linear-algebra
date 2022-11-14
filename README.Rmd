@@ -384,7 +384,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
    -   [Markov Chains Explained Visually](https://setosa.io/ev/markov-chains/)
 
-- Activity - Eigenvalues II [[.md for viewing](https://github.com/chadtopaz/computational-linear-algebra/blob/main/activities/Activity-Eigenvalues-II.md)] [[.Rmd for editing](https://github.com/chadtopaz/computational-linear-algebra/blob/main/activities/Activity-Eigenvalues-II.R)]
+- Activity - Eigenvalues II [[.md for viewing](https://github.com/chadtopaz/computational-linear-algebra/blob/main/activities/Activity-Eigenvalues-II.md)] [[.Rmd for editing](https://github.com/chadtopaz/computational-linear-algebra/blob/main/activities/Activity-Eigenvalues-II.Rmd)]
 
 - Pset - Eigenvalues II [[.md for viewing]()] [[.Rmd for editing]()]
 
