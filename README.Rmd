@@ -348,15 +348,15 @@ To enable you to make easy and flexible use of the resources here, I have elimin
     
     -   [Introduction to PageRank (8:44)](https://youtu.be/urKLHNhUEQ0)
     
--   Reading  
+- Reading  
 
     -   [Course Notes: Eigenvalues I](https://github.com/chadtopaz/computational-linear-algebra/blob/main/coursenotes/coursenotes.md)
     
     -   [Link Analysis and Web Search](http://www.cs.cornell.edu/home/kleinber/networks-book/networks-book-ch14.pdf), pp. 397 - 417
 
--   Activity - Eigenvalues I [[.md for viewing](https://github.com/chadtopaz/computational-linear-algebra/blob/main/activities/Activity-Eigenvalues-I.md)] [[.Rmd for editing](https://github.com/chadtopaz/computational-linear-algebra/blob/main/activities/Activity-Eigenvalues-I.Rmd)]
+- Activity - Eigenvalues I [[.md for viewing](https://github.com/chadtopaz/computational-linear-algebra/blob/main/activities/Activity-Eigenvalues-I.md)] [[.Rmd for editing](https://github.com/chadtopaz/computational-linear-algebra/blob/main/activities/Activity-Eigenvalues-I.Rmd)]
 
--   Pset - Eigenvalues I [[.md for viewing](https://github.com/chadtopaz/computational-linear-algebra/blob/main/psets/Pset-Eigenvalues-I.md)] [[.Rmd for editing](https://github.com/chadtopaz/computational-linear-algebra/blob/main/psets/Pset-Eigenvalues-I.Rmd)]
+- Pset - Eigenvalues I [[.md for viewing](https://github.com/chadtopaz/computational-linear-algebra/blob/main/psets/Pset-Eigenvalues-I.md)] [[.Rmd for editing](https://github.com/chadtopaz/computational-linear-algebra/blob/main/psets/Pset-Eigenvalues-I.Rmd)]
 
 - Other Resources
 
@@ -370,7 +370,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
 ## Eigenvalues II
 
--   Videos
+- Videos
 
    -   [Intro to Markov Chains and Transition Diagrams (11:24)](https://youtu.be/rHdX3ANxofs)
 
@@ -380,19 +380,19 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
    -   [Absorbing Markov Chain Standard Form \[first 2:08 only\] (2:08)](https://youtu.be/bj_O4edCwgc)
 
--   Reading
+- Reading
 
    -   [Markov Chains Explained Visually](https://setosa.io/ev/markov-chains/)
 
--   Activity - Eigenvalues II [[.md for viewing](https://github.com/chadtopaz/computational-linear-algebra/blob/main/activities/Activity-Eigenvalues-II.md)] [[.Rmd for editing](https://github.com/chadtopaz/computational-linear-algebra/blob/main/activities/Activity-Eigenvalues-II.R)]
+- Activity - Eigenvalues II [[.md for viewing](https://github.com/chadtopaz/computational-linear-algebra/blob/main/activities/Activity-Eigenvalues-II.md)] [[.Rmd for editing](https://github.com/chadtopaz/computational-linear-algebra/blob/main/activities/Activity-Eigenvalues-II.R)]
 
--   Pset - Eigenvalues I [[.md for viewing]()] [[.Rmd for editing]()]
+- Pset - Eigenvalues I [[.md for viewing]()] [[.Rmd for editing]()]
 
--   Other Resources
+- Other Resources
 
    -   [In-class code examples]()
 
--   Challenge problems
+- Challenge problems
 
    -   TBD
 
