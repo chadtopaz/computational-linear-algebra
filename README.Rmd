@@ -378,7 +378,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
    -   [Absorbing Markov Chains Definition (3:35)](https://youtu.be/bpWV66hnRvQ)
 
-   -   [Absorbing Markov Chain Standard Form \[first 2:08 only\] (2:08)](https://youtu.be/bj_O4edCwgc)
+   -   [Absorbing Markov Chain Standard Form [first 2:08 only] (2:08)](https://youtu.be/bj_O4edCwgc)
 
 - Reading
 

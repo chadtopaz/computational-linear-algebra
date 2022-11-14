@@ -555,8 +555,7 @@ respository’s subdirectories:
     -   [Absorbing Markov Chains Definition
         (3:35)](https://youtu.be/bpWV66hnRvQ)
 
-    -   [Absorbing Markov Chain Standard Form
-        *f**i**r**s**t*2 : 08*o**n**l**y*
+    -   [Absorbing Markov Chain Standard Form \[first 2:08 only\]
         (2:08)](https://youtu.be/bj_O4edCwgc)
 
 -   Reading
