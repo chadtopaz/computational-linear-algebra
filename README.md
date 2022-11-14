@@ -544,6 +544,42 @@ respository’s subdirectories:
 
 ## Eigenvalues II
 
+-   Videos
+
+    -   [Intro to Markov Chains and Transition Diagrams
+        (11:24)](https://youtu.be/rHdX3ANxofs)
+
+    -   [Markov Chains and Transition Matrices
+        (6:53)](https://youtu.be/1GKtfgwf3ig)
+
+    -   [Absorbing Markov Chains Definition
+        (3:35)](https://youtu.be/bpWV66hnRvQ)
+
+    -   [Absorbing Markov Chain Standard Form
+        *f**i**r**s**t*2 : 08*o**n**l**y*
+        (2:08)](https://youtu.be/bj_O4edCwgc)
+
+-   Reading
+
+-   [Markov Chains Explained
+    Visually](https://setosa.io/ev/markov-chains/)
+
+-   Activity - Eigenvalues II \[[.md for
+    viewing](https://github.com/chadtopaz/computational-linear-algebra/blob/main/activities/Activity-Eigenvalues-II.md)\]
+    \[[.Rmd for
+    editing](https://github.com/chadtopaz/computational-linear-algebra/blob/main/activities/Activity-Eigenvalues-II.R)\]
+
+-   Pset - Eigenvalues I \[[.md for viewing]()\] \[[.Rmd for
+    editing]()\]
+
+-   Other Resources
+
+    -   [In-class code examples]()
+
+-   Challenge problems
+
+    -   TBD
+
 [Back to Table of Contents](#header)
 
 ## Principal Component Analysis
