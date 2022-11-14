@@ -388,11 +388,11 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
 -   Pset - Eigenvalues I [[.md for viewing]()] [[.Rmd for editing]()]
 
-- Other Resources
+-   Other Resources
 
    -   [In-class code examples]()
 
-- Challenge problems
+-   Challenge problems
 
    -   TBD
 

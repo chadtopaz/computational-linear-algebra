@@ -574,11 +574,11 @@ respository’s subdirectories:
 
 -   Other Resources
 
-    -   [In-class code examples]()
+-   [In-class code examples]()
 
 -   Challenge problems
 
-    -   TBD
+-   TBD
 
 [Back to Table of Contents](#header)
 
