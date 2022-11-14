@@ -25,33 +25,26 @@ be a Democrat or Republican.
 
 a\. Let’s model the political party of the representative as a Markov
 chain with two states. We can represent the Markov chain as the
-dynamical system **x**<sub>*k* + 1</sub> = **A****x**<sub>*k*</sub>,
-where **x**<sub>*k*</sub> ∈ ℝ<sup>2</sup> is a vector whose first
-component represents the probability that a Democrat wins the
-*k*<sup>*t**h*</sup> election, and the second component represents the
-probability that a Republican wins the *k*<sup>*t**h*</sup> election.
-What is the transition matrix **A**?
+dynamical system $\mathbf{x}_{k+1}=\mathbf{A}\mathbf{x}_k$, where $\mathbf{x}_k\in\mathbb{R}^2$ is a vector whose first component represents the probability that a
+Democrat wins the $k^{th}$ election, and the second component represents the probability that a
+Republican wins the $k^{th}$ election. What is the transition matrix $\mathbf{A}$
+?
 
-b\. Let *k* = 0 be the 2022 election. Suppose a Democrat won the
-election in question, so we’ll take
-**x**<sub>0</sub> = (1,0)<sup>*T*</sup>. According to the model, what is
-the probability that a Democrat will win the election in 2028? Hint: to
-raise a matrix **A** to, for example, the power 2, make sure the `expm`
-package is installed, and type `A%^%2`.
+b\. Let $k=0$ be the 2022 election. Suppose a Democrat won the election in question,
+so we’ll take $\mathbf{x}_0=(1,0)^T$. According to the model, what is the probability that a Democrat will
+win the election in 2028? Hint: to raise a matrix $\mathbf{A}$
+to, for example, the power 2, make sure the `expm` package is installed,
+and type `A%^%2`.
 
-c\. A matrix **A** is **primitive** if there exists a positive integer
-*k* such that **A**<sup>*k*</sup> has all positive entries. **A** is
-**(right) stochastic** if its columns sum to one. There is a theorem
-called the **Perron-Frobenius Theorem** that says: if **A** is a
-nonnegative square primitive matrix, then there is a dominant eigenvalue
-*λ* with eigenvector **v** that has all positive entries. If **A** is
-stochastic, then additionally, *λ* = 1, so that **A****v** = **v**. In
-the context of Markov chains, you can imagine **v** as being the
-(possibly scaled) stationary distribution of probabilities, that is, the
-probabilities of being in each state after many, many iterations of the
-Markov chain. Now apply this concept. In the limit of very long time,
-what is the probability that a Democrat will win the election? Would
-your answer be different if a Republican had won the last election?
+c\. A matrix $\mathbf{A}$ is **primitive** if there exists a positive integer $k$ such that $\mathbf{A}^k$ has all positive entries. $\mathbf{A}$ is **(right) stochastic** if its columns sum to one. There is a theorem
+called the **Perron-Frobenius Theorem** that says: if $\mathbf{A}$ is a nonnegative square primitive matrix, then there is a dominant
+eigenvalue $\lambda$ with eigenvector $\mathbf{v}$ that has all positive entries. If $\mathbf{A}$ is stochastic, then additionally, $\lambda = 1$, so that $\mathbf{A}\mathbf{v} =\mathbf{v}$. In the context of Markov chains, you can imagine $\mathbf{v}$
+as being the (possibly scaled) stationary distribution of probabilities,
+that is, the probabilities of being in each state after many, many
+iterations of the Markov chain. Now apply this concept. In the limit of
+very long time, what is the probability that a Democrat will win the
+election? Would your answer be different if a Republican had won the
+last election?
 
 ### Problem 1 Solution
 
@@ -65,43 +58,40 @@ c\. Your solution goes here.
 
 In this problem, you’ll work with the famous Google PageRank algorithm.
 The version of PageRank we use here is slightly more sophisticated than
-the basic version. We start with the adjacency matrix **G** of the
-directed graph that represents websites and their links. A link from
-site *i* to site *j* indicated by a 1 entry in *G*<sub>*i**j*</sub>. At
-each step of the Markov process, an internet surfer jumps to a random
-website with probability *q*, and follows one of the links on the
-current page with probability 1 − *q*. Here, *q* is a parameter in the
-problem. If jumping to a random site (including back to the current
-page), the probability of each site is $\frac{1}{N}$, where *N* is the
-total number of websites. If following one of the links, the surfer
-chooses randomly from the *n*<sub>*i*</sub> links on the current page
-*i* with equal probabilities. The PageRank is the steady-state
-distribution of this Markov chain.
+the basic version. We start with the adjacency matrix $\mathbf{G}$ of the directed graph that represents websites and their links. A link
+from site $i$ to site $j$ indicated by a 1 entry in $G_{ij}$. At each step of the Markov process, an internet surfer jumps to a
+random website with probability $q$, and follows one of the links on the current page with probability $1-q$. Here, $q$ is a parameter in the problem. If jumping to a random site (including
+back to the current page), the probability of each site is $\frac{1}{N}$, where $N$ is the total number of websites. If following one of the links, the
+surfer chooses randomly from the $n_i$ links on the current page $i$
+with equal probabilities. The PageRank is the steady-state distribution
+of this Markov chain.
 
 Consider the following network of 15 websites, encoded in the adjacency
-matrix **G**.
+matrix $\mathbf{G}$
+.
 
-    G <- matrix(c(0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 
-    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 
-    0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 
-    0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-    1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 
-    1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1, 
-    0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 
-    0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+    G <- matrix(c(0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,
+    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,
+    0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0,
+    0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0,
+    1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1,
+    0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0), nrow = 15)
     plot(graph_from_adjacency_matrix(G), margin = -0.07)
 
-![](Activity-Eigenvalues-II_files/figure-markdown_strict/unnamed-chunk-2-1.png)
+![](Activity-Eigenvalues-II_deleteme_files/figure-markdown_strict/unnamed-chunk-2-1.png)
 
-Let *q* = 0.15, and use power iteration to find the PageRank values for
-each website. Stop your iteration when the 2-norm of successive
-approximations is less that 5 × 10<sup>−6</sup>. Remember to normalize
-the dominant eigenvector so that it sums to 1. Then round your PageRanks
-to six decimal places. Which sites have the most inward-pointing links?
-Which sites have the highest PageRank? Are they the same?
+Let $q = 0.15$, and use power iteration to find the PageRank values for each website.
+Stop your iteration when the 2-norm of successive approximations is less
+that $5\times 10^{-6}$
+. Remember to normalize the dominant eigenvector so that it sums to 1.
+Then round your PageRanks to six decimal places. Which sites have the
+most inward-pointing links? Which sites have the highest PageRank? Are
+they the same?
 
 ### Problem 2 Solution
 
