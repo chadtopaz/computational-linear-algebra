@@ -1,7 +1,7 @@
 ---
 title: "Pset - Eigenvalues II"
 output:
-  rmarkdown::md_document:
+  rmarkdown::html_document:
   header-includes:
    - \usepackage{amsmath}
 ---
@@ -165,7 +165,7 @@ V(G)[35]$color <- "powderblue"
 plot(G)
 ```
 
-Let $\mathbf{B}=\mathbf{A}+\mathbf{I}$ be the **augmented adjacency matrix** and let $\mathbf{x}=(1,1,\ldots,1)^{\top}$. Think about computing $\mathbf{B}\mathbf{x}$, $\mathbf{B}^2\mathbf{x}$, $\mathbf{B}^3\mathbf{x}$. The entries are nonnegative integers, and they can be interpreted as counting something. The ij-th entry of the matrix $\mathbf{B}^k$ represents the number of paths of length $k$ or less from vertex $i$ to vertex $j$. As $k$ grows, the normalized version of $\mathbf{B}^k x$ converges to the dominant eigenvector of the augmented adjacency matrix, and is therefore a good measure of accessibility, because it represents the total number of paths of length $k$ or less from each vertex to all of the other vertices. This idea is developed at length in the article ["Linear Algebra in Geography: Eigenvectors of Networks,"](http://www.jstor.org/stable/2689388?seq=1#page_scan_tab_contents) by Philip D. Straffin, Jr. in Mathematics Magazine, November 1980.
+Let $\mathbf{B}=\mathbf{A}+\mathbf{I}$ be the **augmented adjacency matrix** and let $\mathbf{x}=(1,1,\ldots,1)^{\top}$. Think about computing $\mathbf{B}^1\mathbf{x}$, $\mathbf{B}^2\mathbf{x}$, $\mathbf{B}^3\mathbf{x}$. The entries are nonnegative integers, and they can be interpreted as counting something. The ij-th entry of the matrix $\mathbf{B}^k$ represents the number of paths of length $k$ or less from vertex $i$ to vertex $j$. As $k$ grows, the normalized version of $\mathbf{B}^k x$ converges to the dominant eigenvector of the augmented adjacency matrix, and is therefore a good measure of accessibility, because it represents the total number of paths of length $k$ or less from each vertex to all of the other vertices. This idea is developed at length in the article ["Linear Algebra in Geography: Eigenvectors of Networks,"](http://www.jstor.org/stable/2689388?seq=1#page_scan_tab_contents) by Philip D. Straffin, Jr. in Mathematics Magazine, November 1980.
 
 The matrix $\mathbf{B}$ turns out to be primitive, so the Perron-Frobenius theorem applies and there is a dominant eigenvector. **Gould's index of accessibility** is just the dominant eigenvector of $\mathbf{B}$, normalized so that the entries sum to one. That is to say, if $\mathbf{v}$ is the dominant eigenvector, then Gould's index is
 
