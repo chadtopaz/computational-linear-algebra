@@ -9,7 +9,13 @@ Load necessary packages:
 In this problem, you’ll analyze a Markov chain model that has states
 where you can get stuck, known as absorbing states.
 
-You are headed to Las Vegas. Your plan is to bring $100 of gambling money, gamble $ 1 at a time, and stop gambling when you hit $0 or when you hit $
+You are headed to Las Vegas. Your plan is to bring &lt;pre&gt;$100 of
+gambling money, gamble $
+</pre>
+1 at a time, and stop gambling when you hit &lt;pre&gt;$0 or when you
+hit $
+</pre>
+
 1.  Let’s assume at first that the probability of winning each game is
     50% (a naive assumption).
 

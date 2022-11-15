@@ -18,7 +18,7 @@ library(igraph)
 
 In this problem, you'll analyze a Markov chain model that has states where you can get stuck, known as absorbing states.
 
-You are headed to Las Vegas. Your plan is to bring $100 of gambling money, gamble $1 at a time, and stop gambling when you hit $0 or when you hit $200. Let's assume at first that the probability of winning each game is 50% (a naive assumption).
+You are headed to Las Vegas. Your plan is to bring \$100 of gambling money, gamble $1 at a time, and stop gambling when you hit \$0 or when you hit \$200. Let's assume at first that the probability of winning each game is 50% (a naive assumption).
 
 a\. Let's model your earnings with a Markov chain. What are the states? You don't need to include it in your response, but draw a state diagram and label the edges with probabilities. Then form the transition matrix $\mathbf{P}$. To help me check your answer, run these commands on $\mathbf{P}$:
 
