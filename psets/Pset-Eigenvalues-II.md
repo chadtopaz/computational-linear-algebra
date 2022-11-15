@@ -59,7 +59,7 @@ To find the absorption probabilities, once you have **S**, **R**, and
 **F** = **S**(**I**<sub>*n* − 2</sub>−**R**)<sup>−1</sup>. The
 probability of absorbing into state *i* (say $0 in this case) starting
 from transient state *j* (say $100 in this case) is
-(**F**)<sub>*i**j*</sub>. If you start with $100, what is the
+(**F**)<sub>*i*, *j*</sub>. If you start with $100, what is the
 probability of reaching $200 before going broke? How does it change if
 you start with $120 and only aim to make $80 profit?
 
