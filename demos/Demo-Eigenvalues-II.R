@@ -8,6 +8,10 @@ A <- t(P)
 G <- graph_from_adjacency_matrix(A, weighted = TRUE)
 plot(G, edge.width = A[as_edgelist(G)])
 
+# Try to find long term probability distribution
+eigen(P)
+# Uh-oh!
+
 # Reorder the states
 absorbing <- c(2,4)
 transient <- c(1,3,5)
