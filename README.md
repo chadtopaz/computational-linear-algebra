@@ -534,7 +534,7 @@ respository’s subdirectories:
 -   Other Resources
 
     -   [In-class code
-        examples](https://github.com/chadtopaz/computational-linear-algebra/blob/main/demos/Demo-Eigenvalues.R)
+        examples](https://github.com/chadtopaz/computational-linear-algebra/blob/main/demos/Demo-Eigenvalues-I.R)
 
 -   Challenge problems
 
@@ -575,7 +575,8 @@ respository’s subdirectories:
 
 -   Other Resources
 
-    -   [In-class code examples]()
+    -   [In-class code
+        examples](https://github.com/chadtopaz/computational-linear-algebra/blob/main/demos/Demo-Eigenvalues-II.R)
 
 -   Challenge problems
 

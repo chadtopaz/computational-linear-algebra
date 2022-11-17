@@ -360,7 +360,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
 - Other Resources
 
-   -   [In-class code examples](https://github.com/chadtopaz/computational-linear-algebra/blob/main/demos/Demo-Eigenvalues.R)
+   -   [In-class code examples](https://github.com/chadtopaz/computational-linear-algebra/blob/main/demos/Demo-Eigenvalues-I.R)
 
 - Challenge problems
 
@@ -390,7 +390,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
 - Other Resources
 
-   -   [In-class code examples]()
+   -   [In-class code examples](https://github.com/chadtopaz/computational-linear-algebra/blob/main/demos/Demo-Eigenvalues-II.R)
 
 - Challenge problems
 
