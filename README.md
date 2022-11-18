@@ -113,7 +113,7 @@ Here are some help resources for R.
 -   Learning R
 
     -   [DataCamp](https://www.datacamp.com/) \[See [R
-        Bootcamp](#r-bootcamp) below for a discussion of DataCamp’s
+        Bootcamp](#getting-started) below for a discussion of DataCamp’s
         problematic past; it is imperative to read this in order to make
         an informed decision about usage\]
     -   [DataQuest](http://dataquest.io/)
