@@ -6,42 +6,6 @@ Load necessary packages:
 
 ### Problem 1
 
-By completing this problem, you’ll hone your PCA skills in R. We’re
-going to study nutritional information of food. Let’s load some data
-from the USDA National Nutrient Database.
-
-    food <- read.csv("https://query.data.world/s/ixxtapv4y3rbkb6xo5c32ipljmdkor")
-
-a\. Perform a principal component analysis based on the macronutrient
-info, that is, protein, fat, carb, sugar, and fiber. What percent of
-variation in the data do the first two principal components capture?
-
-b\. For ease of bookkeeping, create a new data frame that has columns
-`FoodGroup` and `ShortDescrip` from the original data set, and `PC1` and
-`PC2` from your principal component analysis. Plot the data in
-two-dimensional principal component space.
-
-c\. That’s a lot of data! Just for funsies, subset your data to include
-only the “Beef Products”,“Fruits and Fruit Juices”, and “Fats and Oils”
-food groups. Plot these in two-dimensional principal component space,
-colored by food group. If your data frame was called `myfood` you would
-use the command
-
-    ggplot(myfood, aes(x = PC1, y = PC2, color = FoodGroup)) +
-      geom_point()
-
-Interpret what you see.
-
-### Problem 1 Solution
-
-a\. Your solution goes here.
-
-b\. Your solution goes here.
-
-c\. Your solution goes here.
-
-### Problem 2
-
 By completing this problem, you’ll learn how PCA can be used to compress
 images. Let’s download an image of a famous meme.
 
@@ -54,7 +18,7 @@ let’s convert this color image to black and white and display it.
     dogebw <- grayscale(doge)
     plot(dogebw, axes=FALSE)
 
-![](Pset-Principal-Component-Analysis_files/figure-markdown_strict/unnamed-chunk-5-1.png)
+![](Pset-Principal-Component-Analysis_files/figure-markdown_strict/unnamed-chunk-3-1.png)
 
 One slightly confusing thing about images in `R` is that for a matrix
 that stores an image, the first index counts columns and the second
@@ -65,7 +29,7 @@ extraction, then covert back to an image before plotting.
 
     plot(as.cimg(as.matrix(dogebw)[1:400,]), axes = FALSE)
 
-![](Pset-Principal-Component-Analysis_files/figure-markdown_strict/unnamed-chunk-6-1.png)
+![](Pset-Principal-Component-Analysis_files/figure-markdown_strict/unnamed-chunk-4-1.png)
 
 a\. The image is represented as a matrix of numbers, with each number
 representing the greyscale value of the pixel. Therefore, it takes as
@@ -99,7 +63,7 @@ plus however many numbers there are in the second matrix.
 e\. Divide your answer from (d) by your answer from (a) and comment on
 the level of image compression achieved.
 
-### Problem 2 Solution
+### Problem 1 Solution
 
 a\. Your solution goes here.
 
