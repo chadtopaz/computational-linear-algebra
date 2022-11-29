@@ -13,7 +13,7 @@ u <- u - mean(u)
 v <- v - mean(v)
 summary(u)
 summary(v)
-plot(u, v, pch = 19)
+plot(u, v, pch = 19, asp = 1)
 
 # Create covariance matrix
 m <- matrix(c(cov(u, u), cov(u, v), cov(v, u),cov(v, v)),nrow=2,ncol=2,byrow=TRUE,dimnames=list(c("u","v"),c("u","v")))
@@ -76,8 +76,8 @@ pca$rotation
 V
 
 # Now an actual cool example
-worldbank <- read.csv("worldbank.csv")
-X <- worldbank[,2:7]
+worldbank <- read.csv("https://raw.githubusercontent.com/chadtopaz/computational-linear-algebra/main/demos/worldbank.csv")
+X <- worldbank[,-1]
 pca <- prcomp(X)
 summary(pca)
 plot(pca$x[,1:2],pch=19)
