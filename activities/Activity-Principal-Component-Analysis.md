@@ -1,8 +1,7 @@
 Load necessary packages:
 
     library(Matrix)
-    library(imager)
-    library(ggplot2)
+    library(tidyverse)
 
 ### Problem 1
 

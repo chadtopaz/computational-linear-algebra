@@ -10,8 +10,7 @@ Load necessary packages:
 
 ```{r, message = FALSE}
 library(Matrix)
-library(imager)
-library(ggplot2)
+library(tidyverse)
 ```
 
 
