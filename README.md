@@ -589,6 +589,50 @@ respository’s subdirectories:
 
 ## Principal Component Analysis
 
+-   Videos
+
+    -   [Principal Component Analysis (PCA), Step-by-Step
+        (21:57)](https://youtu.be/FgakZw6K1QQ)
+
+    -   [Principal Component Analysis (PCA)
+        (26:33)](https://youtu.be/g-Hb26agBFg)
+
+    -   [PCA in R (8:56)](https://youtu.be/0Jp4gsfOLMs)
+
+-   Reading
+
+    -   [Principal Component Analysis: Resources for an Essential
+        Application of Linear
+        Algebra](https://drive.google.com/file/d/11oAir712wuIWWKyv9bkcd-uAEUYtNlw8/view)
+
+-   Activity - Principal Component Analysis \[[.md for
+    viewing](https://github.com/chadtopaz/computational-linear-algebra/blob/main/activities/Activity-Principal-Component-Analysis.md)\]
+    \[[.Rmd for
+    editing](https://github.com/chadtopaz/computational-linear-algebra/blob/main/activities/Activity-Principal-Component-Analysis.Rmd)\]
+
+-   Pset - Principal Component Analysis \[[.md for
+    viewing](https://github.com/chadtopaz/computational-linear-algebra/blob/main/psets/Pset-Principal-Component-Analysis.md)\]
+    \[[.Rmd for
+    editing](https://github.com/chadtopaz/computational-linear-algebra/blob/main/psets/Pset-Principal-Component-Analysis.Rmd)\]
+
+-   Other Resources
+
+    -   [In-class code
+        examples](https://github.com/chadtopaz/computationallineaaralgebra/blob/main/demos/Demo-PCA.R)
+
+-   Challenge problems
+
+    -   Find a high-dimensional data set that interests you. Perform PCA
+        on it to see if there is a lower-dimensional structure that
+        captures much of the variation in the data. How many principal
+        components should you keep to be faithful to your particular
+        data set? Do you see a clear interpretation of the loadings?
+        Does your lower dimensional representation of the data reveal
+        anything about its structure?
+
+    -   Discuss some limitations of PCA. Is it possible for data to have
+        a low-dimensional structure that is not well-captured by PCA?
+
 [Back to Table of Contents](#header)
 
 ## Recap Exercise II
