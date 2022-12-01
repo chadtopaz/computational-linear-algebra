@@ -430,4 +430,6 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
 ## Recap Exercise II
 
+-  Recap #2 [[.md for viewing](recap/Recap-2.md)] [[.Rmd for editing](recap/Recap-2.Rmd)]
+
 [Back to Table of Contents](#header)

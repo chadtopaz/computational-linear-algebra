@@ -637,4 +637,7 @@ respository’s subdirectories:
 
 ## Recap Exercise II
 
+-   Recap \#2 \[[.md for viewing](recap/Recap-2.md)\] \[[.Rmd for
+    editing](recap/Recap-2.Rmd)\]
+
 [Back to Table of Contents](#header)
