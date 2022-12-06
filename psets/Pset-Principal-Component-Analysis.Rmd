@@ -10,7 +10,7 @@ Load necessary packages:
 
 ```{r, message = FALSE}
 library(Matrix)
-library(imager)
+library(magick)
 library(ggplot2)
 ```
 
@@ -20,25 +20,19 @@ By completing this problem, you'll learn how PCA can be used to compress images.
 
 ```{r cache = TRUE}
 url <- "http://www.slate.com/content/dam/slate/articles/news_and_politics/the_slate_quiz/authorPortraits/pronounce_doge4.jpg.CROP.promo-xlarge2.jpg"
-doge <- load.image(url)
+doge <- image_read(url)
 ```
 
 It's a bit more straightforward to work with black and white images, so let's convert this color image to black and white and display it.
 
 ```{r cache = TRUE}
-dogebw <- grayscale(doge)
-plot(dogebw, axes=FALSE)
-```
-
-One slightly confusing thing about images in `R` is that for a matrix that stores an image, the first index counts columns and the second index counts rows. Why? I have no idea. But for example, the code below will plot the first 400 columns of the image. To extract those columns, we'll need to convert the image to regular matrix, then do the extraction, then covert back to an image before plotting.
-
-```{r cache = TRUE}
-plot(as.cimg(as.matrix(dogebw)[1:400,]), axes = FALSE)
+dogebw <- as.raster(image_convert(doge, colorspace = "gray"))
+plot(dogebw)
 ```
 
 a\. The image is represented as a matrix of numbers, with each number representing the greyscale value of the pixel. Therefore, it takes as many numbers as there are pixels in the image to specify the image. How many pixels are there in the image?
 
-b\. Perform PCA on the image by treating each column of the image (meaning each row of the matrix) as an observation. Then, reconstruct the image obtained by keeping 1, 3, 10, and 30 principal components and plot each reconstruction.
+b\. Perform PCA on the image by treating each row of the image as an observation. Then, reconstruct the image obtained by keeping 1, 3, 10, and 30 principal components and plot each reconstruction.
 
 One technical hint: when we do PCA, we want our data centered around the origin, and `R` does this by default. After we reconstruct an image from principal components, we have to un-do that centering. For instance, suppose we wanted to reconstruct the original image, and suppose we saved the output of the `prcomp` command in a variable called `pca`. Then we would run something like
 
