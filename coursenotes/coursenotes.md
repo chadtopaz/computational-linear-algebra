@@ -50,23 +50,31 @@ Consider some methods for evaluating the polynomial
 
     -   4 multiplications, 4 additions
 
-We can test:
+We can test, using commands from the `tictoc` library.
 
     xvec <- runif(10^6)
-    t1 <- system.time(
+    tic()
       for (x in xvec){
         2*x^4 + 3*x^3 - 3*x^2 + 5*x - 1
       }
-    )[3]
-    t2 <- system.time(
-      for (x in xvec){
+    T1 <- toc()
+
+    ## 0.114 sec elapsed
+
+    tic()
+    for (x in xvec){
         -1 + x*(5 + x*(-3 + x*(3 + 2*x)))
-      }
-    )[3]
+    }
+    T2 <- toc()
+
+    ## 0.046 sec elapsed
+
+    t1 <- T1$toc - T1$tic
+    t2 <- T2$toc - T2$tic
     t1/t2
 
     ##  elapsed 
-    ## 2.348837
+    ## 2.478261
 
 ## Inner and Outer Products
 
@@ -227,12 +235,12 @@ of 64 bits (1’s and 0’s) and, expressed in base 10, is equal to
 (−1)<sup>*s*</sup>2<sup>*c* − 1023</sup>(1+*f*)
 The parts of this number are:
 
-<table>
+<table style="width:98%;">
 <colgroup>
-<col style="width: 17%" />
-<col style="width: 11%" />
-<col style="width: 20%" />
-<col style="width: 52%" />
+<col style="width: 16%" />
+<col style="width: 10%" />
+<col style="width: 19%" />
+<col style="width: 50%" />
 </colgroup>
 <thead>
 <tr class="header">

@@ -71,20 +71,22 @@ Consider some methods for evaluating the polynomial $2x^4+3x^3-3x^2+5x-1$:
 
    -  4 multiplications, 4 additions
 
-We can test:
+We can test, using commands from the `tictoc` library.
 
 ```{r cache = TRUE}
 xvec <- runif(10^6)
-t1 <- system.time(
+tic()
   for (x in xvec){
     2*x^4 + 3*x^3 - 3*x^2 + 5*x - 1
   }
-)[3]
-t2 <- system.time(
-  for (x in xvec){
+T1 <- toc()
+tic()
+for (x in xvec){
     -1 + x*(5 + x*(-3 + x*(3 + 2*x)))
-  }
-)[3]
+}
+T2 <- toc()
+t1 <- T1$toc - T1$tic
+t2 <- T2$toc - T2$tic
 t1/t2
 ```
 
