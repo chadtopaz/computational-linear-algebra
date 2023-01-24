@@ -81,19 +81,21 @@ Here are some help resources for R.
 
 A few characteristics of my on-the-ground course include:
 
--   Ungrading
--   Flipped classroom style, including pre-class quizzes
+-   Mastery-based assessment
+-   Flipped classroom style
 -   Introductory activities that get students oriented to the course
 -   Organization around weekly blocks of material
 -   Substantial in-class small-group discussion
+-   Positive psychology
 
 To enable you to make easy and flexible use of the resources here, I have eliminated most of these elements from this public facing version of the course. Essentially, what I am providing here is a core dump of materials I use. The materials are linked throughout the various course units. Additionally, you can access the raw materials in this respository's subdirectories:
 
 -   [/coursenotes](/coursenotes)
 -   [/demos](/demos)
 -   [/activities](/activities)
--   [/psets](psets)
--   [/recap](recap)
+-   [/psets](/psets)
+-   [/recap](/recap)
+-   [/worksheets](/worksheets)
 
 [Back to Table of Contents](#header)
 
@@ -107,7 +109,6 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
 -   Reading
 
-    -   [Why I Don't Grade, by Jesse Stommel](https://www.jessestommel.com/why-i-dont-grade/)
     -   [The Mathematics of Mass Testing for COVID-19](https://sinews.siam.org/Details-Page/the-mathematics-of-mass-testing-for-covid-19)
     -   [DataCamp Hid a Sexual Harassment Incident by its CEO](https://www.buzzfeednews.com/article/daveyalba/datacamp-sexual-harassment-metoo-tech-startup) [CW/TW: Sexual Harassment]. DataCamp is this course's default resource for learning R because it is the best-designed and most effective resource I know of. However, **DataCamp has a problematic past**, and I feel an ethical imperative to be transparent about this, which is why I am having you read the article linked above. If you feel you cannot or should not use DataCamp, I encourage you use an alternative option, including one of the choices I have listed in the [R Resources](#r-resources) section. In case it impacts your decision, please know that DataCamp does not gain financially from us using it, as instructors at colleges/universities can get six free months of DataCamp for their students. In any case, you are 100% free to make whatever choice you want and I will support you fully!
 
@@ -162,7 +163,6 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 -   Reading
 
     -   [Course Notes: How Computers Store Numbers](/coursenotes/coursenotes.md)
-    -   [Bits and Bugs](https://epubs.siam.org/doi/book/10.1137/1.9781611975567) 2.1 - 2.4
 
 -   DataCamp Coding Practice
 

@@ -144,11 +144,12 @@ Here are some help resources for R.
 
 A few characteristics of my on-the-ground course include:
 
--   Ungrading
--   Flipped classroom style, including pre-class quizzes
+-   Mastery-based assessment
+-   Flipped classroom style
 -   Introductory activities that get students oriented to the course
 -   Organization around weekly blocks of material
 -   Substantial in-class small-group discussion
+-   Positive psychology
 
 To enable you to make easy and flexible use of the resources here, I
 have eliminated most of these elements from this public facing version
@@ -160,8 +161,9 @@ respository’s subdirectories:
 -   [/coursenotes](/coursenotes)
 -   [/demos](/demos)
 -   [/activities](/activities)
--   [/psets](psets)
--   [/recap](recap)
+-   [/psets](/psets)
+-   [/recap](/recap)
+-   [/worksheets](/worksheets)
 
 [Back to Table of Contents](#header)
 
@@ -176,8 +178,6 @@ respository’s subdirectories:
 
 -   Reading
 
-    -   [Why I Don’t Grade, by Jesse
-        Stommel](https://www.jessestommel.com/why-i-dont-grade/)
     -   [The Mathematics of Mass Testing for
         COVID-19](https://sinews.siam.org/Details-Page/the-mathematics-of-mass-testing-for-covid-19)
     -   [DataCamp Hid a Sexual Harassment Incident by its
@@ -267,9 +267,6 @@ respository’s subdirectories:
 
     -   [Course Notes: How Computers Store
         Numbers](/coursenotes/coursenotes.md)
-    -   [Bits and
-        Bugs](https://epubs.siam.org/doi/book/10.1137/1.9781611975567)
-        2.1 - 2.4
 
 -   DataCamp Coding Practice
 
