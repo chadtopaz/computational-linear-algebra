@@ -1,7 +1,7 @@
 Activity - R Bootcamp
 ================
 
-Remember to show your work / give your reasoning, as applicable.
+Make sure to show your work / give your reasoning.
 
 # Problem 1
 

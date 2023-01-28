@@ -1,3 +1,8 @@
+Pset - How Computers Store Numbers
+================
+
+Make sure to show your work / give your reasoning.
+
 ### Problem 1
 
 Convert the following base-10 numbers to binary.
@@ -24,9 +29,9 @@ calculating (7/3 − 4/3) − 1. I’m not asking for (just) a conceptual
 explanation; you should actually calculate some things on paper to make
 your argument.
 
-b\. Does (4/3 − 1/3) − 1 also give $\epsilon_{mach}$
-? Explain by converting to floating point numbers and carrying out the
-machine arithmetic.
+b\. Does (4/3 − 1/3) − 1 also give $\epsilon_{mach}$? Explain by
+converting to floating point numbers and carrying out the machine
+arithmetic.
 
 ### Problem 2 Solution
 
@@ -45,9 +50,9 @@ Your solution goes here.
 
 ### Problem 4
 
-Find the smallest positive integer $i$ such that $i$ is not exactly representable using the IEEE standard in double
-precision; i.e., $fl(i)\neq i$
-.
+Find the smallest positive integer $i$ such that $i$ is not exactly
+representable using the IEEE standard in double precision; i.e.,
+$fl(i)\neq i$.
 
 ### Problem 4 Solution
 

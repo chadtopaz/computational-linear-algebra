@@ -1,6 +1,13 @@
+Pset - R Bootcamp
+================
+
 Load necessary packages.
 
-    library(tictoc)
+``` r
+library(tictoc)
+```
+
+Make sure to show your work / give your reasoning.
 
 ### Problem 1
 
@@ -13,31 +20,27 @@ skills.
 
 Assume the following details:
 
--   You have access to 10,000 bank accounts.
+- You have access to 10,000 bank accounts.
 
--   Initially, the bank accounts have balances that are uniformly
-    distributed between
- $100 and $
-    100,000.
+- Initially, the bank accounts have balances that are uniformly
+  distributed between \$100 and \$100,000.
 
--   The annual interest rate on the accounts is 5%.
+- The annual interest rate on the accounts is 5%.
 
--   Interest is compounded each day and added to the accounts, except
-    that fractions of a cent are truncated.
+- Interest is compounded each day and added to the accounts, except that
+  fractions of a cent are truncated.
 
--   The daily interest rate is thus
- $.05/365$
-.
+- The daily interest rate is thus $.05/365$.
 
--   The truncated fractions are deposited into an illegal account that
-    initially has a balance of $0.
+- The truncated fractions are deposited into an illegal account that
+  initially has a balance of \$0.
 
--   The illegal account can hold fractional values and it also accrues
-    daily interest.
+- The illegal account can hold fractional values and it also accrues
+  daily interest.
 
--   Assume that each day, interest is earned (on the main account and
-    the illegal account) first, and then skimming from the main account
-    into the illegal account happens.
+- Assume that each day, interest is earned (on the main account and the
+  illegal account) first, and then skimming from the main account into
+  the illegal account happens.
 
 Your job is to write an R script that simulates this situation and finds
 how long it takes for the illegal account to reach a million dollars.
@@ -46,8 +49,10 @@ Here is some R help.
 
 The following code generates the initial accounts:
 
-    accounts <- runif(10000,100,100000)
-    accounts <- floor(accounts*100)/100
+``` r
+accounts <- runif(10000,100,100000)
+accounts <- floor(accounts*100)/100
+```
 
 The first line sets up 10,000 accounts with values uniformly between 100
 and 100,000. The second line removes the fractions of cents (look at the
@@ -56,9 +61,11 @@ data before and after that line is applied).
 For the main part of your code, I strongly recommend a `while` loop,
 which would look something like:
 
-    while (illegal < 1000000) {
-      do stuff here
-    }
+``` r
+while (illegal < 1000000) {
+  do stuff here
+}
+```
 
 ### Problem 1 Solution
 
@@ -69,16 +76,17 @@ Your solution goes here.
 The purpose of this problem is to practice some R skills and review a
 critical topic in applied mathematics: Taylor series.
 
-a\. Find the degree 5 Taylor polynomial $P(x)$ centered at $x = 0$ for $f(x) =\cos x$
-. This is a paper-and-pencil calculation, but you should write up the
-solution here in your markdown document.
+a\. Find the degree 5 Taylor polynomial $P(x)$ centered at $x = 0$ for
+$f(x) = \cos x$. This is a paper-and-pencil calculation, but you should
+write up the solution here in your markdown document.
 
-b\. Find an upper bound for the error in approximating $f(x)$ by $P(x)$ on the interval $[-\pi/4,\pi/4]$
-. This is also a paper-and-pencil calculation that you should write up
-here.
+b\. Find an upper bound for the error in approximating $f(x)$ by $P(x)$
+on the interval $[-\pi/4,\pi/4]$. This is also a paper-and-pencil
+calculation that you should write up here.
 
-c\. Make a single plot with 3 different curves: $cos(x)$ and the 2nd and 4th degree Taylor approximations of $f(x)$ around $x=0$. Plot these on the interval $[-\pi/2,\pi/2]$
-.
+c\. Make a single plot with 3 different curves: $cos(x)$ and the 2nd and
+4th degree Taylor approximations of $f(x)$ around $x=0$. Plot these on
+the interval $[-\pi/2,\pi/2]$.
 
 ### Problem 2 Solution
 
@@ -90,18 +98,17 @@ c\. Your solution goes here.
 
 ### Problem 3
 
-Consider the polynomial $f(x) = x^5 + x^4 - 2x^3 + 4x^2 - 8x + 5$
-. For a vector of 5 million equally spaced values going from x = -100 to
-x = 100, evaluate the polynomial four different ways, time each one
-using commands from the `tictoc` package, and compare. You should make
-your vector of x values using the `seq` command.
+Consider the polynomial $f(x) = x^5 + x^4 - 2x^3 + 4x^2 - 8x + 5$. For a
+vector of 5 million equally spaced values going from x = -100 to x =
+100, evaluate the polynomial four different ways, time each one using
+commands from the `tictoc` package, and compare. You should make your
+vector of x values using the `seq` command.
 
--   Regular polynomial evaluation using a loop to iterate over each
-    value in the vector.
--   Regular polynomial evaluation using the entire vector at once.
--   Horner’s method using a loop to iterate over each value in the
-    vector.
--   Horner’s method using the entire vector at once.
+- Regular polynomial evaluation using a loop to iterate over each value
+  in the vector.
+- Regular polynomial evaluation using the entire vector at once.
+- Horner’s method using a loop to iterate over each value in the vector.
+- Horner’s method using the entire vector at once.
 
 In addition to stating the times for each calculation, identify the
 slowest, the fastest, and the ratio of slowest to fastest.
@@ -114,12 +121,12 @@ Your solution goes here.
 
 You read three articles on applications of linear algebra:
 
--   [The Mathematics of Mass Testing for
-    COVID-19](https://sinews.siam.org/Details-Page/the-mathematics-of-mass-testing-for-covid-19)
--   [Machine Learning Has Been Used to Automatically Translate Long-Lost
-    Languages](https://www.technologyreview.com/2019/07/01/65601/machine-learning-has-been-used-to-automatically-translate-long-lost-languages/)
--   [The Best
-    Bits](https://www.americanscientist.org/article/the-best-bits)
+- [The Mathematics of Mass Testing for
+  COVID-19](https://sinews.siam.org/Details-Page/the-mathematics-of-mass-testing-for-covid-19)
+- [Machine Learning Has Been Used to Automatically Translate Long-Lost
+  Languages](https://www.technologyreview.com/2019/07/01/65601/machine-learning-has-been-used-to-automatically-translate-long-lost-languages/)
+- [The Best
+  Bits](https://www.americanscientist.org/article/the-best-bits)
 
 Choose one of these articles and write a brief paragraph about it in
 which you explain the role that linear algebra plays. Strive to be

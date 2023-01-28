@@ -3,10 +3,16 @@ title: "Activity - How Computers Store Numbers"
 output:
   rmarkdown::html_document:
   header-includes:
-   - \usepackage{amsmath}
+    - \usepackage{amsmath}
+    - \usepackage{bm}
+    - \renewcommand{\vec}[1]{\mathbf{#1}}
+    - \renewcommand{\mat}[1]{\mathbf{#1}}
+    - \newcommand{\exp}[1]{\mathrm{e}^{#1}}
+    - \DeclareMathOperator*{\argmin}{arg\,min}
+    - \DeclareMathOperator*{\float}{fl}
 ---
 
-Remember to show your work / give your reasoning, as applicable.
+Make sure to show your work / give your reasoning.
 
 # Problem 1
 

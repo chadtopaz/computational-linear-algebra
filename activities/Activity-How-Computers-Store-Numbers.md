@@ -1,4 +1,7 @@
-Remember to show your work / give your reasoning, as applicable.
+Activity - How Computers Store Numbers
+================
+
+Make sure to show your work / give your reasoning.
 
 # Problem 1
 
@@ -33,11 +36,11 @@ $$
 f(x)=\frac{1-(1-x)^3}{x}
 $$
 
-for x = 10<sup>−1</sup>, 10<sup>−2</sup>, …, 10<sup>−14</sup>. Then use
-an alternative form of the expression that doesn’t suffer from
-subtracting nearly equal numbers. Consider the results from the second
-calculation to be exact, and make a log-log plot of the relative error
-in the first calculation as a function of x. What is the general trend?
+for x = $10^{-1}, 10^{-2}, \ldots, 10^{-14}$. Then use an alternative
+form of the expression that doesn’t suffer from subtracting nearly equal
+numbers. Consider the results from the second calculation to be exact,
+and make a log-log plot of the relative error in the first calculation
+as a function of x. What is the general trend?
 
 # Problem 4 Solution
 
