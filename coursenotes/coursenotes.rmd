@@ -252,7 +252,7 @@ The result becomes drastically wrong for small $x$ because of subtraction of nea
 
 ## Big Picture
 
-We begin considering the solution of systems of linear equations, $\mat{A}\,\vec{x}=\vec{b}$. Linear systems arise in analysis of different equations (modeling macromolecules, electromagnetics, heat flow, wave motion, structural engineering, a million other examples), in curve fitting, in optimization, and many other applications. To understand solution of linear systems, it's helpful to recall some fundamental ideas of linear algebra. Additionally, as we consider the solution of problems on a computer, we have to think about the effect of small errors on the solution of the problem. This is called conditioning. In the linear algebra setting, conditioning is intimately related to matrix and vector norms.
+We begin considering the solution of systems of linear equations, $\mat{A} \vec{x}=\vec{b}$. Linear systems arise in analysis of different equations (modeling macromolecules, electromagnetics, heat flow, wave motion, structural engineering, a million other examples), in curve fitting, in optimization, and many other applications. To understand solution of linear systems, it's helpful to recall some fundamental ideas of linear algebra. Additionally, as we consider the solution of problems on a computer, we have to think about the effect of small errors on the solution of the problem. This is called conditioning. In the linear algebra setting, conditioning is intimately related to matrix and vector norms.
 
 ## Goals
 
@@ -275,10 +275,19 @@ $$
 2 & 4 & -2\\
 1 & 4 & -3\\
 -2 & -6 & 7
-\end{pmatrix} \begin{pmatrix}
-x_1 \\ x_2 \\ x_3
-\end{pmatrix} = \begin{pmatrix}
-8 \\ 8 \\ -3 \end{pmatrix}.
+\end{pmatrix}
+\begin{pmatrix}
+x_1 \\
+x_2 \\
+x_3
+\end{pmatrix}
+=
+\begin{pmatrix}
+8 \\
+8 \\
+-3
+\end{pmatrix}
+.
 $$
 
 Let's interpret this system two ways.
