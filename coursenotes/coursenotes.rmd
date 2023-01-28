@@ -264,7 +264,7 @@ We begin considering the solution of systems of linear equations, $\mat{A} \vec{
 -   Define forward and backward error
 -   Define vector norms
 -   Define matrix norms
--   Define condition number for solution of $\mat{A}\,\vec{x}=\vec{b}$
+-   Define condition number for solution of $\mat{A} \vec{x}=\vec{b}$
 
 ## Linear Systems
 
