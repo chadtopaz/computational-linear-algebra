@@ -267,11 +267,6 @@ respository’s subdirectories:
     -   [Course Book: How Computers Store
         Numbers](/coursebook/coursebook.md)
 
--   DataCamp Coding Practice
-
-    -   [Quick Introduction to Base R Graphics
-        (chapter)](https://www.datacamp.com/courses/data-visualization-in-r)
-
 -   Activity - How Computers Store Numbers \[[.md for
     viewing](activities/Activity-How-Computers-Store-Numbers.md)\]
     \[[.Rmd for

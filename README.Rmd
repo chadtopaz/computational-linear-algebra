@@ -163,10 +163,6 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
     -   [Course Book: How Computers Store Numbers](/coursebook/coursebook.md)
 
--   DataCamp Coding Practice
-
-    -   [Quick Introduction to Base R Graphics (chapter)](https://www.datacamp.com/courses/data-visualization-in-r)
-
 -   Activity - How Computers Store Numbers [[.md for viewing](activities/Activity-How-Computers-Store-Numbers.md)] [[.Rmd for editing](activities/Activity-How-Computers-Store-Numbers.Rmd)]
 
 -   Pset - How Computers Store Numbers [[.md for viewing](psets/Pset-How-Computers-Store-Numbers.md)] [[.Rmd for editing](psets/Pset-How-Computers-Store-Numbers.Rmd)]
