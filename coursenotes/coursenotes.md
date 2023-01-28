@@ -589,9 +589,22 @@ point, or a line, or a plane.
 
 **Vector spans.** Write the equation in terms of its columns, as
 
-$$
-x_1 \begin{pmatrix} 2 \\ 1 \\ -2 \end{pmatrix} + x_2 \begin{pmatrix} 4 \\ 4 \\ -6 \end{pmatrix} + x_3 \begin{pmatrix} -2 \\ -3 \\ 7 \end{pmatrix} = \begin{pmatrix} 8 \\ 8 \\ -3 \end{pmatrix}
-$$
+$$ x_1 \begin{pmatrix}
+2 \\
+1 \\
+-2
+\end{pmatrix} + x_2 \begin{pmatrix}
+4 \\
+4 \\
+-6
+\end{pmatrix} + x_3 \begin{pmatrix}
+-2 \\
+-3 \\
+7 \end{pmatrix} = \begin{pmatrix}
+8 \\
+8 \\
+-3
+\end{pmatrix} $$
 
 This form suggests thinking of the linear combination of three basis
 vectors necessary to reach a particular target vector. There could be 0,
