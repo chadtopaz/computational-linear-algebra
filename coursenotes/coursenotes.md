@@ -528,7 +528,7 @@ the second option above.
 ## Big Picture
 
 We begin considering the solution of systems of linear equations,
-$\mathbf{A}\,\mathbf{x}=\mathbf{b}$. Linear systems arise in analysis of
+$\mathbf{A} \mathbf{x}=\mathbf{b}$. Linear systems arise in analysis of
 different equations (modeling macromolecules, electromagnetics, heat
 flow, wave motion, structural engineering, a million other examples), in
 curve fitting, in optimization, and many other applications. To
@@ -551,23 +551,14 @@ related to matrix and vector norms.
 - Define vector norms
 - Define matrix norms
 - Define condition number for solution of
-  $\mathbf{A}\,\mathbf{x}=\mathbf{b}$
+  $\mathbf{A} \mathbf{x}=\mathbf{b}$
 
 ## Linear Systems
 
 For concreteness let’s work in three dimensions and let’s consider the
 system
 
-$$
-\begin{pmatrix}
-2 & 4 & -2\\
-1 & 4 & -3\\
--2 & -6 & 7
-\end{pmatrix} \begin{pmatrix}
-x_1 \\ x_2 \\ x_3
-\end{pmatrix} = \begin{pmatrix}
-8 \\ 8 \\ -3 \end{pmatrix}.
-$$
+$$ \begin{pmatrix} 2 & 4 & -2\\ 1 & 4 & -3\\ -2 & -6 & 7 \end{pmatrix} \begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix} = \begin{pmatrix} 8 \\ 8 \\ -3 \end{pmatrix} .$$
 
 Let’s interpret this system two ways.
 
