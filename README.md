@@ -158,12 +158,11 @@ materials I use. The materials are linked throughout the various course
 units. Additionally, you can access the raw materials in this
 respository’s subdirectories:
 
--   [/coursenotes](/coursenotes)
+-   [/coursebook](/coursebook)
 -   [/demos](/demos)
 -   [/activities](/activities)
 -   [/psets](/psets)
 -   [/recap](/recap)
--   [/worksheets](/worksheets)
 
 [Back to Table of Contents](#header)
 
@@ -214,7 +213,7 @@ respository’s subdirectories:
 
 -   Reading
 
-    -   [Course Notes: R Bootcamp](/coursenotes/coursenotes.md)
+    -   [Course Notes: R Bootcamp](/coursebook/coursebook.md)
     -   [Machine Learning Has Been Used to Automatically Translate
         Long-Lost
         Languages](https://www.technologyreview.com/2019/07/01/65601/machine-learning-has-been-used-to-automatically-translate-long-lost-languages/)
@@ -266,7 +265,7 @@ respository’s subdirectories:
 -   Reading
 
     -   [Course Notes: How Computers Store
-        Numbers](/coursenotes/coursenotes.md)
+        Numbers](/coursebook/coursebook.md)
 
 -   DataCamp Coding Practice
 
@@ -306,7 +305,7 @@ respository’s subdirectories:
         Tutorial](https://chadtopaz.com/download/an-ill-advised-linear-algebra-tutorial/)
 
     -   [Course Notes: Fundamentals of Linear
-        Systems](/coursenotes/coursenotes.md)
+        Systems](/coursebook/coursebook.md)
 
 -   Activity - Fundamentals of Linear Systems \[[.md for
     viewing](activities/Activity-Fundamentals-of-Linear-Systems.md)\]
@@ -341,7 +340,7 @@ respository’s subdirectories:
 -   Reading
 
     -   [Course Notes: Solving Linear
-        Systems](/coursenotes/coursenotes.md)
+        Systems](/coursebook/coursebook.md)
 
 -   Activity - Solving Linear Systems \[[.md for
     viewing](activities/Activity-Solving-Linear-Systems.md)\] \[[.Rmd
@@ -389,7 +388,7 @@ respository’s subdirectories:
 
 -   Reading
 
-    -   [Course Notes: Interpolation](/coursenotes/coursenotes.md)
+    -   [Course Notes: Interpolation](/coursebook/coursebook.md)
 
 -   Activity - Interpolation \[[.md for
     viewing](activities/Activity-Interpolation.md)\] \[[.Rmd for
@@ -424,7 +423,7 @@ respository’s subdirectories:
 
 -   Reading
 
-    -   [Course Notes: Least Squares I](/coursenotes/coursenotes.md)
+    -   [Course Notes: Least Squares I](/coursebook/coursebook.md)
 
 -   Activity - Least Squares I \[[.md for
     viewing](activities/Activity-Least-Squares-I.md)\] \[[.Rmd for
@@ -458,7 +457,7 @@ respository’s subdirectories:
 
 -   Reading
 
-    -   [Course Notes: Least Squares II](/coursenotes/coursenotes.md)
+    -   [Course Notes: Least Squares II](/coursebook/coursebook.md)
 
 -   Activity - Least Squares II \[[.md for
     viewing](https://github.com/chadtopaz/computational-linear-algebra/blob/main/activities/Activity-Least-Squares-II.md)\]
@@ -515,7 +514,7 @@ respository’s subdirectories:
 -   Reading
 
     -   [Course Notes: Eigenvalues
-        I](https://github.com/chadtopaz/computational-linear-algebra/blob/main/coursenotes/coursenotes.md)
+        I](https://github.com/chadtopaz/computational-linear-algebra/blob/main/coursebook/coursebook.md)
 
     -   [Link Analysis and Web
         Search](http://www.cs.cornell.edu/home/kleinber/networks-book/networks-book-ch14.pdf),
