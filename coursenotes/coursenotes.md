@@ -558,7 +558,25 @@ related to matrix and vector norms.
 For concreteness let’s work in three dimensions and let’s consider the
 system
 
-$$ \begin{pmatrix} 2 & 4 & -2\\ 1 & 4 & -3\\ -2 & -6 & 7 \end{pmatrix} \begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix} = \begin{pmatrix} 8 \\ 8 \\ -3 \end{pmatrix} .$$
+$$
+\begin{pmatrix}
+2 & 4 & -2\\
+1 & 4 & -3\\
+-2 & -6 & 7
+\end{pmatrix}
+\begin{pmatrix}
+x_1 \\
+x_2 \\
+x_3
+\end{pmatrix}
+=
+\begin{pmatrix}
+8 \\
+8 \\
+-3
+\end{pmatrix}
+.
+$$
 
 Let’s interpret this system two ways.
 
