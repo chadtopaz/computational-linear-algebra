@@ -95,7 +95,6 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 -   [/activities](/activities)
 -   [/psets](/psets)
 -   [/recap](/recap)
--   [/worksheets](/worksheets)
 
 [Back to Table of Contents](#header)
 
