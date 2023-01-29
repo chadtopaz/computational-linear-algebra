@@ -144,7 +144,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
 -   [In-class code examples](https://github.com/chadtopaz/computationallineaaralgebra/blob/main/demos/Demo-R-Bootcamp.R)
 
--   Challenge Problems
+-   Challenge
 
     - Many students take the formula for Taylor series as a given, but it's valuable to understand how it comes from calculus. Derive the Taylor series formula [hint: start with the Fundamental Theorem of Calculus].
 
@@ -196,7 +196,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
 -   Pset - Fundamentals of Linear Systems [[.md for viewing](psets/Pset-Fundamentals-of-Linear-Systems.md)] [[.Rmd for editing](psets/Pset-Fundamentals-of-Linear-Systems.Rmd)]
 
-- Challenge problems
+- Challenge
 
     -  A theory problem: prove that the condition number of a matrix is equal to the norm of the matrix times the norm of the inverse of the matrix.
 
@@ -224,7 +224,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
    -   [In-class code examples](https://github.com/chadtopaz/computationallineaaralgebra/blob/main/demos/Demo-Solving-Linear-Systems.R)
 
-- Challenge problems
+- Challenge
 
    -   Learn about the secant method for root finding and calculate (analytically) the order of convergence. Check your result with a numerical example.
 
@@ -260,7 +260,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
    -   [In-class code examples](https://github.com/chadtopaz/computationallineaaralgebra/blob/main/demos/Demo-Interpolation.R)
 
-- Challenge problems
+- Challenge
 
    -   Learn how to implement interpolation via Newton divided differences and implement the technique in R.
 
@@ -288,7 +288,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
    -   [In-class code examples](demos/Demo-Least-Squares-I.R)
 
-- Challenge problems
+- Challenge
 
    -   TBD
 
@@ -316,7 +316,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
    -   [In-class code examples]()
 
-- Challenge problems
+- Challenge
 
    -   TBD
 
@@ -360,7 +360,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
    -   [In-class code examples](https://github.com/chadtopaz/computational-linear-algebra/blob/main/demos/Demo-Eigenvalues-I.R)
 
-- Challenge problems
+- Challenge
 
    -   TBD
 
@@ -390,7 +390,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
    -   [In-class code examples](https://github.com/chadtopaz/computational-linear-algebra/blob/main/demos/Demo-Eigenvalues-II.R)
 
-- Challenge problems
+- Challenge
 
    -   TBD
 
@@ -418,7 +418,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
    -   [In-class code examples](https://github.com/chadtopaz/computationallineaaralgebra/blob/main/demos/Demo-PCA.R)
 
-- Challenge problems
+- Challenge
 
    -  Find a high-dimensional data set that interests you. Perform PCA on it to see if there is a lower-dimensional structure that captures much of the variation in the data. How many principal components should you keep to be faithful to your particular data set? Do you see a clear interpretation of the loadings? Does your lower dimensional representation of the data reveal anything about its structure?
    
