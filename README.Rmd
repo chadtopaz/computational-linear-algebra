@@ -95,6 +95,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 -   [/activities](/activities)
 -   [/psets](/psets)
 -   [/recap](/recap)
+-   [/worksheets](/worksheets)
 
 [Back to Table of Contents](#header)
 
@@ -140,6 +141,8 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 -   Activity - R Bootcamp [[.md for viewing](activities/Activity-R-Bootcamp.md)] [[.Rmd for editing](activities/Activity-R-Bootcamp.Rmd)]
 
 -   Pset - R Bootcamp [[.md for viewing](psets/Pset-R-Bootcamp.md)] [[.Rmd for editing](psets/Pset-R-Bootcamp.Rmd)]
+
+-   [In-class code examples](https://github.com/chadtopaz/computationallineaaralgebra/blob/main/demos/Demo-R-Bootcamp.R)
 
 -   Challenge Problems
 

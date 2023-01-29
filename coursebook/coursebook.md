@@ -125,26 +125,26 @@ Let’s calculate some examples.
 x <- c(1,2,3)
 y <- c(4,5,6)
 z <- c(7,8,9,10)
-x*y # element-wise
+x*y         # element-wise
 ```
 
     ## [1]  4 10 18
 
 ``` r
-t(x) %*% y # dot product
+t(x) %*% y  # dot product
 ```
 
     ##      [,1]
     ## [1,]   32
 
 ``` r
-sum(x*y) # dot product
+sum(x*y)    # dot product
 ```
 
     ## [1] 32
 
 ``` r
-x %*% t(z) # outer product
+x %*% t(z)  # outer product
 ```
 
     ##      [,1] [,2] [,3] [,4]
@@ -153,7 +153,16 @@ x %*% t(z) # outer product
     ## [3,]   21   24   27   30
 
 ``` r
-x %o% z # outer product
+x %o% z     # outer product
+```
+
+    ##      [,1] [,2] [,3] [,4]
+    ## [1,]    7    8    9   10
+    ## [2,]   14   16   18   20
+    ## [3,]   21   24   27   30
+
+``` r
+outer(x,z)  # outer product
 ```
 
     ##      [,1] [,2] [,3] [,4]
@@ -193,7 +202,7 @@ Here is a plot of the function and the subsequent Taylor approximations.
 ``` r
 P1 <- function(x) {x}
 P3 <- function(x) {x-x^3/6}
-x = seq(from = -pi/2, to = pi/2, length = 200)
+x <- seq(from = -pi/2, to = pi/2, length = 200)
 plot(x, sin(x), col = "black", type = "l")
 lines(x, P1(x), col = "green")
 lines(x, P3(x), col = "red")
@@ -201,8 +210,8 @@ lines(x, P3(x), col = "red")
 
 ![](coursebook_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
-We can also calculaute a bound on the error if we use the fourth degree
-polynomial to approxiamte $\sin(0.1)$. Note $\sin$ is at most one in
+We can also calculate a bound on the error if we use the fourth degree
+polynomial to approximate $\sin(0.1)$. Note $\sin$ is at most one in
 magnitude, so the error term is at most
 $(0.1)^5/120\approx 8.333 \times 10^{-8}$. The actual error achieved is
 
@@ -2222,7 +2231,7 @@ print(ncheb)
     ## [1] 41
 
 This is an improvement in compression by a factor of 632/41 =
-15.414634146341.
+15.4146341.
 
 ## Cubic Splines
 

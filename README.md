@@ -163,6 +163,7 @@ respository’s subdirectories:
 -   [/activities](/activities)
 -   [/psets](/psets)
 -   [/recap](/recap)
+-   [/worksheets](/worksheets)
 
 [Back to Table of Contents](#header)
 
@@ -239,6 +240,9 @@ respository’s subdirectories:
 
 -   Pset - R Bootcamp \[[.md for viewing](psets/Pset-R-Bootcamp.md)\]
     \[[.Rmd for editing](psets/Pset-R-Bootcamp.Rmd)\]
+
+-   [In-class code
+    examples](https://github.com/chadtopaz/computationallineaaralgebra/blob/main/demos/Demo-R-Bootcamp.R)
 
 -   Challenge Problems
 
