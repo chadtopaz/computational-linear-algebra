@@ -174,7 +174,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
 -   Challenge
 
-    - Many students take the formula for Taylor series as a given, but it's valuable to understand how it comes from calculus. Derive the Taylor series formula [hint: start with the Fundamental Theorem of Calculus].
+    - TBD
 
 [Back to Table of Contents](#header)
 

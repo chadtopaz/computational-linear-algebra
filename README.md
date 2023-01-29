@@ -285,10 +285,7 @@ respository’s subdirectories:
 
 -   Challenge
 
-    -   Many students take the formula for Taylor series as a given, but
-        it’s valuable to understand how it comes from calculus. Derive
-        the Taylor series formula \[hint: start with the Fundamental
-        Theorem of Calculus\].
+    -   TBD
 
 [Back to Table of Contents](#header)
 
