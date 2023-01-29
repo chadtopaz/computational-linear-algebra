@@ -170,6 +170,12 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
 -   Pset - How Computers Store Numbers [[.md for viewing](psets/Pset-How-Computers-Store-Numbers.md)] [[.Rmd for editing](psets/Pset-How-Computers-Store-Numbers.Rmd)]
 
+-   [In-class code examples](https://github.com/chadtopaz/computationallineaaralgebra/blob/main/demos/Demo-How-Computers-Store-Numbers.R)
+
+-   Challenge
+
+    - Many students take the formula for Taylor series as a given, but it's valuable to understand how it comes from calculus. Derive the Taylor series formula [hint: start with the Fundamental Theorem of Calculus].
+
 [Back to Table of Contents](#header)
 
 ## Fundamentals of Linear Systems

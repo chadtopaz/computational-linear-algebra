@@ -244,7 +244,7 @@ respository’s subdirectories:
 -   [In-class code
     examples](https://github.com/chadtopaz/computationallineaaralgebra/blob/main/demos/Demo-R-Bootcamp.R)
 
--   Challenge Problems
+-   Challenge
 
     -   Many students take the formula for Taylor series as a given, but
         it’s valuable to understand how it comes from calculus. Derive
@@ -279,6 +279,16 @@ respository’s subdirectories:
 -   Pset - How Computers Store Numbers \[[.md for
     viewing](psets/Pset-How-Computers-Store-Numbers.md)\] \[[.Rmd for
     editing](psets/Pset-How-Computers-Store-Numbers.Rmd)\]
+
+-   [In-class code
+    examples](https://github.com/chadtopaz/computationallineaaralgebra/blob/main/demos/Demo-How-Computers-Store-Numbers.R)
+
+-   Challenge
+
+    -   Many students take the formula for Taylor series as a given, but
+        it’s valuable to understand how it comes from calculus. Derive
+        the Taylor series formula \[hint: start with the Fundamental
+        Theorem of Calculus\].
 
 [Back to Table of Contents](#header)
 
@@ -315,7 +325,7 @@ respository’s subdirectories:
     viewing](psets/Pset-Fundamentals-of-Linear-Systems.md)\] \[[.Rmd for
     editing](psets/Pset-Fundamentals-of-Linear-Systems.Rmd)\]
 
--   Challenge problems
+-   Challenge
 
     -   A theory problem: prove that the condition number of a matrix is
         equal to the norm of the matrix times the norm of the inverse of
@@ -353,7 +363,7 @@ respository’s subdirectories:
     -   [In-class code
         examples](https://github.com/chadtopaz/computationallineaaralgebra/blob/main/demos/Demo-Solving-Linear-Systems.R)
 
--   Challenge problems
+-   Challenge
 
     -   Learn about the secant method for root finding and calculate
         (analytically) the order of convergence. Check your result with
@@ -401,7 +411,7 @@ respository’s subdirectories:
     -   [In-class code
         examples](https://github.com/chadtopaz/computationallineaaralgebra/blob/main/demos/Demo-Interpolation.R)
 
--   Challenge problems
+-   Challenge
 
     -   Learn how to implement interpolation via Newton divided
         differences and implement the technique in R.
@@ -435,7 +445,7 @@ respository’s subdirectories:
 
     -   [In-class code examples](demos/Demo-Least-Squares-I.R)
 
--   Challenge problems
+-   Challenge
 
     -   TBD
 
@@ -471,7 +481,7 @@ respository’s subdirectories:
 
     -   [In-class code examples]()
 
--   Challenge problems
+-   Challenge
 
     -   TBD
 
@@ -533,7 +543,7 @@ respository’s subdirectories:
     -   [In-class code
         examples](https://github.com/chadtopaz/computational-linear-algebra/blob/main/demos/Demo-Eigenvalues-I.R)
 
--   Challenge problems
+-   Challenge
 
     -   TBD
 
@@ -575,7 +585,7 @@ respository’s subdirectories:
     -   [In-class code
         examples](https://github.com/chadtopaz/computational-linear-algebra/blob/main/demos/Demo-Eigenvalues-II.R)
 
--   Challenge problems
+-   Challenge
 
     -   TBD
 
@@ -614,7 +624,7 @@ respository’s subdirectories:
     -   [In-class code
         examples](https://github.com/chadtopaz/computationallineaaralgebra/blob/main/demos/Demo-PCA.R)
 
--   Challenge problems
+-   Challenge
 
     -   Find a high-dimensional data set that interests you. Perform PCA
         on it to see if there is a lower-dimensional structure that
