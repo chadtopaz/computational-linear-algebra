@@ -12,7 +12,8 @@ output:
     - \DeclareMathOperator*{\float}{fl}
 ---
 
-Make sure to show your work / give your reasoning.
+```{r child = "../instructions.Rmd", eval=TRUE}
+```
 
 # Problem 1
 

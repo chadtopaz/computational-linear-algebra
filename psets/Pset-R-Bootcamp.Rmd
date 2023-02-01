@@ -12,13 +12,14 @@ output:
     - \DeclareMathOperator*{\float}{fl}
 ---
 
+```{r child = "../instructions.Rmd", eval=TRUE}
+```
+
 Load necessary packages.
 
 ```{r message = FALSE}
 library(tictoc)
 ```
-
-Make sure to show your work / give your reasoning.
 
 ### Problem 1
 

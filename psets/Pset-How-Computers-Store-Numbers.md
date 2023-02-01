@@ -1,7 +1,30 @@
 Pset - How Computers Store Numbers
 ================
 
-Make sure to show your work / give your reasoning.
+------------------------------------------------------------------------
+
+When you begin work during class, work with your assigned partner.
+Please have only one electronic device open and work on it jointly. When
+writing up this assignment, please remember that showing all of your
+work and giving your reasoning are critical parts of achieving mastery.
+If the course staff cannot tell how you solved a problem or finds leaps
+in explanation or logic, the problem is not mastered. Finally, as a
+matter of academic integrity, please make sure that you are positioned
+to honestly answer yes to these questions:
+
+- Have I disclosed everyone with whom I collaborated on this work? (Even
+  if it is only my assigned partner.)
+
+- Have I made a substantive intellectual contribution to the solution of
+  every problem?
+
+- Am I in any way passing off as my own work any work that belongs to
+  someone else?
+
+Whether intentional or unintentional, any potential violations of
+academic integrity will be referred to the Honor Committee.
+
+------------------------------------------------------------------------
 
 ### Problem 1
 
