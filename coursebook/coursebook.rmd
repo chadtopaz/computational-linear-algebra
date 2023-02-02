@@ -611,7 +611,7 @@ $$
 We define **error magnification** as the ratio
 
 $$
-\frac{\mathrm{relative forward error}}{\mathrm{relative backward error}}=\frac{\frac{||\vec{x}-\vec{x}_a||}{||\vec{x}||}}{\frac{||\vec{b}-\mat{A}\vec{x}_a||}{||\vec{b}||}}.
+\frac{\text{relative forward error}}{\text{relative backward error}}=\frac{\frac{||\vec{x}-\vec{x}_a||}{||\vec{x}||}}{\frac{||\vec{b}-\mat{A}\vec{x}_a||}{||\vec{b}||}}.
 $$
 
 The **condition number** $\kappa(\mat{A})$ is the largest possible error magnification (over all possible $\vec{x}$). Or restated, it's the worst possible ratio of relative forward error to relative backward error.
@@ -620,7 +620,10 @@ Why do we care about this? It tells us whether we expect a small residual to imp
 
 Consider:
 
--   Let $\mat{A} = \begin{pmatrix}0.913 & 0.659 \\ 0.457 & 0.330 \end{pmatrix}$
+-   Let $\mat{A} = \begin{pmatrix}
+0.913 & 0.659 \\
+0.457 & 0.330
+\end{pmatrix}$
 -   Then $\kappa_2(A) = 1.25\times10^4$
 -   Let $\vec{b} = \begin{pmatrix} 0.254 \\ 0.127 \end{pmatrix}$
 -   Then $\vec{x} =(1,-1)$.

@@ -1174,7 +1174,7 @@ $$
 We define **error magnification** as the ratio
 
 $$
-\frac{\mathrm{relative forward error}}{\mathrm{relative backward error}}=\frac{\frac{||\mathbf{x}-\mathbf{x}_a||}{||\mathbf{x}||}}{\frac{||\mathbf{b}-\mathbf{A}\mathbf{x}_a||}{||\mathbf{b}||}}.
+\frac{\text{relative forward error}}{\text{relative backward error}}=\frac{\frac{||\mathbf{x}-\mathbf{x}_a||}{||\mathbf{x}||}}{\frac{||\mathbf{b}-\mathbf{A}\mathbf{x}_a||}{||\mathbf{b}||}}.
 $$
 
 The **condition number** $\kappa(\mathbf{A})$ is the largest possible
@@ -1189,7 +1189,7 @@ concrete with an example.
 Consider:
 
 - Let
-  $\mathbf{A} = \begin{pmatrix}0.913 & 0.659 \\ 0.457 & 0.330 \end{pmatrix}$
+  $\mathbf{A} = \begin{pmatrix} 0.913 & 0.659 \\ 0.457 & 0.330 \end{pmatrix}$
 - Then $\kappa_2(A) = 1.25\times10^4$
 - Let $\mathbf{b} = \begin{pmatrix} 0.254 \\ 0.127 \end{pmatrix}$
 - Then $\mathbf{x} =(1,-1)$.
