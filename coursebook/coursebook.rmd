@@ -388,16 +388,14 @@ $$
 \begin{pmatrix}
 1 & -2\\
 2 & -4
-\end{pmatrix}
-\begin{pmatrix}
+\end{pmatrix} \begin{pmatrix}
 x_1 \\
 x_2
-\end{pmatrix}
-=
-\begin{pmatrix}
+\end{pmatrix} = \begin{pmatrix}
 0 \\
 0
-\end{pmatrix}.$$
+\end{pmatrix}.
+$$
 
 This violates our previous condition (above) about the nullspace only being $\vec{0}$.
 
