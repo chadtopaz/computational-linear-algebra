@@ -638,6 +638,7 @@ $$
 0.127
 \end{pmatrix}
 $$
+
 -   Then $\vec{x} =(1,-1)$.
 -   Consider two approximate solutions $\vec{x}_{1,2}$
 

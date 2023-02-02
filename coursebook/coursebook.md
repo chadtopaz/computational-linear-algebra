@@ -1205,8 +1205,10 @@ $$
 0.254 \\
 0.127
 \end{pmatrix}
-$$ - Then $\mathbf{x} =(1,-1)$. - Consider two approximate solutions
-$\mathbf{x}_{1,2}$
+$$
+
+- Then $\mathbf{x} =(1,-1)$.
+- Consider two approximate solutions $\mathbf{x}_{1,2}$
 
 $$
 \begin{array}{lcl}
