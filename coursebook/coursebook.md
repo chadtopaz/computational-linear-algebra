@@ -1189,7 +1189,14 @@ concrete with an example.
 Consider:
 
 - Let
-  $\mathbf{A} = \begin{pmatrix} 0.913 & 0.659 \\ 0.457 & 0.330 \end{pmatrix}$
+
+$$
+\mathbf{A} = \begin{pmatrix}
+0.913 & 0.659 \\
+0.457 & 0.330
+\end{pmatrix}
+$$
+
 - Then $\kappa_2(A) = 1.25\times10^4$
 - Let $\mathbf{b} = \begin{pmatrix} 0.254 \\ 0.127 \end{pmatrix}$
 - Then $\mathbf{x} =(1,-1)$.

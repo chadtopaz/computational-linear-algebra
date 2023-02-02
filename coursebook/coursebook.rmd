@@ -620,10 +620,15 @@ Why do we care about this? It tells us whether we expect a small residual to imp
 
 Consider:
 
--   Let $\mat{A} = \begin{pmatrix}
+-   Let 
+
+$$
+\mat{A} = \begin{pmatrix}
 0.913 & 0.659 \\
 0.457 & 0.330
-\end{pmatrix}$
+\end{pmatrix}
+$$
+
 -   Then $\kappa_2(A) = 1.25\times10^4$
 -   Let $\vec{b} = \begin{pmatrix} 0.254 \\ 0.127 \end{pmatrix}$
 -   Then $\vec{x} =(1,-1)$.
