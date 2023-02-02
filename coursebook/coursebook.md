@@ -939,7 +939,7 @@ approximate solution $\mathbf{x}_a$. The forward error is the distance
 between the two solutions, that is, $||\mathbf{x}-\mathbf{x_a}||$. The
 backward error is the distance between what the matrix outputs when
 applied to those solutions, that is,
-$||\mathbf{A}\mathbf{x}-\mathbf{A}\ \mathbf{x}_a||=||\mathbf{b}-\mathbf{A} \mathbf{x}_a||$.
+$||\mathbf{A}\mathbf{x}-\mathbf{A}\mathbf{x}_a||=||\mathbf{b}-\mathbf{A} \mathbf{x}_a||$.
 Distance here is the length of the difference between two quantities.
 
 Notice that we haven’t specified what distance means! This is why we
@@ -953,7 +953,9 @@ this rule must satisfy in order to be a norm, but rather than stating
 those requirements, I’m going to just tell you some practicalities.
 
 The vector norm we’ll work with is called the $p$-norm. The $p$-norm for
-$1 \le p \le \infty$ is defined as $$
+$1 \le p \le \infty$ is defined as
+
+$$
 || \mathbf{x} ||_p = \left({|x_1|^p + |x_2|^p + \cdots + |x_n|^p} \right)^{1/p}.
 $$
 
@@ -1145,7 +1147,7 @@ norm(A, "I")
 
 There is one really useful identity you should know about matrix norms:
 
-$$||\mathbf{A}\,\mathbf{x}||_p \leq ||\mathbf{A}||_p ||\mathbf{x}||_p.$$
+$$||\mathbf{A} \mathbf{x}||_p \leq ||\mathbf{A}||_p ||\mathbf{x}||_p.$$
 
 To see this, we start with the right hand side and note
 
@@ -1153,9 +1155,9 @@ $$
 ||\mathbf{A}||_p ||\mathbf{x}||_p = \left( \max_{\mathbf{y} \not = \mathbf{ 0}} \frac{ || \mathbf{A} \mathbf{y}||_p} { ||\mathbf{y}||_p} \right) ||\mathbf{x}||_p \geq \frac{ || \mathbf{A} \mathbf{x}||_p} { ||\mathbf{x}||_p} ||\mathbf{x}||_p = || \mathbf{A} \mathbf{x}||_p.
 $$
 
-## Condition Number for $\mathbf{A}\,\mathbf{x} = \mathbf{b}$
+## Condition Number for $\mathbf{A}\mathbf{x} = \mathbf{b}$
 
-Let us consider solving $\mathbf{A}\,\mathbf{x}=\mathbf{b}$. Suppose we
+Let us consider solving $\mathbf{A}\mathbf{x}=\mathbf{b}$. Suppose we
 find approximate solution $\mathbf{x}_a$. The **relative forward error**
 is
 
@@ -1172,7 +1174,7 @@ $$
 We define **error magnification** as the ratio
 
 $$
-\frac{\text{relative forward error}}{\text{relative backward error}}=\frac{\frac{||\mathbf{x}-\mathbf{x}_a||}{||\mathbf{x}||}}{\frac{||\mathbf{b}-\mathbf{A}\mathbf{x}_a||}{||\mathbf{b}||}}.
+\frac{\mathrm{relative forward error}}{\mathrm{relative backward error}}=\frac{\frac{||\mathbf{x}-\mathbf{x}_a||}{||\mathbf{x}||}}{\frac{||\mathbf{b}-\mathbf{A}\mathbf{x}_a||}{||\mathbf{b}||}}.
 $$
 
 The **condition number** $\kappa(\mathbf{A})$ is the largest possible

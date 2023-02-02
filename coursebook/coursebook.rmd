@@ -508,7 +508,7 @@ t2/t1
 
 In the solution of a computational problem, **forward error** is the difference between the exact and computed solution, and **backwards error** is the difference between the original problem and the so-called modified problem that the approximate solution satisfies. This probably sounds abstract, so let's make it concrete in the context of a linear algebra example.
 
-Suppose we want to solve $\mat{A}  \vec{x}=\vec{b}$. The true solution is $\vec{x}$ but our computational method finds an approximate solution $\vec{x}_a$. The forward error is the distance between the two solutions, that is, $||\vec{x}-\mathbf{x_a}||$. The backward error is the distance between what the matrix outputs when applied to those solutions, that is, $||\mat{A}\vec{x}-\mat{A}\ \vec{x}_a||=||\vec{b}-\mat{A} \vec{x}_a||$. Distance here is the length of the difference between two quantities.
+Suppose we want to solve $\mat{A}  \vec{x}=\vec{b}$. The true solution is $\vec{x}$ but our computational method finds an approximate solution $\vec{x}_a$. The forward error is the distance between the two solutions, that is, $||\vec{x}-\mathbf{x_a}||$. The backward error is the distance between what the matrix outputs when applied to those solutions, that is, $||\mat{A}\vec{x}-\mat{A}\vec{x}_a||=||\vec{b}-\mat{A} \vec{x}_a||$. Distance here is the length of the difference between two quantities.
 
 Notice that we haven't specified what distance means! This is why we need to define vector and matrix norms.
 
@@ -517,6 +517,7 @@ Notice that we haven't specified what distance means! This is why we need to def
 A vector norm is a rule that assigns a real number to every vector. Intuitively, it measures length. There are a bunch of requirements that this rule must satisfy in order to be a norm, but rather than stating those requirements, I'm going to just tell you some practicalities.
 
 The vector norm we'll work with is called the $p$-norm. The $p$-norm for $1 \le p \le \infty$ is defined as
+
 $$
 || \vec{x} ||_p = \left({|x_1|^p + |x_2|^p + \cdots + |x_n|^p} \right)^{1/p}.
 $$
@@ -585,7 +586,7 @@ norm(A, "I")
 
 There is one really useful identity you should know about matrix norms:
 
-$$||\mat{A}\,\vec{x}||_p \leq ||\mat{A}||_p ||\vec{x}||_p.$$
+$$||\mat{A} \vec{x}||_p \leq ||\mat{A}||_p ||\vec{x}||_p.$$
 
 To see this, we start with the right hand side and note
 
@@ -593,9 +594,9 @@ $$
 ||\mat{A}||_p ||\vec{x}||_p = \left( \max_{\vec{y} \not = \vec{ 0}} \frac{ || \mat{A} \vec{y}||_p} { ||\vec{y}||_p} \right) ||\vec{x}||_p \geq \frac{ || \mat{A} \vec{x}||_p} { ||\vec{x}||_p} ||\vec{x}||_p = || \mat{A} \vec{x}||_p.
 $$
 
-## Condition Number for $\mat{A}\,\vec{x} = \vec{b}$
+## Condition Number for $\mat{A}\vec{x} = \vec{b}$
 
-Let us consider solving $\mat{A}\,\vec{x}=\vec{b}$. Suppose we find approximate solution $\vec{x}_a$. The **relative forward error** is
+Let us consider solving $\mat{A}\vec{x}=\vec{b}$. Suppose we find approximate solution $\vec{x}_a$. The **relative forward error** is
 
 $$
 \frac{||\vec{x}-\vec{x}_a||}{||\vec{x}||}
@@ -610,7 +611,7 @@ $$
 We define **error magnification** as the ratio
 
 $$
-\frac{\text{relative forward error}}{\text{relative backward error}}=\frac{\frac{||\vec{x}-\vec{x}_a||}{||\vec{x}||}}{\frac{||\vec{b}-\mat{A}\vec{x}_a||}{||\vec{b}||}}.
+\frac{\mathrm{relative forward error}}{\mathrm{relative backward error}}=\frac{\frac{||\vec{x}-\vec{x}_a||}{||\vec{x}||}}{\frac{||\vec{b}-\mat{A}\vec{x}_a||}{||\vec{b}||}}.
 $$
 
 The **condition number** $\kappa(\mat{A})$ is the largest possible error magnification (over all possible $\vec{x}$). Or restated, it's the worst possible ratio of relative forward error to relative backward error.
