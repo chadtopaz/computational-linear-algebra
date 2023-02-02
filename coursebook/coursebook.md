@@ -716,7 +716,7 @@ not to prove here – just to give you some intuition.)
 5\. **Null space** just means the parts of $\mathbb{R}^n$ that gets
 mapped to $\mathbf{0}$ by $\mathbf{A}$. Another name for nullspace is
 **kernel**. Mathematically, the nullspace is all the vectors
-$\mathbf{v}$ for which $\mathbf{A}\,\mathbf{v}=0$. So for an invertible
+$\mathbf{v}$ for which $\mathbf{A}\mathbf{v}=0$. So for an invertible
 matrix $\mathbf{A}$, the nullspace is $\mathbf{0}$. This is basically
 assigning a definition to the previous point (above).
 
@@ -727,8 +727,18 @@ Why? If the columns were linearly dependent, you could take a linear
 combination of them to reach $\mathbf{0}$ nontrivially, for instance,
 
 $$
-\begin{pmatrix}1 & -2\\2 & -4\end{pmatrix}\begin{pmatrix}x_1 \\ x_2 \end{pmatrix}=\begin{pmatrix}0 \\ 0\end{pmatrix}.
-$$
+\begin{pmatrix}
+1 & -2\\
+2 & -4\end{pmatrix}
+\begin{pmatrix}
+x_1 \\
+x_2
+\end{pmatrix}
+=
+\begin{pmatrix}
+0 \\
+0
+\end{pmatrix}.$$
 
 This violates our previous condition (above) about the nullspace only
 being $\mathbf{0}$.
