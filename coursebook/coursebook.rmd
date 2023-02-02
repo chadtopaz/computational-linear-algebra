@@ -468,7 +468,18 @@ $$
 The bottom row tells us nothing. The second row tells us there is a free variable, which we take to be $x_3$. So we solve this equation for $x_2$, finding $x_2 = 4 -x_3$. This is called back substitution. Then we do back substitution on the top row, from which we find $x_1 = 9 - x_3 - 3 x_2 = 9 - x_3 - 3(4 - x_3) = -3 + 2x_3$. Therefore, the solution is
 
 $$
-\vec{x} = \begin{pmatrix}  -3 + 2x_3 \\ 4 - x_3 \\ x_3 \end{pmatrix} = \begin{pmatrix}  -3 \\ 4\\ 0 \end{pmatrix} + x_3 \begin{pmatrix}  2 \\ -1 \\ 1 \end{pmatrix}.
+\vec{x} = \begin{pmatrix}
+-3 + 2x_3 \\
+4 - x_3 \\
+x_3
+\end{pmatrix} = \begin{pmatrix}
+-3 \\
+4\\
+0 \end{pmatrix} + x_3 \begin{pmatrix}
+2 \\
+-1 \\
+1
+\end{pmatrix}.
 $$
 
 By the way, we can go ahead and use a routine I've written to perform the elimination.

@@ -834,7 +834,18 @@ $x_1 = 9 - x_3 - 3 x_2 = 9 - x_3 - 3(4 - x_3) = -3 + 2x_3$. Therefore,
 the solution is
 
 $$
-\mathbf{x} = \begin{pmatrix}  -3 + 2x_3 \\ 4 - x_3 \\ x_3 \end{pmatrix} = \begin{pmatrix}  -3 \\ 4\\ 0 \end{pmatrix} + x_3 \begin{pmatrix}  2 \\ -1 \\ 1 \end{pmatrix}.
+\mathbf{x} = \begin{pmatrix}
+-3 + 2x_3 \\
+4 - x_3 \\
+x_3
+\end{pmatrix} = \begin{pmatrix}
+-3 \\
+4\\
+0 \end{pmatrix} + x_3 \begin{pmatrix}
+2 \\
+-1 \\
+1
+\end{pmatrix}.
 $$
 
 By the way, we can go ahead and use a routine I’ve written to perform
