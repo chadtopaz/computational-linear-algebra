@@ -704,14 +704,14 @@ are the **eigenvectors**. There is a nice property of eigenvalues,
 namely $\prod_i \lambda_i = \det \mathbf{A}$, from which it follows that
 no $\lambda_i = 0 \iff \det \mathbf{A} \neq 0$.
 
-4\. $\mathbf{A}\,\mathbf{z} \neq 0$ for all
-$\mathbf{z} \in \mathbb{R}^n$ except $\mathbf{z}=0 \iff \mathbf{A}$ is
-invertible. Why? If $\mathbf{A}\,\mathbf{z} = 0$ for
-$\mathbf{z} \neq 0$, then $\mathbf{A}\,\mathbf{z} = 0\,\mathbf{z}$, so 0
-is an eigenvalue. But for $\mathbf{A}$ to be invertible, we know $0$
-can’t be an eigenvalue. (If you are proof oriented you might notice that
-the implication needs to be shown both ways, but I am trying purposely
-not to prove here – just to give you some intuition.)
+4\. $\mathbf{A}\mathbf{z} \neq 0$ for all $\mathbf{z} \in \mathbb{R}^n$
+except $\mathbf{z}=0 \iff \mathbf{A}$ is invertible. Why? If
+$\mathbf{A} \mathbf{z} = 0$ for $\mathbf{z} \neq 0$, then
+$\mathbf{A} \mathbf{z} = 0 \mathbf{z}$, so 0 is an eigenvalue. But for
+$\mathbf{A}$ to be invertible, we know $0$ can’t be an eigenvalue. (If
+you are proof oriented you might notice that the implication needs to be
+shown both ways, but I am trying purposely not to prove here – just to
+give you some intuition.)
 
 5\. **Null space** just means the parts of $\mathbb{R}^n$ that gets
 mapped to $\mathbf{0}$ by $\mathbf{A}$. Another name for nullspace is
@@ -729,7 +729,8 @@ combination of them to reach $\mathbf{0}$ nontrivially, for instance,
 $$
 \begin{pmatrix}
 1 & -2\\
-2 & -4\end{pmatrix}
+2 & -4
+\end{pmatrix}
 \begin{pmatrix}
 x_1 \\
 x_2

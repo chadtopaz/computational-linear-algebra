@@ -378,7 +378,7 @@ So $\mat{A}$ is invertible $\iff \det \mat{A} \neq 0$.
 
 3\. The **eigenvalues** $\lambda_i$ of $\mat{A}$ satisfy $\mat{A}\,\vec{v}_i=\lambda_i \vec{v}_i$, where $\vec{v}_i$ are the **eigenvectors**. There is a nice property of eigenvalues, namely $\prod_i \lambda_i = \det \mat{A}$, from which it follows that no $\lambda_i = 0 \iff \det \mat{A} \neq 0$.
 
-4\. $\mat{A}\,\vec{z} \neq 0$ for all $\vec{z} \in \mathbb{R}^n$ except $\vec{z}=0 \iff \mat{A}$ is invertible. Why? If $\mat{A}\,\vec{z} = 0$ for $\vec{z} \neq 0$, then $\mat{A}\,\vec{z} = 0\,\vec{z}$, so 0 is an eigenvalue. But for $\mat{A}$ to be invertible, we know $0$ can't be an eigenvalue. (If you are proof oriented you might notice that the implication needs to be shown both ways, but I am trying purposely not to prove here -- just to give you some intuition.)
+4\. $\mat{A}\vec{z} \neq 0$ for all $\vec{z} \in \mathbb{R}^n$ except $\vec{z}=0 \iff \mat{A}$ is invertible. Why? If $\mat{A} \vec{z} = 0$ for $\vec{z} \neq 0$, then $\mat{A} \vec{z} = 0 \vec{z}$, so 0 is an eigenvalue. But for $\mat{A}$ to be invertible, we know $0$ can't be an eigenvalue. (If you are proof oriented you might notice that the implication needs to be shown both ways, but I am trying purposely not to prove here -- just to give you some intuition.)
 
 5\. **Null space** just means the parts of $\mathbb{R}^n$ that gets mapped to $\vec{0}$ by $\mat{A}$. Another name for nullspace is **kernel**. Mathematically, the nullspace is all the vectors $\vec{v}$ for which $\mat{A}\vec{v}=0$. So for an invertible matrix $\mat{A}$, the nullspace is $\vec{0}$. This is basically assigning a definition to the previous point (above).
 
@@ -387,7 +387,8 @@ So $\mat{A}$ is invertible $\iff \det \mat{A} \neq 0$.
 $$
 \begin{pmatrix}
 1 & -2\\
-2 & -4\end{pmatrix}
+2 & -4
+\end{pmatrix}
 \begin{pmatrix}
 x_1 \\
 x_2
