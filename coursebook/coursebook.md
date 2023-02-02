@@ -66,7 +66,7 @@ tic()
 T1 <- toc()
 ```
 
-    ## 0.112 sec elapsed
+    ## 0.104 sec elapsed
 
 ``` r
 tic()
@@ -76,7 +76,7 @@ for (x in xvec){
 T2 <- toc()
 ```
 
-    ## 0.045 sec elapsed
+    ## 0.046 sec elapsed
 
 ``` r
 t1 <- T1$toc - T1$tic
@@ -84,8 +84,8 @@ t2 <- T2$toc - T2$tic
 t1/t2
 ```
 
-    ##  elapsed 
-    ## 2.488889
+    ## elapsed 
+    ## 2.26087
 
 ## Inner and Outer Products
 
@@ -208,7 +208,7 @@ lines(x, P1(x), col = "green")
 lines(x, P3(x), col = "red")
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
 We can also calculate a bound on the error if we use the fourth degree
 polynomial to approximate $\sin(0.1)$. Note $\sin$ is at most one in
@@ -774,7 +774,7 @@ set:
 
 - swap two rows
 - multiply a row by a nonzero scalar
-- Add one row to a scalar multiple of another
+- add one row to a scalar multiple of another
 
 To solve a linear system $\mathbf{A}\mathbf{x}=\mathbf{b}$, write it as
 an augmented matrix, reduce it to row echelon form, and then use back
@@ -848,18 +848,18 @@ x_3
 \end{pmatrix}.
 $$
 
-By the way, we can go ahead and use a routine I’ve written to perform
-the elimination.
+By the way, we can go ahead and use the `echelon` command from the
+`matlib` library to perform the elimination.
 
 ``` r
 A <- matrix(c(1,3,1,9,1,1,-1,1,3,11,5,35), nrow = 3, byrow = TRUE)
-eliminate(A)
+echelon(A, reduced = FALSE)
 ```
 
-    ##      [,1] [,2] [,3] [,4]
-    ## [1,]    1    3    1    9
-    ## [2,]    0   -2   -2   -8
-    ## [3,]    0    0    0    0
+    ##      [,1]     [,2]     [,3]     [,4]
+    ## [1,]    1 3.666667 1.666667 11.66667
+    ## [2,]    0 1.000000 1.000000  4.00000
+    ## [3,]    0 0.000000 0.000000  0.00000
 
 ## Operation Counts and Complexity
 
@@ -880,7 +880,7 @@ stages.
     $\frac{2}{3}n^3 + \frac{1}{2}n^2-\frac{7}{6}n = \mathcal{O}(n^3)$.
 
 2.  Back substitute. This takes $n^2 = \mathcal{O}(n^2)$ operations.
-    Back substitution is comptutationally cheap compared to row
+    Back substitution is computationally cheap compared to row
     reduction. For large enough $n$, the back substitution step is
     negligible since $n^3 \gg n^2$. We can use these operation counts to
     make estimates of how long calculations should take.
@@ -896,17 +896,33 @@ Let’s test scaling of the reduction step for a random matrix.
 
 ``` r
 set.seed(123)
-n1 <- 200
+n1 <- 50
 A1 <- matrix(runif(n1^2), ncol = n1)
-t1 <- system.time(eliminate(A1))[3]
+tic()
+invisible(echelon(A1, reduced = FALSE))
+T1 <- toc()
+```
+
+    ## 0.078 sec elapsed
+
+``` r
+t1 <- T1$toc - T1$tic
 n2 <- 2*n1
 A2 <- matrix(runif(n2^2), ncol = n2)
-t2 <- system.time(eliminate(A2))[3]
+tic()
+invisible(echelon(A2, reduced = FALSE))
+T2 <- toc()
+```
+
+    ## 1.52 sec elapsed
+
+``` r
+t2 <- T2$toc - T2$tic
 t2/t1
 ```
 
-    ## elapsed 
-    ##     5.4
+    ##  elapsed 
+    ## 19.48718
 
 ## Forward and Backward Error
 
@@ -914,16 +930,16 @@ In the solution of a computational problem, **forward error** is the
 difference between the exact and computed solution, and **backwards
 error** is the difference between the original problem and the so-called
 modified problem that the approximate solution satisfies. This probably
-sounds abstract, so let’s make it concrete in the cases of a
-root-finding problem and a linear algebra problem.
+sounds abstract, so let’s make it concrete in the context of a linear
+algebra example.
 
-Suppose we want to solve $\mathbf{A}\,\mathbf{x}=\mathbf{b}$. The true
+Suppose we want to solve $\mathbf{A} \mathbf{x}=\mathbf{b}$. The true
 solution is $\mathbf{x}$ but our computational method finds an
 approximate solution $\mathbf{x}_a$. The forward error is the distance
 between the two solutions, that is, $||\mathbf{x}-\mathbf{x_a}||$. The
 backward error is the distance between what the matrix outputs when
 applied to those solutions, that is,
-$||\mathbf{A}\,\mathbf{x}-\mathbf{A}\,\mathbf{x}_a||=||\mathbf{b}-\mathbf{A}\,\mathbf{x}_a||$.
+$||\mathbf{A}\mathbf{x}-\mathbf{A}\ \mathbf{x}_a||=||\mathbf{b}-\mathbf{A} \mathbf{x}_a||$.
 Distance here is the length of the difference between two quantities.
 
 Notice that we haven’t specified what distance means! This is why we
@@ -1452,7 +1468,7 @@ t3 <- system.time(
 as.numeric(t1/(t2 + t3))
 ```
 
-    ## [1] 9.5
+    ## [1] 6.333333
 
 ## Fixed Point Iteration
 
@@ -1549,14 +1565,14 @@ t2 <- system.time(
 Norm(xapprox-xexact,Inf)
 ```
 
-    ## [1] 3.64232569886e-14
+    ## [1] 3.642326e-14
 
 ``` r
 t1/t2
 ```
 
-    ##       elapsed 
-    ## 2.44444444444
+    ##  elapsed 
+    ## 2.452055
 
 ## Convergence of Jacobi’s Method
 
@@ -1624,7 +1640,7 @@ information that we don’t have.
 plot(x,y)
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-25-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-24-1.png)<!-- -->
 
 We might try to use polynomials to describe the data, and then glean
 information from the polynomial. Polynomials are convenient for several
@@ -1669,7 +1685,7 @@ points(xdata, f(xdata), cex = 2)
 lines(x, p(x), col = "green", lwd = 2)
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-26-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-25-1.png)<!-- -->
 
 A few important points to know about the interpolating polynomial
 through $n$ points with distinct $x$ coordinates include:
@@ -1766,7 +1782,7 @@ kappavals
 2
 </td>
 <td style="text-align:right;">
-6.25000000000e+00
+6.250000e+00
 </td>
 </tr>
 <tr>
@@ -1774,7 +1790,7 @@ kappavals
 4
 </td>
 <td style="text-align:right;">
-1.67854715706e+03
+1.678547e+03
 </td>
 </tr>
 <tr>
@@ -1782,7 +1798,7 @@ kappavals
 8
 </td>
 <td style="text-align:right;">
-3.21899099387e+08
+3.218991e+08
 </td>
 </tr>
 <tr>
@@ -1790,7 +1806,7 @@ kappavals
 16
 </td>
 <td style="text-align:right;">
-2.08214238608e+19
+2.082142e+19
 </td>
 </tr>
 <tr>
@@ -1798,7 +1814,7 @@ kappavals
 32
 </td>
 <td style="text-align:right;">
-2.00880822269e+29
+2.008808e+29
 </td>
 </tr>
 <tr>
@@ -1806,7 +1822,7 @@ kappavals
 64
 </td>
 <td style="text-align:right;">
-5.35079511091e+45
+5.350795e+45
 </td>
 </tr>
 <tr>
@@ -1814,7 +1830,7 @@ kappavals
 128
 </td>
 <td style="text-align:right;">
-2.74099311576e+76
+2.740993e+76
 </td>
 </tr>
 <tr>
@@ -1822,7 +1838,7 @@ kappavals
 256
 </td>
 <td style="text-align:right;">
-2.55777379858e+137
+2.557774e+137
 </td>
 </tr>
 </tbody>
@@ -1885,13 +1901,13 @@ c <- solve(vander(x),y)
 horner(c, x0)$y
 ```
 
-    ## [1] -0.157060132098
+    ## [1] -0.1570601
 
 ``` r
 lagrangeInterp(x,y,x0)
 ```
 
-    ## [1] -0.157060132133
+    ## [1] -0.1570601
 
 We can also do a speed comparison test.
 
@@ -1909,7 +1925,7 @@ for (i in 1:numTrials){
 T1 <- toc()
 ```
 
-    ## 1.965 sec elapsed
+    ## 2.072 sec elapsed
 
 ``` r
 t1 <- T1$toc - T1$tic
@@ -1921,14 +1937,14 @@ for (i in 1:numTrials){
 T2 <- toc()
 ```
 
-    ## 0.028 sec elapsed
+    ## 0.032 sec elapsed
 
 ``` r
 t2 <- T2$toc - T2$tic
 as.numeric(t2/t1)
 ```
 
-    ## [1] 0.0142493638677
+    ## [1] 0.01544402
 
 ## Data Compression
 
@@ -1964,9 +1980,9 @@ interperror <- function(n, plotflag = FALSE){
 interperror(5, plotflag = TRUE)
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-31-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-30-1.png)<!-- -->
 
-    ## [1] 0.180757796555
+    ## [1] 0.1807578
 
 Not bad for just 5 points. Let’s examine how the error changes as a
 function of $n$.
@@ -1992,7 +2008,7 @@ orderofmag <- round(log10(errorvec))
 plot(nvec, orderofmag)
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-32-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-31-1.png)<!-- -->
 
 This means that we can represent the sine function with $10^{-13}$ error
 using only 20 pieces of information, instead of storing a huge lookup
@@ -2032,7 +2048,7 @@ for (n in seq(from = 0,to = 14,by = 2)){
 }
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-33-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-32-1.png)<!-- -->
 
 So more terms are better, right? Let’s try again with the function
 $f(x) = 1/x$ around the point $x_0=1$. The $n$th degree Taylor
@@ -2057,7 +2073,7 @@ for (n in seq(from = 0, to = 40, by = 4)){
 }
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-34-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-33-1.png)<!-- -->
 
 Oh! I guess that more isn’t always better.
 
@@ -2080,13 +2096,13 @@ for (n in nvec){
 }
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-35-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-34-1.png)<!-- -->
 
 ``` r
 plot(nvec, log10(error), xlab = "n", ylab = "log10 of error")
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-35-2.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-34-2.png)<!-- -->
 
 Looks good! Let’s try again with a different function,
 $f(x) = (1+x^2)^{-1}$ on $[-1,1]$.
@@ -2106,13 +2122,13 @@ for (n in nvec){
 }
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-36-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-35-1.png)<!-- -->
 
 ``` r
 plot(nvec, log10(error), xlab = "n", ylab = "log10 of error")
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-36-2.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-35-2.png)<!-- -->
 
 Not good! The error goes up as we take more and more points.
 Equally-spaced nodes are very natural in many applications (scientific
@@ -2239,7 +2255,7 @@ maxderiv <- c(0.398942,0.241971,0.178032, 0.550588,1.19683,2.30711,4.24061,14.17
 plot(n, log(maxderiv))
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-37-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-36-1.png)<!-- -->
 
 Given this, using equally-spaced nodes seems reckless, but we can try it
 anyway, say, on $[-10,10]$ with 30 data points to start with.
@@ -2257,7 +2273,7 @@ ydataequal <- lagrangeInterp(xdataequal, f(xdataequal), x)
 lines(x, ydataequal, col = "red", lwd = 2)
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-38-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-37-1.png)<!-- -->
 
 Ok, that approach is not going to work! Let’s try the approach of a
 lookup table with linear interpolation. Let’s suppose we wish to achieve
@@ -2323,7 +2339,7 @@ plot(x, y, ylim = c(-2.5,5.5))
 lines(xplot, linearspline(xplot), col = "red", lwd = 2)
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-41-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-40-1.png)<!-- -->
 
 Your eyeball might be telling you that this is a very jagged graph. Most
 things in nature and society are not this jagged, so it might feel
@@ -2337,7 +2353,7 @@ lines(xplot, linearspline(xplot), col = "red", lwd = 2)
 lines(xplot, cubicspline(xplot), col = "green", lwd = 2)
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-42-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-41-1.png)<!-- -->
 
 This is smoother. What smoothness means here is continuity of
 derivatives from one spline to the next. Using cubic rather than linear
@@ -2429,7 +2445,7 @@ cubicspline <- splinefun(x, y, method = "natural")
 lines(xx, cubicspline(xx), col = "blue", lwd = 3)
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-43-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-42-1.png)<!-- -->
 
 Now let’s work with some real data, let’s say, Tesla stock price for the
 last 100 days (we won’t actually get 100 days because of days when the
@@ -2473,7 +2489,7 @@ plot(day[1:max(sampledday)], interpolatedprice, col = "red", type = "l", ylim = 
 points(day, price, col = "blue")
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-44-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-43-1.png)<!-- -->
 
 ``` r
 # Fit splines
@@ -2482,7 +2498,7 @@ plot(day, TSLAspline(day), col = "blue", type = "l", ylim = c(ymin,ymax))
 points(day, price, col = "blue")
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-44-2.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-43-2.png)<!-- -->
 
 # Least Squares I
 
@@ -2521,7 +2537,7 @@ s <- c(105,117,141,152)
 plot(a, s, xlab = "advertising", ylab = "sales")
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-45-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-44-1.png)<!-- -->
 
 The company would like to model this data so they can predict sales for
 other levels of advertising. The data looks roughly linear, and we have
@@ -2559,12 +2575,12 @@ best thing: let’s find the value of $x$ such that $x\mathbf{A}$ is as
 close as possible to $\mathbf{b}$. We can draw a picture to solve this
 problem.
 
-![](coursebook_files/figure-gfm/unnamed-chunk-46-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-45-1.png)<!-- -->
 
 Where should we stop on the dotted line? When we are perpendicular to
 the end of $\mathbf{b}$. This results in the following picture.
 
-![](coursebook_files/figure-gfm/unnamed-chunk-47-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-46-1.png)<!-- -->
 
 From this picture, two relationships arise:
 
@@ -2773,23 +2789,27 @@ print(bhat)
 t(r) %*% a0
 ```
 
-    ##                   [,1]
-    ## [1,] 1.84741111298e-13
+    ##              [,1]
+    ## [1,] 1.847411e-13
 
 ``` r
 t(r) %*% a1
 ```
 
-    ##                   [,1]
-    ## [1,] 8.81072992343e-13
+    ##             [,1]
+    ## [1,] 8.81073e-13
 
 ``` r
 plot(a1, b, xlab = "advertising", ylab = "sales")
 xx <- seq(from = 0, to = 6, length = 200)
-lines(xx, horner(rev(x), xx)$y) # Note we need to reverse order of coefficients
+lines(xx, horner(rev(x), xx)$y) 
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-49-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-48-1.png)<!-- -->
+
+``` r
+# Note we need to reverse order of coefficients
+```
 
 Symbolically, we calculated the least squares solution
 $\mathbf{x} = \left(\mathbf{A}^T \mathbf{A}\right)^{-1}\mathbf{A}^T \mathbf{b}$
@@ -2849,7 +2869,7 @@ xx <- seq(from = 0, to = 3, length = 200)
 lines(xx, horner(c, xx)$y)
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-50-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-49-1.png)<!-- -->
 
 ``` r
 print(r)
@@ -2893,7 +2913,7 @@ y <- 3*x + 0.4*(2*runif(100) - 1)
 plot(x, y)
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-51-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-50-1.png)<!-- -->
 
 If we decided to represent this data with a line, we’d go down from
 having 100 pieces of information (the original data points) to merely 2
@@ -3127,16 +3147,16 @@ Let’s check the result and see if the procedure worked.
 q1
 ```
 
-    ## [1] 0.333333333333 0.666666666667 0.666666666667
+    ## [1] 0.3333333 0.6666667 0.6666667
 
 ``` r
 q2
 ```
 
-    ##                 [,1]
-    ## [1,]  0.666666666667
-    ## [2,]  0.333333333333
-    ## [3,] -0.666666666667
+    ##            [,1]
+    ## [1,]  0.6666667
+    ## [2,]  0.3333333
+    ## [3,] -0.6666667
 
 ``` r
 Norm(q1, 2)
@@ -3264,10 +3284,10 @@ Rbar <- rbind(c(r11,r12,r13), c(0,r22,r23), c(0,0,r33))
 Qbar
 ```
 
-    ##                  q1                                
-    ## [1,] 0.285714285714  0.857142857143  0.428571428571
-    ## [2,] 0.428571428571  0.285714285714 -0.857142857143
-    ## [3,] 0.857142857143 -0.428571428571  0.285714285714
+    ##             q1                      
+    ## [1,] 0.2857143  0.8571429  0.4285714
+    ## [2,] 0.4285714  0.2857143 -0.8571429
+    ## [3,] 0.8571429 -0.4285714  0.2857143
 
 ``` r
 Rbar
@@ -3302,19 +3322,19 @@ Rbarcheck <- qr.R(QRbarcheck, complete=TRUE)
 Qbar
 ```
 
-    ##                  q1                                
-    ## [1,] 0.285714285714  0.857142857143  0.428571428571
-    ## [2,] 0.428571428571  0.285714285714 -0.857142857143
-    ## [3,] 0.857142857143 -0.428571428571  0.285714285714
+    ##             q1                      
+    ## [1,] 0.2857143  0.8571429  0.4285714
+    ## [2,] 0.4285714  0.2857143 -0.8571429
+    ## [3,] 0.8571429 -0.4285714  0.2857143
 
 ``` r
 Qbarcheck
 ```
 
-    ##                 [,1]            [,2]            [,3]
-    ## [1,] -0.285714285714 -0.857142857143 -0.428571428571
-    ## [2,] -0.428571428571 -0.285714285714  0.857142857143
-    ## [3,] -0.857142857143  0.428571428571 -0.285714285714
+    ##            [,1]       [,2]       [,3]
+    ## [1,] -0.2857143 -0.8571429 -0.4285714
+    ## [2,] -0.4285714 -0.2857143  0.8571429
+    ## [3,] -0.8571429  0.4285714 -0.2857143
 
 ``` r
 S <- diag(c(-1,-1,-1))
@@ -3323,19 +3343,19 @@ Rbarcheck <- S%*%Rbarcheck
 Qbarcheck - Qbar
 ```
 
-    ##                      q1                                     
-    ## [1,] -1.11022302463e-16  0.00000000000e+00 1.66533453694e-16
-    ## [2,]  0.00000000000e+00 -1.11022302463e-16 3.33066907388e-16
-    ## [3,]  0.00000000000e+00 -1.11022302463e-16 6.10622663544e-16
+    ##                 q1                           
+    ## [1,] -1.110223e-16  0.000000e+00 1.665335e-16
+    ## [2,]  0.000000e+00 -1.110223e-16 3.330669e-16
+    ## [3,]  0.000000e+00 -1.110223e-16 6.106227e-16
 
 ``` r
 Rbarcheck - Rbar
 ```
 
-    ##      v1               v2                v3
-    ## [1,]  0 1.7763568394e-15  0.0000000000e+00
-    ## [2,]  0 8.8817841970e-16  0.0000000000e+00
-    ## [3,]  0 0.0000000000e+00 -1.7763568394e-15
+    ##      v1           v2            v3
+    ## [1,]  0 1.776357e-15  0.000000e+00
+    ## [2,]  0 8.881784e-16  0.000000e+00
+    ## [3,]  0 0.000000e+00 -1.776357e-15
 
 Let’s try an example we looked at earlier.
 
@@ -3362,10 +3382,10 @@ y3 <- v3 - (q1 %*% t(q1)) %*% v3 - (q2 %*% t(q2)) %*% v3
 y3
 ```
 
-    ##                   [,1]
-    ## [1,] 1.11022302463e-16
-    ## [2,] 5.55111512313e-17
-    ## [3,] 0.00000000000e+00
+    ##              [,1]
+    ## [1,] 1.110223e-16
+    ## [2,] 5.551115e-17
+    ## [3,] 0.000000e+00
 
 Oh! it turns out there’s nothing left. If we want to compute the full QR
 decomposition, we need to find something orthogonal to the span of
@@ -3388,19 +3408,19 @@ Rbar <- rbind(c(r11,r12,r13), c(0,r22,r23), c(0,0,r33))
 Qbar
 ```
 
-    ##                  q1                                
-    ## [1,] 0.333333333333  0.666666666667  0.666666666667
-    ## [2,] 0.666666666667  0.333333333333 -0.666666666667
-    ## [3,] 0.666666666667 -0.666666666667  0.333333333333
+    ##             q1                      
+    ## [1,] 0.3333333  0.6666667  0.6666667
+    ## [2,] 0.6666667  0.3333333 -0.6666667
+    ## [3,] 0.6666667 -0.6666667  0.3333333
 
 ``` r
 Rbar
 ```
 
-    ##      [,1] [,2]           [,3]
-    ## [1,]    3    0 1.666666666667
-    ## [2,]    0    3 0.333333333333
-    ## [3,]    0    0 0.000000000000
+    ##      [,1] [,2]      [,3]
+    ## [1,]    3    0 1.6666667
+    ## [2,]    0    3 0.3333333
+    ## [3,]    0    0 0.0000000
 
 To reiterate, we ended up with a row of zeros at the bottom of
 $\overline{\mathbf{R}}$. That’s because the columns of $\mathbf{A}$ are
@@ -3411,10 +3431,10 @@ ahead and check our result.
 Qbar %*% Rbar - A
 ```
 
-    ##      v1 v2              v3
-    ## [1,]  0  0 -0.222222222222
-    ## [2,]  0  0  0.222222222222
-    ## [3,]  0  0  0.888888888889
+    ##      v1 v2         v3
+    ## [1,]  0  0 -0.2222222
+    ## [2,]  0  0  0.2222222
+    ## [3,]  0  0  0.8888889
 
 In this case, the full and reduced **QR** are not the same. Let’s see
 how this works.
@@ -3425,27 +3445,27 @@ R <- Rbar[1:2,1:3]
 Q
 ```
 
-    ##                  q1                
-    ## [1,] 0.333333333333  0.666666666667
-    ## [2,] 0.666666666667  0.333333333333
-    ## [3,] 0.666666666667 -0.666666666667
+    ##             q1           
+    ## [1,] 0.3333333  0.6666667
+    ## [2,] 0.6666667  0.3333333
+    ## [3,] 0.6666667 -0.6666667
 
 ``` r
 R
 ```
 
-    ##      [,1] [,2]           [,3]
-    ## [1,]    3    0 1.666666666667
-    ## [2,]    0    3 0.333333333333
+    ##      [,1] [,2]      [,3]
+    ## [1,]    3    0 1.6666667
+    ## [2,]    0    3 0.3333333
 
 ``` r
 Q %*% R - A
 ```
 
-    ##      v1 v2              v3
-    ## [1,]  0  0 -0.222222222222
-    ## [2,]  0  0  0.222222222222
-    ## [3,]  0  0  0.888888888889
+    ##      v1 v2         v3
+    ## [1,]  0  0 -0.2222222
+    ## [2,]  0  0  0.2222222
+    ## [3,]  0  0  0.8888889
 
 Ok, and let’s do one last example.
 
@@ -3504,31 +3524,31 @@ Rbar <- rbind(c(r11,r12,r13), c(0,r22,r23), c(0,0,r33), c(0,0,0))
 Qbar
 ```
 
-    ##       q1                                                      
-    ## [1,] 0.5 -0.866025403784  1.35973995551e-16  3.92523114671e-16
-    ## [2,] 0.5  0.288675134595 -8.16496580928e-01 -3.14018491737e-16
-    ## [3,] 0.5  0.288675134595  4.08248290464e-01 -7.07106781187e-01
-    ## [4,] 0.5  0.288675134595  4.08248290464e-01  7.07106781187e-01
+    ##       q1                                       
+    ## [1,] 0.5 -0.8660254  1.359740e-16  3.925231e-16
+    ## [2,] 0.5  0.2886751 -8.164966e-01 -3.140185e-16
+    ## [3,] 0.5  0.2886751  4.082483e-01 -7.071068e-01
+    ## [4,] 0.5  0.2886751  4.082483e-01  7.071068e-01
 
 ``` r
 Rbar
 ```
 
-    ##      [,1]           [,2]           [,3]
-    ## [1,]    2 1.500000000000 1.000000000000
-    ## [2,]    0 0.866025403784 0.577350269190
-    ## [3,]    0 0.000000000000 0.816496580928
-    ## [4,]    0 0.000000000000 0.000000000000
+    ##      [,1]      [,2]      [,3]
+    ## [1,]    2 1.5000000 1.0000000
+    ## [2,]    0 0.8660254 0.5773503
+    ## [3,]    0 0.0000000 0.8164966
+    ## [4,]    0 0.0000000 0.0000000
 
 ``` r
 Qbar %*% Rbar - A
 ```
 
-    ##      v1 v2                 v3
-    ## [1,]  0  0 -1.23259516441e-32
-    ## [2,]  0  0  0.00000000000e+00
-    ## [3,]  0  0  0.00000000000e+00
-    ## [4,]  0  0  0.00000000000e+00
+    ##      v1 v2            v3
+    ## [1,]  0  0 -1.232595e-32
+    ## [2,]  0  0  0.000000e+00
+    ## [3,]  0  0  0.000000e+00
+    ## [4,]  0  0  0.000000e+00
 
 ``` r
 # Make reduced QR and check
@@ -3537,11 +3557,11 @@ R <- Rbar[1:3,1:3]
 Q %*% R - A
 ```
 
-    ##      v1 v2                 v3
-    ## [1,]  0  0 -1.23259516441e-32
-    ## [2,]  0  0  0.00000000000e+00
-    ## [3,]  0  0  0.00000000000e+00
-    ## [4,]  0  0  0.00000000000e+00
+    ##      v1 v2            v3
+    ## [1,]  0  0 -1.232595e-32
+    ## [2,]  0  0  0.000000e+00
+    ## [3,]  0  0  0.000000e+00
+    ## [4,]  0  0  0.000000e+00
 
 ## Computational considerations
 
@@ -3726,9 +3746,9 @@ e
     ## [1] -1 -5
     ## 
     ## $vectors
-    ##                [,1]            [,2]
-    ## [1,] 0.707106781187  0.707106781187
-    ## [2,] 0.707106781187 -0.707106781187
+    ##           [,1]       [,2]
+    ## [1,] 0.7071068  0.7071068
+    ## [2,] 0.7071068 -0.7071068
 
 ``` r
 Lambda <- diag(e$values)
@@ -3796,30 +3816,30 @@ lambdap <- (1+sqrt(5)) / 2
 lambdap
 ```
 
-    ## [1] 1.61803398875
+    ## [1] 1.618034
 
 ``` r
 lambdam <- (1-sqrt(5)) / 2
 lambdam
 ```
 
-    ## [1] -0.61803398875
+    ## [1] -0.618034
 
 ``` r
 e <- eigen(A)
 e$values
 ```
 
-    ## [1]  1.61803398875 -0.61803398875
+    ## [1]  1.618034 -0.618034
 
 ``` r
 Lambda <- diag(e$values)
 Lambda
 ```
 
-    ##               [,1]           [,2]
-    ## [1,] 1.61803398875  0.00000000000
-    ## [2,] 0.00000000000 -0.61803398875
+    ##          [,1]      [,2]
+    ## [1,] 1.618034  0.000000
+    ## [2,] 0.000000 -0.618034
 
 ``` r
 S <- e$vectors
@@ -3829,17 +3849,17 @@ S <- cbind(v1, v2)
 S
 ```
 
-    ##                 v1             v2
-    ## [1,] 1.61803398875 -0.61803398875
-    ## [2,] 1.00000000000  1.00000000000
+    ##            v1        v2
+    ## [1,] 1.618034 -0.618034
+    ## [2,] 1.000000  1.000000
 
 ``` r
 S %*% Lambda %*% solve(S)
 ```
 
-    ##      [,1]               [,2]
-    ## [1,]    1  1.00000000000e+00
-    ## [2,]    1 -1.11022302463e-16
+    ##      [,1]          [,2]
+    ## [1,]    1  1.000000e+00
+    ## [2,]    1 -1.110223e-16
 
 So to recap, we have
 
@@ -3934,7 +3954,7 @@ fib(1:10)
 fib(1000)
 ```
 
-    ## [1] 7.03303677114e+208
+    ## [1] 7.033037e+208
 
 One cool thing about this is that it lets us understand the behavior of
 $F_n$ for large $n$ in a simpler way. Since $|\lambda_-| < 1$, after
@@ -3963,8 +3983,8 @@ fib(n)
 fibapprox(n)
 ```
 
-    ##  [1]  1.17082039325  1.89442719100  3.06524758425  4.95967477525  8.02492235950
-    ##  [6] 12.98459713475 21.00951949425 33.99411662900 55.00363612325 88.99775275225
+    ##  [1]  1.170820  1.894427  3.065248  4.959675  8.024922 12.984597 21.009519
+    ##  [8] 33.994117 55.003636 88.997753
 
 ``` r
 n <- 1:20
@@ -3972,7 +3992,7 @@ error <- abs(fib(n) - fibapprox(n))
 plot(n, log10(error))
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-68-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-67-1.png)<!-- -->
 
 It’s important to remember from linear algebra that not every matrix can
 be diagonalized. For a matrix to be diagonalizable, you need for the
@@ -3991,10 +4011,10 @@ e$values
 e$vectors
 ```
 
-    ##                 [,1]           [,2]            [,3]
-    ## [1,] -0.301511344578 0.534522483825 -0.588533689677
-    ## [2,] -0.904534033733 0.801783725737 -0.784390372213
-    ## [3,] -0.301511344578 0.267261241912 -0.195856682537
+    ##            [,1]      [,2]       [,3]
+    ## [1,] -0.3015113 0.5345225 -0.5885337
+    ## [2,] -0.9045340 0.8017837 -0.7843904
+    ## [3,] -0.3015113 0.2672612 -0.1958567
 
 Here, the **algebraic multiplicity** of $-3$ is 1 because it is only an
 eigenvalue once, and the **geometric multiplicity** is 1 because it only
@@ -4026,9 +4046,9 @@ e$values
 e$vectors
 ```
 
-    ##      [,1]              [,2]
-    ## [1,]    1 1.00000000000e+00
-    ## [2,]    0 2.22044604925e-16
+    ##      [,1]         [,2]
+    ## [1,]    1 1.000000e+00
+    ## [2,]    0 2.220446e-16
 
 The eigenvalue $1$ has algebraic multiplicity 2, but there is only one
 eigenvector (the trivial eigenvector doesn’t count) so it has geometric
@@ -4089,20 +4109,20 @@ v <- v / Norm(v, 2)
 v
 ```
 
-    ##                 [,1]
-    ## [1,]  0.519251568355
-    ## [2,] -0.686667691150
-    ## [3,]  0.508788060681
+    ##            [,1]
+    ## [1,]  0.5192516
+    ## [2,] -0.6866677
+    ## [3,]  0.5087881
 
 ``` r
 v <- A %*% v
 v
 ```
 
-    ##                 [,1]
-    ## [1,] -1.374643320759
-    ## [2,]  0.867163198538
-    ## [3,] -0.673588306557
+    ##            [,1]
+    ## [1,] -1.3746433
+    ## [2,]  0.8671632
+    ## [3,] -0.6735883
 
 ``` r
 v <- v / Norm(v, 2)
@@ -4150,7 +4170,7 @@ e <- eigen(A)
 e$values
 ```
 
-    ## [1]  8.82000000000e+02 -2.52000000000e+02 -4.63379334903e-14
+    ## [1]  8.820000e+02 -2.520000e+02 -4.633793e-14
 
 This method is called **power iteration**. You might not realize it, but
 you use power iteration nearly every day. Google searches are based on

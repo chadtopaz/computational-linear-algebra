@@ -4,6 +4,6 @@ dplyr
 BatchGetSymbols
 kableExtra
 pracma
-matlib
 PolynomF
 tictoc
+matlib
