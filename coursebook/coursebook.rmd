@@ -354,7 +354,7 @@ Let's consider an $n \times n$ matrix $\mat{A}$.
 
 1\. **Invertible** means that the inverse $\mat{A}^{-1}$ exists. This matrix satisfies $\mat{A} \mat{A}^{-1} = \mat{I}$, where $\mat{I}$ is the $n \times n$ identity matrix.
 
-2\. The notation $\det$ means **determinant**. Think of it as a scaling factor for the transformation defined by a matrix. That is, multiplication by $\mat{A}$ can cause a region to contract ($|\det \mat{A}| < 1$) or expand ($|\det \mat{A}| > 1$) and/or reflect ($\det \mat{A} < 0$). As an example, let
+2\. The notation $\det$ means **determinant**. Think of it as a scaling factor for the transformation defined by a matrix. That is, multiplication by $\mat{A}$ can cause a region to contract if $|\det \mat{A}| < 1$, expand if $|\det \mat{A}| > 1$, and/or reflect if $\det \mat{A} < 0$. As an example, let
 
 $$
 \mat{A} =
@@ -374,7 +374,7 @@ d & -b\\
 \end{pmatrix}.
 $$
 
-So $\mat{A}$ invertible $\iff \det \mat{A} \neq 0$.
+So $\mat{A}$ is invertible $\iff \det \mat{A} \neq 0$.
 
 3\. The **eigenvalues** $\lambda_i$ of $\mat{A}$ satisfy $\mat{A}\,\vec{v}_i=\lambda_i \vec{v}_i$, where $\vec{v}_i$ are the **eigenvectors**. There is a nice property of eigenvalues, namely $\prod_i \lambda_i = \det \mat{A}$, from which it follows that no $\lambda_i = 0 \iff \det \mat{A} \neq 0$.
 

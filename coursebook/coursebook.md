@@ -674,9 +674,9 @@ $\mathbf{I}$ is the $n \times n$ identity matrix.
 
 2\. The notation $\det$ means **determinant**. Think of it as a scaling
 factor for the transformation defined by a matrix. That is,
-multiplication by $\mathbf{A}$ can cause a region to contract
-($|\det \mathbf{A}| < 1$) or expand ($|\det \mathbf{A}| > 1$) and/or
-reflect ($\det \mathbf{A} < 0$). As an example, let
+multiplication by $\mathbf{A}$ can cause a region to contract if
+$|\det \mathbf{A}| < 1$, expand if $|\det \mathbf{A}| > 1$, and/or
+reflect if $\det \mathbf{A} < 0$. As an example, let
 
 $$
 \mathbf{A} =
@@ -696,7 +696,7 @@ d & -b\\
 \end{pmatrix}.
 $$
 
-So $\mathbf{A}$ invertible $\iff \det \mathbf{A} \neq 0$.
+So $\mathbf{A}$ is invertible $\iff \det \mathbf{A} \neq 0$.
 
 3\. The **eigenvalues** $\lambda_i$ of $\mathbf{A}$ satisfy
 $\mathbf{A}\,\mathbf{v}_i=\lambda_i \mathbf{v}_i$, where $\mathbf{v}_i$
