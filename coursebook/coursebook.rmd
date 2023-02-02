@@ -630,7 +630,14 @@ $$
 $$
 
 -   Then $\kappa_2(A) = 1.25\times10^4$
--   Let $\vec{b} = \begin{pmatrix} 0.254 \\ 0.127 \end{pmatrix}$
+-   Let
+
+$$
+\vec{b} = \begin{pmatrix}
+0.254 \\
+0.127
+\end{pmatrix}
+$$
 -   Then $\vec{x} =(1,-1)$.
 -   Consider two approximate solutions $\vec{x}_{1,2}$
 
