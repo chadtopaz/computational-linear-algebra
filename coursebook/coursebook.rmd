@@ -299,7 +299,7 @@ We begin considering the solution of systems of linear equations, $\mat{A} \vec{
 
 ## Linear Systems
 
-For concreteness let's work in three dimensions and let's consider the system
+For concreteness, let's work in three dimensions and let's consider the system
 
 $$ \begin{pmatrix}
 2 & 4 & -2\\
@@ -352,14 +352,15 @@ This form suggests thinking of the linear combination of three basis vectors nec
 
 Let's consider an $n \times n$ matrix $\mat{A}$.
 
-1\. **Invertible** means that the inverse $\mat{A}^{-1}$ exists. This matrix satisfies $\mat{A}\,\mat{A}^{-1} = \mat{I}$, where $\mat{I}$ is the $n \times n$ identity matrix.
+1\. **Invertible** means that the inverse $\mat{A}^{-1}$ exists. This matrix satisfies $\mat{A} \mat{A}^{-1} = \mat{I}$, where $\mat{I}$ is the $n \times n$ identity matrix.
 
 2\. The notation $\det$ means **determinant**. Think of it as a scaling factor for the transformation defined by a matrix. That is, multiplication by $\mat{A}$ can cause a region to contract ($|\det \mat{A}| < 1$) or expand ($|\det \mat{A}| > 1$) and/or reflect ($\det \mat{A} < 0$). As an example, let
 
 $$
 \mat{A} =
 \begin{pmatrix}
-a & b\\c & d
+a & b\\
+c & d
 \end{pmatrix}.
 $$
 

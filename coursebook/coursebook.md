@@ -609,7 +609,7 @@ related to matrix and vector norms.
 
 ## Linear Systems
 
-For concreteness let’s work in three dimensions and let’s consider the
+For concreteness, let’s work in three dimensions and let’s consider the
 system
 
 $$ \begin{pmatrix}
@@ -669,7 +669,7 @@ vectors necessary to reach a particular target vector. There could be 0,
 Let’s consider an $n \times n$ matrix $\mathbf{A}$.
 
 1\. **Invertible** means that the inverse $\mathbf{A}^{-1}$ exists. This
-matrix satisfies $\mathbf{A}\,\mathbf{A}^{-1} = \mathbf{I}$, where
+matrix satisfies $\mathbf{A} \mathbf{A}^{-1} = \mathbf{I}$, where
 $\mathbf{I}$ is the $n \times n$ identity matrix.
 
 2\. The notation $\det$ means **determinant**. Think of it as a scaling
@@ -681,7 +681,8 @@ reflect ($\det \mathbf{A} < 0$). As an example, let
 $$
 \mathbf{A} =
 \begin{pmatrix}
-a & b\\c & d
+a & b\\
+c & d
 \end{pmatrix}.
 $$
 
