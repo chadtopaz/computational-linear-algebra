@@ -219,6 +219,36 @@ For our example above, in the mantissa $f$ we have $11011$ followed by 23 copies
 
 The relative error in the storage of this number is $$\frac{|59\ 1/3 -  59.333333333333335702|}{59\ 1/3} \approx -4 \times 10^{-17}.$$ An important number is *machine epsilon*, denoted $\epsilon_{mach}$, which is the distance from the number 1 to the next smallest number that can be represented exactly in floating point form. This distance is $\epsilon_{mach}=2^{-52}\approx 2.2 \times 10^{-16}$.
 
+It's really important to understand and to be able to implement the ideas above manually, using your understanding of how to go back and forth between real numbers and floats. That said, it will also be convient to automate this process. Fortunately, there's a command that can help us called `numToBits`. For example, let's try it on the number 97.
+
+```{r}
+x <- 97
+numToBits(x)
+```
+
+This is a good start, but the output is annoying (in reverse from how we'd usually write it) and is hard to read. Let's write a little function to make more friendly.
+
+```{r}
+bitRep <- function(x) {
+  x <- numToBits(x)
+  x <- as.numeric(x)
+  x <- rev(x)
+  paste0(c(x[1], " | ", x[2:12], " | ", x[13:64]), collapse = "")
+}
+```
+
+Now we can test it
+
+```{r}
+bitRep(x)
+```
+
+It's always a good idea to check our function. Using the values of the sign s, exponent c, and mantissa f represented above, we can convert from float to base 10 as
+
+$$
+(-1)^0 \times 2^{(1 + 4 + 1024 - 1023)} \times (1 + 1/2 + 1/64) = 97.
+$$
+
 ## Machine Addition
 
 Machine addition is defined as

@@ -324,6 +324,51 @@ which is the distance from the number 1 to the next smallest number that
 can be represented exactly in floating point form. This distance is
 $\epsilon_{mach}=2^{-52}\approx 2.2 \times 10^{-16}$.
 
+It’s really important to understand and to be able to implement the
+ideas above manually, using your understanding of how to go back and
+forth between real numbers and floats. That said, it will also be
+convient to automate this process. Fortunately, there’s a command that
+can help us called `numToBits`. For example, let’s try it on the number
+97.
+
+``` r
+x <- 97
+numToBits(x)
+```
+
+    ##  [1] 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    ## [26] 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00
+    ## [51] 00 01 01 00 01 00 00 00 00 00 00 00 01 00
+
+This is a good start, but the output is annoying (in reverse from how
+we’d usually write it) and is hard to read. Let’s write a little
+function to make more friendly.
+
+``` r
+bitRep <- function(x) {
+  x <- numToBits(x)
+  x <- as.numeric(x)
+  x <- rev(x)
+  paste0(c(x[1], " | ", x[2:12], " | ", x[13:64]), collapse = "")
+}
+```
+
+Now we can test it
+
+``` r
+bitRep(x)
+```
+
+    ## [1] "0 | 10000000101 | 1000010000000000000000000000000000000000000000000000"
+
+It’s always a good idea to check our function. Using the values of the
+sign s, exponent c, and mantissa f represented above, we can convert
+from float to base 10 as
+
+$$
+(-1)^0 \times 2^{(1 + 4 + 1024 - 1023)} \times (1 + 1/2 + 1/64) = 97.
+$$
+
 ## Machine Addition
 
 Machine addition is defined as
@@ -838,8 +883,8 @@ t2 <- system.time(eliminate(A2))[3]
 t2/t1
 ```
 
-    ##       elapsed 
-    ## 5.86956521739
+    ## elapsed 
+    ##     5.4
 
 ## Forward and Backward Error
 
@@ -1385,7 +1430,7 @@ t3 <- system.time(
 as.numeric(t1/(t2 + t3))
 ```
 
-    ## [1] 6.66666666667
+    ## [1] 9.5
 
 ## Fixed Point Iteration
 
@@ -1489,7 +1534,7 @@ t1/t2
 ```
 
     ##       elapsed 
-    ## 2.47297297297
+    ## 2.44444444444
 
 ## Convergence of Jacobi’s Method
 
@@ -1557,7 +1602,7 @@ information that we don’t have.
 plot(x,y)
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-22-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-25-1.png)<!-- -->
 
 We might try to use polynomials to describe the data, and then glean
 information from the polynomial. Polynomials are convenient for several
@@ -1602,7 +1647,7 @@ points(xdata, f(xdata), cex = 2)
 lines(x, p(x), col = "green", lwd = 2)
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-23-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-26-1.png)<!-- -->
 
 A few important points to know about the interpolating polynomial
 through $n$ points with distinct $x$ coordinates include:
@@ -1842,7 +1887,7 @@ for (i in 1:numTrials){
 T1 <- toc()
 ```
 
-    ## 1.984 sec elapsed
+    ## 1.965 sec elapsed
 
 ``` r
 t1 <- T1$toc - T1$tic
@@ -1854,14 +1899,14 @@ for (i in 1:numTrials){
 T2 <- toc()
 ```
 
-    ## 0.029 sec elapsed
+    ## 0.028 sec elapsed
 
 ``` r
 t2 <- T2$toc - T2$tic
 as.numeric(t2/t1)
 ```
 
-    ## [1] 0.0146169354839
+    ## [1] 0.0142493638677
 
 ## Data Compression
 
@@ -1897,7 +1942,7 @@ interperror <- function(n, plotflag = FALSE){
 interperror(5, plotflag = TRUE)
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-28-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-31-1.png)<!-- -->
 
     ## [1] 0.180757796555
 
@@ -1925,7 +1970,7 @@ orderofmag <- round(log10(errorvec))
 plot(nvec, orderofmag)
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-29-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-32-1.png)<!-- -->
 
 This means that we can represent the sine function with $10^{-13}$ error
 using only 20 pieces of information, instead of storing a huge lookup
@@ -1965,7 +2010,7 @@ for (n in seq(from = 0,to = 14,by = 2)){
 }
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-30-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-33-1.png)<!-- -->
 
 So more terms are better, right? Let’s try again with the function
 $f(x) = 1/x$ around the point $x_0=1$. The $n$th degree Taylor
@@ -1990,7 +2035,7 @@ for (n in seq(from = 0, to = 40, by = 4)){
 }
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-31-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-34-1.png)<!-- -->
 
 Oh! I guess that more isn’t always better.
 
@@ -2013,13 +2058,13 @@ for (n in nvec){
 }
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-32-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-35-1.png)<!-- -->
 
 ``` r
 plot(nvec, log10(error), xlab = "n", ylab = "log10 of error")
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-32-2.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-35-2.png)<!-- -->
 
 Looks good! Let’s try again with a different function,
 $f(x) = (1+x^2)^{-1}$ on $[-1,1]$.
@@ -2039,13 +2084,13 @@ for (n in nvec){
 }
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-33-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-36-1.png)<!-- -->
 
 ``` r
 plot(nvec, log10(error), xlab = "n", ylab = "log10 of error")
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-33-2.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-36-2.png)<!-- -->
 
 Not good! The error goes up as we take more and more points.
 Equally-spaced nodes are very natural in many applications (scientific
@@ -2172,7 +2217,7 @@ maxderiv <- c(0.398942,0.241971,0.178032, 0.550588,1.19683,2.30711,4.24061,14.17
 plot(n, log(maxderiv))
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-34-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-37-1.png)<!-- -->
 
 Given this, using equally-spaced nodes seems reckless, but we can try it
 anyway, say, on $[-10,10]$ with 30 data points to start with.
@@ -2190,7 +2235,7 @@ ydataequal <- lagrangeInterp(xdataequal, f(xdataequal), x)
 lines(x, ydataequal, col = "red", lwd = 2)
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-35-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-38-1.png)<!-- -->
 
 Ok, that approach is not going to work! Let’s try the approach of a
 lookup table with linear interpolation. Let’s suppose we wish to achieve
@@ -2256,7 +2301,7 @@ plot(x, y, ylim = c(-2.5,5.5))
 lines(xplot, linearspline(xplot), col = "red", lwd = 2)
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-38-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-41-1.png)<!-- -->
 
 Your eyeball might be telling you that this is a very jagged graph. Most
 things in nature and society are not this jagged, so it might feel
@@ -2270,7 +2315,7 @@ lines(xplot, linearspline(xplot), col = "red", lwd = 2)
 lines(xplot, cubicspline(xplot), col = "green", lwd = 2)
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-39-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-42-1.png)<!-- -->
 
 This is smoother. What smoothness means here is continuity of
 derivatives from one spline to the next. Using cubic rather than linear
@@ -2362,7 +2407,7 @@ cubicspline <- splinefun(x, y, method = "natural")
 lines(xx, cubicspline(xx), col = "blue", lwd = 3)
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-40-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-43-1.png)<!-- -->
 
 Now let’s work with some real data, let’s say, Tesla stock price for the
 last 100 days (we won’t actually get 100 days because of days when the
@@ -2406,7 +2451,7 @@ plot(day[1:max(sampledday)], interpolatedprice, col = "red", type = "l", ylim = 
 points(day, price, col = "blue")
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-41-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-44-1.png)<!-- -->
 
 ``` r
 # Fit splines
@@ -2415,7 +2460,7 @@ plot(day, TSLAspline(day), col = "blue", type = "l", ylim = c(ymin,ymax))
 points(day, price, col = "blue")
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-41-2.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-44-2.png)<!-- -->
 
 # Least Squares I
 
@@ -2454,7 +2499,7 @@ s <- c(105,117,141,152)
 plot(a, s, xlab = "advertising", ylab = "sales")
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-42-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-45-1.png)<!-- -->
 
 The company would like to model this data so they can predict sales for
 other levels of advertising. The data looks roughly linear, and we have
@@ -2492,12 +2537,12 @@ best thing: let’s find the value of $x$ such that $x\mathbf{A}$ is as
 close as possible to $\mathbf{b}$. We can draw a picture to solve this
 problem.
 
-![](coursebook_files/figure-gfm/unnamed-chunk-43-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-46-1.png)<!-- -->
 
 Where should we stop on the dotted line? When we are perpendicular to
 the end of $\mathbf{b}$. This results in the following picture.
 
-![](coursebook_files/figure-gfm/unnamed-chunk-44-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-47-1.png)<!-- -->
 
 From this picture, two relationships arise:
 
@@ -2722,7 +2767,7 @@ xx <- seq(from = 0, to = 6, length = 200)
 lines(xx, horner(rev(x), xx)$y) # Note we need to reverse order of coefficients
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-46-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-49-1.png)<!-- -->
 
 Symbolically, we calculated the least squares solution
 $\mathbf{x} = \left(\mathbf{A}^T \mathbf{A}\right)^{-1}\mathbf{A}^T \mathbf{b}$
@@ -2782,7 +2827,7 @@ xx <- seq(from = 0, to = 3, length = 200)
 lines(xx, horner(c, xx)$y)
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-47-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-50-1.png)<!-- -->
 
 ``` r
 print(r)
@@ -2826,7 +2871,7 @@ y <- 3*x + 0.4*(2*runif(100) - 1)
 plot(x, y)
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-48-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-51-1.png)<!-- -->
 
 If we decided to represent this data with a line, we’d go down from
 having 100 pieces of information (the original data points) to merely 2
@@ -3905,7 +3950,7 @@ error <- abs(fib(n) - fibapprox(n))
 plot(n, log10(error))
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-65-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-68-1.png)<!-- -->
 
 It’s important to remember from linear algebra that not every matrix can
 be diagonalized. For a matrix to be diagonalizable, you need for the
