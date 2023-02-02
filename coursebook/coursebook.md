@@ -754,7 +754,7 @@ the columns of $\mathbf{A}$. If the rank of $\mathbf{A}$ is $n$, then
 the column vectors are linearly independent so they span $\mathbb{R}^n$,
 so the image of $\mathbf{A}$ is $\mathbb{R}^n$.
 
-9\. $\mathbf{A}\,\mathbf{x}=\mathbf{b}$ has a unique solution for all
+9\. $\mathbf{A}\mathbf{x}=\mathbf{b}$ has a unique solution for all
 $\mathbf{b} \iff \mathbf{A}$ is invertible, since you can left multiply
 by $\mathbf{A}^{-1}$.
 
@@ -776,8 +776,8 @@ set:
 - multiply a row by a nonzero scalar
 - Add one row to a scalar multiple of another
 
-To solve a linear system $\mathbf{A}\,\mathbf{x}=\mathbf{b}$, write it
-as an augmented matrix, reduce it to row echelon form, and then use back
+To solve a linear system $\mathbf{A}\mathbf{x}=\mathbf{b}$, write it as
+an augmented matrix, reduce it to row echelon form, and then use back
 substitution to solve.
 
 For example, take
@@ -788,9 +788,10 @@ $$
 1 & 3 & 1\\
 1 & 1 & -1 \\
 3 & 11 & 5
-\end{pmatrix}, \quad
-\mathbf{b} = \begin{pmatrix}
-9 \\ 1 \\ 35
+\end{pmatrix}, \quad \mathbf{b} = \begin{pmatrix}
+9 \\
+1 \\
+35
 \end{pmatrix}.
 $$
 
