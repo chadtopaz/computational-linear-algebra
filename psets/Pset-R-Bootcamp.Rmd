@@ -72,6 +72,12 @@ while (illegal < 1000000) {
 }
 ```
 
+In your response, before you provide your code and the final answer, write out your algorithm in words. I want to read something like "Here's the procedure we'll follow. First, we initialize 10,000 accounts each with a random amount of money between \$100 and \$10,000, making sure to round them so that there are no fractional cents. Next, we initialize the illegal account to have zero dollars, and we set a day counter to begin at 0. Then, we perform the following procedure until the illegal account meets or exceeds the \$1,000,000 threshold:
+
+   - Apply interest to the illegal account
+   - Apply interest to the main accounts
+   - Etc. etc.
+
 ### Problem 1 Solution
 
 Your solution goes here.
