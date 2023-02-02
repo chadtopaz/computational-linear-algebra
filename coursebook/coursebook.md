@@ -111,8 +111,8 @@ $\mathbf{y}$:
     number of elements, and the result is a scalar.
 
 3.  Outer product. To compute, calculate
-    $\mathbf{x} \otimes \mathbf{y} \equiv \mathbf{x}\,\mathbf{y}^T$.
-    Note that $\mathbf{x}$ and $\mathbf{y}$ do not need to have the same
+    $\mathbf{x} \otimes \mathbf{y} \equiv \mathbf{x} \mathbf{y}^T$. Note
+    that $\mathbf{x}$ and $\mathbf{y}$ do not need to have the same
     number of elements, and the result is a matrix. If $\mathbf{x}$ is
     $m \times 1$ and $\mathbf{y}$ is $n \times 1$ then
     $\mathbf{x} \otimes \mathbf{y}$ is $m \times n$.

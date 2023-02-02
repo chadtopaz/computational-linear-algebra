@@ -98,7 +98,7 @@ There are several different ways to "multiply" vectors $\vec{x}$ and $\vec{y}$:
 
 2.  Dot product, also known as the inner product. To compute, calculate $\vec{x} \cdot \vec{y} \equiv \vec{x}^T \vec{y}$ where the superscript $T$ indicates transpose. Dot product is related to the angle $\theta$ between the two vectors as $\vec{x} \cdot \vec{y} = |\vec{x}||\vec{y}| \cos \theta$. Rearranging this as $\vec{x} \cdot \vec{y}/|\vec{y}| = |\vec{x}| \cos \theta$ suggests the intuition of the dot product. It calculates a *projection* of one vector onto the other, or restated, it tells us how much of one vector is pointing in the direction of the other vector. Note that $\vec{x}$ and $\vec{y}$ must have the same number of elements, and the result is a scalar.
 
-3.  Outer product. To compute, calculate $\vec{x} \otimes \vec{y} \equiv \vec{x}\,\vec{y}^T$. Note that $\vec{x}$ and $\vec{y}$ do not need to have the same number of elements, and the result is a matrix. If $\vec{x}$ is $m \times 1$ and $\vec{y}$ is $n \times 1$ then $\vec{x} \otimes \vec{y}$ is $m \times n$.
+3.  Outer product. To compute, calculate $\vec{x} \otimes \vec{y} \equiv \vec{x} \vec{y}^T$. Note that $\vec{x}$ and $\vec{y}$ do not need to have the same number of elements, and the result is a matrix. If $\vec{x}$ is $m \times 1$ and $\vec{y}$ is $n \times 1$ then $\vec{x} \otimes \vec{y}$ is $m \times n$.
 
 4.  Cross product. We are not going to worry about this one for now.
 
