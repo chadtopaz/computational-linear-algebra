@@ -81,7 +81,7 @@ describe the conditioning of the matrix as $n$ increases?
 
 c\. Now choose $n=30$. Generate the matrix $\mathbf{A}$ and let
 $\mathbf{b_1}$ be an $n \times 1$ vector of random numbers chosen
-uniformly from 0 to 1. Solve $\mathbf{A}\,\mathbf{x}_1 = \mathbf{b}_1$
+uniformly from 0 to 1. Solve $\mathbf{A}\mathbf{x}_1 = \mathbf{b}_1$
 using any appropriate method that you want (including R’s built-in
 capabilities). Now let
 $\mathbf{b}_2 = \mathbf{b}_1 + (0,\ldots,0,0.001)^T$, that is, you leave

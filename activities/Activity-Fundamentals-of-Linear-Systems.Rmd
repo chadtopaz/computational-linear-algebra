@@ -64,7 +64,19 @@ Your solution goes here.
 Solve (by hand) the system below.
 
 $$
-\begin{pmatrix}1 & 2 & 0 \\ 3 & 2 & 4 \\ -2 & 1 & -2 \end{pmatrix} \begin{pmatrix} x \\ y \\ z \end{pmatrix} = \begin{pmatrix} 1 \\ 7\\ -1 \end{pmatrix}
+\begin{pmatrix}
+1 & 2 & 0 \\
+3 & 2 & 4 \\
+-2 & 1 & -2
+\end{pmatrix} \begin{pmatrix}
+x \\
+y \\
+z
+\end{pmatrix} = \begin{pmatrix}
+1 \\
+7\\
+-1
+\end{pmatrix}
 $$
 
 ### Problem 3 Solution
