@@ -39,7 +39,7 @@ library("pracma")
 A real $n \times n$ matrix $\mat{Q}$ is *orthonormal* if 
 
 $$
-\mat{Q}^{T}\,\mat{Q}=\mat{Q}\,\mat{Q}^T=\mat{I};~i.e., \mat{Q}^{-1}=\mat{Q}^T.
+\mat{Q}^{T} \mat{Q}=\mat{Q}\ mat{Q}^T=\mat{I};~i.e., \mat{Q}^{-1}=\mat{Q}^T.
 $$
 
 Note: sometimes you will see these matrices just called *orthogonal matrices*. 
@@ -55,7 +55,13 @@ Your solution goes here.
 Consider the $n \times n$ square matrix
 
 $$
-A=\begin{pmatrix} 1 & -1 & -1 & -1 & \ldots & -1 \\ 0 & 1 & -1 & -1 & \ldots & -1 \\ 0 & 0 & 1 & -1 & \ldots & -1 \\ \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\ 0 & 0 & 0 & 0 & 0 & 1 \end{pmatrix}.
+A=\begin{pmatrix}
+1 & -1 & -1 & -1 & \ldots & -1 \\
+0 & 1 & -1 & -1 & \ldots & -1 \\
+0 & 0 & 1 & -1 & \ldots & -1 \\
+\vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
+0 & 0 & 0 & 0 & 0 & 1 
+\end{pmatrix}.
 $$
 
 a\. Write a function that takes a value of $n$ as input and outputs the matrix A above. Challenge yourself to be efficient in your coding when you create the matrix. Looking at patterns and Googling how to create them helps. I managed to create the matrix with no loops, in two lines of code. Hint: the commands `upper.tri` and `diag` will be helpful.
@@ -80,7 +86,7 @@ Note: This problem is taken from Linear Algebra and its Applications, by Lay et 
 
 An important concern in the study of heat transfer is to determine the steady-state temperature distribution of a thin plate when the temperature around the boundary is known. Assume the plate shown in the figure above represents a cross section of a metal beam, with negligible heat flow in the direction perpendicular to the plate. Let the variables $x_1, x_2, \ldots, x_8$ denote the temperatures at nodes 1 through 8 in the picture. In steady state, the temperature at a node is approximately equal to the average of the four nearest nodes (to the left, above, right, below).
 
-a\. The solution to the approximate steady-state heat flow problem for this plate can be written as a system of linear equations $\mat{A}\,\vec{x}=\vec{b}$, where $x=[x_1, x_2, \ldots, x_8]$ is the vector of temperatures at nodes 1 through 8. Find the $8 \times 8$ matrix $A$ and the vector $b$.
+a\. The solution to the approximate steady-state heat flow problem for this plate can be written as a system of linear equations $\mat{A} \vec{x}=\vec{b}$, where $x=(x_1, x_2, \ldots, x_8)^T$ is the vector of temperatures at nodes 1 through 8. Find the $8 \times 8$ matrix $A$ and the vector $b$.
 
 b\. Solve the system any way you want (using R) to find the unknown temperatures.
 

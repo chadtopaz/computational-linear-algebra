@@ -39,7 +39,7 @@ library("pracma")
 A real $n \times n$ matrix $\mathbf{Q}$ is *orthonormal* if
 
 $$
-\mathbf{Q}^{T}\,\mathbf{Q}=\mathbf{Q}\,\mathbf{Q}^T=\mathbf{I};~i.e., \mathbf{Q}^{-1}=\mathbf{Q}^T.
+\mathbf{Q}^{T} \mathbf{Q}=\mathbf{Q}\ mat{Q}^T=\mathbf{I};~i.e., \mathbf{Q}^{-1}=\mathbf{Q}^T.
 $$
 
 Note: sometimes you will see these matrices just called *orthogonal
@@ -58,7 +58,13 @@ Your solution goes here.
 Consider the $n \times n$ square matrix
 
 $$
-A=\begin{pmatrix} 1 & -1 & -1 & -1 & \ldots & -1 \\ 0 & 1 & -1 & -1 & \ldots & -1 \\ 0 & 0 & 1 & -1 & \ldots & -1 \\ \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\ 0 & 0 & 0 & 0 & 0 & 1 \end{pmatrix}.
+A=\begin{pmatrix}
+1 & -1 & -1 & -1 & \ldots & -1 \\
+0 & 1 & -1 & -1 & \ldots & -1 \\
+0 & 0 & 1 & -1 & \ldots & -1 \\
+\vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
+0 & 0 & 0 & 0 & 0 & 1 
+\end{pmatrix}.
 $$
 
 a\. Write a function that takes a value of $n$ as input and outputs the
@@ -114,7 +120,7 @@ right, below).
 
 a\. The solution to the approximate steady-state heat flow problem for
 this plate can be written as a system of linear equations
-$\mathbf{A}\,\mathbf{x}=\mathbf{b}$, where $x=[x_1, x_2, \ldots, x_8]$
+$\mathbf{A} \mathbf{x}=\mathbf{b}$, where $x=(x_1, x_2, \ldots, x_8)^T$
 is the vector of temperatures at nodes 1 through 8. Find the
 $8 \times 8$ matrix $A$ and the vector $b$.
 
