@@ -86,7 +86,7 @@ using any appropriate method that you want (including R’s built-in
 capabilities). Now let
 $\mathbf{b}_2 = \mathbf{b}_1 + (0,\ldots,0,0.001)^T$, that is, you leave
 the first 29 elements the same as in $\mathbf{b}_1$ but add 0.001 to the
-last element. Solve $\mathbf{A}\,\mathbf{x}_2 = \mathbf{b}_2$. Use the
+last element. Solve $\mathbf{A} \mathbf{x}_2 = \mathbf{b}_2$. Use the
 command `Norm` to find the (approximate) 2-norm of
 $\mathbf{x_1}-\mathbf{x_2}$ and discuss vis-a-vis your result from part
 b. Also, to help build your intuition, find the magnitude of the
