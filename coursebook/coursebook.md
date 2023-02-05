@@ -848,18 +848,34 @@ x_3
 \end{pmatrix}.
 $$
 
-By the way, we can go ahead and use the `echelon` command from the
-`matlib` library to perform the elimination.
+Let’s go ahead and perform the elimination to echelon form. Here is a
+function called `eliminate` that will do it for you.
+
+``` r
+eliminate <- function(A, tol = 10^-8) {
+  n <- nrow(A)
+  for ( j in 1:(n-1) ) {
+    pivot <- A[j,j]
+    if (abs(pivot) < tol) stop('zero pivot encountered')
+    for ( i in (j+1):n ) {
+      A[i,] <- A[i,] - A[i,j]/pivot * A[j,]
+    }
+  }
+  return(A)
+}
+```
+
+Now we can perform the elimination.
 
 ``` r
 A <- matrix(c(1,3,1,9,1,1,-1,1,3,11,5,35), nrow = 3, byrow = TRUE)
-echelon(A, reduced = FALSE)
+eliminate(A)
 ```
 
-    ##      [,1]     [,2]     [,3]     [,4]
-    ## [1,]    1 3.666667 1.666667 11.66667
-    ## [2,]    0 1.000000 1.000000  4.00000
-    ## [3,]    0 0.000000 0.000000  0.00000
+    ##      [,1] [,2] [,3] [,4]
+    ## [1,]    1    3    1    9
+    ## [2,]    0   -2   -2   -8
+    ## [3,]    0    0    0    0
 
 ## Operation Counts and Complexity
 
@@ -892,29 +908,35 @@ $t$ is time per operation. Solving, $t = 1.2 \times 10^{-8}$. Back
 substitution takes $n^2=500^2$ operations, so the total time is
 $n^2t=500^2\times 1.2 \times 10^{-8}=0.003$ seconds.
 
-Let’s test scaling of the reduction step for a random matrix.
+Let’s test scaling of the reduction step for a random matrix. In the
+code block below, the `invisible` function suppresses the output from
+being printed on the screen. Why do we use this command? Because
+printing to the screen takes time. We want to measure the time
+associated with the elimination itself, and as little else as possible.
+So, between the `tic` and `toc` commands, we try to only include the
+computational steps we are interested in timing and nothing else.
 
 ``` r
 set.seed(123)
-n1 <- 50
+n1 <- 750
 A1 <- matrix(runif(n1^2), ncol = n1)
 tic()
-invisible(echelon(A1, reduced = FALSE))
+invisible(eliminate(A1))
 T1 <- toc()
 ```
 
-    ## 0.078 sec elapsed
+    ## 4.883 sec elapsed
 
 ``` r
 t1 <- T1$toc - T1$tic
 n2 <- 2*n1
 A2 <- matrix(runif(n2^2), ncol = n2)
 tic()
-invisible(echelon(A2, reduced = FALSE))
+invisible(eliminate(A2))
 T2 <- toc()
 ```
 
-    ## 1.52 sec elapsed
+    ## 39.438 sec elapsed
 
 ``` r
 t2 <- T2$toc - T2$tic
@@ -922,7 +944,7 @@ t2/t1
 ```
 
     ##  elapsed 
-    ## 19.48718
+    ## 8.076592
 
 ## Forward and Backward Error
 
@@ -1137,7 +1159,7 @@ norm(A, "1")
 norm(A, "2")
 ```
 
-    ## [1] 5.72292695333
+    ## [1] 5.722927
 
 ``` r
 norm(A, "I")
@@ -1233,13 +1255,13 @@ A <- matrix(c(0.913,0.659,0.457,0.330), nrow = 2, byrow = TRUE)
 kappa(A)
 ```
 
-    ## [1] 14132.0316376
+    ## [1] 14132.03
 
 ``` r
 kappa(A, exact = TRUE)
 ```
 
-    ## [1] 12485.031416
+    ## [1] 12485.03
 
 ## Calculating the Condition Number
 
@@ -1265,13 +1287,13 @@ A <- matrix(runif(N^2), nrow = N)
 norm(A, "2") * norm(solve(A), "2")
 ```
 
-    ## [1] 47.2939732454
+    ## [1] 47.29397
 
 ``` r
 kappa(A, norm = "2", exact = TRUE)
 ```
 
-    ## [1] 47.2939732454
+    ## [1] 47.29397
 
 # Solving Linear Systems
 
@@ -1485,7 +1507,7 @@ t3 <- system.time(
 as.numeric(t1/(t2 + t3))
 ```
 
-    ## [1] 6.333333
+    ## [1] 7
 
 ## Fixed Point Iteration
 
@@ -1589,7 +1611,7 @@ t1/t2
 ```
 
     ##  elapsed 
-    ## 2.452055
+    ## 2.545455
 
 ## Convergence of Jacobi’s Method
 
@@ -1657,7 +1679,7 @@ information that we don’t have.
 plot(x,y)
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-24-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-25-1.png)<!-- -->
 
 We might try to use polynomials to describe the data, and then glean
 information from the polynomial. Polynomials are convenient for several
@@ -1702,7 +1724,7 @@ points(xdata, f(xdata), cex = 2)
 lines(x, p(x), col = "green", lwd = 2)
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-25-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-26-1.png)<!-- -->
 
 A few important points to know about the interpolating polynomial
 through $n$ points with distinct $x$ coordinates include:
@@ -1942,7 +1964,7 @@ for (i in 1:numTrials){
 T1 <- toc()
 ```
 
-    ## 2.072 sec elapsed
+    ## 2.017 sec elapsed
 
 ``` r
 t1 <- T1$toc - T1$tic
@@ -1954,14 +1976,14 @@ for (i in 1:numTrials){
 T2 <- toc()
 ```
 
-    ## 0.032 sec elapsed
+    ## 0.036 sec elapsed
 
 ``` r
 t2 <- T2$toc - T2$tic
 as.numeric(t2/t1)
 ```
 
-    ## [1] 0.01544402
+    ## [1] 0.01784829
 
 ## Data Compression
 
@@ -1997,7 +2019,7 @@ interperror <- function(n, plotflag = FALSE){
 interperror(5, plotflag = TRUE)
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-30-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-31-1.png)<!-- -->
 
     ## [1] 0.1807578
 
@@ -2025,7 +2047,7 @@ orderofmag <- round(log10(errorvec))
 plot(nvec, orderofmag)
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-31-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-32-1.png)<!-- -->
 
 This means that we can represent the sine function with $10^{-13}$ error
 using only 20 pieces of information, instead of storing a huge lookup
@@ -2065,7 +2087,7 @@ for (n in seq(from = 0,to = 14,by = 2)){
 }
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-32-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-33-1.png)<!-- -->
 
 So more terms are better, right? Let’s try again with the function
 $f(x) = 1/x$ around the point $x_0=1$. The $n$th degree Taylor
@@ -2090,7 +2112,7 @@ for (n in seq(from = 0, to = 40, by = 4)){
 }
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-33-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-34-1.png)<!-- -->
 
 Oh! I guess that more isn’t always better.
 
@@ -2113,13 +2135,13 @@ for (n in nvec){
 }
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-34-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-35-1.png)<!-- -->
 
 ``` r
 plot(nvec, log10(error), xlab = "n", ylab = "log10 of error")
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-34-2.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-35-2.png)<!-- -->
 
 Looks good! Let’s try again with a different function,
 $f(x) = (1+x^2)^{-1}$ on $[-1,1]$.
@@ -2139,13 +2161,13 @@ for (n in nvec){
 }
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-35-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-36-1.png)<!-- -->
 
 ``` r
 plot(nvec, log10(error), xlab = "n", ylab = "log10 of error")
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-35-2.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-36-2.png)<!-- -->
 
 Not good! The error goes up as we take more and more points.
 Equally-spaced nodes are very natural in many applications (scientific
@@ -2272,7 +2294,7 @@ maxderiv <- c(0.398942,0.241971,0.178032, 0.550588,1.19683,2.30711,4.24061,14.17
 plot(n, log(maxderiv))
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-36-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-37-1.png)<!-- -->
 
 Given this, using equally-spaced nodes seems reckless, but we can try it
 anyway, say, on $[-10,10]$ with 30 data points to start with.
@@ -2290,7 +2312,7 @@ ydataequal <- lagrangeInterp(xdataequal, f(xdataequal), x)
 lines(x, ydataequal, col = "red", lwd = 2)
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-37-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-38-1.png)<!-- -->
 
 Ok, that approach is not going to work! Let’s try the approach of a
 lookup table with linear interpolation. Let’s suppose we wish to achieve
@@ -2356,7 +2378,7 @@ plot(x, y, ylim = c(-2.5,5.5))
 lines(xplot, linearspline(xplot), col = "red", lwd = 2)
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-40-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-41-1.png)<!-- -->
 
 Your eyeball might be telling you that this is a very jagged graph. Most
 things in nature and society are not this jagged, so it might feel
@@ -2370,7 +2392,7 @@ lines(xplot, linearspline(xplot), col = "red", lwd = 2)
 lines(xplot, cubicspline(xplot), col = "green", lwd = 2)
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-41-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-42-1.png)<!-- -->
 
 This is smoother. What smoothness means here is continuity of
 derivatives from one spline to the next. Using cubic rather than linear
@@ -2462,7 +2484,7 @@ cubicspline <- splinefun(x, y, method = "natural")
 lines(xx, cubicspline(xx), col = "blue", lwd = 3)
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-42-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-43-1.png)<!-- -->
 
 Now let’s work with some real data, let’s say, Tesla stock price for the
 last 100 days (we won’t actually get 100 days because of days when the
@@ -2506,7 +2528,7 @@ plot(day[1:max(sampledday)], interpolatedprice, col = "red", type = "l", ylim = 
 points(day, price, col = "blue")
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-43-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-44-1.png)<!-- -->
 
 ``` r
 # Fit splines
@@ -2515,7 +2537,7 @@ plot(day, TSLAspline(day), col = "blue", type = "l", ylim = c(ymin,ymax))
 points(day, price, col = "blue")
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-43-2.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-44-2.png)<!-- -->
 
 # Least Squares I
 
@@ -2554,7 +2576,7 @@ s <- c(105,117,141,152)
 plot(a, s, xlab = "advertising", ylab = "sales")
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-44-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-45-1.png)<!-- -->
 
 The company would like to model this data so they can predict sales for
 other levels of advertising. The data looks roughly linear, and we have
@@ -2592,12 +2614,12 @@ best thing: let’s find the value of $x$ such that $x\mathbf{A}$ is as
 close as possible to $\mathbf{b}$. We can draw a picture to solve this
 problem.
 
-![](coursebook_files/figure-gfm/unnamed-chunk-45-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-46-1.png)<!-- -->
 
 Where should we stop on the dotted line? When we are perpendicular to
 the end of $\mathbf{b}$. This results in the following picture.
 
-![](coursebook_files/figure-gfm/unnamed-chunk-46-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-47-1.png)<!-- -->
 
 From this picture, two relationships arise:
 
@@ -2822,7 +2844,7 @@ xx <- seq(from = 0, to = 6, length = 200)
 lines(xx, horner(rev(x), xx)$y) 
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-48-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-49-1.png)<!-- -->
 
 ``` r
 # Note we need to reverse order of coefficients
@@ -2886,7 +2908,7 @@ xx <- seq(from = 0, to = 3, length = 200)
 lines(xx, horner(c, xx)$y)
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-49-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-50-1.png)<!-- -->
 
 ``` r
 print(r)
@@ -2930,7 +2952,7 @@ y <- 3*x + 0.4*(2*runif(100) - 1)
 plot(x, y)
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-50-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-51-1.png)<!-- -->
 
 If we decided to represent this data with a line, we’d go down from
 having 100 pieces of information (the original data points) to merely 2
@@ -4009,7 +4031,7 @@ error <- abs(fib(n) - fibapprox(n))
 plot(n, log10(error))
 ```
 
-![](coursebook_files/figure-gfm/unnamed-chunk-67-1.png)<!-- -->
+![](coursebook_files/figure-gfm/unnamed-chunk-68-1.png)<!-- -->
 
 It’s important to remember from linear algebra that not every matrix can
 be diagonalized. For a matrix to be diagonalizable, you need for the

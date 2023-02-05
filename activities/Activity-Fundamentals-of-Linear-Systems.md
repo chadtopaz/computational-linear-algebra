@@ -112,8 +112,9 @@ eliminate <- function(A, tol = 10^-8) {
 Demonstrate $\mathcal{O}(n^3)$ complexity by doing the following. Run
 the `eliminate` command on an $n \times n$ random matrix (generated
 using the `runif` command) for each
-`n <- seq(from = 300, to = 1000, by = 50)`, saving the run time for each
-value of $n$. To save the run time, you can use something like
+`n <- round(seq(from = 700, to = 1000, length = 10))`, saving the run
+time for each value of $n$. To save the run time, you can use something
+like
 
 ``` r
 tic()
