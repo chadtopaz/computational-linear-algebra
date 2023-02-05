@@ -3,11 +3,28 @@ title: "Pset - Fundamentals of Linear Systems"
 output:
   rmarkdown::html_document:
   header-includes:
-   - \usepackage{amsmath}
+    - \usepackage{amsmath}
+    - \usepackage{bm}
+    - \renewcommand{\vec}[1]{\mathbf{#1}}
+    - \renewcommand{\mat}[1]{\mathbf{#1}}
+    - \newcommand{\exp}[1]{\mathrm{e}^{#1}}
+    - \DeclareMathOperator*{\argmin}{arg\,min}
+    - \DeclareMathOperator*{\float}{fl}
 ---
 
-\renewcommand{\vec}[1]{\mathbf{#1}}
-\renewcommand{\mat}[1]{\mathbf{#1}}
+***
+
+When you begin work during class, work with your assigned partner. Please have only one electronic device open and work on it jointly. When writing up this assignment, please remember that showing all of your work and giving your reasoning are critical parts of achieving mastery. If the course staff cannot tell how you solved a problem or finds leaps in explanation or logic, the problem is not mastered. Finally, as a matter of academic integrity, please make sure that you are positioned to honestly answer yes to these questions:
+
+- Have I disclosed everyone with whom I collaborated on this work? (Even if it is only my assigned partner.)
+
+- Have I made a substantive intellectual contribution to the solution of every problem?
+
+- Am I in any way passing off as my own work any work that belongs to someone else?
+
+Whether intentional or unintentional, any potential violations of academic integrity will be referred to the Honor Committee.
+
+***
 
 Load necessary packages:
 
@@ -49,7 +66,11 @@ c\. Now choose $n=30$. Generate the matrix $\mat{A}$ and let $\vec{b_1}$ be an $
 
 ### Problem 2 Solution
 
-Your solution goes here.
+a\. Your solution goes here.
+
+b\. Your solution goes here.
+
+c\. Your solution goes here.
 
 ### Problem 3
 
@@ -65,17 +86,26 @@ b\. Solve the system any way you want (using R) to find the unknown temperatures
 
 ### Problem 3 Solution
 
-Your solution goes here.
+a\. Your solution goes here.
+
+b\. Your solution goes here.
 
 ### Problem 4
 
-The following command loads a matrix $\mat{M}$ describing the western power network of the United States. Each element is zero or one. A one in row $i$ and column $j$ means that component $i$ of the network is connected to component $j$. This type of matrix is called a network's *adjacency matrix*.
+This is a problem about network science. Networks are objects made up of **vertices** (visualized as dots) that are connected by **edges** (visualized as straight or curved lines, doesn't matter which). A network is said to be **undirected** if the edges have no direction to them (no arrows), and **directed** if the directionality of the edges matters (arrows present). As a matter of vocabulary, sometimes people interchangeably use the word "graph" for network and "vertex" for node.
+
+The following command loads a matrix $\mat{A}$ describing the western power network of the United States. This is an undirected network. Each element is zero or one. A one in row $i$ and column $j$ means that component $i$ of the network is connected by an edge to component $j$. This type of matrix is called a network's **adjacency matrix**.
+
 ```{r cache = TRUE}
-M <- as.matrix(readMM(gzcon(url("https://math.nist.gov/pub/MatrixMarket2/Harwell-Boeing/bcspwr/bcspwr10.mtx.gz")))+0)
+A <- readMM(gzcon(url("https://math.nist.gov/pub/MatrixMarket2/Harwell-Boeing/bcspwr/bcspwr10.mtx.gz"))) + 0
 ```
-These commands visualize the network for you using a package called `igraph`. It may take a little bit of time (several minutes) to run because the graph is really large!
+
+Above, the `readMM` and `gzcon` commands read the data. We add zero (which seems strange!) for the following reason. R initially interprets the matrix, which only contains ones and zeroes, as representing `TRUE` and `FALSE` logical values, which is not what we want. However, once you perform arithmetic on logical values, they get turned into their numerical values.
+
+It's worth realizing that the adjacency matrix and a picture of the network are just two ways of representing the same thing; if you know one, you know the other. Let's visualize the network using a package called `igraph`. It may take a little bit of time to run the commands below because the network is large. Note how we set the color and size of the nodes. Here, `V` means "vertices". In other words, we are accessing the vertices `V` of the network `g`, creating properties called `color` and `size` that will be used for plotting, and assigning all nodes the color grey and the size 2.
+
 ```{r cache = TRUE, out.width = '70%'}
-g <- graph_from_adjacency_matrix(M, mode="undirected")
+g <- graph_from_adjacency_matrix(A, mode="undirected")
 V(g)$color <- "grey"
 V(g)$size <- 2
 myLayout <- layout_nicely(g)
@@ -85,12 +115,19 @@ plot(simplify(g), layout=myLayout, vertex.color=V(g)$color, vertex.size=V(g)$siz
 a\. In the analysis of networks, one is often concerned with finding the most important (most central, in some sense) component. One measure of importance is called Katz centrality. The Katz centrality of the nodes, $\vec{x}$, satisfies
 
 $$
-\bigl(\mat{I} - \alpha\,\mat{M}^T)(\vec{x} + \vec{1}) = \vec{1}
+\vec{x} = \bigl((\mat{I} - \alpha \mat{A}^T)^{-1} - \mat{I} \bigr) \vec{1}
 $$
 
-where $\mat{I}$ is the identity matrix, $\alpha$ is a small number, and $\vec{1}$ is a vector of all ones. Take $\alpha = 0.05$ and solve for $\vec{x}$ using any method you want. I used R's `solve` command.) Print out the largest element of $\vec{x}$ so that I can verify your answer.
+where $\mat{I}$ is the identity matrix, $\vec{1}$ is a vector of ones, and $\alpha$ is a parameter that we get to choose. You can just take this definition as a given. The mathematical ideas behind the definition of Katz centrality are perhaps best suited for a course focusing specifically on network science but if you are interested, go investigate the topic on your own or ask me to point you to some sources.
 
-b\. Re-plot the network using your same graph layout as before, color the most important node red and plot it with size 5. This way, the most important node (at least, according to the Katz measure) will stand out on your plot.
+Write the system in the form $\mat{M}\vec{x}=\vec{b}$. Then take $\alpha = 0.05$ and solve for $\vec{x}$ using R's `solve` command. Your solution vector $\vec{x}$ will come out as a sparse matrix type but just go ahead and convert it to a "regular" vector by using `x <- as.numeric(x)`. Print out the largest element of $\vec{x}$ using the `max` command so that I can verify your answer. Make a histogram of all the Katz centralities.
+
+b\. Re-plot the network using your same network layout as before, color the most important node red and plot it with size 5. This way, the most important node (at least, according to the Katz measure) will stand out on your plot. Remember, you can set colors of nodes by assigning values to the `colors` field of the vertices `V` of the network `g`. That is to say, if I wanted to set the 10th node to be green, I could write `V(g)$color[10] <- "green"`. Similarly, we can set sizes with commands like `V(g)$size[10] <- 17`. Finally, we of course don't want the 10th node; we want whichever node turns out to have the largest Katz centrality. Here, you can use the command `which.max` to find its index. For example, if I wanted to know the index of the largest value of the vector $(1,3,5,7,6,4,2)$, I could do
+
+```{r}
+v <- c(1, 3, 5, 7, 6, 4, 2)
+which.max(v)
+```
 
 ### Problem 4 Solution
 
