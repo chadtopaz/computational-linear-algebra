@@ -39,7 +39,7 @@ library("pracma")
 A real $n \times n$ matrix $\mat{Q}$ is *orthonormal* if 
 
 $$
-\mat{Q}^{T} \mat{Q}=\mat{Q}\ mat{Q}^T=\mat{I};~i.e., \mat{Q}^{-1}=\mat{Q}^T.
+\mat{Q}^{T} \mat{Q}=\mat{Q} \mat{Q}^T=\mat{I};~i.e., \mat{Q}^{-1}=\mat{Q}^T.
 $$
 
 Note: sometimes you will see these matrices just called *orthogonal matrices*. 
