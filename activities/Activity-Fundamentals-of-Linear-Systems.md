@@ -153,7 +153,13 @@ Your solution goes here.
 Compute by hand the eigenvalues of the matrices
 
 $$
-\mathbf{A}=\begin{pmatrix} 1 & 1000 \\ 0 & 1\end{pmatrix}, \qquad \widetilde{\mathbf{A}}=\begin{pmatrix} 1 & 1000 \\ 0.001 & 1\end{pmatrix}.
+\mathbf{A}=\begin{pmatrix}
+1 & 1000 \\
+0 & 1
+\end{pmatrix}, \qquad \widetilde{\mathbf{A}}=\begin{pmatrix}
+1 & 1000 \\
+0.001 & 1
+\end{pmatrix}.
 $$
 
 Would you say that the problem of computing eigenvalues is

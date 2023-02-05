@@ -131,7 +131,13 @@ Your solution goes here.
 Compute by hand the eigenvalues of the matrices
 
 $$
-\mat{A}=\begin{pmatrix} 1 & 1000 \\ 0 & 1\end{pmatrix}, \qquad \widetilde{\mat{A}}=\begin{pmatrix} 1 & 1000 \\ 0.001 & 1\end{pmatrix}.
+\mat{A}=\begin{pmatrix}
+1 & 1000 \\
+0 & 1
+\end{pmatrix}, \qquad \widetilde{\mat{A}}=\begin{pmatrix}
+1 & 1000 \\
+0.001 & 1
+\end{pmatrix}.
 $$
 
 Would you say that the problem of computing eigenvalues is well-conditioned or ill-conditioned? Check the condition number of $\mat{A}$ using the `kappa` command with the option `exact = TRUE`. For concreteness, use the 2-norm, though there is nothing special about that choice.
