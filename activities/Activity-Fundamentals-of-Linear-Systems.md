@@ -18,8 +18,8 @@ to honestly answer yes to these questions:
 - Have I made a substantive intellectual contribution to the solution of
   every problem?
 
-- Am I in any way passing off as my own work any work that belongs to
-  someone else?
+- Am I making sure not to pass off as my own work any work that belongs
+  to someone else?
 
 Whether intentional or unintentional, any potential violations of
 academic integrity will be referred to the Honor Committee.
