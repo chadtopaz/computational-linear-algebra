@@ -130,7 +130,7 @@ lines(x, P1(x), col = "green")
 lines(x, P3(x), col = "red")
 ```
 
-We can also calculate a bound on the error if we use the fourth degree polynomial to approximate $\sin(0.1)$. Note $\sin$ is at most one in magnitude, so the error term is at most $(0.1)^5/120\approx 8.333 \times 10^{-8}$. The actual error achieved is
+We can also calculate a bound on the error if we use the fourth degree polynomial to approximate $\sin(0.1)$. Note $\cos$ is at most one in magnitude, so the error term is at most $(0.1)^5/120\approx 8.333 \times 10^{-8}$. The actual error achieved is
 
 ```{r cache = TRUE}
 abs(sin(0.1) - P3(0.1))
