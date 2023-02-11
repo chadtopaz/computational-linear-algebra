@@ -29,7 +29,7 @@ academic integrity will be referred to the Honor Committee.
 Load necessary packages:
 
 ``` r
-library(tictoc)
+library(pracma)
 ```
 
 ### Problem 1
@@ -131,8 +131,7 @@ like
 ``` r
 tic()
 2+2 # Just as an example
-T1 <- toc()
-t1 <- T1$toc - T1$tic
+t1 <- toc(echo = FALSE)
 ```
 
 Note: the computations will not be instantaneous, and you may have to

@@ -29,7 +29,7 @@ Whether intentional or unintentional, any potential violations of academic integ
 Load necessary packages:
 
 ```{r}
-library(tictoc)
+library(pracma)
 ```
 
 ### Problem 1
@@ -124,8 +124,7 @@ Demonstrate $\mathcal{O}(n^3)$ complexity by doing the following. Run the `elimi
 ```{r eval = FALSE}
 tic()
 2+2 # Just as an example
-T1 <- toc()
-t1 <- T1$toc - T1$tic
+t1 <- toc(echo = FALSE)
 ```
 
 Note: the computations will not be instantaneous, and you may have to wait several minutes for them to finish. I urge you to use the `cache = TRUE` option in your code block, which will prevent R from re-running the block each time you knit, so long as the block hasn't changed. Instead, R will execute the code on the first knit, but it will save the answer and just re-use that answer the next time the code is knit. You should keep this option in mind as a possibility for all future coding you do in R markdown.

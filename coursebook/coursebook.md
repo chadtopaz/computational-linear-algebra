@@ -1620,7 +1620,7 @@ only if the eigenvalues of $-\mathbf{D}^{-1}\mathbf{R}$ are all less
 than one in magnitude. If this criterion is met, then the closer to one
 the eigenvalues are in magnitude, the slower convergence will be. This
 takes about half a page to prove and is a worthwhile exercise to
-understand, so feel free to ask me for the proof.
+understand, especially if you are interested in theory.
 
 However, calculating the eigenvalues of that matrix could be really hard
 and costly! There’s a sufficient condition for convergence that is much
@@ -1635,8 +1635,8 @@ $$
 
 There are other iterative solution methods for linear systems that all
 are inspired by Jacobi’s method. Some of these include Gauss-Seidel
-iteration and Successive Over-Relaxation. DYou are welcome to ask me
-about these.
+iteration and Successive Over-Relaxation. These provide refinement of
+the basic ideas used in Jacobi’s method.
 
 # Interpolation
 

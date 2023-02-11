@@ -20,7 +20,7 @@ When you begin work during class, work with your assigned partner. Please have o
 
 - Have I made a substantive intellectual contribution to the solution of every problem?
 
-- Am I in any way passing off as my own work any work that belongs to someone else?
+- Am I making sure not to pass off as my own work any work that belongs to someone else?
 
 Whether intentional or unintentional, any potential violations of academic integrity will be referred to the Honor Committee.
 
@@ -29,7 +29,7 @@ Whether intentional or unintentional, any potential violations of academic integ
 Load necessary packages.
 
 ```{r message = FALSE}
-library(tictoc)
+library(pracma)
 ```
 
 ### Problem 1
@@ -102,7 +102,7 @@ c\. Your solution goes here.
 
 ### Problem 3
 
-Consider the polynomial $f(x) = x^5 + x^4 - 2x^3 + 4x^2 - 8x + 5$. For a vector of 5 million equally spaced values going from x = -100 to x = 100, evaluate the polynomial four different ways, time each one using commands from the `tictoc` package, and compare. You should make your vector of x values using the `seq` command.
+Consider the polynomial $f(x) = x^5 + x^4 - 2x^3 + 4x^2 - 8x + 5$. For a vector of 5 million equally spaced values going from x = -100 to x = 100, evaluate the polynomial four different ways, time each one, and compare. You should make your vector of x values using the `seq` command.
 
 * Regular polynomial evaluation using a loop to iterate over each value in the vector.
 * Regular polynomial evaluation using the entire vector at once.
