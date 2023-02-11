@@ -55,7 +55,8 @@ $2x^4+3x^3-3x^2+5x-1$:
 
   - 4 multiplications, 4 additions
 
-We can test, using commands from the `tictoc` library.
+We can test, using the `tic` and `toc` commands from the `pracma`
+library.
 
 ``` r
 xvec <- runif(10^6)
@@ -63,29 +64,16 @@ tic()
   for (x in xvec){
     2*x^4 + 3*x^3 - 3*x^2 + 5*x - 1
   }
-T1 <- toc()
-```
-
-    ## 0.104 sec elapsed
-
-``` r
+t1 <- toc(echo = FALSE)
 tic()
 for (x in xvec){
     -1 + x*(5 + x*(-3 + x*(3 + 2*x)))
 }
-T2 <- toc()
+t2 <- toc(echo = FALSE)
+as.numeric(t1/t2)
 ```
 
-    ## 0.046 sec elapsed
-
-``` r
-t1 <- T1$toc - T1$tic
-t2 <- T2$toc - T2$tic
-t1/t2
-```
-
-    ## elapsed 
-    ## 2.26087
+    ## [1] 2.363636
 
 ## Inner and Outer Products
 
@@ -922,29 +910,17 @@ n1 <- 750
 A1 <- matrix(runif(n1^2), ncol = n1)
 tic()
 invisible(eliminate(A1))
-T1 <- toc()
-```
-
-    ## 4.883 sec elapsed
-
-``` r
-t1 <- T1$toc - T1$tic
+t1 <- toc(echo = FALSE)
 n2 <- 2*n1
 A2 <- matrix(runif(n2^2), ncol = n2)
 tic()
 invisible(eliminate(A2))
-T2 <- toc()
-```
-
-    ## 39.438 sec elapsed
-
-``` r
-t2 <- T2$toc - T2$tic
+t2 <- toc(echo = FALSE)
 t2/t1
 ```
 
-    ##  elapsed 
-    ## 8.076592
+    ##       elapsed 
+    ## 7.90215384615
 
 ## Forward and Backward Error
 
@@ -1159,7 +1135,7 @@ norm(A, "1")
 norm(A, "2")
 ```
 
-    ## [1] 5.722927
+    ## [1] 5.72292695333
 
 ``` r
 norm(A, "I")
@@ -1255,13 +1231,13 @@ A <- matrix(c(0.913,0.659,0.457,0.330), nrow = 2, byrow = TRUE)
 kappa(A)
 ```
 
-    ## [1] 14132.03
+    ## [1] 14132.0316376
 
 ``` r
 kappa(A, exact = TRUE)
 ```
 
-    ## [1] 12485.03
+    ## [1] 12485.031416
 
 ## Calculating the Condition Number
 
@@ -1287,13 +1263,13 @@ A <- matrix(runif(N^2), nrow = N)
 norm(A, "2") * norm(solve(A), "2")
 ```
 
-    ## [1] 47.29397
+    ## [1] 47.2939732454
 
 ``` r
 kappa(A, norm = "2", exact = TRUE)
 ```
 
-    ## [1] 47.29397
+    ## [1] 47.2939732454
 
 # Solving Linear Systems
 
@@ -1483,36 +1459,46 @@ A - L%*%U
     ## [3,]    0    0    0
 
 Let’s use Gaussian elimination with the `echelon` command and **LU**
-decomposition with the to compare the time for solving a
-$100 \times 100$ system for $100$ different right hand sides.
+decomposition with the \``lu` command and back substitution to compare
+the time for solving a $10 \times 10$ system for $100$ different right
+hand sides.
 
 ``` r
-n <- 10
-A <- matrix(runif(n^2),nrow=n)
-set.seed(123)
-t1 <- system.time(
-  for (i in 1:n){
-    b <- runif(n)
-    x <- echelon(A,b)
-  }
-)[3]
-t2 <- system.time(
-  LU <- lu(A, scheme = "ijk")
-)[3]
+# Define matrix and right hand sides
+n <- 60
+M <- 30
+A <- matrix(runif(n^2), nrow = n, ncol = n)
+B <- matrix(runif(n*M), nrow = n, ncol = M)
+
+# Time solution with Gaussian elimination
+tic()
+for (i in 1:M){
+  x <- echelon(A, B[ ,i])
+}
+t1 <- toc(echo = FALSE)
+
+# Time LU decomposition
+tic()
+LU <- lu(A, scheme = "ijk")
+t2 <- toc(echo = FALSE)
+
+# Extract L and U
 L <- LU$L
 U <- LU$U
-set.seed(123)
-t3 <- system.time(
-  for (i in 1:n){
-    b <- runif(n)
-    y <- forwardsolve(L,b)
-    x <- backsolve(U,y)
-  }
-)[3]
+
+# Time forward/back solves
+tic()
+for (i in 1:M){
+  y <- forwardsolve(L, B[ ,i])
+  x <- backsolve(U, y)
+}
+t3 <- toc(echo = FALSE)
+
+# Calculate ratio of times
 as.numeric(t1/(t2 + t3))
 ```
 
-    ## [1] 7
+    ## [1] 1028.308
 
 ## Fixed Point Iteration
 
@@ -1616,7 +1602,7 @@ t1/t2
 ```
 
     ##  elapsed 
-    ## 2.545455
+    ## 2.158537
 
 ## Convergence of Jacobi’s Method
 
@@ -1966,29 +1952,17 @@ for (i in 1:numTrials){
   c <- echelon(vander(x), y)[, n+1]
   horner(c, x0)
 }
-T1 <- toc()
-```
-
-    ## 2.017 sec elapsed
-
-``` r
-t1 <- T1$toc - T1$tic
+t1 <- toc(echo = FALSE)
 tic()
 for (i in 1:numTrials){
   y <- runif(n)
   lagrangeInterp(x, y, x0)
 }
-T2 <- toc()
-```
-
-    ## 0.036 sec elapsed
-
-``` r
-t2 <- T2$toc - T2$tic
+t2 <- toc(echo = FALSE)
 as.numeric(t2/t1)
 ```
 
-    ## [1] 0.01784829
+    ## [1] 0.01518219
 
 ## Data Compression
 
