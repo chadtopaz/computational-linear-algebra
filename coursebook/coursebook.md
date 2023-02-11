@@ -211,7 +211,7 @@ lines(x, P3(x), col = "red")
 ![](coursebook_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
 We can also calculate a bound on the error if we use the fourth degree
-polynomial to approximate $\sin(0.1)$. Note $\sin$ is at most one in
+polynomial to approximate $\sin(0.1)$. Note $\cos$ is at most one in
 magnitude, so the error term is at most
 $(0.1)^5/120\approx 8.333 \times 10^{-8}$. The actual error achieved is
 
@@ -1325,12 +1325,12 @@ is called Jacobi’s method.
 ## LU Decomposition
 
 Recall that when solving an $n \times n$ system
-$\mathbf{A}\,\mathbf{x} = \mathbf{b}$ with Gaussian elimination, the
+$\mathbf{A} \mathbf{x} = \mathbf{b}$ with Gaussian elimination, the
 elimination step is $\mathcal{O}(n^3)$ and back substitution is
 $\mathcal{O}(n^2)$. In some applications, it is necessary to solve
 
 $$
-\mathbf{A}\,\mathbf{x} = \mathbf{b}_1, \quad \mathbf{A}\,\mathbf{x} = \mathbf{b}_2, \quad \mathbf{A}\,\mathbf{x} = \mathbf{b}_3, \quad \ldots, \quad \mathbf{A}\,\mathbf{x} = \mathbf{b}_M
+\mathbf{A}\mathbf{x} = \mathbf{b}_1, \quad \mathbf{A} \mathbf{x} = \mathbf{b}_2, \quad \mathbf{A} \mathbf{x} = \mathbf{b}_3, \quad \ldots, \quad \mathbf{A} \mathbf{x} = \mathbf{b}_M
 $$
 
 where $\mathbf{A}$ is the same each time and $M$ is large. $\mathbf{A}$
@@ -1351,8 +1351,7 @@ A  =
 \ast & \ast & \ast & 1 &&\\
 \ast & \ast & \ast & \ast & 1  &\\
 \ast & \ast & \ast & \ast & \ast & 1 \\ \hline
-\end{array}}_{\mathbf{L}=\text{Lower unit triangular}} \
-\underbrace{\begin{array}{|cccccc|}
+\end{array}}_{\mathbf{L}=\text{Lower unit triangular}} \underbrace{\begin{array}{|cccccc|}
 \hline \ast & \ast & \ast & \ast & \ast & \ast \\ 
 &\ast & \ast & \ast & \ast & \ast  \\
 &&\ast & \ast & \ast & \ast \\

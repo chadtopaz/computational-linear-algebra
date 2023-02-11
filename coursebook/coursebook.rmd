@@ -717,10 +717,10 @@ We will learn two methods of solving systems of linear equations. First, dependi
  
 ## LU Decomposition
 
-Recall that when solving an $n \times n$ system $\mat{A}\,\vec{x} = \vec{b}$ with Gaussian elimination, the elimination step is $\mathcal{O}(n^3)$ and back substitution is $\mathcal{O}(n^2)$. In some applications, it is necessary to solve
+Recall that when solving an $n \times n$ system $\mat{A} \vec{x} = \vec{b}$ with Gaussian elimination, the elimination step is $\mathcal{O}(n^3)$ and back substitution is $\mathcal{O}(n^2)$. In some applications, it is necessary to solve
 
 $$
-\mat{A}\,\vec{x} = \vec{b}_1, \quad \mat{A}\,\vec{x} = \vec{b}_2, \quad \mat{A}\,\vec{x} = \vec{b}_3, \quad \ldots, \quad \mat{A}\,\vec{x} = \vec{b}_M
+\mat{A}\vec{x} = \vec{b}_1, \quad \mat{A} \vec{x} = \vec{b}_2, \quad \mat{A} \vec{x} = \vec{b}_3, \quad \ldots, \quad \mat{A} \vec{x} = \vec{b}_M
 $$
 
 where $\mat{A}$ is the same each time and $M$ is large. $\mat{A}$ itself needs the same row reductions each time. Only the augmented part $\vec{b}$ changes. It would be a waste of computation to run Gaussian elimination $M$ times.
@@ -736,8 +736,7 @@ A  =
 \ast & \ast & \ast & 1 &&\\
 \ast & \ast & \ast & \ast & 1  &\\
 \ast & \ast & \ast & \ast & \ast & 1 \\ \hline
-\end{array}}_{\mat{L}=\text{Lower unit triangular}} \
-\underbrace{\begin{array}{|cccccc|}
+\end{array}}_{\mat{L}=\text{Lower unit triangular}} \underbrace{\begin{array}{|cccccc|}
 \hline \ast & \ast & \ast & \ast & \ast & \ast \\ 
 &\ast & \ast & \ast & \ast & \ast  \\
 &&\ast & \ast & \ast & \ast \\
