@@ -834,7 +834,7 @@ U <- sol$U
 A - L%*%U
 ```
 
-Let's use Gaussian elimination with the `echelon` command and **LU** decomposition with the ``lu` command and back substitution to compare the time for solving a $10 \times 10$ system for $100$ different right hand sides.
+Let's use Gaussian elimination with the `echelon` command and **LU** decomposition with the `lu` command and back substitution to compare the time for solving a $60 \times 60$ system for $30$ different right hand sides.
 
 ```{r cache = TRUE}
 
@@ -898,7 +898,7 @@ But if it converges, it's pretty nifty. It's computationally cheap -- all we hav
 
 ## Jacobi Iteration
 
-Let's take this idea and apply it to solving $\mat{A}\,\vec{x}=\vec{b}$. Let $\mat{A} = \mat{D} + \mat{R}$ where $\mat{D}$ contains the diagonal elements of $\mat{A}$ and $\mat{R}$ contains everything else. Then we can write
+Let's take this idea and apply it to solving $\mat{A}\vec{x}=\vec{b}$. Let $\mat{A} = \mat{D} + \mat{R}$ where $\mat{D}$ contains the diagonal elements of $\mat{A}$ and $\mat{R}$ contains everything else. Then we can write
 
 $$
 \begin{align}
@@ -926,27 +926,37 @@ The usual way we stop iterating is that we choose in advance a threshold for the
 Here's an example.
 
 ```{r cache = TRUE}
+
+# Seed random number generator, define A and b
 set.seed(123)
-n <- 1000
+n <- 2000
 A <- matrix(runif(n^2), nrow = n)
 diag(A) <- n + 1 + diag(A)
 b <- runif(n)
-t1 <- system.time(
-  xexact <- solve(A,b)
-)[3]
+
+# Solve exactly
+tic()
+xexact <- solve(A, b)
+t1 <- toc(echo = FALSE)
+
+# Set up for Jacobi iteration
 xapprox <- rep(0,n)
 d <- diag(A)
 R <- A - diag(d)
 err <-  Inf
 tol <- 1e-10
-t2 <- system.time(
-  while (err > tol){
-    xapprox <- (b - R%*%xapprox)/d
-    err <- Norm(b-A%*%xapprox,Inf)/Norm(b,Inf)
-  }
-)[3]
-Norm(xapprox-xexact,Inf)
-t1/t2
+
+# Solve via Jacobi
+tic()
+while (err > tol){
+  xapprox <- (b - R%*%xapprox)/d
+  err <- Norm(b-A%*%xapprox,Inf)/Norm(b,Inf)
+}
+t2 <- toc(echo = FALSE)
+
+# Compute absolute error and time ratio
+Norm(xapprox-xexact, Inf)
+as.numeric(t1/t2)
 ```
 
 ## Convergence of Jacobi's Method

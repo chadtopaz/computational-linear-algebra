@@ -1459,9 +1459,9 @@ A - L%*%U
     ## [3,]    0    0    0
 
 Let’s use Gaussian elimination with the `echelon` command and **LU**
-decomposition with the \``lu` command and back substitution to compare
-the time for solving a $10 \times 10$ system for $100$ different right
-hand sides.
+decomposition with the `lu` command and back substitution to compare the
+time for solving a $60 \times 60$ system for $30$ different right hand
+sides.
 
 ``` r
 # Define matrix and right hand sides
@@ -1538,7 +1538,7 @@ repeatedly.
 ## Jacobi Iteration
 
 Let’s take this idea and apply it to solving
-$\mathbf{A}\,\mathbf{x}=\mathbf{b}$. Let
+$\mathbf{A}\mathbf{x}=\mathbf{b}$. Let
 $\mathbf{A} = \mathbf{D} + \mathbf{R}$ where $\mathbf{D}$ contains the
 diagonal elements of $\mathbf{A}$ and $\mathbf{R}$ contains everything
 else. Then we can write
@@ -1573,36 +1573,44 @@ for the relative backwards error and stop when we fall below it.
 Here’s an example.
 
 ``` r
+# Seed random number generator, define A and b
 set.seed(123)
-n <- 1000
+n <- 2000
 A <- matrix(runif(n^2), nrow = n)
 diag(A) <- n + 1 + diag(A)
 b <- runif(n)
-t1 <- system.time(
-  xexact <- solve(A,b)
-)[3]
+
+# Solve exactly
+tic()
+xexact <- solve(A, b)
+t1 <- toc(echo = FALSE)
+
+# Set up for Jacobi iteration
 xapprox <- rep(0,n)
 d <- diag(A)
 R <- A - diag(d)
 err <-  Inf
 tol <- 1e-10
-t2 <- system.time(
-  while (err > tol){
-    xapprox <- (b - R%*%xapprox)/d
-    err <- Norm(b-A%*%xapprox,Inf)/Norm(b,Inf)
-  }
-)[3]
-Norm(xapprox-xexact,Inf)
+
+# Solve via Jacobi
+tic()
+while (err > tol){
+  xapprox <- (b - R%*%xapprox)/d
+  err <- Norm(b-A%*%xapprox,Inf)/Norm(b,Inf)
+}
+t2 <- toc(echo = FALSE)
+
+# Compute absolute error and time ratio
+Norm(xapprox-xexact, Inf)
 ```
 
-    ## [1] 3.642326e-14
+    ## [1] 1.980761e-14
 
 ``` r
-t1/t2
+as.numeric(t1/t2)
 ```
 
-    ##  elapsed 
-    ## 2.158537
+    ## [1] 3.861789
 
 ## Convergence of Jacobi’s Method
 
