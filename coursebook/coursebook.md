@@ -1371,12 +1371,12 @@ The $\mathbf{L}$ matrix encodes the multipliers used to eliminate
 elements during Gaussian elimination and the $\mathbf{U}$ matrix is the
 result of the elimination process. Therefore, putting $\mathbf{A}$ into
 its **LU** factorization takes one application of Gaussian elimination,
-or approximately $\frac{2}{3} n^3$ operations. Solving **LUx** = **b**
-requires two back substitutions, namely one to solve
-$\mathbf{L}\,\mathbf{y} = \mathbf{b}$ for $\mathbf{y}$ and one to solve
-$\mathbf{U}\,\mathbf{x}=\mathbf{y}$ for $\mathbf{x}$. This takes $2n^2$
-operations. So, to solve
-$\mathbf{A}\,\mathbf{x} = \mathbf{b}_1, \ldots, \mathbf{A}\,\mathbf{x} = \mathbf{b}_M$
+or approximately $\frac{2}{3} n^3$ operations. Solving
+$\mathbf{L}\mathbf{U}\mathbf{x}=\mathbf{b}$ requires two back
+substitutions, namely one to solve $\mathbf{L} \mathbf{y} = \mathbf{b}$
+for $\mathbf{y}$ and one to solve $\mathbf{U} \mathbf{x}=\mathbf{y}$ for
+$\mathbf{x}$. This takes $2n^2$ operations. So, to solve
+$\mathbf{A} \mathbf{x} = \mathbf{b}_1, \ldots, \mathbf{A} \mathbf{x} = \mathbf{b}_M$
 takes approximately $\frac{2}{3}n^3 + 2 M n^2$ operations, in contrast
 to $\frac{2}{3}Mn^3 + Mn^2$ for Gaussian elimination.
 
