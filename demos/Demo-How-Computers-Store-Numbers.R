@@ -1,6 +1,10 @@
 # Load libraries
 library(kableExtra)
 
+# Funny business!
+8.2 - 7.2 - 1
+10^(18) + 100 - 10^(18)
+
 # Write numbers out as bit representation
 x <- 97
 numToBits(x)

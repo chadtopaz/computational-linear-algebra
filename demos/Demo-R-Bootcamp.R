@@ -1,5 +1,5 @@
 # Load libraries
-library(tictoc)
+library(pracma)
 
 # Set up x values
 xvec <- runif(10^6)
@@ -9,19 +9,17 @@ tic()
 for (x in xvec){
   2*x^4 + 3*x^3 - 3*x^2 + 5*x - 1
 }
-T1 <- toc()
-t1 <- T1$toc - T1$tic
+t1 <- toc(echo = FALSE)
 
 # Polynomial evaluation - Horner
 tic()
 for (x in xvec){
   -1 + x*(5 + x*(-3 + x*(3 + 2*x)))
 }
-T2 <- toc()
-t2 <- T2$toc - T2$tic
+t2 <- toc(echo = FALSE)
 
 # Compare times
-t1/t2
+as.numeric(t1/t2)
 
 # Flavors of vector multiplication
 x <- c(1,2,3)
