@@ -5,6 +5,13 @@ library(kableExtra)
 8.2 - 7.2 - 1
 10^(18) + 100 - 10^(18)
 
+# How machine arithmetic works
+# 14 zeros before decimal pt, 8 zeros after
+options(digits = 22)
+x <- 100000000000000.000000001
+y <- 42.312312312312312312312312312312999999
+x + y
+
 # Write numbers out as bit representation
 x <- 97
 numToBits(x)
