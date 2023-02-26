@@ -70,12 +70,13 @@ b\. Your solution goes here.
 
 The table below shows $||\vec{x}^i||_{\infty}$ and $||\mat{A}\,\vec{x}^i||_{\infty}$ for four different vectors $\vec{x}^i$, $i=1,\ldots,4$. $\mat{A}$ is a fixed but unknown $n \times n$ invertible matrix. What are the best (largest) lower bounds on $||\mat{A}||_\infty$, $||\mat{A}^{-1}||_\infty$, and $\kappa_\infty(\mat{A})$?
 
-| $i$ | $||\vec{x}^i||_{\infty}$ | $||\mat{A} \vec{x}^i||_{\infty}$|
-|:-----:|:--------------------------:|:---------------------------------:|
-| $1$ | $1$                      | $10^2$ |
-| $2$ | $10^3$                   | $10^4$ |
-| $3$ | $10^2$                   | $1$    |
-| $4$ | $10^{-3}$                | $10^2$ |
+
+| $i$ | $\|\|\vec{x}^i\|\|_{\infty}$ | $\|\|\mat{A} \vec{x}^i\|\|_{\infty}$ |
+|:---:|:----------------------------:|:------------------------------------:|
+| $1$ |              $1$             |                $10^2$                |
+| $2$ |            $10^3$            |                $10^4$                |
+| $3$ |            $10^2$            |                  $1$                 |
+| $4$ |           $10^{-3}$          |                $10^2$                |
 
 ### Problem 3 Solution
 
