@@ -170,7 +170,7 @@ $$
 \end{array}
 $$
 
-By solving a linear system $\mathbf{A}\,\mathbf{r}=\mathbf{b}$, find the
+By solving a linear system $\mathbf{A} \mathbf{r}=\mathbf{b}$, find the
 ratings vector $\mathbf{r}$ and use it to give the ranking of teams from
 first place to last place. In answering this problem, let
 $i=(1,2,3,4,5,6)$ correspond to $(M,C,H,T,G,O)$ respectively. If you
