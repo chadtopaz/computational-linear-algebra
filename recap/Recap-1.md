@@ -1,27 +1,44 @@
-**Important note: For your first submission of this recap exercise, work
-on it alone. Do not collaborate with classmates, the TAs, or the
-instructor.**
+Recap Exercise \#1
+================
+
+------------------------------------------------------------------------
+
+This recap exercise provides a formative assessment of your
+understanding of the course material. No collaboration is allowed.
+Please work on your own. Once you complete your first attempt and
+receive written feedback, you can seek support from the TAs and
+professor if you want, but please continue not to collaborate with
+peers. Any/all work you turn in should be your own work. Whether
+intentional or unintentional, any potential violations of academic
+integrity will be referred to the Honor Committee.
+
+------------------------------------------------------------------------
 
 Load necessary packages:
 
-    library(Matrix)
-    knitr::opts_chunk$set(options(digits=8))
+``` r
+library(Matrix)
+knitr::opts_chunk$set(options(digits=8))
+```
 
 ### Problem 1
 
 Assume that for all parts of this problem, I am using the same computer
-and software. I have a 1000 × 1000 dense matrix **A** without special
-structure. My computer solves **A** **x** = **b** using Gaussian
-elimination and back substitution in 10 seconds.
+and software. I have a $1000 \times 1000$ dense matrix $\mathbf{A}$
+without special structure. My computer solves
+$\mathbf{A}\,\mathbf{x}=\mathbf{b}$ using Gaussian elimination and back
+substitution in 10 seconds.
 
-a\. I’d like to solve another problem **C** **y** = **g**, where **C**
-is a dense 10<sup>5</sup> × 10<sup>5</sup> matrix without special
-structure. How many hours will it take to solve **C** **y** = **g** with
-the same method as before?
+a\. I’d like to solve another problem
+$\mathbf{C}\,\mathbf{y}=\mathbf{g}$, where $\mathbf{C}$ is a dense
+$10^5 \times 10^5$ matrix without special structure. How many hours will
+it take to solve $\mathbf{C}\,\mathbf{y}=\mathbf{g}$ with the same
+method as before?
 
-b\. I have a third matrix **D** that is 1000 × 1000, dense, and has no
-special structure. How many hours should it take to solve
-**D** **x**<sub>1</sub> = **f**<sub>1</sub>, …, **D** **x**<sub>100</sub> = **f**<sub>100</sub>
+b\. I have a third matrix $\mathbf{D}$ that is $1000 \times 1000$,
+dense, and has no special structure. How many hours should it take to
+solve
+$\mathbf{D}\,\mathbf{x}_1 = \mathbf{f}_1, \ldots, \mathbf{D}\,\mathbf{x}_{100} = \mathbf{f}_{100}$
 if I am being as efficient as possible?
 
 ### Problem 1 Solution
@@ -43,12 +60,12 @@ hPhone was reserved to represent infinity.
 a\. Which number is closest to the largest exactly representable number
 on the hPhone? (Make sure to show/explain your work.)
 
-A. 10<sup>6</sup>  
-B. 10<sup>10</sup>  
-C. 10<sup>19</sup>  
-D. 10<sup>31</sup>  
-E. 10<sup>63</sup>  
-F. 10<sup>308</sup>
+A. $10^6$  
+B. $10^{10}$  
+C. $10^{19}$  
+D. $10^{31}$  
+E. $10^{63}$  
+F. $10^{308}$
 
 b\. On the hPhone, what number is the base-10 number 5901.546875
 actually stored as? Give your answer in base-10.
@@ -61,58 +78,19 @@ b\. Your solution goes here.
 
 ### Problem 3
 
-The table below shows ||**x**<sup>*i*</sup>||<sub>∞</sub> and
-||**A** **x**<sup>*i*</sup>||<sub>∞</sub> for four different vectors
-**x**<sup>*i*</sup>, *i* = 1, …, 4. **A** is a fixed but unknown
-*n* × *n* invertible matrix. What are the best (largest) lower bounds on
-||**A**||<sub>∞</sub>, ||**A**<sup>−1</sup>||<sub>∞</sub>, and
-*κ*<sub>∞</sub>(**A**)?
+The table below shows $||\mathbf{x}^i||_{\infty}$ and
+$||\mathbf{A}\,\mathbf{x}^i||_{\infty}$ for four different vectors
+$\mathbf{x}^i$, $i=1,\ldots,4$. $\mathbf{A}$ is a fixed but unknown
+$n \times n$ invertible matrix. What are the best (largest) lower bounds
+on $||\mathbf{A}||_\infty$, $||\mathbf{A}^{-1}||_\infty$, and
+$\kappa_\infty(\mathbf{A})$?
 
-<table>
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 40%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: center;"><span
-class="math inline"><em>i</em></span></th>
-<th style="text-align: center;"><span
-class="math inline">||<strong>x</strong><sup><em>i</em></sup>||<sub>∞</sub></span></th>
-<th style="text-align: center;"><span
-class="math inline">||<strong>A</strong><strong>x</strong><sup><em>i</em></sup>||<sub>∞</sub></span></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;"><span class="math inline">1</span></td>
-<td style="text-align: center;"><span class="math inline">1</span></td>
-<td style="text-align: center;"><span
-class="math inline">10<sup>2</sup></span></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;"><span class="math inline">2</span></td>
-<td style="text-align: center;"><span
-class="math inline">10<sup>3</sup></span></td>
-<td style="text-align: center;"><span
-class="math inline">10<sup>4</sup></span></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;"><span class="math inline">3</span></td>
-<td style="text-align: center;"><span
-class="math inline">10<sup>2</sup></span></td>
-<td style="text-align: center;"><span class="math inline">1</span></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;"><span class="math inline">4</span></td>
-<td style="text-align: center;"><span
-class="math inline">10<sup>−3</sup></span></td>
-<td style="text-align: center;"><span
-class="math inline">10<sup>2</sup></span></td>
-</tr>
-</tbody>
-</table>
+| $i$ | $||\mathbf{x}^i||_{\infty}$ | $||\mathbf{A} \mathbf{x}^i||_{\infty}$ |
+|:---:|:---------------------------:|:--------------------------------------:|
+| $1$ |             $1$             |                 $10^2$                 |
+| $2$ |           $10^3$            |                 $10^4$                 |
+| $3$ |           $10^2$            |                  $1$                   |
+| $4$ |          $10^{-3}$          |                 $10^2$                 |
 
 ### Problem 3 Solution
 
@@ -122,23 +100,24 @@ Your solution goes here.
 
 Let’s learn about numerical calculation of derivatives and the
 associated error. Write a function called `D2` that takes a function
-*f*(*x*), a value *x*<sub>0</sub> and a value of a quantity we’ll call
-*h* as inputs and approximates the second derivative
-*f*<sup>′′</sup>(*x*<sub>0</sub>) as
+$f(x)$, a value $x_0$ and a value of a quantity we’ll call $h$ as inputs
+and approximates the second derivative $f^{\prime \prime}(x_0)$ as
 
 $$
-f^{\prime \prime}(x\_0) \approx \frac{f(x\_0-h)-2f(x\_0)+f(x\_0+h)}{h^2}
+f^{\prime \prime}(x_0) \approx \frac{f(x_0-h)-2f(x_0)+f(x_0+h)}{h^2}
 $$
 
-Using this function, make a graph of the absolute error for
-*f*(*x*) = *e*<sup>*x*</sup> at *x*<sub>0</sub> = 0 as a function of h,
-and find the optimal size of *h*. You’ll want to check many orders of
-magnitude for *h*, and so equally spaced values are not appropriate.
-Instead, use values whose logs are equally spaced by taking
+Using this function, make a graph of the absolute error for $f(x)=e^x$
+at $x_0=0$ as a function of h, and find the optimal size of $h$. You’ll
+want to check many orders of magnitude for $h$, and so equally spaced
+values are not appropriate. Instead, use values whose logs are equally
+spaced by taking
 
-    h <- 10^seq(from = -8, to = -1, length = 501)
+``` r
+h <- 10^seq(from = -8, to = -1, length = 501)
+```
 
-Then, in a few sentences, explain why it is not optimal to take *h* as
+Then, in a few sentences, explain why it is not optimal to take $h$ as
 small as possible for the numerical computation you carried out above.
 Be specific.
 
@@ -153,22 +132,21 @@ competitions. The following is the method behind one of the computer
 rankings that used to be used to determine the college football playoff
 teams.
 
-For each team *i*, the algorithm uses the following information:
+For each team $i$, the algorithm uses the following information:
 
--   *w*<sub>*i*</sub>= the number of wins for team *i*
--   *l*<sub>*i*</sub>= the number of losses for team *i*
--   *t*<sub>*i*</sub> = *w*<sub>*i*</sub> + *l*<sub>*i*</sub>= the total
-    number of games played by team *i*
+- $w_i=$ the number of wins for team $i$
+- $l_i=$ the number of losses for team $i$
+- $t_i=w_i+l_i=$ the total number of games played by team $i$
 
-The goal is to determine **r**, a vector of ratings, with the
-i<sup>th</sup> element *r*<sub>*i*</sub> representing the rating for
-team *i*. Rankings are just the order of the ratings (the highest
-*r*<sub>*i*</sub> is given the \#1 ranking spot, etc.).
+The goal is to determine $\mathbf{r}$, a vector of ratings, with the
+i<sup>th</sup> element $r_i$ representing the rating for team $i$.
+Rankings are just the order of the ratings (the highest $r_i$ is given
+the \#1 ranking spot, etc.).
 
 The ratings are computed as follows:
 
 $$
-r\_i = \frac{1}{2+t\_i}\left(1+\frac{w\_i-l\_i}{2}+\sum\limits\_{j \in \\{i\hbox{'s opponents}\\}}r\_j\right)
+r_i = \frac{1}{2+t_i}\left(1+\frac{w_i-l_i}{2}+\sum\limits_{j \in \{i\hbox{'s opponents}\}}r_j\right)
 $$
 
 where “opponent” means a team that a given team played (*not* all the
@@ -182,17 +160,17 @@ Gustavus Adolphus (G), and St. Olaf (O):
 
 $$
 \begin{array}{lllllll}
-\text{M beat C}&\hskip.2in&\text{T beat C}&\hskip.2in&\text{T beat H} &\hskip.2in& \text{G beat H} \\\\
-\text{H beat M}&&\text{G beat C}&&\text{T beat G} && \text{H beat O} \\\\
-\text{C beat H}&&\text{O beat C}&&\text{T beat O} && \text{G beat O} \\\\
+\text{M beat C}&\hskip.2in&\text{T beat C}&\hskip.2in&\text{T beat H} &\hskip.2in& \text{G beat H} \\
+\text{H beat M}&&\text{G beat C}&&\text{T beat G} && \text{H beat O} \\
+\text{C beat H}&&\text{O beat C}&&\text{T beat O} && \text{G beat O} \\
 \end{array}
 $$
 
-By solving a linear system **A** **r** = **b**, find the ratings vector
-**r** and use it to give the ranking of teams from first place to last
-place. In answering this problem, let *i* = (1,2,3,4,5,6) correspond to
-(*M*,*C*,*H*,*T*,*G*,*O*) respectively. If you find ties between teams
-you may choose their relative ordering.
+By solving a linear system $\mathbf{A}\,\mathbf{r}=\mathbf{b}$, find the
+ratings vector $\mathbf{r}$ and use it to give the ranking of teams from
+first place to last place. In answering this problem, let
+$i=(1,2,3,4,5,6)$ correspond to $(M,C,H,T,G,O)$ respectively. If you
+find ties between teams you may choose their relative ordering.
 
 ### Problem 5 solution
 

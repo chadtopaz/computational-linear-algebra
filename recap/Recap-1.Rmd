@@ -1,15 +1,22 @@
 ---
 title: "Recap Exercise #1"
 output:
-  rmarkdown::md_document:
+  rmarkdown::github_document:
   header-includes:
-   - \usepackage{amsmath}
+    - \usepackage{amsmath}
+    - \usepackage{bm}
+    - \renewcommand{\vec}[1]{\mathbf{#1}}
+    - \renewcommand{\mat}[1]{\mathbf{#1}}
+    - \newcommand{\exp}[1]{\mathrm{e}^{#1}}
+    - \DeclareMathOperator*{\argmin}{arg\,min}
+    - \DeclareMathOperator*{\float}{fl}
 ---
 
-\renewcommand{\vec}[1]{\mathbf{#1}}
-\renewcommand{\mat}[1]{\mathbf{#1}}
+***
 
-**Important note: For your first submission of this recap exercise, work on it alone. Do not collaborate with classmates, the TAs, or the instructor.**
+This recap exercise provides a formative assessment of your understanding of the course material. No collaboration is allowed. Please work on your own. Once you complete your first attempt and receive written feedback, you can seek support from the TAs and professor if you want, but please continue not to collaborate with peers. Any/all work you turn in should be your own work. Whether intentional or unintentional, any potential violations of academic integrity will be referred to the Honor Committee.
+
+***
 
 Load necessary packages:
 
