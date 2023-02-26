@@ -30,15 +30,15 @@ $\mathbf{A}\,\mathbf{x}=\mathbf{b}$ using Gaussian elimination and back
 substitution in 10 seconds.
 
 a\. I’d like to solve another problem
-$\mathbf{C}\,\mathbf{y}=\mathbf{g}$, where $\mathbf{C}$ is a dense
+$\mathbf{C} \mathbf{y}=\mathbf{g}$, where $\mathbf{C}$ is a dense
 $10^5 \times 10^5$ matrix without special structure. How many hours will
-it take to solve $\mathbf{C}\,\mathbf{y}=\mathbf{g}$ with the same
-method as before?
+it take to solve $\mathbf{C} \mathbf{y}=\mathbf{g}$ with the same method
+as before?
 
 b\. I have a third matrix $\mathbf{D}$ that is $1000 \times 1000$,
 dense, and has no special structure. How many hours should it take to
 solve
-$\mathbf{D}\,\mathbf{x}_1 = \mathbf{f}_1, \ldots, \mathbf{D}\,\mathbf{x}_{100} = \mathbf{f}_{100}$
+$\mathbf{D} \mathbf{x}_1 = \mathbf{f}_1, \ldots, \mathbf{D} \mathbf{x}_{100} = \mathbf{f}_{100}$
 if I am being as efficient as possible?
 
 ### Problem 1 Solution
