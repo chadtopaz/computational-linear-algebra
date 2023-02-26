@@ -62,7 +62,7 @@ $$
 such that $C$ is a finite, nonzero number. Here, $a$ is the limit of the sequence, that is, the value of $a_n$ as $n \to \infty$. Sometimes you might see this expression rearranged and written more compactly as as
 
 $$
-e_{n+1} = C\,e_n^q
+e_{n+1} = C e_n^q
 $$
 
 as $n \to \infty$, where $e_n \equiv |a_n - a|$.
@@ -70,7 +70,7 @@ as $n \to \infty$, where $e_n \equiv |a_n - a|$.
 To bring it back to computational linear algebra... when solving a problem with an iterative algorithm, the relevant sequence is the sequence of errors produced. If we don't know the true solution, we can't calculate the forward error, but we can calculate the backward error. Let's call the backward error on the nth iteration $e_n$. We can estimate the convergence of the algorithm by making a log-log plot of error data. Taking the log of each side of the equation above, we have
 
 $$
-\log e_{n+1} = \log C + q\,\log e_n.
+\log e_{n+1} = \log C + q \log e_n.
 $$
 
 If we plot $(\log\,e_n,\log\,e_{n+1})$ and observe linear behavior for large enough $n$, then the slope is the convergence rate $q$.

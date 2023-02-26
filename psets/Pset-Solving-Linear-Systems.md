@@ -85,7 +85,7 @@ sequence, that is, the value of $a_n$ as $n \to \infty$. Sometimes you
 might see this expression rearranged and written more compactly as as
 
 $$
-e_{n+1} = C\,e_n^q
+e_{n+1} = C e_n^q
 $$
 
 as $n \to \infty$, where $e_n \equiv |a_n - a|$.
@@ -99,7 +99,7 @@ convergence of the algorithm by making a log-log plot of error data.
 Taking the log of each side of the equation above, we have
 
 $$
-\log e_{n+1} = \log C + q\,\log e_n.
+\log e_{n+1} = \log C + q \log e_n.
 $$
 
 If we plot $(\log\,e_n,\log\,e_{n+1})$ and observe linear behavior for
