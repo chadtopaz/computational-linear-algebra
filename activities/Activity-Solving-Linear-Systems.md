@@ -1,6 +1,36 @@
-Remember to show your work / give your reasoning, as applicable.
+Activity - Solving Linear Systems
+================
 
-    library(pracma)
+------------------------------------------------------------------------
+
+When you begin work during class, work with your assigned partner.
+Please have only one electronic device open and work on it jointly. When
+writing up this assignment, please remember that showing all of your
+work and giving your reasoning are critical parts of achieving mastery.
+If the course staff cannot tell how you solved a problem or finds leaps
+in explanation or logic, the problem is not mastered. Finally, as a
+matter of academic integrity, please make sure that you are positioned
+to honestly answer yes to these questions:
+
+- Have I disclosed everyone with whom I collaborated on this work? (Even
+  if it is only my assigned partner.)
+
+- Have I made a substantive intellectual contribution to the solution of
+  every problem?
+
+- Am I making sure not to pass off as my own work any work that belongs
+  to someone else?
+
+Whether intentional or unintentional, any potential violations of
+academic integrity will be referred to the Honor Committee.
+
+------------------------------------------------------------------------
+
+Load necessary packages:
+
+``` r
+library(pracma)
+```
 
 ### Problem 1
 
@@ -9,8 +39,8 @@ the matrix
 
 $$
 \mathbf{A} = \begin{pmatrix}
-4 & 5 & 6\\\\
-8 & 14 & 17\\\\
+4 & 5 & 6\\
+8 & 14 & 17\\
 12 & 23 & 32
 \end{pmatrix}
 $$
@@ -61,12 +91,12 @@ Consider **Ax**=**b** for
 
 $$
 \mathbf{A} = \begin{pmatrix}
-4 & -1 & -1 \\\\
--2 & 6 & 1\\\\
+4 & -1 & -1 \\
+-2 & 6 & 1\\
 -1 & 1 & 7
 \end{pmatrix}, \quad
 \mathbf{b} = \begin{pmatrix}
-3 \\\\ 9 \\\\ -6
+3 \\ 9 \\ -6
 \end{pmatrix}
 $$
 
@@ -74,8 +104,8 @@ a\. Show that **A** is strictly diagonally dominant.
 
 b\. Choose any initial guess for **x** that you want (really! or you can
 try different ones!) and use Jacobi iteration to solve until the
-backwards error is less than 10<sup>−6</sup> in the infinity norm.
-Report your answer.
+backwards error is less than $10^{-6}$ in the infinity norm. Report your
+answer.
 
 ### Problem 3 Solution
 
