@@ -82,8 +82,8 @@ b\. Your solution goes here.
 
 ### Problem 3
 
-The table below shows $||\mathbf{x}^i||$ and
-$||\mathbf{A} \mathbf{x}^i||_{\infty}$ for four different vectors
+The table below shows $||\mathbf{x}^i||_\infty$ and
+$||\mathbf{A}\mathbf{x}^i||_\infty$ for four different vectors
 $\mathbf{x}^i$, $i=1,\ldots,4$. $\mathbf{A}$ is a fixed but unknown
 $n \times n$ invertible matrix. What are the best (largest) lower bounds
 on $||\mathbf{A}||_\infty$, $||\mathbf{A}^{-1}||_\infty$, and
