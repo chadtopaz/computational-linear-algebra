@@ -1545,7 +1545,7 @@ else. Then we can write
 
 $$
 \begin{align}
-\mathbf{A}\,\mathbf{x} &= \mathbf{b} \\
+\mathbf{A} \mathbf{x} &= \mathbf{b} \\
 (\mathbf{D}+\mathbf{R})\mathbf{x} &= \mathbf{b} \\
 \mathbf{D}\mathbf{x} + \mathbf{R} \mathbf{x} &= \mathbf{b}\\
 \mathbf{D} \mathbf{x} &= \mathbf{b} - \mathbf{R} \mathbf{x}\\

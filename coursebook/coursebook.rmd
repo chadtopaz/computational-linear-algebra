@@ -902,7 +902,7 @@ Let's take this idea and apply it to solving $\mat{A}\vec{x}=\vec{b}$. Let $\mat
 
 $$
 \begin{align}
-\mat{A}\,\vec{x} &= \vec{b} \\
+\mat{A} \vec{x} &= \vec{b} \\
 (\mat{D}+\mathbf{R})\vec{x} &= \vec{b} \\
 \mat{D}\vec{x} + \mat{R} \vec{x} &= \vec{b}\\
 \mat{D} \vec{x} &= \vec{b} - \mat{R} \vec{x}\\
