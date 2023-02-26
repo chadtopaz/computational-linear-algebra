@@ -366,6 +366,9 @@ respository’s subdirectories:
         (analytically) the order of convergence. Check your result with
         a numerical example.
 
+    -   Read and understand [the original paper on Katz
+        centrality](https://link.springer.com/content/pdf/10.1007/BF02289026.pdf)
+
 [Back to Table of Contents](#header)
 
 ## Recap Exercise I
