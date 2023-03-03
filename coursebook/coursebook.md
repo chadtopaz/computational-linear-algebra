@@ -1760,10 +1760,13 @@ $$
 1 & x_2 & x_2^2 \\
 1 & x_3 & x_3^2
 \end{pmatrix} \begin{pmatrix}
-c_0 \\ c_1 \\ c_2
-\end{pmatrix} =
-\begin{pmatrix}
-y_1 \\ y_2 \\ y_3
+c_0 \\
+c_1 \\
+c_2
+\end{pmatrix} = \begin{pmatrix}
+y_1 \\
+y_2 \\
+y_3
 \end{pmatrix}.
 $$
 
@@ -1777,8 +1780,18 @@ $$
 1 & x_3 & x_3^2 &  & x_3^{n-1} \\ 
 &  \vdots &  &  & \vdots \\ 
 1 & x_n & x_n^2 & \cdots & x_n^{n-1} \\ 
-\end{pmatrix} \begin{pmatrix} c_0 \\ c_1 \\ c_2 \\ \vdots \\ c_{n-1} \end{pmatrix} = 
-\begin{pmatrix} y_1 \\ y_2 \\ y_3 \\ \vdots \\ y_n \end{pmatrix}.
+\end{pmatrix} \begin{pmatrix} c_0 \\
+c_1 \\
+c_2 \\
+\vdots \\
+c_{n-1} \end{pmatrix} = 
+\begin{pmatrix}
+y_1 \\
+y_2 \\
+y_3 \\
+\vdots \\
+y_n
+\end{pmatrix}.
 $$
 
 It can be proven that if the $x_i$ are distinct, the matrix has nonzero
@@ -2411,9 +2424,9 @@ splines. Note that at $x_1$ there’s no condition to enforce, since
 there’s no spline to the left of it. And at $x_n$ there’s no condition
 to enforce, since there’s no spline to the right of it. Therefore, we
 enforce conditions at the $n-2$ points $x_2,\ldots,x_{n-1}$.
-Specifically, the condition is $S_i^'(x_i)=S_{i-1}^'(x_i)$. Subtracting
-these $n-2$ conditions from our previous count of $2n-2$, there are $n$
-conditions left.
+Specifically, the condition is $S_i^{'}(x_i)=S_{i-1}^{'}(x_i)$.
+Subtracting these $n-2$ conditions from our previous count of $2n-2$,
+there are $n$ conditions left.
 
 Finally, we enforce continuity of the second derivatives of successive
 splines. This is very similar to enforcing the previous condition. The
