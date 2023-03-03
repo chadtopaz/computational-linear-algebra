@@ -283,7 +283,9 @@ vector of Katz centralities **x** satisfies
 
 $$
 \mathbf{x} = \bigl((\mathbf{I} - \alpha \mathbf{A}^T)^{-1} - \mathbf{I} \bigr) \mathbf{1}.
-$$ where $\mathbf{1}$ is a vector of ones.
+$$
+
+where $\mathbf{1}$ is a vector of ones.
 
 You are going to compute the Katz centrality without inverting a matrix.
 Some hints:
