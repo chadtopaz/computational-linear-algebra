@@ -2027,29 +2027,18 @@ Not bad for just 5 points. Let’s examine how the error changes as a
 function of $n$.
 
 ``` r
-nvec <- 2:19
+nvec <- 3:20
 errorvec <- NULL
 for (n in nvec){
   errorvec <- c(errorvec, interperror(n))
 }
-```
-
-    ## Warning in max(abs(y - yinterp)): no non-missing arguments to max; returning
-    ## -Inf
-
-``` r
 orderofmag <- round(log10(errorvec))
-```
-
-    ## Warning: NaNs produced
-
-``` r
 plot(nvec, orderofmag)
 ```
 
 ![](coursebook_files/figure-gfm/unnamed-chunk-32-1.png)<!-- -->
 
-This means that we can represent the sine function with $10^{-13}$ error
+This means that we can represent the sine function with $10^{-12}$ error
 using only 20 pieces of information, instead of storing a huge lookup
 table.
 

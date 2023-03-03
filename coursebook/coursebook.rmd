@@ -1198,7 +1198,7 @@ interperror(5, plotflag = TRUE)
 Not bad for just 5 points. Let's examine how the error changes as a function of $n$.
 
 ```{r cache = TRUE}
-nvec <- 2:19
+nvec <- 3:20
 errorvec <- NULL
 for (n in nvec){
   errorvec <- c(errorvec, interperror(n))
@@ -1207,7 +1207,7 @@ orderofmag <- round(log10(errorvec))
 plot(nvec, orderofmag)
 ```
 
-This means that we can represent the sine function with $10^{-13}$ error using only 20 pieces of information, instead of storing a huge lookup table.
+This means that we can represent the sine function with $10^{-12}$ error using only 20 pieces of information, instead of storing a huge lookup table.
 
 ## Runge's Phenomenon
 
