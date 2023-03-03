@@ -2027,7 +2027,7 @@ Not bad for just 5 points. Let’s examine how the error changes as a
 function of $n$.
 
 ``` r
-nvec <- 2:20
+nvec <- 2:19
 errorvec <- NULL
 for (n in nvec){
   errorvec <- c(errorvec, interperror(n))
