@@ -76,7 +76,7 @@ g\. Your solution goes here.
 
 ### Problem 2
 
-Suppose you are designing a natural log (`ln`) key for a calculator that displays 5 digits to the right of the decimal point. Find the least degree $d$ for which Chebyshev interpolation on the interval $[1,e]$ will always approximate the natural log function to 5 digits of accuracy (i.e., the interpolation error will always be less than $0.5*10^{-5}$)?
+Suppose you are designing a natural log (`ln`) key for a calculator that displays 5 digits to the right of the decimal point. Find the least degree $d$ for which Chebyshev interpolation on the interval $[1,e]$ will always approximate the natural log function to 5 digits of accuracy (i.e., the interpolation error will always be less than $0.5 \times 10^{-5}$)?
 
 ### Problem 2 Solution
 
