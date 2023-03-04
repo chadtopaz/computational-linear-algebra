@@ -1,7 +1,7 @@
 # Load libraries
 library(pracma)
 library(knitr)
-library(tictoc)
+library(matlib)
 
 # What is interpolation?
 # Suppose "true" function is cosine
@@ -60,14 +60,12 @@ for (i in 1:numTrials){
   c <- echelon(vander(x), y)[, n+1]
   horner(C,x0)
 }
-T1 <- toc()
-t1 <- T1$toc - T1$tic
+t1 <- toc(echo = FALSE)
 tic()
 for (i in 1:numTrials){
   lagrangeInterp(x,y,x0)
 }
-T2 <- toc()
-t2 <- T2$toc - T2$tic
+t2 <- toc(echo = FALSE)
 as.numeric(t2/t1)
 
 # Set up function to do interpolation and calculate error
