@@ -112,3 +112,11 @@ for (n in nvec){
 }
 orderofmag <- round(log10(errorvec))
 plot(nvec,orderofmag)
+
+# Chebyshev nodes
+a <- -2
+b <- 2
+n <- 100
+i <- 1:n
+xdata <- sort((b+a)/2 + (b-a)/2*cos((2*i-1)*pi/2/n))
+plot(xdata, rep(0, length(xdata)))
