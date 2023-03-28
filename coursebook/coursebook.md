@@ -2776,11 +2776,25 @@ x_0 \mathbf{A}_1\cdot\mathbf{A}_0 + x_1 \mathbf{A}_1\cdot\mathbf{A}_1 &= \mathbf
 $$
 
 where we have elminated terms that turn out to be zero thanks to the
-second and third equations previously. Note that aa matrix way to write
-this. We can write
+second and third equations previously. Note that there is a matrix way
+to write this. We can write
 
 $$
-\begin{pmatrix} \mathbf{A}_0^T \\ \mathbf{A}_1^T \end{pmatrix} \begin{pmatrix} \mathbf{A}_0 & \mathbf{A}_1 \end{pmatrix} \begin{pmatrix} x_0 \\ x_1 \end{pmatrix} = \begin{pmatrix} \mathbf{A}_0^T \\ \mathbf{A}_1^T \end{pmatrix} \mathbf{b}.
+\begin{pmatrix}
+\mathbf{A}_0^T \\
+\mathbf{A}_1^T
+\end{pmatrix}
+\begin{pmatrix}
+\mathbf{A}_0 & \mathbf{A}_1
+\end{pmatrix}
+\begin{pmatrix}
+x_0 \\
+x_1
+\end{pmatrix} =
+\begin{pmatrix}
+\mathbf{A}_0^T \\
+\mathbf{A}_1^T
+\end{pmatrix} \mathbf{b}.
 $$
 
 If we let $\mathbf{A}$ represent the matrix with columns
@@ -2788,22 +2802,56 @@ $\mathbf{A}_{0,1}$ and if we let $\mathbf{x}=(x_0,x_1)^T$ then we can
 write the last equation as
 
 $$
-\mathbf{A}^T\,\mathbf{A}\,\mathbf{x} = \mathbf{A}^T\,\mathbf{b}.
+\mathbf{A}^T \mathbf{A} \mathbf{x} = \mathbf{A}^T \mathbf{b}.
 $$
 
 These are the normal equations. For us, concretely, it looks like
 
 $$
 \begin{align}
-\begin{pmatrix} 1 & 1 & 1 & 1\\ 3 & 4 & 5 & 6\end{pmatrix} \begin{pmatrix} 1 & 3\\1 & 4\\ 1 & 5\\ 1& 6\end{pmatrix}\begin{pmatrix}x_1 \\ x_2 \end{pmatrix} &= \begin{pmatrix} 1 & 1 & 1 & 1\\ 3 & 4 & 5 & 6\end{pmatrix} \begin{pmatrix} 105 \\ 117 \\ 141 \\ 152\end{pmatrix}\\
-\begin{pmatrix} 4 & 18 \\ 18 & 86 \end{pmatrix} \begin{pmatrix} x_1 \\ x_2 \end{pmatrix} &= \begin{pmatrix} 515 \\ 2400 \end{pmatrix}
+\begin{pmatrix}
+1 & 1 & 1 & 1\\
+3 & 4 & 5 & 6
+\end{pmatrix}
+\begin{pmatrix}
+1 & 3\\
+1 & 4\\
+1 & 5\\
+1& 6
+\end{pmatrix}
+\begin{pmatrix}
+x_1 \\
+x_2
+\end{pmatrix} &= \begin{pmatrix}
+1 & 1 & 1 & 1\\
+3 & 4 & 5 & 6
+\end{pmatrix} \begin{pmatrix}
+105 \\
+117 \\
+141 \\
+152\end{pmatrix} \\
+\begin{pmatrix}
+4 & 18 \\
+18 & 86
+\end{pmatrix} \begin{pmatrix}
+x_1 \\
+x_2
+\end{pmatrix} &= \begin{pmatrix}
+515 \\
+2400 \end{pmatrix}
 \end{align}
 $$
 
 which has solution
 
 $$
-\begin{pmatrix} x_1 \\ x_2  \end{pmatrix} = \begin{pmatrix}  54.5 \\ 16.5 \end{pmatrix}.
+\begin{pmatrix}
+x_1 \\
+x_2
+\end{pmatrix} = \begin{pmatrix}
+54.5 \\
+16.5
+\end{pmatrix}.
 $$
 
 Let’s calculuate this in `R`.
