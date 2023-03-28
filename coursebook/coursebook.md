@@ -2740,7 +2740,22 @@ Let’s apply these same conceps to our original problem of predicting
 sales from advertising. We had
 
 $$
-x_0 \begin{pmatrix} 1 \\ 1 \\ 1 \\ 1 \end{pmatrix} + x_1 \begin{pmatrix} 3 \\ 4 \\ 5 \\ 6 \end{pmatrix} = \begin{pmatrix} 105 \\ 117 \\ 141 \\ 152 \end{pmatrix}
+x_0 \begin{pmatrix}
+1 \\
+1 \\
+1 \\
+1
+\end{pmatrix} + x_1 \begin{pmatrix}
+3 \\
+4 \\
+5 \\
+6
+\end{pmatrix} = \begin{pmatrix}
+105 \\
+117 \\
+141 \\
+152
+\end{pmatrix}
 $$
 
 which we’ll write symbolically as
@@ -3038,13 +3053,12 @@ and define our least squares solution $\mathbf{x}_{LS}$as the value of
 $\mathbf{x}$ that minimizes this objective function, that is,
 
 $$
-\mathbf{x}_{LS} = \mathop{\mathrm{arg\,min}}_{\mathbf{x}} f(\mathbf{x}).
+\mathbf{x}_{LS} = \mathrm{argmin}_{\mathbf{x}} f(\mathbf{x}).
 $$
 
 Now you know where the terminology least squares comes from! We can
 apply calculus to minimize this expression and the normal equations will
-result. This is a problem on your in-class exercise and your homework,
-and it is critical that you work through the details.
+result. This is a really important calculation for you to be able to do.
 
 # Least Squares II
 
