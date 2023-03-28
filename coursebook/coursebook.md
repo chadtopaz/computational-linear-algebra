@@ -2990,9 +2990,9 @@ where the model parameters appear in a lienar fashion.
 
 1.  Look at data.
 2.  Propose a model.
-3.  Force the model, resulting in $\mathbf{A}\,\mathbf{x}=\mathbf{b}$.
+3.  Force the model, resulting in $\mathbf{A} \mathbf{x}=\mathbf{b}$.
 4.  Solve the normal equations
-    $\mathbf{A}^T\,\mathbf{A}\,\mathbf{x}=\mathbf{A}^T\,\mathbf{b}$.
+    $\mathbf{A}^T \mathbf{A} \mathbf{x}=\mathbf{A}^T \mathbf{b}$.
 5.  Assess the fit of the model visually and/or using the residual
     vector.
 
@@ -3031,14 +3031,14 @@ $$
 More formally, we can define the scalar **objective function**
 
 $$
-f(\mathbf{x}) = \frac{1}{2} ||\mathbf{A}\,\mathbf{x}-\mathbf{b}||^2
+f(\mathbf{x}) = \frac{1}{2} ||\mathbf{A}\ \mathbf{x}-\mathbf{b}||^2
 $$
 
-and define our least squares solution $\mathbf{x}_{L\,S}$as the value of
+and define our least squares solution $\mathbf{x}_{LS}$as the value of
 $\mathbf{x}$ that minimizes this objective function, that is,
 
 $$
-\mathbf{x}_{L\,S} = \mathop{\mathrm{arg\,min}}_{\mathbf{x}} f(\mathbf{x}).
+\mathbf{x}_{LS} = \mathop{\mathrm{arg\,min}}_{\mathbf{x}} f(\mathbf{x}).
 $$
 
 Now you know where the terminology least squares comes from! We can
