@@ -2995,10 +2995,10 @@ print(r)
 
 If model parameters don’t appear in a linear fashion, sometimes you can
 transform the equation so that they do. For example, if you wanted to
-fit data to $y = C \mathrm{e}^{k\,x}$, you could take the log of both
-sides to obtain $\ln y = \ln C + k\,x$. By considering the data
-$(x,\,\ln y)$ you could take a least squares approach to find $\ln C$
-and $k$.
+fit data to $y = C \mathrm{e}^{kx}$, you could take the log of both
+sides to obtain $\ln y = \ln C + kx$. By considering the data
+$(x,\ln y)$ you could take a least squares approach to find $\ln C$ and
+$k$.
 
 Overall, here’s the process one would follow for model fitting in cases
 where the model parameters appear in a lienar fashion.
