@@ -2553,7 +2553,7 @@ enough?
 
 ## Model Fitting
 
-By way of motivation, let’s examine a pedagogical data set. Suppose $a$
+By way of motivation, let’s examine a toy example. Suppose $a$
 represents the amount of money (in \$1,000’s) a company spent on
 advertising during different quarters, and $s$ represents money the
 company earned on sales that quarter. We can plot the data to explore
@@ -2573,14 +2573,35 @@ no reason to expect a complicated relationship, so let’s try modeling
 the data with a line, $s = x_0 + x_1 a$ where $x_{0,1}$ are unknown
 coefficients. Plugging in to the model, we find
 
-$$ \begin{aligned}
-x_0 + 3x_1 &= 105\\ x_0 + 4x_1 &= 117\\ x_0 + 5x_1 &= 141\\ x_0 + 6x_1 &= 152
-\end{aligned} $$
+$$
+\begin{aligned}
+x_0 + 3x_1 &= 105\\
+x_0 + 4x_1 &= 117\\
+x_0 + 5x_1 &= 141\\
+x_0 + 6x_1 &= 152
+\end{aligned}
+$$
 
 which we can write in vector form as
 
 $$
-x_0 \begin{pmatrix} 1 \\ 1 \\ 1 \\ 1 \end{pmatrix} + x_1 \begin{pmatrix} 3 \\ 4 \\ 5 \\ 6 \end{pmatrix} = \begin{pmatrix} 105 \\ 117 \\ 141 \\ 152 \end{pmatrix}.
+x_0  \begin{pmatrix}
+1 \\
+1 \\
+1 \\
+1
+\end{pmatrix} + x_1
+\begin{pmatrix} 3
+\\
+4 \\
+5 \\
+6
+\end{pmatrix} = \begin{pmatrix}
+105 \\
+117 \\
+141 \\
+152
+\end{pmatrix}.
 $$
 
 By writing it this way, we can remember one interpretation of linear
