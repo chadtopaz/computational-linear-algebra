@@ -50,7 +50,7 @@ grid()
 Using a least squares approach, fit a “surge” model of the form
 
 $$
-y(t) = c\,t\,e^{k\,t}
+y(t) = cte^{k\,t}
 $$
 
 State your estimated values of $c$ and $k$ and plot your final function
@@ -78,7 +78,7 @@ if $(u-u_c)^2+(v-v_c)^2=R$. We can therefore formulate the fitting
 problem as choosing the $u_c$, $v_c$, and $R$ that minimize
 
 $$
-\left\{\sum_{i=1}^{50} \left[(u_i-u_c)^2+(v_i-v_c)^2-R^2\right]^2  \right\}.
+\lbrace{\sum_{i=1}^{50} \left[(u_i-u_c)^2+(v_i-v_c)^2-R^2\right]^2  \rbrace.
 $$
 
 If we do a change of variable $w=u_c^2+v_c^2-R^2$, then the problem
