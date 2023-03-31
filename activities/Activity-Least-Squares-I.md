@@ -61,10 +61,10 @@ $$
 In this problem, any time you need a norm, use the Euclidean norm.
 
 a\. Find the projection of $\mathbf{b}$ onto
-$\mathrm{span}\{\mathbf{a}_1\}$. Call that $\widehat{\mathbf{b}}_1$.
+$\mathrm{span} \{ \mathbf{a}_1 \}$. Call that $\widehat{\mathbf{b}}_1$.
 
 b\. Find the projection of $\mathbf{b}$ onto
-$\mathrm{span}\{\mathbf{a}_2\}$. Call that $\widehat{\mathbf{b}}_2$.
+$\mathrm{span} \{ \mathbf{a}_2 \}$. Call that $\widehat{\mathbf{b}}_2$.
 
 c\. Compute the pseudoinverse of $\mathbf{A}$.
 
@@ -185,7 +185,7 @@ means!
 
 c\. Here’s a fact: if the $\mathbf{P}$ matrix in the quadratic function
 form above is symmetric positive semidefinite, then
-$\nabla f(\mathbf{x})=\mathbf{P}\,\mathbf{x}+\mathbf{q}$, and the
+$\nabla f(\mathbf{x})=\mathbf{P} \mathbf{x}+\mathbf{q}$, and the
 critical point $\mathbf{x}$ satisfying
 $\nabla f (\mathbf{x})=\mathbf{0}$ is a global minimum. Conclude that
 the value of $\mathbf{x}$ that satisfies the normal equations gives the

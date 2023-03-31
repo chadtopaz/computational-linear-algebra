@@ -60,9 +60,9 @@ $$
 
 In this problem, any time you need a norm, use the Euclidean norm.
 
-a\. Find the projection of $\vec{b}$ onto $\mathrm{span}\{\vec{a}_1\}$. Call that $\widehat{\vec{b}}_1$.
+a\. Find the projection of $\vec{b}$ onto $\mathrm{span} \{ \vec{a}_1 \}$. Call that $\widehat{\vec{b}}_1$.
 
-b\. Find the projection of $\vec{b}$ onto $\mathrm{span}\{\vec{a}_2\}$. Call that $\widehat{\vec{b}}_2$.
+b\. Find the projection of $\vec{b}$ onto $\mathrm{span} \{ \vec{a}_2 \}$. Call that $\widehat{\vec{b}}_2$.
 
 c\. Compute the pseudoinverse of $\mat{A}$.
 
@@ -153,7 +153,7 @@ Put the error term in this form, that is, find the matrix $\mat{P}$, vector $\ve
 
 b\. Show that the $\mat{P}$ matrix from part (a) is symmetric and positive semidefinite. Feel free to look up what positive semidefinite means!
 
-c\. Here's a fact: if the $\mat{P}$ matrix in the quadratic function form above is symmetric positive semidefinite, then $\nabla f(\vec{x})=\mat{P}\,\vec{x}+\vec{q}$, and the critical point $\vec{x}$ satisfying $\nabla f (\vec{x})=\vec{0}$ is a global minimum. Conclude that the value of $\vec{x}$ that satisfies the normal equations gives the optimal least squares coefficients.
+c\. Here's a fact: if the $\mat{P}$ matrix in the quadratic function form above is symmetric positive semidefinite, then $\nabla f(\vec{x})=\mat{P} \vec{x}+\vec{q}$, and the critical point $\vec{x}$ satisfying $\nabla f (\vec{x})=\vec{0}$ is a global minimum. Conclude that the value of $\vec{x}$ that satisfies the normal equations gives the optimal least squares coefficients.
 
 ### Problem 3 Solution
 
