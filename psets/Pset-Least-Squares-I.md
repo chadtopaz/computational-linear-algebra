@@ -85,13 +85,17 @@ If we do a change of variable $w=u_c^2+v_c^2-R^2$, then the problem
 becomes finding the $\mathbf{x}$ that minimizes
 
 $$
-||\mathbf{A}\,\mathbf{x}-\mathbf{b}||^2,
+||\mathbf{A} \mathbf{x}-\mathbf{b}||^2,
 $$
 
 where
 
 $$
-\mathbf{x}=\begin{pmatrix} u_c \\ v_c \\ w \end{pmatrix}.
+\mathbf{x}=\begin{pmatrix}
+u_c \\
+v_c \\
+w
+\end{pmatrix}.
 $$
 
 a\. Define $\mathbf{A}$ and $\mathbf{b}$ in this least squares
