@@ -61,10 +61,10 @@ $$
 In this problem, any time you need a norm, use the Euclidean norm.
 
 a\. Find the projection of $\mathbf{b}$ onto
-$\mathrm{span} \{ \mathbf{a}_1 \}$. Call that $\widehat{\mathbf{b}}_1$.
+$\mathrm{span}\{\mathbf{a}_1\}$. Call that $\widehat{\mathbf{b}}_1$.
 
 b\. Find the projection of $\mathbf{b}$ onto
-$\mathrm{span} \{ \mathbf{a}_2 \}$. Call that $\widehat{\mathbf{b}}_2$.
+$\mathrm{span}\{\mathbf{a}_2\}$. Call that $\widehat{\mathbf{b}}_2$.
 
 c\. Compute the pseudoinverse of $\mathbf{A}$.
 
