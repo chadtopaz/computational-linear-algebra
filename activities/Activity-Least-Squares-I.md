@@ -37,15 +37,25 @@ library(pracma)
 Let
 
 $$
-\mathbf{a}_1 = \begin{pmatrix} 0 \\ 3 \\ 4 \end{pmatrix}, \quad \mathbf{a}_2 = \begin{pmatrix} 2 \\ 2 \\ 1 \end{pmatrix}
+\mathbf{a}_1 = \begin{pmatrix}
+0 \\
+3 \\
+4
+\end{pmatrix}, \quad \mathbf{a}_2 = \begin{pmatrix}
+2 \\
+2 \\
+1
+\end{pmatrix}
 $$
 
-be the columns of the 3x2 matrix $\mathbf{A}$. Let
-${\cal W}=\hbox{col}(\mathbf{A})=\hbox{span}\{\mathbf{a}_1,\mathbf{a}_2\}$,
-and let
+be the columns of the 3x2 matrix \$ and let
 
 $$
-\mathbf{b} = \begin{pmatrix} 2 \\ -1 \\ 1 \end{pmatrix}.
+\mathbf{b} = \begin{pmatrix}
+2 \\
+-1 \\
+1
+\end{pmatrix}.
 $$
 
 In this problem, any time you need a norm, use the Euclidean norm.
@@ -58,9 +68,9 @@ $\hbox{span}\{\mathbf{a}_2\}$. Call that $\widehat{\mathbf{b}}_2$.
 
 c\. Compute the pseudoinverse of $\mathbf{A}$.
 
-d\. Compute the projection operator $\mathbf{P}_{{\cal W}}$ such that
-the closest point to a given vector $\mathbf{v} \in \mathbb{R}^3$ in the
-space ${\cal W}$ is $\mathbf{P}_{{\cal W}}\mathbf{v}$.
+d\. Compute the projection operator $\mathbf{P}$ such that the closest
+point to a given vector $\mathbf{v} \in \mathbb{R}^3$ in the space
+${\cal W}$ is $\mathbf{P}_{{\cal W}}\mathbf{v}$.
 
 e\. Find the vector $\widehat{\mathbf{b}} \in {\cal W}$ that is closest
 to $b$.

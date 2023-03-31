@@ -37,13 +37,25 @@ library(pracma)
 Let
 
 $$
-\vec{a}_1 = \begin{pmatrix} 0 \\ 3 \\ 4 \end{pmatrix}, \quad \vec{a}_2 = \begin{pmatrix} 2 \\ 2 \\ 1 \end{pmatrix}
+\vec{a}_1 = \begin{pmatrix}
+0 \\
+3 \\
+4
+\end{pmatrix}, \quad \vec{a}_2 = \begin{pmatrix}
+2 \\
+2 \\
+1
+\end{pmatrix}
 $$
 
-be the columns of the 3x2 matrix $\mat{A}$. Let ${\cal W}=\hbox{col}(\mat{A})=\hbox{span}\{\vec{a}_1,\vec{a}_2\}$, and let
+be the columns of the 3x2 matrix $\mat{A} and let
 
 $$
-\vec{b} = \begin{pmatrix} 2 \\ -1 \\ 1 \end{pmatrix}.
+\vec{b} = \begin{pmatrix}
+2 \\
+-1 \\
+1
+\end{pmatrix}.
 $$
 
 In this problem, any time you need a norm, use the Euclidean norm.
@@ -54,7 +66,7 @@ b\. Find the projection of $\vec{b}$ onto $\hbox{span}\{\vec{a}_2\}$. Call that 
 
 c\. Compute the pseudoinverse of $\mat{A}$.
 
-d\. Compute the projection operator $\mat{P}_{{\cal W}}$ such that the closest point to a given vector $\vec{v} \in \mathbb{R}^3$ in the space ${\cal W}$ is $\vec{P}_{{\cal W}}\vec{v}$.
+d\. Compute the projection operator $\mat{P}$ such that the closest point to a given vector $\vec{v} \in \mathbb{R}^3$ in the space ${\cal W}$ is $\vec{P}_{{\cal W}}\vec{v}$.
 
 e\. Find the vector $\widehat{\vec{b}} \in {\cal W}$ that is closest to $b$.
 
@@ -71,6 +83,7 @@ i\. Find vectors $\vec{v}_1$ and $\vec{v}_2$ in $\mathbb{R}^3$ such that these t
   -   $\vec{v}_2 \in {\cal W}^{\perp}$
 
 j\. What is the distance from $\vec{b}$ to ${\cal W}$?
+
 
 ### Problem 1 Solution
 
