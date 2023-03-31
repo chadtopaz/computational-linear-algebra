@@ -60,9 +60,9 @@ $$
 
 In this problem, any time you need a norm, use the Euclidean norm.
 
-a\. Find the projection of $\vec{b}$ onto $\hbox{span}\{\vec{a}_1\}$. Call that $\widehat{\vec{b}}_1$.
+a\. Find the projection of $\vec{b}$ onto $\mathrm{span}\{\vec{a}_1\}$. Call that $\widehat{\vec{b}}_1$.
 
-b\. Find the projection of $\vec{b}$ onto $\hbox{span}\{\vec{a}_2\}$. Call that $\widehat{\vec{b}}_2$.
+b\. Find the projection of $\vec{b}$ onto $\mathrm{span}\{\vec{a}_2\}$. Call that $\widehat{\vec{b}}_2$.
 
 c\. Compute the pseudoinverse of $\mat{A}$.
 
