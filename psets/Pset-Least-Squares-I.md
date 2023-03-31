@@ -78,7 +78,7 @@ if $(u-u_c)^2+(v-v_c)^2=R$. We can therefore formulate the fitting
 problem as choosing the $u_c$, $v_c$, and $R$ that minimize
 
 $$
-\lbrace{\sum_{i=1}^{50} \left[(u_i-u_c)^2+(v_i-v_c)^2-R^2\right]^2  \rbrace.
+\sum_{i=1}^{50} \left[(u_i-u_c)^2+(v_i-v_c)^2-R^2\right]^2.
 $$
 
 If we do a change of variable $w=u_c^2+v_c^2-R^2$, then the problem
