@@ -3256,10 +3256,10 @@ r11 <- Norm(y1, 2)
 q1 <- y1 / r11
 ```
 
-Step 2. Think of $\mathbf{v}_2$ as made up of stuff in the subspace
-spanned by $\mathbf{q}_1$ and stuff orthogonal to it. Throw away stuff
-in the span of $\mathbf{q}_1$ since we have it covered already. Take
-what’s left of $\mathbf{v}_2$ and turn it unto a unit vector.
+Step 2. Think of as made up of stuff in the subspace spanned by and
+stuff orthogonal to it. Throw away stuff in the span of $\mathbf{q}_1$
+since we have it covered already. Take what’s left of $\mathbf{v}_2$ and
+turn it unto a unit vector.
 
 ``` r
 y2 <- v2 - q1 %*% t(q1) %*% v2
