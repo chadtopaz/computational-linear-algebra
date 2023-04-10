@@ -3083,7 +3083,7 @@ The eventual goal of this lesson is to show you how to solve the least
 squares problem
 
 $$
-\mathbf{x}_{LS} = \mathrm{argmin}_{\mathbf{x}} \frac{1}{2}||\mathbf{A}\,\mathbf{x}-\mathbf{b}||^2
+\mathbf{x}_{LS} = \mathrm{argmin}_{\mathbf{x}} \frac{1}{2}||\mathbf{A} \mathbf{x}-\mathbf{b}||^2
 $$
 
 by writing the matrix $\mathbf{A}$ in a convenient way. But to build up
@@ -3114,7 +3114,8 @@ $$
 \end{pmatrix} \begin{pmatrix}
 \mathbf{v}_1 & \mathbf{v}_2 & \cdots & \mathbf{v}_n
 \end{pmatrix} \\ &= \begin{pmatrix}
-\mathbf{v}_1^T \mathbf{v}_1 & \mathbf{v}_1^T \mathbf{v}_2 & \cdots & \mathbf{v}_1^T \mathbf{v}_n \\ \mathbf{v}_2^T \mathbf{v}_1 & \mathbf{v}_2^T \mathbf{v}_2 & \cdots &  \mathbf{v}_2^T \mathbf{v}_n \\
+\mathbf{v}_1^T \mathbf{v}_1 & \mathbf{v}_1^T \mathbf{v}_2 & \cdots & \mathbf{v}_1^T \mathbf{v}_n \\
+\mathbf{v}_2^T \mathbf{v}_1 & \mathbf{v}_2^T \mathbf{v}_2 & \cdots &  \mathbf{v}_2^T \mathbf{v}_n \\
 \vdots & \vdots & \cdots & \vdots \\
 \mathbf{v}_n^T \mathbf{v}_1 & \mathbf{v}_n^T \mathbf{v}_2 & \cdots & \mathbf{v}_n^T \mathbf{v}_n
 \end{pmatrix}\\
@@ -3267,10 +3268,9 @@ q2 <- y2 / r22
 ```
 
 Step 3. Think of $\mathbf{v}_3$ as made up of stuff in the subspace
-spanned by $\mathbf{q}_{1,2}$ and stuff orthogonal to it. Through away
-stuff in the span of $\mathbf{q}_{1,2}$ since we have it covered
-already. Take what’s left of $\mathbf{v}_3$ and turn it unto a unit
-vector.
+spanned by $vec{q}_{1,2}$ and stuff orthogonal to it. Through away stuff
+in the span of $\mathbf{q}_{1,2}$ since we have it covered already. Take
+what’s left of $\mathbf{v}_3$ and turn it unto a unit vector.
 
 ``` r
 y3 <- v3 - q1 %*% t(q1) %*% v3 - q2 %*% t(q2) %*% v3
@@ -3378,7 +3378,7 @@ $\mathbf{A} = \mathbf{Q}\,\mathbf{R}$ where:
   $\mathbf{A}$.
 - The matrix $\mathbf{R}$ gives the change of basis between the vectors
   in $\mathbf{Q}$ and the vectors in $\mathbf{A}$.
-- The decompisition is unique up to some sign changes, so if we require
+- The decomposition is unique up to some sign changes, so if we require
   $R_{ii}\geq 0$, it is unique.
 - If the columns of $\mathbf{A}$ are independent, then $R_{ii}\neq 0$.
 - On the other hand, if column $j$ of $\mathbf{A}$ can be written as a
@@ -3537,8 +3537,8 @@ y3
 
 Oh! it turns out there’s nothing left. If we want to compute the full QR
 decomposition, we need to find something orthogonal to the span of
-$q_{1,2}$. An easy way to do that is to pick a vector outside of their
-span and continue the orthogonalization procedure. You can
+$\mathbf{q}_{1,2}.$ An easy way to do that is to pick a vector outside
+of their span and continue the orthogonalization procedure. You can
 algorithmically use your linear algebra skills to do this, but for
 little cases like ours, you can eyeball it.
 

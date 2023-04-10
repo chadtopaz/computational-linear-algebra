@@ -1915,7 +1915,7 @@ We've talked about how to fit a model to data using least squares, and we've exa
 The eventual goal of this lesson is to show you how to solve the least squares problem
 
 $$
-\vec{x}_{LS} = \mathrm{argmin}_{\vec{x}} \frac{1}{2}||\mat{A}\,\vec{x}-\vec{b}||^2
+\vec{x}_{LS} = \mathrm{argmin}_{\vec{x}} \frac{1}{2}||\mat{A} \vec{x}-\vec{b}||^2
 $$
 
 by writing the matrix $\mat{A}$ in a convenient way. But to build up to that, we need to introduce a number of ideas. First off: orthogonality.
@@ -1935,7 +1935,8 @@ $$
 \end{pmatrix} \begin{pmatrix}
 \mathbf{v}_1 & \mathbf{v}_2 & \cdots & \mathbf{v}_n
 \end{pmatrix} \\ &= \begin{pmatrix}
-\mathbf{v}_1^T \mathbf{v}_1 & \mathbf{v}_1^T \mathbf{v}_2 & \cdots & \mathbf{v}_1^T \mathbf{v}_n \\ \mathbf{v}_2^T \mathbf{v}_1 & \mathbf{v}_2^T \mathbf{v}_2 & \cdots &  \mathbf{v}_2^T \mathbf{v}_n \\
+\mathbf{v}_1^T \mathbf{v}_1 & \mathbf{v}_1^T \mathbf{v}_2 & \cdots & \mathbf{v}_1^T \mathbf{v}_n \\
+\mathbf{v}_2^T \mathbf{v}_1 & \mathbf{v}_2^T \mathbf{v}_2 & \cdots &  \mathbf{v}_2^T \mathbf{v}_n \\
 \vdots & \vdots & \cdots & \vdots \\
 \mathbf{v}_n^T \mathbf{v}_1 & \mathbf{v}_n^T \mathbf{v}_2 & \cdots & \mathbf{v}_n^T \mathbf{v}_n
 \end{pmatrix}\\
@@ -2063,7 +2064,7 @@ r22 <- Norm(y2, 2)
 q2 <- y2 / r22
 ```
 
-Step 3.  Think of $\mathbf{v}_3$ as made up of stuff in the subspace spanned by $\mathbf{q}_{1,2}$ and stuff orthogonal to it. Through away stuff in the span of $\mathbf{q}_{1,2}$ since we have it covered already. Take what's left of $\mathbf{v}_3$ and turn it unto a unit vector.
+Step 3.  Think of $\vec{v}_3$ as made up of stuff in the subspace spanned by $vec{q}_{1,2}$ and stuff orthogonal to it. Through away stuff in the span of $\vec{q}_{1,2}$ since we have it covered already. Take what's left of $\vec{v}_3$ and turn it unto a unit vector.
 
 ```{r}
 y3 <- v3 - q1 %*% t(q1) %*% v3 - q2 %*% t(q2) %*% v3
@@ -2132,11 +2133,11 @@ $$
 
 The **QR** decomposition is a matrix decomposition that writes a $m \times n$ matrix $\mat{A}$ as a product $\mat{A} = \mathbf{Q}\,\mathbf{R}$ where:
 
--   $\mathbf{Q}$ is an $m \times r$ matrix with orthonormal columns, where $r$ is the number of linearly independent columns of $\mat{A}$.
--   $\mathbf{R}$ is an $r \times n$ matrix which is upper triangular if $r=n$, or the top portion of an upper triangular matrix if $r<n$.
--   The columns of $\mathbf{Q}$ span the same space as the columns of $\mat{A}$.
--   The matrix $\mathbf{R}$ gives the change of basis between the vectors in $\mathbf{Q}$ and the vectors in $\mat{A}$.
--   The decompisition is unique up to some sign changes, so if we require $R_{ii}\geq 0$, it is unique.
+-   $\mat{Q}$ is an $m \times r$ matrix with orthonormal columns, where $r$ is the number of linearly independent columns of $\mat{A}$.
+-   $\mat{R}$ is an $r \times n$ matrix which is upper triangular if $r=n$, or the top portion of an upper triangular matrix if $r<n$.
+-   The columns of $\mat{Q}$ span the same space as the columns of $\mat{A}$.
+-   The matrix $\mat{R}$ gives the change of basis between the vectors in $\mat{Q}$ and the vectors in $\mat{A}$.
+-   The decomposition is unique up to some sign changes, so if we require $R_{ii}\geq 0$, it is unique.
 -   If the columns of $\mat{A}$ are independent, then $R_{ii}\neq 0$.
 -   On the other hand, if column $j$ of $\mat{A}$ can be written as a linear combination of columns to the left, then $R_{jj}=0$.
 
@@ -2223,7 +2224,7 @@ y3 <- v3 - (q1 %*% t(q1)) %*% v3 - (q2 %*% t(q2)) %*% v3
 y3
 ```
 
-Oh! it turns out there's nothing left. If we want to compute the full QR decomposition, we need to find something orthogonal to the span of $q_{1,2}$. An easy way to do that is to pick a vector outside of their span and continue the orthogonalization procedure. You can algorithmically use your linear algebra skills to do this, but for little cases like ours, you can eyeball it.
+Oh! it turns out there's nothing left. If we want to compute the full QR decomposition, we need to find something orthogonal to the span of $\vec{q}_{1,2}.$ An easy way to do that is to pick a vector outside of their span and continue the orthogonalization procedure. You can algorithmically use your linear algebra skills to do this, but for little cases like ours, you can eyeball it.
 
 ```{r}
 v3 <- c(1,1,1)
