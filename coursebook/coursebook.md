@@ -3268,9 +3268,10 @@ q2 <- y2 / r22
 ```
 
 Step 3. Think of $\mathbf{v}_3$ as made up of stuff in the subspace
-spanned by $vec{q}_{1,2}$ and stuff orthogonal to it. Through away stuff
-in the span of $\mathbf{q}_{1,2}$ since we have it covered already. Take
-what’s left of $\mathbf{v}_3$ and turn it unto a unit vector.
+spanned by $\mathbf{q}_{1,2}$ and stuff orthogonal to it. Through away
+stuff in the span of $\mathbf{q}_{1,2}$ since we have it covered
+already. Take what’s left of $\mathbf{v}_3$ and turn it unto a unit
+vector.
 
 ``` r
 y3 <- v3 - q1 %*% t(q1) %*% v3 - q2 %*% t(q2) %*% v3
@@ -3373,7 +3374,7 @@ $\mathbf{A} = \mathbf{Q}\,\mathbf{R}$ where:
 - $\mathbf{Q}$ is an $m \times r$ matrix with orthonormal columns, where
   $r$ is the number of linearly independent columns of $\mathbf{A}$.
 - $\mathbf{R}$ is an $r \times n$ matrix which is upper triangular if
-  $r=n$, or the top portion of an upper triangular matrix if $r<n$.
+  $r=n$, or the top portion of an upper triangular matrix if $2^3$.
 - The columns of $\mathbf{Q}$ span the same space as the columns of
   $\mathbf{A}$.
 - The matrix $\mathbf{R}$ gives the change of basis between the vectors
