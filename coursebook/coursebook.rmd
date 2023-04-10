@@ -1907,7 +1907,7 @@ We've talked about how to fit a model to data using least squares, and we've exa
 ## Goals
 
 -   Define orthonormal matrices
--   Perform Graham-Schmidt Orthogonalization
+-   Perform Gram-Schmidt Orthogonalization
 -   Solve least squares problems with **QR** decomposition
 
 ## Orthogonality is nice
@@ -2040,7 +2040,7 @@ $$
 
 Now that I've convinced you that it's nice to have an orthonormal basis, let's talk about how to get one. Gram-Schmidt orthogonalization is an iterative way of creating an orthonormal basis from a set of vectors.
 
-Let's see how it works via an example. Suppose we have $\mathbf{v}_1 = (3,4,0)^T$ and $\mathbf{v}_2 = (1,1,0)^T$.
+Let's see how it works via an example. Suppose we have $\vec{v}_1 = (3,4,0)^T$ and $\vec{v}_2 = (1,1,0)^T$.
 
 ```{r cache = TRUE}
 v1 <- c(1,2,2)

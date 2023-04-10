@@ -3074,7 +3074,7 @@ problem.
 ## Goals
 
 - Define orthonormal matrices
-- Perform Graham-Schmidt Orthogonalization
+- Perform Gram-Schmidt Orthogonalization
 - Solve least squares problems with **QR** decomposition
 
 ## Orthogonality is nice
