@@ -3267,10 +3267,11 @@ r22 <- Norm(y2, 2)
 q2 <- y2 / r22
 ```
 
-Step 3. Think of $fred$ as made up of stuff in the subspace spanned by
-${\mathbf{q}_{1,2}}$ and stuff orthogonal to it. Throw away stuff in the
-span of ${\mathbf{q}_{1,2}}$ since we have it covered already. Take
-what’s left of $\mathbf{v}_3$ and turn it unto a unit vector.
+Step 3. Think of $\mathbf{q}_3$ as made up of stuff in the subspace
+spanned by $\mathbf{q}_{1,2}$ and stuff orthogonal to it. Throw away
+stuff in the span of $\mathbf{q}_{1,2}$ since we have it covered
+already. Take what’s left of $\mathbf{v}_3$ and turn it unto a unit
+vector.
 
 ``` r
 y3 <- v3 - q1 %*% t(q1) %*% v3 - q2 %*% t(q2) %*% v3
