@@ -2056,7 +2056,7 @@ r11 <- Norm(y1, 2)
 q1 <- y1 / r11
 ```
 
-Step 2. Think of \begin{math}\vec{v}_2\end{math} as made up of stuff in the subspace spanned by \begin{math}\vec{q}_1\end{math} and stuff orthogonal to it. Throw away stuff in the span of $\vec{q}_1$ since we have it covered already. Take what's left of $\vec{v}_2$ and turn it unto a unit vector.
+Step 2. Think of \(\vec{v}_2\) as made up of stuff in the subspace spanned by $\vec{q}_1$ and stuff orthogonal to it. Throw away stuff in the span of $\vec{q}_1$ since we have it covered already. Take what's left of $\vec{v}_2$ and turn it unto a unit vector.
 
 ```{r}
 y2 <- v2 - q1 %*% t(q1) %*% v2
