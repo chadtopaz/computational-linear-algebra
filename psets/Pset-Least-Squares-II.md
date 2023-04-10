@@ -37,7 +37,12 @@ library(pracma)
 Define
 
 $$
-\mathbf{A} = \begin{pmatrix} 1 & 0 & 5\\ 2 & 1 & -5 \\ 3 & 3 & 1 \\ 4 & 0 & 0 \end{pmatrix}.
+\mathbf{A} = \begin{pmatrix}
+1 & 0 & 5\\
+2 & 1 & -5 \\
+3 & 3 & 1 \\
+4 & 0 & 0
+\end{pmatrix}.
 $$
 
 Find the matrix $\mathbf{R}$ that reflects a given vector $\mathbf{b}$
@@ -57,8 +62,10 @@ Define the $d$-degree polynomial
 
 $$
 f(x) = 1 + x^2 + \ldots + x^d,
-$$ that is, the $d$-degree polynomial with all coefficients equal to
-one. Let $(x_1, y_1), \ldots, (x_9, y_9)$ be 9 points sampled from this
+$$
+
+that is, the $d$-degree polynomial with all coefficients equal to one.
+Let $(x_1, y_1), \ldots, (x_9, y_9)$ be 9 points sampled from this
 function with $x$ values equally spaced on $[2,4]$. Assume $d < 8$. In
 that case, we (theoretically) have more than enough points to recover
 the coefficients in the polynomial by plugging in the values to a
