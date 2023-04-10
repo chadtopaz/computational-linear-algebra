@@ -2048,7 +2048,7 @@ v2 <- c(2,1,-2)
 v3 <- c(1,1,0)
 ```
 
-Step 1.  Take the first vector and turn it into a unit vector.
+Step 1. Take the first vector and turn it into a unit vector.d
 
 ```{r cache = TRUE}
 y1 <- v1
@@ -2056,7 +2056,7 @@ r11 <- Norm(y1, 2)
 q1 <- y1 / r11
 ```
 
-Step 2.  Think of $\vec{v}_2$ as made up of stuff in the subspace spanned by $\vec{q}_1$ and stuff orthogonal to it. Throw away stuff in the span of $\vec{q}_1$ since we have it covered already. Take what's left of $\vec{v}_2$ and turn it unto a unit vector.
+Step 2. Think of $\vec{v}_2$ as made up of stuff in the subspace spanned by $\vec{q}_1$ and stuff orthogonal to it. Throw away stuff in the span of $\vec{q}_1$ since we have it covered already. Take what's left of $\vec{v}_2$ and turn it unto a unit vector.
 
 ```{r}
 y2 <- v2 - q1 %*% t(q1) %*% v2
@@ -2064,7 +2064,7 @@ r22 <- Norm(y2, 2)
 q2 <- y2 / r22
 ```
 
-Step 3.  Think of $\vec{v}_3$ as made up of stuff in the subspace spanned by $\vec{q}_{1,2}$ and stuff orthogonal to it. Throw away stuff in the span of $\mathbf{q}_{1,2}$ since we have it covered already. Take what's left of $\vec{v}_3$ and turn it unto a unit vector.
+Step 3. Think of $\vec{v}_3$ as made up of stuff in the subspace spanned by $\vec{q}_{1,2}$ and stuff orthogonal to it. Throw away stuff in the span of $\mathbf{q}_{1,2}$ since we have it covered already. Take what's left of $\vec{v}_3$ and turn it unto a unit vector.
 
 ```{r}
 y3 <- v3 - q1 %*% t(q1) %*% v3 - q2 %*% t(q2) %*% v3

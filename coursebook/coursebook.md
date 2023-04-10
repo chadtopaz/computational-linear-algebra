@@ -3248,7 +3248,7 @@ v2 <- c(2,1,-2)
 v3 <- c(1,1,0)
 ```
 
-Step 1. Take the first vector and turn it into a unit vector.
+Step 1. Take the first vector and turn it into a unit vector.d
 
 ``` r
 y1 <- v1
