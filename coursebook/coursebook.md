@@ -3083,7 +3083,7 @@ The eventual goal of this lesson is to show you how to solve the least
 squares problem
 
 $$
-\mathbf{x}_{L\,S} = \mathop{\mathrm{arg\,min}}_x \frac{1}{2}||\mathbf{A}\,\mathbf{x}-\mathbf{b}||^2
+\mathbf{x}_{LS} = \mathrm{argmin}_{\mathbf{x}} \frac{1}{2}||\mathbf{A}\,\mathbf{x}-\mathbf{b}||^2
 $$
 
 by writing the matrix $\mathbf{A}$ in a convenient way. But to build up
@@ -3105,12 +3105,25 @@ quantity $\mathbf{A}^T \mathbf{A}$:
 
 $$
 \begin{align}
-\mathbf{A}^T \mathbf{A} &= \begin{pmatrix} \mathbf{v}_1^T\\ \mathbf{v}_2^T \\ \vdots \\ \mathbf{v}_n^T \end{pmatrix} \begin{pmatrix} \mathbf{v}_1 & \mathbf{v}_2 & \cdots & \mathbf{v}_n \end{pmatrix} \\
-&= \begin{pmatrix} \mathbf{v}_1^T \mathbf{v}_1 & \mathbf{v}_1^T \mathbf{v}_2 & \cdots & \mathbf{v}_1^T \mathbf{v}_n \\ \mathbf{v}_2^T \mathbf{v}_1 & \mathbf{v}_2^T \mathbf{v}_2 & \cdots &  \mathbf{v}_2^T \mathbf{v}_n \\
+\mathbf{A}^T \mathbf{A} &=
+\begin{pmatrix}
+\mathbf{v}_1^T\\
+\mathbf{v}_2^T \\
+\vdots \\
+\mathbf{v}_n^T
+\end{pmatrix} \begin{pmatrix}
+\mathbf{v}_1 & \mathbf{v}_2 & \cdots & \mathbf{v}_n
+\end{pmatrix} \\ &= \begin{pmatrix}
+\mathbf{v}_1^T \mathbf{v}_1 & \mathbf{v}_1^T \mathbf{v}_2 & \cdots & \mathbf{v}_1^T \mathbf{v}_n \\ \mathbf{v}_2^T \mathbf{v}_1 & \mathbf{v}_2^T \mathbf{v}_2 & \cdots &  \mathbf{v}_2^T \mathbf{v}_n \\
 \vdots & \vdots & \cdots & \vdots \\
 \mathbf{v}_n^T \mathbf{v}_1 & \mathbf{v}_n^T \mathbf{v}_2 & \cdots & \mathbf{v}_n^T \mathbf{v}_n
 \end{pmatrix}\\
-&= \begin{pmatrix} 1 & 0 & \cdots & 0 \\ 0 & 1 & \cdots & 0\\ \vdots & \vdots & \cdots & \vdots \\ 0 & 0 & \cdots & 1\end{pmatrix}\\
+&= \begin{pmatrix}
+1 & 0 & \cdots & 0 \\
+0 & 1 & \cdots & 0\\
+\vdots & \vdots & \cdots & \vdots \\
+0 & 0 & \cdots & 1
+\end{pmatrix} \\
 &= \mathbf{I}_n.
 \end{align}
 $$
@@ -3136,9 +3149,9 @@ $$
 \end{align}
 $$
 
-Since $||\mathbf{Q}\,\mathbf{v}||^2 = ||\mathbf{v}||^2$, we know
-$||\mathbf{Q}\,\mathbf{v}|| = ||\mathbf{v}||$ and therefore
-$||\mathbf{Q}||=1$. A similar calculuation shows that
+Since $||\mathbf{Q} \mathbf{v}||^2 = ||\mathbf{v}||^2$, we know
+$||\mathbf{Q} \mathbf{v}|| = ||\mathbf{v}||$ and therefore
+$||\mathbf{Q}||=1$. A similar calculation shows that
 $||\mathbf{Q}^{-1}||=1$. And then, by definition of condition number,
 $\kappa(\mathbf{Q}) = 1$. This means that orthogonal matrices are
 incredibly well-conditioned.
@@ -3148,7 +3161,11 @@ orthonormal vectors $\mathbf{q}_i$, $i=1,\ldots,n$. Define $\mathbf{A}$
 as
 
 $$
-\mathbf{A} = \begin{pmatrix} | & | &  & | \\ \mathbf{q}_1 & \mathbf{q}_2 & \cdots & \  \mathbf{q}_n \\| & | &  & | \\ \end{pmatrix}.
+\mathbf{A} = \begin{pmatrix}
+| & | &  & | \\
+\mathbf{q}_1 & \mathbf{q}_2 & \cdots & \  \mathbf{q}_n \\
+| & | &  & | \\
+\end{pmatrix}.
 $$
 
 Let’s project a vector $\mathbf{w}$ onto the subspace spanned by the
@@ -3178,21 +3195,29 @@ $$
 so that
 
 $$
-\mathbf{A} = \begin{pmatrix} \frac{1}{3} & \frac{2}{15} \\ \frac{2}{3} & \frac{2}{3} \\ \frac{2}{3} & -\frac{11}{15} \end{pmatrix}.
+\mathbf{A} = \begin{pmatrix}
+\frac{1}{3} & \frac{2}{15} \\
+\frac{2}{3} & \frac{2}{3} \\
+\frac{2}{3} & -\frac{11}{15}
+\end{pmatrix}.
 $$
 
 Then
 
 $$
 \begin{align}
-\mathbf{A} \mathbf{A}^T &= \begin{pmatrix} \frac{1}{3} & \frac{2}{15} \\ \frac{2}{3} & \frac{2}{3} \\ \frac{2}{3} & -\frac{11}{15} \end{pmatrix}
-\begin{pmatrix} \frac{1}{3} &  \frac{2}{3} & \frac{2}{3} \\ \frac{2}{15} & \frac{2}{3} & -\frac{11}{15} \end{pmatrix} \\
-&= \frac{1}{225}
-\begin{pmatrix}
+\mathbf{A} \mathbf{A}^T &= \begin{pmatrix}
+\frac{1}{3} & \frac{2}{15} \\
+\frac{2}{3} & \frac{2}{3} \\
+\frac{2}{3} & -\frac{11}{15}
+\end{pmatrix} \begin{pmatrix}
+\frac{1}{3} &  \frac{2}{3} & \frac{2}{3} \\
+\frac{2}{15} & \frac{2}{3} & -\frac{11}{15}
+\end{pmatrix} \\ &= \frac{1}{225} \begin{pmatrix}
 29 & 70 & 28 \\
 70 & 200 & -10 \\
 28 & -10 & 221
-\end{pmatrix}\\
+\end{pmatrix} \\
 & = \underbrace{
 \begin{pmatrix}
 \frac{1}{9} & \frac{2}{9} & \frac{2}{9} \\
@@ -3319,8 +3344,20 @@ $$
 or, as matrices,
 
 $$
-\begin{pmatrix} | & | &   | \\ \mathbf{v}_1 & \mathbf{v}_2  & \mathbf{v}_3 \\| & | &   | \\ \end{pmatrix} = 
-\underbrace{ \begin{pmatrix} | & | &   | \\ \mathbf{q}_1 & \mathbf{q}_2  & \mathbf{q}_3 \\| & | &   | \\ \end{pmatrix}}_Q   \underbrace{\begin{pmatrix} r_{1,1} & r_{1,2} &   r_{1,3} \\ 0 &r_{2,2}  & r_{2,3} \\0 & 0 &   r_{3,3} \\ \end{pmatrix} }_R
+\begin{pmatrix}
+| & | &   | \\
+\mathbf{v}_1 & \mathbf{v}_2  & \mathbf{v}_3 \\
+| & | &   | \\
+\end{pmatrix} = 
+\underbrace{ \begin{pmatrix}
+| & | &   | \\
+\mathbf{q}_1 & \mathbf{q}_2  & \mathbf{q}_3 \\
+| & | &   | \\
+\end{pmatrix}}_Q   \underbrace{\begin{pmatrix}
+r_{1,1} & r_{1,2} &   r_{1,3} \\
+0 &r_{2,2}  & r_{2,3} \\
+0 & 0 &   r_{3,3} \\
+\end{pmatrix} }_R
 $$
 
 with
@@ -3693,7 +3730,7 @@ really convenient for least squares, and turns out to have very nice
 numerical properties because of small condition numbers. You’ll work
 with the numerical issue on your activities and/or homework, but for
 now, here’s how least squares works when you use **QR** decomposition on
-$\mathbf{A}\,\mathbf{x}=\mathbf{b}$. Note
+$\mathbf{A} \mathbf{x}=\mathbf{b}$. Note
 
 $$
 \begin{align}
