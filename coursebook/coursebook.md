@@ -3267,7 +3267,7 @@ r22 <- Norm(y2, 2)
 q2 <- y2 / r22
 ```
 
-Step 3. Think of $\mathbf{q}_3$ as made up of stuff in the subspace
+Step 3. Think of $\mathbf{v}_3$ as made up of stuff in the subspace
 spanned by $\mathbf{q}_{1,2}$ and stuff orthogonal to it. Throw away
 stuff in the span of $\mathbf{q}_{1,2}$ since we have it covered
 already. Take what’s left of $\mathbf{v}_3$ and turn it unto a unit
