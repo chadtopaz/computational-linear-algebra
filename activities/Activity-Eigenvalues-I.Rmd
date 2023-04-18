@@ -42,7 +42,7 @@ $$
 
 (You can check this if you want.)
 
-a\. Let $\mathbf{A}\mathbf{v}=\lambda\mathbf{v}$. For $k \in \mathbb{Z}^+$, what is $\mathbf{A}^k\mathbf{v}$?
+a\. Let $\mathbf{A} \mathbf{v}=\lambda\mathbf{v}$. For $k \in \mathbb{Z}^+$, what is $\mathbf{A}^k\mathbf{v}$?
 
 b\. An orthonormal basis for $\mathbb{R}^3$ is 
 
