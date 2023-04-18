@@ -15,7 +15,7 @@ output:
     - \DeclareMathOperator*{\float}{fl}
 ---
 
-```{r, message=FALSE, warning=FALSE, include=TRUE}
+```{r, message=FALSE, warning=FALSE, include=TRUE, echo=FALSE}
 library(knitr)
 knitr::opts_chunk$set(cache = TRUE)
 library(BatchGetSymbols, quietly = T)
@@ -24,14 +24,6 @@ library(pracma)
 library(matlib)
 library(PolynomF)
 ```
-
-\usepackage{amsmath}
-\usepackage{bm}
-\renewcommand{\vec}[1]{\mathbf{#1}}
-\renewcommand{\mat}[1]{\mathbf{#1}}
-\newcommand{\exp}[1]{\mathrm{e}^{#1}}
-\DeclareMathOperator*{\argmin}{arg\,min}
-\DeclareMathOperator*{\float}{fl}
 
 # R Bootcamp
 
