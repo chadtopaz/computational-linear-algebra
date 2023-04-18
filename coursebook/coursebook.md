@@ -3789,9 +3789,7 @@ by a constant $\lambda$.
 How do we calculate them? Let’s take the definition
 $\mathbf{A} \mathbf{v} = \lambda \mathbf{v}$ and rearrange it to write
 
-``` math
-(\mat{A} - \mat{I} \lambda) \vec{v} = \vec{0}.
-```
+$$(\mathbf{A} - \mathbf{I} \lambda) \mathbf{v} = \mathbf{0}.$$
 
 There are only two ways this can happen. One choice is $\mathbf{v}=0$,
 but that’s trivial because it works for any $\mathbf{A}$. The other
