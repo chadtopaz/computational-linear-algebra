@@ -3789,7 +3789,7 @@ $\mathbf{A}$, you get back the same vector $\mathbf{v}$ but multiplied
 by a constant $\lambda$.
 
 How do we calculate them? Let’s take the definition
-`$\mat{A} \vec{v} = \lambda \vec{v}$` and rearrange it to write
+$\mathbf{A} \mathbf{v} = \lambda \mathbf{v}$ and rearrange it to write
 
 ``` math
 (\mathbf{A} - \mathbf{I} \lambda) \mathbf{v} = \mathbf{0}.
@@ -3817,38 +3817,38 @@ To recap:
 
 For example, let’s find the eigenvalues and eigenvectors of
 
-$$
-\mathbf{A} = \begin{pmatrix} -3 & 2 \\ 2 & -3 \end{pmatrix}.
-$$
+``` math
+\mat{A} = \begin{pmatrix} -3 & 2 \\ 2 & -3 \end{pmatrix}.
+```
 
 Using the result above, we can write the characteristic polynomial:
 
-$$
+``` math
 \begin{align}
-\det (\mathbf{A} - \mathbf{I} \lambda) &= 0\\
+\det (\mat{A} - \mathbf{I} \lambda) &= 0\\
 \det \begin{pmatrix} -3 - \lambda & 2 \\ 2 & -3 - \lambda \end{pmatrix} &= 0\\
 (\lambda+3)^2-4 &= 0\\
 \lambda^2 + 6\lambda + 5 &= 0\\
 (\lambda+5)(\lambda+1) &= 0
 \end{align}
-$$
+```
 
 and therefore $\lambda_{1,2} = -1, -5$. To find $\mathbf{v}_1$, we
 solve:
 
-$$
+``` math
 \begin{align}
-(\mathbf{A}-\mathbf{I}\lambda_1)\mathbf{v}_1&=\mathbf{0}\\
+(\mat{A}-\mathbf{I}\lambda_1)\mathbf{v}_1&=\mathbf{0}\\
 \begin{pmatrix} -2 & 2 \\ 2 & -2 \end{pmatrix}\mathbf{v}_1 &= \mathbf{0} \\
 \mathbf{v}_1 &= \begin{pmatrix} 1 \\ 1 \end{pmatrix}
 \end{align}
-$$
+```
 
 or any scalar multiple of this vector. Similarly, we find
 
-$$
+``` math
 \mathbf{v}_2 = \begin{pmatrix} 1 \\ -1 \end{pmatrix}.
-$$
+```
 
 ## Algebraic multiplicity, geometric multiplicity, and diagonalization
 
@@ -3858,9 +3858,9 @@ $\lambda_i$, $\mathbf{v}_i$, $i = 1,\ldots,n$. Then we can write down
 the definition of eigenpair for all pairs simultaneously:
 $\mathbf{A}\,\mathbf{v}_i = \lambda_i \mathbf{v}_i$ implies
 
-$$
+``` math
 \begin{align}
-\mathbf{A} \underbrace{\begin{pmatrix}
+\mat{A} \underbrace{\begin{pmatrix}
 \vert & \vert & \cdots & \vert \\
 \mathbf{v}_1 & \mathbf{v}_2 & \cdots & \mathbf{v}_n \\
 \vert & \vert & \cdots & \vert 
@@ -3875,7 +3875,7 @@ $$
 \end{pmatrix}}_\mathbf{S}
 \underbrace{\begin{pmatrix} \lambda_1 &&& \\ & \lambda_2 & & \\ && \ddots & \\ &&& \lambda_n   \end{pmatrix}}_\mathbf{\Lambda}.
 \end{align}
-$$
+```
 
 Since $\mathbf{A}\,\mathbf{S} = \mathbf{S}\, \mathbf{\Lambda}$, we can
 write $\mathbf{A} = \mathbf{S} \mathbf{\Lambda} \mathbf{S}^{-1}$. If we
