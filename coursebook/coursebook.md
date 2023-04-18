@@ -16,6 +16,16 @@ Chad M. Topaz
   II</a>
 - <a href="#eigenvalues-i" id="toc-eigenvalues-i">Eigenvalues I</a>
 
+``` r
+library(knitr)
+knitr::opts_chunk$set(cache = TRUE)
+library(BatchGetSymbols, quietly = T)
+library(kableExtra)
+library(pracma)
+library(matlib)
+library(PolynomF)
+```
+
 # R Bootcamp
 
 ## Big Picture
