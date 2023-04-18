@@ -3779,7 +3779,7 @@ For an $n \times n$ matrix $\mathbf{A}$, a scalar
 $\lambda \in \mathbb{C}$, and vector $\mathbf{v} \in \mathbb{R}^n$,
 $\mathbf{v} \neq \mathbf{0}$, then we say $\lambda$ is an **eigenvalue**
 of $\mathbf{A}$ and $\mathbf{v}$ is an **eigenvector** of $\mathbf{A}$
-if $\mathbf{A}\,\mathbf{v}=\lambda \mathbf{v}$.
+if $\mathbf{A} \mathbf{v}=\lambda \mathbf{v}$.
 
 Stated in words: an eigenvector and eigenvalue are the magical vector
 $\mathbf{v}$ and scalar $\lambda$ such that if you hit $\mathbf{v}$ with
@@ -3788,16 +3788,21 @@ by a constant $\lambda$.
 
 How do we calculate them? Let’s take the definition
 $\mathbf{A} \mathbf{v} = \lambda \mathbf{v}$ and rearrange it to write
-$(\mathbf{A} - \mathbf{I} \lambda) \mathbf{v} = \mathbf{0}$. There are
-only two ways this can happen. One choice is $\mathbf{v}=0$, but that’s
-trivial because it works for any $\mathbf{A}$. The other choice, by the
-Invertible Matrix Theorem, is that the matrix on the left is singular.
-Also from the Invertible Matrix Theorem, if it is singular, then it has
-determinant zero, that is $\det (\mathbf{A}- \mathbf{I} \lambda) = 0$.
-This equation is a polynomial in $\lambda$ and is called the
-**characteristic polynomial**. When calculating by hand, we find the
-characteristic polynomial first and then solve it to find the
-eigenvalues. To find eigenvectors, we remember that
+
+$$
+(\mathbf{A} - \mathbf{I} \lambda) \mathbf{v} = \mathbf{0}.
+$$
+
+There are only two ways this can happen. One choice is $\mathbf{v}=0$,
+but that’s trivial because it works for any $\mathbf{A}$. The other
+choice, by the Invertible Matrix Theorem, is that the matrix on the left
+is singular. Also from the Invertible Matrix Theorem, if it is singular,
+then it has determinant zero, that is
+$\det (\mathbf{A}- \mathbf{I} \lambda) = 0$. This equation is a
+polynomial in $\lambda$ and is called the **characteristic polynomial**.
+When calculating by hand, we find the characteristic polynomial first
+and then solve it to find the eigenvalues. To find eigenvectors, we
+remember that
 $\mathbf{A} \mathbf{v} = \lambda \mathbf{v} \rightarrow (\mathbf{A}-\mathbf{I}\lambda)\mathbf{v}=\mathbf{0}$
 and solve for $\mathbf{v}$.
 
