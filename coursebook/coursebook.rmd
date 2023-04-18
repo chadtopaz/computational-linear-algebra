@@ -2,7 +2,7 @@
 title: "Computational Linear Algebra Course Book"
 author: "Chad M. Topaz"
 output:
-  rmarkdown::github_document:
+  rmarkdown::md_document:
       toc: true
       toc_depth: 1
   header-includes:
