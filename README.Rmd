@@ -126,7 +126,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
 -   Reading
 
-    -   [Course Book: R Bootcamp](/coursebook/coursebook.md)
+    -   [Course Book: R Bootcamp](https://htmlpreview.github.io/?https://github.com/chadtopaz/computational-linear-algebra/blob/main/coursebook/coursebook.html?raw=true)
     -   [Machine Learning Has Been Used to Automatically Translate Long-Lost Languages](https://www.technologyreview.com/2019/07/01/65601/machine-learning-has-been-used-to-automatically-translate-long-lost-languages/)
     -   [The Best Bits](https://www.americanscientist.org/article/the-best-bits)
 
@@ -164,7 +164,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
 -   Reading
 
-    -   [Course Book: How Computers Store Numbers](/coursebook/coursebook.md)
+    -   [Course Book: How Computers Store Numbers](https://htmlpreview.github.io/?https://github.com/chadtopaz/computational-linear-algebra/blob/main/coursebook/coursebook.html?raw=true)
 
 -   Activity - How Computers Store Numbers [[.md for viewing](activities/Activity-How-Computers-Store-Numbers.md)] [[.Rmd for editing](activities/Activity-How-Computers-Store-Numbers.Rmd)]
 
@@ -196,7 +196,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
     -   [An Ill-Advised Linear Algebra Tutorial](https://chadtopaz.com/download/an-ill-advised-linear-algebra-tutorial/)
 
-    -   [Course Book: Fundamentals of Linear Systems](/coursebook/coursebook.md)
+    -   [Course Book: Fundamentals of Linear Systems](https://htmlpreview.github.io/?https://github.com/chadtopaz/computational-linear-algebra/blob/main/coursebook/coursebook.html?raw=true)
     
 -   Activity - Fundamentals of Linear Systems [[.md for viewing](activities/Activity-Fundamentals-of-Linear-Systems.md)] [[.Rmd for editing](activities/Activity-Fundamentals-of-Linear-Systems.Rmd)]
 
@@ -220,8 +220,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
     
 -   Reading
 
-    -   [Course Book: Solving Linear Systems](/coursebook/coursebook.md)
-
+    -   [Course Book: Solving Linear Systems](https://htmlpreview.github.io/?https://github.com/chadtopaz/computational-linear-algebra/blob/main/coursebook/coursebook.html?raw=true
 -   Activity - Solving Linear Systems [[.md for viewing](activities/Activity-Solving-Linear-Systems.md)] [[.Rmd for editing](activities/Activity-Solving-Linear-Systems.Rmd)]
 
 -   Pset - Solving Linear Systems [[.md for viewing](psets/Pset-Solving-Linear-Systems.md)] [[.Rmd for editing](psets/Pset-Solving-Linear-Systems.Rmd)]
@@ -258,7 +257,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
 -   Reading
 
-    -   [Course Book: Interpolation](/coursebook/coursebook.md)
+    -   [Course Book: Interpolation](https://htmlpreview.github.io/?https://github.com/chadtopaz/computational-linear-algebra/blob/main/coursebook/coursebook.html?raw=true)
     
 -   Activity - Interpolation [[.md for viewing](activities/Activity-Interpolation.md)] [[.Rmd for editing](activities/Activity-Interpolation.Rmd)]
 
@@ -286,7 +285,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
 
 -   Reading
 
-    -   [Course Book: Least Squares I](/coursebook/coursebook.md)
+    -   [Course Book: Least Squares I](https://htmlpreview.github.io/?https://github.com/chadtopaz/computational-linear-algebra/blob/main/coursebook/coursebook.html?raw=true)
     
 -   Activity - Least Squares I [[.md for viewing](activities/Activity-Least-Squares-I.md)] [[.Rmd for editing](activities/Activity-Least-Squares-I.Rmd)]
 
@@ -314,7 +313,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
     
 -   Reading
 
-    -   [Course Book: Least Squares II](/coursebook/coursebook.md)
+    -   [Course Book: Least Squares II](https://htmlpreview.github.io/?https://github.com/chadtopaz/computational-linear-algebra/blob/main/coursebook/coursebook.html?raw=true)
     
 -   Activity - Least Squares II [[.md for viewing](https://github.com/chadtopaz/computational-linear-algebra/blob/main/activities/Activity-Least-Squares-II.md)] [[.Rmd for editing](https://github.com/chadtopaz/computational-linear-algebra/blob/main/activities/Activity-Least-Squares-II.Rmd)]
 

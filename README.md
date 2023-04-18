@@ -214,7 +214,8 @@ respository’s subdirectories:
 
 -   Reading
 
-    -   [Course Book: R Bootcamp](/coursebook/coursebook.md)
+    -   [Course Book: R
+        Bootcamp](https://htmlpreview.github.io/?https://github.com/chadtopaz/computational-linear-algebra/blob/main/coursebook/coursebook.html?raw=true)
     -   [Machine Learning Has Been Used to Automatically Translate
         Long-Lost
         Languages](https://www.technologyreview.com/2019/07/01/65601/machine-learning-has-been-used-to-automatically-translate-long-lost-languages/)
@@ -269,7 +270,7 @@ respository’s subdirectories:
 -   Reading
 
     -   [Course Book: How Computers Store
-        Numbers](/coursebook/coursebook.md)
+        Numbers](https://htmlpreview.github.io/?https://github.com/chadtopaz/computational-linear-algebra/blob/main/coursebook/coursebook.html?raw=true)
 
 -   Activity - How Computers Store Numbers \[[.md for
     viewing](activities/Activity-How-Computers-Store-Numbers.md)\]
@@ -311,7 +312,7 @@ respository’s subdirectories:
         Tutorial](https://chadtopaz.com/download/an-ill-advised-linear-algebra-tutorial/)
 
     -   [Course Book: Fundamentals of Linear
-        Systems](/coursebook/coursebook.md)
+        Systems](https://htmlpreview.github.io/?https://github.com/chadtopaz/computational-linear-algebra/blob/main/coursebook/coursebook.html?raw=true)
 
 -   Activity - Fundamentals of Linear Systems \[[.md for
     viewing](activities/Activity-Fundamentals-of-Linear-Systems.md)\]
@@ -345,7 +346,8 @@ respository’s subdirectories:
 
 -   Reading
 
-    -   [Course Book: Solving Linear Systems](/coursebook/coursebook.md)
+    -   \[Course Book: Solving Linear
+        Systems\](<https://htmlpreview.github.io/?https://github.com/chadtopaz/computational-linear-algebra/blob/main/coursebook/coursebook.html?raw=true>
 
 -   Activity - Solving Linear Systems \[[.md for
     viewing](activities/Activity-Solving-Linear-Systems.md)\] \[[.Rmd
@@ -396,7 +398,8 @@ respository’s subdirectories:
 
 -   Reading
 
-    -   [Course Book: Interpolation](/coursebook/coursebook.md)
+    -   [Course Book:
+        Interpolation](https://htmlpreview.github.io/?https://github.com/chadtopaz/computational-linear-algebra/blob/main/coursebook/coursebook.html?raw=true)
 
 -   Activity - Interpolation \[[.md for
     viewing](activities/Activity-Interpolation.md)\] \[[.Rmd for
@@ -431,7 +434,8 @@ respository’s subdirectories:
 
 -   Reading
 
-    -   [Course Book: Least Squares I](/coursebook/coursebook.md)
+    -   [Course Book: Least Squares
+        I](https://htmlpreview.github.io/?https://github.com/chadtopaz/computational-linear-algebra/blob/main/coursebook/coursebook.html?raw=true)
 
 -   Activity - Least Squares I \[[.md for
     viewing](activities/Activity-Least-Squares-I.md)\] \[[.Rmd for
@@ -465,7 +469,8 @@ respository’s subdirectories:
 
 -   Reading
 
-    -   [Course Book: Least Squares II](/coursebook/coursebook.md)
+    -   [Course Book: Least Squares
+        II](https://htmlpreview.github.io/?https://github.com/chadtopaz/computational-linear-algebra/blob/main/coursebook/coursebook.html?raw=true)
 
 -   Activity - Least Squares II \[[.md for
     viewing](https://github.com/chadtopaz/computational-linear-algebra/blob/main/activities/Activity-Least-Squares-II.md)\]
