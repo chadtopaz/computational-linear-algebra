@@ -15,15 +15,7 @@ output:
     - \DeclareMathOperator*{\float}{fl}
 ---
 
-```{r, message=FALSE, warning=FALSE, include=TRUE, echo=FALSE}
-library(knitr)
-knitr::opts_chunk$set(cache = TRUE)
-library(BatchGetSymbols, quietly = T)
-library(kableExtra)
-library(pracma)
-library(matlib)
-library(PolynomF)
-```
+
 
 # R Bootcamp
 
@@ -58,7 +50,8 @@ Consider some methods for evaluating the polynomial $2x^4+3x^3-3x^2+5x-1$:
 
 We can test, using the `tic` and `toc` commands from the `pracma` library.
 
-```{r cache = TRUE}
+
+```r
 xvec <- runif(10^6)
 tic()
   for (x in xvec){
@@ -71,6 +64,10 @@ for (x in xvec){
 }
 t2 <- toc(echo = FALSE)
 as.numeric(t1/t2)
+```
+
+```
+## [1] 2.363636
 ```
 
 ## Inner and Outer Products
@@ -87,16 +84,66 @@ There are several different ways to "multiply" vectors $\vec{x}$ and $\vec{y}$:
 
 Let's calculate some examples.
 
-```{r cache = TRUE}
+
+```r
 x <- c(1,2,3)
 y <- c(4,5,6)
 z <- c(7,8,9,10)
 x*y         # element-wise
+```
+
+```
+## [1]  4 10 18
+```
+
+```r
 t(x) %*% y  # dot product
+```
+
+```
+##      [,1]
+## [1,]   32
+```
+
+```r
 sum(x*y)    # dot product
+```
+
+```
+## [1] 32
+```
+
+```r
 x %*% t(z)  # outer product
+```
+
+```
+##      [,1] [,2] [,3] [,4]
+## [1,]    7    8    9   10
+## [2,]   14   16   18   20
+## [3,]   21   24   27   30
+```
+
+```r
 x %o% z     # outer product
+```
+
+```
+##      [,1] [,2] [,3] [,4]
+## [1,]    7    8    9   10
+## [2,]   14   16   18   20
+## [3,]   21   24   27   30
+```
+
+```r
 outer(x,z)  # outer product
+```
+
+```
+##      [,1] [,2] [,3] [,4]
+## [1,]    7    8    9   10
+## [2,]   14   16   18   20
+## [3,]   21   24   27   30
 ```
 
 ## Taylor's Theorem
@@ -119,7 +166,8 @@ $$
 
 Here is a plot of the function and the subsequent Taylor approximations.
 
-```{r cache = TRUE}
+
+```r
 P1 <- function(x) {x}
 P3 <- function(x) {x-x^3/6}
 x <- seq(from = -pi/2, to = pi/2, length = 200)
@@ -128,10 +176,17 @@ lines(x, P1(x), col = "green")
 lines(x, P3(x), col = "red")
 ```
 
+![](coursebook_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+
 We can also calculate a bound on the error if we use the fourth degree polynomial to approximate $\sin(0.1)$. Note $\cos$ is at most one in magnitude, so the error term is at most $(0.1)^5/120\approx 8.333 \times 10^{-8}$. The actual error achieved is
 
-```{r cache = TRUE}
+
+```r
 abs(sin(0.1) - P3(0.1))
+```
+
+```
+## [1] 8.331349e-08
 ```
 
 # How Computers Store Numbers
@@ -204,14 +259,22 @@ The relative error in the storage of this number is $$\frac{|59\ 1/3 -  59.33333
 
 It's really important to understand and to be able to implement the ideas above manually, using your understanding of how to go back and forth between real numbers and floats. That said, it will also be convient to automate this process. Fortunately, there's a command that can help us called `numToBits`. For example, let's try it on the number 97.
 
-```{r}
+
+```r
 x <- 97
 numToBits(x)
 ```
 
+```
+##  [1] 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+## [26] 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00
+## [51] 00 01 01 00 01 00 00 00 00 00 00 00 01 00
+```
+
 This is a good start, but the output is annoying (in reverse from how we'd usually write it) and is hard to read. Let's write a little function to make more friendly.
 
-```{r}
+
+```r
 bitRep <- function(x) {
   x <- numToBits(x)
   x <- as.numeric(x)
@@ -222,8 +285,13 @@ bitRep <- function(x) {
 
 Now we can test it
 
-```{r}
+
+```r
 bitRep(x)
+```
+
+```
+## [1] "0 | 10000000101 | 1000010000000000000000000000000000000000000000000000"
 ```
 
 It's always a good idea to check our function. Using the values of the sign s, exponent c, and mantissa f represented above, we can convert from float to base 10 as
@@ -244,21 +312,104 @@ That is, take $x$ and $y$, convert each to a machine number, add them (exactly, 
 
 For example, let's add $1$ and $2^{-53}$. Well, $\float(1)=1$ and $\float(2^{-53})=2^{-53}$. The (exact) sum is $1+2^{-53}$ but due to the rounding rules on machines, $\float(1+2^{-53})=1$. Therefore, on a machine, the sum is $1$. Let's try:
 
-```{r cache = TRUE}
+
+```r
 1 + 2^(-53)
+```
+
+```
+## [1] 1
 ```
 
 ## Loss of Significance
 
 We've seen that computer storage of numbers can have error, and therefore arithmetic can have error. This error is sometimes called *loss of significance* and the most dangerous operation is subtraction of nearly equal numbers. Consider the expression $(1-\cos x)/\sin^2 x$, which can also be written as $1/(1+\cos x)$. We compute this both ways for $x$ decreasing from $1$.
 
-```{r cache = TRUE}
+
+```r
 options(digits=12)
 x <- 10^(-(0:12))
 E1 <- (1 - cos(x))/sin(x)^2
 E2 <- 1/(1 + cos(x))
 kable(cbind(x, E1, E2))
 ```
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> x </th>
+   <th style="text-align:right;"> E1 </th>
+   <th style="text-align:right;"> E2 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 1e+00 </td>
+   <td style="text-align:right;"> 0.649223205205 </td>
+   <td style="text-align:right;"> 0.649223205205 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1e-01 </td>
+   <td style="text-align:right;"> 0.501252086289 </td>
+   <td style="text-align:right;"> 0.501252086289 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1e-02 </td>
+   <td style="text-align:right;"> 0.500012500208 </td>
+   <td style="text-align:right;"> 0.500012500208 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1e-03 </td>
+   <td style="text-align:right;"> 0.500000124992 </td>
+   <td style="text-align:right;"> 0.500000125000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1e-04 </td>
+   <td style="text-align:right;"> 0.499999998628 </td>
+   <td style="text-align:right;"> 0.500000001250 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1e-05 </td>
+   <td style="text-align:right;"> 0.500000041387 </td>
+   <td style="text-align:right;"> 0.500000000012 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1e-06 </td>
+   <td style="text-align:right;"> 0.500044450291 </td>
+   <td style="text-align:right;"> 0.500000000000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1e-07 </td>
+   <td style="text-align:right;"> 0.499600361081 </td>
+   <td style="text-align:right;"> 0.500000000000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1e-08 </td>
+   <td style="text-align:right;"> 0.000000000000 </td>
+   <td style="text-align:right;"> 0.500000000000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1e-09 </td>
+   <td style="text-align:right;"> 0.000000000000 </td>
+   <td style="text-align:right;"> 0.500000000000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1e-10 </td>
+   <td style="text-align:right;"> 0.000000000000 </td>
+   <td style="text-align:right;"> 0.500000000000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1e-11 </td>
+   <td style="text-align:right;"> 0.000000000000 </td>
+   <td style="text-align:right;"> 0.500000000000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1e-12 </td>
+   <td style="text-align:right;"> 0.000000000000 </td>
+   <td style="text-align:right;"> 0.500000000000 </td>
+  </tr>
+</tbody>
+</table>
 
 The result becomes drastically wrong for small $x$ because of subtraction of nearly equal numbers. In such problems, be aware and seek alternative ways to represent the necessary computation, as we did with the second option above.
 
@@ -467,7 +618,8 @@ $$
 
 Let's go ahead and perform the elimination to echelon form. Here is a function called `eliminate` that will do it for you.
 
-```{r}
+
+```r
 eliminate <- function(A, tol = 10^-8) {
   n <- nrow(A)
   for ( j in 1:(n-1) ) {
@@ -483,9 +635,17 @@ eliminate <- function(A, tol = 10^-8) {
 
 Now we can perform the elimination.
 
-```{r cache = TRUE}
+
+```r
 A <- matrix(c(1,3,1,9,1,1,-1,1,3,11,5,35), nrow = 3, byrow = TRUE)
 eliminate(A)
+```
+
+```
+##      [,1] [,2] [,3] [,4]
+## [1,]    1    3    1    9
+## [2,]    0   -2   -2   -8
+## [3,]    0    0    0    0
 ```
 
 ## Operation Counts and Complexity
@@ -502,7 +662,8 @@ For example, suppose row reduction on a $500 \times 500$ matrix takes 1 second. 
 
 Let's test scaling of the reduction step for a random matrix. In the code block below, the `invisible` function suppresses the output from being printed on the screen. Why do we use this command? Because printing to the screen takes time. We want to measure the time associated with the elimination itself, and as little else as possible. So, between the `tic` and `toc` commands, we try to only include the computational steps we are interested in timing and nothing else.
 
-```{r cache = TRUE}
+
+```r
 set.seed(123)
 n1 <- 750
 A1 <- matrix(runif(n1^2), ncol = n1)
@@ -515,6 +676,11 @@ tic()
 invisible(eliminate(A2))
 t2 <- toc(echo = FALSE)
 t2/t1
+```
+
+```
+##       elapsed 
+## 7.90215384615
 ```
 
 ## Forward and Backward Error
@@ -544,7 +710,8 @@ The three most common $p$-norms are $p = 1, 2, \infty$ since they are the easies
 -   $p=\infty$ $$|| \vec{x} ||_\infty = \max{\left(| x_1|, | x_2|,  \ldots, |x_n|\right)}$$
 
 For $p = \infty$ it takes a little analysis to show why the computational definition is what it is, but a numerical study is usually convincing. We can use the `Norm` command
-```{r cache = TRUE}
+
+```r
 v <- c(3,-2,2,3,1,4,1,2,3)
 pvals <- c(1,1.5,2,3,4,5,6,7,20)
 res <- NULL
@@ -554,6 +721,57 @@ for (p in pvals){
 res <- c(res, Norm(v, Inf))
 kable(cbind(c(pvals, "Infinity"), res), col.names=c("p", "norm"))
 ```
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> p </th>
+   <th style="text-align:left;"> norm </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:left;"> 21 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1.5 </td>
+   <td style="text-align:left;"> 10.5102535215316 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2 </td>
+   <td style="text-align:left;"> 7.54983443527075 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 3 </td>
+   <td style="text-align:left;"> 5.55049910291155 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 4 </td>
+   <td style="text-align:left;"> 4.84053189512475 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 5 </td>
+   <td style="text-align:left;"> 4.50278575773901 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 6 </td>
+   <td style="text-align:left;"> 4.31746656321528 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 7 </td>
+   <td style="text-align:left;"> 4.20717405025799 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 20 </td>
+   <td style="text-align:left;"> 4.00189474866413 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Infinity </td>
+   <td style="text-align:left;"> 4 </td>
+  </tr>
+</tbody>
+</table>
 
 To further build intuition, we can plot the unit sphere in $\mathbb{R}^2$ for various values of $p$, that is, the set of points that are unit distance from the origin. ![](UnitCircleGrid.png)
 
@@ -590,11 +808,30 @@ $$
 To see why these definitions are true requires some analysis. If you are interested, I am happy to point you to proofs.
 
 You can calculate the $1$, $2$, and $\infty$ matrix norms using the R command `norm`.
-```{r cache = TRUE}
+
+```r
 A <- matrix(c(2,-1,1,1,0,1,3,-1,4), byrow = TRUE, nrow = 3)
 norm(A, "1")
+```
+
+```
+## [1] 6
+```
+
+```r
 norm(A, "2")
+```
+
+```
+## [1] 5.72292695333
+```
+
+```r
 norm(A, "I")
+```
+
+```
+## [1] 8
 ```
 
 There is one really useful identity you should know about matrix norms:
@@ -671,10 +908,22 @@ $$
 
 We can go ahead and calculate the actual condition number of the matrix. R has a command called `kappa` that computes the condition number approximately by default, or exactly if specified.
 
-```{r cache = TRUE}
+
+```r
 A <- matrix(c(0.913,0.659,0.457,0.330), nrow = 2, byrow = TRUE)
 kappa(A)
+```
+
+```
+## [1] 14132.0316376
+```
+
+```r
 kappa(A, exact = TRUE)
+```
+
+```
+## [1] 12485.031416
 ```
 
 ## Calculating the Condition Number
@@ -689,12 +938,24 @@ $$
 
 The derivation of this identity is a few lines of linear algebra that I am happy to show you if you are interested. We can check it numerically for now.
 
-```{r cache = TRUE}
+
+```r
 set.seed(123)
 N <- 10
 A <- matrix(runif(N^2), nrow = N)
 norm(A, "2") * norm(solve(A), "2")
+```
+
+```
+## [1] 47.2939732454
+```
+
+```r
 kappa(A, norm = "2", exact = TRUE)
+```
+
+```
+## [1] 47.2939732454
 ```
 
 # Solving Linear Systems
@@ -818,26 +1079,42 @@ $$
 
 Since $\mat{U}$ is in echelon form, we are done! We can check that our decomposition worked.
 
-```{r cache = TRUE}
+
+```r
 A <- matrix(c(1,3,1,1,1,-1,3,11,5),nrow=3,byrow=TRUE)
 L <- matrix(c(1,0,0,1,1,0,3,-1,1),nrow=3,byrow=TRUE)
 U <- matrix(c(1,3,1,0,-2,-2,0,0,0),nrow=3,byrow=TRUE)
 A - L %*% U
 ```
 
+```
+##      [,1] [,2] [,3]
+## [1,]    0    0    0
+## [2,]    0    0    0
+## [3,]    0    0    0
+```
+
 We can also use the `lu` command.
 
-```{r cache = TRUE}
+
+```r
 sol <-  lu(A, scheme = "ijk")
 L <- sol$L
 U <- sol$U
 A - L%*%U
 ```
 
+```
+##      [,1] [,2] [,3]
+## [1,]    0    0    0
+## [2,]    0    0    0
+## [3,]    0    0    0
+```
+
 Let's use Gaussian elimination with the `echelon` command and **LU** decomposition with the `lu` command and back substitution to compare the time for solving a $60 \times 60$ system for $30$ different right hand sides.
 
-```{r cache = TRUE}
 
+```r
 # Define matrix and right hand sides
 n <- 60
 M <- 30
@@ -872,11 +1149,16 @@ t3 <- toc(echo = FALSE)
 as.numeric(t1/(t2 + t3))
 ```
 
+```
+## [1] 1028.308
+```
+
 ## Fixed Point Iteration
 
 Now we turn to iterative methods. Sometimes you can solve a problem by a method called **fixed point iteration** whereby you just keep plugging into an expression until the output equals the input. For example, suppose you want to solve $(x-3)(x+1)=x^2-2x-3=0$. Pretend you don't know where the roots are but you think there is one near x = -2, so you start out with that guess. You also notice you can write $x^2 - 2x - 3 =0$ as $x = 3/(x-2)$. So you define an iteration $x_{i+1} = 3/(x_i-2)$.
 
-```{r cache = TRUE}
+
+```r
 x <- -2
 for (i in 1:10){
   x <-  3/(x-2)
@@ -885,7 +1167,8 @@ for (i in 1:10){
 
 The iteration seems to be converging to a root. What if we try a guess near the other root?
 
-```{r cache = TRUE}
+
+```r
 x <- 3.00001
 for (i in 1:20){
   x <-  3/(x-2)
@@ -925,8 +1208,8 @@ The usual way we stop iterating is that we choose in advance a threshold for the
 
 Here's an example.
 
-```{r cache = TRUE}
 
+```r
 # Seed random number generator, define A and b
 set.seed(123)
 n <- 2000
@@ -956,7 +1239,18 @@ t2 <- toc(echo = FALSE)
 
 # Compute absolute error and time ratio
 Norm(xapprox-xexact, Inf)
+```
+
+```
+## [1] 1.980761e-14
+```
+
+```r
 as.numeric(t1/t2)
+```
+
+```
+## [1] 3.861789
 ```
 
 ## Convergence of Jacobi's Method
@@ -994,18 +1288,17 @@ Now we enter into the part of this course that is about data. As scientists, oft
 
 ## Why Polynomials?
 
-```{r echo = FALSE, cache = TRUE}
-f <- function(x){1/x}
-x <- seq(from = 1, to = 3, length = 8)
-y <- f(x)
-```
+
 
 Suppose we have incomplete data and we'd like to estimate a piece of information that we don't have.
 
-```{r cache = TRUE}
+
+```r
 # I created some mystery data and hid it from you
 plot(x,y)
 ```
+
+![](coursebook_files/figure-gfm/unnamed-chunk-25-1.png)<!-- -->
 
 We might try to use polynomials to describe the data, and then glean information from the polynomial. Polynomials are convenient for several reasons.
 
@@ -1019,7 +1312,8 @@ In contrast, a polynomial that passes through every data point is called the int
 
 Even though I haven't yet told you how to find an interpolating polynomial, let's compare the Taylor and interpolating approaches. Consider $f(x) = 1/x$ on the interval $[1,3]$. The second degree Taylor polynomal through $x=1$ (as an example) is $T(x)=3-3x+x^2$. The interpolating polynomial using three points sampled equally across the interval, namely $(1,1),(2,1/2),(3,1/3)$, is $11/6 - x + (1/6)x^2$.
 
-```{r cache = TRUE}
+
+```r
 f <- function(x){1/x}
 tee <- function(x){3 - 3*x + x^2}
 p <- function(x){11/6 - x + 1/6*x^2}
@@ -1030,6 +1324,8 @@ lines(x, tee(x), col = "red", lwd = 2)
 points(xdata, f(xdata), cex = 2)
 lines(x, p(x), col = "green", lwd = 2)
 ```
+
+![](coursebook_files/figure-gfm/unnamed-chunk-26-1.png)<!-- -->
 
 A few important points to know about the interpolating polynomial through $n$ points with distinct $x$ coordinates include:
 
@@ -1096,7 +1392,8 @@ It can be proven that if the $x_i$ are distinct, the matrix has nonzero determin
 
 In solving problems using the Vandermonde matrix, we are using a basis for the interpolating polynomial that is $\{1,x,x^2,\ldots\}$. This seems very natural since this is how we usually think of polynomials! The problems is that to find the coefficients in this basis, we have to solve a linear problem whose matrix is very ill-conditioned. Let's see what happens if we sample more and more points from our function and construct the interpolating polynomial. We'll look at $\kappa$ for the Vandermonde matrix.
 
-```{r cache = TRUE}
+
+```r
 nvals <- 2^(1:8)
 kappavals <- NULL
 for (n in nvals){
@@ -1105,6 +1402,49 @@ for (n in nvals){
 }
 kable(cbind(nvals, kappavals))
 ```
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> nvals </th>
+   <th style="text-align:right;"> kappavals </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 6.250000e+00 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 1.678547e+03 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:right;"> 3.218991e+08 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 16 </td>
+   <td style="text-align:right;"> 2.082142e+19 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 32 </td>
+   <td style="text-align:right;"> 2.008808e+29 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 64 </td>
+   <td style="text-align:right;"> 5.350795e+45 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 128 </td>
+   <td style="text-align:right;"> 2.740993e+76 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 256 </td>
+   <td style="text-align:right;"> 2.557774e+137 </td>
+  </tr>
+</tbody>
+</table>
 
 ## Lagrange Interpolating Polynomial
 
@@ -1124,11 +1464,16 @@ Since the answer to all these questions is yes, it is the interpolating polynomi
 
 If we expand out our Lagrange polynomial we find $p(x) = x^3 - 5 x^2 + 4 x+10$. We can use `R` to verify this result by solving the Vandermonde problem.
 
-```{r cache = TRUE}
+
+```r
 x <- c(1,2,3,4)
 y <- c(10,6,4,10)
 c <- solve(vander(x), y)
 c
+```
+
+```
+## [1]  1 -5  4 10
 ```
 
 Following the pattern we established above, the Lagrange polynomial for points $(x_1,y_1),\ldots,(x_n,y_n)$ is
@@ -1139,7 +1484,8 @@ $$
 
 The advantage of this method is that it doesn't require any numerical solution... just evaluation. Let's try a comparison: Vandermonde vs. Lagrange. Here, I'll use R's `lagrangeInterp` function.
 
-```{r error = TRUE, cache = TRUE}
+
+```r
 set.seed(123)
 n <- 10
 x <- 1:n
@@ -1147,12 +1493,24 @@ y <- runif(n)
 x0 <- 1.5
 c <- solve(vander(x),y)
 horner(c, x0)$y
+```
+
+```
+## [1] -0.1570601
+```
+
+```r
 lagrangeInterp(x,y,x0)
+```
+
+```
+## [1] -0.1570601
 ```
 
 We can also do a speed comparison test.
 
-```{r cache = TRUE}
+
+```r
 set.seed(123)
 numTrials <- 1000
 n <- 10
@@ -1173,11 +1531,16 @@ t2 <- toc(echo = FALSE)
 as.numeric(t2/t1)
 ```
 
+```
+## [1] 0.01518219
+```
+
 ## Data Compression
 
 One of the powerful things interpolation can do is compress data. Let's do an example. Suppose that we need to know values for the function $\sin x$. A computer doesn't magically know this function, so it has to have some way to compute/evaluate it. One option would be to store a giant look-up table. There are an infinite number of numbers to store, though, even for the interval $[0,2\pi)$. Another option is to fit a polynomial based on a finite number of points, store the coefficients, and evaluate the polynomial as needed. Let's do this using 5 points to begin with. We'll write a function that takes a specified number of points, samples them from the function, constructs the interpolating polynomial, plots the function and the polynomial, and calculates the maximum error. The inputs are your $x$ data, your $y$ data, and the $x$ values at which you'd like interpolated values.
 
-```{r cache = TRUE}
+
+```r
 interperror <- function(n, plotflag = FALSE){
   xdata <- seq(from = 0, to = 2*pi, length = n)
   ydata<- sin(xdata)
@@ -1195,9 +1558,16 @@ interperror <- function(n, plotflag = FALSE){
 interperror(5, plotflag = TRUE)
 ```
 
+![](coursebook_files/figure-gfm/unnamed-chunk-31-1.png)<!-- -->
+
+```
+## [1] 0.1807578
+```
+
 Not bad for just 5 points. Let's examine how the error changes as a function of $n$.
 
-```{r cache = TRUE}
+
+```r
 nvec <- 3:20
 errorvec <- NULL
 for (n in nvec){
@@ -1206,6 +1576,8 @@ for (n in nvec){
 orderofmag <- round(log10(errorvec))
 plot(nvec, orderofmag)
 ```
+
+![](coursebook_files/figure-gfm/unnamed-chunk-32-1.png)<!-- -->
 
 This means that we can represent the sine function with $10^{-12}$ error using only 20 pieces of information, instead of storing a huge lookup table.
 
@@ -1219,7 +1591,8 @@ $$
 \sum_{i=1}^n (-1)^{i/2} \frac{x^i}{i!}.
 $$
 
-```{r cache = TRUE}
+
+```r
 mytaylor1 <- function(x,n){
   ans <- 0
   for (i in seq(from = 0, to = n, by = 2)){
@@ -1234,13 +1607,16 @@ for (n in seq(from = 0,to = 14,by = 2)){
 }
 ```
 
+![](coursebook_files/figure-gfm/unnamed-chunk-33-1.png)<!-- -->
+
 So more terms are better, right? Let's try again with the function $f(x) = 1/x$ around the point $x_0=1$. The $n$th degree Taylor polynomial is
 
 $$
 \sum_{i=1}^n (-1)^i (x-1)^i.
 $$
 
-```{r cache = TRUE}
+
+```r
 mytaylor2 <- function(x,n){
   ans <- 0
   for (i in seq(from = 0, to = n, by = 1)){
@@ -1255,11 +1631,14 @@ for (n in seq(from = 0, to = 40, by = 4)){
 }
 ```
 
+![](coursebook_files/figure-gfm/unnamed-chunk-34-1.png)<!-- -->
+
 Oh! I guess that more isn't always better.
 
 Now let's think now about interpolating polynomials. Let's consider $\cos(x)$ with $n$ equally sampled points across $[0,2\pi]$ for different values of $n$.
 
-```{r cache = TRUE}
+
+```r
 x <- seq(from = 0, to = 2*pi, length = 1000)
 y <- cos(x)
 plot(x, y, type = "l", col = "red", lwd = 5, xlim = c(0,2*pi), ylim = c(-1.1,1.1))
@@ -1272,12 +1651,20 @@ for (n in nvec){
   lines(x, yinterp)
   error <- c(error, max(abs(y - yinterp)))
 }
+```
+
+![](coursebook_files/figure-gfm/unnamed-chunk-35-1.png)<!-- -->
+
+```r
 plot(nvec, log10(error), xlab = "n", ylab = "log10 of error")
 ```
 
+![](coursebook_files/figure-gfm/unnamed-chunk-35-2.png)<!-- -->
+
 Looks good! Let's try again with a different function, $f(x) = (1+x^2)^{-1}$ on $[-1,1]$.
 
-```{r cache = TRUE}
+
+```r
 x <- seq(from = -5, to = 5, length = 1000)
 y <- 1/(1+x^2)
 plot(x, y, type = "l", col = "red", lwd = 5, xlim = c(-5,5), ylim = c(-3,3))
@@ -1290,8 +1677,15 @@ for (n in nvec){
   lines(x, yinterp)
   error <- c(error, max(abs(y - yinterp)))
 }
+```
+
+![](coursebook_files/figure-gfm/unnamed-chunk-36-1.png)<!-- -->
+
+```r
 plot(nvec, log10(error), xlab = "n", ylab = "log10 of error")
 ```
+
+![](coursebook_files/figure-gfm/unnamed-chunk-36-2.png)<!-- -->
 
 Not good! The error goes up as we take more and more points. Equally-spaced nodes are very natural in many applications (scientific measurements, audio/video signals, etc.). But sadly, it turns out that in some circumstances, inteprolating with polynomials through equally-spaced nodes leads to very undesirable oscillations like those above, called **Runge's phenomenon**.
 
@@ -1367,15 +1761,19 @@ Let's do an example comparing interpolation approaches. Consider $f(x)=(1/\sqrt{
 
 One thing to know is that the derivatives of this function grow with $n$.
 
-```{r cache = TRUE}
+
+```r
 n <- 0:10
 maxderiv <- c(0.398942,0.241971,0.178032, 0.550588,1.19683,2.30711,4.24061,14.178,41.8889,115.091,302.425) # Computed in Mathematica
 plot(n, log(maxderiv))
 ```
 
+![](coursebook_files/figure-gfm/unnamed-chunk-37-1.png)<!-- -->
+
 Given this, using equally-spaced nodes seems reckless, but we can try it anyway, say, on $[-10,10]$ with 30 data points to start with.
 
-```{r cache = TRUE}
+
+```r
 a <- -10
 b <- 10
 x <- seq(from = a, to = b, length = 10000)
@@ -1388,9 +1786,12 @@ ydataequal <- lagrangeInterp(xdataequal, f(xdataequal), x)
 lines(x, ydataequal, col = "red", lwd = 2)
 ```
 
+![](coursebook_files/figure-gfm/unnamed-chunk-38-1.png)<!-- -->
+
 Ok, that approach is not going to work! Let's try the approach of a lookup table with linear interpolation. Let's suppose we wish to achieve 4 digit accuracy.
 
-```{r cache = TRUE}
+
+```r
 n <- 1
 error <- Inf
 while (error > 0.5e-4){
@@ -1404,8 +1805,13 @@ nlookup <- n
 print(nlookup)
 ```
 
+```
+## [1] 632
+```
+
 Now we can go back to polynomial interpolation with Chebyshev nodes.
-```{r cache = TRUE}
+
+```r
 n <- 30
 error <- Inf
 while (error > 0.5e-4){
@@ -1419,7 +1825,11 @@ ncheb <- n
 print(ncheb)
 ```
 
-This is an improvement in compression by a factor of `r nlookup`/`r ncheb` = `r nlookup/ncheb`.
+```
+## [1] 41
+```
+
+This is an improvement in compression by a factor of 632/41 = 15.4146341.
 
 ## Cubic Splines
 
@@ -1427,7 +1837,8 @@ I've tried to convince you that it can be problematic to construct interpolating
 
 Before progressing to real data later on, let's do an illustrative example with a small amount of fake data. We make some data points and connect them with linear splines. We can do this using the built-in `approxfun` command which returns a function representing the linear spline.
 
-```{r cache = TRUE}
+
+```r
 x <- c(-2,-1.5,-1,0.25,1,2,3.75,4,5)
 y <- c(4,4.2,3,5,0,-2,2,1,1)
 xplot <- seq(from = -2, to = 5, length = 200)
@@ -1436,14 +1847,19 @@ plot(x, y, ylim = c(-2.5,5.5))
 lines(xplot, linearspline(xplot), col = "red", lwd = 2)
 ```
 
+![](coursebook_files/figure-gfm/unnamed-chunk-41-1.png)<!-- -->
+
 Your eyeball might be telling you that this is a very jagged graph. Most things in nature and society are not this jagged, so it might feel desirable to represent the data with smoother functions. Let me show you what this looks like.
 
-```{r cache = TRUE}
+
+```r
 cubicspline <- splinefun(x, y)
 plot(x, y, ylim = c(-2.5,5.5))
 lines(xplot, linearspline(xplot), col = "red", lwd = 2)
 lines(xplot, cubicspline(xplot), col = "green", lwd = 2)
 ```
+
+![](coursebook_files/figure-gfm/unnamed-chunk-42-1.png)<!-- -->
 
 This is smoother. What smoothness means here is continuity of derivatives from one spline to the next. Using cubic rather than linear splines gives us more coefficients, and using these coefficients we can make the derivatives of successive splines match up. How exactly does this work though?
 
@@ -1481,7 +1897,8 @@ As we have been discussing, to find spline coefficients, we have to solve a line
 
 Just to emphasize how splines avoid the problem of high-degree polynomial interpolation, let's do a cooked example.
 
-```{r}
+
+```r
 set.seed(123)
 n <- 30
 x <- sort(runif(n))
@@ -1494,15 +1911,40 @@ cubicspline <- splinefun(x, y, method = "natural")
 lines(xx, cubicspline(xx), col = "blue", lwd = 3)
 ```
 
+![](coursebook_files/figure-gfm/unnamed-chunk-43-1.png)<!-- -->
+
 Now let's work with some real data, let's say, Tesla stock price for the last 100 days (we won't actually get 100 days because of days when the markets were closed, including weekends).
 
-```{r}
+
+```r
 # Set dates and stock symbol
 first.date <- Sys.Date() - 100
 last.date <- Sys.Date()
 tickers <- c('TSLA')
 # Acquire data
 l.out <- BatchGetSymbols(tickers = tickers, first.date = first.date, last.date = last.date)
+```
+
+```
+## Warning: `BatchGetSymbols()` was deprecated in BatchGetSymbols 2.6.4.
+## ℹ Please use `yfR::yf_get()` instead.
+## ℹ 2022-05-01: Package BatchGetSymbols will soon be replaced by yfR.  More
+##   details about the change is available at github
+##   <<www.github.com/msperlin/yfR> You can install yfR by executing:
+## 
+## remotes::install_github('msperlin/yfR')
+```
+
+```
+## 
+## Running BatchGetSymbols for:
+##    tickers =TSLA
+##    Downloading data for benchmark ticker
+## ^GSPC | yahoo (1|1) | Not Cached | Saving cache
+## TSLA | yahoo (1|1) | Not Cached | Saving cache - Got 100% of valid prices | Youre doing good!
+```
+
+```r
 price <- l.out[[2]]$price.close
 day <- 1:length(price)
 # Sample every 5th day
@@ -1514,11 +1956,18 @@ ymin <- min(price) - 0.1*(max(price) - min(price))
 ymax <- max(price) + 0.1*(max(price) - min(price))
 plot(day[1:max(sampledday)], interpolatedprice, col = "red", type = "l", ylim = c(ymin,ymax))
 points(day, price, col = "blue")
+```
+
+![](coursebook_files/figure-gfm/unnamed-chunk-44-1.png)<!-- -->
+
+```r
 # Fit splines
 TSLAspline <- splinefun(sampledday, sampledprice, method = "natural")
 plot(day, TSLAspline(day), col = "blue", type = "l", ylim = c(ymin,ymax))
 points(day, price, col = "blue")
 ```
+
+![](coursebook_files/figure-gfm/unnamed-chunk-44-2.png)<!-- -->
 
 # Least Squares I
 
@@ -1539,11 +1988,14 @@ All of our study of interpolation has been based on the idea that the model (a p
 
 By way of motivation, let's examine a toy example. Suppose $a$ represents the amount of money (in \$1,000's) a company spent on advertising during different quarters, and $s$ represents money the company earned on sales that quarter. We can plot the data to explore it.
 
-```{r cache = TRUE}
+
+```r
 a <- c(3,4,5,6)
 s <- c(105,117,141,152)
 plot(a, s, xlab = "advertising", ylab = "sales")
 ```
+
+![](coursebook_files/figure-gfm/unnamed-chunk-45-1.png)<!-- -->
 
 The company would like to model this data so they can predict sales for other levels of advertising. The data looks roughly linear, and we have no reason to expect a complicated relationship, so let's try modeling the data with a line, $s = x_0 + x_1 a$ where $x_{0,1}$ are unknown coefficients. Plugging in to the model, we find
 
@@ -1584,30 +2036,11 @@ By writing it this way, we can remember one interpretation of linear systems. In
 
 To examine the details, let's start with an even more fundamental example: a single vector in the plane. Suppose I hand you the vector $\mat{A} = (2,1)^T$ and tell you to use it to reach the target vector $\vec{b}=(6,8)^T$. Well, you can't do it exactly because there is no scalar $x$ such that $x\mat{A} = \vec{b}$. So let us do the next best thing: let's find the value of $x$ such that $x\mat{A}$ is as close as possible to $\vec{b}$. We can draw a picture to solve this problem.
 
-```{r cache = TRUE, echo = FALSE}
-par(pty="s")
-plot(0,0,xlim=c(-0.1,10),ylim=c(-0.1,10),type="n",xlab="",ylab="",asp=1)
-arrows(0,0,2,1)
-arrows(0,0,6,8)
-text(1.4,-0.1,labels=expression(bolditalic(a)))
-text(3,4.5,labels=expression(bolditalic(b)))
-lines(c(0,10),c(0,5),type="l",lty=5)
-```
+![](coursebook_files/figure-gfm/unnamed-chunk-46-1.png)<!-- -->
 
 Where should we stop on the dotted line? When we are perpendicular to the end of $\vec{b}$. This results in the following picture.
 
-```{r cache = TRUE, echo= FALSE}
-par(pty="s")
-plot(0,0,xlim=c(-0.1,10),ylim=c(-0.1,10),type="n",xlab="",ylab="",asp=1)
-arrows(0,0,2,1)
-arrows(0,0,6,8)
-arrows(0,0,8,4)
-arrows(8,4,6,8)
-text(1.4,-0.1,labels=expression(bolditalic(a)))
-text(3,4.5,labels=expression(bolditalic(b)))
-text(7.8,2.8,labels=expression(x*bolditalic(a)))
-text(8,7,labels=expression(bolditalic(r)==bolditalic(b)-x*bolditalic(a)))
-```
+![](coursebook_files/figure-gfm/unnamed-chunk-47-1.png)<!-- -->
 
 From this picture, two relationships arise:
 
@@ -1657,7 +2090,8 @@ What are the words/ideas you should make sure you understand in the narrative ab
 
 Let's calculate this concretely in `R`.
 
-```{r cache = TRUE}
+
+```r
 a <- c(2,1)
 b <- c(6,8)
 pseudoinv <- solve(t(a) %*% a) %*% t(a)
@@ -1665,8 +2099,30 @@ x <- pseudoinv %*% b
 bhat <- a %*% x
 r <- b - bhat
 print(x)
+```
+
+```
+##      [,1]
+## [1,]    4
+```
+
+```r
 print(bhat)
+```
+
+```
+##      [,1]
+## [1,]    8
+## [2,]    4
+```
+
+```r
 t(a) %*% r # Dot product
+```
+
+```
+##      [,1]
+## [1,]    0
 ```
 
 ## Projection onto a Plane
@@ -1798,7 +2254,8 @@ $$
 
 Let's calculuate this in `R`.
 
-```{r cache = TRUE}
+
+```r
 a0 <- c(1,1,1,1)
 a1 <- c(3,4,5,6)
 A <- cbind(a0,a1)
@@ -1808,12 +2265,53 @@ x <- pseudoinv %*% b
 bhat <- A %*% x
 r <- b - bhat
 print(x)
+```
+
+```
+##    [,1]
+## a0 54.5
+## a1 16.5
+```
+
+```r
 print(bhat)
+```
+
+```
+##       [,1]
+## [1,] 104.0
+## [2,] 120.5
+## [3,] 137.0
+## [4,] 153.5
+```
+
+```r
 t(r) %*% a0
+```
+
+```
+##              [,1]
+## [1,] 1.847411e-13
+```
+
+```r
 t(r) %*% a1
+```
+
+```
+##             [,1]
+## [1,] 8.81073e-13
+```
+
+```r
 plot(a1, b, xlab = "advertising", ylab = "sales")
 xx <- seq(from = 0, to = 6, length = 200)
 lines(xx, horner(rev(x), xx)$y) 
+```
+
+![](coursebook_files/figure-gfm/unnamed-chunk-49-1.png)<!-- -->
+
+```r
 # Note we need to reverse order of coefficients
 ```
 
@@ -1837,7 +2335,8 @@ c_0 + c_1 \cdot 3 + c_2 \cdot 3^2 &= 2
 $$
 
 So, we calculuate in `R`:
-```{r cache = TRUE}
+
+```r
 x <- c(0,1,2,3)
 A <- vander(x)[,2:4]
 b <- c(6,5,2,12)
@@ -1846,10 +2345,33 @@ c <- pseudoinv %*% b
 bhat <- A %*% c
 r <- b - bhat
 print(c)
+```
+
+```
+##       [,1]
+## [1,]  2.75
+## [2,] -6.75
+## [3,]  6.75
+```
+
+```r
 plot(x,b)
 xx <- seq(from = 0, to = 3, length = 200)
 lines(xx, horner(c, xx)$y)
+```
+
+![](coursebook_files/figure-gfm/unnamed-chunk-50-1.png)<!-- -->
+
+```r
 print(r)
+```
+
+```
+##       [,1]
+## [1,] -0.75
+## [2,]  2.25
+## [3,] -2.25
+## [4,]  0.75
 ```
 
 If model parameters don't appear in a linear fashion, sometimes you can transform the equation so that they do. For example, if you wanted to fit data to $y = C \mathrm{e}^{kx}$, you could take the log of both sides to obtain $\ln y = \ln C + kx$. By considering the data $(x,\ln y)$ you could take a least squares approach to find $\ln C$ and $k$.
@@ -1868,11 +2390,14 @@ A statistics class would provide much more sophisticated ways of analyzing the e
 
 Adopting a least squares approach allows, potentially, massive compression of data. Suppose we had 100 points that looked like this
 
-```{r}
+
+```r
 x <- seq(from = 0, to = 1, length = 100)
 y <- 3*x + 0.4*(2*runif(100) - 1)
 plot(x, y)
 ```
+
+![](coursebook_files/figure-gfm/unnamed-chunk-51-1.png)<!-- -->
 
 If we decided to represent this data with a line, we'd go down from having 100 pieces of information (the original data points) to merely 2 (a slope and an intercept).
 
@@ -2042,7 +2567,8 @@ Now that I've convinced you that it's nice to have an orthonormal basis, let's t
 
 Let's see how it works via an example. Suppose we have $\vec{v}_1 = (3,4,0)^T$ and $\vec{v}_2 = (1,1,0)^T$.
 
-```{r cache = TRUE}
+
+```r
 v1 <- c(1,2,2)
 v2 <- c(2,1,-2)
 v3 <- c(1,1,0)
@@ -2050,7 +2576,8 @@ v3 <- c(1,1,0)
 
 Step 1. Take the first vector and turn it into a unit vector.
 
-```{r cache = TRUE}
+
+```r
 y1 <- v1
 r11 <- Norm(y1, 2)
 q1 <- y1 / r11
@@ -2058,7 +2585,8 @@ q1 <- y1 / r11
 
 Step 2. Think of $\vec{v}_2$ as made up of stuff in the subspace spanned by $\vec{q}_1$ and stuff orthogonal to it. Throw away stuff in the span of $\vec{q}_1$ since we have it covered already. Take what's left of $\vec{v}_2$ and turn it unto a unit vector.
 
-```{r}
+
+```r
 y2 <- v2 - q1 %*% t(q1) %*% v2
 r22 <- Norm(y2, 2)
 q2 <- y2 / r22
@@ -2066,19 +2594,57 @@ q2 <- y2 / r22
 
 Step 3. Think of $\vec{v}_3$ as made up of stuff in the subspace spanned by $\vec{q}_{1,2}$ and stuff orthogonal to it. Throw away stuff in the span of $\mathbf{q}_{1,2}$ since we have it covered already. Take what's left of $\vec{v}_3$ and turn it unto a unit vector.
 
-```{r}
+
+```r
 y3 <- v3 - q1 %*% t(q1) %*% v3 - q2 %*% t(q2) %*% v3
 r33 <- Norm(y3, 2)
 ```
 
 Let's check the result and see if the procedure worked.
 
-```{r cache = TRUE}
+
+```r
 q1
+```
+
+```
+## [1] 0.3333333 0.6666667 0.6666667
+```
+
+```r
 q2
+```
+
+```
+##            [,1]
+## [1,]  0.6666667
+## [2,]  0.3333333
+## [3,] -0.6666667
+```
+
+```r
 Norm(q1, 2)
+```
+
+```
+## [1] 1
+```
+
+```r
 Norm(q2, 2)
+```
+
+```
+## [1] 1
+```
+
+```r
 t(q1) %*% q2
+```
+
+```
+##      [,1]
+## [1,]    0
 ```
 
 ## QR decomposition
@@ -2149,7 +2715,8 @@ Let's make this clear with numerous examples!
 
 First example. Let's start with a $3 \times 3$ matrix and perform Gram-Schmidt orthogonalization to obtain the **QR** decomposition.
 
-```{r cache = TRUE}
+
+```r
 # Define matrix
 v1 <- c(2,3,6)
 v2 <- c(10,8,9)
@@ -2178,30 +2745,96 @@ r23 <- t(q2) %*% v3
 Qbar <- cbind(q1,q2,q3)
 Rbar <- rbind(c(r11,r12,r13), c(0,r22,r23), c(0,0,r33))
 Qbar
+```
+
+```
+##             q1                      
+## [1,] 0.2857143  0.8571429  0.4285714
+## [2,] 0.4285714  0.2857143 -0.8571429
+## [3,] 0.8571429 -0.4285714  0.2857143
+```
+
+```r
 Rbar
+```
+
+```
+##      [,1] [,2] [,3]
+## [1,]    7   14   -7
+## [2,]    0    7   21
+## [3,]    0    0    7
 ```
 
 In this example, notice that $\overline{\mathbf{Q}}$ has three columns. This reflects the fact that the columns of $\mat{A}$ are linearly independent. Hence, it spans all of $\mathbb{R}^3$ and the **QR** and full **QR** decompositions are the same.
 
 Let's check our answer by hand and also check it against `R`'s built-in capabilities.
 
-```{r cache = TRUE}
+
+```r
 Qbar%*%Rbar - A
+```
+
+```
+##      v1 v2 v3
+## [1,]  0  0  0
+## [2,]  0  0  0
+## [3,]  0  0  0
+```
+
+```r
 QRbarcheck <- qr(A)
 Qbarcheck <- qr.Q(QRbarcheck, complete=TRUE)
 Rbarcheck <- qr.R(QRbarcheck, complete=TRUE)
 Qbar
+```
+
+```
+##             q1                      
+## [1,] 0.2857143  0.8571429  0.4285714
+## [2,] 0.4285714  0.2857143 -0.8571429
+## [3,] 0.8571429 -0.4285714  0.2857143
+```
+
+```r
 Qbarcheck
+```
+
+```
+##            [,1]       [,2]       [,3]
+## [1,] -0.2857143 -0.8571429 -0.4285714
+## [2,] -0.4285714 -0.2857143  0.8571429
+## [3,] -0.8571429  0.4285714 -0.2857143
+```
+
+```r
 S <- diag(c(-1,-1,-1))
 Qbarcheck <- Qbarcheck%*%S
 Rbarcheck <- S%*%Rbarcheck
 Qbarcheck - Qbar
+```
+
+```
+##                 q1                           
+## [1,] -1.110223e-16  0.000000e+00 1.665335e-16
+## [2,]  0.000000e+00 -1.110223e-16 3.330669e-16
+## [3,]  0.000000e+00 -1.110223e-16 6.106227e-16
+```
+
+```r
 Rbarcheck - Rbar
+```
+
+```
+##      v1           v2            v3
+## [1,]  0 1.776357e-15  0.000000e+00
+## [2,]  0 8.881784e-16  0.000000e+00
+## [3,]  0 0.000000e+00 -1.776357e-15
 ```
 
 Let's try an example we looked at earlier.
 
-```{r cache = TRUE}
+
+```r
 # Define matrix
 v1 <- c(1,2,2)
 v2 <- c(2,1,-2)
@@ -2224,9 +2857,17 @@ y3 <- v3 - (q1 %*% t(q1)) %*% v3 - (q2 %*% t(q2)) %*% v3
 y3
 ```
 
+```
+##              [,1]
+## [1,] 1.110223e-16
+## [2,] 5.551115e-17
+## [3,] 0.000000e+00
+```
+
 Oh! it turns out there's nothing left. If we want to compute the full QR decomposition, we need to find something orthogonal to the span of $\vec{q}_{1,2}.$ An easy way to do that is to pick a vector outside of their span and continue the orthogonalization procedure. You can algorithmically use your linear algebra skills to do this, but for little cases like ours, you can eyeball it.
 
-```{r}
+
+```r
 v3 <- c(1,1,1)
 y3 <- v3 - (q1 %*% t(q1)) %*% v3 - (q2 %*% t(q2)) %*% v3
 q3 <- y3 / Norm(y3, 2)
@@ -2238,35 +2879,98 @@ r33 <- 0
 Qbar <- cbind(q1,q2,q3)
 Rbar <- rbind(c(r11,r12,r13), c(0,r22,r23), c(0,0,r33))
 Qbar
+```
+
+```
+##             q1                      
+## [1,] 0.3333333  0.6666667  0.6666667
+## [2,] 0.6666667  0.3333333 -0.6666667
+## [3,] 0.6666667 -0.6666667  0.3333333
+```
+
+```r
 Rbar
+```
+
+```
+##      [,1] [,2]      [,3]
+## [1,]    3    0 1.6666667
+## [2,]    0    3 0.3333333
+## [3,]    0    0 0.0000000
 ```
 
 To reiterate, we ended up with a row of zeros at the bottom of $\overline{\mathbf{R}}$. That's because the columns of $\mat{A}$ are linearly dependent and don't span $\mathbb{R}^3$. At any rate, let's go ahead and check our result.
 
-```{r cache = TRUE}
+
+```r
 Qbar %*% Rbar - A
+```
+
+```
+##      v1 v2         v3
+## [1,]  0  0 -0.2222222
+## [2,]  0  0  0.2222222
+## [3,]  0  0  0.8888889
 ```
 
 In this case, the full and reduced **QR** are not the same. Let's see how this works.
 
-```{r cache = TRUE}
+
+```r
 Q <- Qbar[1:3,1:2]
 R <- Rbar[1:2,1:3]
 Q
+```
+
+```
+##             q1           
+## [1,] 0.3333333  0.6666667
+## [2,] 0.6666667  0.3333333
+## [3,] 0.6666667 -0.6666667
+```
+
+```r
 R
+```
+
+```
+##      [,1] [,2]      [,3]
+## [1,]    3    0 1.6666667
+## [2,]    0    3 0.3333333
+```
+
+```r
 Q %*% R - A
+```
+
+```
+##      v1 v2         v3
+## [1,]  0  0 -0.2222222
+## [2,]  0  0  0.2222222
+## [3,]  0  0  0.8888889
 ```
 
 Ok, and let's do one last example.
 
-```{r cache = TRUE}
+
+```r
 # Define matrix
 v1 <- c(1,1,1,1)
 v2 <- c(0,1,1,1)
 v3 <- c(0,0,1,1)
 A <- cbind(v1,v2,v3)
 A
+```
 
+```
+##      v1 v2 v3
+## [1,]  1  0  0
+## [2,]  1  1  0
+## [3,]  1  1  1
+## [4,]  1  1  1
+```
+
+```r
 # Step 1
 y1 <- v1
 r11 <- Norm(y1, 2)
@@ -2288,7 +2992,8 @@ r23 <- t(q2) %*% v3
 
 But wait! We are living in $\mathbb{R}^4$ and we only have three vectors to far, $\mathbf{q}_{1,2,3}$. If we want the full decomposition, we have to find a basis for the orthogonal complement of $\mat{A}$.
 
-```{r cache = TRUE}
+
+```r
 # Choose a vector not in the span of q1, q2, q3
 v4 <- c(1,2,3,4)
 y4 <- v4 - (q1 %*% t(q1)) %*% v4 - (q2 %*% t(q2)) %*% v4  - (q3 %*% t(q3)) %*% v4
@@ -2302,13 +3007,53 @@ r34 <- t(q3) %*% v4
 Qbar <- cbind(q1,q2,q3,q4)
 Rbar <- rbind(c(r11,r12,r13), c(0,r22,r23), c(0,0,r33), c(0,0,0))
 Qbar
-Rbar
-Qbar %*% Rbar - A
+```
 
+```
+##       q1                                       
+## [1,] 0.5 -0.8660254  1.359740e-16  3.925231e-16
+## [2,] 0.5  0.2886751 -8.164966e-01 -3.140185e-16
+## [3,] 0.5  0.2886751  4.082483e-01 -7.071068e-01
+## [4,] 0.5  0.2886751  4.082483e-01  7.071068e-01
+```
+
+```r
+Rbar
+```
+
+```
+##      [,1]      [,2]      [,3]
+## [1,]    2 1.5000000 1.0000000
+## [2,]    0 0.8660254 0.5773503
+## [3,]    0 0.0000000 0.8164966
+## [4,]    0 0.0000000 0.0000000
+```
+
+```r
+Qbar %*% Rbar - A
+```
+
+```
+##      v1 v2            v3
+## [1,]  0  0 -1.232595e-32
+## [2,]  0  0  0.000000e+00
+## [3,]  0  0  0.000000e+00
+## [4,]  0  0  0.000000e+00
+```
+
+```r
 # Make reduced QR and check
 Q <- Qbar[1:4,1:3]
 R <- Rbar[1:3,1:3]
 Q %*% R - A
+```
+
+```
+##      v1 v2            v3
+## [1,]  0  0 -1.232595e-32
+## [2,]  0  0  0.000000e+00
+## [3,]  0  0  0.000000e+00
+## [4,]  0  0  0.000000e+00
 ```
 
 ## Computational considerations
@@ -2427,13 +3172,34 @@ $$
 \mat{A} = \begin{pmatrix} -3 & 2 \\ 2 & -3 \end{pmatrix}.
 $$
 
-```{r}
+
+```r
 A <- matrix(c(-3,2,2,-3), byrow = TRUE, nrow = 2)
 e <- eigen(A)
 e
+```
+
+```
+## eigen() decomposition
+## $values
+## [1] -1 -5
+## 
+## $vectors
+##           [,1]       [,2]
+## [1,] 0.7071068  0.7071068
+## [2,] 0.7071068 -0.7071068
+```
+
+```r
 Lambda <- diag(e$values)
 S <- e$vectors
 S %*% Lambda %*% solve(S)
+```
+
+```
+##      [,1] [,2]
+## [1,]   -3    2
+## [2,]    2   -3
 ```
 
 Why would you ever need/want to diagonalize a matrix? There are many reasons related to data analysis, differential equations, graph theory, and more. During the next class you will see some of these applications of eigenvalues and eigenvectors.
@@ -2476,22 +3242,68 @@ $$
 
 Let's diagonalize $\mat{A}$, and momentarily, you'll see why.
 
-```{r}
+
+```r
 A <- matrix(c(1,1,1,0), byrow = TRUE, nrow = 2)
 lambdap <- (1+sqrt(5)) / 2
 lambdap
+```
+
+```
+## [1] 1.618034
+```
+
+```r
 lambdam <- (1-sqrt(5)) / 2
 lambdam
+```
+
+```
+## [1] -0.618034
+```
+
+```r
 e <- eigen(A)
 e$values
+```
+
+```
+## [1]  1.618034 -0.618034
+```
+
+```r
 Lambda <- diag(e$values)
 Lambda
+```
+
+```
+##          [,1]      [,2]
+## [1,] 1.618034  0.000000
+## [2,] 0.000000 -0.618034
+```
+
+```r
 S <- e$vectors
 v1 <- S[,1] / S[2,1]
 v2 <- S[,2] / S[2,2]
 S <- cbind(v1, v2)
 S
+```
+
+```
+##            v1        v2
+## [1,] 1.618034 -0.618034
+## [2,] 1.000000  1.000000
+```
+
+```r
 S %*% Lambda %*% solve(S)
+```
+
+```
+##      [,1]          [,2]
+## [1,]    1  1.000000e+00
+## [2,]    1 -1.110223e-16
 ```
 
 So to recap, we have
@@ -2565,7 +3377,8 @@ F_n = \frac{1}{\sqrt{5}}\lambda_+^{n+1} - \frac{1}{\sqrt{5}}\lambda_-^{n+1},\qua
 $$
 
 Let's test this out.
-```{r}
+
+```r
 fib <- function(n){
   lambdap <- (1 + sqrt(5)) / 2
   lambdam <- (1 - sqrt(5)) / 2
@@ -2573,7 +3386,18 @@ fib <- function(n){
   return(Fn)
 }
 fib(1:10)
+```
+
+```
+##  [1]  1  2  3  5  8 13 21 34 55 89
+```
+
+```r
 fib(1000)
+```
+
+```
+## [1] 7.033037e+208
 ```
 
 One cool thing about this is that it lets us understand the behavior of $F_n$ for large $n$ in a simpler way. Since $|\lambda_-| < 1$, after many repeated iterations, the term involving $\lambda_-$ will die out and we can write, for large $n$,
@@ -2584,7 +3408,8 @@ $$
 
 Let's test this out!
 
-```{r}
+
+```r
 fibapprox <- function(n){
   lambdap <- (1 + sqrt(5)) / 2
   Fn <- 1/sqrt(5) * lambdap^(n+1)
@@ -2592,31 +3417,86 @@ fibapprox <- function(n){
 }
 n <- 1:10
 fib(n)
+```
+
+```
+##  [1]  1  2  3  5  8 13 21 34 55 89
+```
+
+```r
 fibapprox(n)
+```
+
+```
+##  [1]  1.170820  1.894427  3.065248  4.959675  8.024922 12.984597 21.009519
+##  [8] 33.994117 55.003636 88.997753
+```
+
+```r
 n <- 1:20
 error <- abs(fib(n) - fibapprox(n))
 plot(n, log10(error))
 ```
 
+![](coursebook_files/figure-gfm/unnamed-chunk-68-1.png)<!-- -->
+
 It's important to remember from linear algebra that not every matrix can be diagonalized. For a matrix to be diagonalizable, you need for the multiplicity of each eigenvalue to be the same as the dimension of the eigenspace. Here are a couple of examples.
 
-```{r}
+
+```r
 A <- matrix(c(5,-4,4,12,-11,12,4,-4,5), byrow = TRUE, nrow = 3)
 e <- eigen(A)
 e$values
+```
+
+```
+## [1] -3  1  1
+```
+
+```r
 e$vectors
+```
+
+```
+##            [,1]      [,2]       [,3]
+## [1,] -0.3015113 0.5345225 -0.5885337
+## [2,] -0.9045340 0.8017837 -0.7843904
+## [3,] -0.3015113 0.2672612 -0.1958567
 ```
 
 Here, the **algebraic multiplicity** of $-3$ is 1 because it is only an eigenvalue once, and the **geometric multiplicity** is 1 because it only has one eigenvector. The algebraic multiplicity of $1$ is $2$ because it is an eigenvalue twice. Since it has two independent eigenvectors, the geometric multiplicity is also 2. Therefore, this matrix is diagonalizable. Stated differently: we need enough independent eigenvectors to form the $\mathbf{S}$ matrix.
 
 By way of counterexample, consider this problem.
 
-```{r}
+
+```r
 A <- matrix(c(1,-1,0,1), byrow = TRUE, nrow = 2)
 A
+```
+
+```
+##      [,1] [,2]
+## [1,]    1   -1
+## [2,]    0    1
+```
+
+```r
 e <- eigen(A)
 e$values
+```
+
+```
+## [1] 1 1
+```
+
+```r
 e$vectors
+```
+
+```
+##      [,1]         [,2]
+## [1,]    1 1.000000e+00
+## [2,]    0 2.220446e-16
 ```
 
 The eigenvalue $1$ has algebraic multiplicity 2, but there is only one eigenvector (the trivial eigenvector doesn't count) so it has geometric multiplicity 1. We don't have enough eigenvectors to make $\mathbf{S}$, so the matrix is not diagonalizable.
@@ -2625,41 +3505,110 @@ The eigenvalue $1$ has algebraic multiplicity 2, but there is only one eigenvect
 
 Please find the eigenvalues of this matrix:
 
-```{r}
+
+```r
 set.seed(123)
 A <- matrix(sample(-100:100,64), nrow = 8)
 print(A)
+```
+
+```
+##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8]
+## [1,]   58   98   36  -23    8   62   -4   15
+## [2,]   78   97   -2  -20   80   77   87   -7
+## [3,]  -87   52  -29   93   99  -67  -63  -95
+## [4,]   94  -11  -75    2  -27  -32  -80  -15
+## [5,]   69  -10  -94   16  -78   82  -60   41
+## [6,]  -51   88   96  -25   54   71   89  -62
+## [7,]   17   84   86   42  -48  -38  -41   91
+## [8,]  -58   -9   63  -69   34   40  -85   95
 ```
 
 Haha, you (probably) can't! That's because writing down the characteristic polynomial is messy, and also, because for any polynomial of degree greater than 4, we don't have a formula for the solution, so you'd have to resort to numerical methods to find the roots.
 
 Instead, we will develop numerical methods that can find an eigenvalue more directly. Let's do a numerical experiment.
 
-```{r}
+
+```r
 A <- matrix(c(-13,170,240,19,-224,-320,-14,166,237), byrow = TRUE, nrow = 3)
 A
+```
+
+```
+##      [,1] [,2] [,3]
+## [1,]  -13  170  240
+## [2,]   19 -224 -320
+## [3,]  -14  166  237
+```
+
+```r
 v <- c(1,1,1)
 v <- A %*% v
 v
+```
+
+```
+##      [,1]
+## [1,]  397
+## [2,] -525
+## [3,]  389
+```
+
+```r
 v <- v / Norm(v, 2)
 v
+```
+
+```
+##            [,1]
+## [1,]  0.5192516
+## [2,] -0.6866677
+## [3,]  0.5087881
+```
+
+```r
 v <- A %*% v
 v
+```
+
+```
+##            [,1]
+## [1,] -1.3746433
+## [2,]  0.8671632
+## [3,] -0.6735883
+```
+
+```r
 v <- v / Norm(v, 2)
 for (i in 1:100){
   v <- A %*% v
   v <- v / Norm(v, 2)
 }
 (A %*%v )/ v
+```
+
+```
+##      [,1]
+## [1,]   -3
+## [2,]   -3
+## [3,]   -3
+```
+
+```r
 e <- eigen(A)
 e$values
+```
+
+```
+## [1] -3  2  1
 ```
 
 Interesting. Using this iteration, we found the eigenvalue $-3$. Any guesses why?
 
 Let's try another example.
 
-```{r}
+
+```r
 A <- matrix(c(2,-520,8,-90,468,-360,40,-698,160), byrow = TRUE, nrow = 3)
 v <- c(1,1,1)
 for (i in 1:100){
@@ -2667,8 +3616,22 @@ for (i in 1:100){
   v <- v / Norm(v, 2)
 }
 (A %*% v)/v
+```
+
+```
+##      [,1]
+## [1,]  882
+## [2,]  882
+## [3,]  882
+```
+
+```r
 e <- eigen(A)
 e$values
+```
+
+```
+## [1]  8.820000e+02 -2.520000e+02 -4.633793e-14
 ```
 
 This method is called **power iteration**. You might not realize it, but you use power iteration nearly every day. Google searches are based on an algorithm called PageRank, which is applies power iteration to a matrix that encodes links between web pages. The matrix in question is gigantic, which is why numerical methods are necessary.

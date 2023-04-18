@@ -3758,12 +3758,11 @@ called `qr.solve`.
 
 ## Big picture
 
-Along with solving the linear system
-$\mathbf{A}\,\mathbf{x}=\mathbf{b}$, finding the eigenvalues and
-eigenvectors of a matrix $\mathbf{A}$ is one of the most important
-problems in linear algebra. Knowing the eigenpairs can help simplify a
-problem and reveal important information about systems modeled with
-linear algebra.
+Along with solving the linear system $\mathbf{A} \mathbf{x}=\mathbf{b}$,
+finding the eigenvalues and eigenvectors of a matrix $\mathbf{A}$ is one
+of the most important problems in linear algebra. Knowing the eigenpairs
+can help simplify a problem and reveal important information about
+systems modeled with linear algebra.
 
 ## Goals
 
