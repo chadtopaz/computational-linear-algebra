@@ -3790,16 +3790,13 @@ by a constant $\lambda$.
 
 How do we calculate them? Let’s take the definition
 $\mathbf{A} \mathbf{v} = \lambda \mathbf{v}$ and rearrange it to write
-
-``` math
+$$
 (\mathbf{A} - \mathbf{I} \lambda) \mathbf{v} = \mathbf{0}.
-```
-
-There are only two ways this can happen. One choice is $\mathbf{v}=0$,
-but that’s trivial because it works for any $\mathbf{A}$. The other
-choice, by the Invertible Matrix Theorem, is that the matrix on the left
-is singular. Also from the Invertible Matrix Theorem, if it is singular,
-then it has determinant zero, that is
+$$ There are only two ways this can happen. One choice is
+$\mathbf{v}=0$, but that’s trivial because it works for any
+$\mathbf{A}$. The other choice, by the Invertible Matrix Theorem, is
+that the matrix on the left is singular. Also from the Invertible Matrix
+Theorem, if it is singular, then it has determinant zero, that is
 $\det (\mathbf{A}- \mathbf{I} \lambda) = 0$. This equation is a
 polynomial in $\lambda$ and is called the **characteristic polynomial**.
 When calculating by hand, we find the characteristic polynomial first
@@ -3815,11 +3812,9 @@ To recap:
 2.  Solve $(\mathbf{A}-\mathbf{I}\lambda_i)\mathbf{v_i}=\mathbf{0}$ to
     find the $\mathbf{v}_i$.
 
-For example, let’s find the eigenvalues and eigenvectors of
-
-``` math
-\mat{A} = \begin{pmatrix} -3 & 2 \\ 2 & -3 \end{pmatrix}.
-```
+For example, let’s find the eigenvalues and eigenvectors of $$
+\mathbf{A} = \begin{pmatrix} -3 & 2 \\ 2 & -3 \end{pmatrix}.
+$$
 
 Using the result above, we can write the characteristic polynomial:
 
