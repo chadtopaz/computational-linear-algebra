@@ -3787,7 +3787,7 @@ $\mathbf{A}$, you get back the same vector $\mathbf{v}$ but multiplied
 by a constant $\lambda$.
 
 How do we calculate them? Let’s take the definition
-$\mathbf{A} \,\mathbf{v} = \lambda \mathbf{v}$ and rearrange it to write
+$\mathbf{A} \mathbf{v} = \lambda \mathbf{v}$ and rearrange it to write
 $(\mathbf{A} - \mathbf{I} \lambda) \mathbf{v} = \mathbf{0}$. There are
 only two ways this can happen. One choice is $\mathbf{v}=0$, but that’s
 trivial because it works for any $\mathbf{A}$. The other choice, by the
@@ -3798,7 +3798,7 @@ This equation is a polynomial in $\lambda$ and is called the
 **characteristic polynomial**. When calculating by hand, we find the
 characteristic polynomial first and then solve it to find the
 eigenvalues. To find eigenvectors, we remember that
-$\mathbf{A}\,\mathbf{v} = \lambda \mathbf{v} \rightarrow (\mathbf{A}-\mathbf{I}\lambda)\mathbf{v}=\mathbf{0}$
+$\mathbf{A} \mathbf{v} = \lambda \mathbf{v} \rightarrow (\mathbf{A}-\mathbf{I}\lambda)\mathbf{v}=\mathbf{0}$
 and solve for $\mathbf{v}$.
 
 To recap:
