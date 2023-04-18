@@ -2342,7 +2342,7 @@ print(ncheb)
     ## [1] 41
 
 This is an improvement in compression by a factor of 632/41 =
-15.414634146341.
+15.4146341.
 
 ## Cubic Splines
 
@@ -3789,11 +3789,11 @@ $\mathbf{A}$, you get back the same vector $\mathbf{v}$ but multiplied
 by a constant $\lambda$.
 
 How do we calculate them? Let’s take the definition
-$\mathbf{A} \mathbf{v} = \lambda \mathbf{v}$ and rearrange it to write
+`$\mat{A} \vec{v} = \lambda \vec{v}$` and rearrange it to write
 
-$$
+``` math
 (\mathbf{A} - \mathbf{I} \lambda) \mathbf{v} = \mathbf{0}.
-$$
+```
 
 There are only two ways this can happen. One choice is $\mathbf{v}=0$,
 but that’s trivial because it works for any $\mathbf{A}$. The other

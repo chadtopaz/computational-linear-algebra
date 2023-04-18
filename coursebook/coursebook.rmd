@@ -2351,11 +2351,11 @@ For an $n \times n$ matrix $\mat{A}$, a scalar $\lambda \in \mathbb{C}$, and vec
 
 Stated in words: an eigenvector and eigenvalue are the magical vector $\vec{v}$ and scalar $\lambda$ such that if you hit $\vec{v}$ with $\mat{A}$, you get back the same vector $\mathbf{v}$ but multiplied by a constant $\lambda$.
 
-How do we calculate them? Let's take the definition $\mat{A} \vec{v} = \lambda \vec{v}$ and rearrange it to write
+How do we calculate them? Let's take the definition `$\mat{A} \vec{v} = \lambda \vec{v}$` and rearrange it to write
 
-$$
+```math
 (\mathbf{A} - \mathbf{I} \lambda) \mathbf{v} = \mathbf{0}.
-$$
+```
 
 There are only two ways this can happen. One choice is $\vec{v}=0$, but that's trivial because it works for any $\mat{A}$. The other choice, by the Invertible Matrix Theorem, is that the matrix on the left is singular. Also from the Invertible Matrix Theorem, if it is singular, then it has determinant zero, that is $\det (\mat{A}- \mat{I} \lambda) = 0$. This equation is a polynomial in $\lambda$ and is called the **characteristic polynomial**. When calculating by hand, we find the characteristic polynomial first and then solve it to find the eigenvalues. To find eigenvectors, we remember that $\mat{A} \vec{v} = \lambda \vec{v} \rightarrow (\mat{A}-\mat{I}\lambda)\vec{v}=\vec{0}$ and solve for $\vec{v}$.
 
