@@ -346,8 +346,8 @@ respository’s subdirectories:
 
 -   Reading
 
-    -   \[Course Book: Solving Linear
-        Systems\](<https://htmlpreview.github.io/?https://github.com/chadtopaz/computational-linear-algebra/blob/main/coursebook/coursebook.html?raw=true>
+    -   [Course Book: Solving Linear
+        Systems](https://htmlpreview.github.io/?https://github.com/chadtopaz/computational-linear-algebra/blob/main/coursebook/coursebook.html?raw=true)
 
 -   Activity - Solving Linear Systems \[[.md for
     viewing](activities/Activity-Solving-Linear-Systems.md)\] \[[.Rmd
@@ -527,7 +527,7 @@ respository’s subdirectories:
 -   Reading
 
     -   [Course Book: Eigenvalues
-        I](https://github.com/chadtopaz/computational-linear-algebra/blob/main/coursebook/coursebook.md)
+        I](https://htmlpreview.github.io/?https://github.com/chadtopaz/computational-linear-algebra/blob/main/coursebook/coursebook.html?raw=true)
 
     -   [Link Analysis and Web
         Search](http://www.cs.cornell.edu/home/kleinber/networks-book/networks-book-ch14.pdf),

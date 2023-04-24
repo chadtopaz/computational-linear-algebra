@@ -220,7 +220,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
     
 -   Reading
 
-    -   [Course Book: Solving Linear Systems](https://htmlpreview.github.io/?https://github.com/chadtopaz/computational-linear-algebra/blob/main/coursebook/coursebook.html?raw=true
+    -   [Course Book: Solving Linear Systems](https://htmlpreview.github.io/?https://github.com/chadtopaz/computational-linear-algebra/blob/main/coursebook/coursebook.html?raw=true)
 -   Activity - Solving Linear Systems [[.md for viewing](activities/Activity-Solving-Linear-Systems.md)] [[.Rmd for editing](activities/Activity-Solving-Linear-Systems.Rmd)]
 
 -   Pset - Solving Linear Systems [[.md for viewing](psets/Pset-Solving-Linear-Systems.md)] [[.Rmd for editing](psets/Pset-Solving-Linear-Systems.Rmd)]
@@ -355,7 +355,7 @@ To enable you to make easy and flexible use of the resources here, I have elimin
     
 - Reading  
 
-    -   [Course Book: Eigenvalues I](https://github.com/chadtopaz/computational-linear-algebra/blob/main/coursebook/coursebook.md)
+    -   [Course Book: Eigenvalues I](https://htmlpreview.github.io/?https://github.com/chadtopaz/computational-linear-algebra/blob/main/coursebook/coursebook.html?raw=true)
     
     -   [Link Analysis and Web Search](http://www.cs.cornell.edu/home/kleinber/networks-book/networks-book-ch14.pdf), pp. 397 - 417
 
