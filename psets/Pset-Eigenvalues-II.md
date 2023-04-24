@@ -71,7 +71,10 @@ the first two listed, and then everything else. That is, we can
 rearrange the transition matrix $\mathbf{P}$ into the following form:
 
 $$
-\mathbf{P}=\begin{bmatrix} \mathbf{I} & \mathbf{S} \\ \mathbf{0}  & \mathbf{R}\end{bmatrix},
+\mathbf{P}=\begin{bmatrix}
+\mathbf{I} & \mathbf{S} \\
+\mathbf{0}  & \mathbf{R}
+\\end{bmatrix},
 $$
 
 where
@@ -89,9 +92,13 @@ where
 
 To find the absorption probabilities, once you have $\mathbf{S}$,
 $\mathbf{R}$, and $\mathbf{I}$, compute the **fundamental matrix**
-$\mathbf{F} = \mathbf{S}(\mathbf{I}_{n-2} -\mathbf{R})^{-1}$. The
-probability of absorbing into state $i$ (say \$0 in this case) starting
-from transient state $j$ (say \$100 in this case) is
+
+$$
+\mathbf{F} = \mathbf{S}(\mathbf{I}_{n-2} -\mathbf{R})^{-1}.
+$$
+
+The probability of absorbing into state $i$ (say \$0 in this case)
+starting from transient state $j$ (say \$100 in this case) is
 $(\mathbf{F})_{i,j}$. If you start with \$100, what is the probability
 of reaching \$200 before going broke? How does it change if you start
 with \$120 and only aim to make \$80 profit?
