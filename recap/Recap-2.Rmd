@@ -3,10 +3,20 @@ title: "Recap Exercise #2"
 output:
   rmarkdown::html_document:
   header-includes:
-   - \usepackage{amsmath}
+    - \usepackage{amsmath}
+    - \usepackage{bm}
+    - \renewcommand{\vec}[1]{\mathbf{#1}}
+    - \renewcommand{\mat}[1]{\mathbf{#1}}
+    - \newcommand{\exp}[1]{\mathrm{e}^{#1}}
+    - \DeclareMathOperator*{\argmin}{arg\,min}
+    - \DeclareMathOperator*{\float}{fl}
 ---
 
-**Important note: For your first submission of this recap exercise, work on it alone. Do not collaborate with classmates, the TAs, or the instructor.**
+***
+
+This recap exercise provides a formative assessment of your understanding of the course material. No collaboration is allowed. Please work on your own. Once you complete your first attempt and receive written feedback, you can seek support from the TAs and professor if you want, but please continue not to collaborate with peers. Any/all work you turn in should be your own work. Whether intentional or unintentional, any potential violations of academic integrity will be referred to the Honor Committee.
+
+***
 
 Load necessary packages:
 
@@ -330,12 +340,13 @@ b\. Your solution goes here.
 Here is some data about life expectancy in various countries in Africa, estimated every 5 years from 1952 to 2007:
 
 ```{r}
-lifeexpectancy <- read.csv("https://bit.ly/2vEDq5b") %>%
-  select(continent,country,starts_with('lifeExp')) %>%
-  filter(continent %in% c("Africa"))
+lifeexpectancy <- read.csv("https://goo.gl/BtBnPg", header = T) %>%
+  filter(continent %in% c("Africa")) %>%
+  select(country, year, lifeExp) %>%
+  pivot_wider(names_from = year, names_prefix = "lifeExp", values_from = lifeExp)
 ```
 
-a\. Perform a principal component analysis on this data and plot the data (with labels as country names). What proportion of the variance in the data do the first two principal components capture?
+a\. Perform a principal component analysis on this data and plot the data in the space of the first two principal components (with labels as country names). What proportion of the variance in the data do the first two principal components capture?
 
 b\. Note that Zimbabwe and Senegal have similar values for the first principal component coordinate and quite different values for the second principal component coordinate. By looking at the loadings (the rotation matrix) and remembering that PCA does a change of basis, interpret the difference between these two countries in terms of life expectancy.
 
